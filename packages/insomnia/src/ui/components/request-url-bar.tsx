@@ -10,7 +10,7 @@ import { isEventStreamRequest } from '../../models/request';
 import { fetchRequestData, tryToInterpolateRequest, tryToTransformRequestWithPlugins } from '../../network/network';
 import { tryToInterpolateRequestOrShowRenderErrorModal } from '../../utils/try-interpolate';
 import { buildQueryStringFromParams, joinUrlAndQueryString } from '../../utils/url/querystring';
-import { SegmentEvent } from '../analytics';
+
 import { useReadyState } from '../hooks/use-ready-state';
 import { useRequestPatcher } from '../hooks/use-request';
 import { useRequestMetaPatcher } from '../hooks/use-request';
@@ -107,14 +107,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
 
   const sendOrConnect = async (shouldPromptForPathAfterResponse?: boolean) => {
     models.stats.incrementExecutedRequests();
-    window.main.trackSegmentEvent({
-      event: SegmentEvent.requestExecute,
-      properties: {
-        preferredHttpVersion: settings.preferredHttpVersion,
-        authenticationType: activeRequest.authentication?.type,
-        mimeType: activeRequest.body.mimeType,
-      },
-    });
+
     // reset timeout
     setCurrentTimeout(undefined);
 

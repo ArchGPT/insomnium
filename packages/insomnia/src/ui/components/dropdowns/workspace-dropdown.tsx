@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { useFetcher, useParams, useRouteLoaderData } from 'react-router-dom';
 
-import { isLoggedIn } from '../../../account/session';
+
 import { getProductName } from '../../../common/constants';
 import { database as db } from '../../../common/database';
 import { getWorkspaceLabel } from '../../../common/get-workspace-label';
@@ -16,7 +16,7 @@ import { invariant } from '../../../utils/invariant';
 import { useAIContext } from '../../context/app/ai-context';
 import { WorkspaceLoaderData } from '../../routes/workspace';
 import { Dropdown, DropdownButton, type DropdownHandle, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
-import { InsomniaAI } from '../insomnia-ai-icon';
+
 import { showError, showPrompt } from '../modals';
 import { ExportRequestsModal } from '../modals/export-requests-modal';
 import { configGenerators, showGenerateConfigModal } from '../modals/generate-config-modal';
@@ -45,47 +45,10 @@ export const WorkspaceDropdown: FC = () => {
   const projectName = activeProject.name ?? getProductName();
   const fetcher = useFetcher();
 
-  const [actionPlugins, setActionPlugins] = useState<WorkspaceAction[]>([]);
+  const [, setActionPlugins] = useState<WorkspaceAction[]>([]);
   const [loadingActions, setLoadingActions] = useState<Record<string, boolean>>({});
   const dropdownRef = useRef<DropdownHandle>(null);
 
-  const {
-    generating: loading,
-    access,
-    generateTests,
-  } = useAIContext();
-
-  const handlePluginClick = useCallback(async ({ action, plugin, label }: WorkspaceAction, workspace: Workspace) => {
-    setLoadingActions({ ...loadingActions, [label]: true });
-    try {
-      const context = {
-        ...(pluginContexts.app.init(RENDER_PURPOSE_NO_RENDER) as Record<string, any>),
-        ...pluginContexts.data.init(activeProject._id),
-        ...(pluginContexts.store.init(plugin) as Record<string, any>),
-        ...(pluginContexts.network.init() as Record<string, any>),
-      };
-
-      const docs = await db.withDescendants(workspace);
-      const requests = docs
-        .filter(isRequest)
-        .filter(doc => (
-          !doc.isPrivate
-        ));
-      const requestGroups = docs.filter(isRequestGroup);
-      await action(context, {
-        requestGroups,
-        requests,
-        workspace,
-      });
-    } catch (err) {
-      showError({
-        title: 'Plugin Action Failed',
-        error: err,
-      });
-    }
-    setLoadingActions({ ...loadingActions, [label]: false });
-    dropdownRef.current?.hide();
-  }, [activeProject._id, loadingActions]);
 
   const handleDropdownOpen = useCallback(async () => {
     const actionPlugins = await getWorkspaceActions();

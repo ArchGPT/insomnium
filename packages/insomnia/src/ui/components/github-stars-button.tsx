@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-aria-components';
 import { useMount, useMountedState } from 'react-use';
 
-import { SegmentEvent } from '../analytics';
 import { Icon } from './icon';
 
 const LOCALSTORAGE_GITHUB_STARS_KEY = 'insomnia:github-stars';
@@ -49,23 +48,11 @@ export const GitHubStarsButton = () => {
   });
 
   const starClick = useCallback(() => {
-    window.main.trackSegmentEvent({
-      event: SegmentEvent.buttonClick,
-      properties: {
-        type: 'GitHub stars',
-        action: 'clicked star',
-      },
-    });
+
   }, []);
 
   const counterClick = useCallback(() => {
-    window.main.trackSegmentEvent({
-      event: SegmentEvent.buttonClick,
-      properties: {
-        type: 'GitHub stars',
-        action: 'clicked stargazers',
-      },
-    });
+
   }, []);
 
   const shouldShowCount = !Boolean(error);

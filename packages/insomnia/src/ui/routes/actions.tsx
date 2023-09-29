@@ -23,7 +23,6 @@ import { getSendRequestCallback } from '../../network/unit-test-feature';
 import { initializeLocalBackendProjectAndMarkForSync } from '../../sync/vcs/initialize-backend-project';
 import { getVCS } from '../../sync/vcs/vcs';
 import { invariant } from '../../utils/invariant';
-import { SegmentEvent } from '../analytics';
 
 // Project
 export const createNewProjectAction: ActionFunction = async ({ request, params }) => {
@@ -33,7 +32,7 @@ export const createNewProjectAction: ActionFunction = async ({ request, params }
   const name = formData.get('name');
   invariant(typeof name === 'string', 'Name is required');
   const project = await models.project.create({ name });
-  window.main.trackSegmentEvent({ event: SegmentEvent.projectLocalCreate });
+
   return redirect(`/organization/${organizationId}/project/${project._id}`);
 };
 

@@ -15,7 +15,6 @@ import { registergRPCHandlers } from './main/ipc/grpc';
 import { registerMainHandlers } from './main/ipc/main';
 import { registerCurlHandlers } from './main/network/curl';
 import { registerWebSocketHandlers } from './main/network/websocket';
-import { initializeSentry, sentryWatchAnalyticsEnabled } from './main/sentry';
 import { checkIfRestartNeeded } from './main/squirrel-startup';
 import * as updates from './main/updates';
 import * as windowUtils from './main/window-utils';
@@ -23,7 +22,6 @@ import * as models from './models/index';
 import type { Stats } from './models/stats';
 import type { ToastNotification } from './ui/components/toast';
 
-initializeSentry();
 
 // Handle potential auto-update
 if (checkIfRestartNeeded()) {
@@ -92,7 +90,7 @@ app.on('ready', async () => {
   // Init some important things first
   await database.init(models.types());
   await _createModelInstances();
-  sentryWatchAnalyticsEnabled();
+
   windowUtils.init();
   await _launchApp();
 
@@ -146,7 +144,6 @@ app.on('activate', (_error, hasVisibleWindows) => {
 });
 
 const _launchApp = async () => {
-  await _trackStats();
   let window: BrowserWindow;
   // Handle URLs sent via command line args
   ipcMain.once('halfSecondAfterAppStart', () => {
@@ -219,40 +216,3 @@ async function _createModelInstances() {
   await models.settings.getOrCreate();
 }
 
-async function _trackStats() {
-  // Handle the stats
-  const oldStats = await models.stats.get();
-  const stats: Stats = await models.stats.update({
-    currentLaunch: Date.now(),
-    lastLaunch: oldStats.currentLaunch,
-    currentVersion: getAppVersion(),
-    lastVersion: oldStats.currentVersion,
-    launches: oldStats.launches + 1,
-  });
-
-  ipcMain.once('halfSecondAfterAppStart', async () => {
-    backupIfNewerVersionAvailable();
-    const { currentVersion, launches, lastVersion } = stats;
-
-    const firstLaunch = launches === 1;
-    const justUpdated = !firstLaunch && currentVersion !== lastVersion;
-    if (!justUpdated || !currentVersion) {
-      return;
-    }
-    console.log('[main] App update detected', currentVersion, lastVersion);
-    const notification: ToastNotification = {
-      key: `updated-${currentVersion}`,
-      url: changelogUrl(),
-      cta: "See What's New",
-      message: `Updated to ${currentVersion}`,
-    };
-    // Wait a bit before showing the user because the app just launched.
-    setTimeout(async () => {
-      for (const window of BrowserWindow.getAllWindows()) {
-        // @ts-expect-error -- TSCONVERSION likely needs to be window.webContents.send instead
-        window.send('show-notification', notification);
-      }
-    }, 5000);
-  });
-  return stats;
-}

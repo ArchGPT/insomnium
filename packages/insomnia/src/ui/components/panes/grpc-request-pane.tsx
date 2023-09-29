@@ -317,7 +317,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
           {!methodType && (
             <EmptyStatePane
               icon={<SvgIcon icon="bug" />}
-              documentationLinks={[documentationLinks.introductionToInsomnia]}
+              documentationLinks={[]}
               secondaryAction="Select a body type from above to send data in the body of a request"
               title="Enter a URL and send to get a response"
             />

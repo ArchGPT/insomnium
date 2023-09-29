@@ -1,6 +1,5 @@
 import { decodeBase64, encodeBase64 } from '@getinsomnia/api-client/base64';
 import { keyPair, open } from '@getinsomnia/api-client/sealedbox';
-import * as Sentry from '@sentry/electron';
 
 import * as session from '../account/session';
 import { getAppWebsiteBaseURL } from '../common/constants';
@@ -33,7 +32,7 @@ export async function submitAuthCode(code: string) {
     const box: AuthBox = JSON.parse(decoder.decode(boxData));
     await session.absorbKey(box.token, box.key);
   } catch (error) {
-    Sentry.captureException(error);
+
     throw error;
   }
 }

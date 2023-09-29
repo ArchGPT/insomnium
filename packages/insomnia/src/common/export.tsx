@@ -22,7 +22,7 @@ import { isWebSocketPayload } from '../models/websocket-payload';
 import { isWebSocketRequest } from '../models/websocket-request';
 import { isWorkspace, Workspace } from '../models/workspace';
 import { resetKeys } from '../sync/ignore-keys';
-import { SegmentEvent } from '../ui/analytics';
+
 import { showAlert, showError, showModal } from '../ui/components/modals';
 import { AskModal } from '../ui/components/modals/ask-modal';
 import { SelectModal } from '../ui/components/modals/select-modal';
@@ -405,7 +405,7 @@ export const exportAllToFile = (activeProjectName: string, workspacesForActivePr
           default:
             throw new Error(`selected export format "${selectedFormat}" is invalid`);
         }
-        window.main.trackSegmentEvent({ event: SegmentEvent.dataExport, properties: { type: selectedFormat } });
+
       } catch (err) {
         showError({
           title: 'Export Failed',
@@ -477,7 +477,7 @@ export const exportRequestsToFile = (requestIds: string[]) => {
           default:
             throw new Error(`selected export format "${selectedFormat}" is invalid`);
         }
-        window.main.trackSegmentEvent({ event: SegmentEvent.dataExport, properties: { type: selectedFormat } });
+
       } catch (err) {
         showError({
           title: 'Export Failed',

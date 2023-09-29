@@ -132,7 +132,7 @@ export const DesignEmptyState: FC<Props> = ({ onImport }) => {
         icon={<SvgIcon icon="drafting-compass" />}
         documentationLinks={[
           documentationLinks.workingWithDesignDocs,
-          documentationLinks.introductionToInsomnia,
+
         ]}
         secondaryAction={<SecondaryAction onImport={onImport} />}
         title="Enter an OpenAPI specification here"

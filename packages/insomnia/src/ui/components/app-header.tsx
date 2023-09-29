@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import * as session from '../../account/session';
 import { GitHubStarsButton } from './github-stars-button';
-import { InsomniaAILogo } from './insomnia-icon';
+import { InsomniaLogo } from './insomnia-icon';
 const LogoWrapper = styled.div({
   display: 'flex',
   justifyContent: 'center',
@@ -78,7 +78,7 @@ export const AppHeader: FC<AppHeaderProps> = ({
       gridLeft={(
         <Fragment>
           <LogoWrapper>
-            <InsomniaAILogo />
+            <InsomniaLogo />
           </LogoWrapper>
           {!session.isLoggedIn() ? <GitHubStarsButton /> : null}
         </Fragment>
