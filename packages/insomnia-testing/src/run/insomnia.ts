@@ -8,11 +8,11 @@ export interface InsomniaOptions<TResponse> {
 }
 
 /**
- * An instance of Insomnia will be exposed as a global variable during
+ * An instance of Insomnium will be exposed as a global variable during
  * tests, and will provide a bunch of utility functions for sending
  * requests, etc.
  */
-export class Insomnia<TResponse = {}> {
+export class Insomnium<TResponse = {}> {
   activeRequestId: string | null;
   activeEnvironmentId: string | null = null;
   sendRequest: SendRequestCallback<TResponse>;

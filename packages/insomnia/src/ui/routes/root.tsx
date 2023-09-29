@@ -23,6 +23,7 @@ import {
   useParams,
   useRouteLoaderData,
 } from 'react-router-dom';
+/**** ><> ↑ --------- Imports */
 
 import {
   getFirstName,
@@ -41,6 +42,7 @@ import { createPlugin } from '../../plugins/create';
 import { setTheme } from '../../plugins/misc';
 import { exchangeCodeForToken } from '../../sync/git/github-oauth-provider';
 import { exchangeCodeForGitLabToken } from '../../sync/git/gitlab-oauth-provider';
+/**** ><> ↑ --------- Account and Models */
 import { submitAuthCode } from '../auth-session-provider';
 import { WorkspaceDropdown } from '../components/dropdowns/workspace-dropdown';
 import { GitHubStarsButton } from '../components/github-stars-button';
@@ -51,8 +53,9 @@ import { showError, showModal } from '../components/modals';
 import { AlertModal } from '../components/modals/alert-modal';
 import { AskModal } from '../components/modals/ask-modal';
 import { ImportModal } from '../components/modals/import-modal';
-import { LoginModal, showLoginModal } from '../components/modals/login-modal';
+
 import {
+  /**** ><> ↑ --------- Modal Components */
   SettingsModal,
   showSettingsModal,
   TAB_INDEX_PLUGINS,
@@ -61,11 +64,13 @@ import { Toast } from '../components/toast';
 import { AppHooks } from '../containers/app-hooks';
 import { AIProvider } from '../context/app/ai-context';
 import { NunjucksEnabledProvider } from '../context/nunjucks/nunjucks-enabled-context';
+/**** ><> ↑ --------- Settings and Themes */
 import { useSettingsPatcher } from '../hooks/use-request';
 import Modals from './modals';
 import { useOrganizationLoaderData } from './organization';
 import { WorkspaceLoaderData } from './workspace';
 
+/**** ><> ↑ --------- Hooks and Containers */
 export interface RootLoaderData {
   settings: Settings;
 }
@@ -75,6 +80,7 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
     settings: await models.settings.getOrCreate(),
   };
 };
+/**** ><> ↑ --------- Root Loader Data */
 
 const getNameInitials = (name: string) => {
   // Split on whitespace and take first letter of each word
@@ -95,6 +101,7 @@ const getNameInitials = (name: string) => {
 
   return `${firstWord.charAt(0)}${lastWord ? lastWord.charAt(0) : ''}`;
 };
+/**** ><> ↑ --------- Helper Function */
 
 const Root = () => {
   const navigate = useNavigate();
@@ -146,13 +153,7 @@ const Root = () => {
             });
             break;
 
-          case 'insomnia://app/auth/login':
-            showModal(LoginModal, {
-              title: params.title,
-              message: params.message,
-              reauth: true,
-            });
-            break;
+
 
           case 'insomnia://app/import':
             setImportUri(params.uri);
@@ -297,7 +298,7 @@ const Root = () => {
           {importUri && (
             <ImportModal
               onHide={() => setImportUri('')}
-              projectName="Insomnia"
+              projectName="Insomnium"
               organizationId={organizationId}
               from={{ type: 'uri', defaultValue: importUri }}
             />
@@ -308,7 +309,7 @@ const Root = () => {
                 <div className="flex w-[50px] py-2">
                   <InsomniaAILogo />
                 </div>
-                {!isLoggedIn() ? <GitHubStarsButton /> : null}
+
               </div>
               <div className="flex gap-2 flex-nowrap items-center justify-center">
                 {workspaceData && (
@@ -384,22 +385,11 @@ const Root = () => {
                     </Popover>
                   </MenuTrigger>
                 ) : (
-                  <Fragment>
-                    <Button
-                      onPress={showLoginModal}
-                      className="px-4 py-1 font-semibold border border-solid border-[--hl-md] flex items-center justify-center gap-2 aria-pressed:bg-[--hl-sm] rounded-sm text-[--color-font] hover:bg-[--hl-xs] focus:ring-inset ring-1 ring-transparent focus:ring-[--hl-md] transition-all text-sm"
-                    >
-                      Login
-                    </Button>
-                    <a
-                      className="px-4 py-1 flex items-center justify-center gap-2 aria-pressed:bg-[rgba(var(--color-surprise-rgb),0.8)] focus:bg-[rgba(var(--color-surprise-rgb),0.9)] bg-[--color-surprise] font-semibold rounded-sm text-[--color-font-surprise] focus:ring-inset ring-1 ring-transparent focus:ring-[--hl-md] transition-all text-sm"
-                      href="https://app.insomnia.rest/app/signup/"
-                    >
-                      Sign Up
-                    </a>
+                    <Fragment>
                   </Fragment>
                 )}
               </div>
+              {/* /**** ><> ↑ --------- Root Component */}
             </header>
             <div className="[grid-area:Navbar] overflow-hidden">
               <nav className="flex flex-col items-center place-content-stretch gap-[--padding-md] w-full h-full overflow-y-auto py-[--padding-md]">
@@ -434,6 +424,7 @@ const Root = () => {
                 ))}
               </nav>
             </div>
+            {/* /**** ><> ↑ --------- Navbar */}
             <Outlet />
             <div className="relative [grid-area:Statusbar] flex items-center justify-between overflow-hidden">
               <TooltipTrigger>
@@ -458,23 +449,24 @@ const Root = () => {
                 </Tooltip>
               </TooltipTrigger>
               <Link>
+
                 <a
                   className="flex focus:outline-none focus:underline gap-1 items-center text-xs text-[--color-font] px-[--padding-md]"
-                  href="https://konghq.com/"
                 >
-                  Made with
-                  <Icon className="text-[--color-surprise]" icon="heart" /> by
-                  Kong
+                  a 100% local and privacy-focus fork of Insomnia <Icon className="text-white" icon="heart" />
                 </a>
               </Link>
             </div>
           </div>
+          {/* /**** ><> ↑ --------- Statusbar */}
 
           <Toast />
         </div>
       </NunjucksEnabledProvider>
+      {/* /**** ><> ↑ --------- Toast */}
     </AIProvider>
   );
 };
 
 export default Root;
+/**** ><> ↑ --------- Export */

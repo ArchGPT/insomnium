@@ -9,7 +9,7 @@
     <br />
     <br />
   </h1>
-  <h3>A CLI for <a href="https://insomnia.rest">Insomnia</a></h3>
+  <h3>A CLI for <a href="https://insomnia.rest">Insomnium</a></h3>
   <pre>npm install --global <a href="https://www.npmjs.com/package/insomnia-inso">insomnia-inso</a></pre>
   <img src="https://raw.githubusercontent.com/Kong/insomnia/develop/packages/insomnia-inso/assets/demo.gif" alt=""/>
   <br />

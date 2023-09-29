@@ -57,27 +57,27 @@ declare module 'codemirror' {
 
   interface Hint {
     /**
-     * Custom Insomnia Key. Used for checking the type of the hint
+     * Custom Insomnium Key. Used for checking the type of the hint
      */
     type: 'constant' | 'variable' | 'snippet' | 'tag';
     /**
-     * Custom Insomnia Key. The segment that matched and produced this hint
+     * Custom Insomnium Key. The segment that matched and produced this hint
      */
     segment: string;
     /**
-     * Custom Insomnia Key. This value gets displayed in the autocomplete menu.
+     * Custom Insomnium Key. This value gets displayed in the autocomplete menu.
      */
     displayValue: string;
     /**
-     * Custom Insomnia Key. The display value of the hint
+     * Custom Insomnium Key. The display value of the hint
      */
     comment?: string;
     /**
-     * Custom Insomnia Key. Used for sorting the hints
+     * Custom Insomnium Key. Used for sorting the hints
      */
     score: number;
     /**
-     * Custom Insomnia Key. Used for snippet promises
+     * Custom Insomnium Key. Used for snippet promises
      */
     text: string | (() => PromiseLike<unknown>);
   }

@@ -2,8 +2,8 @@ import { Converter, ImportRequest } from '../entities';
 import { Insomnia1Data } from './insomnia-1';
 
 export const id = 'insomnia-2';
-export const name = 'Insomnia v2';
-export const description = 'Insomnia export format 2';
+export const name = 'Insomnium v2';
+export const description = 'Insomnium export format 2';
 
 export interface Insomnia2Data extends Omit<Insomnia1Data, '__export_format'> {
   __export_format: 2;

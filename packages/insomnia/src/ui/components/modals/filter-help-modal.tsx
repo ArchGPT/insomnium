@@ -38,7 +38,7 @@ const JSONPathHelp: FC = () => (
       ]}
     />
     <p className="notice info">
-      Note that there's <Link href="https://cburgmer.github.io/json-path-comparison/">no standard</Link> for JSONPath. Insomnia uses <Link href="https://www.npmjs.com/package/jsonpath-plus">jsonpath-plus</Link>.
+      Note that there's <Link href="https://cburgmer.github.io/json-path-comparison/">no standard</Link> for JSONPath. Insomnium uses <Link href="https://www.npmjs.com/package/jsonpath-plus">jsonpath-plus</Link>.
     </p>
   </ModalBody>
 );

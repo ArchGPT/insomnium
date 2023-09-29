@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report an Insomnia bug
+description: Report an Insomnium bug
 labels: [B-bug, S-unverified]
 body:
 - type: textarea
@@ -38,7 +38,7 @@ body:
     description: If your problem needs further explanation, please add more information here.
 - type: input
   attributes:
-    label: Insomnia Version
+    label: Insomnium Version
     description: What version of Insmonia are you using?
     placeholder: "2021.5.0"
   validations:
@@ -68,12 +68,12 @@ body:
 - type: input
   attributes:
     label: Installation method
-    description: How did you install Insomnia?
+    description: How did you install Insomnium?
     placeholder: "e.g. download from insomnia.rest, homebrew, apt, etc."
   validations:
     required: true
 - type: input
   attributes:
-    label: Last Known Working Insomnia version
-    description: What is the last version of Insomnia this worked in, if applicable?
+    label: Last Known Working Insomnium version
+    description: What is the last version of Insomnium this worked in, if applicable?
     placeholder: "2021.4.0"

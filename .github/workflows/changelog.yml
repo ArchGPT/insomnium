@@ -64,7 +64,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          releaseNameRegEx: Insomnia .*
+          releaseNameRegEx: Insomnium .*
           repo: ${{github.repository}}
 
       - name: Run Changelog-generator script

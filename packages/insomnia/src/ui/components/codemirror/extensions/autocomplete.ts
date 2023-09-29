@@ -91,7 +91,7 @@ CodeMirror.defineOption('environmentAutocomplete', null, (cm: CodeMirror.Editor,
     const tags = options.getTags ? await options.getTags() : null;
     // Actually show the hint
     cm.showHint({
-      // Insomnia-specific options
+      // Insomnium-specific options
       constants: constants || [],
       variables: variables || [],
       snippets: snippets || [],

@@ -4,8 +4,8 @@ import { Converter } from '../entities';
 import { Insomnia3Data } from './insomnia-3';
 
 export const id = 'insomnia-4';
-export const name = 'Insomnia v4';
-export const description = 'Insomnia export format 4';
+export const name = 'Insomnium v4';
+export const description = 'Insomnium export format 4';
 
 export interface Insomnia4Data extends Omit<Insomnia3Data, '__export_format'> {
   __export_format: 4;

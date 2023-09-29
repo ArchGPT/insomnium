@@ -3,7 +3,7 @@
 exports[`Snapshot for "inso --help" 1`] = `
 "Usage: inso [options] [command]
 
-A CLI for Insomnia!
+A CLI for Insomnium!
 
 Options:
   -v, --version           output the version number
@@ -29,7 +29,7 @@ Commands:
 exports[`Snapshot for "inso -h" 1`] = `
 "Usage: inso [options] [command]
 
-A CLI for Insomnia!
+A CLI for Insomnium!
 
 Options:
   -v, --version           output the version number
@@ -110,7 +110,7 @@ Options:
 exports[`Snapshot for "inso help" 1`] = `
 "Usage: inso [options] [command]
 
-A CLI for Insomnia!
+A CLI for Insomnium!
 
 Options:
   -v, --version           output the version number
@@ -164,14 +164,14 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test [options] [identifier]  Run Insomnia unit test suites
+  test [options] [identifier]  Run Insomnium unit test suites
   help [command]               display help for command"
 `;
 
 exports[`Snapshot for "inso run test -h" 1`] = `
 "Usage: inso run test [options] [identifier]
 
-Run Insomnia unit test suites
+Run Insomnium unit test suites
 
 Options:
   -e, --env <identifier>         environment to use

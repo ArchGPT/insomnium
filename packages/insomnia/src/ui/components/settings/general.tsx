@@ -262,7 +262,7 @@ export const General: FC = () => {
         <BooleanSetting
           label="Clear OAuth 2 session on start"
           setting="clearOAuth2SessionOnRestart"
-          help="If checked, clears the OAuth session every time Insomnia is relaunched."
+          help="If checked, clears the OAuth session every time Insomnium is relaunched."
         />
         <button
           className="btn btn--clicky pointer"
@@ -289,7 +289,7 @@ export const General: FC = () => {
       <BooleanSetting
         label="Enable proxy"
         setting="proxyEnabled"
-        help="If checked, enables a global network proxy on all requests sent through Insomnia. This proxy supports Basic Auth, digest, and NTLM authentication."
+        help="If checked, enables a global network proxy on all requests sent through Insomnium. This proxy supports Basic Auth, digest, and NTLM authentication."
       />
 
       <div className="form-row pad-top-sm">
@@ -356,13 +356,7 @@ export const General: FC = () => {
       )}
 
       <hr className="pad-top" />
-      <h2>Plugins</h2>
-      <TextSetting
-        label="Additional Plugin Path"
-        setting="pluginPath"
-        help="Add a custom path to direct Insomnia to a different plugin directory."
-        placeholder="~/.insomnia:/other/path"
-      />
+
 
       {!isLoggedIn && (
         <>

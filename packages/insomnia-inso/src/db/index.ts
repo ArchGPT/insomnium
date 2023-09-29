@@ -81,7 +81,7 @@ export const loadDb = async ({
 
   if (!db) {
     logger.warn(
-      'No git, app data store or Insomnia V4 export file found, re-run `inso` with `--verbose` to see tracing information',
+      'No git, app data store or Insomnium V4 export file found, re-run `inso` with `--verbose` to see tracing information',
     );
     db = emptyDb();
   }

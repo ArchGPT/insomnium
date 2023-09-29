@@ -9,7 +9,7 @@ import { emptyDb } from '../index';
 import { BaseModel } from '../models/types';
 
 /**
- * When exporting from Insomnia, the `models.[kind].type` is converted from PascalCase to snake_case.
+ * When exporting from Insomnium, the `models.[kind].type` is converted from PascalCase to snake_case.
  *
  * It is then set to the property `_type`, and the `type` property is removed.
  * Therefore, when importing, we just need to do the reverse of this.
@@ -93,9 +93,9 @@ const insomniaAdapter: DbAdapter = async (filePath, filterTypes) => {
   if (!parsed) {
     throw new InsoError(`Failed to parse ${fileName}.`);
   } else if (!parsed.__export_format) {
-    throw new InsoError(`Expected an Insomnia v4 export file; unexpected data found in ${fileName}.`);
+    throw new InsoError(`Expected an Insomnium v4 export file; unexpected data found in ${fileName}.`);
   } else if (parsed.__export_format !== 4) {
-    throw new InsoError(`Expected an Insomnia v4 export file; found an Insomnia v${parsed.__export_format} export file in ${fileName}.`);
+    throw new InsoError(`Expected an Insomnium v4 export file; found an Insomnium v${parsed.__export_format} export file in ${fileName}.`);
   }
 
   // Transform filter to a set for faster search

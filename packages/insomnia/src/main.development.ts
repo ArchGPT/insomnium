@@ -199,7 +199,7 @@ const _launchApp = async () => {
     window = windowUtils.getOrCreateWindow();
   }
 
-  // Don't send origin header from Insomnia because we're not technically using CORS
+  // Don't send origin header from Insomnium because we're not technically using CORS
   session.defaultSession.webRequest.onBeforeSendHeaders((details, fn) => {
     delete details.requestHeaders.Origin;
     fn({

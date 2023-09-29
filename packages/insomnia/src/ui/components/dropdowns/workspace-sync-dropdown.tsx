@@ -10,7 +10,6 @@ import { getVCS, initVCS, VCS } from '../../../sync/vcs/vcs';
 import { WorkspaceLoaderData } from '../../routes/workspace';
 import { showModal } from '../modals';
 import { SyncMergeModal } from '../modals/sync-merge-modal';
-import { GitSyncDropdown } from './git-sync-dropdown';
 import { SyncDropdown } from './sync-dropdown';
 
 export function useVCS({
@@ -87,9 +86,7 @@ export const WorkspaceSyncDropdown: FC = () => {
     );
   }
 
-  if (activeWorkspaceMeta?.gitRepositoryId || !isRemoteProject(activeProject)) {
-    return <GitSyncDropdown isInsomniaSyncEnabled={isRemoteProject(activeProject)} gitRepository={gitRepository} />;
-  }
+
 
   return null;
 };

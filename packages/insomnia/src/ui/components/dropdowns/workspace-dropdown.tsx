@@ -183,24 +183,7 @@ export const WorkspaceDropdown: FC = () => {
             />
           </DropdownItem>
         </DropdownSection>
-        <DropdownSection
-          aria-label='Plugins Section'
-          title="Plugins"
-        >
-          {actionPlugins.map((p: WorkspaceAction) => (
-            <DropdownItem
-              key={p.label}
-              aria-label={p.label}
-            >
-              <ItemContent
-                icon={loadingActions[p.label] ? 'refresh fa-spin' : p.icon || 'code'}
-                label={p.label}
-                stayOpenAfterClick
-                onClick={() => handlePluginClick(p, activeWorkspace)}
-              />
-            </DropdownItem>
-          ))}
-        </DropdownSection>
+
 
         <DropdownSection
           aria-label='Config Generators Section'
@@ -221,39 +204,7 @@ export const WorkspaceDropdown: FC = () => {
           }
         </DropdownSection>
 
-        <DropdownSection
-          aria-label='AI'
-          title="Insomnia AI"
-          items={isLoggedIn() && access.enabled && activeWorkspace.scope === 'design' ? [{
-            label: 'Auto-generate Tests For Collection',
-            key: 'insomnia-ai/generate-test-suite',
-            action: generateTests,
-          }] : []}
-        >
-          {item =>
-            <DropdownItem
-              key={`generateConfig-${item.label}`}
-              aria-label={item.label}
-            >
-              <ItemContent
-                icon={
-                  <span
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      padding: '0 var(--padding-xs)',
-                      width: 'unset',
-                    }}
-                  >
-                    <InsomniaAI />
-                  </span>}
-                isDisabled={loading}
-                label={item.label}
-                onClick={item.action}
-              />
-            </DropdownItem>
-          }
-        </DropdownSection>
+
       </Dropdown>
       {isDuplicateModalOpen && (
         <WorkspaceDuplicateModal

@@ -1,16 +1,16 @@
 {
   "name": "insomnia",
   "appId": "com.insomnia.app",
-  "userDataFolder": "Insomnia",
-  "productName": "Insomnia",
+  "userDataFolder": "Insomnium",
+  "productName": "Insomnium",
   "synopsis": "The Collaborative API Client and Design Tool",
-  "icon": "https://github.com/kong/insomnia/blob/develop/packages/insomnia/src/icons/icon.ico?raw=true",
+  "icon": "NEW_INSOMNIUM_ICON",
   "changelogUrl": "https://insomnia.rest/changelog",
   "theme": "default",
   "lightTheme": "studio-light",
   "darkTheme": "default",
-  "githubOrg": "Kong",
-  "githubRepo": "insomnia",
+  "githubOrg": "ArchGPT",
+  "githubRepo": "insomnium",
   "segmentWriteKeys": {
     "development": "rTOCSvGV23cHGJyb3HI9EUQDNA6ar7ay",
     "production": "4l7QUfACrIcqvC913hiIwAA2BDYP2OJ1"

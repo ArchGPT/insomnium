@@ -22,7 +22,7 @@ export const docsGitAccessToken = {
 
 export const documentationLinks = {
   introductionToInsomnia: {
-    title: 'Introduction to Insomnia',
+    title: 'Introduction to Insomnium',
     url: docsIntroductionInsomnia,
   },
   workingWithDesignDocs: {

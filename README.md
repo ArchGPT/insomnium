@@ -1,25 +1,33 @@
-# Insomnia API Client
+# Insomnium API Client
 
-[![Slack Channel](https://chat.insomnia.rest/badge.svg)](https://chat.insomnia.rest/)
+Insomnium is a local-only, open-source, cross-platform API client for GraphQL, REST, WebSockets, Server-sent events and gRPC.
+
 [![license](https://img.shields.io/github/license/Kong/insomnia.svg)](LICENSE)
 
-Insomnia is an open-source, cross-platform API client for GraphQL, REST, WebSockets, Server-sent events and gRPC.
+![Insomnium API Client](https://raw.githubusercontent.com/ArchGPT/insomnium/develop/screenshots/main.png)
 
-![Insomnia API Client](https://raw.githubusercontent.com/Kong/insomnia/develop/screenshots/main.png)
+## Backstory
 
-## Download
+Insomnium is a fork of [Kong/Insomnium at 2023.5.8](https://github.com/ArchGPT/insomnia), the last commit before compulsory account login was introduced. 
 
-Insomnia is available for Mac, Windows, and Linux and can be downloaded
-from the website.
+In a sense, Insomnium is a community response to [the latest product update that forces account creation w/o warning](https://news.ycombinator.com/item?id=37680522).
 
-**[https://insomnia.rest/download](https://insomnia.rest/download/)**
+![HN](https://github.com/ArchGPT/insomnium/blob/main/hn.png?raw=true)
+
+
+<!-- ## Download
+
+Insomnium is available for Mac, Windows, and Linux and can be downloaded
+from the website. -->
+
+<!-- **[https://insomnia.rest/download](https://insomnia.rest/download/)** -->
 
 ## Bugs and Feature Requests
 
 Have a bug or a feature request? First, read the
-[issue guidelines](CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/Kong/insomnia/issues).
+[issue guidelines](CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/ArchGPT/insomnium/issues).
 
-For more generic product questions and feedback, join the [Slack Team](https://chat.insomnia.rest).
+<!-- For more generic product questions and feedback, join the [Slack Team](https://chat.insomnia.rest). -->
 
 ## Contributing
 
@@ -27,11 +35,11 @@ Please read through our [contributing guidelines](CONTRIBUTING.md) and [code of 
 
 ## Documentation
 
-Check out our open-source [Insomnia Documentation](https://docs.insomnia.rest/).
+Check out our open-source [Insomnium Documentation](https://docs.insomnia.rest/).
 
-## Develop Insomnia
+## Develop Insomnium
 
-Development on Insomnia can be done on Mac, Windows, or Linux as long as you have [Node.js](https://nodejs.org) and [Git](https://git-scm.com/). See the `.nvmrc` file located in the project for the correct Node version.
+Development on Insomnium can be done on Mac, Windows, or Linux as long as you have [Node.js](https://nodejs.org) and [Git](https://git-scm.com/). See the `.nvmrc` file located in the project for the correct Node version.
 
 <details>
 <summary>Initial Dev Setup</summary>
@@ -111,16 +119,6 @@ You can use any editor you'd like, but make sure to have support/plugins for the
 - Start the compiler in watch mode: `npm run inso-start`
 - Run: `./packages/insomnia-inso/bin/inso -v`
 
-## Plugins
-
-Search for, discover, and install plugins from the Insomnia [Plugin Hub](https://insomnia.rest/plugins/)!
-
-## Community Projects
-
-- [Insomnia Documenter](https://github.com/jozsefsallai/insomnia-documenter) - Generate beautiful API documentation pages using the [documenter plugin](https://insomnia.rest/plugins/insomnia-plugin-documenter) or your Insomnia export file.
-- [GitHub API Spec Importer](https://github.com/swinton/github-rest-apis-for-insomnia) - A complete set of GitHub REST API route specifications that can be imported straight into Insomnia.
-- [Swaggymnia](https://github.com/mlabouardy/swaggymnia) - Generate [Swagger](https://swagger.io/) documentation for your existing API in Insomnia.
-
 ## License
 
-[MIT](LICENSE) &copy; [Insomnia](https://insomnia.rest)
+[MIT](LICENSE)

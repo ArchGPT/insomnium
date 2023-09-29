@@ -466,7 +466,7 @@ export const cloneGitRepoAction: ActionFunction = async ({
       name: repoSettingsPatch.uri.split('/').pop(),
       scope: scope,
       parentId: project._id,
-      description: `Insomnia Workspace for ${repoSettingsPatch.uri}}`,
+      description: `Insomnium Workspace for ${repoSettingsPatch.uri}}`,
     });
     await models.apiSpec.getOrCreateForParentId(workspace._id);
     window.main.trackSegmentEvent({

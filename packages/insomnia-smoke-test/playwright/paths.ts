@@ -17,8 +17,8 @@ export const INSOMNIA_DATA_PATH = randomDataPath();
 
 // Packaged app paths
 const pathLookup: Record<string, string> = {
-  win32: path.join('win-unpacked', 'Insomnia.exe'),
-  darwin: path.join('mac-universal', 'Insomnia.app', 'Contents', 'MacOS', 'Insomnia'),
+  win32: path.join('win-unpacked', 'Insomnium.exe'),
+  darwin: path.join('mac-universal', 'Insomnium.app', 'Contents', 'MacOS', 'Insomnium'),
   linux: path.join('linux-unpacked', 'insomnia'),
 };
 export const cwd = path.resolve(__dirname, '..', '..', 'insomnia');

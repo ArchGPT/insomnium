@@ -538,7 +538,7 @@ export const WorkspaceSettingsModal = ({ workspace, workspaceMeta, clientCertifi
                       Enable Git Sync
                     </label>
                     <p>
-                      By enabling Git Sync, you can sync your workspace with a Git repository. This will disable the ability to sync with Insomnia Sync.
+                      By enabling Git Sync, you can sync your workspace with a Git repository. This will disable the ability to sync with Insomnium Sync.
                     </p>
                   </div>
                 </PanelContainer>

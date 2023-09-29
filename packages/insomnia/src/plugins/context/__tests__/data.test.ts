@@ -213,7 +213,7 @@ describe('app.export.*', () => {
     expect(exportedData).toEqual({
       log: {
         creator: {
-          name: 'Insomnia REST Client',
+          name: 'Insomnium REST Client',
           version: `insomnia.desktop.app:v${getAppVersion()}`,
         },
         entries: [

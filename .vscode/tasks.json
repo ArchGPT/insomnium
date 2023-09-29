@@ -4,27 +4,27 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Insomnia: Compile Main",
+      "label": "Insomnium: Compile Main",
       "detail": "esbuild.main.ts",
       "type": "shell",
       "promptOnClose": false,
       "options": {
         "cwd": "${workspaceFolder}/packages/insomnia",
         "env": {
-          "NODE_ENV": "development",
+          "NODE_ENV": "development"
         }
       },
       "command": "${workspaceRoot}/packages/insomnia/node_modules/.bin/esr esbuild.main.ts"
     },
     {
-      "label": "Insomnia: Compile Renderer (Watch)",
+      "label": "Insomnium: Compile Renderer (Watch)",
       "detail": "vite dev",
       "type": "shell",
       "promptOnClose": false,
       "options": {
         "cwd": "${workspaceFolder}/packages/insomnia",
         "env": {
-          "NODE_ENV": "development",
+          "NODE_ENV": "development"
         }
       },
       "isBackground": true,
@@ -55,12 +55,9 @@
       "command": "${workspaceRoot}/packages/insomnia/node_modules/.bin/vite dev"
     },
     {
-      "label": "Insomnia: Compile (Watch)",
+      "label": "Insomnium: Compile (Watch)",
       "detail": "Compile Renderer (Watch) | Compile Main",
-      "dependsOn": [
-        "Insomnia: Compile Renderer (Watch)",
-        "Insomnia: Compile Main"
-      ]
+      "dependsOn": ["Insomnium: Compile Renderer (Watch)", "Insomnium: Compile Main"]
     },
     {
       "label": "Inso: Compile (Watch)",

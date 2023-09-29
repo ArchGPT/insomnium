@@ -24,7 +24,7 @@ export const description = 'Importer for Swagger 2.0 specification (json/yaml)';
 /* eslint-disable camelcase -- this file uses camel case too often */
 
 /**
- * Return Insomnia folder / request group
+ * Return Insomnium folder / request group
  */
 const importFolderItem = (parentId: string) => (
   item: OpenAPIV2.TagObject,
@@ -181,7 +181,7 @@ const importRequest = (
 };
 
 /**
- * Populate Insomnia request with authentication
+ * Populate Insomnium request with authentication
  */
 const setupAuthentication = (
   securityDefinitions: OpenAPIV2.SecurityDefinitionsObject | undefined,

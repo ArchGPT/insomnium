@@ -9,7 +9,7 @@
       "sourceMaps": true,
       "presentation": {
         "hidden": true,
-        "group": "Insomnia",
+        "group": "Insomnium",
         "order": 1
       },
       "cwd": "${workspaceFolder}/packages/insomnia",
@@ -33,7 +33,7 @@
       "request": "attach",
       "presentation": {
         "hidden": true,
-        "group": "Insomnia",
+        "group": "Insomnium",
         "order": 2
       },
       "port": 9222,
@@ -84,24 +84,21 @@
         },
         {
           "value": "help"
-        },
+        }
       ]
     }
   ],
   "compounds": [
     {
-      "name": "Insomnia",
+      "name": "Insomnium",
       "presentation": {
         "hidden": false,
-        "group": "Insomnia",
+        "group": "Insomnium",
         "order": 0
       },
       "stopAll": true,
-      "preLaunchTask": "Insomnia: Compile (Watch)",
-      "configurations": [
-        "Electron: main",
-        "Electron: renderer"
-      ]
+      "preLaunchTask": "Insomnium: Compile (Watch)",
+      "configurations": ["Electron: main", "Electron: renderer"]
     }
   ]
 }

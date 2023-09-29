@@ -42,7 +42,7 @@ export async function insomniaFetch<T = any>({ method, path, data, sessionId, or
   const config: RequestInit = {
     method,
     headers: {
-      'X-Insomnia-Client': getClientString(),
+      'X-Insomnium-Client': getClientString(),
       ...(sessionId ? { 'X-Session-Id': sessionId } : {}),
       ...(data ? { 'Content-Type': 'application/json' } : {}),
     },

@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 
 /*
 
-This simple (and zero dependency) script's purpose in life is to help the Insomnia team answer questions like "I wonder how many plugins use <XYZ>".
+This simple (and zero dependency) script's purpose in life is to help the Insomnium team answer questions like "I wonder how many plugins use <XYZ>".
 In short, it uses the NPM search API and grabs all plugins and puts them into a temporary npm package, the thought being that you can then open up your editor on that temporary package's `node_modules` directory and be able to search the code of all plugins.
 
 Using NPM in this way is a little less error-prone than, say, if we were to clone each repo from GitHub, because what's on GitHub may not match what's on NPM -> and NPM is what the app uses.

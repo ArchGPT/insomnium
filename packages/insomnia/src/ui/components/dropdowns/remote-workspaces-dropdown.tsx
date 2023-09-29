@@ -72,7 +72,7 @@ export const RemoteWorkspacesDropdown: FC<Props> = ({ project: { remoteId } }) =
             Remote {strings.collection.plural}
             <HelpTooltip>
               These {strings.collection.plural.toLowerCase()} have been shared with
-              you via Insomnia Sync and do not yet exist on your machine.
+              you via Insomnium Sync and do not yet exist on your machine.
             </HelpTooltip>{' '}
             {state === 'loading' && <i className="fa fa-spin fa-refresh" />}
           </>
@@ -93,7 +93,7 @@ export const RemoteWorkspacesDropdown: FC<Props> = ({ project: { remoteId } }) =
             Remote {strings.collection.plural}
             <HelpTooltip>
               These {strings.collection.plural.toLowerCase()} have been shared with
-              you via Insomnia Sync and do not yet exist on your machine.
+              you via Insomnium Sync and do not yet exist on your machine.
             </HelpTooltip>{' '}
             {state === 'loading' && <i className="fa fa-spin fa-refresh" />}
           </>

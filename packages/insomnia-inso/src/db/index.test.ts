@@ -129,7 +129,7 @@ describe('loadDb()', () => {
     neDbAdapter.mockResolvedValue(null);
     const db = await loadDb();
     expect(logger.__getLogs().warn).toEqual([
-      'No git, app data store or Insomnia V4 export file found, re-run `inso` with `--verbose` to see tracing information',
+      'No git, app data store or Insomnium V4 export file found, re-run `inso` with `--verbose` to see tracing information',
     ]);
     expect(db).toEqual(emptyDb());
   });

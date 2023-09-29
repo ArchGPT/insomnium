@@ -74,7 +74,7 @@ const makeTestCommand = (commandCreator: CreateCommand) => {
   // inso run tests
   run
     .command('test [identifier]')
-    .description('Run Insomnia unit test suites')
+    .description('Run Insomnium unit test suites')
     .option('-e, --env <identifier>', 'environment to use')
     .option('-t, --testNamePattern <regex>', 'run tests that match the regex')
     .option(
@@ -189,7 +189,7 @@ export const go = (args?: string[], exitOverride?: boolean) => {
   // Version and description
   cmd
     .version(getVersion(), '-v, --version')
-    .description('A CLI for Insomnia!');
+    .description('A CLI for Insomnium!');
 
   // Global options
   cmd

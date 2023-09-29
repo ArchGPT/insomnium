@@ -259,7 +259,7 @@ export async function exportHar(exportRequests: ExportRequest[]) {
     log: {
       version: '1.2',
       creator: {
-        name: 'Insomnia REST Client',
+        name: 'Insomnium REST Client',
         version: `insomnia.desktop.app:v${getAppVersion()}`,
       },
       entries: entries,
@@ -529,7 +529,7 @@ function getRequestPostData(renderedRequest: RenderedRequest): HarPostData | und
       return;
     }
   } else {
-    // For every other type, Insomnia uses the same body format as HAR
+    // For every other type, Insomnium uses the same body format as HAR
     body = renderedRequest.body;
   }
 

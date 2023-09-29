@@ -43,13 +43,13 @@ jobs:
       - name: Type checks
         run: npm run type-check
 
-      - name: Test Insomnia
+      - name: Test Insomnium
         run: npm test -w packages/insomnia
 
       - name: Test Inso
         run: npm test -w packages/insomnia-inso
 
-      - name: Test Insomnia Testing
+      - name: Test Insomnium Testing
         run: npm test -w packages/insomnia-testing
 
       - name: Test O2K

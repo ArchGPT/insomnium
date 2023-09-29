@@ -38,8 +38,8 @@ test.describe('Dashboard', async () => {
       await page.click('text=NameActions Delete >> button');
       await page.getByRole('button', { name: 'Click to confirm' }).click();
 
-      // After deleting project, return to default Insomnia Dashboard
-      await expect(page.locator('.app')).toContainText('Insomnia');
+      // After deleting project, return to default Insomnium Dashboard
+      await expect(page.locator('.app')).toContainText('Insomnium');
       await expect(page.locator('.app')).not.toContainText('My Project123');
       await expect(page.locator('.app')).toContainText('New Document');
       await page.getByLabel('All Files (0)').click();

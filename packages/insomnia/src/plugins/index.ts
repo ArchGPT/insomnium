@@ -148,7 +148,7 @@ async function _traversePluginPath(
 
         const pluginJson = global.require(packageJSONPath);
 
-        // Not an Insomnia plugin because it doesn't have the package.json['insomnia']
+        // Not an Insomnium plugin because it doesn't have the package.json['insomnia']
         if (!pluginJson.hasOwnProperty('insomnia')) {
           continue;
         }

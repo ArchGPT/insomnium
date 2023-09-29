@@ -75,7 +75,7 @@ describe('export', () => {
         log: {
           version: '1.2',
           creator: {
-            name: 'Insomnia REST Client',
+            name: 'Insomnium REST Client',
           },
           entries: [
             {
@@ -243,7 +243,7 @@ describe('export', () => {
         log: {
           version: '1.2',
           creator: {
-            name: 'Insomnia REST Client',
+            name: 'Insomnium REST Client',
           },
           entries: [
             {

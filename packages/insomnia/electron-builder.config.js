@@ -1,4 +1,4 @@
-const BINARY_PREFIX = 'Insomnia.Core';
+const BINARY_PREFIX = 'Insomnium.Core';
 
 // NOTE: USE_HARD_LINKS
 // https://github.com/electron-userland/electron-builder/issues/4594#issuecomment-574653870
@@ -12,7 +12,7 @@ const config = {
   appId: 'com.insomnia.app',
   protocols: [
     {
-      name: 'Insomnia',
+      name: 'Insomnium',
       role: 'Viewer',
       schemes: ['insomnia'],
     },
@@ -98,8 +98,7 @@ const config = {
   },
   squirrelWindows: {
     artifactName: `${BINARY_PREFIX}-\${version}.\${ext}`,
-    iconUrl:
-      'https://github.com/kong/insomnia/blob/develop/packages/insomnia/src/icons/icon.ico?raw=true',
+    iconUrl: 'NEW_INSOMNIUM_ICON',
   },
   portable: {
     artifactName: `${BINARY_PREFIX}-\${version}-portable.\${ext}`,
@@ -110,8 +109,8 @@ const config = {
     synopsis: 'The Collaborative API Client and Design Tool',
     category: 'Development',
     desktop: {
-      Name: 'Insomnia',
-      Comment: 'Insomnia is a cross-platform REST client, built on top of Electron.',
+      Name: 'Insomnium',
+      Comment: 'Insomnium is a cross-platform REST client, built on top of Electron.',
       Categories: 'Development',
       Keywords: 'GraphQL;REST;gRPC;SOAP;openAPI;GitOps;',
     },

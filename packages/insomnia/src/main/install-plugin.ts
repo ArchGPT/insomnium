@@ -10,13 +10,13 @@ import { isDevelopment, isWindows } from '../common/constants';
 const YARN_DEPRECATED_WARN = /(?<keyword>warning)(?<dependencies>[^>:].+[>:])(?<issue>.+)/;
 
 interface InsomniaPlugin {
-  // Insomnia attribute from package.json
+  // Insomnium attribute from package.json
   insomnia: {
     name: string;
     displayName: string;
     description: string;
 
-    // Used by the plugin hub, not currently used by Insomnia
+    // Used by the plugin hub, not currently used by Insomnium
     // Each image is relative to package root
     images?: {
       icon?: string;
@@ -140,7 +140,7 @@ async function _isInsomniaPlugin(lookupName: string) {
           return;
         }
 
-        console.log(`[plugins] Detected Insomnia plugin ${data.name}`);
+        console.log(`[plugins] Detected Insomnium plugin ${data.name}`);
         const insomniaPlugin: InsomniaPlugin = {
           insomnia: data.insomnia,
           name: data.name,

@@ -574,7 +574,7 @@ const ScanResourcesForm = ({
           >
             <Pill>
               <InsomniaIcon />
-              Insomnia
+              Insomnium
             </Pill>
             <Pill>
               <PostmanIcon />
@@ -673,7 +673,7 @@ const ImportResourcesForm = ({
                   {scanResult.type?.id.includes('insomnia') && (
                     <Fragment>
                       <InsomniaIcon width={24} height={24} />
-                      Insomnia
+                      Insomnium
                     </Fragment>
                   )}
                   {scanResult.type?.id.includes('postman') && (
@@ -795,7 +795,7 @@ const ImportResourcesForm = ({
         {errors && errors.length > 0 && (
           <div className="notice error margin-top-sm">
             <p>
-              <strong>Error while importing to Insomnia:</strong>
+              <strong>Error while importing to Insomnium:</strong>
               {errors[0]}
             </p>
           </div>

@@ -104,7 +104,7 @@ export interface Settings {
 
   disableResponsePreviewLinks: boolean;
 
-  /** If true, Insomnia won’t show a notification when new updates are available. Users can still check for updates in Preferences. */
+  /** If true, Insomnium won’t show a notification when new updates are available. Users can still check for updates in Preferences. */
   disableUpdateNotification: boolean;
   editorFontSize: number;
   editorIndentSize: number;
@@ -112,7 +112,7 @@ export interface Settings {
   editorKeyMap: string;
   editorLineWrapping: boolean;
 
-  /** If true, Insomnia will send anonymous data about features and plugins used. */
+  /** If true, Insomnium will send anonymous data about features and plugins used. */
   enableAnalytics: boolean;
   filterResponsesByEnv: boolean;
   followRedirects: boolean;

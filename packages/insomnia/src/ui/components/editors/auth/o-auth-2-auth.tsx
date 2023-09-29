@@ -101,7 +101,7 @@ const getFields = (authentication: Request['authentication']) => {
   />;
   const authorizationUrl = <AuthInputRow label='Authorization URL' property='authorizationUrl' key='authorizationUrl' getAutocompleteConstants={getAuthorizationUrls} />;
   const accessTokenUrl = <AuthInputRow label='Access Token URL' property='accessTokenUrl' key='accessTokenUrl' getAutocompleteConstants={getAccessTokenUrls} />;
-  const redirectUri = <AuthInputRow label='Redirect URL' property='redirectUrl' key='redirectUrl' help='This can be whatever you want or need it to be. Insomnia will automatically detect a redirect in the client browser window and extract the code from the redirected URL.' />;
+  const redirectUri = <AuthInputRow label='Redirect URL' property='redirectUrl' key='redirectUrl' help='This can be whatever you want or need it to be. Insomnium will automatically detect a redirect in the client browser window and extract the code from the redirected URL.' />;
   const state = <AuthInputRow label='State' property='state' key='state' />;
   const scope = <AuthInputRow label='Scope' property='scope' key='scope' />;
   const username = <AuthInputRow label='Username' property='username' key='username' />;

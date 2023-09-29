@@ -25,7 +25,7 @@ app.get('/pets/:id', (req, res) => {
 
 app.get('/builds/check/*', (_req, res) => {
   res.status(200).send({
-    url: 'https://github.com/Kong/insomnia/releases/download/core@2023.5.6/Insomnia.Core-2023.5.6.zip',
+    url: 'https://github.com/Kong/insomnia/releases/download/core@2023.5.6/Insomnium.Core-2023.5.6.zip',
     name: '2099.1.0',
   });
 });

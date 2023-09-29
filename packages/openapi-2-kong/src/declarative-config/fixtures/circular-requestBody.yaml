@@ -5,7 +5,7 @@ info:
   version: 1.1.1
 
   contact:
-    name: Kong Insomnia
+    name: Kong Insomnium
 
 servers:
   - url: https://some.random.url

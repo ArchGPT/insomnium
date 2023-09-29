@@ -6,11 +6,10 @@ import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
 import { PanelContainer, TabItem, Tabs } from '../base/tabs';
-import { Account } from '../settings/account';
-import { AI } from '../settings/ai';
+
 import { General } from '../settings/general';
 import { ImportExport } from '../settings/import-export';
-import { Plugins } from '../settings/plugins';
+
 import { Shortcuts } from '../settings/shortcuts';
 import { ThemePanel } from '../settings/theme-panel';
 import { showModal } from './index';
@@ -51,7 +50,7 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
         </span>
       </ModalHeader>
       <ModalBody noScroll>
-        <Tabs aria-label="Insomnia Settings"  defaultSelectedKey={defaultTabKey}>
+        <Tabs aria-label="Insomnium Settings" defaultSelectedKey={defaultTabKey}>
           <TabItem key="general" title="General">
             <PanelContainer className="pad">
               <General />
@@ -72,21 +71,8 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
               <Shortcuts />
             </PanelContainer>
           </TabItem>
-          <TabItem key="account" title="Account">
-            <PanelContainer className="pad">
-              <Account />
-            </PanelContainer>
-          </TabItem>
-          <TabItem key="plugins" title="Plugins">
-            <PanelContainer className="pad">
-              <Plugins />
-            </PanelContainer>
-          </TabItem>
-          <TabItem key="ai" title="AI">
-            <PanelContainer className="pad">
-              <AI />
-            </PanelContainer>
-          </TabItem>
+
+
         </Tabs>
       </ModalBody>
     </Modal>

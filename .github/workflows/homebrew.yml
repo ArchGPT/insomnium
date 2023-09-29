@@ -9,7 +9,7 @@ on:
 
 jobs:
   update_homebrew:
-    name: Update Insomnia Formula
+    name: Update Insomnium Formula
     # must be macos, linux-brew doesn't have casks
     runs-on: macos-latest
     steps:
@@ -54,7 +54,7 @@ jobs:
         with:
           token: ${{ secrets.HOMEBREW_PR_GH_TOKEN }}
           formulae: inso
-      - name: Bump Insomnia Formula
+      - name: Bump Insomnium Formula
         uses: Homebrew/actions/bump-formulae@master
         with:
           token: ${{ secrets.HOMEBREW_PR_GH_TOKEN }}

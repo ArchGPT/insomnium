@@ -56,13 +56,13 @@ $PWD/packages/insomnia-inso/binaries/inso run test "Echo Test Suite" --src $PWD/
 
 ## How to update the `inso-nedb` fixtures
 
-Run Insomnia with `INSOMNIA_DATA_PATH` environment variable set to `fixtures/inso-nedb`, e.g.:
+Run Insomnium with `INSOMNIA_DATA_PATH` environment variable set to `fixtures/inso-nedb`, e.g.:
 
 ```bash
-INSOMNIA_DATA_PATH=packages/insomnia-smoke-test/fixtures/inso-nedb /Applications/Insomnia.app/Contents/MacOS/Insomnia
+INSOMNIA_DATA_PATH=packages/insomnia-smoke-test/fixtures/inso-nedb /Applications/Insomnium.app/Contents/MacOS/Insomnium
 ```
 
-Relaunch the app one more time, so that Insomnia compacts the database.
+Relaunch the app one more time, so that Insomnium compacts the database.
 
 The `.gitignore` file will explicitly ignore certain database files, to keep the directory size down and avoid prevent sensitive data leaks.
 

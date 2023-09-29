@@ -5,7 +5,7 @@ import { Link } from '../base/link';
 import { PromptButton } from '../base/prompt-button';
 import { HelpTooltip } from '../help-tooltip';
 import { hideAllModals, showModal } from '../modals/index';
-import { LoginModal } from '../modals/login-modal';
+
 
 export const Account: FC = () => {
   const [codeSent, setCodeSent] = useState(false);
@@ -16,7 +16,7 @@ export const Account: FC = () => {
   const handleLogin = useCallback((event: React.SyntheticEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     hideAllModals();
-    showModal(LoginModal);
+
   }, []);
 
   const handleSubmitPasswordChange = useCallback(async (event: React.SyntheticEvent<HTMLFormElement>) => {
@@ -153,7 +153,7 @@ export const Account: FC = () => {
   ) : (
     <Fragment>
       <div className="notice pad surprise">
-        <h1 className="no-margin-top">Try Insomnia Sync!</h1>
+          <h1 className="no-margin-top">Try Insomnium Sync!</h1>
         <p>
           Sync your data across devices or with a team
           <br />

@@ -417,7 +417,7 @@ export function getContentTypeFromHeaders(headers: any[], defaultValue: string |
 export const RESPONSE_CODE_DESCRIPTIONS: Record<number, string> = {
   // Special
   [STATUS_CODE_PLUGIN_ERROR]:
-    'An Insomnia plugin threw an error which prevented the request from sending',
+    'An Insomnium plugin threw an error which prevented the request from sending',
   // 100s
   100: 'This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.',
   101: 'This code is sent in response to an Upgrade: request header by the client and indicates the protocol the server is switching to.',

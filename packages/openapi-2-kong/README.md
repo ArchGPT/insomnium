@@ -248,7 +248,7 @@ The Kong for Kubernetes config will contain at least one `Ingress` document per 
 ```yaml
 openapi: 3.0.0
 info:
-  title: Insomnia API
+  title: Insomnium API
 servers:
   - url: http://one.insomnia.rest/v1
   - url: http://two.insomnia.rest/v2
@@ -321,7 +321,7 @@ In priority order, these sections are:
   openapi: 3.0.0
   info:
     x-kubernetes-ingress-metadata:
-      name: Insomnia API
+      name: Insomnium API
   ...
   ```
 
@@ -329,7 +329,7 @@ In priority order, these sections are:
 
   ```yaml
   openapi: 3.0.0
-  x-kong-name: Insomnia API
+  x-kong-name: Insomnium API
   ...
   ```
 
@@ -338,7 +338,7 @@ In priority order, these sections are:
   ```yaml
   openapi: 3.0.0
   info:
-    title: Insomnia API
+    title: Insomnium API
   ...
   ```
 

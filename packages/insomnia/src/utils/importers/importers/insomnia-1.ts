@@ -8,8 +8,8 @@ import {
 } from '../entities';
 
 export const id = 'insomnia-1';
-export const name = 'Insomnia v1';
-export const description = 'Legacy Insomnia format';
+export const name = 'Insomnium v1';
+export const description = 'Legacy Insomnium format';
 
 type Format = 'form' | 'json' | 'text' | 'xml';
 

@@ -247,7 +247,7 @@ const parseEndpoints = (document?: OpenAPIV3.Document | null) => {
 };
 
 /**
- * Return Insomnia folder / request group
+ * Return Insomnium folder / request group
  */
 const importFolderItem = (parentId: string) => (
   item: OpenAPIV3.SchemaObject,
@@ -277,7 +277,7 @@ const pathWithParamsAsVariables = (path?: string) =>
   path?.replace(VARIABLE_SEARCH_VALUE, '{{ _.$1 }}') ?? '';
 
 /**
- * Return Insomnia request
+ * Return Insomnium request
  */
 const importRequest = (
   endpointSchema: OpenAPIV3.SchemaObject & { summary?: string; path?: string; method?: string },
@@ -453,9 +453,9 @@ const parseSecurity = (
 };
 
 /**
- * Get Insomnia environment variables for OpenAPI securitySchemes
+ * Get Insomnium environment variables for OpenAPI securitySchemes
  *
- * @returns Insomnia environment variables containing security information
+ * @returns Insomnium environment variables containing security information
  */
 const getSecurityEnvVariables = (securitySchemeObject?: OpenAPIV3.SecuritySchemeObject) => {
   if (!securitySchemeObject) {

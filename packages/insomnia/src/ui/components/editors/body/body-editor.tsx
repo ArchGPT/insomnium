@@ -127,7 +127,7 @@ export const BodyEditor: FC<Props> = ({
         title="Enter a URL and connect to start receiving event stream data"
       />;
     }
-    return <EmptyStatePane icon={<SvgIcon icon="bug" />} documentationLinks={[documentationLinks.introductionToInsomnia]} secondaryAction="Select a body type from above to send data in the body of a request" title="Enter a URL and send to get a response" />;
+    return <EmptyStatePane icon={<SvgIcon icon="globe" />} documentationLinks={[documentationLinks.introductionToInsomnia]} secondaryAction="" title="Enter a URL and send to get a response" />;
   };
 
   return <NunjucksEnabledProvider disable={noRender}>{_render()}</NunjucksEnabledProvider>;

@@ -59,7 +59,7 @@ resources:
     parentId: null
     modified: 1626208996457
     created: 1626208996457
-    name: Insomnia
+    name: Insomnium
     description: ""
     _type: workspace
   - _id: env_6aa24926e40c34f11b497374cd4faade781b2d7c
@@ -87,7 +87,7 @@ resources:
     parentId: env_6aa24926e40c34f11b497374cd4faade781b2d7c
     modified: 1634914828784
     created: 1634914792780
-    name: Insomnia Environment
+    name: Insomnium Environment
     data:
       base_path: ""
       scheme: http

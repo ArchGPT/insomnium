@@ -551,7 +551,7 @@ const ProjectRoute: FC = () => {
                               <div>
                                 <p>
                                   At the moment it is not possible to create more
-                                  cloud projects within a team in Insomnia.
+                                  cloud projects within a team in Insomnium.
                                 </p>
                                 <p>🚀 This feature is coming soon!</p>
                               </div>
@@ -673,19 +673,6 @@ const ProjectRoute: FC = () => {
                   );
                 }}
               </GridList>
-              <Button
-                aria-label="Explore subscriptions"
-                className="outline-none select-none flex hover:bg-[--hl-xs] focus:bg-[--hl-sm] transition-colors gap-2 px-4 items-center h-[--line-height-xs] w-full overflow-hidden text-[--hl]"
-                onPress={() => {
-                  window.main.openInBrowser('https://insomnia.rest/pricing');
-                }}
-              >
-                <Icon icon="arrow-up-right-from-square" />
-
-                <span className="truncate capitalize">
-                  Explore subscriptions
-                </span>
-              </Button>
             </div>
           }
           renderPaneOne={

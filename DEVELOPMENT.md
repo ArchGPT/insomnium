@@ -4,14 +4,14 @@ The purpose of this document is to provide a general overview of the application
 
 ## Technologies
 
-Insomnia is a desktop application built on top of [Electron](http://electronjs.org/). Electron provides a Chromium runtime for the Insomnia web app to run inside, as well as additional tools to provide access to operating system features.
+Insomnium is a desktop application built on top of [Electron](http://electronjs.org/). Electron provides a Chromium runtime for the Insomnium web app to run inside, as well as additional tools to provide access to operating system features.
 
 There are a few more technologies and tools worth mentioning:
 
 - [`React`](https://reactjs.org/) is the library used for all UI components.
 - [`styled-components`](https://styled-components.com/) and [`Less`](http://lesscss.org/) are used for styling UI components.
-- [`Electron Builder`](https://github.com/electron-userland/electron-builder) is used to help build, sign, and package Insomnia for distribution.
-- [`libcurl`](https://curl.se/libcurl/) is the library that Insomnia uses to make requests. We used libcurl as our HTTP client of choice because it allows the deepest amount of debuggability and control of HTTP requests.
+- [`Electron Builder`](https://github.com/electron-userland/electron-builder) is used to help build, sign, and package Insomnium for distribution.
+- [`libcurl`](https://curl.se/libcurl/) is the library that Insomnium uses to make requests. We used libcurl as our HTTP client of choice because it allows the deepest amount of debuggability and control of HTTP requests.
 - [`NeDB`](https://github.com/louischatriot/nedb) a local in-memory database.
 - [`node-libcurl`](https://github.com/JCMais/node-libcurl) is a Node.js wrapper around the native libcurl library.
 - [`CodeMirror`](https://codemirror.net/) is a web-based, extendable, code editor used for highlighting and linting of data formats like JSON, GraphQL, and XML.
@@ -19,7 +19,7 @@ There are a few more technologies and tools worth mentioning:
 
 ## Project Structure
 
-Insomnia uses [`npm workspaces`](https://docs.npmjs.com/cli/v9/using-npm/workspaces?v=true) to manage multiple npm packages within a single repository. There are currently the following package locations:
+Insomnium uses [`npm workspaces`](https://docs.npmjs.com/cli/v9/using-npm/workspaces?v=true) to manage multiple npm packages within a single repository. There are currently the following package locations:
 
 - `/packages` contains related packages that are consumed by `insomnia` or externally.
 
@@ -41,7 +41,7 @@ There are a few notable directories inside it:
 
 ## Data and State Architecture
 
-Insomnia stores data in a few places:
+Insomnium stores data in a few places:
 
 - A local in-memory NeDB database stores data for data models (requests, folder, workspaces, etc.).
 - localstorage
@@ -64,7 +64,7 @@ The structure for smoke tests is explained in the smoke testing package: [`packa
 
 ## Technical Debt
 
-This is just a brief summary of Insomnia's current technical debt.
+This is just a brief summary of Insomnium's current technical debt.
 
 - Loading large responses (~20 MB) can crash the app on weaker hardware.
 - Bundling `libcurl` (native module) has caused many weeks of headaches trying to get builds working across Windows, Mac, and Linux. More expertise here is definitely needed.
