@@ -19,7 +19,6 @@
     "packages/insomnia-testing",
     "packages/insomnia-send-request",
     "packages/insomnia",
-    "packages/insomnia-inso",
     "packages/insomnia-smoke-test"
   ],
   "scripts": {
@@ -44,6 +43,7 @@
     "download-all-npm-plugins": "esr ./scripts/download-all-npm-plugins.ts"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.4.2",
     "@jest/globals": "^28.1.0",
     "@jest/types": "^28.1.0",
     "@types/chai": "^4.3.5",

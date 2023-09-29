@@ -1,7 +1,6 @@
-# Kong Security Policy
+# Insomnium Security Policy
 
-## Reporting a Vulnerability
+Insomnium is a fork of Insomnia, and is designed to be 100% local with 100% data privacy. By design, there should not be any security vulnerabilities in Insomnium. 
 
-To report a vulnerability in the Kong gateway, Insomnium or other Kong software, or know of a publicly disclosed security vulnerability, please immediately let us know by emailing <security@konghq.com>.
+If you find any security vulnerability in Insomnium, you can report it to us at security@archgpt.net.
 
-For more detailed information, please see [Kong's Security Update Process](https://docs.konghq.com/gateway-oss/latest/kong-security-update-process/#reporting-a-vulnerability).

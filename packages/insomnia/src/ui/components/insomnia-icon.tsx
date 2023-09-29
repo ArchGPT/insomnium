@@ -85,7 +85,7 @@ const LoadingBarIndicator = styled.div`
   transform: translateX(-100%);
 `;
 
-export const InsomniaAILogo = ({
+export const InsomniaLogo = ({
   ...props
 }: React.SVGProps<SVGSVGElement>) => {
   const {

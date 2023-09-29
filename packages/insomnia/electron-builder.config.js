@@ -98,7 +98,7 @@ const config = {
   },
   squirrelWindows: {
     artifactName: `${BINARY_PREFIX}-\${version}.\${ext}`,
-    iconUrl: 'NEW_INSOMNIUM_ICON',
+    iconUrl: 'https://github.com/archGPT/insomnium/blob/main/packages/insomnia/src/icons/icon.png?raw=true',
   },
   portable: {
     artifactName: `${BINARY_PREFIX}-\${version}-portable.\${ext}`,

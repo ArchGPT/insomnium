@@ -86,33 +86,8 @@ export const GenerateConfigModal = forwardRef<GenerateConfigModalHandle, ModalPr
           error: `Unsupported OpenAPI spec format ${formatVersion}`,
         };
       }
+      throw "openapi-2-kong removed"
 
-      const o2k = await import('openapi-2-kong');
-      const type = generatePlugin.label === 'Kong for Kubernetes' ? 'kong-for-kubernetes' : 'kong-declarative-config';
-      if (generatePlugin.label === 'Declarative Config (Kong 3.x)') {
-        const r = await o2k.generateFromString(rawContents, type, [], false);
-        const yamlDocs = r.documents.map(d => YAML.stringify(d));
-
-        return {
-          // Join the YAML docs with "---" and strip any extra newlines surrounding them
-          content: yamlDocs.join('\n---\n').replace(/\n+---\n+/g, '\n---\n') || '',
-          mimeType: 'text/yaml',
-          label: generatePlugin.label,
-          docsLink: generatePlugin.docsLink,
-          error: null,
-        };
-      }
-      const r = await o2k.generateFromString(rawContents, type);
-      const yamlDocs = r.documents.map(d => YAML.stringify(d));
-
-      return {
-        // Join the YAML docs with "---" and strip any extra newlines surrounding them
-        content: yamlDocs.join('\n---\n').replace(/\n+---\n+/g, '\n---\n') || '',
-        mimeType: 'text/yaml',
-        label: generatePlugin.label,
-        docsLink: generatePlugin.docsLink,
-        error: null,
-      };
     } catch (err) {
       return {
         content: '',

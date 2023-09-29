@@ -5,7 +5,7 @@ import YAMLSourceMap from 'yaml-source-map';
 
 import type { ApiSpec } from '../../../models/api-spec';
 import { useAIContext } from '../../context/app/ai-context';
-import { InsomniaAI } from '../insomnia-ai-icon';
+
 import { Button } from '../themed-button';
 import { Sidebar } from './sidebar';
 

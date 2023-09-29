@@ -54,7 +54,7 @@ import { isDesign, Workspace } from '../../models/workspace';
 import { WorkspaceMeta } from '../../models/workspace-meta';
 import { invariant } from '../../utils/invariant';
 import { ProjectDropdown } from '../components/dropdowns/project-dropdown';
-import { RemoteWorkspacesDropdown } from '../components/dropdowns/remote-workspaces-dropdown';
+
 import { WorkspaceCardDropdown } from '../components/dropdowns/workspace-card-dropdown';
 import { ErrorBoundary } from '../components/error-boundary';
 import { Icon } from '../components/icon';
@@ -790,12 +790,7 @@ const ProjectRoute: FC = () => {
                     </Menu>
                   </Popover>
                 </MenuTrigger>
-                {isRemoteProject(activeProject) && (
-                  <RemoteWorkspacesDropdown
-                    key={activeProject._id}
-                    project={activeProject}
-                  />
-                )}
+
               </div>
 
               <GridList
