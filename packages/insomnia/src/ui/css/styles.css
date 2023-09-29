@@ -1,0 +1,57 @@
+@import 'codemirror/addon/dialog/dialog.css';
+@import 'codemirror/addon/fold/foldgutter.css';
+@import 'codemirror/addon/hint/show-hint.css';
+@import 'codemirror/addon/search/matchesonscrollbar.css';
+@import 'codemirror/addon/lint/lint.css';
+@import 'codemirror/lib/codemirror.css';
+@import './lib/codemirror/codemirror.css';
+@import './lib/codemirror/material.css';
+@import './main.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.grid-template-app-layout {
+  grid-template:
+    'Header Header' auto
+    'Navbar Content' 1fr
+    'Statusbar Statusbar' 30px [row-end]
+    / 50px 1fr;
+}
+
+.react-aria-Breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.react-aria-Breadcrumbs .react-aria-Item {
+  display: flex;
+  user-select: none;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-font);
+}
+
+.react-aria-Breadcrumbs .react-aria-Item:not(:last-child):after {
+  content: '/';
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+.new-sidebar .sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-font);
+  overflow: hidden;
+}

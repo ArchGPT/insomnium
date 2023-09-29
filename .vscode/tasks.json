@@ -1,0 +1,108 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Insomnia: Compile Main",
+      "detail": "esbuild.main.ts",
+      "type": "shell",
+      "promptOnClose": false,
+      "options": {
+        "cwd": "${workspaceFolder}/packages/insomnia",
+        "env": {
+          "NODE_ENV": "development",
+        }
+      },
+      "command": "${workspaceRoot}/packages/insomnia/node_modules/.bin/esr esbuild.main.ts"
+    },
+    {
+      "label": "Insomnia: Compile Renderer (Watch)",
+      "detail": "vite dev",
+      "type": "shell",
+      "promptOnClose": false,
+      "options": {
+        "cwd": "${workspaceFolder}/packages/insomnia",
+        "env": {
+          "NODE_ENV": "development",
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "severity": "error",
+        "fileLocation": "absolute",
+        "pattern": [
+          {
+            "regexp": "ERROR in (.*)",
+            "file": 1
+          },
+          {
+            "regexp": "\\((\\d+),(\\d+)\\):(.*)",
+            "line": 1,
+            "column": 2,
+            "message": 3
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "vite",
+          "endsPattern": {
+            "regexp": "ready in"
+          }
+        }
+      },
+      "command": "${workspaceRoot}/packages/insomnia/node_modules/.bin/vite dev"
+    },
+    {
+      "label": "Insomnia: Compile (Watch)",
+      "detail": "Compile Renderer (Watch) | Compile Main",
+      "dependsOn": [
+        "Insomnia: Compile Renderer (Watch)",
+        "Insomnia: Compile Main"
+      ]
+    },
+    {
+      "label": "Inso: Compile (Watch)",
+      "detail": "npm start",
+      "type": "shell",
+      "promptOnClose": false,
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "webpack",
+        "severity": "error",
+        "fileLocation": "absolute",
+        "pattern": [
+          {
+            "regexp": "ERROR in (.*)",
+            "file": 1
+          },
+          {
+            "regexp": "\\((\\d+),(\\d+)\\):(.*)",
+            "line": 1,
+            "column": 2,
+            "message": 3
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": {
+            "regexp": "watching"
+          },
+          "endsPattern": {
+            "regexp": "\\d+ modules"
+          }
+        }
+      },
+      "command": "npm run inso-start"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "inso_args",
+      "type": "promptString",
+      "description": "Arguments to pass to inso",
+      "default": "-v"
+    }
+  ]
+}

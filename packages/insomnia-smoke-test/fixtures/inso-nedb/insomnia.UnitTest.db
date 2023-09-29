@@ -1,0 +1,1 @@
+{"_id":"ut_babcaf85ec1b481ebed1e1cd1aa61a75","type":"UnitTest","parentId":"uts_b12681ace8eb4e5999b5b51677c4c269","modified":1632964811893,"created":1632962936043,"requestId":"req_f2cd394aad83485c8f7bee1b612165d5","name":"Returns 200","code":"const response1 = await insomnia.send();\nexpect(response1.status).to.equal(200);"}
