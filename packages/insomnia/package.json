@@ -8,6 +8,9 @@
   "bugs": {
     "url": "https://github.com/Kong/insomnia/issues"
   },
+  "build": {
+    "asar": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kong/insomnia.git",
@@ -26,7 +29,7 @@
     "start": "concurrently -n dev,app --kill-others \"npm run start:dev-server\" \"npm run start:electron\"",
     "start:dev-server": "vite dev",
     "start:electron": "cross-env NODE_ENV=development esr esbuild.main.ts && electron .",
-    "test": "jest",
+    "test": "jest", 
     "electron:dev-build": "electron ./build/main.min.js",
     "test:watch": "jest --watch",
     "type-check": "tsc --noEmit --project tsconfig.build.json",
