@@ -261,10 +261,10 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
                 <DropdownItem aria-label="send-now">
                   <ItemContent icon="arrow-circle-o-right" label="Send Now" hint={hotKeyRegistry.request_send} onClick={sendOrConnect} />
                 </DropdownItem>
-                <DropdownItem aria-label='Generate Client Code'>
+                <DropdownItem aria-label='Show CURL code, etc'>
                   <ItemContent
                     icon="code"
-                    label="Generate Client Code"
+                    label="Show CURL code, etc"
                     onClick={() => showModal(GenerateCodeModal, { request: activeRequest })}
                   />
                 </DropdownItem>

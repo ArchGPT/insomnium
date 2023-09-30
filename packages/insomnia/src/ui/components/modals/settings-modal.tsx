@@ -13,6 +13,7 @@ import { ImportExport } from '../settings/import-export';
 import { Shortcuts } from '../settings/shortcuts';
 import { ThemePanel } from '../settings/theme-panel';
 import { showModal } from './index';
+import { Plugins } from '../settings/plugins';
 
 export interface SettingsModalHandle {
   hide: () => void;
@@ -69,6 +70,11 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
           <TabItem key="keyboard" title="Keyboard">
             <PanelContainer className="pad">
               <Shortcuts />
+            </PanelContainer>
+          </TabItem>
+          <TabItem key="plugins" title="Plugins">
+            <PanelContainer className="pad">
+              <Plugins />
             </PanelContainer>
           </TabItem>
 

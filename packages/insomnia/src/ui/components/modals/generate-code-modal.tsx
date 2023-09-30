@@ -111,7 +111,7 @@ export const GenerateCodeModal = forwardRef<GenerateCodeModalHandle, Props>((pro
   }
   return (
     <Modal ref={modalRef} tall {...props}>
-      <ModalHeader>Generate Client Code</ModalHeader>
+      <ModalHeader>Show CURL code, etc</ModalHeader>
       <ModalBody
         noScroll
         style={{
