@@ -14,6 +14,7 @@ import {
   EXPORT_TYPE_WORKSPACE,
 } from '../common/constants';
 import { generateId } from '../common/misc';
+/**** ><> ↑ --------- Importing constants and utility functions ->  */
 import * as _apiSpec from './api-spec';
 import * as _caCertificate from './ca-certificate';
 import * as _clientCertificate from './client-certificate';
@@ -43,6 +44,7 @@ import * as _webSocketRequest from './websocket-request';
 import * as _webSocketResponse from './websocket-response';
 import * as _workspace from './workspace';
 import * as _workspaceMeta from './workspace-meta';
+/**** ><> ↑ --------- Importing various modules ->  */
 
 export interface BaseModel {
   _id: string;
@@ -56,6 +58,7 @@ export interface BaseModel {
   isPrivate: boolean;
   name: string;
 }
+/**** ><> ↑ --------- Defining the BaseModel interface ->  */
 
 // Reference to each model
 export const apiSpec = _apiSpec;
@@ -88,6 +91,7 @@ export const webSocketResponse = _webSocketResponse;
 export const workspace = _workspace;
 export const workspaceMeta = _workspaceMeta;
 export * as organization from './organization';
+/**** ><> ↑ --------- Exporting references to each model ->  */
 
 export function all() {
   // NOTE: This list should be from most to least specific (ie. parents above children)
@@ -125,10 +129,12 @@ export function all() {
     webSocketResponse,
   ] as const;
 }
+/**** ><> ↑ --------- Function to return all models ->  */
 
 export function types() {
   return all().map(model => model.type);
 }
+/**** ><> ↑ --------- Function to return all model types ->  */
 
 export function canSync(d: BaseModel) {
   if (d.isPrivate) {
@@ -143,10 +149,12 @@ export function canSync(d: BaseModel) {
 
   return m.canSync || false;
 }
+/**** ><> ↑ --------- Function to check if a model can be synchronized ->  */
 
 export function getModel(type: string) {
   return all().find(m => m.type === type) || null;
 }
+/**** ><> ↑ --------- Function to get a model by type ->  */
 
 export function mustGetModel(type: string) {
   const model = getModel(type);
@@ -157,11 +165,13 @@ export function mustGetModel(type: string) {
 
   return model;
 }
+/**** ><> ↑ --------- Function to ensure a model exists for a given type ->  */
 
 export function canDuplicate(type: string) {
   const model = getModel(type);
   return model ? model.canDuplicate : false;
 }
+/**** ><> ↑ --------- Function to check if a model can be duplicated ->  */
 
 export async function initModel<T extends BaseModel>(type: string, ...sources: Record<string, any>[]): Promise<T> {
   const model = getModel(type);
@@ -207,6 +217,7 @@ export async function initModel<T extends BaseModel>(type: string, ...sources: R
   // @ts-expect-error -- TSCONVERSION not sure why this error is occurring
   return migratedDoc;
 }
+/**** ><> ↑ --------- Function to initialize a model ->  */
 
 export const MODELS_BY_EXPORT_TYPE: Record<string, any> = {
   [EXPORT_TYPE_REQUEST]: request,
@@ -223,3 +234,4 @@ export const MODELS_BY_EXPORT_TYPE: Record<string, any> = {
   [EXPORT_TYPE_PROTO_FILE]: protoFile,
   [EXPORT_TYPE_PROTO_DIRECTORY]: protoDirectory,
 };
+/**** ><> ↑ --------- Exporting models by export types ->  */

@@ -4,8 +4,10 @@ import { Request } from '../models/request';
 import { WebSocketRequest } from '../models/websocket-request';
 import { showModal } from '../ui/components/modals';
 import { RequestRenderErrorModal } from '../ui/components/modals/request-render-error-modal';
+/**** ><> ↑ --------- Imports - External Dependencies ->  */
 
 // NOTE: template interpolation is tightly coupled with modal implementation
+/**** ><> ↑ --------- Function Comment ->  */
 export const tryToInterpolateRequestOrShowRenderErrorModal = async ({ request, environmentId, payload }: { request: Request | WebSocketRequest | GrpcRequest; environmentId: string; payload: any }): Promise<any> => {
   try {
     const renderContext = await getRenderContext({ request, environmentId, purpose: RENDER_PURPOSE_SEND });
@@ -18,3 +20,4 @@ export const tryToInterpolateRequestOrShowRenderErrorModal = async ({ request, e
     throw error;
   }
 };
+/**** ><> ↑ --------- Function Definition and Implementation ->  */

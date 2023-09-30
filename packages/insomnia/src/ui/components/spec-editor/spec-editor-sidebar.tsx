@@ -8,16 +8,19 @@ import { useAIContext } from '../../context/app/ai-context';
 
 import { Button } from '../themed-button';
 import { Sidebar } from './sidebar';
+/**** ><> ↑ --------- Importing dependencies and external modules ->  */
 
 interface Props {
   apiSpec: ApiSpec;
   handleSetSelection: (chStart: number, chEnd: number, lineStart: number, lineEnd: number) => void;
 }
+/**** ><> ↑ --------- Props interface definition ->  */
 
 const StyledSpecEditorSidebar = styled.div`
   overflow: hidden;
   overflow-y: auto;
 `;
+/**** ><> ↑ --------- Styled component definition ->  */
 
 export const SpecEditorSidebar: FC<Props> = ({ apiSpec, handleSetSelection }) => {
   const {
@@ -54,9 +57,11 @@ export const SpecEditorSidebar: FC<Props> = ({ apiSpec, handleSetSelection }) =>
     //   1-based indexing and we use 0-based.
     handleSetSelection(scrollPosition.start.col - 1, scrollPosition.end.col - 1, scrollPosition.start.line - 1, scrollPosition.end.line - 1);
   };
+/**** ><> ↑ --------- Function component definition ->  */
 
   const specJSON = YAML.parse(apiSpec.contents);
 
+/**** ><> ↑ --------- Convert YAML spec into JSON ->  */
   return (
     <StyledSpecEditorSidebar>
       <div>
@@ -86,3 +91,4 @@ export const SpecEditorSidebar: FC<Props> = ({ apiSpec, handleSetSelection }) =>
     </StyledSpecEditorSidebar>
   );
 };
+/**** ><> ↑ --------- Return JSX element from function component ->  */

@@ -11,6 +11,7 @@ import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
 type Props = ModalProps & {
+/**** ><> ↑ --------- Import statements for required libraries and components -> These lines import all the necessary libraries and components that are used throughout the component. */
   vcs: VCS;
 };
 
@@ -18,6 +19,7 @@ interface State {
   error?: string;
   workspaceName: string;
 }
+/**** ><> ↑ --------- Props and State type definitions -> This partition is for defining the data types for the props and state. */
 
 export const SyncDeleteModal = ({ vcs, onHide }: Props) => {
   const modalRef = useRef<ModalHandle>(null);
@@ -28,10 +30,12 @@ export const SyncDeleteModal = ({ vcs, onHide }: Props) => {
   const {
     activeWorkspace,
   } = useRouteLoaderData(':workspaceId') as WorkspaceLoaderData;
+/**** ><> ↑ --------- Component definition and state setup -> This is where the main component is defined, including setting up its state using the useState hook. */
 
   useEffect(() => {
     modalRef.current?.show();
   }, []);
+/**** ><> ↑ --------- useEffect setup -> This partition is where the useEffect hook is setup to automatically open the modal when the component is mounted. */
   const onSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -50,6 +54,7 @@ export const SyncDeleteModal = ({ vcs, onHide }: Props) => {
       }));
     }
   };
+/**** ><> ↑ --------- Handle form submission -> This is where the form submission event is handled. This function prevents the default form submission, and then attempts to delete the workspace. If there is an error, it is then added to the component's state. */
   const { error, workspaceName } = state;
 
   return (
@@ -80,3 +85,4 @@ export const SyncDeleteModal = ({ vcs, onHide }: Props) => {
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Component Return -> This is where the component's return statement is. This includes the form and conditional rendering for any error messages. */

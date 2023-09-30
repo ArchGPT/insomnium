@@ -1,5 +1,6 @@
 import React, { SVGProps, memo } from 'react';
 export const SvgIcnClock = memo<SVGProps<SVGSVGElement>>(props => (
+/**** ><> ↑ --------- SVG Component declaration and import statements ->  */
   <svg
     width="1em"
     height="1em"
@@ -13,7 +14,9 @@ export const SvgIcnClock = memo<SVGProps<SVGSVGElement>>(props => (
     }}
     role="img"
     {...props}
+/**** ><> ↑ --------- SVG Component attributes ->  */
   >
     <path d="M6 0a6 6 0 1 1 0 12A6 6 0 0 1 6 0Zm0 1.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM6.5 3v2.5H9V7H5V3h1.5Z" />
   </svg>
 ));
+/**** ><> ↑ --------- SVG Path creation ->  */

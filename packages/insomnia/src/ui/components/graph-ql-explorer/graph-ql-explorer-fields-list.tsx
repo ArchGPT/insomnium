@@ -6,6 +6,7 @@ import { MarkdownPreview } from '../markdown-preview';
 import { SvgIcon } from '../svg-icon';
 import { GraphQLDefaultValue } from './graph-ql-default-value';
 import { GraphQLExplorerArgLinks } from './graph-ql-explorer-arg-links';
+/**** ><> ↑ --------- Import Statements */
 import { GraphQLExplorerFieldLink } from './graph-ql-explorer-field-link';
 import { GraphQLExplorerTypeLink } from './graph-ql-explorer-type-link';
 import { GraphQLFieldWithParentName } from './graph-ql-types';
@@ -15,6 +16,7 @@ interface Props {
   onNavigateType: (type: GraphQLType) => void;
   onNavigateField: (field: GraphQLFieldWithParentName) => void;
 }
+/**** ><> ↑ --------- Interface Definition */
 
 export const GraphQLExplorerFieldsList: FC<Props> = ({ fields, onNavigateType, onNavigateField }) => {
   const fieldsList = fields.map(field => {
@@ -43,6 +45,7 @@ export const GraphQLExplorerFieldsList: FC<Props> = ({ fields, onNavigateType, o
             <MarkdownPreview markdown={description} />
           </div>
         )}
+/**** ><> ↑ --------- Description Display */
       </li>
     );
   });
@@ -52,4 +55,6 @@ export const GraphQLExplorerFieldsList: FC<Props> = ({ fields, onNavigateType, o
       {fieldsList}
     </ul>
   );
+/**** ><> ↑ --------- Component Definition */
 };
+/**** ><> ↑ --------- Component Rendering */

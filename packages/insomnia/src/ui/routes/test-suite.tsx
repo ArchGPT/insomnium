@@ -24,12 +24,14 @@ import { EmptyStatePane } from '../components/panes/empty-state-pane';
 import { SvgIcon } from '../components/svg-icon';
 import { Button } from '../components/themed-button';
 import { UnitTestEditable } from '../components/unit-test-editable';
+/**** ><> ↑ --------- Import statements ->  */
 
 const HeaderButton = styled(Button)({
   '&&': {
     marginRight: 'var(--padding-md)',
   },
 });
+/**** ><> ↑ --------- Styled components definitions ->  */
 
 const UnitTestItemView = ({
   unitTest,
@@ -198,6 +200,7 @@ const UnitTestItemView = ({
     </UnitTestItem>
   );
 };
+/**** ><> ↑ --------- Functional component UnitTestItemView ->  */
 
 export const indexLoader: LoaderFunction = async ({ params }) => {
   const { organizationId, projectId, workspaceId } = params;
@@ -224,6 +227,7 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
   }
   return null;
 };
+/**** ><> ↑ --------- Loader function for index ->  */
 
 interface LoaderData {
   unitTests: UnitTest[];
@@ -265,6 +269,7 @@ export const loader: LoaderFunction = async ({ params }): Promise<LoaderData> =>
     requests,
   };
 };
+/**** ><> ↑ --------- LoaderData interface and loader function ->  */
 
 const TestSuiteRoute = () => {
   const { organizationId, projectId, workspaceId } = useParams() as {
@@ -368,5 +373,7 @@ const TestSuiteRoute = () => {
     </div>
   );
 };
+/**** ><> ↑ --------- TestSuiteRoute Functional Component ->  */
 
 export default TestSuiteRoute;
+/**** ><> ↑ --------- TestSuiteRoute export statement ->  */

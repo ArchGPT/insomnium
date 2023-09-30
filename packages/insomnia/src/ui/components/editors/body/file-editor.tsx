@@ -4,11 +4,13 @@ import React, { FC, useCallback } from 'react';
 import * as misc from '../../../../common/misc';
 import { FileInputButton } from '../../base/file-input-button';
 import { PromptButton } from '../../base/prompt-button';
+/**** ><> ↑ --------- Import statements */
 
 interface Props {
   onChange: (path: string) => void;
   path: string;
 }
+/**** ><> ↑ --------- Props interface declaration */
 
 export const FileEditor: FC<Props> = ({ onChange, path }) => {
   const _handleResetFile = useCallback(() => {
@@ -30,6 +32,7 @@ export const FileEditor: FC<Props> = ({ onChange, path }) => {
   } catch (error) {
     sizeDescription = '';
   }
+/**** ><> ↑ --------- Inside FileEditor component, calculation of homeDirectory, pathDescription and sizeDescription */
 
   return (
     <div className="text-center">
@@ -52,3 +55,5 @@ export const FileEditor: FC<Props> = ({ onChange, path }) => {
     </div>
   );
 };
+/**** ><> ↑ --------- FileEditor component */
+/**** ><> ↑ --------- Inside FileEditor component, return statement with JSX */

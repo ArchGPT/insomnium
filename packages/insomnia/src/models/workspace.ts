@@ -5,12 +5,14 @@ import { strings } from '../common/strings';
 import type { BaseModel } from './index';
 import * as models from './index';
 import { DEFAULT_PROJECT_ID, isProjectId } from './project';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const name = 'Workspace';
 export const type = 'Workspace';
 export const prefix = 'wrk';
 export const canDuplicate = true;
 export const canSync = true;
+/**** ><> ↑ --------- Constant exports ->  */
 
 export interface BaseWorkspace {
   name: string;
@@ -28,6 +30,7 @@ export const WorkspaceScopeKeys = {
 
 export type Workspace = BaseModel & BaseWorkspace;
 
+/**** ><> ↑ --------- Interface and type definitions ->  */
 export const isWorkspace = (model: Pick<BaseModel, 'type'>): model is Workspace => (
   model.type === type
 );
@@ -39,12 +42,14 @@ export const isDesign = (workspace: Pick<Workspace, 'scope'>) => (
 export const isCollection = (workspace: Pick<Workspace, 'scope'>) => (
   workspace.scope === WorkspaceScopeKeys.collection
 );
+/**** ><> ↑ --------- Utility checker functions ->  */
 
 export const init = (): BaseWorkspace => ({
   name: `New ${strings.collection.singular}`,
   description: '',
   scope: WorkspaceScopeKeys.collection,
 });
+/**** ><> ↑ --------- Initialization function ->  */
 
 export function migrate(doc: Workspace) {
   try {
@@ -58,6 +63,7 @@ export function migrate(doc: Workspace) {
     throw e;
   }
 }
+/**** ><> ↑ --------- Migration function ->  */
 
 export function getById(id?: string) {
   return db.get<Workspace>(type, id);
@@ -79,6 +85,7 @@ export async function all() {
 export function count() {
   return db.count(type);
 }
+/**** ><> ↑ --------- Database query functions ->  */
 
 export function update(workspace: Workspace, patch: Partial<Workspace>) {
   expectParentToBeProject(patch.parentId);
@@ -88,6 +95,7 @@ export function update(workspace: Workspace, patch: Partial<Workspace>) {
 export function remove(workspace: Workspace) {
   return db.remove(workspace);
 }
+/**** ><> ↑ --------- Database update and remove functions ->  */
 
 function _migrateExtractClientCertificates(workspace: Workspace) {
   const certificates = workspace.certificates || null;
@@ -161,3 +169,4 @@ function expectParentToBeProject(parentId?: string | null) {
     throw new Error('Expected the parent of a Workspace to be a Project');
   }
 }
+/**** ><> ↑ --------- Private migration and utility functions ->  */

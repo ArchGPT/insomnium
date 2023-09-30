@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Imports ->  */
 
 export interface SidebarBadgeProps {
   label?: string;
   onClick?: () => void;
   method?: 'get' | 'post' | 'delete' | 'parameters' | 'patch' | 'put' | 'options-head' | string;
 }
+/**** ><> ↑ --------- SidebarBadgeProps Interface ->  */
 
 const StyledBadge = styled.span`
   display: table;
@@ -72,6 +74,7 @@ const StyledBadge = styled.span`
     }
   }
 `;
+/**** ><> ↑ --------- StyledBadge CSS Styling ->  */
 
 export const SidebarBadge: FunctionComponent<SidebarBadgeProps> = ({
   onClick = () => {},
@@ -84,3 +87,4 @@ export const SidebarBadge: FunctionComponent<SidebarBadgeProps> = ({
     </StyledBadge>
   );
 };
+/**** ><> ↑ --------- SidebarBadge Component ->  */

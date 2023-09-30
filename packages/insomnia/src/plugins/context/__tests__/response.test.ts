@@ -7,6 +7,7 @@ import { globalBeforeEach } from '../../../__jest__/before-each';
 import * as models from '../../../models/index';
 import * as plugin from '../response';
 
+/**** ><> ↑ --------- Importing libraries and modules ->  */
 describe('init()', () => {
   beforeEach(globalBeforeEach);
 
@@ -32,6 +33,7 @@ describe('init()', () => {
     expect(() => plugin.init()).toThrowError('contexts.response initialized without response');
   });
 });
+/**** ><> ↑ --------- Describe block for init() ->  */
 
 describe('response.*', () => {
   beforeEach(globalBeforeEach);
@@ -105,3 +107,4 @@ describe('response.*', () => {
     expect(result.response.hasHeader('ConTent-Type')).toBe(true);
   });
 });
+/**** ><> ↑ --------- Describe block for response.* with multiple test cases ->  */

@@ -1,4 +1,5 @@
 import { jest } from '@jest/globals';
+/**** ><> ↑ --------- import dependencies ->  */
 
 module.exports = {
   start: jest.fn(),
@@ -7,3 +8,4 @@ module.exports = {
   cancel: jest.fn(),
   cancelMultiple: jest.fn(),
 };
+/**** ><> ↑ --------- define the module object ->  */

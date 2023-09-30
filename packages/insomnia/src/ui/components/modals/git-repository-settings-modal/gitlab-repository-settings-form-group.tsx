@@ -14,10 +14,12 @@ import {
 import { Button } from '../../themed-button';
 import { showAlert, showError } from '..';
 
+/**** ><> ↑ --------- Import statements ->  */
 interface Props {
   uri?: string;
   onSubmit: (args: Partial<GitRepository>) => void;
 }
+/**** ><> ↑ --------- Props interface definition ->  */
 
 export const GitLabRepositorySetupFormGroup = (props: Props) => {
   const { onSubmit, uri } = props;
@@ -53,6 +55,7 @@ export const GitLabRepositorySetupFormGroup = (props: Props) => {
     />
   );
 };
+/**** ><> ↑ --------- GitLabRepositorySetupFormGroup Component definition ->  */
 
 const AccountViewContainer = styled.div({
   display: 'flex',
@@ -75,6 +78,7 @@ const AvatarImg = styled.img({
   width: 16,
   height: 16,
 });
+/**** ><> ↑ --------- Styled component definitions ->  */
 
 const Avatar = ({ src }: { src: string }) => {
   const [imageSrc, setImageSrc] = useState('');
@@ -107,6 +111,7 @@ const Avatar = ({ src }: { src: string }) => {
     <i className="fas fa-user-circle" />
   );
 };
+/**** ><> ↑ --------- Avatar Component definition ->  */
 
 const Details = styled.div({
   display: 'flex',
@@ -124,6 +129,7 @@ const AuthorizationFormContainer = styled.div({
   padding: 'var(--padding-sm)',
   boxSizing: 'border-box',
 });
+/**** ><> ↑ --------- More styled component definitions ->  */
 
 export interface GitLabUserResult {
   id: number;
@@ -135,6 +141,7 @@ export interface GitLabUserResult {
   projects_limit: number;
   commit_email: string;
 }
+/**** ><> ↑ --------- GitLabUserResult interface definition ->  */
 
 interface GitLabRepositoryFormProps {
   uri?: string;
@@ -142,6 +149,7 @@ interface GitLabRepositoryFormProps {
   onSignOut: () => void;
   token?: string;
 }
+/**** ><> ↑ --------- GitLabRepositoryFormProps interface definition ->  */
 
 const GitLabRepositoryForm = ({
   uri,
@@ -270,10 +278,12 @@ const GitLabRepositoryForm = ({
     </form>
   );
 };
+/**** ><> ↑ --------- GitLabRepositoryForm Component definition ->  */
 
 interface GitLabSignInFormProps {
   token?: string;
 }
+/**** ><> ↑ --------- GitLabSignInFormProps interface definition ->  */
 
 const GitLabSignInForm = ({ token }: GitLabSignInFormProps) => {
   const [authUrl, setAuthUrl] = useState('');
@@ -348,3 +358,4 @@ const GitLabSignInForm = ({ token }: GitLabSignInFormProps) => {
     </AuthorizationFormContainer>
   );
 };
+/**** ><> ↑ --------- GitLabSignInForm Component definition ->  */

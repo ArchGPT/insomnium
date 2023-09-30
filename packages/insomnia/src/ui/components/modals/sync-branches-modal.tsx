@@ -13,6 +13,7 @@ import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { SyncPullButton } from '../sync-pull-button';
 
+/**** ><> ↑ --------- Importing necessary libraries and internal modules */
 type Props = ModalProps & {
   vcs: VCS;
 };
@@ -30,6 +31,7 @@ export interface SyncBranchesModalHandle {
   show: (options: SyncBranchesModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Type and interface definitions */
 export const SyncBranchesModal = ({ vcs, onHide }: Props) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<State>({
@@ -39,6 +41,7 @@ export const SyncBranchesModal = ({ vcs, onHide }: Props) => {
     currentBranch: '',
   });
 
+/**** ><> ↑ --------- Main function definition and initialization of state */
   const refreshState = useCallback(async () => {
     try {
       const currentBranch = await vcs.getBranch();
@@ -68,10 +71,12 @@ export const SyncBranchesModal = ({ vcs, onHide }: Props) => {
       }));
     }
   }, [vcs]);
+/**** ><> ↑ --------- Async function to refresh state */
   useEffect(() => {
     modalRef.current?.show();
     refreshState();
   }, [refreshState]);
+/**** ><> ↑ --------- Effect to call refresh state function */
 
   const {
     syncItems,
@@ -153,7 +158,9 @@ export const SyncBranchesModal = ({ vcs, onHide }: Props) => {
       }));
     }
   };
+/**** ><> ↑ --------- Definition of multiple event handlers for different tasks */
   const { branches, remoteBranches, currentBranch, error } = state;
+/**** ><> ↑ --------- Destructuring state to use in component */
 
   return (
     <OverlayContainer>
@@ -290,5 +297,7 @@ export const SyncBranchesModal = ({ vcs, onHide }: Props) => {
       </Modal>
     </OverlayContainer>
   );
+/**** ><> ↑ --------- Component return (render) block */
 };
 SyncBranchesModal.displayName = 'SyncBranchesModal';
+/**** ><> ↑ --------- Setting displayName for debugging */

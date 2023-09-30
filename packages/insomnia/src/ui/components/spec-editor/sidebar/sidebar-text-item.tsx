@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Import Statements ->  */
 
 export interface SidebarTextItemProps {
   label: string;
   headline: string;
 }
+/**** ><> ↑ --------- SidebarTextItemProps Interface Definition ->  */
 
 const StyledTextItem = styled.span`
   display: block;
@@ -13,6 +15,7 @@ const StyledTextItem = styled.span`
   overflow: hidden;
   white-space: nowrap;
 `;
+/**** ><> ↑ --------- StyledTextItem Styled Component Definition ->  */
 
 export const SidebarTextItem: FunctionComponent<SidebarTextItemProps> = ({ label, headline }) => (
   <StyledTextItem>
@@ -20,3 +23,4 @@ export const SidebarTextItem: FunctionComponent<SidebarTextItemProps> = ({ label
     <span>{headline}</span>
   </StyledTextItem>
 );
+/**** ><> ↑ --------- SidebarTextItem Functional Component Definition ->  */

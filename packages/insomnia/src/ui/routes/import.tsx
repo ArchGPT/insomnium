@@ -6,8 +6,10 @@ import * as models from '../../models';
 import { DEFAULT_PROJECT_ID } from '../../models/project';
 import { invariant } from '../../utils/invariant';
 
+/**** ><> ↑ --------- Import Statements ->  */
 export interface ScanForResourcesActionResult extends ScanResult { }
 
+/**** ><> ↑ --------- ScanForResourcesActionResult Interface ->  */
 export const scanForResourcesAction: ActionFunction = async ({ request }): Promise<ScanForResourcesActionResult> => {
   const formData = await request.formData();
 
@@ -53,11 +55,13 @@ export const scanForResourcesAction: ActionFunction = async ({ request }): Promi
 
   return result;
 };
+/**** ><> ↑ --------- scanForResourcesAction Function ->  */
 
 export interface ImportResourcesActionResult {
   errors?: string[];
   done: boolean;
 }
+/**** ><> ↑ --------- ImportResourcesActionResult Interface ->  */
 
 export const importResourcesAction: ActionFunction = async ({ request }): Promise<ImportResourcesActionResult> => {
   const formData = await request.formData();
@@ -85,3 +89,4 @@ export const importResourcesAction: ActionFunction = async ({ request }): Promis
   await importResourcesToProject({ projectId: project._id });
   return { done: true };
 };
+/**** ><> ↑ --------- importResourcesAction Function ->  */

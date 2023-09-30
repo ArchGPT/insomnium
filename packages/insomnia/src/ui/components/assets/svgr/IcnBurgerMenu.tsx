@@ -1,5 +1,7 @@
 import React, { SVGProps, memo } from 'react';
+/**** ><> ↑ --------- Importing required libraries and components ->  */
 export const SvgIcnBurgerMenu = memo<SVGProps<SVGSVGElement>>(props => (
+/**** ><> ↑ --------- Defining the SvgIcnBurgerMenu component ->  */
   <svg
     width="1em"
     height="1em"
@@ -8,13 +10,17 @@ export const SvgIcnBurgerMenu = memo<SVGProps<SVGSVGElement>>(props => (
     xmlns="http://www.w3.org/2000/svg"
     role="img"
     {...props}
+/**** ><> ↑ --------- SVG attributes setup ->  */
   >
     <path fill="none" d="M0 0h14v14H0z" />
+/**** ><> ↑ --------- First path element and its attributes ->  */
     <path
       fillRule="evenodd"
       clipRule="evenodd"
       d="M11.5 10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h9Zm0-4a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h9Zm0-4a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h9Z"
       fill=""
     />
+/**** ><> ↑ --------- Second path element and its attributes ->  */
   </svg>
 ));
+/**** ><> ↑ --------- Closing svg and component ->  */

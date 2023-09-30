@@ -8,10 +8,12 @@ import { isProtoFile } from '../../proto-file';
 import { isRequest } from '../../request';
 import { isRequestGroup } from '../../request-group';
 import { isDesign, isWorkspace, WorkspaceScopeKeys } from '../../workspace';
+/**** ><> ↑ --------- Importing dependencies ->  */
 
 const allTypes = models.types();
 const allPrefixes = models.all().map(model => model.prefix);
 
+/**** ><> ↑ --------- Defining constants ->  */
 describe('isGrpcRequest', () => {
   const supported = [models.grpcRequest.type];
   const unsupported = allTypes.filter(x => !supported.includes(x));
@@ -32,6 +34,7 @@ describe('isGrpcRequest', () => {
     ).toBe(false);
   });
 });
+/**** ><> ↑ --------- Test suite for isGrpcRequest ->  */
 
 describe('isGrpcRequestId', () => {
   const supported = [models.grpcRequest.prefix];
@@ -45,6 +48,7 @@ describe('isGrpcRequestId', () => {
     expect(isGrpcRequestId(generateId(prefix))).toBe(false);
   });
 });
+/**** ><> ↑ --------- Test suite for isGrpcRequestId ->  */
 
 describe('isRequest', () => {
   const supported = [models.request.type];
@@ -66,6 +70,7 @@ describe('isRequest', () => {
     ).toBe(false);
   });
 });
+/**** ><> ↑ --------- Test suite for isRequest ->  */
 
 describe('isRequestGroup', () => {
   const supported = [models.requestGroup.type];
@@ -87,6 +92,7 @@ describe('isRequestGroup', () => {
     ).toBe(false);
   });
 });
+/**** ><> ↑ --------- Test suite for isRequestGroup ->  */
 
 describe('isProtoFile', () => {
   const supported = [models.protoFile.type];
@@ -108,6 +114,7 @@ describe('isProtoFile', () => {
     ).toBe(false);
   });
 });
+/**** ><> ↑ --------- Test suite for isProtoFile ->  */
 
 describe('isProtoDirectory', () => {
   const supported = [models.protoDirectory.type];
@@ -129,6 +136,7 @@ describe('isProtoDirectory', () => {
     ).toBe(false);
   });
 });
+/**** ><> ↑ --------- Test suite for isProtoDirectory ->  */
 
 describe('isWorkspace', () => {
   const supported = [models.workspace.type];
@@ -150,6 +158,7 @@ describe('isWorkspace', () => {
     ).toBe(false);
   });
 });
+/**** ><> ↑ --------- Test suite for isWorkspace ->  */
 
 describe('isDesign', () => {
   it('should be true', () => {
@@ -164,3 +173,4 @@ describe('isDesign', () => {
     expect(isDesign(w)).toBe(false);
   });
 });
+/**** ><> ↑ --------- Test suite for isDesign ->  */

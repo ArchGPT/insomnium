@@ -7,15 +7,18 @@ import { SidebarBadge } from './sidebar-badge';
 import { SidebarInvalidSection } from './sidebar-invalid-section';
 import { SidebarItem } from './sidebar-item';
 import { SidebarSection } from './sidebar-section';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface SidebarRequestsProps {
   requests: Record<string, any>;
   onClick: (section: string, ...args: any) => void;
 }
+/**** ><> ↑ --------- Interface declaration ->  */
 
 const StyledRequestFormat = styled.span`
   padding-left: var(--padding-sm);
 `;
+/**** ><> ↑ --------- Styled component declaration ->  */
 
 // Implemented as a class component because of a caveat with render props
 // https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent
@@ -103,8 +106,10 @@ export class SidebarRequests extends Component<SidebarRequestsProps> {
       </div>
     );
   };
+/**** ><> ↑ --------- Class Component declaration and rendering logic ->  */
 
   render() {
     return <SidebarSection title="REQUESTS" renderBody={this.renderBody} />;
   }
 }
+/**** ><> ↑ --------- render function ->  */

@@ -3,6 +3,7 @@ export const GRANT_TYPE_IMPLICIT = 'implicit';
 export const GRANT_TYPE_PASSWORD = 'password';
 export const GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials';
 export const GRANT_TYPE_REFRESH = 'refresh_token';
+/**** ><> ↑ --------- Declaration of grant type constants ->  */
 export type AuthKeys =
     'access_token' |
     'id_token' |
@@ -30,5 +31,7 @@ export type AuthKeys =
     'username' |
     'xError' |
     'xResponseId';
+/**** ><> ↑ --------- Declaration of authorization keys type ->  */
 export const PKCE_CHALLENGE_S256 = 'S256';
 export const PKCE_CHALLENGE_PLAIN = 'plain';
+/**** ><> ↑ --------- Declaration of PKCE challenges ->  */

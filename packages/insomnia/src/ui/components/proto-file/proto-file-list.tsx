@@ -5,12 +5,14 @@ import { ProtoDirectory } from '../../../models/proto-directory';
 import type { ProtoFile } from '../../../models/proto-file';
 import { ListGroup, ListGroupItem } from '../list-group';
 import { Button } from '../themed-button';
+/**** ><> ↑ --------- Imports ->  */
 
 export type SelectProtoFileHandler = (id: string) => void;
 export type DeleteProtoFileHandler = (protofile: ProtoFile) => void;
 export type DeleteProtoDirectoryHandler = (protoDirectory: ProtoDirectory) => void;
 export type UpdateProtoFileHandler = (protofile: ProtoFile) => Promise<void>;
 export type RenameProtoFileHandler = (protoFile: ProtoFile, name?: string) => Promise<void>;
+/**** ><> ↑ --------- Type Exports ->  */
 export const ProtoListItem = styled(ListGroupItem).attrs(() => ({
   className: 'row-spaced',
 }))`
@@ -20,6 +22,7 @@ export const ProtoListItem = styled(ListGroupItem).attrs(() => ({
 
   height: var(--line-height-sm);
 `;
+/**** ><> ↑ --------- Styled Component Definition ->  */
 
 export interface ExpandedProtoDirectory {
   files: ProtoFile[];
@@ -34,6 +37,7 @@ interface Props {
   handleUpdate: UpdateProtoFileHandler;
   handleDeleteDirectory: DeleteProtoDirectoryHandler;
 }
+/**** ><> ↑ --------- Interface Definitions ->  */
 
 const recursiveRender = (
   indent: number,
@@ -115,6 +119,7 @@ const recursiveRender = (
     handleDeleteDirectory,
     selectedId,
   ))]);
+/**** ><> ↑ --------- Recursive Render Function ->  */
 
 export const ProtoFileList: FunctionComponent<Props> = props => (
   <ListGroup bordered>
@@ -132,3 +137,4 @@ export const ProtoFileList: FunctionComponent<Props> = props => (
     ))}
   </ListGroup>
 );
+/**** ><> ↑ --------- Main Component Definition ->  */

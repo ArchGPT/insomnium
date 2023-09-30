@@ -13,10 +13,12 @@ const RFC_3986_SUB_DELIMITERS = '$+,;='; // (unintentionally?) missing: !&'()*
 /** see list of allowed characters https://datatracker.ietf.org/doc/html/rfc3986#section-2.2 */
 const URL_PATH_CHARACTER_WHITELIST = `${RFC_3986_GENERAL_DELIMITERS}${RFC_3986_SUB_DELIMITERS}`;
 
+/**** ><> ↑ --------- Importing libraries and setting constants ->  */
 export const getJoiner = (url: string) => {
   url = url || '';
   return url.indexOf('?') === -1 ? '?' : '&';
 };
+/**** ><> ↑ --------- Function to get joiner ->  */
 
 /**
  * Join querystring to URL
@@ -35,6 +37,7 @@ export const joinUrlAndQueryString = (url: string, qs: string) => {
   const hash = hashes.length ? `#${hashes.join('#')}` : '';
   return `${baseUrl}${joiner}${qs}${hash}`;
 };
+/**** ><> ↑ --------- Function to join URL and querystring ->  */
 
 /**
  * Extract querystring from URL
@@ -53,6 +56,7 @@ export const extractQueryStringFromUrl = (url: string) => {
     return qsWithHash.replace(/#.*/, '');
   }
 };
+/**** ><> ↑ --------- Function to extract querystring from URL ->  */
 
 /**
  * Build a querystring parameter from a param object
@@ -85,6 +89,7 @@ export const buildQueryParameter = (
     return flexibleEncodeComponent(param.name);
   }
 };
+/**** ><> ↑ --------- Function to build a querystring parameter from a param object ->  */
 
 /**
  * Build a querystring from a list of name/value pairs
@@ -105,6 +110,7 @@ export const buildQueryStringFromParams = (
   }
   return items.join('&');
 };
+/**** ><> ↑ --------- Function to build a querystring from a list of name/value pairs ->  */
 
 /**
  * Deconstruct a querystring to name/value pairs
@@ -157,6 +163,7 @@ export const deconstructQueryStringToParams = (
 
   return pairs;
 };
+/**** ><> ↑ --------- Function to deconstruct a querystring to name/value pairs ->  */
 
 /**
  * Automatically encode the path and querystring components
@@ -207,6 +214,7 @@ export const smartEncodeUrl = (url: string, encode?: boolean) => {
     return urlFormat(parsedUrl);
   }
 };
+/**** ><> ↑ --------- Function to automatically encode the path and querystring components ->  */
 
 /**
  * URL encode a string in a flexible way
@@ -249,3 +257,4 @@ export const flexibleEncodeComponent = (str = '', ignore = '') => {
 
   return str;
 };
+/**** ><> ↑ --------- Function to encode a string in a flexible way ->  */

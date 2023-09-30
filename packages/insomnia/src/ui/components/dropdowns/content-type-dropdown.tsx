@@ -25,7 +25,9 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } 
 import { AlertModal } from '../modals/alert-modal';
 import { showModal } from '../modals/index';
 
+/**** ><> ↑ --------- Import statements ->  */
 const EMPTY_MIME_TYPE = null;
+/**** ><> ↑ --------- Constant declaration ->  */
 
 export const ContentTypeDropdown: FC = () => {
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
@@ -65,6 +67,7 @@ export const ContentTypeDropdown: FC = () => {
 
 
   };
+/**** ><> ↑ --------- ContentTypeDropdown component declaration, including hooks setup and helper function handleChangeMimeType ->  */
 
   const { body } = activeRequest;
   const hasMimeType = 'mimeType' in body;
@@ -197,6 +200,7 @@ export const ContentTypeDropdown: FC = () => {
       </DropdownSection>
     </Dropdown>
   );
+/**** ><> ↑ --------- ContentTypeDropdown component return statement, rendering Dropdown and its items ->  */
 };
 export function newBodyGraphQL(rawBody: string): RequestBody {
   try {
@@ -217,6 +221,7 @@ export function newBodyGraphQL(rawBody: string): RequestBody {
     }
   }
 }
+/**** ><> ↑ --------- newBodyGraphQL function ->  */
 
 export const updateMimeType = (
   request: Request,
@@ -255,3 +260,4 @@ export const updateMimeType = (
     headers: [{ name: 'Content-Type', value: mimeType || '' }, ...withoutContentType],
   };
 };
+/**** ><> ↑ --------- updateMimeType function ->  */

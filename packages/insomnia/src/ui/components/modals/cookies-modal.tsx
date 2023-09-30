@@ -11,6 +11,7 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { CookieList } from '../cookie-list';
+/**** ><> ↑ --------- Importing modules from both npm and local sources. -> This segment is mostly for importing different packages necessary for this file to work. It contains various imports from npm packages (like 'react', 'react-aria', and 'react-router-dom') as well as local modules. */
 
 export const CookiesModal = ({ onHide }: ModalProps) => {
   const modalRef = useRef<ModalHandle>(null);
@@ -21,6 +22,7 @@ export const CookiesModal = ({ onHide }: ModalProps) => {
   const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
   const updateCookieJarFetcher = useFetcher<CookieJar>();
   useEffect(() => {
+/**** ><> ↑ --------- Creating the CookiesModal component and setting up state and various hooks. -> Defines the CookiesModal component and sets up state using the useState Hook. It also sets up various hooks for fetching data and acting on updates to the data. */
     modalRef.current?.show();
   }, []);
 
@@ -31,7 +33,9 @@ export const CookiesModal = ({ onHide }: ModalProps) => {
       action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/cookieJar/update`,
     });
   };
+/**** ><> ↑ --------- Update CookieJar function definition. -> This segment defines a function 'updateCookieJar' that presumably updates a cookieJar by POST-ing data to an API endpoint. */
   const filteredCookies = visibleCookieIndexes ? (activeCookieJar?.cookies || []).filter((_, i) => visibleCookieIndexes.includes(i)) : (activeCookieJar?.cookies || []);
+/**** ><> ↑ --------- Filtering visible cookies -> This line takes care of providing a filtered cookies list based on their visibility status. */
   return (
     <OverlayContainer>
       <Modal ref={modalRef} wide tall onHide={onHide}>
@@ -109,3 +113,4 @@ export const CookiesModal = ({ onHide }: ModalProps) => {
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Rendering the CookiesModal component -> This segment contains all the JSX code necessary to render the CookiesModal component and its children, including event handlers and nested components like OverlayContainer, Modal, ModalHeader, ModalBody, and ModalFooter. */

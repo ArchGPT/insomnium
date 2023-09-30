@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 import { SidebarItem } from './sidebar-item';
 import { SidebarTextItem } from './sidebar-text-item';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface SidebarInfoType {
   title: string;
@@ -11,12 +12,14 @@ export interface SidebarInfoType {
     name: string;
   };
 }
+/**** ><> ↑ --------- SidebarInfoType interface declaration ->  */
 
 export interface SidebarInfoProps {
   info: SidebarInfoType;
   childrenVisible: boolean;
   onClick: (section: string, ...args: string[]) => void;
 }
+/**** ><> ↑ --------- SidebarInfoProps interface declaration ->  */
 
 export const SidebarInfo: FunctionComponent<SidebarInfoProps> = ({
   info: {
@@ -53,3 +56,4 @@ export const SidebarInfo: FunctionComponent<SidebarInfoProps> = ({
     </div>
   );
 };
+/**** ><> ↑ --------- SidebarInfo FunctionComponent declaration ->  */

@@ -2,6 +2,7 @@ import clone from 'clone';
 import { lookup } from 'mime-types';
 import React, { FC, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+/**** ><> ↑ --------- External Dependencies */
 
 import {
   CONTENT_TYPE_FILE,
@@ -28,11 +29,13 @@ import { FormEditor } from './form-editor';
 import { GraphQLEditor } from './graph-ql-editor';
 import { RawEditor } from './raw-editor';
 import { UrlEncodedEditor } from './url-encoded-editor';
+/**** ><> ↑ --------- Modules */
 
 interface Props {
   request: Request;
   environmentId: string;
 }
+/**** ><> ↑ --------- Type Definitions */
 
 export const BodyEditor: FC<Props> = ({
   request,
@@ -101,6 +104,7 @@ export const BodyEditor: FC<Props> = ({
       });
     }
   };
+/**** ><> ↑ --------- Component and Hook Definitions */
 
   const noRender = request.settingDisableRenderRequestBody;
   const uniqueKey = `${request._id}::${noRender ? 'no-render' : 'render'}`;
@@ -129,6 +133,8 @@ export const BodyEditor: FC<Props> = ({
     }
     return <EmptyStatePane icon={<SvgIcon icon="globe" />} documentationLinks={[]} secondaryAction="" title="Enter a URL and send to get a response" />;
   };
+/**** ><> ↑ --------- Render Logic and Conditions */
 
   return <NunjucksEnabledProvider disable={noRender}>{_render()}</NunjucksEnabledProvider>;
 };
+/**** ><> ↑ --------- React Component Return Statement */

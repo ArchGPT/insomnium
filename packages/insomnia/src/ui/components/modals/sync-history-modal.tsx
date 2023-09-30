@@ -14,11 +14,13 @@ import { PromptButton } from '../base/prompt-button';
 import { HelpTooltip } from '../help-tooltip';
 import { TimeFromNow } from '../time-from-now';
 import { Tooltip } from '../tooltip';
+/**** ><> ↑ --------- Import Statements -> These lines are responsible for importing necessary modules or components for the current component from various libraries and other modules in the project. */
 type Props = ModalProps & {
   vcs: VCS;
   branch: string;
   history: Snapshot[];
 };
+/**** ><> ↑ --------- Type Declaration -> These lines are used for defining the type 'Props' which contains the properties that will be provided to this component. */
 
 export const SyncHistoryModal = ({ vcs, branch, history, onHide }: Props) => {
   const modalRef = useRef<ModalHandle>(null);
@@ -41,6 +43,7 @@ export const SyncHistoryModal = ({ vcs, branch, history, onHide }: Props) => {
 
     return fullName;
   };
+/**** ><> ↑ --------- SyncHistoryModal Component Definition -> This part of the code defines the SyncHistoryModal component along with its functionalities. It includes the component's internal state and methods. */
   return (
     <OverlayContainer>
       <Modal ref={modalRef} onHide={onHide}>
@@ -111,3 +114,4 @@ export const SyncHistoryModal = ({ vcs, branch, history, onHide }: Props) => {
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Component Return Function -> This part of the code defines the JSX to be returned by the component. It includes the structure of the modal along with the logic for displaying the history. */

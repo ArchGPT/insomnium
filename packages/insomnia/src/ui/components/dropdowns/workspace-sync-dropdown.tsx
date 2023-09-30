@@ -11,6 +11,7 @@ import { WorkspaceLoaderData } from '../../routes/workspace';
 import { showModal } from '../modals';
 import { SyncMergeModal } from '../modals/sync-merge-modal';
 import { SyncDropdown } from './sync-dropdown';
+/**** ><> ↑ --------- Import statements ->  */
 
 export function useVCS({
   workspaceId,
@@ -60,6 +61,7 @@ export function useVCS({
 
   return vcs;
 }
+/**** ><> ↑ --------- Declaration and initialization of function 'useVCS' ->  */
 
 export const WorkspaceSyncDropdown: FC = () => {
   const {
@@ -90,3 +92,4 @@ export const WorkspaceSyncDropdown: FC = () => {
 
   return null;
 };
+/**** ><> ↑ --------- Declaration and initialization of constant 'WorkspaceSyncDropdown' ->  */

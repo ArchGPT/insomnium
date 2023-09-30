@@ -34,6 +34,7 @@ import {
   useActiveApiSpecSyncVCSVersion,
   useGitVCSVersion,
 } from '../hooks/use-vcs-version';
+/**** ><> ↑ --------- Import statements ->  */
 const EmptySpaceHelper = styled.div({
   display: 'flex',
   alignItems: 'flex-start',
@@ -72,6 +73,7 @@ const RulesetLabel = styled.div({
   color: 'var(--hl)',
 });
 
+/**** ><> ↑ --------- Defining styled components ->  */
 interface LoaderData {
   lintMessages: LintMessage[];
   apiSpec: ApiSpec;
@@ -131,6 +133,7 @@ export const loader: LoaderFunction = async ({
     rulesetPath,
   };
 };
+/**** ><> ↑ --------- Interface and loader function ->  */
 
 const SwaggerUIDiv = ({ text }: { text: string }) => {
   useEffect(() => {
@@ -149,10 +152,12 @@ const SwaggerUIDiv = ({ text }: { text: string }) => {
     }}
   />;
 };
+/**** ><> ↑ --------- SwaggerUIDiv component ->  */
 
 interface LintMessage extends Notice {
   range: IRuleResult['range'];
 }
+/**** ><> ↑ --------- LintMessage interface ->  */
 
 const Design: FC = () => {
   const { organizationId, projectId, workspaceId } = useParams() as {
@@ -383,5 +388,7 @@ const Design: FC = () => {
     />
   );
 };
+/**** ><> ↑ --------- Design component ->  */
 
 export default Design;
+/**** ><> ↑ --------- Export default statement ->  */

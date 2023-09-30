@@ -4,11 +4,13 @@ import { useRef } from 'react';
 import { useMenuItem } from 'react-aria';
 import { TreeState } from 'react-stately';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Imports ->  */
 
 interface StyledListItemProps {
   isFocused?: boolean;
   isDisabled?: boolean;
 }
+/**** ><> ↑ --------- StyledListItemProps interface declaration ->  */
 
 const StyledListItem = styled.li<StyledListItemProps>(({ isFocused, isDisabled }) => ({
   display: 'flex',
@@ -27,12 +29,14 @@ const StyledListItem = styled.li<StyledListItemProps>(({ isFocused, isDisabled }
     outline: '0',
   },
 }));
+/**** ><> ↑ --------- StyledListItem constant declaration ->  */
 
 interface Props<T> {
   item: Node<T>;
   state: TreeState<T>;
   closeOnSelect?: boolean;
 }
+/**** ><> ↑ --------- Props interface declaration ->  */
 
 export const MenuItem = <T extends object>({
   item,
@@ -81,3 +85,4 @@ export const MenuItem = <T extends object>({
     </StyledListItem>
   );
 };
+/**** ><> ↑ --------- MenuItem function component export ->  */

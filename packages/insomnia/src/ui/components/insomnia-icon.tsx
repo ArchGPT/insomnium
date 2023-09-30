@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { useAIContext } from '../context/app/ai-context';
+/**** ><> ↑ --------- import statements */
 
 const SlideInLeftKeyframes = keyframes`
   0% {
@@ -24,6 +25,7 @@ const FadeInKeyframes = keyframes`
     opacity: 1;
   }
 `;
+/**** ><> ↑ --------- styling keyframes */
 
 const Layout = styled.div({
   display: 'flex',
@@ -84,6 +86,7 @@ const LoadingBarIndicator = styled.div`
   opacity: 1;
   transform: translateX(-100%);
 `;
+/**** ><> ↑ --------- styled component definitions */
 
 export const InsomniaLogo = ({
   ...props
@@ -115,3 +118,4 @@ export const InsomniaLogo = ({
     </Layout>
   );
 };
+/**** ><> ↑ --------- functional component definition */

@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { wrapToIndex } from '../utils';
+/**** ><> ↑ --------- Import statements -> This section just imports necessary functions/modules that are used in the subsequent code. These lines will be called first when the program starts. */
 
 describe('wrapToIndex', () => {
   it.each([
@@ -20,3 +21,5 @@ describe('wrapToIndex', () => {
     expect(execute).toThrow();
   });
 });
+/**** ><> ↑ --------- describe block for wrapToIndex -> This section is a top-level 'describe' block for the wrapToIndex function. It includes two 'it' blocks inside to test different aspects of wrapToIndex function. */
+/**** ><> ↑ --------- it block inside describe block -> This part of the code tests that the wrapToIndex function throws an error when the second argument (maxCount) is negative. This block will be called when Jest runs this describe block. */

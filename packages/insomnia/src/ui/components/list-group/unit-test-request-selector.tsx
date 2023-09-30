@@ -3,11 +3,13 @@ import styled from 'styled-components';
 
 import { Request } from '../../../models/request';
 
+/**** ><> ↑ --------- Import Statements ->  */
 export interface UnitTestRequestSelectorProps {
   onSetActiveRequest: React.ChangeEventHandler<HTMLSelectElement>;
   selectedRequestId?: string | null;
   selectableRequests: Request[];
 }
+/**** ><> ↑ --------- Type declaration for Component Props ->  */
 
 const StyledUnitTestRequestSelector = styled.div`
   padding: 0 var(--padding-sm);
@@ -31,6 +33,7 @@ const StyledUnitTestRequestSelector = styled.div`
     margin: 0px;
   }
 `;
+/**** ><> ↑ --------- Styled Component definition ->  */
 
 export const UnitTestRequestSelector: FunctionComponent<UnitTestRequestSelectorProps> = ({
   onSetActiveRequest,
@@ -57,3 +60,4 @@ export const UnitTestRequestSelector: FunctionComponent<UnitTestRequestSelectorP
     </StyledUnitTestRequestSelector>
   );
 };
+/**** ><> ↑ --------- Functional Component definition ->  */

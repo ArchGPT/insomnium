@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { globalBeforeEach } from '../../../__jest__/before-each';
 import * as models from '../../index';
 import { createGitRepository, deleteGitRepository } from '../git-repository-operations';
+/**** ><> ↑ --------- Import Statements ->  */
 
 describe('gitRepositoryOperations', () => {
   beforeEach(globalBeforeEach);
@@ -52,4 +53,7 @@ describe('gitRepositoryOperations', () => {
       );
     });
   });
+/**** ><> ↑ --------- Sub-Suite: deleteGitRepository ->  */
 });
+/**** ><> ↑ --------- Test Suite for gitRepositoryOperations ->  */
+/**** ><> ↑ --------- Test Case: reset workspace meta fields after delete ->  */

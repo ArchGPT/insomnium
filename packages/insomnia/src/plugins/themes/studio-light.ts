@@ -6,6 +6,7 @@ const background = {
   info: '#003052',
   surprise: '#6030BF',
 };
+/**** ><> ↑ --------- Background color definitions ->  */
 
 export default {
   name: 'studio-light',
@@ -21,22 +22,26 @@ export default {
           default: '#f7fafc',
         },
       },
+/**** ><> ↑ --------- App header styles ->  */
       link: {
         foreground: {
           default: '#68a9a2',
         },
       },
+/**** ><> ↑ --------- Link styles ->  */
       editor: {
         background: {
           surprise: background.info,
           info: background.surprise,
         },
       },
+/**** ><> ↑ --------- Editor styles ->  */
       dialog: {
         background: {
           info: '#005B9E',
         },
       },
+/**** ><> ↑ --------- Dialog styles ->  */
       sidebar: {
         background: {
           default: '#f7fafc',
@@ -52,14 +57,17 @@ export default {
         },
         highlight: {},
       },
+/**** ><> ↑ --------- Sidebar styles ->  */
       transparentOverlay: {
         background: {
           default: 'rgba(230,240,250,0.8)',
         },
         foreground: {
           default: '#555',
+/**** ><> ↑ --------- Main object export ->  */
         },
       },
     },
   },
 };
+/**** ><> ↑ --------- Transparent overlay styles ->  */

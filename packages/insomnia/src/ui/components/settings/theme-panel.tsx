@@ -6,6 +6,7 @@ import { PluginTheme } from '../../../plugins/misc';
 import { useThemes } from '../../hooks/theme';
 import { HelpTooltip } from '../help-tooltip';
 
+/**** ><> ↑ --------- Imports */
 const THEMES_PER_ROW = 5;
 
 const isDark = (mode: 'dark' | 'light') => mode === 'dark';
@@ -17,6 +18,7 @@ const CheckboxWrapper = styled.div({
   marginLeft: 'var(--padding-md)',
 });
 
+/**** ><> ↑ --------- Variables and Styled Components */
 const Themes = styled.div({
   display: 'flex',
   flexWrap: 'wrap',
@@ -66,6 +68,7 @@ const ThemeButton = styled.div<{ $isActive: boolean; $isInOsThemeMode: boolean }
   } : {}),
 }));
 
+/**** ><> ↑ --------- Components */
 const ThemeTitle = styled.h2({
   marginTop: 0,
   marginBottom: 'var(--padding-xs)',
@@ -146,6 +149,7 @@ const OverlaySide = styled.div<{ $theme: 'dark' | 'light' }>(({ $theme }) => ({
     border: '1px solid var(--color-surprise)',
   },
 }));
+/**** ><> ↑ --------- Styles */
 
 const SunSvg = () => (
   <svg viewBox="0 0 14 14">
@@ -169,6 +173,7 @@ const MoonSvg = () => (
   </svg>
 );
 
+/**** ><> ↑ --------- SVGs */
 const ThemePreview: FC<{ theme: PluginTheme }> = ({ theme: { name: themeName } }) => (
   <svg
     // @ts-expect-error -- something about themes
@@ -239,6 +244,7 @@ const ThemePreview: FC<{ theme: PluginTheme }> = ({ theme: { name: themeName } }
     </g>
   </svg>
 );
+/**** ><> ↑ --------- Theme Preview Component */
 
 const IndividualTheme: FC<{
   isActive: boolean;
@@ -310,6 +316,7 @@ const IndividualTheme: FC<{
 };
 
 export const ThemePanel: FC = () => {
+/**** ><> ↑ --------- Individual Theme Component */
   const {
     themes,
     activate,
@@ -353,3 +360,4 @@ export const ThemePanel: FC = () => {
     </RootWrapper>
   );
 };
+/**** ><> ↑ --------- Exported Component */

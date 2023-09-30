@@ -5,6 +5,7 @@ import path from 'path';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import LocalStorage from '../../main/local-storage';
 
+/**** ><> ↑ --------- Import Statements ->  */
 describe('LocalStorage()', () => {
   beforeEach(globalBeforeEach);
 
@@ -12,6 +13,7 @@ describe('LocalStorage()', () => {
     jest.clearAllTimers();
   });
 
+/**** ><> ↑ --------- Setting Up Test Environment ->  */
   it('create directory', () => {
     const basePath = `/tmp/insomnia-localstorage-${Math.random()}`;
 
@@ -21,6 +23,7 @@ describe('LocalStorage()', () => {
     const dir = fs.readdirSync(basePath);
     expect(dir.length).toEqual(0);
   });
+/**** ><> ↑ --------- Test Case - Directory Creation ->  */
 
   it('does basic operations', () => {
     const basePath = `/tmp/insomnia-localstorage-${Math.random()}`;
@@ -45,6 +48,7 @@ describe('LocalStorage()', () => {
     expect(localStorage.getItem('dne', 'default')).toEqual('default');
     expect(localStorage.getItem('dne')).toEqual('default');
   });
+/**** ><> ↑ --------- Test Case - Basic Operations ->  */
 
   it('does handles malformed files', () => {
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -62,6 +66,7 @@ describe('LocalStorage()', () => {
     });
     expect(consoleErrorSpy).toHaveBeenCalled();
   });
+/**** ><> ↑ --------- Test Case - Handling Malformed Files ->  */
 
   it('does handles failing to write file', () => {
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -75,6 +80,7 @@ describe('LocalStorage()', () => {
     expect(localStorage.getItem('key', 'different')).toBe('different');
     expect(consoleErrorSpy).toHaveBeenCalled();
   });
+/**** ><> ↑ --------- Test Case - Handling Failed Write Operations ->  */
 
   it('stores a key', () => {
     jest.useFakeTimers();
@@ -92,6 +98,7 @@ describe('LocalStorage()', () => {
     const contents = fs.readFileSync(path.join(basePath, 'foo'), 'utf8');
     expect(contents).toEqual('"bar"');
   });
+/**** ><> ↑ --------- Test Case - Storing a Key ->  */
 
   it('debounces key sets', () => {
     jest.useFakeTimers();
@@ -110,4 +117,6 @@ describe('LocalStorage()', () => {
     expect(fs.readFileSync(path.join(basePath, 'foo'), 'utf8')).toEqual('"bar3"');
     expect(fs.readFileSync(path.join(basePath, 'another'), 'utf8')).toEqual('10');
   });
+/**** ><> ↑ --------- Test Case - Debounce Key Sets ->  */
 });
+/**** ><> ↑ --------- Finishing Test Case ->  */

@@ -1,12 +1,15 @@
 import React, { FC, HTMLAttributes, useEffect, useRef } from 'react';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface Props extends HTMLAttributes<HTMLInputElement> {
   indeterminate: boolean;
   checked: boolean;
 }
+/**** ><> ↑ --------- Interface declaration ->  */
 
 export const IndeterminateCheckbox: FC<Props> = ({ checked, indeterminate, ...otherProps }) => {
   const checkRef = useRef<HTMLInputElement>(null);
+/**** ><> ↑ --------- Component declaration and props destructuring ->  */
 
   useEffect(() => {
     if (checkRef.current) {
@@ -14,6 +17,7 @@ export const IndeterminateCheckbox: FC<Props> = ({ checked, indeterminate, ...ot
       checkRef.current.indeterminate = indeterminate;
     }
   }, [checked, indeterminate]);
+/**** ><> ↑ --------- useEffect hook for setting checked and indeterminate properties ->  */
 
   return (
     <input
@@ -23,3 +27,4 @@ export const IndeterminateCheckbox: FC<Props> = ({ checked, indeterminate, ...ot
     />
   );
 };
+/**** ><> ↑ --------- Component return statement ->  */

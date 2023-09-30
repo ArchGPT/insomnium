@@ -1,6 +1,7 @@
 import objectPath from 'objectpath';
 
 import type { DisplayName, PluginArgumentEnumOption, PluginTemplateTagActionContext } from './extensions';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface NunjucksParsedTagArg {
   type: 'string' | 'number' | 'boolean' | 'variable' | 'expression' | 'enum' | 'file' | 'model';
@@ -36,11 +37,13 @@ export interface NunjucksParsedTag {
   description?: string;
   disablePreview?: (arg0: NunjucksParsedTagArg[]) => boolean;
 }
+/**** ><> ↑ --------- Interface Definitions for NunjucksParsedTagArg, NunjucksActionTag and NunjucksParsedTag ->  */
 
 interface Key {
   name: string;
   value: any;
 }
+/**** ><> ↑ --------- Interface Definition for Key ->  */
 
 /**
  * Get list of paths to all primitive types in nested object
@@ -76,15 +79,18 @@ export function getKeys(
 
   return allKeys;
 }
+/**** ><> ↑ --------- getKeys function ->  */
 
 export function forceBracketNotation(prefix: string, key: string | number) {
   // Prefix is already in bracket notation because getKeys is recursive
   return `${prefix}${objectPath.stringify([key], "'", true)}`;
 }
+/**** ><> ↑ --------- forceBracketNotation function ->  */
 
 export function normalizeToDotAndBracketNotation(prefix: string) {
   return objectPath.normalize(prefix);
 }
+/**** ><> ↑ --------- normalizeToDotAndBracketNotation function ->  */
 
 /**
  * Parse a Nunjucks tag string into a usable object
@@ -194,6 +200,7 @@ export function tokenizeTag(tagStr: string) {
   };
   return parsedTag;
 }
+/**** ><> ↑ --------- tokenizeTag function ->  */
 
 /** Convert a tokenized tag back into a Nunjucks string */
 export function unTokenizeTag(tagData: NunjucksParsedTag) {
@@ -216,6 +223,7 @@ export function unTokenizeTag(tagData: NunjucksParsedTag) {
   const argsStr = args.join(', ');
   return `{% ${tagData.name} ${argsStr} %}`;
 }
+/**** ><> ↑ --------- unTokenizeTag function ->  */
 
 /** Get the default Nunjucks string for an extension */
 export function getDefaultFill(name: string, args: NunjucksParsedTagArg[]) {
@@ -245,6 +253,7 @@ export function getDefaultFill(name: string, args: NunjucksParsedTagArg[]) {
   });
   return `${name} ${stringArgs.join(', ')}`;
 }
+/**** ><> ↑ --------- getDefaultFill function ->  */
 
 export function encodeEncoding<T>(value: T, encoding?: 'base64') {
   if (typeof value !== 'string') {
@@ -262,6 +271,7 @@ export function encodeEncoding<T>(value: T, encoding?: 'base64') {
 
   return value;
 }
+/**** ><> ↑ --------- encodeEncoding function ->  */
 
 export function decodeEncoding<T>(value: T) {
   if (typeof value !== 'string') {
@@ -276,3 +286,4 @@ export function decodeEncoding<T>(value: T) {
 
   return value;
 }
+/**** ><> ↑ --------- decodeEncoding function ->  */

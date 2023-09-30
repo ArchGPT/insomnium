@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 import { GrpcMethodType } from '../../../main/ipc/grpc';
 import { Button, ButtonProps } from '../themed-button';
+/**** ><> ↑ --------- Import statements */
 
 interface Props {
   running: boolean;
@@ -9,6 +10,7 @@ interface Props {
   handleStart: () => Promise<void>;
   handleCancel: () => void;
 }
+/**** ><> ↑ --------- Interface definition */
 
 const buttonProps: ButtonProps = {
   className: 'tall',
@@ -17,6 +19,7 @@ const buttonProps: ButtonProps = {
   variant: 'contained',
   radius: '0',
 };
+/**** ><> ↑ --------- Button properties definition */
 
 export const GrpcSendButton: FunctionComponent<Props> = ({ running, methodType, handleStart, handleCancel }) => {
   if (running) {
@@ -41,3 +44,4 @@ export const GrpcSendButton: FunctionComponent<Props> = ({ running, methodType, 
     </Button>
   );
 };
+/**** ><> ↑ --------- FunctionComponent definition and logic */

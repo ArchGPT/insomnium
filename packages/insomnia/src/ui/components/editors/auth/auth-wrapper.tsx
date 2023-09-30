@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
+/**** ><> ↑ --------- Module imports from the libraries */
 
 import {
   AUTH_API_KEY,
@@ -14,6 +15,7 @@ import {
   AUTH_OAUTH_1,
   AUTH_OAUTH_2,
 } from '../../../../common/constants';
+/**** ><> ↑ --------- Constant imports from the own project */
 import { RequestLoaderData } from '../../../routes/request';
 import { ApiKeyAuth } from './api-key-auth';
 import { AsapAuth } from './asap-auth';
@@ -26,13 +28,16 @@ import { NetrcAuth } from './netrc-auth';
 import { NTLMAuth } from './ntlm-auth';
 import { OAuth1Auth } from './o-auth-1-auth';
 import { OAuth2Auth } from './o-auth-2-auth';
+/**** ><> ↑ --------- Component imports from the same folder */
 
 export const AuthWrapper: FC<{ disabled?: boolean }> = ({ disabled = false }) => {
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
 
   const { authentication: { type } } = activeRequest;
+/**** ><> ↑ --------- React functional component definition and data retrieval */
 
   let authBody: ReactNode = null;
+/**** ><> ↑ --------- Definition of 'authBody' variable default value */
 
   if (type === AUTH_BASIC) {
     authBody = <BasicAuth disabled={disabled} />;
@@ -74,6 +79,8 @@ export const AuthWrapper: FC<{ disabled?: boolean }> = ({ disabled = false }) =>
       </div>
     );
   }
+/**** ><> ↑ --------- Conditionals to define what 'authBody' is depending on the 'type' value */
 
   return <div>{authBody}</div>;
 };
+/**** ><> ↑ --------- Returning the rendered component */

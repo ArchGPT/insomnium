@@ -7,6 +7,7 @@ import { GraphQLExplorerEnum } from './graph-ql-explorer-enum';
 import { GraphQLExplorerField } from './graph-ql-explorer-field';
 import { GraphQLExplorerSchema } from './graph-ql-explorer-schema';
 import { GraphQLExplorerSearchResults } from './graph-ql-explorer-search-results';
+/**** ><> ↑ --------- Import statements */
 import { GraphQLExplorerType } from './graph-ql-explorer-type';
 import { ActiveReference, GraphQLFieldWithParentName } from './graph-ql-types';
 
@@ -23,6 +24,7 @@ function getReferenceInfo(reference: SchemaReference) {
 
   return { type, field };
 }
+/**** ><> ↑ --------- Function getReferenceInfo */
 
 function isSameFieldAndType(
   currentType?: GraphQLType | null,
@@ -49,6 +51,7 @@ function isSameFieldAndType(
   const isSameField = compare(currentField, field);
   return isSameType && isSameField;
 }
+/**** ><> ↑ --------- Function isSameFieldAndType */
 
 interface Props {
   handleClose: () => void;
@@ -67,6 +70,7 @@ interface State extends HistoryItem {
   filter: string;
 }
 
+/**** ><> ↑ --------- Props and interfaces */
 export const GraphQLExplorer: FC<Props> = ({ schema, handleClose, visible, reference }) => {
   const [{ currentType, currentField, history, filter }, setState] = useState<State>({ history:[], filter: '' });
   const inputRef = useRef<HTMLInputElement>(null);
@@ -261,3 +265,4 @@ export const GraphQLExplorer: FC<Props> = ({ schema, handleClose, visible, refer
     </div>
   );
 };
+/**** ><> ↑ --------- GraphQLExplorer component */

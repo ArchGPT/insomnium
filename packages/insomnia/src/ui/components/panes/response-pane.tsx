@@ -27,10 +27,12 @@ import { ResponseViewer } from '../viewers/response-viewer';
 import { BlankPane } from './blank-pane';
 import { Pane, PaneHeader } from './pane';
 import { PlaceholderResponsePane } from './placeholder-response-pane';
+/**** ><> ↑ --------- Importing required packages and components ->  */
 
 interface Props {
   runningRequests: Record<string, boolean>;
 }
+/**** ><> ↑ --------- Defining Props interface ->  */
 export const ResponsePane: FC<Props> = ({
   runningRequests,
 }) => {
@@ -232,3 +234,4 @@ export const ResponsePane: FC<Props> = ({
     </Pane>
   );
 };
+/**** ><> ↑ --------- Declaring the ResponsePane function component ->  */

@@ -3,15 +3,18 @@ import { parse as urlParse } from 'url';
 
 import { globalBeforeEach } from '../../__jest__/before-each';
 import certificateUrlParse from '../certificate-url-parse';
+/**** ><> ↑ --------- Import statements ->  */
 
 describe('certificateUrlParse', () => {
   beforeEach(globalBeforeEach);
+/**** ><> ↑ --------- Test suit setup ->  */
 
   it('should return the result of url.parse if no wildcard paths are supplied', () => {
     const url = 'https://www.example.org:80/some/resources?query=1&other=2#myfragment';
     const expected = urlParse(url);
     expect(certificateUrlParse(url)).toEqual(expected);
   });
+/**** ><> ↑ --------- Test case - No wildcard paths supplied ->  */
 
   it('should return the correct hostname if a single wildcard is present', () => {
     const protocol = 'https';
@@ -23,6 +26,7 @@ describe('certificateUrlParse', () => {
     const url = `${protocol}://${host}:${port}${path}?${query}#${fragment}`;
     expect(certificateUrlParse(url).hostname).toEqual(host);
   });
+/**** ><> ↑ --------- Test case - Single wildcard ->  */
 
   it('should return the correct hostname if multiple wildcards are present', () => {
     const protocol = 'https';
@@ -34,6 +38,7 @@ describe('certificateUrlParse', () => {
     const url = `${protocol}://${host}:${port}${path}?${query}#${fragment}`;
     expect(certificateUrlParse(url).hostname).toEqual(host);
   });
+/**** ><> ↑ --------- Test case - Multiple wildcards ->  */
 
   it('should return the correct hostname if a wildcard prefix is present', () => {
     const protocol = 'https';
@@ -45,6 +50,7 @@ describe('certificateUrlParse', () => {
     const url = `${protocol}://${host}:${port}${path}?${query}#${fragment}`;
     expect(certificateUrlParse(url).hostname).toEqual(host);
   });
+/**** ><> ↑ --------- Test case - Wildcard prefix ->  */
 
   it('should return the correct hostname if a wildcard suffix is present', () => {
     const protocol = 'https';
@@ -56,6 +62,7 @@ describe('certificateUrlParse', () => {
     const url = `${protocol}://${host}:${port}${path}?${query}#${fragment}`;
     expect(certificateUrlParse(url).hostname).toEqual(host);
   });
+/**** ><> ↑ --------- Test case - Wildcard suffix ->  */
 
   it('should return a host of null if no protocol is provided for a wildcard hostname', () => {
     const host = 'www.example.*';
@@ -65,6 +72,7 @@ describe('certificateUrlParse', () => {
     const url = `${host}${path}?${query}#${fragment}`;
     expect(certificateUrlParse(url).hostname).toEqual(null);
   });
+/**** ><> ↑ --------- Test case - No protocol with wildcard hostname ->  */
 
   it('should return the correct host if basic auth is included', () => {
     const protocol = 'https';
@@ -77,6 +85,7 @@ describe('certificateUrlParse', () => {
     const url = `${protocol}://${user}:${password}@${host}${path}?${query}#${fragment}`;
     expect(certificateUrlParse(url).hostname).toEqual(host);
   });
+/**** ><> ↑ --------- Test case - Basic auth included ->  */
 
   it('should return the correct host if the path contains an @ symbol', () => {
     const protocol = 'https';
@@ -87,6 +96,7 @@ describe('certificateUrlParse', () => {
     const url = `${protocol}://${host}${path}?${query}#${fragment}`;
     expect(certificateUrlParse(url).hostname).toEqual(host);
   });
+/**** ><> ↑ --------- Test case - Path contains @ symbol ->  */
 
   it('should return the correct non-hostname properties for wildcard paths', () => {
     const protocol = 'https';
@@ -106,6 +116,7 @@ describe('certificateUrlParse', () => {
     expected.host = `${host}:${port}`;
     expect(certificateUrlParse(url)).toEqual(expected);
   });
+/**** ><> ↑ --------- Test case - Non-hostname properties for wildcard paths ->  */
 
   it('should return the correct port if wildcard in port', () => {
     const protocol = 'https';
@@ -118,3 +129,4 @@ describe('certificateUrlParse', () => {
     expect(certificateUrlParse(url).port).toEqual(port);
   });
 });
+/**** ><> ↑ --------- Test case - Wildcard in port ->  */

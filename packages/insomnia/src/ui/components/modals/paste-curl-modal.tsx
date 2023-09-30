@@ -8,12 +8,14 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { CodeEditor } from '../codemirror/code-editor';
+/**** ><> ↑ --------- Importing necessary libraries and components -> This section of the code imports necessary libraries and components from various modules that would be used within this file. */
 
 export const PasteCurlModal = ({ onHide, onImport, defaultValue }: ModalProps & { onImport: (req: Partial<Request>) => void; defaultValue?: string }) => {
   const modalRef = useRef<ModalHandle>(null);
   const [isValid, setIsValid] = useState<boolean>(true);
   const [req, setReq] = useState<any>({});
 
+/**** ><> ↑ --------- Defining the PasteCurlModal component and initializing useState and useRef hooks -> The PasteCurlModal component is defined here, along with initialization of state and ref hooks for managing component state and modals respectively. */
   useEffect(() => {
     async function parseCurlToRequest() {
       try {
@@ -34,6 +36,7 @@ export const PasteCurlModal = ({ onHide, onImport, defaultValue }: ModalProps & 
     parseCurlToRequest();
 
   }, [defaultValue]);
+/**** ><> ↑ --------- useEffect hook for side effects -> This useEffect hook segment is meant to handle side effects in the component. Here, it calls a function that converts a string to a request object and manages state accordingly. */
 
   return (
     <OverlayContainer onClick={e => e.stopPropagation()}>
@@ -90,3 +93,4 @@ export const PasteCurlModal = ({ onHide, onImport, defaultValue }: ModalProps & 
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Return section with actual JSX -> This section returns the JSX for the component, including the OverlayContainer, Modal, and all the child components. It describes how the component would look and behave. */

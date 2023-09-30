@@ -83,6 +83,7 @@ export default [
   'application/widget',
   'application/wsdl+xml',
   'application/x-7z-compressed',
+/**** ><> ↑ --------- Application content types ->  */
   'application/x-ace-compressed',
   'application/x-bittorrent',
   'application/x-bzip',
@@ -93,6 +94,7 @@ export default [
   'application/x-envoy',
   'application/x-eva',
   'font/opentype',
+/**** ><> ↑ --------- Font content type ->  */
   'application/x-gca-compressed',
   'application/x-gtar',
   'application/x-hdf',
@@ -120,6 +122,7 @@ export default [
   'application/xop+xml',
   'application/xslt+xml',
   'application/zip',
+/**** ><> ↑ --------- Application content types ->  */
   'audio/3gpp',
   'audio/adpcm',
   'audio/basic',
@@ -135,6 +138,7 @@ export default [
   'audio/x-caf',
   'audio/x-flac',
   'audio/xm',
+/**** ><> ↑ --------- Audio content types ->  */
   'image/bmp',
   'image/cgm',
   'image/sgi',
@@ -149,7 +153,9 @@ export default [
   'image/x-pict',
   'image/x-rgb',
   'image/x-tga',
+/**** ><> ↑ --------- Image content types ->  */
   'message/rfc822',
+/**** ><> ↑ --------- Message content type ->  */
   'text/cache-manifest',
   'text/calendar',
   'text/coffeescript',
@@ -186,6 +192,7 @@ export default [
   'text/x-scss',
   'text/x-vcalendar',
   'text/xml',
+/**** ><> ↑ --------- Text content types ->  */
   'text/yaml',
   'video/3gpp',
   'video/3gpp2',
@@ -206,3 +213,4 @@ export default [
   'video/x-flv',
   'video/x-m4v',
 ];
+/**** ><> ↑ --------- Video content types ->  */

@@ -5,6 +5,7 @@ import { Link } from '../base/link';
 import { PromptButton } from '../base/prompt-button';
 import { HelpTooltip } from '../help-tooltip';
 import { hideAllModals, showModal } from '../modals/index';
+/**** ><> ↑ --------- Import Statements */
 
 
 export const Account: FC = () => {
@@ -56,6 +57,7 @@ export const Account: FC = () => {
 
   const logout = useCallback(() => session.logout(), []);
 
+/**** ><> ↑ --------- Account Component */
   return session.isLoggedIn() ? (
     <Fragment>
       <div>
@@ -151,6 +153,7 @@ export const Account: FC = () => {
       )}
     </Fragment>
   ) : (
+/**** ><> ↑ --------- Render when logged in */
     <Fragment>
       <div className="notice pad surprise">
           <h1 className="no-margin-top">Try Insomnium Sync!</h1>
@@ -176,3 +179,4 @@ export const Account: FC = () => {
       </p>
     </Fragment>);
 };
+/**** ><> ↑ --------- Render when logged out */

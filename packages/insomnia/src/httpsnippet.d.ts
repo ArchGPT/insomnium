@@ -1,11 +1,14 @@
 // @TODO We should make a PR for improving the types of httpsnippet.
+/**** ><> ↑ --------- Comment ->  */
 declare module 'httpsnippet' {
+/**** ><> ↑ --------- Module Declaration ->  */
   export interface HTTPSnippetClient {
     key: string;
     title: string;
     link: string;
     description: string;
   }
+/**** ><> ↑ --------- Interface HTTPSnippetClient ->  */
 
   export interface HTTPSnippetTarget {
     key: string;
@@ -14,6 +17,7 @@ declare module 'httpsnippet' {
     default: string;
     clients: HTTPSnippetClient[];
   }
+/**** ><> ↑ --------- Interface HTTPSnippetTarget ->  */
 
   class HTTPSnippet {
     constructor(data: any);
@@ -28,6 +32,9 @@ declare module 'httpsnippet' {
     static extName(target: string): string;
     static availableTargets(): HTTPSnippetTarget[];
   }
+/**** ><> ↑ --------- Class HTTPSnippet ->  */
 
   export default HTTPSnippet;
+/**** ><> ↑ --------- Default export of HTTPSnippet ->  */
 }
+/**** ><> ↑ --------- End of Module Declaration ->  */

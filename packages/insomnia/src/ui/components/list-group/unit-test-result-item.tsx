@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ListGroupItem } from './list-group-item';
 import { UnitTestResultBadge } from './unit-test-result-badge';
 import { UnitTestResultTimestamp } from './unit-test-result-timestamp';
+/**** ><> ↑ --------- Imports ->  */
 
 export interface UnitTestResultItemProps {
   item: {
@@ -14,6 +15,7 @@ export interface UnitTestResultItemProps {
     title: string;
   };
 }
+/**** ><> ↑ --------- Interface definition for props ->  */
 
 const StyledResultListItem = styled(ListGroupItem)`
   && {
@@ -44,6 +46,7 @@ const StyledResultListItem = styled(ListGroupItem)`
     }
   }
 `;
+/**** ><> ↑ --------- Styled-component definition ->  */
 
 export const UnitTestResultItem: FunctionComponent<UnitTestResultItemProps> = ({
   item: {
@@ -63,3 +66,4 @@ export const UnitTestResultItem: FunctionComponent<UnitTestResultItemProps> = ({
     </StyledResultListItem>
   );
 };
+/**** ><> ↑ --------- Main component definition ->  */

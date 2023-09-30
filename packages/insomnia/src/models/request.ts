@@ -31,6 +31,7 @@ export const canDuplicate = true;
 export const canSync = true;
 
 export type RequestAuthentication = Record<string, any>;
+/**** ><> ↑ --------- Imports and type definitions ->  */
 export type OAuth2ResponseType = 'code' | 'id_token' | 'id_token token' | 'none' | 'token';
 export interface AuthTypeOAuth2 {
   type: 'oauth2';
@@ -110,6 +111,7 @@ export interface BaseRequest {
 }
 
 export type Request = BaseModel & BaseRequest;
+/**** ><> ↑ --------- Interfaces defined for use within the file ->  */
 
 export const isRequest = (model: Pick<BaseModel, 'type'>): model is Request => (
   model.type === type
@@ -123,6 +125,7 @@ export const isEventStreamRequest = (model: Pick<BaseModel, 'type'>) => (
   isRequest(model) && model.headers?.find(h => h.name === 'Accept')?.value === 'text/event-stream'
 );
 
+/**** ><> ↑ --------- Some utility functions for checking type of request ->  */
 export function init(): BaseRequest {
   return {
     url: '',
@@ -231,6 +234,7 @@ export function newAuth(type: string, oldAuth: RequestAuthentication = {}): Requ
   }
 }
 
+/**** ><> ↑ --------- Initialization and Authentication functions ->  */
 export function migrate(doc: Request): Request {
   try {
     doc = migrateBody(doc);
@@ -304,6 +308,7 @@ export async function all() {
 }
 
 // ~~~~~~~~~~ //
+/**** ><> ↑ --------- Database interaction functions ->  */
 // Migrations //
 // ~~~~~~~~~~ //
 
@@ -368,3 +373,4 @@ function migrateAuthType(request: Request) {
 
   return request;
 }
+/**** ><> ↑ --------- Migrations functions ->  */

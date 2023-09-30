@@ -8,6 +8,7 @@ interface FileSelection {
   canceled: boolean;
 }
 
+/**** ><> ↑ --------- Interface definitions for Options and FileSelection. ->  */
 export const selectFileOrFolder = async ({ itemTypes, extensions }: Options) => {
   // If no types are selected then default to just files and not directories
   const types = itemTypes || ['file'];
@@ -24,6 +25,7 @@ export const selectFileOrFolder = async ({ itemTypes, extensions }: Options) => 
   if (types.includes('directory')) {
     title += ' Directory';
   }
+/**** ><> ↑ --------- Definition and implementation of the selectFileOrFolder function starts, including default logic for itemTypes. ->  */
 
   const { canceled, filePaths } = await window.dialog.showOpenDialog({
     title,
@@ -40,10 +42,12 @@ export const selectFileOrFolder = async ({ itemTypes, extensions }: Options) => 
           throw new Error(`unrecognized item type: "${type}"`);
       }
     }),
+/**** ><> ↑ --------- An async function call to open a dialog for file or directory selection with switch logic for types. ->  */
     filters: [{
       extensions: (extensions?.length ? extensions : ['*']),
       name: '',
     }],
+/**** ><> ↑ --------- Setting and passing filters to the dialog ->  */
   });
 
   const fileSelection: FileSelection = {
@@ -52,3 +56,4 @@ export const selectFileOrFolder = async ({ itemTypes, extensions }: Options) => 
   };
   return fileSelection;
 };
+/**** ><> ↑ --------- Setting up the file selection object and returning it ->  */

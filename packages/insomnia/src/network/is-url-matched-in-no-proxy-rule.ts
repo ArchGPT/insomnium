@@ -1,10 +1,12 @@
 import { parse as urlParse } from 'url';
+/**** ><> ↑ --------- Import url module ->  */
 
 function formatHostname(rawHostname: string) {
   // canonicalize the hostname, so that 'oogle.com' won't match 'google.com'
   const hostname = rawHostname.replace(/^\.*/, '.').toLowerCase();
   return hostname.endsWith('.') ? hostname.slice(0, -1) : hostname;
 }
+/**** ><> ↑ --------- Format hostname function definition ->  */
 
 function parseNoProxyZone(zone: string) {
   zone = zone.trim().toLowerCase();
@@ -15,12 +17,14 @@ function parseNoProxyZone(zone: string) {
 
   return { hostname: zoneHost, port: zonePort, hasPort: hasPort };
 }
+/**** ><> ↑ --------- Parse no-proxy zone function definition ->  */
 
 function matchesHostname(hostname: string, noProxyZoneHostname: string) {
   const wildcardNeedle = noProxyZoneHostname.startsWith('.*.') ? noProxyZoneHostname.slice(2) : noProxyZoneHostname;
   const isMatchedAt = hostname.indexOf(wildcardNeedle);
   return (isMatchedAt > -1 && (isMatchedAt === hostname.length - wildcardNeedle.length));
 }
+/**** ><> ↑ --------- Matches hostname function definition ->  */
 
 export function isUrlMatchedInNoProxyRule(url: string | undefined, noProxyRule: any) {
   if (!url || !noProxyRule || typeof noProxyRule !== 'string') {
@@ -48,3 +52,4 @@ export function isUrlMatchedInNoProxyRule(url: string | undefined, noProxyRule: 
     return hostnameMatched;
   });
 }
+/**** ><> ↑ --------- Is URL matched in No-proxy rule function definition ->  */

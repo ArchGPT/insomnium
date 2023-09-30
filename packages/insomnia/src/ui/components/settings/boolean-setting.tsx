@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Import statements */
 
 import { SettingsOfType } from '../../../common/settings';
 import { useSettingsPatcher } from '../../hooks/use-request';
@@ -15,6 +16,7 @@ const Descriptions = styled.div({
     marginBottom: 'var(--padding-sm)',
   },
 });
+/**** ><> ↑ --------- Other dependencies and styled components */
 
 export const BooleanSetting: FC<{
   /** each element of this array will appear as a paragraph below the setting describing it */
@@ -64,3 +66,4 @@ export const BooleanSetting: FC<{
     </>
   );
 };
+/**** ><> ↑ --------- BooleanSetting component definition */

@@ -17,6 +17,7 @@ import { database } from './database';
 import { filterHeaders, getSetCookieHeaders, hasAuthHeader } from './misc';
 import type { RenderedRequest } from './render';
 import { getRenderedRequestAndContext } from './render';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface HarCookie {
   name: string;
@@ -168,6 +169,7 @@ export interface HarLog {
 export interface Har {
   log: HarLog;
 }
+/**** ><> ↑ --------- Interface definitions ->  */
 
 export interface ExportRequest {
   requestId: string;
@@ -200,6 +202,7 @@ export async function exportHarCurrentRequest(request: Request, response: Respon
     },
   ]);
 }
+/**** ><> ↑ --------- Function exportHarCurrentRequest ->  */
 
 export async function exportHar(exportRequests: ExportRequest[]) {
   // Export HAR entries with the same start time in order to keep their workspace sort order.
@@ -267,6 +270,7 @@ export async function exportHar(exportRequests: ExportRequest[]) {
   };
   return har;
 }
+/**** ><> ↑ --------- Function exportHar ->  */
 
 export async function exportHarResponse(response: Response | null) {
   if (!response) {
@@ -299,6 +303,7 @@ export async function exportHarResponse(response: Response | null) {
   };
   return harResponse;
 }
+/**** ><> ↑ --------- Function exportHarResponse ->  */
 
 export async function exportHarRequest(
   requestId: string,
@@ -313,6 +318,7 @@ export async function exportHarRequest(
 
   return exportHarWithRequest(request, environmentId, addContentLength);
 }
+/**** ><> ↑ --------- Function exportHarRequest ->  */
 
 export async function exportHarWithRequest(
   request: Request,
@@ -334,6 +340,7 @@ export async function exportHarWithRequest(
     }
   }
 }
+/**** ><> ↑ --------- Function exportHarWithRequest ->  */
 
 async function _applyRequestPluginHooks(
   renderedRequest: RenderedRequest,
@@ -359,6 +366,7 @@ async function _applyRequestPluginHooks(
 
   return newRenderedRequest;
 }
+/**** ><> ↑ --------- Function _applyRequestPluginHooks ->  */
 
 export async function exportHarWithRenderedRequest(
   renderedRequest: RenderedRequest,
@@ -406,6 +414,7 @@ export async function exportHarWithRenderedRequest(
   };
   return harRequest;
 }
+/**** ><> ↑ --------- Function exportHarWithRenderedRequest ->  */
 
 function getRequestCookies(renderedRequest: RenderedRequest) {
   const jar = jarFromCookies(renderedRequest.cookieJar.cookies);
@@ -476,6 +485,7 @@ function mapCookie(cookie: ToughCookie) {
   }
 
   return harCookie;
+/**** ><> ↑ --------- Functions related to Cookies from Requests and Responses ->  */
 }
 
 function getResponseContent(response: Response) {
@@ -491,6 +501,7 @@ function getResponseContent(response: Response) {
   };
   return harContent;
 }
+/**** ><> ↑ --------- Function getResponseContent ->  */
 
 function getResponseHeaders(response: Response) {
   return response.headers
@@ -509,6 +520,7 @@ function getRequestHeaders(renderedRequest: RenderedRequest) {
       value: header.value,
     }));
 }
+/**** ><> ↑ --------- Functions related to Headers from Requests and Responses ->  */
 
 function getRequestQueryString(renderedRequest: RenderedRequest): HarQueryString[] {
   return renderedRequest.parameters.map<HarQueryString>(parameter => ({
@@ -516,6 +528,7 @@ function getRequestQueryString(renderedRequest: RenderedRequest): HarQueryString
     value: parameter.value,
   }));
 }
+/**** ><> ↑ --------- Function getRequestQueryString ->  */
 
 function getRequestPostData(renderedRequest: RenderedRequest): HarPostData | undefined {
   let body;
@@ -557,3 +570,4 @@ function getRequestPostData(renderedRequest: RenderedRequest): HarPostData | und
     params: params,
   };
 }
+/**** ><> ↑ --------- Function getRequestPostData ->  */

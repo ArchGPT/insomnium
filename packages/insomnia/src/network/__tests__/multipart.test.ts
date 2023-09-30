@@ -6,11 +6,14 @@ import path from 'path';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import { buildMultipart, DEFAULT_BOUNDARY } from '../../main/network/multipart';
 
+/**** ><> ↑ --------- Import statements ->  */
 window.app = electron.app;
 
+/**** ><> ↑ --------- Setting up electron app ->  */
 describe('buildMultipart()', () => {
   beforeEach(globalBeforeEach);
 
+/**** ><> ↑ --------- Test case setup and initial description ->  */
   it('builds a simple request', async () => {
     const { filePath, boundary, contentLength } = await buildMultipart([
       {
@@ -39,6 +42,7 @@ describe('buildMultipart()', () => {
       ].join('\r\n'),
     );
   });
+/**** ><> ↑ --------- Test case: 'builds a simple request' ->  */
 
   it('builds a multiline request with content-type', async () => {
     const { filePath, boundary, contentLength } = await buildMultipart([
@@ -79,6 +83,7 @@ describe('buildMultipart()', () => {
       ].join('\r\n'),
     );
   });
+/**** ><> ↑ --------- Test case: 'builds a multiline request with content-type' ->  */
 
   it('builds with file', async () => {
     const fileName = path.resolve(path.join(__dirname, './testfile.txt'));
@@ -119,6 +124,7 @@ describe('buildMultipart()', () => {
       ].join('\r\n'),
     );
   });
+/**** ><> ↑ --------- Test case: 'builds with file' ->  */
 
   it('skips entries with no name or value', async () => {
     const { filePath, boundary, contentLength } = await buildMultipart([
@@ -155,4 +161,6 @@ describe('buildMultipart()', () => {
       ].join('\r\n'),
     );
   });
+/**** ><> ↑ --------- Test case: 'skips entries with no name or value' ->  */
 });
+/**** ><> ↑ --------- End of test cases ->  */

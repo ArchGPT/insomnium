@@ -7,6 +7,7 @@ import zlib from 'zlib';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import * as models from '../../models';
 
+/**** ><> ↑ --------- Import statements ->  */
 describe('migrate()', () => {
   beforeEach(globalBeforeEach);
 
@@ -31,6 +32,7 @@ describe('migrate()', () => {
       ).bodyCompression,
     ).toBe(null);
   });
+/**** ><> ↑ --------- Second test ->  */
 
   it('migrates sets bodyCompression to zip if does not have one yet', async () => {
     expect(
@@ -41,6 +43,7 @@ describe('migrate()', () => {
       ).bodyCompression,
     ).toBe('zip');
   });
+/**** ><> ↑ --------- Third test ->  */
 
   it('migrates leaves bodyCompression if string', async () => {
     expect(
@@ -53,3 +56,5 @@ describe('migrate()', () => {
     ).toBe('zip');
   });
 });
+/**** ><> ↑ --------- Outer describe block ->  */
+/**** ><> ↑ --------- Fourth test ->  */

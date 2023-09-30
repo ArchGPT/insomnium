@@ -7,11 +7,13 @@ import * as plugins from '../plugins';
 import * as themes from '../plugins/misc';
 import * as templating from '../templating';
 
+/**** ><> ↑ --------- Import statements */
 import { showModal } from './components/modals';
 import { AskModal } from './components/modals/ask-modal';
 import { SelectModal } from './components/modals/select-modal';
 import { SettingsModal, TAB_INDEX_SHORTCUTS } from './components/modals/settings-modal';
 
+/**** ><> ↑ --------- Modal components import statements */
 window.main.on('toggle-preferences', () => {
   showModal(SettingsModal);
 });
@@ -42,6 +44,7 @@ if (isDevelopment()) {
     });
   });
 
+/**** ><> ↑ --------- Window event listeners for preferences and model clearing (in development) */
   window.main.on('clear-all-models', () => {
     showModal(AskModal, {
       title: 'Clear all models',
@@ -76,8 +79,10 @@ window.main.on('reload-plugins', async () => {
   templating.reload();
   console.log('[plugins] reloaded');
 });
+/**** ><> ↑ --------- Window event listener for reloading plugins */
 
 window.main.on('toggle-preferences-shortcuts', () => {
   showModal(SettingsModal, { tab: TAB_INDEX_SHORTCUTS });
 });
+/**** ><> ↑ --------- Window event listener for preferences shortcuts */
 

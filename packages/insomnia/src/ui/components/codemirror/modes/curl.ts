@@ -1,6 +1,7 @@
 import 'codemirror/addon/mode/simple';
 
 import CodeMirror from 'codemirror';
+/**** ><> ↑ --------- Import Statements */
 
 /** regular key-value header tokens */
 const keyValueHeaders = [
@@ -13,6 +14,7 @@ const keyValueHeaders = [
     token: ['curl-prefix curl-in', 'curl-in', 'curl-in curl-value'],
   },
 ];
+/**** ><> ↑ --------- KeyValue Headers Definition */
 
 /**
  * @example POST /foo/bar HTTP/1.1
@@ -27,6 +29,7 @@ const headerFields = [
     token: ['curl-prefix curl-in curl-header', 'curl-in curl-header'],
   },
 ];
+/**** ><> ↑ --------- Header Fields Definition */
 
 const data = [
   {
@@ -34,6 +37,7 @@ const data = [
     token: ['curl-prefix curl-data', 'curl-data'],
   },
 ];
+/**** ><> ↑ --------- Data Definition */
 
 const informationalText = [
   {
@@ -41,6 +45,7 @@ const informationalText = [
     token: ['curl-prefix curl-comment', 'curl-comment'],
   },
 ];
+/**** ><> ↑ --------- Informational Text Definition */
 
 CodeMirror.defineSimpleMode('curl', {
   start: [
@@ -52,3 +57,4 @@ CodeMirror.defineSimpleMode('curl', {
   comment: [],
   meta: {},
 });
+/**** ><> ↑ --------- CodeMirror Mode Definition */

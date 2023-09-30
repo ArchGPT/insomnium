@@ -5,12 +5,14 @@ import type { GrpcMethodInfo } from '../../../../main/ipc/grpc';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../../base/dropdown';
 import { GrpcMethodTag } from '../../tags/grpc-method-tag';
 import { Tooltip } from '../../tooltip';
+/**** ><> ↑ --------- Import statements ->  */
 
 const DropdownMethodButtonLabel = styled.div({
   display: 'flex',
   alignItems: 'center',
   gap: 'var(--padding-xs)',
 });
+/**** ><> ↑ --------- Styled component definition ->  */
 
 interface Props {
   disabled?: boolean;
@@ -18,10 +20,13 @@ interface Props {
   selectedMethod?: GrpcMethodInfo;
   handleChange: (arg0: string) => void;
 }
+/**** ><> ↑ --------- Props interface definition ->  */
 const PROTO_PATH_REGEX = /^\/(?:(?<package>[\w.]+)\.)?(?<service>\w+)\/(?<method>\w+)$/;
+/**** ><> ↑ --------- PROT_PATH_REGEX constant ->  */
 
 export const NO_PACKAGE_KEY = 'no-package';
 
+/**** ><> ↑ --------- NO_PACKAGE_KEY constant ->  */
 function groupBy(list: {}[], keyGetter: (item: any) => string): Record<string, any[]> {
   const map = new Map();
   list.forEach(item => {
@@ -35,10 +40,12 @@ function groupBy(list: {}[], keyGetter: (item: any) => string): Record<string, a
   });
   return Object.fromEntries(map);
 }
+/**** ><> ↑ --------- Function to group by ->  */
 
 export const groupGrpcMethodsByPackage = (methodInfoList: GrpcMethodInfo[]): Record<string, GrpcMethodInfo[]> => {
   return groupBy(methodInfoList, ({ fullPath }) => PROTO_PATH_REGEX.exec(fullPath)?.groups?.package || NO_PACKAGE_KEY);
 };
+/**** ><> ↑ --------- Function to group GRPC methods by package ->  */
 
 // If all segments are found, return a shorter path, otherwise the original path
 export const getShortGrpcPath = (fullPath: string): string => {
@@ -48,9 +55,11 @@ export const getShortGrpcPath = (fullPath: string): string => {
   const methodName = result?.groups?.method;
   return packageName && serviceName && methodName ? `/${serviceName}/${methodName}` : fullPath;
 };
+/**** ><> ↑ --------- Function to get short GRPC path ->  */
 const NormalCase = styled.span`
   text-transform: initial;
 `;
+/**** ><> ↑ --------- Styled span for NormalCase ->  */
 
 export const GrpcMethodDropdown: FunctionComponent<Props> = ({
   disabled,
@@ -117,3 +126,4 @@ export const GrpcMethodDropdown: FunctionComponent<Props> = ({
     </Dropdown>
   );
 };
+/**** ><> ↑ --------- Main component definition ->  */

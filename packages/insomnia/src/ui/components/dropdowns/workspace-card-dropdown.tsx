@@ -25,6 +25,7 @@ import { WorkspaceDuplicateModal } from '../modals/workspace-duplicate-modal';
 import { WorkspaceSettingsModal } from '../modals/workspace-settings-modal';
 import { SvgIcon } from '../svg-icon';
 
+/**** ><> ↑ --------- Import statements ->  */
 interface Props {
   workspace: Workspace;
   workspaceMeta: WorkspaceMeta;
@@ -34,6 +35,7 @@ interface Props {
   clientCertificates: ClientCertificate[];
   caCertificate: CaCertificate | null;
 }
+/**** ><> ↑ --------- Prop types definition ->  */
 
 const useDocumentActionPlugins = ({ workspace, apiSpec, project }: Props) => {
   const [actionPlugins, setActionPlugins] = useState<DocumentAction[]>([]);
@@ -82,6 +84,7 @@ const useDocumentActionPlugins = ({ workspace, apiSpec, project }: Props) => {
 
   return { renderPluginDropdownItems, refresh };
 };
+/**** ><> ↑ --------- useDocumentActionPlugins hook definition ->  */
 
 export const WorkspaceCardDropdown: FC<Props> = props => {
   const { workspace, project, projects, workspaceMeta, clientCertificates, caCertificate } = props;
@@ -233,3 +236,4 @@ export const WorkspaceCardDropdown: FC<Props> = props => {
     </Fragment>
   );
 };
+/**** ><> ↑ --------- WorkspaceCardDropdown component export and definition ->  */

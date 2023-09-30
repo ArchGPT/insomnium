@@ -11,8 +11,10 @@ export const id = 'insomnia-1';
 export const name = 'Insomnium v1';
 export const description = 'Legacy Insomnium format';
 
+/**** ><> ↑ --------- Importing required modules and constants declaration ->  */
 type Format = 'form' | 'json' | 'text' | 'xml';
 
+/**** ><> ↑ --------- Declare Format type ->  */
 interface Item {
   requests: UNKNOWN[];
   name?: string;
@@ -39,11 +41,13 @@ interface Item {
   url?: string;
   method?: string;
 }
+/**** ><> ↑ --------- Declare Item interface ->  */
 
 export interface Insomnia1Data {
   __export_format: 1;
   items: Item[];
 }
+/**** ><> ↑ --------- Declare Insomnia1Data interface ->  */
 
 let requestCount = 1;
 let requestGroupCount = 1;
@@ -54,6 +58,7 @@ const FORMAT_MAP: Record<Format, string> = {
   text: 'text/plain',
   xml: 'application/xml',
 };
+/**** ><> ↑ --------- Declare global variables and constants ->  */
 
 const importRequestGroupItem = (item: Item): ImportRequest => {
   const environment = item.environments?.base ?? {};
@@ -67,6 +72,7 @@ const importRequestGroupItem = (item: Item): ImportRequest => {
     name: item.name || `Imported Folder ${count}`,
   };
 };
+/**** ><> ↑ --------- Define importRequestGroupItem function ->  */
 
 const importRequestItem = (parentId?: string) => ({
   authentication: { username, password } = {},
@@ -141,6 +147,7 @@ const importRequestItem = (parentId?: string) => ({
     },
   };
 };
+/**** ><> ↑ --------- Define importRequestItem function ->  */
 
 export const convert: Converter = rawData => {
   requestCount = 1;
@@ -168,3 +175,4 @@ export const convert: Converter = rawData => {
     })
     .flat();
 };
+/**** ><> ↑ --------- Define convert function and export it ->  */

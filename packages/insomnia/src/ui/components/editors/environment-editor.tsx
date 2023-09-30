@@ -4,10 +4,12 @@ import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState }
 import { JSON_ORDER_PREFIX, JSON_ORDER_SEPARATOR } from '../../../common/constants';
 import { NUNJUCKS_TEMPLATE_GLOBAL_PROPERTY_NAME } from '../../../templating';
 import { CodeEditor, CodeEditorHandle } from '../codemirror/code-editor';
+/**** ><> ↑ --------- Imports */
 
 // NeDB field names cannot begin with '$' or contain a period '.'
 // Docs: https://github.com/DeNA/nedb#inserting-documents
 const INVALID_NEDB_KEY_REGEX = /^\$|\./;
+/**** ><> ↑ --------- Constant Definitions */
 
 export const ensureKeyIsValid = (key: string, isRoot: boolean): string | null => {
   if (key.match(INVALID_NEDB_KEY_REGEX)) {
@@ -20,6 +22,7 @@ export const ensureKeyIsValid = (key: string, isRoot: boolean): string | null =>
 
   return null;
 };
+/**** ><> ↑ --------- Exports and function to ensure key validity */
 
 /**
  * Recursively check nested keys in and immediately return when an invalid key found
@@ -49,6 +52,7 @@ export function checkNestedKeys(obj: Record<string, any>, isRoot = true): string
 
   return null;
 }
+/**** ><> ↑ --------- Export function to check nested keys */
 
 export interface EnvironmentInfo {
   object: Record<string, any>;
@@ -65,6 +69,7 @@ export interface EnvironmentEditorHandle {
   getValue: () => EnvironmentInfo | null;
 }
 
+/**** ><> ↑ --------- Interface Definitions */
 export const EnvironmentEditor = forwardRef<EnvironmentEditorHandle, Props>(({
   environmentInfo,
   onBlur,
@@ -129,4 +134,6 @@ export const EnvironmentEditor = forwardRef<EnvironmentEditorHandle, Props>(({
     </div>
   );
 });
+/**** ><> ↑ --------- The EnvironmentEditor component */
 EnvironmentEditor.displayName = 'EnvironmentEditor';
+/**** ><> ↑ --------- Setting displayName for EnvironmentEditor */

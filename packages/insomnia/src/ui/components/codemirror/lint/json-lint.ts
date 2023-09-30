@@ -2,20 +2,24 @@
 // the linting process to ensure accurate parsing of values is completed.
 // It still uses under the hood the jsonlint-mod-fixed library found at
 // https://github.com/circlecell/jsonlint-mod/blob/master/lib/jsonlint.js
+/**** ><> ↑ --------- This linter override allows Nunjuck templates to be rendered before attempting the linting process to ensure accurate parsing of values is completed. */
 
 import 'codemirror/addon/lint/json-lint';
 
 import CodeMirror from 'codemirror';
 import * as jsonlint from 'jsonlint-mod-fixed';
 
+/**** ><> ↑ --------- Imports and dependencies */
 import { render } from '../../../../../../insomnia/src/templating/index';
 CodeMirror.registerHelper('lint', 'json', validator);
 
+/**** ><> ↑ --------- CodeMirror helper registration */
 interface ValidationError {
   message: string;
   from: CodeMirror.Position;
   to: CodeMirror.Position;
 }
+/**** ><> ↑ --------- Interface definition */
 
 async function validator(text: string): Promise<ValidationError[]> {
   const found: ValidationError[] = [];
@@ -48,3 +52,4 @@ async function validator(text: string): Promise<ValidationError[]> {
 
   return found;
 }
+/**** ><> ↑ --------- Validator function */

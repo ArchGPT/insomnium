@@ -3,10 +3,12 @@ import React, { FC } from 'react';
 import { CONTENT_TYPE_JSON, CONTENT_TYPE_PLAINTEXT } from '../../../common/constants';
 import { Dropdown, DropdownButton, DropdownItem, ItemContent } from '../base/dropdown';
 
+/**** ><> ↑ --------- Importing libraries and constants ->  */
 interface Props {
   previewMode: string;
   onClick: (previewMode: string) => void;
 }
+/**** ><> ↑ --------- Props interface definition ->  */
 export const WebSocketPreviewMode: FC<Props> = ({ previewMode, onClick }) => {
   return (
     <Dropdown
@@ -36,3 +38,5 @@ export const WebSocketPreviewMode: FC<Props> = ({ previewMode, onClick }) => {
     </Dropdown>
   );
 };
+/**** ><> ↑ --------- WebSocketPreviewMode component definition ->  */
+/**** ><> ↑ --------- DropdownItem for Plaintext content type ->  */

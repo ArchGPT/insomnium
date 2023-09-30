@@ -1,21 +1,26 @@
 /*
 * @jest-environment node
 */
+/**** ><> ↑ --------- Jest setup and environment specification ->  */
 import { describe, expect, it } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
 
 import { convert } from '../convert';
+/**** ><> ↑ --------- Import statements ->  */
 
 const fixturesPath = path.join(__dirname, './fixtures');
 const fixtures = fs.readdirSync(fixturesPath);
+/**** ><> ↑ --------- Fixtures setup ->  */
 
 describe('Fixtures', () => {
   describe.each(fixtures)('Import %s', name => {
     const dir = path.join(fixturesPath, `./${name}`);
+/**** ><> ↑ --------- Start of test suite ->  */
     const inputs = fs
       .readdirSync(dir)
       .filter(name => name.match(/^(.+)-?input\.[^.]+$/));
+/**** ><> ↑ --------- Input files setup ->  */
 
     for (const input of inputs) {
       const prefix = input.replace(/-input\.[^.]+/, '');
@@ -24,6 +29,7 @@ describe('Fixtures', () => {
       if (prefix.startsWith('skip')) {
         continue;
       }
+/**** ><> ↑ --------- Test case generation ->  */
 
       it(input, async () => {
         expect.assertions(5);
@@ -50,6 +56,8 @@ describe('Fixtures', () => {
           ids.add(resource?._id);
         }
       });
+/**** ><> ↑ --------- Individual test case definition ->  */
     }
   });
 });
+/**** ><> ↑ --------- End of test suite ->  */

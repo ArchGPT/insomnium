@@ -7,8 +7,10 @@ import { keyboardKeys } from '../../common/keyboard-keys';
 import { KeyboardShortcut, KeyCombination } from '../../common/settings';
 import { RootLoaderData } from '../routes/root';
 
+/**** ><> ↑ --------- Import statements ->  */
 const keyCombinationToTinyKeyString = ({ ctrl, alt, shift, meta, keyCode }: KeyCombination): string =>
   `${meta ? 'Meta+' : ''}${alt ? 'Alt+' : ''}${ctrl ? 'Control+' : ''}${shift ? 'Shift+' : ''}` + Object.entries(keyboardKeys).find(([, { keyCode: kc }]) => kc === keyCode)?.[1].code;
+/**** ><> ↑ --------- Definition for keyCombinationToTinyKeyString function ->  */
 
 export function useKeyboardShortcuts(getTarget: () => HTMLElement, listeners: { [key in KeyboardShortcut]?: (event: KeyboardEvent) => any }) {
   const {
@@ -38,10 +40,12 @@ export function useKeyboardShortcuts(getTarget: () => HTMLElement, listeners: { 
     return unsubscribe;
   }, [hotKeyRegistry, listeners, getTarget]);
 }
+/**** ><> ↑ --------- Definition for useKeyboardShortcuts function ->  */
 
 export function useDocBodyKeyboardShortcuts(listeners: { [key in KeyboardShortcut]?: (event: KeyboardEvent) => any }) {
   useKeyboardShortcuts(() => document.body, listeners);
 }
+/**** ><> ↑ --------- Definition for useDocBodyKeyboardShortcuts function ->  */
 
 export function createKeybindingsHandler(
   keyBindingMap: KeyBindingMap,
@@ -57,3 +61,4 @@ export function createKeybindingsHandler(
     }
   };
 }
+/**** ><> ↑ --------- Definition for createKeybindingsHandler function ->  */

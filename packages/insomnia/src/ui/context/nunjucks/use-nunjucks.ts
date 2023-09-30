@@ -5,6 +5,7 @@ import { getRenderContext, getRenderContextAncestors, HandleGetRenderContext, Ha
 import { NUNJUCKS_TEMPLATE_GLOBAL_PROPERTY_NAME } from '../../../templating';
 import { getKeys } from '../../../templating/utils';
 import { RequestLoaderData } from '../../routes/request';
+/**** ><> ↑ --------- Import Statements */
 import { WorkspaceLoaderData } from '../../routes/workspace';
 let getRenderContextPromiseCache: any = {};
 
@@ -15,6 +16,7 @@ export const initializeNunjucksRenderPromiseCache = () => {
 initializeNunjucksRenderPromiseCache();
 
 /**
+/**** ><> ↑ --------- Initialization and Utility Functions */
  * Access to functions useful for Nunjucks rendering
  */
 export const useNunjucks = () => {
@@ -35,6 +37,7 @@ export const useNunjucks = () => {
     const keys = getKeys(context, NUNJUCKS_TEMPLATE_GLOBAL_PROPERTY_NAME);
     return { context, keys };
   }, [fetchRenderContext]);
+/**** ><> ↑ --------- Nunjucks Functions */
 
   /**
    * Heavily optimized render function
@@ -58,9 +61,11 @@ export const useNunjucks = () => {
     const context = await getRenderContextPromiseCache[contextCacheKey];
     return render(obj, context);
   }, [fetchRenderContext]);
+/**** ><> ↑ --------- Render Function and Cache */
 
   return {
     handleRender,
     handleGetRenderContext,
   };
 };
+/**** ><> ↑ --------- Export Statement */

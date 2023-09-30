@@ -5,6 +5,7 @@ import { SettingsOfType } from '../../../common/settings';
 import { useSettingsPatcher } from '../../hooks/use-request';
 import { RootLoaderData } from '../../routes/root';
 import { HelpTooltip } from '../help-tooltip';
+/**** ><> ↑ --------- Importing dependencies */
 interface Props<T> {
   help?: ReactNode;
   label: string;
@@ -14,6 +15,7 @@ interface Props<T> {
     value: T;
   }[];
 }
+/**** ><> ↑ --------- Props type definition */
 
 export const EnumSetting = <T extends string | number>({
   help,
@@ -48,3 +50,4 @@ export const EnumSetting = <T extends string | number>({
     </div>
   );
 };
+/**** ><> ↑ --------- Definition of EnumSetting functional component */

@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { OverlayContainer } from 'react-aria';
 import { useFetcher, useParams } from 'react-router-dom';
+/**** ><> ↑ --------- Importing libraries */
 
 import { getWorkspaceLabel } from '../../../common/get-workspace-label';
 import { strings } from '../../../common/strings';
@@ -10,11 +11,13 @@ import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
+/**** ><> ↑ --------- Importing local modules */
 
 interface WorkspaceDuplicateModalProps extends ModalProps {
   workspace: Workspace;
   projects: Project[];
 }
+/**** ><> ↑ --------- Interface definition */
 
 export const WorkspaceDuplicateModal: FC<WorkspaceDuplicateModalProps> = ({ workspace, projects, onHide }) => {
   const { organizationId } = useParams<{organizationId: string}>();
@@ -23,6 +26,7 @@ export const WorkspaceDuplicateModal: FC<WorkspaceDuplicateModalProps> = ({ work
   useEffect(() => {
     modalRef.current?.show();
   }, []);
+/**** ><> ↑ --------- Component definition */
 
   return (
     <OverlayContainer onClick={e => e.stopPropagation()}>
@@ -65,3 +69,4 @@ export const WorkspaceDuplicateModal: FC<WorkspaceDuplicateModalProps> = ({ work
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Component return */

@@ -15,6 +15,7 @@ import { showError } from '../ui/components/modals/index';
 import type { PluginTheme } from './misc';
 import themes from './themes';
 
+/**** ><> ↑ --------- Import statements ->  */
 export interface Module {
   templateTags?: PluginTemplateTag[];
   requestHooks?: ((requestContext: any) => void)[];
@@ -103,11 +104,14 @@ export interface Theme extends InternalProperties {
 
 export type ColorScheme = 'default' | 'light' | 'dark';
 
+/**** ><> ↑ --------- Interface and type declarations ->  */
 let plugins: Plugin[] | null | undefined = null;
 
+/**** ><> ↑ --------- Initial variable declarations ->  */
 export async function init() {
   await reloadPlugins();
 }
+/**** ><> ↑ --------- Init function ->  */
 
 async function _traversePluginPath(
   pluginMap: Record<string, Plugin>,
@@ -177,6 +181,7 @@ async function _traversePluginPath(
     }
   }
 }
+/**** ><> ↑ --------- _traversePluginPath function ->  */
 
 export async function getPlugins(force = false): Promise<Plugin[]> {
   if (force) {
@@ -216,14 +221,17 @@ export async function getPlugins(force = false): Promise<Plugin[]> {
 
   return plugins;
 }
+/**** ><> ↑ --------- getPlugins function ->  */
 
 export async function reloadPlugins() {
   await getPlugins(true);
 }
+/**** ><> ↑ --------- reloadPlugins function ->  */
 
 async function getActivePlugins(): Promise<Plugin[]> {
   return (await getPlugins()).filter(p => !p.config.disabled);
 }
+/**** ><> ↑ --------- getActivePlugins function ->  */
 
 export async function getRequestGroupActions(): Promise<RequestGroupAction[]> {
   let extensions: RequestGroupAction[] = [];
@@ -241,6 +249,7 @@ export async function getRequestGroupActions(): Promise<RequestGroupAction[]> {
 
   return extensions;
 }
+/**** ><> ↑ --------- getRequestGroupActions function ->  */
 
 export async function getRequestActions(): Promise<RequestAction[]> {
   let extensions: RequestAction[] = [];
@@ -258,6 +267,7 @@ export async function getRequestActions(): Promise<RequestAction[]> {
 
   return extensions;
 }
+/**** ><> ↑ --------- getRequestActions function ->  */
 
 export async function getWorkspaceActions(): Promise<WorkspaceAction[]> {
   let extensions: WorkspaceAction[] = [];
@@ -275,6 +285,7 @@ export async function getWorkspaceActions(): Promise<WorkspaceAction[]> {
 
   return extensions;
 }
+/**** ><> ↑ --------- getWorkspaceActions function ->  */
 
 export async function getDocumentActions(): Promise<DocumentAction[]> {
   let extensions: DocumentAction[] = [];
@@ -292,6 +303,7 @@ export async function getDocumentActions(): Promise<DocumentAction[]> {
 
   return extensions;
 }
+/**** ><> ↑ --------- getDocumentActions function ->  */
 
 export async function getTemplateTags(): Promise<TemplateTag[]> {
   let extensions: TemplateTag[] = [];
@@ -309,6 +321,7 @@ export async function getTemplateTags(): Promise<TemplateTag[]> {
 
   return extensions;
 }
+/**** ><> ↑ --------- getTemplateTags function ->  */
 
 export async function getRequestHooks(): Promise<RequestHook[]> {
   let functions: RequestHook[] = [{
@@ -356,6 +369,7 @@ export async function getRequestHooks(): Promise<RequestHook[]> {
 
   return functions;
 }
+/**** ><> ↑ --------- getRequestHooks function ->  */
 
 export async function getResponseHooks(): Promise<ResponseHook[]> {
   let functions: ResponseHook[] = [];
@@ -373,6 +387,7 @@ export async function getResponseHooks(): Promise<ResponseHook[]> {
 
   return functions;
 }
+/**** ><> ↑ --------- getResponseHooks function ->  */
 
 export async function getThemes(): Promise<Theme[]> {
   let extensions = themes.map(theme => ({
@@ -401,3 +416,4 @@ export async function getThemes(): Promise<Theme[]> {
 
   return extensions;
 }
+/**** ><> ↑ --------- getThemes function ->  */

@@ -1,4 +1,5 @@
 import React, { createRef, PureComponent } from 'react';
+/**** ><> ↑ --------- Import statements ->  */
 
 export class MockCodeEditor extends PureComponent<any> {
   ref = createRef<HTMLTextAreaElement>();
@@ -8,6 +9,7 @@ export class MockCodeEditor extends PureComponent<any> {
   focus() {
     this.ref.current?.focus();
   }
+/**** ><> ↑ --------- Methods ->  */
 
   render() {
     const { id, onChange, placeholder, defaultValue } = this.props;
@@ -21,3 +23,5 @@ export class MockCodeEditor extends PureComponent<any> {
     />;
   }
 }
+/**** ><> ↑ --------- Component declaration ->  */
+/**** ><> ↑ --------- Render method ->  */

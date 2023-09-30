@@ -8,6 +8,7 @@ import { GrpcRequest } from '../grpc-request';
 import { Request } from '../request';
 import { RequestGroup } from '../request-group';
 import { Workspace } from '../workspace';
+/**** ><> ↑ --------- Importing libraries and models ->  */
 
 // move into fluent-builder
 const toSchema = <T>(obj: T): Schema<T> => {
@@ -22,6 +23,7 @@ const toSchema = <T>(obj: T): Schema<T> => {
 
   return output as Schema<T>;
 };
+/**** ><> ↑ --------- Function to clone an object and return partial schema ->  */
 
 export const baseModelSchema: Schema<BaseModel> = {
   _id: () => 'id',
@@ -32,6 +34,7 @@ export const baseModelSchema: Schema<BaseModel> = {
   parentId: () => '',
   type: () => 'base',
 };
+/**** ><> ↑ --------- Base model schema ->  */
 
 export const workspaceModelSchema: Schema<Workspace> = {
   ...baseModelSchema,
@@ -39,24 +42,28 @@ export const workspaceModelSchema: Schema<Workspace> = {
   certificates: () => undefined,
   type: () => workspace.type,
 };
+/**** ><> ↑ --------- Workspace model schema ->  */
 
 export const requestModelSchema: Schema<Request> = {
   ...baseModelSchema,
   ...toSchema(request.init()),
   type: () => request.type,
 };
+/**** ><> ↑ --------- Request model schema ->  */
 
 export const grpcRequestModelSchema: Schema<GrpcRequest> = {
   ...baseModelSchema,
   ...toSchema(grpcRequest.init()),
   type: () => grpcRequest.type,
 };
+/**** ><> ↑ --------- GRPC request model schema ->  */
 
 export const requestGroupModelSchema: Schema<RequestGroup> = {
   ...baseModelSchema,
   ...toSchema(requestGroup.init()),
   type: () => requestGroup.type,
 };
+/**** ><> ↑ --------- Request group model schema ->  */
 
 export const gitRepositorySchema: Schema<GitRepository> = {
   ...baseModelSchema,
@@ -67,9 +74,11 @@ export const gitRepositorySchema: Schema<GitRepository> = {
   needsFullClone: () => false,
   uriNeedsMigration: () => true,
 };
+/**** ><> ↑ --------- Git repository schema ->  */
 
 export const environmentModelSchema: Schema<Environment> = {
   ...baseModelSchema,
   ...toSchema(environment.init()),
   type: () => environment.type,
 };
+/**** ><> ↑ --------- Environment model schema ->  */

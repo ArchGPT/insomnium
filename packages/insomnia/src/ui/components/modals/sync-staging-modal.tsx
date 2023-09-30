@@ -15,6 +15,7 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { Tooltip } from '../tooltip';
+/**** ><> ↑ --------- Import packages and modules -> This is the part where all necessary external and internal packages are imported for use in the rest of the file. */
 
 type Props = ModalProps & {
   vcs: VCS;
@@ -37,6 +38,7 @@ type LookupMap = Record<string, {
   checked: boolean;
 }>;
 
+/**** ><> ↑ --------- Define types and interfaces -> In this section, the Props and State interfaces, as well as the LookupMap type, are defined to structure the data. */
 export const SyncStagingModal = ({ vcs, branch, onSnapshot, handlePush, onHide }: Props) => {
   const modalRef = useRef<ModalHandle>(null);
   const {
@@ -81,6 +83,7 @@ export const SyncStagingModal = ({ vcs, branch, onSnapshot, handlePush, onHide }
       error: '',
     }));
   }, [branch, syncItems, vcs]);
+/**** ><> ↑ --------- Main Component definition -> The main React component named 'SyncStagingModal' is defined. It is initialized with props, state and a 'refreshVCS' callback function. */
 
   useEffect(() => {
     modalRef.current?.show();
@@ -110,6 +113,7 @@ export const SyncStagingModal = ({ vcs, branch, onSnapshot, handlePush, onHide }
     };
     fn();
   }, [refreshVCS, syncItems, vcs]);
+/**** ><> ↑ --------- Component's Effect Hook -> In this section, the useEffect() hook is defined. It will run once the component renders and perform some initial setup tasks. */
 
   const handleStageToggle = async (event: React.SyntheticEvent<HTMLInputElement>) => {
     const { status } = state;
@@ -171,6 +175,7 @@ export const SyncStagingModal = ({ vcs, branch, onSnapshot, handlePush, onHide }
     modalRef.current?.hide();
     return true;
   };
+/**** ><> ↑ --------- Functions that handle User Interaction -> Several functions are defined to handle user interactions and state changes. */
 
   const { status, message, error } = state;
   const allMap = { ...status.stage, ...status.unstaged };
@@ -243,6 +248,7 @@ export const SyncStagingModal = ({ vcs, branch, onSnapshot, handlePush, onHide }
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Render Component -> The render section of the React component where JSX is returned to be displayed in the UI. */
 
 interface OperationTooltipProps {
   entry: StageEntry;
@@ -364,3 +370,4 @@ const ChangesTable = ({
     </div>
   );
 };
+/**** ><> ↑ --------- Subcomponent Definitions -> This section defines other smaller components and exports them - 'OperationTooltip' and 'ChangesTable'. */

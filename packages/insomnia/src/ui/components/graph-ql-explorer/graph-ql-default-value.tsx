@@ -1,11 +1,14 @@
 import { astFromValue, print } from 'graphql';
 import React, { FC, memo } from 'react';
+/**** ><> ↑ --------- Importing dependencies */
 
 import { GraphQLFieldWithParentName } from './graph-ql-types';
+/**** ><> ↑ --------- Importing local dependencies */
 
 interface Props {
   field: GraphQLFieldWithParentName;
 }
+/**** ><> ↑ --------- Defining interface for Props */
 
 export const GraphQLDefaultValue: FC<Props> = memo(({ field }) => {
   const fieldO: Record<string, any> = field;
@@ -18,5 +21,7 @@ export const GraphQLDefaultValue: FC<Props> = memo(({ field }) => {
     return null;
   }
 });
+/**** ><> ↑ --------- Defining GraphQLDefaultValue */
 
 GraphQLDefaultValue.displayName = 'GraphQLDefaultValue';
+/**** ><> ↑ --------- Setting display name for GraphQLDefaultValue */

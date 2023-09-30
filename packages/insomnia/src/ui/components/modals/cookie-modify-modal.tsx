@@ -15,9 +15,11 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { PanelContainer, TabItem, Tabs } from '../base/tabs';
 import { OneLineEditor } from '../codemirror/one-line-editor';
+/**** ><> ↑ --------- Import statements ->  */
 export interface CookieModifyModalOptions {
   cookie: Cookie;
 }
+/**** ><> ↑ --------- Interface definition for cookie modification ->  */
 
 export const CookieModifyModal = ((props: ModalProps & CookieModifyModalOptions) => {
   const modalRef = useRef<ModalHandle>(null);
@@ -34,6 +36,7 @@ export const CookieModifyModal = ((props: ModalProps & CookieModifyModalOptions)
       method: 'post',
       action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/cookieJar/update`,
     });
+/**** ><> ↑ --------- Functional component definition and setup ->  */
   };
   const handleCookieUpdate = async (nextCookie: any) => {
     if (!cookie) {
@@ -58,6 +61,7 @@ export const CookieModifyModal = ((props: ModalProps & CookieModifyModalOptions)
     cookieJar.cookies = [...cookieJar.cookies.slice(0, index), newcookie, ...cookieJar.cookies.slice(index + 1)];
     updateCookieJar(cookieJar._id, cookieJar);
   };
+/**** ><> ↑ --------- Function for handling cookie update ->  */
 
   let localDateTime;
   if (cookie && cookie.expires && isValid(new Date(cookie.expires))) {
@@ -75,6 +79,7 @@ export const CookieModifyModal = ((props: ModalProps & CookieModifyModalOptions)
       rawDefaultValue = '';
     }
   }
+/**** ><> ↑ --------- LocalDateTime and RawDefaultValue computation ->  */
   return (
     <OverlayContainer>
       <Modal ref={modalRef} onHide={props.onHide}>
@@ -197,3 +202,4 @@ export const CookieModifyModal = ((props: ModalProps & CookieModifyModalOptions)
     </OverlayContainer>
   );
 });
+/**** ><> ↑ --------- Functional component return & Render JSX ->  */

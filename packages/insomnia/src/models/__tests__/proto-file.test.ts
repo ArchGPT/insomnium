@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import * as models from '../index';
 
+/**** ><> ↑ --------- Import necessary modules and functions ->  */
 describe('init()', () => {
   beforeEach(globalBeforeEach);
 
@@ -13,6 +14,7 @@ describe('init()', () => {
     });
   });
 });
+/**** ><> ↑ --------- First test suite: Testing init() function ->  */
 
 describe('create()', () => {
   beforeEach(globalBeforeEach);
@@ -36,6 +38,7 @@ describe('create()', () => {
     expect(request).toEqual(expected);
     expect(await models.protoFile.getById(expected._id)).toEqual(expected);
   });
+/**** ><> ↑ --------- Second test suite: Testing create() function - case 1 ->  */
 
   it('fails when missing parentId', async () => {
     Date.now = jest.fn().mockReturnValue(1478795580200);
@@ -46,3 +49,4 @@ describe('create()', () => {
     ).toThrow('New ProtoFile missing `parentId`');
   });
 });
+/**** ><> ↑ --------- Second test suite: Testing create() function - case 2 ->  */

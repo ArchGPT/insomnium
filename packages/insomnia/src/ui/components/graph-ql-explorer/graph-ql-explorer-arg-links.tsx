@@ -1,12 +1,15 @@
 import { GraphQLArgument, GraphQLType } from 'graphql';
 import React, { FC } from 'react';
 
+/**** ><> ↑ --------- Imports */
 import { GraphQLExplorerTypeLink } from './graph-ql-explorer-type-link';
 
+/**** ><> ↑ --------- Component */
 interface Props {
   args?: readonly GraphQLArgument[];
   onNavigate: (type: GraphQLType) => void;
 }
+/**** ><> ↑ --------- Props Interface */
 
 export const GraphQLExplorerArgLinks: FC<Props> = ({
   args,
@@ -19,3 +22,4 @@ export const GraphQLExplorerArgLinks: FC<Props> = ({
     </div>
   )) : null}
 </>;
+/**** ><> ↑ --------- Component Definition */

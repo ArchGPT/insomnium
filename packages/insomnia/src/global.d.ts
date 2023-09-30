@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import type { MainBridgeAPI } from './main/ipc/main';
+/**** ><> ↑ --------- Importing types ->  */
 
 declare global {
   interface Window {
@@ -10,8 +11,10 @@ declare global {
     clipboard: Pick<Electron.Clipboard, 'readText' | 'writeText' | 'clear'>;
   }
 }
+/**** ><> ↑ --------- Declaring global types for Electron APIs ->  */
 
 declare const __DEV__: boolean;
+/**** ><> ↑ --------- Declaring __DEV__ type ->  */
 
 declare namespace NodeJS {
   interface Global {
@@ -20,3 +23,4 @@ declare namespace NodeJS {
     jsyaml: any;
   }
 }
+/**** ><> ↑ --------- Declaring global types for NodeJS ->  */

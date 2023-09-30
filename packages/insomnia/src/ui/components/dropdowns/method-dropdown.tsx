@@ -4,20 +4,24 @@ import styled from 'styled-components';
 import { HTTP_METHODS } from '../../../common/constants';
 import { Dropdown, DropdownButton, type DropdownHandle, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
 import { showPrompt } from '../modals/index';
+/**** ><> ↑ --------- Importing modules ->  */
 
 const LOCALSTORAGE_KEY = 'insomnia.httpMethods';
+/**** ><> ↑ --------- Defining constants ->  */
 
 const StyledDropdownButton = styled(DropdownButton)({
   '&&': {
     paddingLeft: 'var(--padding-sm)',
   },
 });
+/**** ><> ↑ --------- Styling the dropdown component ->  */
 
 interface Props {
   className?: string;
   method: string;
   onChange: (method: string) => void;
 }
+/**** ><> ↑ --------- Defining the Props type ->  */
 
 export const MethodDropdown = forwardRef<DropdownHandle, Props>(({
   className,
@@ -72,6 +76,7 @@ export const MethodDropdown = forwardRef<DropdownHandle, Props>(({
       },
     });
   }, [method, onChange, recent]);
+/**** ><> ↑ --------- Defining the MethodDropdown component ->  */
 
   return (
     <Dropdown
@@ -107,6 +112,8 @@ export const MethodDropdown = forwardRef<DropdownHandle, Props>(({
       </DropdownSection>
     </Dropdown>
   );
+/**** ><> ↑ --------- Rendering the MethodDropdown component ->  */
 });
 
 MethodDropdown.displayName = 'MethodDropdown';
+/**** ><> ↑ --------- Setting the displayName of the MethodDropdown component ->  */

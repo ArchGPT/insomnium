@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
+/**** ><> ↑ --------- Importing packages */
 
 import {
   OAuth1SignatureMethod,
@@ -14,6 +15,7 @@ import { AuthPrivateKeyRow } from './components/auth-private-key-row';
 import { AuthSelectRow } from './components/auth-select-row';
 import { AuthTableBody } from './components/auth-table-body';
 import { AuthToggleRow } from './components/auth-toggle-row';
+/**** ><> ↑ --------- Importing internal packages */
 
 const blankForDefault = 'Leave blank for default';
 const signatureMethodOptions: {name: string; value: OAuth1SignatureMethod}[] = [{
@@ -32,6 +34,7 @@ const signatureMethodOptions: {name: string; value: OAuth1SignatureMethod}[] = [
   name: 'PLAINTEXT',
   value: SIGNATURE_METHOD_PLAINTEXT,
 }];
+/**** ><> ↑ --------- Defining variables */
 
 export const OAuth1Auth: FC = () => {
   const { activeRequest: { authentication: { signatureMethod } } } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
@@ -59,3 +62,4 @@ export const OAuth1Auth: FC = () => {
     </AuthTableBody>
   );
 };
+/**** ><> ↑ --------- Creating a functional component */

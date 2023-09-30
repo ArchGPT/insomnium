@@ -21,9 +21,11 @@ import { showError, showModal, showPrompt } from '../modals';
 import { EnvironmentEditModal } from '../modals/environment-edit-modal';
 import { PasteCurlModal } from '../modals/paste-curl-modal';
 import { RequestGroupSettingsModal } from '../modals/request-group-settings-modal';
+/**** ><> ↑ --------- Module imports ->  */
 interface Props extends Partial<DropdownProps> {
   requestGroup: RequestGroup;
 }
+/**** ><> ↑ --------- Props interface declaration ->  */
 
 export const RequestGroupActionsDropdown = ({
   requestGroup,
@@ -38,6 +40,7 @@ export const RequestGroupActionsDropdown = ({
   const [actionPlugins, setActionPlugins] = useState<RequestGroupAction[]>([]);
   const [loadingActions, setLoadingActions] = useState<Record<string, boolean>>({});
   const dropdownRef = useRef<DropdownHandle>(null);
+/**** ><> ↑ --------- RequestGroupActionsDropdown component definition ->  */
 
   const requestFetcher = useFetcher();
   const { organizationId, projectId, workspaceId } = useParams() as { organizationId: string; projectId: string; workspaceId: string };
@@ -49,11 +52,13 @@ export const RequestGroupActionsDropdown = ({
         action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/new`,
         method: 'post',
       });
+/**** ><> ↑ --------- Function createRequest declaration ->  */
 
   const onOpen = async () => {
     const actionPlugins = await getRequestGroupActions();
     setActionPlugins(actionPlugins);
   };
+/**** ><> ↑ --------- Function onOpen declaration ->  */
 
   const handleRequestGroupDuplicate = () => {
     showPrompt({
@@ -71,6 +76,7 @@ export const RequestGroupActionsDropdown = ({
           });
       },
     });
+/**** ><> ↑ --------- Function handleRequestGroupDuplicate declaration ->  */
   };
 
   const patchGroup = useRequestGroupPatcher();
@@ -84,6 +90,7 @@ export const RequestGroupActionsDropdown = ({
       onComplete: name => patchGroup(requestGroup._id, { name }),
     });
   };
+/**** ><> ↑ --------- Function handleRename declaration ->  */
 
   const handleDeleteFolder = async () => {
     models.stats.incrementDeletedRequestsForDescendents(requestGroup);
@@ -93,6 +100,7 @@ export const RequestGroupActionsDropdown = ({
         method: 'post',
       });
   };
+/**** ><> ↑ --------- Function handleDeleteFolder declaration ->  */
 
   const handlePluginClick = async ({ label, plugin, action }: RequestGroupAction) => {
     setLoadingActions({ ...loadingActions, [label]: true });
@@ -124,6 +132,7 @@ export const RequestGroupActionsDropdown = ({
 
     dropdownRef.current?.hide();
 
+/**** ><> ↑ --------- Function handlePluginClick declaration ->  */
   };
 
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
@@ -249,6 +258,7 @@ export const RequestGroupActionsDropdown = ({
           setIsSettingsModalOpen(true),
       },
     ];
+/**** ><> ↑ --------- RequestGroupActionItems definition ->  */
 
   return (
     <Fragment>
@@ -306,3 +316,4 @@ export const RequestGroupActionsDropdown = ({
     </Fragment>
   );
 };
+/**** ><> ↑ --------- Return of the RequestGroupActionsDropdown component ->  */

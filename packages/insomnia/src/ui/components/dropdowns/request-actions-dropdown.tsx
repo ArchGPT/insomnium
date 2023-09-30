@@ -2,6 +2,7 @@ import { IconName } from '@fortawesome/fontawesome-svg-core';
 import React, { Fragment, useCallback, useState } from 'react';
 import { Button, Item, Menu, MenuTrigger, Popover } from 'react-aria-components';
 import { useFetcher, useParams, useRouteLoaderData } from 'react-router-dom';
+/**** ><> ↑ --------- Importing libraries ->  */
 
 import { exportHarRequest } from '../../../common/har';
 import { toKebabCase } from '../../../common/misc';
@@ -27,6 +28,7 @@ import { AlertModal } from '../modals/alert-modal';
 import { GenerateCodeModal } from '../modals/generate-code-modal';
 import { RequestSettingsModal } from '../modals/request-settings-modal';
 
+/**** ><> ↑ --------- Importing application modules ->  */
 interface Props extends Omit<DropdownProps, 'children'> {
   activeEnvironment: Environment;
   activeProject: Project;
@@ -34,6 +36,7 @@ interface Props extends Omit<DropdownProps, 'children'> {
   request: Request | GrpcRequest | WebSocketRequest;
   requestGroup?: RequestGroup;
 }
+/**** ><> ↑ --------- Defining component props ->  */
 
 export const RequestActionsDropdown = ({
   activeEnvironment,
@@ -52,6 +55,7 @@ export const RequestActionsDropdown = ({
   const requestFetcher = useFetcher();
   const { organizationId, projectId, workspaceId } = useParams() as { organizationId: string; projectId: string; workspaceId: string };
 
+/**** ><> ↑ --------- Defining RequestActionsDropdown component ->  */
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
   const onOpen = useCallback(async () => {
@@ -78,6 +82,7 @@ export const RequestActionsDropdown = ({
         }),
     });
   };
+/**** ><> ↑ --------- Setting up modal states and callback functions ->  */
 
   const handlePluginClick = async ({ plugin, action, label }: RequestAction) => {
     setLoadingActions({ ...loadingActions, [label]: true });
@@ -148,6 +153,7 @@ export const RequestActionsDropdown = ({
         method: 'post',
       });
   };
+/**** ><> ↑ --------- Handling request actions ->  */
 
   // Can only generate code for regular requests, not gRPC requests
   const canGenerateCode = isRequest(request);
@@ -219,6 +225,7 @@ export const RequestActionsDropdown = ({
         },
       },
     ];
+/**** ><> ↑ --------- Defining available actions ->  */
 
   return (
     <Fragment>
@@ -263,3 +270,4 @@ export const RequestActionsDropdown = ({
     </Fragment>
   );
 };
+/**** ><> ↑ --------- Returning component structure ->  */

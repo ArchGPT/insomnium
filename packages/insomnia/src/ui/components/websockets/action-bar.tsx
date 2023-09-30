@@ -11,6 +11,7 @@ import { OneLineEditor, OneLineEditorHandle } from '../codemirror/one-line-edito
 import { createKeybindingsHandler, useDocBodyKeyboardShortcuts } from '../keydown-binder';
 import { DisconnectButton } from './disconnect-button';
 
+/**** ><> ↑ --------- Imports required libraries and modules */
 const Button = styled.button<{ warning?: boolean }>(({ warning }) => ({
   paddingRight: 'var(--padding-md)',
   paddingLeft: 'var(--padding-md)',
@@ -22,6 +23,7 @@ const Button = styled.button<{ warning?: boolean }>(({ warning }) => ({
     filter: 'brightness(0.8)',
   },
 }));
+/**** ><> ↑ --------- Button styled component definition */
 
 interface ActionBarProps {
   request: WebSocketRequest;
@@ -30,6 +32,7 @@ interface ActionBarProps {
   readyState: boolean;
   onChange: (value: string) => void;
 }
+/**** ><> ↑ --------- Interface definition for ActionBarProps */
 
 const Form = styled.form({
   flex: 1,
@@ -64,6 +67,7 @@ export const ConnectionCircle = styled.span({
   height: 10,
   borderRadius: '50%',
 });
+/**** ><> ↑ --------- Form, StyledUrlBar, WebSocketIcon and ConnectionStatus styled component definitions */
 
 export const WebSocketActionBar: FC<ActionBarProps> = ({ request, environmentId, defaultValue, onChange, readyState }) => {
   const isOpen = readyState;
@@ -156,3 +160,4 @@ export const WebSocketActionBar: FC<ActionBarProps> = ({ request, environmentId,
     </>
   );
 };
+/**** ><> ↑ --------- WebSocketActionBar: Functional Component definition and logic */

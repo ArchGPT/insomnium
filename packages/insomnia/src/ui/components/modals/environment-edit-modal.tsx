@@ -7,6 +7,7 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { EnvironmentEditor, EnvironmentEditorHandle } from '../editors/environment-editor';
+/**** ><> ↑ --------- Import statements -> This segment is for importing necessary modules and components from various libraries and files. The imports include both common libraries such as 'react' and custom components or models from the project's own directories. */
 
 interface State {
   requestGroup: RequestGroup | null;
@@ -19,6 +20,7 @@ export interface EnvironmentEditModalHandle {
   show: (options: EnvironmentEditModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Interface declarations -> This segment declares the 'State', 'EnvironmentEditModalOptions', and 'EnvironmentEditModalHandle' interfaces. These types will be used in state management and function signatures in the following code. */
 export const EnvironmentEditModal = forwardRef<EnvironmentEditModalHandle, ModalProps>((props, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const environmentEditorRef = useRef<EnvironmentEditorHandle>(null);
@@ -37,6 +39,7 @@ export const EnvironmentEditModal = forwardRef<EnvironmentEditModalHandle, Modal
   }), []);
 
   const { requestGroup } = state;
+/**** ><> ↑ --------- Component Definition -> This segment is the initial setup of the 'EnvironmentEditModal' component using React's 'forwardRef'. It outlines the initial state, useRef hooks, and useImperativeHandle hook for managing child component behaviors. */
   const environmentInfo = {
     object: requestGroup ? requestGroup.environment : {},
     propertyOrder: requestGroup && requestGroup.environmentPropertyOrder,
@@ -77,5 +80,7 @@ export const EnvironmentEditModal = forwardRef<EnvironmentEditModalHandle, Modal
       </ModalFooter>
     </Modal >
   );
+/**** ><> ↑ --------- Component Return Statement -> This is the JSX returned by the 'EnvironmentEditModal' component. It includes the definitions and properties of 'Modal', 'ModalHeader', 'ModalBody', 'EnvironmentEditor', and 'ModalFooter'. */
 });
 EnvironmentEditModal.displayName = 'EnvironmentEditModal';
+/**** ><> ↑ --------- Component Display Name Setting -> This line sets the display name of the 'EnvironmentEditModal'. This is helpful for debugging, especially when the component is used in higher-order components. */

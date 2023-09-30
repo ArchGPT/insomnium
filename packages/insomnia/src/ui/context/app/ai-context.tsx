@@ -1,6 +1,7 @@
 import React, { createContext, FC, PropsWithChildren, useContext, useEffect } from 'react';
 import { useFetcher, useFetchers, useParams } from 'react-router-dom';
 import { usePrevious } from 'react-use';
+/**** ><> ↑ --------- import statements */
 
 
 
@@ -17,6 +18,7 @@ const AIContext = createContext({
     progress: 0,
   },
 });
+/**** ><> ↑ --------- AIContext definition */
 
 export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
   const {
@@ -58,6 +60,7 @@ export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [aiAccessFetcher, organizationId, projectId, workspaceId, loggedIn, prevProjectId]);
 
+/**** ><> ↑ --------- AIProvider component */
   const isAIEnabled = aiAccessFetcher.data?.enabled ?? false;
 
   const aiGenerateTestsProgressStream = aiGenerateTestsFetcher.data as TransformStream;
@@ -117,3 +120,4 @@ export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
 };
 
 export const useAIContext = () => useContext(AIContext);
+/**** ><> ↑ --------- useAIContext custom hook */

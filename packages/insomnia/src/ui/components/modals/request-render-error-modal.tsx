@@ -10,6 +10,7 @@ import { Link } from '../base/link';
 import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
+/**** ><> ↑ --------- Importing necessary libraries and modules. -> These lines import necessary libraries and functions needed for this file. This will be called when the file is being loaded. */
 export interface RequestRenderErrorModalOptions {
   error: RenderError | null;
   request: Request | WebSocketRequest | GrpcRequest | null;
@@ -18,6 +19,7 @@ export interface RequestRenderErrorModalHandle {
   show: (options: RequestRenderErrorModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Interface definitions for the error modal. -> Defines the 'RequestRenderErrorModalOptions' and 'RequestRenderErrorModalHandle' interfaces. They represent the structure of the data. This can be used whenever we want this type of object. */
 
 export const RequestRenderErrorModal = forwardRef<RequestRenderErrorModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
@@ -74,5 +76,7 @@ export const RequestRenderErrorModal = forwardRef<RequestRenderErrorModalHandle,
     </Modal>
   );
 });
+/**** ><> ↑ --------- React component for displaying the error modal. -> This is the main component of the file. It utilizes hooks to manage its local state and render the modal component. It will be called when the component is used in a JSX expression. */
 
 RequestRenderErrorModal.displayName = 'RequestRenderErrorModal';
+/**** ><> ↑ --------- Setting a display name for the component. -> Defines the 'displayName' property of the component. This is used in error messages, and is usually helpful in a debugging context. */

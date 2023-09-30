@@ -5,6 +5,7 @@ declare module 'srp-js' {
     g: BigInteger;
     hash: string;
   }
+/**** ><> ↑ --------- Module Declaration and Interface Definition ->  */
 
   export const params: {
     1024: Params;
@@ -15,6 +16,7 @@ declare module 'srp-js' {
     6244: Params;
     8192: Params;
   };
+/**** ><> ↑ --------- Export Constant Parameters ->  */
 
   export class Client {
     constructor(params: Params, salt_buf: Buffer, identity_buf: Buffer, password_buf: Buffer, secret1_buf: Buffer);
@@ -29,8 +31,10 @@ declare module 'srp-js' {
 
     computeK(): Buffer;
   }
+/**** ><> ↑ --------- Class Definition ->  */
 
   export function computeVerifier(params: Params, salt: Buffer, I: Buffer, P: Buffer): Buffer;
 
   export function genKey(cb: (err: Error | undefined, res: Buffer) => void): void;
 }
+/**** ><> ↑ --------- Exported Function Definitions ->  */

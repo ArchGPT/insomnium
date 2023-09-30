@@ -1,10 +1,13 @@
 import { Body, Converter, ImportRequest, PostData, UNKNOWN } from '../entities';
+/**** ><> ↑ --------- Module imports ->  */
 
 export const id = 'har';
 export const name = 'HAR 1.2';
 export const description = 'Importer for HTTP Archive 1.2';
+/**** ><> ↑ --------- Constant exports ->  */
 
 let requestCount = 1;
+/**** ><> ↑ --------- Variable definitions ->  */
 
 interface Entry {
   comment: UNKNOWN;
@@ -19,6 +22,7 @@ interface HarRoot {
   method: UNKNOWN;
   url: UNKNOWN;
 }
+/**** ><> ↑ --------- Interface definitions ->  */
 
 const extractRequests = (harRoot: HarRoot): ImportRequest[] => {
   const { log, httpVersion, method, url } = harRoot;
@@ -36,11 +40,13 @@ const extractRequests = (harRoot: HarRoot): ImportRequest[] => {
     return request;
   });
 };
+/**** ><> ↑ --------- Function for extracting requests ->  */
 
 const removeComment = <T extends { comment?: UNKNOWN }>(obj: T) => {
   const { comment, ...newObject } = obj;
   return newObject;
 };
+/**** ><> ↑ --------- Function to remove comments from objects ->  */
 
 const importPostData = (postData?: PostData): Body => {
   if (!postData) {
@@ -64,6 +70,7 @@ const importPostData = (postData?: PostData): Body => {
     };
   }
 };
+/**** ><> ↑ --------- Function for importing post data ->  */
 
 const importRequest = (request: ImportRequest): ImportRequest => {
   const cookieHeaderValue = (request.cookies ?? [])
@@ -105,6 +112,7 @@ const importRequest = (request: ImportRequest): ImportRequest => {
     authentication: {},
   };
 };
+/**** ><> ↑ --------- Function for importing a request ->  */
 
 export const convert: Converter = rawData => {
   requestCount = 1;
@@ -117,3 +125,4 @@ export const convert: Converter = rawData => {
     return null;
   }
 };
+/**** ><> ↑ --------- Function for converting raw data ->  */

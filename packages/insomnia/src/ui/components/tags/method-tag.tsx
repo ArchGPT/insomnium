@@ -3,14 +3,17 @@ import React, { FC, memo } from 'react';
 import { CONTENT_TYPE_GRAPHQL, METHOD_DELETE, METHOD_OPTIONS } from '../../../common/constants';
 import { isEventStreamRequest, Request } from '../../../models/request';
 
+/**** ><> ↑ --------- Imports ->  */
 interface Props {
   method: string;
   override?: string | null;
   fullNames?: boolean;
 }
+/**** ><> ↑ --------- Props Interface Definition ->  */
 function removeVowels(str: string) {
   return str.replace(/[aeiouyAEIOUY]/g, '');
 }
+/**** ><> ↑ --------- Function removeVowels ->  */
 
 export const getMethodShortHand = (doc: Request) => {
   if (isEventStreamRequest(doc)) {
@@ -22,6 +25,7 @@ export const getMethodShortHand = (doc: Request) => {
   }
   return formatMethodName(doc.method);
 };
+/**** ><> ↑ --------- Function getMethodShortHand ->  */
 export function formatMethodName(method: string) {
   let methodName = method || '';
 
@@ -33,6 +37,7 @@ export function formatMethodName(method: string) {
 
   return methodName;
 }
+/**** ><> ↑ --------- Function formatMethodName ->  */
 
 export const MethodTag: FC<Props> = memo(({ method, override, fullNames }) => {
   let methodName = method;
@@ -62,5 +67,7 @@ export const MethodTag: FC<Props> = memo(({ method, override, fullNames }) => {
     </div>
   );
 });
+/**** ><> ↑ --------- MethodTag Component Definition ->  */
 
 MethodTag.displayName = 'MethodTag';
+/**** ><> ↑ --------- Assigning displayName to MethodTag ->  */

@@ -1,4 +1,5 @@
 import React, { FC, SyntheticEvent, useCallback } from 'react';
+/**** ><> ↑ --------- Import external dependencies ->  */
 
 import { GrpcRequest, isGrpcRequest } from '../../../models/grpc-request';
 import { isRequest, Request } from '../../../models/request';
@@ -6,21 +7,25 @@ import { isWebSocketRequest, WebSocketRequest } from '../../../models/websocket-
 import { GrpcTag } from '../tags/grpc-tag';
 import { MethodTag } from '../tags/method-tag';
 import { WebSocketTag } from '../tags/websocket-tag';
+/**** ><> ↑ --------- Import internal modules and types ->  */
 
 interface Props {
   handleSetItemSelected: (...args: any[]) => any;
   isSelected: boolean;
   request: Request | WebSocketRequest | GrpcRequest;
 }
+/**** ><> ↑ --------- Define interface Props ->  */
 
 export const RequestRow: FC<Props> = ({
   handleSetItemSelected,
   request,
   isSelected,
 }) => {
+/**** ><> ↑ --------- Define Functional Component RequestRow ->  */
   const onChange = useCallback((event: SyntheticEvent<HTMLInputElement>) => {
     handleSetItemSelected(request._id, event?.currentTarget.checked);
   }, [handleSetItemSelected, request._id]);
+/**** ><> ↑ --------- Define callback for checkbox onChange event ->  */
 
   return (
     <li className="tree__row">
@@ -38,3 +43,4 @@ export const RequestRow: FC<Props> = ({
     </li>
   );
 };
+/**** ><> ↑ --------- Functional Component Return JSX ->  */

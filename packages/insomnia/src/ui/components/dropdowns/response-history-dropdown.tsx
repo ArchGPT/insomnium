@@ -19,6 +19,7 @@ import { StatusTag } from '../tags/status-tag';
 import { TimeTag } from '../tags/time-tag';
 import { URLTag } from '../tags/url-tag';
 import { TimeFromNow } from '../time-from-now';
+/**** ><> ↑ --------- Import External and Internal libraries ->  */
 
 export const ResponseHistoryDropdown = ({
   activeResponse,
@@ -41,10 +42,12 @@ export const ResponseHistoryDropdown = ({
     week: [],
     other: [],
   };
+/**** ><> ↑ --------- Component Function Definition ->  */
 
   const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
   const fetcher = useFetcher();
 
+/**** ><> ↑ --------- Parameters and States Initialization ->  */
   const handleSetActiveResponse = useCallback(async (requestId: string, activeResponse: Response | WebSocketResponse) => {
     if (isWebSocketResponse(activeResponse)) {
       window.main.webSocket.close({ requestId });
@@ -56,6 +59,7 @@ export const ResponseHistoryDropdown = ({
 
     await patchRequestMeta(requestId, { activeResponseId: activeResponse._id });
   }, [patchRequestMeta]);
+/**** ><> ↑ --------- Handle Set Active Response Function ->  */
 
   const handleDeleteResponses = useCallback(async () => {
     if (isWebSocketResponse(activeResponse)) {
@@ -67,6 +71,7 @@ export const ResponseHistoryDropdown = ({
       encType: 'application/json',
     });
   }, [activeResponse, fetcher, organizationId, projectId, requestId, workspaceId]);
+/**** ><> ↑ --------- Handle Delete Responses Function ->  */
 
   const handleDeleteResponse = useCallback(async () => {
     if (activeResponse) {
@@ -80,6 +85,7 @@ export const ResponseHistoryDropdown = ({
       encType: 'application/json',
     });
   }, [activeResponse, fetcher, requestId, organizationId, projectId, workspaceId]);
+/**** ><> ↑ --------- Handle Delete Response Function ->  */
 
   responses.forEach((response: Response | WebSocketResponse) => {
     const responseTime = new Date(response.created);
@@ -92,6 +98,7 @@ export const ResponseHistoryDropdown = ({
     }).find(([, value]) => value === true)?.[0] || 'other';
     categories[match].push(response);
   });
+/**** ><> ↑ --------- Responses Grouping ->  */
 
   const renderResponseRow = (response: Response | WebSocketResponse) => {
     const activeResponseId = activeResponse ? activeResponse._id : 'n/a';
@@ -143,12 +150,14 @@ export const ResponseHistoryDropdown = ({
       </DropdownItem>
     );
   };
+/**** ><> ↑ --------- Render Response Row Function ->  */
 
   useDocBodyKeyboardShortcuts({
     request_toggleHistory: () => dropdownRef.current?.toggle(true),
   });
 
   const environmentName = activeEnvironment ? activeEnvironment.name : 'Base';
+/**** ><> ↑ --------- Use Document Body Keyboard Shortcuts and Set Environment Name ->  */
   const isLatestResponseActive = !responses.length || activeResponse._id === responses[0]._id;
   return (
     <Dropdown
@@ -225,3 +234,4 @@ export const ResponseHistoryDropdown = ({
     </Dropdown>
   );
 };
+/**** ><> ↑ --------- Render Dropdown Component ->  */

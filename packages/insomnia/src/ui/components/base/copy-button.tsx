@@ -2,12 +2,14 @@ import React, { FC, useCallback, useState } from 'react';
 import { useInterval } from 'react-use';
 
 import { Button, ButtonProps } from '../themed-button';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface Props extends ButtonProps {
   confirmMessage?: string;
   content: string;
   title?: string;
 }
+/**** ><> ↑ --------- Props interface ->  */
 
 export const CopyButton: FC<Props> = ({
   children,
@@ -16,6 +18,7 @@ export const CopyButton: FC<Props> = ({
   title,
   ...buttonProps
 }) => {
+/**** ><> ↑ --------- Main CopyButton component ->  */
   const [showConfirmation, setshowConfirmation] = useState(false);
   const onClick = useCallback(async (event: React.MouseEvent) => {
     event.preventDefault();
@@ -26,10 +29,12 @@ export const CopyButton: FC<Props> = ({
     }
     setshowConfirmation(true);
   }, [content]);
+/**** ><> ↑ --------- State and onClick function ->  */
 
   useInterval(() => {
     setshowConfirmation(false);
   }, 2000);
+/**** ><> ↑ --------- useInterval Hook ->  */
 
   const confirm = typeof confirmMessage === 'string' ? confirmMessage : 'Copied';
   return (
@@ -48,3 +53,4 @@ export const CopyButton: FC<Props> = ({
     </Button>
   );
 };
+/**** ><> ↑ --------- Confirm message handling and component return statement ->  */

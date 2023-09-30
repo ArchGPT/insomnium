@@ -7,6 +7,7 @@ import { database as db } from '../common/database';
 import * as hotkeys from '../common/hotkeys';
 import { HttpVersions, KeyboardShortcut, Settings as BaseSettings, UpdateChannel } from '../common/settings';
 import type { BaseModel } from './index';
+/**** ><> ↑ --------- Import statements ->  */
 
 export type Settings = BaseModel & BaseSettings;
 export const name = 'Settings';
@@ -16,10 +17,12 @@ export const canDuplicate = false;
 export const canSync = false;
 
 export type ThemeSettings = Pick<Settings, 'autoDetectColorScheme' | 'lightTheme' | 'darkTheme' | 'theme'>;
+/**** ><> ↑ --------- Export constants and types ->  */
 
 export const isSettings = (model: Pick<BaseModel, 'type'>): model is Settings => (
   model.type === type
 );
+/**** ><> ↑ --------- Type guard function ->  */
 
 export function init(): BaseSettings {
   return {
@@ -71,6 +74,7 @@ export function init(): BaseSettings {
     validateSSL: true,
   };
 }
+/**** ><> ↑ --------- Init function ->  */
 
 export function migrate(doc: Settings) {
   try {
@@ -81,6 +85,7 @@ export function migrate(doc: Settings) {
     throw e;
   }
 }
+/**** ><> ↑ --------- Migrate function ->  */
 
 export async function all() {
   let settingsList = await db.all<Settings>(type);
@@ -91,22 +96,26 @@ export async function all() {
 
   return settingsList;
 }
+/**** ><> ↑ --------- All function ->  */
 
 async function create() {
   const settings = await db.docCreate<Settings>(type);
   return settings;
 }
+/**** ><> ↑ --------- Create function ->  */
 
 export async function update(settings: Settings, patch: Partial<Settings>) {
   const updatedSettings = await db.docUpdate<Settings>(settings, patch);
   return updatedSettings;
 }
+/**** ><> ↑ --------- Update function ->  */
 
 export async function patch(patch: Partial<Settings>) {
   const settings = await getOrCreate();
   const updatedSettings = await db.docUpdate<Settings>(settings, patch);
   return updatedSettings;
 }
+/**** ><> ↑ --------- Patch function ->  */
 
 export async function getOrCreate() {
   const results = await db.all<Settings>(type) || [];
@@ -116,6 +125,7 @@ export async function getOrCreate() {
   }
   return results[0];
 }
+/**** ><> ↑ --------- GetOrCreate function ->  */
 
 /**
  * Ensure map is updated when new hotkeys are added
@@ -135,3 +145,4 @@ function migrateEnsureHotKeys(settings: Settings): Settings {
   settings.hotKeyRegistry = { ...defaultHotKeyRegistry, ...hotKeyRegistry };
   return settings;
 }
+/**** ><> ↑ --------- MigrateEnsureHotKeys function ->  */

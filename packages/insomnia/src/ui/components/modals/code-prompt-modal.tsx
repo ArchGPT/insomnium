@@ -10,6 +10,7 @@ import { ModalHeader } from '../base/modal-header';
 import { CodeEditor } from '../codemirror/code-editor';
 import { MarkdownEditor } from '../markdown-editor';
 
+/**** ><> ↑ --------- Importing dependencies & components ->  */
 const MODES: Record<string, string> = {
   'text/plain': 'Plain Text',
   'application/json': 'JSON',
@@ -18,6 +19,7 @@ const MODES: Record<string, string> = {
   'text/x-markdown': 'Markdown',
   'text/html': 'HTML',
 };
+/**** ><> ↑ --------- Constants, Enumerations and Mode definitions ->  */
 
 interface CodePromptModalOptions {
   title: string;
@@ -32,11 +34,13 @@ interface CodePromptModalOptions {
   onChange: (value: string) => void;
   onModeChange?: (value: string) => void;
 }
+/**** ><> ↑ --------- CodePromptModalOptions Interface definition ->  */
 
 export interface CodePromptModalHandle {
   show: (options: CodePromptModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- CodePromptModalHandle Interface definition ->  */
 export const CodePromptModal = forwardRef<CodePromptModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<CodePromptModalOptions>({
@@ -52,6 +56,7 @@ export const CodePromptModal = forwardRef<CodePromptModalHandle, ModalProps>((_,
     onChange: () => { },
     onModeChange: () => { },
   });
+/**** ><> ↑ --------- Beginning of CodePromptModal component definition ->  */
 
   useImperativeHandle(ref, () => ({
     hide: () => {
@@ -67,6 +72,7 @@ export const CodePromptModal = forwardRef<CodePromptModalHandle, ModalProps>((_,
     },
   }), []);
 
+/**** ><> ↑ --------- Component method definitions for showing and hiding modals ->  */
   const {
     submitName,
     title,
@@ -79,6 +85,7 @@ export const CodePromptModal = forwardRef<CodePromptModalHandle, ModalProps>((_,
     showCopyButton,
     onChange,
   } = state;
+/**** ><> ↑ --------- Destructuring of state variable ->  */
 
   return (
     <Modal ref={modalRef} tall>
@@ -173,5 +180,7 @@ export const CodePromptModal = forwardRef<CodePromptModalHandle, ModalProps>((_,
       </ModalFooter>
     </Modal>
   );
+/**** ><> ↑ --------- Modal component rendering ->  */
 });
 CodePromptModal.displayName = 'CodePromptModal';
+/**** ><> ↑ --------- Setting displayName for the component ->  */

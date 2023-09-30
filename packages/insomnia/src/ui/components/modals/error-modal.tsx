@@ -5,6 +5,7 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 // NOTE: this is only used by the plugin api
+/**** ><> ↑ --------- Imports and module level constants ->  */
 export interface ErrorModalOptions {
   title?: string;
   error?: Error | null;
@@ -15,6 +16,7 @@ export interface ErrorModalHandle {
   show: (options: ErrorModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Interface definitions ->  */
 export const ErrorModal = forwardRef<ErrorModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<ErrorModalOptions>({
@@ -24,6 +26,7 @@ export const ErrorModal = forwardRef<ErrorModalHandle, ModalProps>((_, ref) => {
     addCancel: false,
   });
 
+/**** ><> ↑ --------- State definitions ->  */
   useImperativeHandle(ref, () => ({
     hide: () => {
       modalRef.current?.hide();
@@ -33,9 +36,11 @@ export const ErrorModal = forwardRef<ErrorModalHandle, ModalProps>((_, ref) => {
       modalRef.current?.show();
     },
   }), []);
+/**** ><> ↑ --------- useImperativeHandle Hook ->  */
   const { error, title, addCancel } = state;
   const message = state.message || error?.message;
   return (
+/**** ><> ↑ --------- Clear error message determination ->  */
     <Modal ref={modalRef}>
       <ModalHeader>{title || 'Uh Oh!'}</ModalHeader>
       <ModalBody className="wide pad">
@@ -63,5 +68,7 @@ export const ErrorModal = forwardRef<ErrorModalHandle, ModalProps>((_, ref) => {
       </ModalFooter>
     </Modal>
   );
+/**** ><> ↑ --------- Returning Modal ->  */
 });
 ErrorModal.displayName = 'ErrorModal';
+/**** ><> ↑ --------- Module exports and misc ->  */

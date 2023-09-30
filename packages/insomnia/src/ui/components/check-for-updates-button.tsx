@@ -4,10 +4,12 @@ interface Props {
   children: ReactNode;
   className?: string | null;
 }
+/**** ><> ↑ --------- Import section and interface definition */
 
 export const CheckForUpdatesButton: FC<Props> = ({ children, className }) => {
   const [disabled, setDisabled] = useState(false);
   const [status, setStatus] = useState('');
+/**** ><> ↑ --------- Component definition and state creation */
 
   useEffect(() => {
     const unsubscribe = window.main.on('updaterStatus',
@@ -16,6 +18,7 @@ export const CheckForUpdatesButton: FC<Props> = ({ children, className }) => {
       unsubscribe();
     };
   });
+/**** ><> ↑ --------- UseEffect for handling updates */
   return (
     <button
       className={className ?? ''}
@@ -31,3 +34,4 @@ export const CheckForUpdatesButton: FC<Props> = ({ children, className }) => {
     </button>
   );
 };
+/**** ><> ↑ --------- Render section of component */

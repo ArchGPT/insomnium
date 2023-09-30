@@ -2,6 +2,7 @@ export default {
   name: 'one-dark',
   displayName: 'One Dark',
   theme: {
+/**** ><> ↑ --------- Export and theme name ->  */
     background: {
       default: '#272c35',
       success: '#98c379',
@@ -11,6 +12,7 @@ export default {
       surprise: '#c678dd',
       info: '#56b6c2',
     },
+/**** ><> ↑ --------- Background colors configuration ->  */
     foreground: {
       default: '#bbb',
       success: '#fff',
@@ -20,6 +22,7 @@ export default {
       surprise: '#fff',
       info: '#fff',
     },
+/**** ><> ↑ --------- Foreground colors configuration ->  */
     highlight: {
       default: 'rgba(114, 121, 133, 1)',
       xxs: 'rgba(114, 121, 133, 0.05)',
@@ -29,6 +32,7 @@ export default {
       lg: 'rgba(114, 121, 133, 0.6)',
       xl: 'rgba(114, 121, 133, 0.8)',
     },
+/**** ><> ↑ --------- Highlight configuration ->  */
     styles: {
       appHeader: {
         background: {
@@ -61,5 +65,7 @@ export default {
         },
       },
     },
+/**** ><> ↑ --------- Application styles and colors ->  */
   },
 };
+/**** ><> ↑ --------- End of theme configuration ->  */

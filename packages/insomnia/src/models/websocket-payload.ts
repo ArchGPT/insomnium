@@ -1,5 +1,6 @@
 import { database } from '../common/database';
 import type { BaseModel } from '.';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const name = 'WebSocket Payload';
 
@@ -10,6 +11,7 @@ export const prefix = 'ws-payload';
 export const canDuplicate = true;
 
 export const canSync = true;
+/**** ><> ↑ --------- Exporting constants ->  */
 
 export interface BaseWebSocketPayload {
   name: string;
@@ -18,6 +20,7 @@ export interface BaseWebSocketPayload {
 }
 
 export type WebSocketPayload = BaseModel & BaseWebSocketPayload & { type: typeof type };
+/**** ><> ↑ --------- Interface and Type definitions ->  */
 
 export const isWebSocketPayload = (model: Pick<BaseModel, 'type'>): model is WebSocketPayload => (
   model.type === type
@@ -26,14 +29,17 @@ export const isWebSocketPayload = (model: Pick<BaseModel, 'type'>): model is Web
 export const isWebSocketPayloadId = (id: string | null) => (
   id?.startsWith(`${prefix}_`)
 );
+/**** ><> ↑ --------- Type check functions ->  */
 
 export const init = (): BaseWebSocketPayload => ({
   name: 'New Payload',
   value: '',
   mode: 'application/json',
 });
+/**** ><> ↑ --------- Initialize WebSocketPayload function ->  */
 
 export const migrate = (doc: WebSocketPayload) => doc;
+/**** ><> ↑ --------- Migrate WebSocketPayload function ->  */
 
 export const create = (patch: Partial<WebSocketPayload> = {}) => {
   if (!patch.parentId) {
@@ -42,13 +48,16 @@ export const create = (patch: Partial<WebSocketPayload> = {}) => {
 
   return database.docCreate<WebSocketPayload>(type, patch);
 };
+/**** ><> ↑ --------- Create WebSocketPayload function ->  */
 
 export const remove = (obj: WebSocketPayload) => database.remove(obj);
+/**** ><> ↑ --------- Remove WebSocketPayload function ->  */
 
 export const update = (
   obj: WebSocketPayload,
   patch: Partial<WebSocketPayload> = {}
 ) => database.docUpdate(obj, patch);
+/**** ><> ↑ --------- Update WebSocketPayload function ->  */
 
 export async function duplicate(request: WebSocketPayload, patch: Partial<WebSocketPayload> = {}) {
   // Only set name and "(Copy)" if the patch does
@@ -64,8 +73,12 @@ export async function duplicate(request: WebSocketPayload, patch: Partial<WebSoc
     ...patch,
   });
 }
+/**** ><> ↑ --------- Duplicate WebSocketPayload function ->  */
 
 export const getById = (_id: string) => database.getWhere<WebSocketPayload>(type, { _id });
+/**** ><> ↑ --------- Get WebSocketPayload by ID function ->  */
 export const getByParentId = (parentId: string) => database.getWhere<WebSocketPayload>(type, { parentId });
+/**** ><> ↑ --------- Get WebSocketPayload by Parent ID function ->  */
 
 export const all = () => database.all<WebSocketPayload>(type);
+/**** ><> ↑ --------- Get all WebSocketPayload function ->  */

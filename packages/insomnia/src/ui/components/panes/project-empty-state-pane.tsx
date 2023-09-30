@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '../themed-button';
+/**** ><> ↑ --------- Import Statements ->  */
 
 const Wrapper = styled.div({
   height: '100%',
@@ -13,6 +14,7 @@ const Wrapper = styled.div({
   textAlign: 'center',
   opacity: 'calc(var(--opacity-subtle) * 0.8)',
 });
+/**** ><> ↑ --------- Wrapper StyledComponent ->  */
 
 const Divider = styled.div({
   color: 'var(--color-font)',
@@ -39,10 +41,12 @@ const Divider = styled.div({
     marginLeft: '1rem',
   },
 });
+/**** ><> ↑ --------- Divider StyledComponent ->  */
 
 const Title = styled.div({
   fontWeight: 'bold',
 });
+/**** ><> ↑ --------- Title StyledComponent ->  */
 
 interface Props {
   createRequestCollection: () => void;
@@ -50,6 +54,7 @@ interface Props {
   importFrom: () => void;
   cloneFromGit: () => void;
 }
+/**** ><> ↑ --------- Props Interface ->  */
 
 export const EmptyStatePane: FC<Props> = ({ createRequestCollection, createDesignDocument, importFrom, cloneFromGit }) => {
   return (
@@ -101,3 +106,4 @@ export const EmptyStatePane: FC<Props> = ({ createRequestCollection, createDesig
     </Wrapper>
   );
 };
+/**** ><> ↑ --------- EmptyStatePane Component ->  */

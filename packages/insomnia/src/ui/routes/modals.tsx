@@ -1,5 +1,6 @@
 import React, { FC, Fragment } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
+/**** ><> ↑ --------- Imports of libraries and integrations ->  */
 
 import { useVCS } from '../components/dropdowns/workspace-sync-dropdown';
 import { ErrorBoundary } from '../components/error-boundary';
@@ -13,6 +14,7 @@ import { ErrorModal } from '../components/modals/error-modal';
 import { FilterHelpModal } from '../components/modals/filter-help-modal';
 import { GenerateCodeModal } from '../components/modals/generate-code-modal';
 import { GenerateConfigModal } from '../components/modals/generate-config-modal';
+/**** ><> ↑ --------- Local components imports ->  */
 
 import { NunjucksModal } from '../components/modals/nunjucks-modal';
 import { PromptModal } from '../components/modals/prompt-modal';
@@ -22,7 +24,9 @@ import { SelectModal } from '../components/modals/select-modal';
 import { SettingsModal } from '../components/modals/settings-modal';
 import { SyncMergeModal } from '../components/modals/sync-merge-modal';
 import { WrapperModal } from '../components/modals/wrapper-modal';
+/**** ><> ↑ --------- Further local components imports ->  */
 import { WorkspaceLoaderData } from './workspace';
+/**** ><> ↑ --------- Local data import ->  */
 
 const Modals: FC = () => {
   const workspaceData = useRouteLoaderData(':workspaceId') as WorkspaceLoaderData | undefined;
@@ -32,6 +36,7 @@ const Modals: FC = () => {
   });
 
   return (
+/**** ><> ↑ --------- Modals component definition and initialization ->  */
     <div key="modals" className="modals">
       <ErrorBoundary showAlert>
         <AlertModal ref={instance => registerModal(instance, 'AlertModal')} />
@@ -60,6 +65,7 @@ const Modals: FC = () => {
         <CodePromptModal
           ref={instance => registerModal(instance, 'CodePromptModal')}
         />
+/**** ><> ↑ --------- Different modal component instances registration ->  */
 
         {activeWorkspace ? (
           <>
@@ -69,6 +75,7 @@ const Modals: FC = () => {
             />
           </>
         ) : null}
+/**** ><> ↑ --------- Conditional rendering based on active workspace for NunjucksModal ->  */
 
         <GenerateCodeModal
           ref={instance => registerModal(instance, 'GenerateCodeModal')}
@@ -85,6 +92,7 @@ const Modals: FC = () => {
         <EnvironmentEditModal
           ref={instance => registerModal(instance, 'EnvironmentEditModal')}
         />
+/**** ><> ↑ --------- More modal component instances registration ->  */
 
         {activeWorkspace && vcs ? (
           <Fragment>
@@ -93,14 +101,18 @@ const Modals: FC = () => {
             />
           </Fragment>
         ) : null}
+/**** ><> ↑ --------- Conditional rendering based on active workspace and VCS for SyncMergeModal ->  */
 
         <AddKeyCombinationModal
           ref={instance => registerModal(instance, 'AddKeyCombinationModal')}
         />
+/**** ><> ↑ --------- Final modal instance registration ->  */
 
       </ErrorBoundary>
     </div>
   );
 };
+/**** ><> ↑ --------- End of Modals component ->  */
 
 export default Modals;
+/**** ><> ↑ --------- Export of Modals component ->  */

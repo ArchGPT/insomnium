@@ -8,6 +8,7 @@ import { Dropdown, DropdownButton, DropdownItem, ItemContent } from './base/drop
 import { showPrompt } from './modals';
 import { EmptyStatePane } from './panes/empty-state-pane';
 import { SvgIcon } from './svg-icon';
+/**** ><> ↑ --------- Module imports ->  */
 const Wrapper = styled.div({
   position: 'absolute',
   top: '50%',
@@ -34,10 +35,12 @@ const ExampleButton = styled.div({
     opacity: 'var(--opacity-subtle)',
   },
 });
+/**** ><> ↑ --------- Styled components ->  */
 
 interface Props {
   onImport: (contents: string) => void;
 }
+/**** ><> ↑ --------- Props interface ->  */
 
 const ImportSpecButton: FC<Props> = ({ onImport }) => {
   const handleImportFile = useCallback(async () => {
@@ -102,6 +105,7 @@ const ImportSpecButton: FC<Props> = ({ onImport }) => {
     </Dropdown>
   );
 };
+/**** ><> ↑ --------- ImportSpecButton component ->  */
 
 const SecondaryAction: FC<Props> = ({ onImport }) => {
   const PETSTORE_EXAMPLE_URI = 'https://gist.githubusercontent.com/gschier/4e2278d5a50b4bbf1110755d9b48a9f9/raw/801c05266ae102bcb9288ab92c60f52d45557425/petstore-spec.yaml';
@@ -124,6 +128,7 @@ const SecondaryAction: FC<Props> = ({ onImport }) => {
     </div>
   );
 };
+/**** ><> ↑ --------- SecondaryAction component ->  */
 
 export const DesignEmptyState: FC<Props> = ({ onImport }) => {
   return (
@@ -140,3 +145,4 @@ export const DesignEmptyState: FC<Props> = ({ onImport }) => {
     </Wrapper>
   );
 };
+/**** ><> ↑ --------- DesignEmptyState component ->  */

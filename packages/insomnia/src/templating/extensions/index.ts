@@ -7,6 +7,7 @@ import {
 import { AppContext } from '../../plugins/context/app';
 import { HelperContext } from '../base-extension';
 import type { NunjucksActionTag, NunjucksParsedTagArg } from '../utils';
+/**** ><> ↑ --------- Imports ->  */
 export type PluginArgumentValue = string | number | boolean;
 
 export type DisplayName = string | ((args: NunjucksParsedTagArg[]) => string);
@@ -65,6 +66,7 @@ export type PluginArgument =
   | PluginArgumentBoolean
   | PluginArgumentFile
   | PluginArgumentNumber;
+/**** ><> ↑ --------- Type Definitions ->  */
 
 export type PluginTemplateTagContext = HelperContext & {
   app: AppContext;
@@ -84,16 +86,19 @@ export type PluginTemplateTagContext = HelperContext & {
     };
   };
 };
+/**** ><> ↑ --------- Interface: PluginTemplateTagContext ->  */
 
 export interface PluginTemplateTagActionContext {
   store: PluginStore;
 }
+/**** ><> ↑ --------- Interface: PluginTemplateTagActionContext ->  */
 
 export interface PluginTemplateTagAction {
   name: string;
   icon?: string;
   run: (context: PluginTemplateTagActionContext) => Promise<void>;
 }
+/**** ><> ↑ --------- Interface: PluginTemplateTagAction ->  */
 
 export interface PluginTemplateTag {
   args: NunjucksParsedTagArg[];
@@ -107,3 +112,4 @@ export interface PluginTemplateTag {
   validate?: (value: any) => string | null;
   priority?: number;
 }
+/**** ><> ↑ --------- Interface: PluginTemplateTag ->  */

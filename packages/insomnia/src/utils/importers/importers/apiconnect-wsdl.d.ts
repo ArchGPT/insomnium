@@ -3,8 +3,10 @@ type UNKNOWN = any;
 interface UNKNOWN_OBJ {
   [key: string]: UNKNOWN;
 }
+/**** ><> ↑ --------- Declaration of UNKNOWN type and related interface ->  */
 
 type WSDL = UNKNOWN;
+/**** ><> ↑ --------- Declaration of WSDL type ->  */
 
 interface Service {
   service: string;
@@ -14,12 +16,14 @@ interface Service {
 interface ServiceData {
   services: Service[];
 }
+/**** ><> ↑ --------- Declaration of Service and ServiceData interfaces ->  */
 
 interface WSDLEntry {
   serviceJSON: UNKNOWN;
   fullName: string;
   filename: string;
 }
+/**** ><> ↑ --------- Declaration of WSDLEntry interface ->  */
 
 declare module 'apiconnect-wsdl' {
   export function getJsonForWSDL(
@@ -74,3 +78,4 @@ declare module 'apiconnect-wsdl' {
     createOptions?: UNKNOWN_OBJ
   ): Swagger;
 }
+/**** ><> ↑ --------- Declaration of 'apiconnect-wsdl' module and its related interfaces and functions ->  */

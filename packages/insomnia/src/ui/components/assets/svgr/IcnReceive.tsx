@@ -1,5 +1,7 @@
 import React, { SVGProps, memo } from 'react';
+/**** ><> ↑ --------- import dependencies ->  */
 export const SvgIcnReceive = memo<SVGProps<SVGSVGElement>>(props => (
+/**** ><> ↑ --------- create memoized SvgIcnReceive component ->  */
   <svg
     width="1em"
     height="1em"
@@ -9,10 +11,14 @@ export const SvgIcnReceive = memo<SVGProps<SVGSVGElement>>(props => (
     role="img"
     {...props}
   >
+/**** ><> ↑ --------- SvgIcnReceive component's SVG attributes ->  */
     <path
       d="M6.25 2v7.129l-1.72-1.72-1.06 1.06L7 12l3.53-3.53-1.06-1.061-1.72 1.72V2h-1.5Z"
       fill="#36CB84"
       opacity={0.8}
     />
+/**** ><> ↑ --------- SvgIcnReceive component's PATH attributes ->  */
   </svg>
+/**** ><> ↑ --------- SvgIcnReceive component's SVG closing tag ->  */
 ));
+/**** ><> ↑ --------- SvgIcnReceive component's closing parentheses ->  */

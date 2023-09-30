@@ -1,5 +1,6 @@
 import * as models from '../../models';
 import type { Plugin } from '../index';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface PluginStore {
   hasItem(arg0: string): Promise<boolean>;
@@ -14,6 +15,7 @@ export interface PluginStore {
     }[]
   >;
 }
+/**** ><> ↑ --------- Interface declaration for PluginStore ->  */
 
 export function init(plugin: Plugin):{store: PluginStore} {
   return {
@@ -55,3 +57,4 @@ export function init(plugin: Plugin):{store: PluginStore} {
     },
   };
 }
+/**** ><> ↑ --------- Initialization of plugin and store ->  */

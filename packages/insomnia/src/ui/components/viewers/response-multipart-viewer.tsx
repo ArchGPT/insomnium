@@ -17,6 +17,7 @@ import { showModal } from '../modals/index';
 import { WrapperModal } from '../modals/wrapper-modal';
 import { ResponseHeadersViewer } from './response-headers-viewer';
 import { ResponseViewer } from './response-viewer';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface Part {
   id: number;
@@ -40,6 +41,7 @@ interface Props {
   editorFontSize: number;
   url: string;
 }
+/**** ><> ↑ --------- Interface definitions ->  */
 
 export const ResponseMultipartViewer: FC<Props> = ({
   download,
@@ -128,6 +130,7 @@ export const ResponseMultipartViewer: FC<Props> = ({
       console.warn('Failed to save multipart to file', err);
     }
   }, [selectedPart]);
+/**** ><> ↑ --------- ResponseMultipartViewer Component Definition ->  */
 
   if (error) {
     return (
@@ -140,11 +143,13 @@ export const ResponseMultipartViewer: FC<Props> = ({
         Failed to parse multipart response: {error}
       </div>
     );
+/**** ><> ↑ --------- Error handling ->  */
   }
 
   if (parts.length === 0 || !selectedPart) {
     return null;
   }
+/**** ><> ↑ --------- Empty parts handling ->  */
   return (
     <div
       className="pad-sm tall wide"
@@ -215,6 +220,7 @@ export const ResponseMultipartViewer: FC<Props> = ({
           </DropdownItem>
         </Dropdown>
       </div>
+/**** ><> ↑ --------- Markup and logic for Response Part selection dropdown and Part Actions ->  */
       <div className="tall wide">
         <ResponseViewer
           bytes={selectedPart.bytes || 0}
@@ -232,11 +238,13 @@ export const ResponseMultipartViewer: FC<Props> = ({
           responseId={`${responseId}[${selectedPart?.id}]`}
           url={url}
         />
+/**** ><> ↑ --------- ResponseViewer Component ->  */
       </div>
 
     </div>
   );
 };
+/**** ><> ↑ --------- End of ResponseMultipartViewer Component Definition ->  */
 
 function multipartBufferToArray({ bodyBuffer, contentType }: { bodyBuffer: Buffer | null; contentType: string }): Promise<Part[]> {
   return new Promise((resolve, reject) => {
@@ -290,3 +298,4 @@ function multipartBufferToArray({ bodyBuffer, contentType }: { bodyBuffer: Buffe
     fakeReq.end();
   });
 }
+/**** ><> ↑ --------- Definition of multipartBufferToArray function ->  */

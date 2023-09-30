@@ -1,7 +1,9 @@
 export default {
   name: 'colorblind-dark',
+/**** ><> ↑ --------- Exporting default theme configuration ->  */
   displayName: 'Dark Colorblind',
   theme: {
+/**** ><> ↑ --------- Declaring main theme properties with their display names ->  */
     background: {
       default:    '#21262D', 	// primary background color
       success:    '#0080FF', 	// POST request, 200 OK, parameter names
@@ -11,6 +13,7 @@ export default {
       surprise:   '#FFC20A', 	// accent (Dashboard link, branch button, add plugin button)
       info:       '#58A6FF', 	// OPTIONS AND HEAD request
     },
+/**** ><> ↑ --------- Setting primary theme background colors ->  */
     foreground: {
       default:     '#fff',    // primary font color
       success:     '#000', 	// secondary font color for success background
@@ -20,9 +23,11 @@ export default {
       surprise:    '#000', 	// secondary font color for surprise background
       info:        '#000', 	// secondary font color for info background
     },
+/**** ><> ↑ --------- Setting primary theme foreground colors ->  */
     highlight: {
       default: '#D3D3D3',      // sidebar highlight color
     },
+/**** ><> ↑ --------- Setting default sidebar highlight color ->  */
     styles: {
       appHeader: {
         foreground: {
@@ -51,5 +56,7 @@ export default {
         },
       },
     },
+/**** ><> ↑ --------- Styling specific application components ->  */
   },
 };
+/**** ><> ↑ --------- Closing brackets for main theme and export statement ->  */

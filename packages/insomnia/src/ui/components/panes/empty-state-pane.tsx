@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Link } from '../base/link';
 import { SvgIcon } from '../svg-icon';
 
+/**** ><> ↑ --------- importing modules ->  */
 const Panel = styled.div({
   height: '100%',
   overflow: 'hidden',
@@ -41,6 +42,7 @@ const Divider = styled.div({
   width: 'calc(100% + var(--padding-xl))',
   opacity: 'calc(var(--opacity-subtle) * 0.2)',
 });
+/**** ><> ↑ --------- defining styled components (Panel, Wrapper, Icon, Title, Divider) ->  */
 
 const SecondaryAction = styled.div({
 });
@@ -55,6 +57,7 @@ const DocumentationLinks = styled.div({
   flexWrap: 'wrap',
 });
 
+/**** ><> ↑ --------- defining styled components (SecondaryAction, DocumentationLinks) ->  */
 const StyledLink = styled(Link)({
   '&&': {
     display: 'flex',
@@ -74,6 +77,7 @@ const LinkIcon = styled(SvgIcon)({
   },
 });
 
+/**** ><> ↑ --------- defining styled components (StyledLink, LinkIcon) ->  */
 export const EmptyStatePane: FC<{
   icon: ReactNode;
   title: string;
@@ -106,3 +110,4 @@ export const EmptyStatePane: FC<{
     </DocumentationLinks>
   </Wrapper>
 </Panel>);
+/**** ><> ↑ --------- defining the main functional component ->  */

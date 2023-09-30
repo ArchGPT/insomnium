@@ -3,6 +3,7 @@ import { describe, expect, it } from '@jest/globals';
 import { AUTH_AWS_IAM, CONTENT_TYPE_FORM_DATA } from '../../common/constants';
 import { parseHeaderStrings } from '../../main/network/parse-header-strings';
 
+/**** ><> ↑ --------- Importing dependencies ->  */
 describe('parseHeaderStrings', () => {
   it('should default with empty inputs', () => {
     const req = { authentication: {}, body: {}, headers: [] };
@@ -13,11 +14,13 @@ describe('parseHeaderStrings', () => {
     const req = { authentication: {}, body: {}, headers: [] };
     expect(parseHeaderStrings({ req, requestBody: 'test' })).toEqual(['Expect:', 'Transfer-Encoding:', 'Accept: */*', 'Accept-Encoding:', 'content-type:']);
   });
+/**** ><> ↑ --------- Test case: disable expect and transfer-encoding with body ->  */
 
   it('should add boundary with multipart body path', () => {
     const req = { authentication: {}, body: { mimeType: CONTENT_TYPE_FORM_DATA }, headers: [] };
     expect(parseHeaderStrings({ req, requestBodyPath: '/tmp/x.z' })).toEqual(['Expect:', 'Transfer-Encoding:', 'Content-Type: multipart/form-data; boundary=X-INSOMNIA-BOUNDARY', 'Accept: */*', 'Accept-Encoding:']);
   });
+/**** ><> ↑ --------- Test case: add boundary with multipart body path ->  */
 
   it('should sign with aws iam', () => {
     const req = { authentication: {
@@ -34,3 +37,5 @@ describe('parseHeaderStrings', () => {
     expect(authorization).toContain('Signature=');
   });
 });
+/**** ><> ↑ --------- Test suit - parseHeaderStrings ->  */
+/**** ><> ↑ --------- Test case: sign with aws iam ->  */

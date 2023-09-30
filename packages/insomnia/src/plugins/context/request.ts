@@ -1,6 +1,7 @@
 import * as misc from '../../common/misc';
 import type { RenderedRequest } from '../../common/render';
 import type { RequestBody } from '../../models/request';
+/**** ><> ↑ --------- 1 - Import Statements ->  */
 export function filterParameters<T extends { name: string; value: string }>(
   parameters: T[],
   name: string,
@@ -11,11 +12,13 @@ export function filterParameters<T extends { name: string; value: string }>(
 
   return parameters.filter(h => (!h || !h.name ? false : h.name === name));
 }
+/**** ><> ↑ --------- 2 - Filter Parameters Function ->  */
 export function init(
   renderedRequest: RenderedRequest | null,
   renderedContext: Record<string, any>,
   readOnly = false,
 ) {
+/**** ><> ↑ --------- 3 - Init Function Declaration ->  */
   if (!renderedRequest) {
     throw new Error('contexts.request initialized without request');
   }
@@ -225,6 +228,7 @@ export function init(
     // getCookie (name: string): string | null {}
     // removeCookie (name: string) {}
   };
+/**** ><> ↑ --------- 4 - Request Object Declaration ->  */
 
   /* eslint-disable @typescript-eslint/ban-ts-comment */
   if (readOnly) {
@@ -265,9 +269,11 @@ export function init(
     // @ts-ignore -- TSCONVERSION something is wrong here, the build doesn't error here but vscode does
     delete request.setBody;
   }
+/**** ><> ↑ --------- 5 - Read Only Checks ->  */
   /* eslint-enable @typescript-eslint/ban-ts-comment */
 
   return {
     request,
   };
 }
+/**** ><> ↑ --------- 6 - Return Statement ->  */

@@ -4,12 +4,14 @@ import { getAppDefaultTheme } from '../common/constants';
 import { ThemeSettings } from '../models/settings';
 import type { Theme } from './index';
 import { ColorScheme, getThemes } from './index';
+/**** ><> ↑ --------- Import Statements ->  */
 
 export type HexColor = `#${string}`;
 export type RGBColor = `rgb(${string})`;
 export type RGBAColor = `rgba(${string})`;
 
 export type ThemeColor = HexColor | RGBColor | RGBAColor;
+/**** ><> ↑ --------- Type Definitions ->  */
 
 // notice that for each sub-block (`background`, `foreground`, `highlight`) the `default` key is required if the sub-block is present
 export interface ThemeBlock {
@@ -41,6 +43,7 @@ export interface ThemeBlock {
     xl?: ThemeColor;
   };
 }
+/**** ><> ↑ --------- ThemeBlock Interface Definition ->  */
 
 export interface CompleteStyleBlock {
   background: Required<Required<ThemeBlock>['background']>;
@@ -68,6 +71,7 @@ export interface StylesThemeBlocks {
 
   transparentOverlay?: ThemeBlock;
 }
+/**** ><> ↑ --------- Different Interface Definitions ->  */
 
 export type ThemeInner = ThemeBlock & {
   rawCss?: string;
@@ -80,6 +84,7 @@ export interface PluginTheme {
   displayName: string;
   theme: ThemeInner;
 }
+/**** ><> ↑ --------- ThemeInner and PluginTheme Interface Definitions ->  */
 
 export const validateThemeName = (name: string) => {
   const validName = name.replace(/\s/gm, '-').toLowerCase();
@@ -143,6 +148,7 @@ export const validateTheme = (pluginTheme: PluginTheme) => {
   });
 
 };
+/**** ><> ↑ --------- Validation Functions ->  */
 
 export const generateThemeCSS = (pluginTheme: PluginTheme) => {
   const { theme, name } = pluginTheme;
@@ -202,6 +208,7 @@ export const generateThemeCSS = (pluginTheme: PluginTheme) => {
   return css;
 };
 
+/**** ><> ↑ --------- Theme CSS Manipulation Functions  ->  */
 function getThemeBlockCSS(block?: ThemeBlock) {
   if (!block) {
     return '';
@@ -313,6 +320,7 @@ export function getColorScheme({ autoDetectColorScheme }: ThemeSettings): ColorS
 
   return 'default';
 }
+/**** ><> ↑ --------- Color Scheme Functions ->  */
 
 export async function applyColorScheme(settings: ThemeSettings) {
   const scheme = getColorScheme(settings);
@@ -376,6 +384,7 @@ export async function setTheme(themeName: string) {
     s.innerHTML = themeCSS;
   }
 }
+/**** ><> ↑ --------- Theme Application Functions ->  */
 
 export const baseTheme: CompleteStyleBlock = {
   background: {
@@ -406,3 +415,4 @@ export const baseTheme: CompleteStyleBlock = {
     xl: 'rgba(130, 130, 130, 0.8)',
   },
 };
+/**** ><> ↑ --------- BaseTheme Definition ->  */

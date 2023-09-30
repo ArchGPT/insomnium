@@ -8,6 +8,7 @@ const PLUGIN = {
   directory: '/plugins/my-plugin',
   module: {},
 };
+/**** ><> ↑ --------- Import statements and global variable declaration ->  */
 
 describe('init()', () => {
   beforeEach(globalBeforeEach);
@@ -26,6 +27,7 @@ describe('init()', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- Unit test for 'init' function ->  */
 
 describe('store.*', () => {
   beforeEach(globalBeforeEach);
@@ -68,3 +70,4 @@ describe('store.*', () => {
     expect(await p.store.getItem('c')).toBeNull();
   });
 });
+/**** ><> ↑ --------- Unit test for 'store' methods ->  */

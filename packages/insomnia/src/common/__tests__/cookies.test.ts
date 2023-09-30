@@ -2,6 +2,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { Cookie, CookieJar, CookieSerialized } from 'tough-cookie';
 
 import { cookiesFromJar, jarFromCookies } from '../cookies';
+/**** ><> ↑ --------- Import statements ->  */
 
 describe('jarFromCookies()', () => {
   it('returns valid cookies', done => {
@@ -23,6 +24,7 @@ describe('jarFromCookies()', () => {
       done();
     });
   });
+/**** ><> ↑ --------- Test jarFromCookies() function - returns valid cookies ->  */
 
   it('handles malformed JSON', () => {
     jest.spyOn(console, 'log').mockImplementationOnce(() => {});
@@ -30,6 +32,7 @@ describe('jarFromCookies()', () => {
     const jar = jarFromCookies('not a jar');
     expect(jar.constructor.name).toBe('CookieJar');
   });
+/**** ><> ↑ --------- Test jarFromCookies() function - handles malformed JSON ->  */
 });
 
 describe('cookiesFromJar()', () => {
@@ -58,6 +61,7 @@ describe('cookiesFromJar()', () => {
     expect(cookies[0].creation).toMatch(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/);
     expect(cookies[0].expires).toEqual(d.toISOString());
   });
+/**** ><> ↑ --------- Test cookiesFromJar() function - returns valid jar ->  */
 
   it('handles bad jar', async () => {
     const jar = CookieJar.fromJSON({ cookies: [] });
@@ -70,3 +74,4 @@ describe('cookiesFromJar()', () => {
     expect(cookies.length).toBe(0);
   });
 });
+/**** ><> ↑ --------- Test cookiesFromJar() function - handles bad jar ->  */

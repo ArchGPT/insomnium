@@ -7,6 +7,7 @@ import { request, requestGroup, workspace } from '../../models';
 import { DEFAULT_PROJECT_ID } from '../../models/project';
 import * as importUtil from '../import';
 
+/**** ><> ↑ --------- Import dependencies from various sources ->  */
 describe('isApiSpecImport()', () => {
   it.each(['swagger2', 'openapi3'])(
     'should return true if spec id is %o',
@@ -20,6 +21,7 @@ describe('isApiSpecImport()', () => {
     expect(importUtil.isApiSpecImport({ id })).toBe(false);
   });
 });
+/**** ><> ↑ --------- Describe the isApiSpecImport() function and its tests ->  */
 
 describe('isInsomniaV4Import()', () => {
   it.each(['insomnia-4'])('should return true if spec id is %o', (id: string) => {
@@ -31,10 +33,12 @@ describe('isInsomniaV4Import()', () => {
     expect(importUtil.isInsomniaV4Import({ id })).toBe(false);
   });
 });
+/**** ><> ↑ --------- Describe the isInsomniaV4Import() function and its tests ->  */
 
 describe('importRaw()', () => {
   beforeEach(globalBeforeEach);
 
+/**** ><> ↑ --------- Describe the importRaw() function and its tests: setup ->  */
   it('should import a curl request to a new workspace', async () => {
     const fixturePath = path.join(__dirname, '..', '__fixtures__', 'curl', 'complex-input.sh');
     const content = fs.readFileSync(fixturePath, 'utf8').toString();
@@ -64,6 +68,7 @@ describe('importRaw()', () => {
       },
     });
   });
+/**** ><> ↑ --------- Test importing a curl request to a new workspace ->  */
 
   it('should import a curl request to an existing workspace', async () => {
     const fixturePath = path.join(__dirname, '..', '__fixtures__', 'curl', 'complex-input.sh');
@@ -93,6 +98,7 @@ describe('importRaw()', () => {
       },
     });
   });
+/**** ><> ↑ --------- Test importing a curl request to an existing workspace ->  */
 
   it('should import a postman collection to a new workspace', async () => {
     const fixturePath = path.join(__dirname, '..', '__fixtures__', 'postman', 'aws-signature-auth-v2_0-input.json');
@@ -123,6 +129,7 @@ describe('importRaw()', () => {
       url: 'https://insomnia.rest',
     });
   });
+/**** ><> ↑ --------- Test importing a postman collection to a new workspace ->  */
 
   it('should import a postman collection to an existing workspace', async () => {
     const fixturePath = path.join(__dirname, '..', '__fixtures__', 'postman', 'aws-signature-auth-v2_0-input.json');
@@ -152,6 +159,7 @@ describe('importRaw()', () => {
       url: 'https://insomnia.rest',
     });
   });
+/**** ><> ↑ --------- Test importing a postman collection to an existing workspace ->  */
 
   it('should import an openapi collection to an existing workspace with scope design', async () => {
     const fixturePath = path.join(__dirname, '..', '__fixtures__', 'openapi', 'endpoint-security-input.yaml');
@@ -179,3 +187,4 @@ describe('importRaw()', () => {
   });
 
 });
+/**** ><> ↑ --------- Test importing an openapi collection to an existing workspace with scope design ->  */

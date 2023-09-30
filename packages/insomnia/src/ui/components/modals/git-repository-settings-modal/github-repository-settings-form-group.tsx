@@ -13,11 +13,13 @@ import {
 } from '../../../../sync/git/github-oauth-provider';
 import { Button } from '../../themed-button';
 import { showAlert, showError } from '..';
+/**** ><> ↑ --------- Import declarations ->  */
 
 interface Props {
   uri?: string;
   onSubmit: (args: Partial<GitRepository>) => void;
 }
+/**** ><> ↑ --------- Props interface for GitHubRepositorySetupFormGroup component ->  */
 
 export const GitHubRepositorySetupFormGroup = (props: Props) => {
   const { onSubmit, uri } = props;
@@ -53,6 +55,7 @@ export const GitHubRepositorySetupFormGroup = (props: Props) => {
     />
   );
 };
+/**** ><> ↑ --------- GitHubRepositorySetupFormGroup component definition with its internal state and behavior ->  */
 
 interface FetchGraphQLInput {
   query: string;
@@ -79,6 +82,7 @@ async function fetchGraphQL<QueryResult>(input: FetchGraphQLInput) {
 
   return response.data;
 }
+/**** ><> ↑ --------- Declaration of FetchGraphQLInput interface and fetchGraphQL function ->  */
 
 const GitHubUserInfoQuery = `
   query getUserInfo {
@@ -99,6 +103,7 @@ interface GitHubUserInfoQueryResult {
     url: string;
   };
 }
+/**** ><> ↑ --------- GitHub user information GraphQL query string and its corresponding result interface ->  */
 
 const AccountViewContainer = styled.div({
   display: 'flex',
@@ -121,6 +126,7 @@ const AvatarImg = styled.img({
   width: 16,
   height: 16,
 });
+/**** ><> ↑ --------- Styled components for displaying GitHub user account ->  */
 
 const Avatar = ({ src }: { src: string }) => {
   const [imageSrc, setImageSrc] = useState('');
@@ -153,6 +159,7 @@ const Avatar = ({ src }: { src: string }) => {
     <i className="fas fa-user-circle" />
   );
 };
+/**** ><> ↑ --------- Avatar component for displaying GitHub user profile image ->  */
 
 const Details = styled.div({
   display: 'flex',
@@ -170,6 +177,7 @@ const AuthorizationFormContainer = styled.div({
   padding: 'var(--padding-sm)',
   boxSizing: 'border-box',
 });
+/**** ><> ↑ --------- More styled components related to GitHub user account and authorization ->  */
 
 interface GitHubRepositoryFormProps {
   uri?: string;
@@ -316,6 +324,7 @@ const GitHubRepositoryForm = ({
     </form>
   );
 };
+/**** ><> ↑ --------- GitHubRepositoryFormProps interface and GitHubRepositoryForm component definition ->  */
 
 interface GitHubSignInFormProps {
   token?: string;
@@ -405,3 +414,4 @@ const GitHubSignInForm = ({ token }: GitHubSignInFormProps) => {
     </AuthorizationFormContainer>
   );
 };
+/**** ><> ↑ --------- GitHubSignInFormProps interface and GitHubSignInForm component definition ->  */

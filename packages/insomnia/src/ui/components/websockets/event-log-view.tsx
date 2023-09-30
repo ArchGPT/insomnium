@@ -3,21 +3,25 @@ import { format } from 'date-fns';
 import React, { FC, useRef } from 'react';
 import { useMeasure } from 'react-use';
 import styled from 'styled-components';
+/**** ><> ↑ --------- External modules import */
 
 import { CurlEvent } from '../../../main/network/curl';
 import { WebSocketEvent } from '../../../main/network/websocket';
 import { SvgIcon, SvgIconProps } from '../svg-icon';
+/**** ><> ↑ --------- Internal modules import */
 
 const Timestamp: FC<{ time: Date | number }> = ({ time }) => {
   const date = format(time, 'HH:mm:ss');
   return <>{date}</>;
 };
+/**** ><> ↑ --------- Definition of Timestamp component */
 
 interface Props {
   events: (WebSocketEvent | CurlEvent)[];
   selectionId?: string;
   onSelect: (event: WebSocketEvent | CurlEvent) => void;
 }
+/**** ><> ↑ --------- Props interface definition */
 
 const Divider = styled('div')({
   height: '100%',
@@ -43,6 +47,7 @@ const HeadingRow = styled('div')({
   paddingRight: 'var(--scrollbar-width)',
   boxSizing: 'border-box',
 });
+/**** ><> ↑ --------- Definition of styled components: Divider, AutoSize, Scrollable, HeadingRow */
 
 const Row = styled('div')<{ isActive: boolean }>(({ isActive }) => ({
   position: 'absolute',
@@ -56,6 +61,7 @@ const Row = styled('div')<{ isActive: boolean }>(({ isActive }) => ({
   boxSizing: 'border-box',
   backgroundColor: isActive ? 'var(--hl-lg)' : 'transparent',
 }));
+/**** ><> ↑ --------- Definition of the styled component: Row */
 
 const List = styled('div')({
   width: '100%',
@@ -70,6 +76,7 @@ const EventLog = styled('div')({
   overflow: 'hidden',
   borderTop: '1px solid var(--hl-md)',
 });
+/**** ><> ↑ --------- Definition of styled components: List, EventLog */
 
 const EventIconCell = styled('div')({
   flex: '0 0 15px',
@@ -79,6 +86,7 @@ const EventIconCell = styled('div')({
   boxSizing: 'border-box',
   padding: 'var(--padding-xs)',
 });
+/**** ><> ↑ --------- Definition of the styled component: EventIconCell */
 
 function getIcon(event: WebSocketEvent | CurlEvent): SvgIconProps['icon'] {
   switch (event.type) {
@@ -103,6 +111,7 @@ function getIcon(event: WebSocketEvent | CurlEvent): SvgIconProps['icon'] {
     }
   }
 }
+/**** ><> ↑ --------- Function to get Icons based on event type */
 
 const EventMessageCell = styled('div')({
   flex: '1 0',
@@ -111,6 +120,7 @@ const EventMessageCell = styled('div')({
   textOverflow: 'ellipsis',
   padding: 'var(--padding-xs)',
 });
+/**** ><> ↑ --------- Definition of the styled component: EventMessageCell */
 
 const getMessage = (event: WebSocketEvent | CurlEvent): string => {
   switch (event.type) {
@@ -134,11 +144,13 @@ const getMessage = (event: WebSocketEvent | CurlEvent): string => {
     }
   }
 };
+/**** ><> ↑ --------- Function to get messages based on event type */
 
 const EventTimestampCell = styled('div')({
   flex: '0 0 80px',
   padding: 'var(--padding-xs)',
 });
+/**** ><> ↑ --------- Definition of the styled component: EventTimestampCell */
 
 export const EventLogView: FC<Props> = ({ events, onSelect, selectionId }) => {
   const parentRef = useRef<HTMLDivElement>(null);
@@ -202,3 +214,4 @@ export const EventLogView: FC<Props> = ({ events, onSelect, selectionId }) => {
     </EventLog>
   );
 };
+/**** ><> ↑ --------- Definition of the EventLogView component */

@@ -7,6 +7,7 @@ const sidebarBackground = {
   surprise: '#a626a4',
   info: '#0184bc',
 };
+/**** ><> ↑ --------- Declaration of sidebarBackground object with color codes ->  */
 
 export default {
   name: 'one-light',
@@ -21,9 +22,11 @@ export default {
       surprise: '#a626a4',
       info: '#0184bc',
     },
+/**** ><> ↑ --------- Background color codes of the theme ->  */
     foreground: {
       default: '#777',
     },
+/**** ><> ↑ --------- Foreground color code of the theme ->  */
     highlight: {
       default: 'rgba(114, 121, 133, 1)',
       xxs: 'rgba(114, 121, 133, 0.05)',
@@ -33,6 +36,7 @@ export default {
       lg: 'rgba(114, 121, 133, 0.5)',
       xl: 'rgba(114, 121, 133, 0.8)',
     },
+/**** ><> ↑ --------- Highlight color codes of the theme ->  */
     styles: {
       appHeader: {
         background: {
@@ -46,14 +50,19 @@ export default {
         },
         highlight: {},
       },
+/**** ><> ↑ --------- sidebar style attributes ->  */
       paneHeader: {
         background: sidebarBackground,
       },
+/**** ><> ↑ --------- paneHeader style attributes ->  */
       transparentOverlay: {
         background: {
           default: 'rgba(30, 33, 40, 0.8)',
+/**** ><> ↑ --------- Definition of default exported object ->  */
         },
+/**** ><> ↑ --------- Styles of the theme ->  */
       },
     },
   },
 };
+/**** ><> ↑ --------- transparentOverlay style attributes ->  */

@@ -1,4 +1,5 @@
 const insomniaDocs = (slug: string) => `https://docs.insomnia.rest${slug}`;
+/**** ><> ↑ --------- Insomnia documentation helper function ->  */
 
 export const docsBase = insomniaDocs('/');
 export const docsGitSync = insomniaDocs('/insomnia/git-sync');
@@ -11,6 +12,7 @@ export const docsIntroductionInsomnia = insomniaDocs('/insomnia/get-started');
 export const docsWorkingWithDesignDocs = insomniaDocs('/insomnia/design-documents');
 export const docsUnitTesting = insomniaDocs('/insomnia/unit-testing');
 export const docsIntroductionToInsoCLI = insomniaDocs('/inso-cli/introduction');
+/**** ><> ↑ --------- Exported constants for various pages of Insomnia documentation ->  */
 
 export const docsGitAccessToken = {
   github: 'https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token',
@@ -19,6 +21,7 @@ export const docsGitAccessToken = {
   bitbucketServer: 'https://confluence.atlassian.com/bitbucketserver/personal-access-tokens-939515499.html',
   azureDevOps: 'https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate',
 };
+/**** ><> ↑ --------- Exported constants for Git access token documentation for various platforms ->  */
 
 export const documentationLinks = {
   introductionToInsomnia: {
@@ -38,3 +41,4 @@ export const documentationLinks = {
     url: docsIntroductionToInsoCLI,
   },
 } as const;
+/**** ><> ↑ --------- Exported object with mapping of terms to associated documentation ->  */

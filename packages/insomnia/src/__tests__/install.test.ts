@@ -1,6 +1,7 @@
 import { describe, expect, it, jest } from '@jest/globals';
 
 import { containsOnlyDeprecationWarnings, isDeprecatedDependencies } from '../main/install-plugin';
+/**** ><> ↑ --------- import statements ->  */
 
 describe('install.js', () => {
   describe('containsOnlyDeprecationWarning', () => {
@@ -19,6 +20,7 @@ describe('install.js', () => {
       expect(containsOnlyDeprecationWarnings(stderr)).toBe(true);
       expect(consoleWarnSpy).toHaveBeenCalledTimes(3);
     });
+/**** ><> ↑ --------- Test for function 'containsOnlyDeprecationWarning' - 'should return true when all lines in stderr are deprecation warnings' ->  */
 
     it('should return false when stderr contains a deprecation warning and an error', () => {
       const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
@@ -35,6 +37,7 @@ describe('install.js', () => {
       expect(containsOnlyDeprecationWarnings(stderr)).toBe(false);
       expect(consoleWarnSpy).toHaveBeenCalledTimes(2);
     });
+/**** ><> ↑ --------- Test for function 'containsOnlyDeprecationWarning' - 'should return false when stderr contains a deprecation warning and an error' ->  */
   });
 
   describe('isDeprecatedDependencies', () => {
@@ -43,6 +46,7 @@ describe('install.js', () => {
       expect(isDeprecatedDependencies(null)).toBe(false);
       expect(isDeprecatedDependencies(undefined)).toBe(false);
     });
+/**** ><> ↑ --------- Test for function 'isDeprecatedDependencies' - 'should not match when the message is falsy' ->  */
 
     it('should match with multiple nested dependencies', () => {
       const msg =
@@ -51,6 +55,7 @@ describe('install.js', () => {
         'Please, upgrade your dependencies to the actual version of xyz.';
       expect(isDeprecatedDependencies(msg)).toBe(true);
     });
+/**** ><> ↑ --------- Test for function 'isDeprecatedDependencies' - 'should match with multiple nested dependencies' ->  */
 
     it('should match with one nested dependency', () => {
       const msg =
@@ -59,6 +64,7 @@ describe('install.js', () => {
         'Please, upgrade your dependencies to the actual version of xyz.';
       expect(isDeprecatedDependencies(msg)).toBe(true);
     });
+/**** ><> ↑ --------- Test for function 'isDeprecatedDependencies' - 'should match with one nested dependency' ->  */
 
     it('should not match with an unrelated warning', () => {
       const msg =
@@ -66,6 +72,7 @@ describe('install.js', () => {
         'Yarn supports the following server range: "^4.8.0 || ^5.7.0 || ^6.2.2 || >=8.0.0"';
       expect(isDeprecatedDependencies(msg)).toBe(false);
     });
+/**** ><> ↑ --------- Test for function 'isDeprecatedDependencies' - 'should not match with an unrelated warning' ->  */
 
     it('should not match with an unrelated error', () => {
       const msg =
@@ -76,3 +83,4 @@ describe('install.js', () => {
     });
   });
 });
+/**** ><> ↑ --------- Test for function 'isDeprecatedDependencies' - 'should not match with an unrelated error' ->  */

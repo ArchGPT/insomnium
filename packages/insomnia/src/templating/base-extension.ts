@@ -6,17 +6,20 @@ import * as templating from './index';
 import { decodeEncoding } from './utils';
 
 const EMPTY_ARG = '__EMPTY_NUNJUCKS_ARG__';
+/**** ><> ↑ --------- Imports and constants ->  */
 export interface HelperContext {
   context: any;
   meta: any;
   renderPurpose: any;
   util: any;
 }
+/**** ><> ↑ --------- HelperContext interface ->  */
 export default class BaseExtension {
   _ext: PluginTemplateTag | null = null;
   _plugin: Plugin | null = null;
   tags: PluginTemplateTag['name'][] = [];
 
+/**** ><> ↑ --------- BaseExtension class definition and property initialization ->  */
   constructor(ext: PluginTemplateTag, plugin: Plugin) {
     this._ext = ext;
     this._plugin = plugin;
@@ -25,6 +28,7 @@ export default class BaseExtension {
       ...(tag === null ? [] : [tag]),
     ];
   }
+/**** ><> ↑ --------- BaseExtension class constructor ->  */
 
   getTag() {
     return this._ext?.name || null;
@@ -68,10 +72,12 @@ export default class BaseExtension {
     return this._ext?.deprecated || false;
   }
 
+/**** ><> ↑ --------- BaseExtension class getter methods ->  */
   run(...args: any[]) {
     // @ts-expect-error -- TSCONVERSION
     return this._ext?.run(...args);
   }
+/**** ><> ↑ --------- BaseExtension class run method ->  */
 
   parse(parser: any, nodes: any, lexer: any) {
     const tok = parser.nextToken();
@@ -88,6 +94,7 @@ export default class BaseExtension {
     parser.advanceAfterBlockEnd(tok.value);
     return new nodes.CallExtensionAsync(this, 'asyncRun', args);
   }
+/**** ><> ↑ --------- BaseExtension class parse method ->  */
 
   asyncRun({ ctx: renderContext }: any, ...runArgs: any[]) {
     // Pull the callback off the end
@@ -103,6 +110,7 @@ export default class BaseExtension {
       .map(decodeEncoding);
     // Define a helper context with utils
     const helperContext: HelperContext = {
+/**** ><> ↑ --------- BaseExtension class asyncRun method part I: variables initialization ->  */
       ...pluginContexts.app.init(renderPurpose),
       // @ts-expect-error -- TSCONVERSION
       ...pluginContexts.store.init(this._plugin),
@@ -144,6 +152,7 @@ export default class BaseExtension {
         },
       },
     };
+/**** ><> ↑ --------- BaseExtension class asyncRun method part II: helperContext initialization ->  */
     let result;
 
     try {
@@ -171,3 +180,4 @@ export default class BaseExtension {
     callback(null, result);
   }
 }
+/**** ><> ↑ --------- BaseExtension class asyncRun method part III: error handling and result return ->  */

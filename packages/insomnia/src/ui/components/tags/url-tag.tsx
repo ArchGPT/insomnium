@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React, { FC, memo } from 'react';
 
 import { Tooltip } from '../tooltip';
+/**** ><> ↑ --------- Module imports ->  */
 
 interface Props {
   url: string;
@@ -11,6 +12,7 @@ interface Props {
   method?: string;
   tooltipDelay?: number;
 }
+/**** ><> ↑ --------- Props interface declaration ->  */
 
 export const URLTag: FC<Props> = memo(({
   url,
@@ -26,6 +28,7 @@ export const URLTag: FC<Props> = memo(({
   if (url.length > max) {
     shortUrl = url.slice(0, max - 3) + '…';
   }
+/**** ><> ↑ --------- URLTag component definition ->  */
 
   return (
     <div
@@ -42,6 +45,8 @@ export const URLTag: FC<Props> = memo(({
       </Tooltip>
     </div>
   );
+/**** ><> ↑ --------- URLTag component return block ->  */
 });
 
 URLTag.displayName = 'URLTag';
+/**** ><> ↑ --------- URLTag displayName declaration ->  */

@@ -11,6 +11,7 @@ import {
   useTooltipTrigger,
 } from 'react-aria';
 import { useTooltipTriggerState } from 'react-stately';
+/**** ><> ↑ --------- Import required dependencies ->  */
 
 interface Props {
   children: ReactNode;
@@ -23,6 +24,7 @@ interface Props {
   style?: CSSProperties;
   onClick?: () => void;
 }
+/**** ><> ↑ --------- Props interface definition ->  */
 
 export const Tooltip = (props: Props) => {
   const { children, message, className, wide, selectable, delay = 400, position, style } = props;
@@ -33,6 +35,7 @@ export const Tooltip = (props: Props) => {
   const trigger = useTooltipTrigger(props, state, triggerRef);
   const tooltip = useTooltip(trigger.tooltipProps, state);
 
+/**** ><> ↑ --------- Tooltip component definition ->  */
   const { overlayProps: positionProps } = useOverlayPosition({
     targetRef: triggerRef,
     overlayRef,
@@ -40,6 +43,7 @@ export const Tooltip = (props: Props) => {
     offset: 5,
     isOpen: state.isOpen,
   });
+/**** ><> ↑ --------- Set position for the tooltip ->  */
 
   const tooltipClasses = classnames(className, 'tooltip');
   const bubbleClasses = classnames('tooltip__bubble theme--tooltip', {
@@ -47,6 +51,7 @@ export const Tooltip = (props: Props) => {
     'tooltip__bubble--wide': wide,
     selectable,
   });
+/**** ><> ↑ --------- Assign class names to tooltip and its bubble ->  */
 
   return (
     <div
@@ -72,3 +77,4 @@ export const Tooltip = (props: Props) => {
     </div>
   );
 };
+/**** ><> ↑ --------- Return Tooltip component with defined properties ->  */

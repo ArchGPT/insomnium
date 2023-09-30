@@ -17,12 +17,14 @@ import { showAlert } from '..';
 import { CustomRepositorySettingsFormGroup } from './custom-repository-settings-form-group';
 import { GitHubRepositorySetupFormGroup } from './github-repository-settings-form-group';
 import { GitLabRepositorySetupFormGroup } from './gitlab-repository-settings-form-group';
+/**** ><> ↑ --------- Importing modules and dependencies ->  */
 
 const TabPill = styled.div({
   display: 'flex',
   gap: 'var(--padding-xs)',
   alignItems: 'center',
 });
+/**** ><> ↑ --------- Styling with CSS in JS ->  */
 
 export const GitRepositorySettingsModal = (props: ModalProps & {
   gitRepository?: GitRepository;
@@ -35,9 +37,11 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
 
   const [selectedTab, setTab] = useState<OauthProviderName>('github');
 
+/**** ><> ↑ --------- GitRepositorySettingsModal component setup and initial state ->  */
   useEffect(() => {
     modalRef.current?.show();
   }, []);
+/**** ><> ↑ --------- useEffect hook for modal display ->  */
 
   const onSubmit = (gitRepositoryPatch: Partial<GitRepository>) => {
     const {
@@ -64,6 +68,7 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
       }
     );
   };
+/**** ><> ↑ --------- Submit handler function 'onSubmit' ->  */
 
   const isLoading = updateGitRepositoryFetcher.state !== 'idle';
   const hasGitRepository = Boolean(gitRepository);
@@ -78,6 +83,7 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
         message: errorMessage,
       });
     }
+/**** ><> ↑ --------- Loading and Error Handling computations ->  */
   }, [errors]);
 
   return (
@@ -171,3 +177,4 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Component return statement and JSX ->  */

@@ -32,6 +32,7 @@ import { RequestRenderErrorModal } from '../modals/request-render-error-modal';
 import { SvgIcon } from '../svg-icon';
 import { Button } from '../themed-button';
 import { Tooltip } from '../tooltip';
+/**** ><> ↑ --------- Import statements ->  */
 import { EmptyStatePane } from './empty-state-pane';
 import { Pane, PaneBody, PaneHeader } from './pane';
 interface Props {
@@ -39,6 +40,7 @@ interface Props {
   setGrpcState: (states: GrpcRequestState) => void;
   reloadRequests: (requestIds: string[]) => void;
 }
+/**** ><> ↑ --------- Props Interface declaration ->  */
 
 const StyledUrlBar = styled.div`
   width: 100%;
@@ -60,6 +62,7 @@ const StyledDropdownWrapper = styled.div({
   paddingRight: 'var(--padding-sm)',
   gap: 'var(--padding-xs)',
 });
+/**** ><> ↑ --------- Styled components ->  */
 
 export const canClientStream = (methodType?: GrpcMethodType) => methodType === 'client' || methodType === 'bidi';
 export const GrpcMethodTypeName = {
@@ -68,6 +71,7 @@ export const GrpcMethodTypeName = {
   client: 'Client Streaming',
   bidi: 'Bi-directional Streaming',
 } as const;
+/**** ><> ↑ --------- Helper Functions declarations ->  */
 
 export const GrpcRequestPane: FunctionComponent<Props> = ({
   grpcState,
@@ -340,6 +344,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
       />}
     </>
   );
+/**** ><> ↑ --------- Main functional component - GrpcRequestPane ->  */
 };
 const ActionButtonsContainer = styled.div({
   display: 'flex',
@@ -350,3 +355,4 @@ const ActionButtonsContainer = styled.div({
   borderBottom: '1px solid var(--hl-lg)',
   padding: 3,
 });
+/**** ><> ↑ --------- Other styled component and final export ->  */

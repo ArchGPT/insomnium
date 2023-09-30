@@ -13,6 +13,7 @@ import {
   keyedDebounce,
   toKebabCase,
 } from '../misc';
+/**** ><> ↑ --------- Importing necessary modules and functions ->  */
 
 describe('hasAuthHeader()', () => {
   beforeEach(globalBeforeEach);
@@ -45,6 +46,7 @@ describe('hasAuthHeader()', () => {
     expect(yes).toEqual(true);
   });
 });
+/**** ><> ↑ --------- Describe block for hasAuthHeader ->  */
 
 describe('generateId()', () => {
   beforeEach(globalBeforeEach);
@@ -59,6 +61,7 @@ describe('generateId()', () => {
     expect(id).toMatch(/^[a-z0-9]{32}$/);
   });
 });
+/**** ><> ↑ --------- Describe block for generateId ->  */
 
 describe('filterHeaders()', () => {
   beforeEach(globalBeforeEach);
@@ -131,6 +134,7 @@ describe('filterHeaders()', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- Describe block for filterHeaders ->  */
 
 describe('keyedDebounce()', () => {
   beforeEach(async () => {
@@ -163,6 +167,7 @@ describe('keyedDebounce()', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- Describe block for keyedDebounce ->  */
 
 describe('debounce()', () => {
   beforeEach(globalBeforeEach);
@@ -183,6 +188,7 @@ describe('debounce()', () => {
     expect(resultList).toEqual([['foo', 'bar3']]);
   });
 });
+/**** ><> ↑ --------- Describe block for debounce ->  */
 
 describe('fuzzyMatch()', () => {
   beforeEach(globalBeforeEach);
@@ -205,6 +211,7 @@ describe('fuzzyMatch()', () => {
     expect(fuzzyMatch('foo', 'bar')).toBeNull();
   });
 });
+/**** ><> ↑ --------- Describe block for fuzzyMatch ->  */
 
 describe('fuzzyMatchAll()', () => {
   beforeEach(globalBeforeEach);
@@ -250,6 +257,7 @@ describe('fuzzyMatchAll()', () => {
     expect(fuzzyMatchAll('wrong this ou', ['testing', 'this', 'out'])).toEqual(null);
   });
 });
+/**** ><> ↑ --------- Describe block for fuzzyMatchAll ->  */
 describe('chunkArray()', () => {
   it('works with exact divisor', () => {
     const chunks = chunkArray([1, 2, 3, 4, 5, 6], 3);
@@ -277,6 +285,7 @@ describe('chunkArray()', () => {
     expect(chunks).toEqual([[1, 2]]);
   });
 });
+/**** ><> ↑ --------- Describe block for chunkArray ->  */
 
 describe('isNotNullOrUndefined', () => {
   it('should return correctly', () => {
@@ -287,6 +296,7 @@ describe('isNotNullOrUndefined', () => {
     expect(isNotNullOrUndefined(undefined)).toBe(false);
   });
 });
+/**** ><> ↑ --------- Describe block for isNotNullOrUndefined ->  */
 
 describe('toKebabCase', () => {
   it('leaves strings without spaces alone', () => {
@@ -302,3 +312,4 @@ describe('toKebabCase', () => {
     expect(toKebabCase('a A b B c')).toEqual('a-A-b-B-c');
   });
 });
+/**** ><> ↑ --------- Describe block for toKebabCase ->  */

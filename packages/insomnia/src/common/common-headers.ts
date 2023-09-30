@@ -4,6 +4,7 @@ import allMimeTypes from '../datasets/content-types';
 import allEncodings from '../datasets/encodings';
 import allHeaderNames from '../datasets/header-names';
 import { RequestHeader } from '../models/request';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const getCommonHeaderValues = (pair: RequestHeader): any[] => {
   switch (pair.name.toLowerCase()) {
@@ -21,7 +22,9 @@ export const getCommonHeaderValues = (pair: RequestHeader): any[] => {
       return [];
   }
 };
+/**** ><> ↑ --------- Function to get common header values ->  */
 
 export const getCommonHeaderNames = (): any[] => {
   return allHeaderNames;
 };
+/**** ><> ↑ --------- Function to get common header names ->  */

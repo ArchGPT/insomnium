@@ -18,8 +18,10 @@ import { ResponseErrorViewer } from './response-error-viewer';
 import { ResponseMultipartViewer } from './response-multipart-viewer';
 import { ResponsePDFViewer } from './response-pdf-viewer';
 import { ResponseWebView } from './response-web-view';
+/**** ><> ↑ --------- Importing necessary libraries and components ->  */
 
 let alwaysShowLargeResponses = false;
+/**** ><> ↑ --------- Global variable declaration ->  */
 
 export interface ResponseViewerHandle {
   refresh: () => void;
@@ -36,6 +38,7 @@ export function xmlDecode(input: string) {
     ESCAPED_CHARACTERS_MAP[item])
   );
 }
+/**** ><> ↑ --------- Exporting interfaces and function xmlDecode ->  */
 export interface ResponseViewerProps {
   bytes: number;
   contentType: string;
@@ -52,6 +55,7 @@ export interface ResponseViewerProps {
   updateFilter?: (filter: string) => void;
   error?: string | null;
 }
+/**** ><> ↑ --------- Exporting interface ResponseViewerProps ->  */
 
 export const ResponseViewer = ({
   bytes,
@@ -365,5 +369,7 @@ export const ResponseViewer = ({
     />
   );
 };
+/**** ><> ↑ --------- Exporting main ResponseViewer function, including allowing for error handling and different file types ->  */
 
 ResponseViewer.displayName = 'ResponseViewer';
+/**** ><> ↑ --------- Setting display name for ResponseViewer ->  */

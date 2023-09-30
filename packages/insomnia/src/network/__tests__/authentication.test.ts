@@ -6,6 +6,7 @@ import {
   getAuthHeader,
   getAuthQueryParams,
 } from '../authentication';
+/**** ><> ↑ --------- Importing required modules and functions ->  */
 
 describe('OAuth 1.0', () => {
   it('Does OAuth 1.0', async () => {
@@ -41,6 +42,7 @@ describe('OAuth 1.0', () => {
     });
   });
 
+/**** ><> ↑ --------- Running tests for OAuth 1.0 ->  */
   it('Does OAuth 1.0 with RSA-SHA1', async () => {
     const authentication = {
       type: AUTH_OAUTH_1,
@@ -89,6 +91,7 @@ describe('OAuth 1.0', () => {
       ].join(', '),
     });
   });
+/**** ><> ↑ --------- Running tests for OAuth 1.0 with RSA-SHA1 ->  */
 
   it('Does OAuth 1.0 with defaults', async () => {
     const authentication = {
@@ -117,6 +120,7 @@ describe('OAuth 1.0', () => {
       ),
     );
   });
+/**** ><> ↑ --------- Running tests for OAuth 1.0 with default configurations ->  */
 });
 
 describe('_buildBearerHeader()', () => {
@@ -147,6 +151,7 @@ describe('_buildBearerHeader()', () => {
     });
   });
 });
+/**** ><> ↑ --------- Running tests for _buildBearerHeader function ->  */
 
 describe('API Key', () => {
   describe('getAuthHeader', () => {
@@ -206,3 +211,4 @@ describe('API Key', () => {
     });
   });
 });
+/**** ><> ↑ --------- Running tests for API Key Authentication ->  */

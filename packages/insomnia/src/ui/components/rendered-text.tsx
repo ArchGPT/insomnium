@@ -3,6 +3,7 @@ import React, { FC, PureComponent } from 'react';
 import { HandleRender } from '../../common/render';
 import { useNunjucks } from '../context/nunjucks/use-nunjucks';
 
+/**** ><> ↑ --------- Import Statements */
 interface Props {
   children: string;
   render: HandleRender;
@@ -11,6 +12,7 @@ interface State {
   renderedText: string;
   error: string;
 }
+/**** ><> ↑ --------- Interfaces */
 
 class RenderedTextInternal extends PureComponent<Props, State> {
   state: State = {
@@ -64,9 +66,11 @@ class RenderedTextInternal extends PureComponent<Props, State> {
     }
   }
 }
+/**** ><> ↑ --------- Class Component */
 
 export const RenderedText: FC<Omit<Props, 'render'>> = props => {
   const { handleRender } = useNunjucks();
 
   return <RenderedTextInternal {...props} render={handleRender}/>;
 };
+/**** ><> ↑ --------- Functional Component */

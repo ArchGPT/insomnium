@@ -2,20 +2,24 @@ export default {
   name: 'purple',
   displayName: 'Purple',
   theme: {
+/**** ><> ↑ --------- Default export and theme name ->  */
     foreground: {
       default: '#555',
     },
+/**** ><> ↑ --------- Foreground color settings ->  */
     styles: {
       appHeader: {
         background: {
           default: '#fff',
         },
       },
+/**** ><> ↑ --------- App header styles ->  */
       link: {
         foreground: {
           default: '#68a9a2',
         },
       },
+/**** ><> ↑ --------- Link styles ->  */
       sidebar: {
         background: {
           default: '#695eb8',
@@ -26,6 +30,7 @@ export default {
           surprise: '#c5bbff',
           info: '#75ddff',
         },
+/**** ><> ↑ --------- Sidebar background settings ->  */
         foreground: {
           default: '#fff',
         },
@@ -39,11 +44,13 @@ export default {
           xl: 'rgba(207, 190, 255, 0.8)',
         },
       },
+/**** ><> ↑ --------- Sidebar foreground and highlight settings ->  */
       sidebarHeader: {
         foreground: {
           default: '#eee',
         },
       },
+/**** ><> ↑ --------- Sidebar header styles ->  */
       transparentOverlay: {
         background: {
           default: 'rgba(243, 242, 250, 0.8)',
@@ -52,6 +59,8 @@ export default {
           default: '#555',
         },
       },
+/**** ><> ↑ --------- Transparent overlay settings ->  */
     },
   },
 };
+/**** ><> ↑ --------- Closing styles and theme objects ->  */

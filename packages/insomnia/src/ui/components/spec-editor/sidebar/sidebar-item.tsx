@@ -1,11 +1,13 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Module Import Statements ->  */
 
 export interface SidebarItemProps {
   children: ReactNode;
   gridLayout?: boolean;
   onClick?: () => void;
 }
+/**** ><> ↑ --------- SidebarItemProps Interface definition ->  */
 
 const StyledBlockItem = styled.div`
   padding: var(--padding-xs) var(--padding-md) var(--padding-xs) 0;
@@ -38,6 +40,7 @@ const StyledBlockItem = styled.div`
     padding: 0;
   }
 `;
+/**** ><> ↑ --------- StyledBlockItem Definition ->  */
 
 const StyledGridItem = styled.li`
   padding: 0 0 0 var(--padding-sm);
@@ -74,6 +77,7 @@ const StyledGridItem = styled.li`
     margin-bottom: var(--padding-md);
   }
 `;
+/**** ><> ↑ --------- StyledGridItem Definition ->  */
 
 export const SidebarItem: FunctionComponent<SidebarItemProps> = ({ children, gridLayout, onClick }) => {
   if (gridLayout) {
@@ -82,3 +86,4 @@ export const SidebarItem: FunctionComponent<SidebarItemProps> = ({ children, gri
     return <StyledBlockItem onClick={onClick}>{children}</StyledBlockItem>;
   }
 };
+/**** ><> ↑ --------- SidebarItem Component Definition ->  */

@@ -8,6 +8,7 @@ import * as requestOperations from '../models/helpers/request-operations';
 import type { BaseModel } from './index';
 import * as models from './index';
 
+/**** ><> ↑ --------- Importing necessary modules and declaring types ->  */
 export const name = 'Response';
 
 export const type = 'Response';
@@ -18,6 +19,7 @@ export const canDuplicate = false;
 
 export const canSync = false;
 
+/**** ><> ↑ --------- Declaring some base module properties ->  */
 export interface ResponseHeader {
   name: string;
   value: string;
@@ -25,6 +27,7 @@ export interface ResponseHeader {
 
 type Compression = 'zip' | null | '__NEEDS_MIGRATION__' | undefined;
 
+/**** ><> ↑ --------- Declaring an Interface for ResponseHeader and Compression type ->  */
 export interface BaseResponse {
   environmentId: string | null;
   statusCode: number;
@@ -49,6 +52,7 @@ export interface BaseResponse {
 }
 
 export type Response = BaseModel & BaseResponse;
+/**** ><> ↑ --------- Declaring an Interface for BaseResponse and defining Response type ->  */
 
 export const isResponse = (model: Pick<BaseModel, 'type'>): model is Response => (
   model.type === type
@@ -83,6 +87,7 @@ export function init(): BaseResponse {
   };
 }
 
+/**** ><> ↑ --------- Function declarations to initialize and check if an object is a Response ->  */
 export function migrate(doc: Response) {
   try {
     return migrateBodyCompression(doc);
@@ -96,6 +101,7 @@ export function hookDatabaseInit(consoleLog: typeof console.log = console.log) {
   consoleLog('[db] Init responses DB');
 }
 
+/**** ><> ↑ --------- Function definitions for handling operations related to Database and Response migration ->  */
 export function hookRemove(doc: Response, consoleLog: typeof console.log = console.log) {
   fs.unlink(doc.bodyPath, () => {
     consoleLog(`[response] Delete body ${doc.bodyPath}`);
@@ -105,6 +111,7 @@ export function hookRemove(doc: Response, consoleLog: typeof console.log = conso
   });
 }
 
+/**** ><> ↑ --------- Function definitions to remove a response and its related operations ->  */
 export function getById(id: string) {
   return db.get<Response>(type, id);
 }
@@ -116,6 +123,7 @@ export function findByParentId(parentId: string) {
 export async function all() {
   return db.all<Response>(type);
 }
+/**** ><> ↑ --------- Functions to query the database for Responses ->  */
 
 export async function removeForRequest(parentId: string, environmentId?: string | null) {
   const settings = await models.settings.getOrCreate();
@@ -134,10 +142,12 @@ export async function removeForRequest(parentId: string, environmentId?: string 
   // why some responses are still showing in the UI.
   await db.removeWhere(type, query);
 }
+/**** ><> ↑ --------- Function to remove response for a specific request ->  */
 
 export function remove(response: Response) {
   return db.remove(response);
 }
+/**** ><> ↑ --------- Function to remove a specific Response ->  */
 
 async function _findRecentForRequest(
   requestId: string,
@@ -156,6 +166,7 @@ async function _findRecentForRequest(
   return db.findMostRecentlyModified<Response>(type, query, limit);
 }
 
+/**** ><> ↑ --------- Function to find recent responses for a specific request ->  */
 export async function getLatestForRequest(
   requestId: string,
   environmentId: string | null,
@@ -164,6 +175,7 @@ export async function getLatestForRequest(
   const response = responses[0] as Response | null | undefined;
   return response || null;
 }
+/**** ><> ↑ --------- Function to fetch latest response for a specific request ->  */
 
 export async function create(patch: Partial<Response> = {}, maxResponses = 20): Promise<Response> {
   if (!patch.parentId) {
@@ -197,11 +209,13 @@ export async function create(patch: Partial<Response> = {}, maxResponses = 20): 
   return db.docCreate(type, patch);
 }
 
+/**** ><> ↑ --------- Function to create new Response ->  */
 export function getLatestByParentId(parentId: string) {
   return db.getMostRecentlyModified<Response>(type, {
     parentId,
   });
 }
+/**** ><> ↑ --------- Function to fetch the latest response by parentId ->  */
 
 export const getBodyStream = (
   response?: { bodyPath?: string; bodyCompression?: Compression },
@@ -243,6 +257,7 @@ export const getBodyBuffer = (
     return readFailureValue === undefined ? null : readFailureValue;
   }
 };
+/**** ><> ↑ --------- Functions to manage the body of the Response ->  */
 
 export function getTimeline(response: Response, showBody?: boolean) {
   const { timelinePath, bodyPath } = response;
@@ -270,6 +285,7 @@ export function getTimeline(response: Response, showBody?: boolean) {
     return [];
   }
 }
+/**** ><> ↑ --------- Function to get timeline of the Response ->  */
 
 function migrateBodyCompression(doc: Response) {
   if (doc.bodyCompression === '__NEEDS_MIGRATION__') {
@@ -278,3 +294,4 @@ function migrateBodyCompression(doc: Response) {
 
   return doc;
 }
+/**** ><> ↑ --------- Function to migrate bodyCompression of the Response ->  */

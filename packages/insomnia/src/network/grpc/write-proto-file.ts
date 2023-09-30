@@ -9,10 +9,12 @@ import { isProtoDirectory, ProtoDirectory } from '../../models/proto-directory';
 import { isProtoFile, ProtoFile } from '../../models/proto-file';
 import { isWorkspace } from '../../models/workspace';
 
+/**** ><> ↑ --------- Import libraries and modules ->  */
 interface WriteResult {
   filePath: string;
   dirs: string[];
 }
+/**** ><> ↑ --------- Interface declaration ->  */
 
 const recursiveWriteProtoDirectory = async (
   dir: ProtoDirectory,
@@ -37,6 +39,7 @@ const recursiveWriteProtoDirectory = async (
   );
   return [dirPath, ...createdDirs.flat()];
 };
+/**** ><> ↑ --------- Recursive function to write ProtoDirectory ->  */
 
 export const writeProtoFile = async (protoFile: ProtoFile): Promise<WriteResult> => {
   // Find all ancestors
@@ -103,3 +106,4 @@ export const writeProtoFile = async (protoFile: ProtoFile): Promise<WriteResult>
     return result;
   }
 };
+/**** ><> ↑ --------- Function to write a ProtoFile ->  */

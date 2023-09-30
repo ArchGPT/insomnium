@@ -2,6 +2,7 @@ import { RENDER_PURPOSE_SEND } from '../common/render';
 import { stats } from '../models';
 import { getBodyBuffer } from '../models/response';
 import { fetchRequestData, responseTransform, sendCurlAndWriteTimeline, tryToInterpolateRequest, tryToTransformRequestWithPlugins } from './network';
+/**** ><> ↑ --------- Import statements ->  */
 
 export function getSendRequestCallback() {
   return async function sendRequest(requestId: string) {
@@ -17,6 +18,7 @@ export function getSendRequestCallback() {
     const renderResult = await tryToInterpolateRequest(request, environment._id, RENDER_PURPOSE_SEND);
     const renderedRequest = await tryToTransformRequestWithPlugins(renderResult);
     const response = await sendCurlAndWriteTimeline(
+/**** ><> ↑ --------- Requests transformations ->  */
       renderedRequest,
       clientCertificates,
       caCert,
@@ -25,9 +27,12 @@ export function getSendRequestCallback() {
     const res = await responseTransform(response, activeEnvironmentId, renderedRequest, renderResult.context);
     const { statusCode: status, statusMessage, headers: headerArray, elapsedTime: responseTime } = res;
     const headers = headerArray?.reduce((acc, { name, value }) => ({ ...acc, [name.toLowerCase() || '']: value || '' }), []);
+/**** ><> ↑ --------- Response transformation and variable extraction ->  */
     const bodyBuffer = await getBodyBuffer(res) as Buffer;
     const data = bodyBuffer ? bodyBuffer.toString('utf8') : undefined;
     return { status, statusMessage, data, headers, responseTime };
 
+/**** ><> ↑ --------- Export function definition ->  */
   };
 }
+/**** ><> ↑ --------- Response body and return statement ->  */

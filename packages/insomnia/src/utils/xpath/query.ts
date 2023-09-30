@@ -1,24 +1,30 @@
 import { DOMParser } from 'xmldom';
 import xpath, { SelectedValue } from 'xpath';
+/**** ><> ↑ --------- Import statements ->  */
 
 /**
  * Query an XML blob with XPath
  */
+/**** ><> ↑ --------- Function comment ->  */
 export const queryXPath = (xml: string, query?: string) => {
   const dom = new DOMParser().parseFromString(xml);
   let selectedValues: SelectedValue[] = [];
+/**** ><> ↑ --------- Function definition and initialization ->  */
   if (query === undefined) {
     throw new Error('Must pass an XPath query.');
   }
+/**** ><> ↑ --------- Error handling for undefined query ->  */
   try {
     selectedValues = xpath.select(query, dom);
   } catch (err) {
     throw new Error(`Invalid XPath query: ${query}`);
   }
+/**** ><> ↑ --------- XPath query execution and error handling ->  */
   // Functions return plain strings
   if (typeof selectedValues === 'string') {
     return [{ outer: selectedValues, inner: selectedValues }];
   }
+/**** ><> ↑ --------- Return plain string if selectedValues is string ->  */
 
   return (selectedValues as Node[])
     .filter(sv => sv.nodeType === Node.ATTRIBUTE_NODE
@@ -37,5 +43,7 @@ export const queryXPath = (xml: string, query?: string) => {
       }
       return { outer, inner: null };
     });
+/**** ><> ↑ --------- Processing selectedValues for different node types ->  */
 
 };
+/**** ><> ↑ --------- Function end ->  */

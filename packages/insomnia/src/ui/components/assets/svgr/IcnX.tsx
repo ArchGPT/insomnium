@@ -1,5 +1,7 @@
 import React, { SVGProps, memo } from 'react';
+/**** ><> ↑ --------- Import statements ->  */
 export const SvgIcnX = memo<SVGProps<SVGSVGElement>>(props => (
+/**** ><> ↑ --------- SVG component definition ->  */
   <svg
     width="1em"
     height="1em"
@@ -8,11 +10,16 @@ export const SvgIcnX = memo<SVGProps<SVGSVGElement>>(props => (
     xmlns="http://www.w3.org/2000/svg"
     role="img"
     {...props}
+/**** ><> ↑ --------- SVG initial properties ->  */
   >
     <path fill="none" d="M0 0h14v14H0z" />
+/**** ><> ↑ --------- SVG Path with no fill ->  */
     <path
       d="m11.9 1 1.096 1.096-4.902 4.902 4.902 4.902-1.096 1.096-4.902-4.902-4.902 4.902L1 11.9l4.902-4.902L1 2.096 2.096 1l4.902 4.902L11.9 1Z"
       fill=""
     />
+/**** ><> ↑ --------- SVG Path with fill ->  */
   </svg>
+/**** ><> ↑ --------- Closing SVG tag ->  */
 ));
+/**** ><> ↑ --------- Closing SVG component function ->  */

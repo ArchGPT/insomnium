@@ -3,6 +3,7 @@ import React, { FC, memo } from 'react';
 
 import * as misc from '../../../common/misc';
 import { Tooltip } from '../tooltip';
+/**** ><> ↑ --------- Import Statements ->  */
 
 interface Props {
   bytesRead: number;
@@ -11,6 +12,7 @@ interface Props {
   className?: string;
   tooltipDelay?: number;
 }
+/**** ><> ↑ --------- Interface Declaration ->  */
 
 export const SizeTag: FC<Props> = memo(({ bytesRead, bytesContent, small, className, tooltipDelay }) => {
   const responseSizeReadStringShort = misc.describeByteSize(bytesRead);
@@ -48,5 +50,7 @@ export const SizeTag: FC<Props> = memo(({ bytesRead, bytesContent, small, classN
     </div>
   );
 });
+/**** ><> ↑ --------- React Component Definition ->  */
 
 SizeTag.displayName = 'SizeTag';
+/**** ><> ↑ --------- Component Display Name Assignment ->  */

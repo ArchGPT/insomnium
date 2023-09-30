@@ -500,3 +500,4 @@ export const keyboardKeys: Record<string, { keyCode: number; label: string; code
     label: "'",
   },
 };
+/**** ><> ↑ --------- Definition of keyboard keycodes and labels ->  */

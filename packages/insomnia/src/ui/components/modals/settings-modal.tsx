@@ -14,16 +14,19 @@ import { Shortcuts } from '../settings/shortcuts';
 import { ThemePanel } from '../settings/theme-panel';
 import { showModal } from './index';
 
+/**** ><> ↑ --------- Importing modules and components */
 export interface SettingsModalHandle {
   hide: () => void;
   show: (options?: { tab?: string }) => void;
 }
+/**** ><> ↑ --------- Declaring export interface */
 
 export const TAB_INDEX_EXPORT = 'data';
 export const TAB_INDEX_SHORTCUTS = 'keyboard';
 export const TAB_INDEX_THEMES = 'themes';
 export const TAB_INDEX_PLUGINS = 'plugins';
 export const TAB_INDEX_AI = 'ai';
+/**** ><> ↑ --------- Declaring export constants */
 
 export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props, ref) => {
   const [defaultTabKey, setDefaultTabKey] = useState('general');
@@ -40,6 +43,7 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
     },
   }), []);
 
+/**** ><> ↑ --------- Declaring main SettingsModal Component with its functionality */
   return (
     <Modal ref={modalRef} tall {...props}>
       <ModalHeader>
@@ -76,7 +80,9 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
         </Tabs>
       </ModalBody>
     </Modal>
+/**** ><> ↑ --------- Returning the modal with header and body */
   );
 });
 SettingsModal.displayName = 'SettingsModal';
 export const showSettingsModal = () => showModal(SettingsModal);
+/**** ><> ↑ --------- Setting the display name and declaring showSettingsModal function */

@@ -16,11 +16,13 @@ import { getBasicAuthHeader } from './basic-auth/get-header';
 import { getBearerAuthHeader } from './bearer-auth/get-header';
 import getOAuth1Token from './o-auth-1/get-token';
 import { getOAuth2Token } from './o-auth-2/get-token';
+/**** ><> ↑ --------- Module imports ->  */
 
 interface Header {
   name: string;
   value: string;
 }
+/**** ><> ↑ --------- Header interface definition ->  */
 
 export async function getAuthHeader(renderedRequest: RenderedRequest, url: string) {
   const { method, authentication, body } = renderedRequest;
@@ -152,6 +154,7 @@ export async function getAuthHeader(renderedRequest: RenderedRequest, url: strin
 
   return;
 }
+/**** ><> ↑ --------- getAuthHeader function definition ->  */
 
 export function getAuthQueryParams(authentication: RequestAuthentication) {
   if (authentication.disabled) {
@@ -168,6 +171,7 @@ export function getAuthQueryParams(authentication: RequestAuthentication) {
 
   return;
 }
+/**** ><> ↑ --------- getAuthQueryParams function definition ->  */
 
 export const _buildBearerHeader = (accessToken: string, prefix: string) => {
   if (!accessToken) {
@@ -187,3 +191,4 @@ export const _buildBearerHeader = (accessToken: string, prefix: string) => {
 
   return header;
 };
+/**** ><> ↑ --------- _buildBearerHeader function definition ->  */

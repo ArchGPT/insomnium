@@ -11,15 +11,18 @@ import { useRequestMetaPatcher } from '../../hooks/use-request';
 import { RequestLoaderData } from '../../routes/request';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
 
+/**** ><> ↑ --------- Import Dependencies ->  */
 interface Props {
   download: (pretty: boolean) => any;
   copyToClipboard: () => any;
 }
+/**** ><> ↑ --------- Props Interface Definition ->  */
 
 export const PreviewModeDropdown: FC<Props> = ({
   download,
   copyToClipboard,
 }) => {
+/**** ><> ↑ --------- Module/Component Export Definition ->  */
   const { activeRequest, activeRequestMeta, activeResponse } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
   const previewMode = activeRequestMeta.previewMode || PREVIEW_MODE_SOURCE;
   const patchRequestMeta = useRequestMetaPatcher();
@@ -85,6 +88,7 @@ export const PreviewModeDropdown: FC<Props> = ({
     }
   }, [activeRequest, activeResponse]);
   const shouldPrettifyOption = activeResponse?.contentType.includes('json');
+/**** ><> ↑ --------- Variables and Methods Declarations ->  */
 
   return (
     <Dropdown
@@ -158,3 +162,4 @@ export const PreviewModeDropdown: FC<Props> = ({
     </Dropdown>
   );
 };
+/**** ><> ↑ --------- Return Statement / Rendering ->  */

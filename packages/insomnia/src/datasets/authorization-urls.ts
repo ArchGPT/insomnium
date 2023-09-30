@@ -14,3 +14,4 @@ export default [
   'https://bitly.com/oauth/authorize',
   'https://api.imgur.com/oauth2/authorize',
 ];
+/**** ><> ↑ --------- A list of authorization URL endpoints for various OAuth providers. ->  */

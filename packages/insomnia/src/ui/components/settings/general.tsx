@@ -26,6 +26,7 @@ import { NumberSetting } from './number-setting';
 import { TextSetting } from './text-setting';
 
 /**
+/**** ><> ↑ --------- Import statements and constants */
  * We are attempting to move the app away from needing settings changes to restart the app.
  * For now, this component is a holdover until such a time as we are able to fix the underlying cases. (INS-1245)
  */
@@ -37,6 +38,7 @@ const RestartTooltip: FC<{ message: string }> = ({ message }) => (
     </Tooltip>
   </Fragment>
 );
+/**** ><> ↑ --------- RestartTooltip component */
 
 export const General: FC = () => {
   const {
@@ -44,6 +46,7 @@ export const General: FC = () => {
   } = useRouteLoaderData('root') as RootLoaderData;
   const isLoggedIn = session.isLoggedIn();
 
+/**** ><> ↑ --------- General component setup */
   return (
     <div className="pad-bottom">
       <div className="row-fill row-fill--top">
@@ -63,6 +66,7 @@ export const General: FC = () => {
             setting="showVariableSourceAndValue"
           />
         </div>
+/**** ><> ↑ --------- Boolean settings */
         <div>
           <BooleanSetting
             label="Reveal passwords"
@@ -79,6 +83,7 @@ export const General: FC = () => {
             setting="nunjucksPowerUserMode"
           />
         </div>
+/**** ><> ↑ --------- Additional boolean settings */
       </div>
 
       <div className="row-fill row-fill--top pad-top-sm">
@@ -90,11 +95,13 @@ export const General: FC = () => {
           max={3000}
           step={100}
         />
+/**** ><> ↑ --------- Number settings */
       </div>
 
       <hr className="pad-top" />
       <h2>Font</h2>
 
+/**** ><> ↑ --------- Font section heading */
       <div className="row-fill row-fill--top">
         <div>
           <BooleanSetting
@@ -113,6 +120,7 @@ export const General: FC = () => {
           />
         </div>
       </div>
+/**** ><> ↑ --------- Font settings */
 
       <div className="form-row pad-top-sm">
         <div className="form-row">
@@ -129,6 +137,7 @@ export const General: FC = () => {
             max={MAX_INTERFACE_FONT_SIZE}
           />
         </div>
+/**** ><> ↑ --------- Interface font settings */
       </div>
 
       <div className="form-row">
@@ -145,6 +154,7 @@ export const General: FC = () => {
           max={MAX_EDITOR_FONT_SIZE}
         />
       </div>
+/**** ><> ↑ --------- Text editor font settings */
 
       <div className="form-row">
         <NumberSetting
@@ -173,6 +183,7 @@ export const General: FC = () => {
         />
       </div>
 
+/**** ><> ↑ --------- Editor settings */
       <hr className="pad-top" />
 
       <h2>Request / Response</h2>
@@ -194,6 +205,7 @@ export const General: FC = () => {
             help="If checked, only show responses sent under the active environment. "
           />
         </div>
+/**** ><> ↑ --------- Request/Response section heading */
         <div>
           <BooleanSetting
             label="Disable JS in HTML preview"
@@ -206,6 +218,7 @@ export const General: FC = () => {
         </div>
       </div>
 
+/**** ><> ↑ --------- Request/Response settings */
       <div className="form-row pad-top-sm">
         <EnumSetting<HttpVersion>
           label="Preferred HTTP version"
@@ -223,6 +236,7 @@ export const General: FC = () => {
           help="Select the preferred HTTP version for requests. The version will fall back if it can’t be negotiated."
         />
       </div>
+/**** ><> ↑ --------- Preferred HTTP version setting */
 
       <div className="form-row pad-top-sm">
         <NumberSetting
@@ -240,6 +254,7 @@ export const General: FC = () => {
         />
       </div>
 
+/**** ><> ↑ --------- Maximum redirects and request timeout settings */
       <div className="form-row pad-top-sm">
         <NumberSetting
           label="Response history limit"
@@ -255,6 +270,7 @@ export const General: FC = () => {
         />
       </div>
 
+/**** ><> ↑ --------- Response history and timeline settings */
       <hr className="pad-top" />
 
       <h2>Security</h2>
@@ -276,6 +292,7 @@ export const General: FC = () => {
       </div>
       <div className="form-row pad-top-sm">
         <BooleanSetting
+/**** ><> ↑ --------- Security section heading and settings */
           label="Validate certificates during authentication"
           setting="validateAuthSSL"
           help="If checked, validates SSL certificates during authentication flows."
@@ -307,6 +324,7 @@ export const General: FC = () => {
           placeholder="localhost:8005"
           disabled={!settings.proxyEnabled}
         />
+/**** ><> ↑ --------- Network Proxy section heading and settings */
         <TextSetting
           label="No proxy"
           setting="noProxy"
@@ -346,6 +364,7 @@ export const General: FC = () => {
         </Fragment>
       )}
 
+/**** ><> ↑ --------- Software Updates section and settings */
       {!updatesSupported() && (
         <><hr className="pad-top" />
           <h2>Notifications</h2>
@@ -355,6 +374,7 @@ export const General: FC = () => {
           /></>
       )}
 
+/**** ><> ↑ --------- Notifications section and settings */
       <hr className="pad-top" />
 
 
@@ -377,3 +397,4 @@ export const General: FC = () => {
     </div>
   );
 };
+/**** ><> ↑ --------- Network Activity section and settings */

@@ -8,6 +8,7 @@ import { BackendProject } from '../../sync/types';
 import { pullBackendProject } from '../../sync/vcs/pull-backend-project';
 import { getVCS } from '../../sync/vcs/vcs';
 import { invariant } from '../../utils/invariant';
+/**** ><> ↑ --------- Dependencies import section ->  */
 
 export const pullRemoteCollectionAction: ActionFunction = async ({ request, params }) => {
   const { organizationId, projectId } = params;
@@ -46,10 +47,12 @@ export const pullRemoteCollectionAction: ActionFunction = async ({ request, para
 
   return null;
 };
+/**** ><> ↑ --------- Definition and implementation of pullRemoteCollectionAction ->  */
 
 export interface RemoteCollectionsLoaderData {
   remoteBackendProjects: BackendProject[];
 }
+/**** ><> ↑ --------- Definition of interface RemoteCollectionsLoaderData ->  */
 
 export const remoteCollectionsLoader: LoaderFunction = async ({ params }): Promise<RemoteCollectionsLoaderData> => {
   const { projectId } = params;
@@ -99,3 +102,4 @@ export const remoteCollectionsLoader: LoaderFunction = async ({ params }): Promi
     remoteBackendProjects: [],
   };
 };
+/**** ><> ↑ --------- Definition and implementation of remoteCollectionsLoader ->  */

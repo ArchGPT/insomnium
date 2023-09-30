@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import zlib from 'zlib';
 
 import { DEBOUNCE_MILLIS } from './constants';
+/**** ><> ↑ --------- Importing modules ->  */
 
 const ESCAPE_REGEX_MATCH = /[-[\]/{}()*+?.\\^$|]/g;
 
@@ -74,6 +75,7 @@ export function getContentDispositionHeader<T extends Header>(headers: T[]): T |
   const matches = filterHeaders(headers, 'content-disposition');
   return matches.length ? matches[0] : null;
 }
+/**** ><> ↑ --------- Defining header interface and helper functions related to headers ->  */
 
 /**
  * Generate an ID of the format "<MODEL_NAME>_<TIMESTAMP><RANDOM>"
@@ -115,6 +117,7 @@ export function keyedDebounce<T>(
   };
   return t;
 }
+/**** ><> ↑ --------- Defining utility functions ->  */
 
 export function debounce<T extends Function>(
   callback: T,
@@ -152,6 +155,7 @@ export function describeByteSize(bytes: number, long = false) {
   const rounded = Math.round(size * 10) / 10;
   return `${rounded} ${unit}`;
 }
+/**** ><> ↑ --------- Function that describes byte size ->  */
 
 export function fnOrString(v: string | ((...args: any[]) => any), ...args: any[]) {
   if (typeof v === 'string') {
@@ -160,6 +164,7 @@ export function fnOrString(v: string | ((...args: any[]) => any), ...args: any[]
     return v(...args);
   }
 }
+/**** ><> ↑ --------- Utility for function or string ->  */
 
 export function compressObject(obj: any) {
   const compressed = zlib.gzipSync(JSON.stringify(obj));
@@ -174,6 +179,7 @@ export function decompressObject<ObjectType>(input: string | null): ObjectType |
   const jsonBuffer = zlib.gunzipSync(Buffer.from(input, 'base64'));
   return JSON.parse(jsonBuffer.toString('utf8')) as ObjectType;
 }
+/**** ><> ↑ --------- Functions related to compression and decompression ->  */
 
 /**
  * Escape a dynamic string for use inside of a regular expression
@@ -183,6 +189,7 @@ export function decompressObject<ObjectType>(input: string | null): ObjectType |
 export function escapeRegex(str: string) {
   return str.replace(ESCAPE_REGEX_MATCH, '\\$&');
 }
+/**** ><> ↑ --------- Function for escaping regex ->  */
 
 export interface FuzzyMatchOptions {
   splitSpace?: boolean;
@@ -258,6 +265,7 @@ export function fuzzyMatchAll(
     target: allText.join(' '),
   };
 }
+/**** ><> ↑ --------- Defining fuzzy match options interface and related functions ->  */
 
 export function isNotNullOrUndefined<ValueType>(
   value: ValueType | null | undefined
@@ -268,5 +276,7 @@ export function isNotNullOrUndefined<ValueType>(
 
   return true;
 }
+/**** ><> ↑ --------- Utility for checking null or undefined values ->  */
 
 export const toKebabCase = (value: string) => value.replace(/ /g, '-');
+/**** ><> ↑ --------- Utility to convert to kebab case ->  */

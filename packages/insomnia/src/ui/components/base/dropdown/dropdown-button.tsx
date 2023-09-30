@@ -6,12 +6,14 @@ import styled from 'styled-components';
 
 import { Button as ThemedButton, ButtonProps } from '../../themed-button';
 
+/**** ><> ↑ --------- Import statements ->  */
 interface StyledThemedButtonProps extends ButtonProps {
   removePaddings?: boolean;
   removeBorderRadius?: boolean;
   disableHoverBehavior?: boolean;
   isDisabled?: boolean;
 }
+/**** ><> ↑ --------- Themed Button Properties Interface ->  */
 
 const StyledThemedButton = styled(ThemedButton)(({ removePaddings, disableHoverBehavior, isDisabled }: StyledThemedButtonProps) => ({
   height: '100%',
@@ -36,6 +38,7 @@ const StyledThemedButton = styled(ThemedButton)(({ removePaddings, disableHoverB
     backgroundColor: `${disableHoverBehavior && 'unset'}`,
   },
 }));
+/**** ><> ↑ --------- Styled Themed Button Component ->  */
 
 type DropdownButtonProps = {
   className?: string;
@@ -44,6 +47,7 @@ type DropdownButtonProps = {
   isDisabled?: boolean;
   onClick?: () => void;
 } & ButtonProps & AriaButtonProps & StyledThemedButtonProps;
+/**** ><> ↑ --------- Dropdown Button Properties Type ->  */
 
 export const DropdownButton = forwardRef<{}, DropdownButtonProps>((props: DropdownButtonProps, ref: any) => {
   const buttonRef = useRef(ref);
@@ -67,5 +71,7 @@ export const DropdownButton = forwardRef<{}, DropdownButtonProps>((props: Dropdo
     </StyledThemedButton>
   );
 });
+/**** ><> ↑ --------- Dropdown Button Component ->  */
 
 DropdownButton.displayName = 'DropdownButton';
+/**** ><> ↑ --------- Dropdown Button Display Name ->  */

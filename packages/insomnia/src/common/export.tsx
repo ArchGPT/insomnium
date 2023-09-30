@@ -46,9 +46,11 @@ import {
 import { database, database as db } from './database';
 import * as har from './har';
 import { strings } from './strings';
+/**** ><> ↑ --------- Importing libraries and modules ->  */
 
 const EXPORT_FORMAT = 4;
 
+/**** ><> ↑ --------- Defining and initializating constants ->  */
 const getDocWithDescendants = (includePrivateDocs = false) => async (parentDoc: BaseModel | null) => {
   const docs = await db.withDescendants(parentDoc);
   return docs.filter(
@@ -56,6 +58,7 @@ const getDocWithDescendants = (includePrivateDocs = false) => async (parentDoc: 
     doc => !doc?.isPrivate || includePrivateDocs,
   );
 };
+/**** ><> ↑ --------- Defining 'getDocWithDescendants' helper function ->  */
 
 export async function exportWorkspacesHAR(
   workspaces: Workspace[],
@@ -66,6 +69,7 @@ export async function exportWorkspacesHAR(
   const requests = docs.filter(isRequest);
   return exportRequestsHAR(requests, includePrivateDocs);
 }
+/**** ><> ↑ --------- Defining 'exportWorkspacesHAR' function ->  */
 
 export async function exportRequestsHAR(
   requests: BaseModel[],
@@ -128,6 +132,7 @@ export async function exportRequestsHAR(
   const data = await har.exportHar(harRequests);
   return JSON.stringify(data, null, '\t');
 }
+/**** ><> ↑ --------- Defining 'exportRequestsHAR' function ->  */
 
 export async function exportWorkspacesData(
   workspaces: Workspace[],
@@ -139,6 +144,7 @@ export async function exportWorkspacesData(
   const requests = docs.filter(doc => isRequest(doc) || isGrpcRequest(doc) || isWebSocketRequest(doc));
   return exportRequestsData(requests, includePrivateDocs, format);
 }
+/**** ><> ↑ --------- Defining 'exportWorkspacesData' function ->  */
 
 export async function exportRequestsData(
   requests: BaseModel[],
@@ -277,6 +283,7 @@ export async function exportRequestsData(
     throw new Error(`Invalid export format ${format}. Must be "json" or "yaml"`);
   }
 }
+/**** ><> ↑ --------- Defining 'exportRequestsData' function ->  */
 
 const VALUE_JSON = 'json';
 const VALUE_YAML = 'yaml';
@@ -287,6 +294,7 @@ export type SelectedFormat =
   | typeof VALUE_JSON
   | typeof VALUE_YAML
   ;
+/**** ><> ↑ --------- Defining constants for export file formats ->  */
 
 const showSelectExportTypeModal = ({ onDone }: {
   onDone: (selectedFormat: SelectedFormat) => Promise<void>;
@@ -322,6 +330,7 @@ const showSelectExportTypeModal = ({ onDone }: {
     },
   });
 };
+/**** ><> ↑ --------- Defining 'showSelectExportTypeModal' function ->  */
 
 const showExportPrivateEnvironmentsModal = async () => {
   return new Promise<boolean>(resolve => {
@@ -338,6 +347,7 @@ const showExportPrivateEnvironmentsModal = async () => {
     });
   });
 };
+/**** ><> ↑ --------- Defining 'showExportPrivateEnvironmentsModal' function ->  */
 
 const showSaveExportedFileDialog = async ({
   exportedFileNamePrefix,
@@ -358,12 +368,14 @@ const showSaveExportedFileDialog = async ({
   const { filePath } = await window.dialog.showSaveDialog(options);
   return filePath || null;
 };
+/**** ><> ↑ --------- Defining 'showSaveExportedFileDialog' function ->  */
 
 const writeExportedFileToFileSystem = (filename: string, jsonData: string, onDone: fs.NoParamCallback) => {
   // Remember last exported path
   window.localStorage.setItem('insomnia.lastExportPath', path.dirname(filename));
   fs.writeFile(filename, jsonData, {}, onDone);
 };
+/**** ><> ↑ --------- Defining 'writeExportedFileToFileSystem' function ->  */
 
 export const exportAllToFile = (activeProjectName: string, workspacesForActiveProject: Workspace[]) => {
   if (!workspacesForActiveProject.length) {
@@ -423,6 +435,7 @@ export const exportAllToFile = (activeProjectName: string, workspacesForActivePr
     },
   });
 };
+/**** ><> ↑ --------- Defining 'exportAllToFile' function ->  */
 export const exportRequestsToFile = (requestIds: string[]) => {
   showSelectExportTypeModal({
     onDone: async selectedFormat => {
@@ -495,3 +508,4 @@ export const exportRequestsToFile = (requestIds: string[]) => {
     },
   });
 };
+/**** ><> ↑ --------- Defining 'exportRequestsToFile' function ->  */

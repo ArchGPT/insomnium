@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { setDefaults, unthrowableParseJson } from './utils';
+/**** ><> ↑ --------- Import statements ->  */
 
 describe('setDefaults()', () => {
   it('should leave non-objects alone', () => {
@@ -59,6 +60,7 @@ describe('setDefaults()', () => {
     });
   });
 
+/**** ><> ↑ --------- setDefaults() tests ->  */
   describe('unthrowableParseJson', () => {
     it('should parse happy json', () => {
       const json = '{"foo": "bar"}';
@@ -77,3 +79,4 @@ describe('setDefaults()', () => {
     });
   });
 });
+/**** ><> ↑ --------- unthrowableParseJson tests ->  */

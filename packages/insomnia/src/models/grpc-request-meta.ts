@@ -1,6 +1,7 @@
 import { database as db } from '../common/database';
 import { isGrpcRequestId } from './grpc-request';
 import type { BaseModel } from './index';
+/**** ><> ↑ --------- Import Statements ->  */
 
 export const name = 'gRPC Request Meta';
 
@@ -12,12 +13,14 @@ export const canDuplicate = false;
 
 export const canSync = false;
 
+/**** ><> ↑ --------- Export Constants ->  */
 interface BaseGrpcRequestMeta {
   pinned: boolean;
   lastActive: number;
 }
 
 export type GrpcRequestMeta = BaseModel & BaseGrpcRequestMeta;
+/**** ><> ↑ --------- Interface and Type Declarations ->  */
 
 export const isGrpcRequestMeta = (model: Pick<BaseModel, 'type'>): model is GrpcRequestMeta => (
   model.type === type
@@ -33,6 +36,7 @@ export function init() {
 export function migrate(doc: GrpcRequestMeta) {
   return doc;
 }
+/**** ><> ↑ --------- Function Definitions ->  */
 
 export function create(patch: Partial<GrpcRequestMeta> = {}) {
   if (!patch.parentId) {
@@ -78,6 +82,7 @@ export async function updateOrCreateByParentId(parentId: string, patch: Partial<
     return create(newPatch);
   }
 }
+/**** ><> ↑ --------- Database Operations ->  */
 
 export function all() {
   return db.all<GrpcRequestMeta>(type);
@@ -88,3 +93,4 @@ function expectParentToBeGrpcRequest(parentId: string | null) {
     throw new Error('Expected the parent of GrpcRequestMeta to be a GrpcRequest');
   }
 }
+/**** ><> ↑ --------- Utility function ->  */

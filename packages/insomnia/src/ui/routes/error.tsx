@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { DEFAULT_ORGANIZATION_ID } from '../../models/organization';
 import { Button } from '../components/themed-button';
 
+/**** ><> ↑ --------- Importing modules and components ->  */
 const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
@@ -19,9 +20,11 @@ const Container = styled.div({
   height: '100%',
   width: '100%',
 });
+/**** ><> ↑ --------- Styled component Container ->  */
 
 const Spinner = () => <i className="fa fa-spin fa-refresh" />;
 
+/**** ><> ↑ --------- Stateless component Spinner ->  */
 export const ErrorRoute: FC = () => {
   const error = useRouteError();
   const getErrorMessage = (err: any) => {
@@ -40,6 +43,7 @@ export const ErrorRoute: FC = () => {
     }
     return err?.stack;
   };
+/**** ><> ↑ --------- Component ErrorRoute with its internal helper functions ->  */
 
   const navigate = useNavigate();
   const navigation = useNavigation();
@@ -62,3 +66,4 @@ export const ErrorRoute: FC = () => {
     </Container>
   );
 };
+/**** ><> ↑ --------- Usage of hooks and function return ->  */

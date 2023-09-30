@@ -2,6 +2,7 @@ export interface StringInfo {
   singular: string;
   plural: string;
 }
+/**** ><> ↑ --------- StringInfo interface ->  */
 
 type StringId =
   | 'collection'
@@ -12,6 +13,7 @@ type StringId =
   | 'localProject'
   | 'remoteProject'
   ;
+/**** ><> ↑ --------- StringId type declaration ->  */
 
 export const strings: Record<StringId, StringInfo> = {
   collection: {
@@ -43,3 +45,4 @@ export const strings: Record<StringId, StringInfo> = {
     plural: 'Remote',
   },
 };
+/**** ><> ↑ --------- Strings constant declaration and initialization ->  */

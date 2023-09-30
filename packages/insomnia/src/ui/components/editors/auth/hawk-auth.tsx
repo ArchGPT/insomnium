@@ -8,6 +8,7 @@ import { AuthInputRow } from './components/auth-input-row';
 import { AuthSelectRow } from './components/auth-select-row';
 import { AuthTableBody } from './components/auth-table-body';
 import { AuthToggleRow } from './components/auth-toggle-row';
+/**** ><> ↑ --------- Import dependencies */
 
 export const HawkAuth: FC = () => (
   <AuthTableBody>
@@ -32,3 +33,4 @@ export const HawkAuth: FC = () => (
     <AuthToggleRow label='Validate Payload' property='validatePayload' />
   </AuthTableBody>
 );
+/**** ><> ↑ --------- Define FC component */

@@ -19,6 +19,7 @@ import { invariant } from '../utils/invariant';
 import { database as db } from './database';
 import { generateId } from './misc';
 
+/**** ><> ↑ --------- import statements ->  */
 export interface ExportedModel extends BaseModel {
   _type: string;
 }
@@ -29,6 +30,7 @@ interface ConvertResult {
     resources: ExportedModel[];
   };
 }
+/**** ><> ↑ --------- interface definitions ->  */
 
 const isSubEnvironmentResource = (environment: Environment) => {
   return !environment.parentId || environment.parentId.startsWith(models.environment.prefix) || environment.parentId.startsWith('__BASE_ENVIRONMENT_ID__');
@@ -63,6 +65,7 @@ export async function fetchImportContentFromURI({ uri }: { uri: string }) {
     return content;
   }
 }
+/**** ><> ↑ --------- helper function definitions ->  */
 
 export interface ScanResult {
   requests?: (Request | WebSocketRequest | GrpcRequest)[];
@@ -75,6 +78,7 @@ export interface ScanResult {
   type?: InsomniaImporter;
   errors: string[];
 }
+/**** ><> ↑ --------- interface definition ->  */
 
 let ResourceCache: {
   content: string;
@@ -142,6 +146,7 @@ export async function scanResources({
     errors: [],
   };
 }
+/**** ><> ↑ --------- variable and function definition ->  */
 
 export async function importResourcesToProject({ projectId }: { projectId: string }) {
   invariant(ResourceCache, 'No resources to import');
@@ -157,6 +162,7 @@ export async function importResourcesToProject({ projectId }: { projectId: strin
   await db.flushChanges(bufferId);
   return { resources: r.flat() };
 }
+/**** ><> ↑ --------- function definition ->  */
 export const importResourcesToWorkspace = async ({ workspaceId }: { workspaceId: string }) => {
   invariant(ResourceCache, 'No resources to import');
   const resources = ResourceCache.resources;
@@ -246,8 +252,10 @@ export const importResourcesToWorkspace = async ({ workspaceId }: { workspaceId:
     workspace: existingWorkspace,
   };
 };
+/**** ><> ↑ --------- function definition ->  */
 export const isApiSpecImport = ({ id }: Pick<InsomniaImporter, 'id'>) =>
   id === 'openapi3' || id === 'swagger2';
+/**** ><> ↑ --------- function definition ->  */
 const importResourcesToNewWorkspace = async (projectId: string, workspaceToImport?: Workspace) => {
   invariant(ResourceCache, 'No resources to import');
   const resources = ResourceCache.resources;
@@ -355,3 +363,4 @@ const importResourcesToNewWorkspace = async (projectId: string, workspaceToImpor
     workspace: newWorkspace,
   };
 };
+/**** ><> ↑ --------- function definition ->  */

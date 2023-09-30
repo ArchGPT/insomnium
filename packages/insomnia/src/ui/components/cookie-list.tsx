@@ -8,6 +8,7 @@ import { Dropdown, DropdownButton, DropdownItem, ItemContent } from './base/drop
 import { PromptButton } from './base/prompt-button';
 import { CookieModifyModal } from './modals/cookie-modify-modal';
 import { RenderedText } from './rendered-text';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface CookieListProps {
   handleCookieAdd: (cookie: Cookie) => void;
@@ -16,10 +17,12 @@ export interface CookieListProps {
   cookies: Cookie[];
   newCookieDomainName: string;
 }
+/**** ><> ↑ --------- Type definitions ->  */
 
 // Use tough-cookie MAX_DATE value
 // https://github.com/salesforce/tough-cookie/blob/5ae97c6a28122f3fb309adcd8428274d9b2bd795/lib/cookie.js#L77
 const MAX_TIME = 2147483647000;
+/**** ><> ↑ --------- Const MAX_TIME definition ->  */
 
 const CookieRow: FC<{
   cookie: Cookie;
@@ -62,6 +65,7 @@ const CookieRow: FC<{
   </tr>;
 
 };
+/**** ><> ↑ --------- CookieRow component ->  */
 
 export const CookieList: FC<CookieListProps> = ({
   cookies,
@@ -157,3 +161,4 @@ export const CookieList: FC<CookieListProps> = ({
     </div>}
   </div>;
 };
+/**** ><> ↑ --------- CookieList component ->  */

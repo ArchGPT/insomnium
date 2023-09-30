@@ -1,6 +1,7 @@
 import { differenceInMinutes, formatDistanceToNowStrict } from 'date-fns';
 import React, { FC, useState } from 'react';
 import { useInterval } from 'react-use';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface Props {
   timestamp: number | Date | string;
@@ -8,6 +9,7 @@ interface Props {
   className?: string;
   titleCase?: boolean;
 }
+/**** ><> ↑ --------- Interface Props definition ->  */
 const toTitleCase = (value: string) => (
   value
     .toLowerCase()
@@ -15,6 +17,7 @@ const toTitleCase = (value: string) => (
     .map(value => value.charAt(0).toUpperCase() + value.slice(1))
     .join(' ')
 );
+/**** ><> ↑ --------- Utility function toTitleCase ->  */
 
 function getTimeFromNow(timestamp: string | number | Date, titleCase: boolean): string {
   const date = new Date(timestamp);
@@ -34,6 +37,7 @@ function getTimeFromNow(timestamp: string | number | Date, titleCase: boolean): 
   }
   return text;
 }
+/**** ><> ↑ --------- Function getTimeFromNow ->  */
 
 function useTimeNowLabel(
   timestamp: number | Date | string,
@@ -49,6 +53,7 @@ function useTimeNowLabel(
 
   return text;
 }
+/**** ><> ↑ --------- Function useTimeNowLabel ->  */
 
 export const TimeFromNow: FC<Props> = ({
   className,
@@ -63,3 +68,4 @@ export const TimeFromNow: FC<Props> = ({
     </span>
   );
 };
+/**** ><> ↑ --------- TimeFromNow Component ->  */

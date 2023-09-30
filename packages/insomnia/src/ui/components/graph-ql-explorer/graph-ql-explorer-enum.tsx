@@ -2,10 +2,12 @@ import { GraphQLEnumType } from 'graphql';
 import React, { FC } from 'react';
 
 import { MarkdownPreview } from '../markdown-preview';
+/**** ><> ↑ --------- Imports */
 
 interface Props {
   type: GraphQLEnumType;
 }
+/**** ><> ↑ --------- Component Props */
 
 export const GraphQLExplorerEnum: FC<Props> = ({ type }) => {
   const values = type.getValues();
@@ -30,3 +32,4 @@ export const GraphQLExplorerEnum: FC<Props> = ({ type }) => {
     </div>
   );
 };
+/**** ><> ↑ --------- Component Function */

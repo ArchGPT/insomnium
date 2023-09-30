@@ -6,6 +6,7 @@ import { generateId } from '../../../common/misc';
 import { PromptButton } from '../base/prompt-button';
 import { AutocompleteHandler, Pair, Row } from './row';
 
+/**** ><> ↑ --------- Import Statements */
 export const Toolbar = styled.div({
   boxSizing: 'content-box',
   position: 'sticky',
@@ -23,6 +24,7 @@ export const Toolbar = styled.div({
     height: '100%',
   },
 });
+/**** ><> ↑ --------- Styled Components */
 interface Props {
   allowFile?: boolean;
   allowMultiline?: boolean;
@@ -42,6 +44,7 @@ interface Props {
   pairs: Pair[];
   valuePlaceholder?: string;
 }
+/**** ><> ↑ --------- Props Interface */
 
 export const KeyValueEditor: FC<Props> = ({
   allowFile,
@@ -165,3 +168,4 @@ export const KeyValueEditor: FC<Props> = ({
     </Fragment >
   );
 };
+/**** ><> ↑ --------- KeyValueEditor Component */

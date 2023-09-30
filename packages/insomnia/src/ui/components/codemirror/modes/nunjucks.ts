@@ -1,10 +1,12 @@
 import CodeMirror from 'codemirror';
+/**** ><> ↑ --------- Importing dependencies */
 
 export function isNunjucksMode(
   mode: CodeMirror.ModeSpec<unknown>
 ): mode is CodeMirror.ModeSpec<{ baseMode: 'string' }> {
   return 'baseMode' in mode;
 }
+/**** ><> ↑ --------- Defining isNunjucksMode function */
 
 CodeMirror.defineMode('nunjucks', (config, parserConfig) => {
   const baseMode = CodeMirror.getMode(config, parserConfig.baseMode || 'text/plain');
@@ -13,6 +15,7 @@ CodeMirror.defineMode('nunjucks', (config, parserConfig) => {
 
   return CodeMirror.overlayMode(baseMode, nunjucksMode, false);
 });
+/**** ><> ↑ --------- Defining a custom mode with CodeMirror */
 
 function _nunjucksMode() {
   const regexVariable = /^{{\s*([^ }]+)\s*[^}]*\s*}}/;
@@ -79,3 +82,4 @@ function _nunjucksMode() {
     },
   };
 }
+/**** ><> ↑ --------- Defining helper function _nunjucksMode */

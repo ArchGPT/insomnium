@@ -8,23 +8,27 @@ import {
   Popover,
 } from 'react-aria-components';
 import { useFetcher } from 'react-router-dom';
+/**** ><> ↑ --------- Importing packages and components ->  */
 
 import {
   Project,
 } from '../../../models/project';
 import { Icon } from '../icon';
 import ProjectSettingsModal from '../modals/project-settings-modal';
+/**** ><> ↑ --------- Relative Imports ->  */
 
 interface Props {
   project: Project;
   organizationId: string;
 }
+/**** ><> ↑ --------- Props Interface Definition ->  */
 
 export const ProjectDropdown: FC<Props> = ({ project, organizationId }) => {
   const [isProjectSettingsModalOpen, setIsProjectSettingsModalOpen] =
     useState(false);
   const deleteProjectFetcher = useFetcher();
 
+/**** ><> ↑ --------- ProjectDropdown Function Component ->  */
   const projectActionList: {
     id: string;
     name: string;
@@ -51,6 +55,7 @@ export const ProjectDropdown: FC<Props> = ({ project, organizationId }) => {
         ),
     },
   ];
+/**** ><> ↑ --------- Project Action List Definition ->  */
   return (
     <Fragment>
       <MenuTrigger>
@@ -93,3 +98,4 @@ export const ProjectDropdown: FC<Props> = ({ project, organizationId }) => {
     </Fragment>
   );
 };
+/**** ><> ↑ --------- ProjectDropdown component return ->  */

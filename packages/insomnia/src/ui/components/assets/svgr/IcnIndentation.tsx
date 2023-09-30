@@ -1,5 +1,7 @@
 import React, { SVGProps, memo } from 'react';
+/**** ><> ↑ --------- Import statements ->  */
 export const SvgIcnIndentation = memo<SVGProps<SVGSVGElement>>(props => (
+/**** ><> ↑ --------- SvgIcnIndentation component declaration and props ->  */
   <svg
     width="1em"
     height="1em"
@@ -9,7 +11,9 @@ export const SvgIcnIndentation = memo<SVGProps<SVGSVGElement>>(props => (
     role="img"
     {...props}
   >
+/**** ><> ↑ --------- Svg attributes and properties ->  */
     <path fill="none" d="M0 0h14v14H0z" />
     <path d="M4.5 0v9.5H14V11H4.5A1.5 1.5 0 0 1 3 9.5V0h1.5Z" fill="" />
   </svg>
 ));
+/**** ><> ↑ --------- Svg paths and component closure ->  */

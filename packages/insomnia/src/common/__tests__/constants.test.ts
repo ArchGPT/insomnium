@@ -10,6 +10,7 @@ import {
   isValidActivity,
   isWorkspaceActivity,
 } from '../constants';
+/**** ><> ↑ --------- Import Statements ->  */
 
 describe('URL Regex', () => {
   it('matches valid URLs', () => {
@@ -36,6 +37,7 @@ describe('URL Regex', () => {
     expect('[https://google.com]').not.toMatch(FLEXIBLE_URL_REGEX);
   });
 });
+/**** ><> ↑ --------- URL Regex Tests ->  */
 
 describe('isWorkspaceActivity', () => {
   it('should return true', () => {
@@ -48,6 +50,7 @@ describe('isWorkspaceActivity', () => {
     expect(isWorkspaceActivity(ACTIVITY_HOME)).toBe(false);
   });
 });
+/**** ><> ↑ --------- isWorkspaceActivity Tests ->  */
 
 describe('isValidActivity', () => {
   it('should return true', () => {
@@ -65,6 +68,7 @@ describe('isValidActivity', () => {
     expect(isValidActivity(undefined)).toBe(false);
   });
 });
+/**** ><> ↑ --------- isValidActivity Tests ->  */
 
 describe('getContentTypeName', () => {
   it('should return empty content type name', () => {
@@ -86,3 +90,4 @@ describe('getContentTypeName', () => {
     expect(getContentTypeName('unknown')).toBe('Other');
   });
 });
+/**** ><> ↑ --------- getContentTypeName Tests ->  */

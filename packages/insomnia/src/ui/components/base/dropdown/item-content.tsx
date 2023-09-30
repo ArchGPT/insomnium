@@ -7,6 +7,7 @@ import { svgPlacementHack } from '../../dropdowns/dropdown-placement-hacks';
 import { SvgIcon } from '../../svg-icon';
 import { PromptButton } from '../prompt-button';
 import { DropdownHint } from './dropdown-hint';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface StyledIconProps {
   icon: string;
@@ -20,6 +21,7 @@ const StyledIcon = styled.i.attrs<StyledIconProps>(props => ({
   padding: '0 var(--padding-xs)',
   width: 'unset',
 });
+/**** ><> ↑ --------- StyledIcon component definition ->  */
 
 interface ContainerProps {
   isSelected?: boolean;
@@ -36,6 +38,7 @@ const StyledItemContainer = styled.div<ContainerProps>(props => ({
   background: props.isSelected ? 'var(--hl-xs)' : 'initial',
   fontWeight: props.isSelected ? 'bold' : 'normal',
 }));
+/**** ><> ↑ --------- StyledItemContainer component definition ->  */
 
 const StyledItemPromptContainer = styled(PromptButton)({
   width: '100%',
@@ -46,12 +49,14 @@ const StyledItemPromptContainer = styled(PromptButton)({
   paddingRight: 'var(--padding-md)',
   paddingLeft: 'var(--padding-sm)',
 });
+/**** ><> ↑ --------- StyledItemPromptContainer component definition ->  */
 
 const StyledItemContent = styled.div({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
 });
+/**** ><> ↑ --------- StyledItemContent component definition ->  */
 
 const Checkmark = styled(SvgIcon)({
   '&&': {
@@ -61,6 +66,7 @@ const Checkmark = styled(SvgIcon)({
     },
   },
 });
+/**** ><> ↑ --------- Checkmark component definition ->  */
 
 type ItemContentProps = PropsWithChildren<{
   icon?: string | ReactNode;
@@ -75,6 +81,7 @@ type ItemContentProps = PropsWithChildren<{
   stayOpenAfterClick?: boolean;
   onClick?: () => void;
 }>;
+/**** ><> ↑ --------- ItemContentProps type definition ->  */
 
 export const ItemContent: FC<ItemContentProps> = (props: ItemContentProps) => {
   const { icon, label, hint, className, withPrompt, children, iconStyle, style, isSelected, onClick } = props;
@@ -113,3 +120,4 @@ export const ItemContent: FC<ItemContentProps> = (props: ItemContentProps) => {
     </StyledItemContainer>
   );
 };
+/**** ><> ↑ --------- ItemContent component implementation ->  */

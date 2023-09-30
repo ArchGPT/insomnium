@@ -2,6 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { IconEnum, SvgIcon } from '../../svg-icon';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface SidebarHeaderProps {
   headerTitle: string;
@@ -10,6 +11,7 @@ export interface SidebarHeaderProps {
   sectionVisible: boolean;
   children?: ReactNode;
 }
+/**** ><> ↑ --------- Interface definition ->  */
 
 const StyledHeader = styled.li`
   display: flex;
@@ -54,6 +56,7 @@ const StyledHeader = styled.li`
     }
   }
 `;
+/**** ><> ↑ --------- Styled-component definition ->  */
 
 export const SidebarHeader: FunctionComponent<SidebarHeaderProps> = ({
   headerTitle,
@@ -86,3 +89,4 @@ export const SidebarHeader: FunctionComponent<SidebarHeaderProps> = ({
     </StyledHeader>
   );
 };
+/**** ><> ↑ --------- Functional Component Definition ->  */

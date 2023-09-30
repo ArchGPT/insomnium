@@ -3,10 +3,12 @@ import fs from 'fs';
 import { SpyInstance } from 'jest-mock';
 import os from 'os';
 import path from 'path';
+/**** ><> ↑ --------- module imports ->  */
 
 import { globalBeforeEach } from '../../../__jest__/before-each';
 import * as models from '../../../models';
 import { writeProtoFile } from '../write-proto-file';
+/**** ><> ↑ --------- additional imports ->  */
 
 describe('writeProtoFile', () => {
   let existsSyncSpy: SpyInstance<any>;
@@ -30,6 +32,7 @@ describe('writeProtoFile', () => {
     tmpDirSpy.mockRestore();
     writeFileSpy.mockRestore();
   };
+/**** ><> ↑ --------- test suite setup ->  */
 
   beforeEach(async () => {
     await globalBeforeEach();
@@ -43,6 +46,7 @@ describe('writeProtoFile', () => {
 
     jest.resetAllMocks();
   });
+/**** ><> ↑ --------- beforeEach and afterEach hooks ->  */
 
   describe('individual files', () => {
     it('can write individual file', async () => {
@@ -91,6 +95,7 @@ describe('writeProtoFile', () => {
       expect(writeFileSpy).not.toHaveBeenCalled();
     });
   });
+/**** ><> ↑ --------- 'writeProtoFile' function tests for individual files ->  */
 
   describe('nested files', () => {
     it('can write file contained in a single folder', async () => {
@@ -230,3 +235,4 @@ describe('writeProtoFile', () => {
     });
   });
 });
+/**** ><> ↑ --------- 'writeProtoFile' function tests for nested files ->  */

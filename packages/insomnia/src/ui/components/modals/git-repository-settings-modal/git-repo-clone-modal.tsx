@@ -16,12 +16,14 @@ import { showAlert } from '..';
 import { CustomRepositorySettingsFormGroup } from './custom-repository-settings-form-group';
 import { GitHubRepositorySetupFormGroup } from './github-repository-settings-form-group';
 import { GitLabRepositorySetupFormGroup } from './gitlab-repository-settings-form-group';
+/**** ><> ↑ --------- Import statements ->  */
 
 const TabPill = styled.div({
   display: 'flex',
   gap: 'var(--padding-xs)',
   alignItems: 'center',
 });
+/**** ><> ↑ --------- Styled-component definition ->  */
 
 export const GitRepositoryCloneModal = (props: ModalProps) => {
   const { organizationId, projectId } = useParams() as { organizationId: string; projectId: string };
@@ -30,9 +32,11 @@ export const GitRepositoryCloneModal = (props: ModalProps) => {
 
   const [selectedTab, setTab] = useState<OauthProviderName>('github');
 
+/**** ><> ↑ --------- GitRepositoryCloneModal function component definition initialization ->  */
   useEffect(() => {
     modalRef.current?.show();
   }, []);
+/**** ><> ↑ --------- Modal show useEffect ->  */
 
   const onSubmit = (gitRepositoryPatch: Partial<GitRepository>) => {
     const {
@@ -59,6 +63,7 @@ export const GitRepositoryCloneModal = (props: ModalProps) => {
       }
     );
   };
+/**** ><> ↑ --------- onSubmit function definition ->  */
 
   const isSubmitting = cloneGitRepositoryFetcher.state === 'submitting';
   const errors = cloneGitRepositoryFetcher.data?.errors as (Error | string)[];
@@ -72,6 +77,7 @@ export const GitRepositoryCloneModal = (props: ModalProps) => {
       });
     }
   }, [errors]);
+/**** ><> ↑ --------- Handling submission state and errors ->  */
 
   return (
     <Modal ref={modalRef} {...props}>
@@ -127,3 +133,4 @@ export const GitRepositoryCloneModal = (props: ModalProps) => {
     </Modal>
   );
 };
+/**** ><> ↑ --------- Modal component return JSX ->  */

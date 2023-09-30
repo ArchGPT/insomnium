@@ -2,6 +2,7 @@ import { exportWorkspacesData, exportWorkspacesHAR } from '../../common/export';
 import { fetchImportContentFromURI, importResourcesToProject, scanResources } from '../../common/import';
 import * as models from '../../models';
 import type { Workspace } from '../../models/workspace';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface InsomniaExport {
   workspace?: Workspace;
@@ -11,6 +12,7 @@ interface InsomniaExport {
 
 type HarExport = Omit<InsomniaExport, 'format'>;
 
+/**** ><> ↑ --------- Interface and type definitions ->  */
 const getWorkspaces = (activeProjectId?: string) => {
   if (activeProjectId) {
     return models.workspace.findByParentId(activeProjectId);
@@ -21,8 +23,10 @@ const getWorkspaces = (activeProjectId?: string) => {
     return models.workspace.all();
   }
 };
+/**** ><> ↑ --------- getWorkspaces function definition ->  */
 
 // Only in the case of running unit tests from Inso via send-request can activeProjectId be undefined. This is because the concept of a project doesn't exist in git/insomnia sync or an export file
+/**** ><> ↑ --------- Comment about special case ->  */
 export const init = (activeProjectId?: string) => ({
   data: {
     import: {
@@ -77,3 +81,4 @@ export const init = (activeProjectId?: string) => ({
     },
   },
 });
+/**** ><> ↑ --------- init function export ->  */

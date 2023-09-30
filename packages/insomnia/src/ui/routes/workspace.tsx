@@ -29,6 +29,7 @@ import { Workspace } from '../../models/workspace';
 import { WorkspaceMeta } from '../../models/workspace-meta';
 import { StatusCandidate } from '../../sync/types';
 import { invariant } from '../../utils/invariant';
+/**** ><> ↑ --------- Import Statements ->  */
 
 type Collection = Child[];
 
@@ -59,6 +60,7 @@ export interface Child {
   level: number;
   ancestors?: string[];
 }
+/**** ><> ↑ --------- Type Declarations ->  */
 
 export const workspaceLoader: LoaderFunction = async ({
   request,
@@ -271,11 +273,14 @@ export const workspaceLoader: LoaderFunction = async ({
     collection: flattenTree(),
   };
 };
+/**** ><> ↑ --------- Workspace Loader Function ->  */
 
 const WorkspaceRoute = () => {
   const workspaceData = useLoaderData() as WorkspaceLoaderData;
   const branch = workspaceData.activeWorkspaceMeta.cachedGitRepositoryBranch;
   return <Outlet key={branch} />;
 };
+/**** ><> ↑ --------- Workspace Route Component ->  */
 
 export default WorkspaceRoute;
+/**** ><> ↑ --------- Default Export Statement ->  */

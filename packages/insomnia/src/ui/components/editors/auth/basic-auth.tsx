@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { AuthInputRow } from './components/auth-input-row';
 import { AuthTableBody } from './components/auth-table-body';
 import { AuthToggleRow } from './components/auth-toggle-row';
+/**** ><> ↑ --------- Import statements */
 
 export const BasicAuth: FC<{ disabled?: boolean }> = ({ disabled = false }) => (
   <AuthTableBody>
@@ -17,3 +18,4 @@ export const BasicAuth: FC<{ disabled?: boolean }> = ({ disabled = false }) => (
     />
   </AuthTableBody>
 );
+/**** ><> ↑ --------- Component definition */

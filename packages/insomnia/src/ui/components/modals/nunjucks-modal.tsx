@@ -7,26 +7,31 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { TagEditor } from '../templating/tag-editor';
 import { VariableEditor } from '../templating/variable-editor';
+/**** ><> ↑ --------- Imports of libraries and components ->  */
 
 interface Props {
   workspace: Workspace;
 }
+/**** ><> ↑ --------- Props interface declaration ->  */
 
 interface State {
   isTag: boolean;
   template: string;
   onDone: Function;
 }
+/**** ><> ↑ --------- State interface declaration ->  */
 
 interface NunjucksModalOptions {
   template: string;
   onDone: Function;
 }
+/**** ><> ↑ --------- NunjucksModalOptions interface declaration ->  */
 
 export interface NunjucksModalHandle {
   show: (options: NunjucksModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- NunjucksModalHandle interface declaration ->  */
 export const NunjucksModal = forwardRef<NunjucksModalHandle, ModalProps & Props>((props, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<State>({
@@ -48,6 +53,7 @@ export const NunjucksModal = forwardRef<NunjucksModalHandle, ModalProps & Props>
       modalRef.current?.show();
     },
   }), []);
+/**** ><> ↑ --------- NunjucksModal Component declaration ->  */
 
   const handleTemplateChange = (template: string) => {
     setState(state => ({
@@ -55,6 +61,7 @@ export const NunjucksModal = forwardRef<NunjucksModalHandle, ModalProps & Props>
       template,
     }));
   };
+/**** ><> ↑ --------- HandleTemplateChange function declaration ->  */
 
   const { workspace } = props;
   const { template, isTag } = state;
@@ -93,5 +100,7 @@ export const NunjucksModal = forwardRef<NunjucksModalHandle, ModalProps & Props>
       </ModalFooter>
     </Modal>
   );
+/**** ><> ↑ --------- Component main rendering logic ->  */
 });
 NunjucksModal.displayName = 'NunjucksModal';
+/**** ><> ↑ --------- Setting Component display name ->  */

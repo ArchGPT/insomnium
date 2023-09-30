@@ -4,6 +4,7 @@
 /* eslint-disable -- eslint has a hard time with declaration files */
 
 declare module 'tough-cookie' {
+/**** ><> ↑ --------- Comments and module declaration ->  */
 
   // Type definitions for tough-cookie 2.3
   // Project: https://github.com/salesforce/tough-cookie
@@ -12,6 +13,7 @@ declare module 'tough-cookie' {
   //                 Michael Wei <https://github.com/no2chem>
   // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
   // TypeScript Version: 2.2
+/**** ><> ↑ --------- Type definitions comment ->  */
 
   /**
    * Parse a cookie date string into a Date.
@@ -70,8 +72,10 @@ declare module 'tough-cookie' {
   export function permuteDomain(domain: string): string[];
 
   export function permutePath(path: string): string[];
+/**** ><> ↑ --------- Functions declaration ->  */
 
   export interface CookieJSON { [key: string]: any; }
+/**** ><> ↑ --------- CookieJSON interface declaration ->  */
 
   export class Cookie {
     static parse(cookieString: string, options?: ParseOptions): Cookie | undefined;
@@ -120,10 +124,12 @@ declare module 'tough-cookie' {
 
     validate(): boolean | string;
   }
+/**** ><> ↑ --------- Cookie class declaration ->  */
 
   export interface ParseOptions {
     loose?: boolean;
   }
+/**** ><> ↑ --------- ParseOptions interface declaration ->  */
 
   export interface CookieProperties {
     key?: string;
@@ -142,15 +148,18 @@ declare module 'tough-cookie' {
     pathIsDefault?: boolean;
     lastAccessed?: Date;
   }
+/**** ><> ↑ --------- CookieProperties interface declaration ->  */
 
   export interface CookieSerialized {
     [key: string]: any;
   }
+/**** ><> ↑ --------- CookieSerialized interface declaration ->  */
 
   export interface CookieJarOptions {
     rejectPublicSuffixes?: boolean;
     looseMode?: boolean;
   }
+/**** ><> ↑ --------- CookieJarOptions interface declaration ->  */
 
   export interface SetCookieOptions {
     http?: boolean;
@@ -158,6 +167,7 @@ declare module 'tough-cookie' {
     now?: Date;
     ignoreError?: boolean;
   }
+/**** ><> ↑ --------- SetCookieOptions interface declaration ->  */
 
   export interface GetCookiesOptions {
     http?: boolean;
@@ -166,6 +176,7 @@ declare module 'tough-cookie' {
     expire?: boolean;
     allPaths?: boolean;
   }
+/**** ><> ↑ --------- GetCookiesOptions interface declaration ->  */
 
   export interface CookieJarSerialized {
     version: string;
@@ -173,6 +184,7 @@ declare module 'tough-cookie' {
     rejectPublicSuffixes: boolean;
     cookies: CookieSerialized[];
   }
+/**** ><> ↑ --------- CookieJarSerialized interface declaration ->  */
 
   export class CookieJar {
     static deserialize(serialized: CookieJarSerialized | string, store: Store, cb: (err: Error | null, object: CookieJar) => void): void;
@@ -223,6 +235,7 @@ declare module 'tough-cookie' {
 
     fromJSON(): CookieJar;
   }
+/**** ><> ↑ --------- CookieJar class declaration ->  */
 
   export abstract class Store {
     findCookie(domain: string, path: string, key: string, cb: (err: Error | null, cookie: Cookie | null) => void): void;
@@ -239,6 +252,9 @@ declare module 'tough-cookie' {
 
     getAllCookies(cb: (err: Error | null, cookie: Cookie[]) => void): void;
   }
+/**** ><> ↑ --------- Store abstract class declaration ->  */
 
   export class MemoryCookieStore extends Store { }
+/**** ><> ↑ --------- MemoryCookieStore class declaration ->  */
 }
+/**** ><> ↑ --------- End of module declaration ->  */

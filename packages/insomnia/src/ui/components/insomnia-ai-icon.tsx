@@ -1,11 +1,14 @@
 import React from 'react';
 
 import { useAIContext } from '../context/app/ai-context';
+/**** ><> ↑ --------- Import dependencies */
 
 export const InsomniaAI = ({
   ...props
 }: React.SVGProps<SVGSVGElement>) => {
+/**** ><> ↑ --------- Function declaration with destructured props */
   const { generating: loading } = useAIContext();
+/**** ><> ↑ --------- Use AI context hook */
 
   return (
     <svg
@@ -18,6 +21,7 @@ export const InsomniaAI = ({
       height="16"
       {...props}
     >
+/**** ><> ↑ --------- Return SVG component with properties */
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -32,6 +36,8 @@ export const InsomniaAI = ({
           />
         )}
       </path>
+/**** ><> ↑ --------- Path element with animation */
     </svg>
   );
 };
+/**** ><> ↑ --------- End of function */

@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React, { FC, memo } from 'react';
 
 import { Tooltip } from '../tooltip';
+/**** ><> ↑ --------- Importing dependencies ->  */
 
 interface Props {
   milliseconds: number;
@@ -9,6 +10,7 @@ interface Props {
   className?: string;
   tooltipDelay?: number;
 }
+/**** ><> ↑ --------- Defining PropTypes ->  */
 
 export const TimeTag: FC<Props> = memo(({ milliseconds, small, className, tooltipDelay }) => {
   let unit = 'ms';
@@ -48,5 +50,7 @@ export const TimeTag: FC<Props> = memo(({ milliseconds, small, className, toolti
     </div>
   );
 });
+/**** ><> ↑ --------- Instantiating the TimeTag component ->  */
 
 TimeTag.displayName = 'TimeTag';
+/**** ><> ↑ --------- Assigning displayName to the TimeTag component ->  */

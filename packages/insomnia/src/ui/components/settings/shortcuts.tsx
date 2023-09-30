@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 
+/**** ><> ↑ --------- Import statements */
 import {
   areSameKeyCombinations,
   constructKeyCombinationDisplay,
@@ -17,6 +18,7 @@ import { Hotkey } from '../hotkey';
 import { showModal } from '../modals';
 import { AddKeyCombinationModal } from '../modals/add-key-combination-modal';
 
+/**** ><> ↑ --------- Helper functions and constants */
 export const isKeyCombinationInRegistry = (pressedKeyComb: KeyCombination, hotKeyRegistry: Partial<HotKeyRegistry>): boolean =>
   !!Object.values(hotKeyRegistry).find(bindings =>
     getPlatformKeyCombinations(bindings)
@@ -29,6 +31,7 @@ export const Shortcuts: FC = () => {
   const { hotKeyRegistry } = settings;
   const patchSettings = useSettingsPatcher();
 
+/**** ><> ↑ --------- Exported functions and components */
   return (
     <div className="shortcuts">
       <div className="row-spaced margin-bottom-xs">
@@ -150,3 +153,4 @@ export const Shortcuts: FC = () => {
     </div>
   );
 };
+/**** ><> ↑ --------- Shortcuts component definition */

@@ -3,10 +3,12 @@ import React, { Fragment, PureComponent } from 'react';
 
 import { GraphQLExplorerTypeLink } from './graph-ql-explorer-type-link';
 
+/**** ><> ↑ --------- Imports */
 interface Props {
   onNavigateType: (type: GraphQLType) => void;
   schema: GraphQLSchema;
 }
+/**** ><> ↑ --------- Props Interface */
 
 export class GraphQLExplorerSchema extends PureComponent<Props> {
   renderQueryType() {
@@ -71,3 +73,4 @@ export class GraphQLExplorerSchema extends PureComponent<Props> {
     );
   }
 }
+/**** ><> ↑ --------- GraphQLExplorerSchema Class */

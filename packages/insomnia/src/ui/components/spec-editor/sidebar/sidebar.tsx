@@ -15,6 +15,7 @@ import { SidebarSchemas } from './sidebar-schemas';
 import { SidebarSecurity } from './sidebar-security';
 import { SidebarServer, SidebarServers } from './sidebar-servers';
 
+/**** ><> ↑ --------- Import dependencies ->  */
 export interface SidebarProps {
   className?: string;
   onClick: (section: string, path: any) => void;
@@ -33,6 +34,7 @@ export interface SidebarProps {
   };
   pathItems?: Record<string, any>[];
 }
+/**** ><> ↑ --------- Define SidebarProps interface ->  */
 
 const StyledSidebar = styled.div`
   width: 100%;
@@ -68,6 +70,7 @@ const StyledItem = styled.div({
   },
 });
 
+/**** ><> ↑ --------- Define styled-components ->  */
 interface ItemWrapperProps {
   checked: boolean;
   htmlFor: string;
@@ -82,9 +85,11 @@ const ItemWrapper = ({ checked, htmlFor, label }: ItemWrapperProps) => {
     </StyledItem>
   );
 };
+/**** ><> ↑ --------- Define ItemWrapper component ->  */
 
 const DropdownEllipsis = () => <SvgIcon icon={IconEnum.ellipsesCircle} />;
 
+/**** ><> ↑ --------- Define DropdownEllipsis component ->  */
 // Section Expansion & Filtering
 export const Sidebar: FunctionComponent<SidebarProps> = ({ jsonData, onClick }) => {
   // Section Visibility
@@ -98,6 +103,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ jsonData, onClick }) 
   const [schemasVisible, setSchemasVisible] = useToggle(true);
   const [securityVisible, setSecurityVisible] = useToggle(true);
 
+/**** ><> ↑ --------- Main Sidebar component - initial setup and section visibility states ->  */
   // Sections
   if (jsonData === null) {
     return null;
@@ -117,6 +123,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ jsonData, onClick }) 
     schemas,
     securitySchemes,
   } = jsonData?.components || {};
+/**** ><> ↑ --------- Main Sidebar component - section data extraction ->  */
 
   return (
     <StyledSidebar className="theme--sidebar">
@@ -256,3 +263,4 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ jsonData, onClick }) 
     </StyledSidebar>
   );
 };
+/**** ><> ↑ --------- Main Sidebar component - component rendering ->  */

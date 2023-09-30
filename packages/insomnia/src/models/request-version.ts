@@ -7,6 +7,7 @@ import { GrpcRequest } from './grpc-request';
 import type { BaseModel } from './index';
 import { isRequest, Request } from './request';
 import { isWebSocketRequest, WebSocketRequest } from './websocket-request';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const name = 'Request Version';
 
@@ -18,12 +19,14 @@ export const canDuplicate = false;
 
 export const canSync = false;
 
+/**** ><> ↑ --------- Export constants ->  */
 interface BaseRequestVersion {
   compressedRequest: string | null;
 }
 
 export type RequestVersion = BaseModel & BaseRequestVersion;
 
+/**** ><> ↑ --------- Interface and type definition ->  */
 const FIELDS_TO_IGNORE = [
   '_id',
   'type',
@@ -34,28 +37,34 @@ const FIELDS_TO_IGNORE = [
   'parentId',
   'name',
 ] as const;
+/**** ><> ↑ --------- Fields to ignore array constant ->  */
 
 export const isRequestVersion = (model: Pick<BaseModel, 'type'>): model is RequestVersion => (
   model.type === type
 );
+/**** ><> ↑ --------- isRequestVersion function export ->  */
 
 export function init() {
   return {
     compressedRequest: null,
   };
 }
+/**** ><> ↑ --------- init function export ->  */
 
 export function migrate(doc: RequestVersion) {
   return doc;
 }
+/**** ><> ↑ --------- migrate function export ->  */
 
 export function getById(id: string) {
   return db.get<RequestVersion>(type, id);
 }
+/**** ><> ↑ --------- getById function export ->  */
 
 export function findByParentId(parentId: string) {
   return db.find<RequestVersion>(type, { parentId });
 }
+/**** ><> ↑ --------- findByParentId function export ->  */
 
 export async function create(request: Request | WebSocketRequest | GrpcRequest) {
   if (!isRequest(request) && !isWebSocketRequest(request)) {
@@ -82,10 +91,12 @@ export async function create(request: Request | WebSocketRequest | GrpcRequest) 
     return latestRequestVersion;
   }
 }
+/**** ><> ↑ --------- create function export ->  */
 
 export function getLatestByParentId(parentId: string) {
   return db.getMostRecentlyModified<RequestVersion>(type, { parentId });
 }
+/**** ><> ↑ --------- getLatestByParentId function export ->  */
 
 export async function restore(requestVersionId: string) {
   const requestVersion = await getById(requestVersionId);
@@ -116,6 +127,7 @@ export async function restore(requestVersionId: string) {
 
   return requestOperations.update(originalRequest, requestPatch);
 }
+/**** ><> ↑ --------- restore function export ->  */
 function _diffRequests(rOld: Request | WebSocketRequest | null, rNew: Request | WebSocketRequest) {
   if (!rOld) {
     return true;
@@ -133,7 +145,9 @@ function _diffRequests(rOld: Request | WebSocketRequest | null, rNew: Request | 
 
   return false;
 }
+/**** ><> ↑ --------- _diffRequests function ->  */
 
 export function all() {
   return db.all<RequestVersion>(type);
 }
+/**** ><> ↑ --------- all function export ->  */

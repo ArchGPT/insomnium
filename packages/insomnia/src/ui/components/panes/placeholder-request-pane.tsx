@@ -1,10 +1,12 @@
 import React, { FC, useCallback } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 import { useFetcher, useParams } from 'react-router-dom';
+/**** ><> ↑ --------- Imports from external libraries ->  */
 
 import { RootLoaderData } from '../../routes/root';
 import { Hotkey } from '../hotkey';
 import { Pane, PaneBody, PaneHeader } from './pane';
+/**** ><> ↑ --------- Imports from internal module or components ->  */
 
 export const PlaceholderRequestPane: FC = () => {
   const {
@@ -20,6 +22,7 @@ export const PlaceholderRequestPane: FC = () => {
         method: 'post',
         encType: 'application/json',
       }), [requestFetcher, organizationId, projectId, workspaceId]);
+/**** ><> ↑ --------- Component definition and state management ->  */
 
   return (
     <Pane type="request">
@@ -74,3 +77,4 @@ export const PlaceholderRequestPane: FC = () => {
     </Pane>
   );
 };
+/**** ><> ↑ --------- Component render method and JSX return ->  */

@@ -3,6 +3,7 @@ import { parse as urlParse } from 'url';
 const WILDCARD_CHARACTER = '*';
 const WILDCARD_SUBSTITUTION = Math.random().toString().split('.')[1];
 const WILDCARD_SUBSTITUTION_PATTERN = new RegExp(`${WILDCARD_SUBSTITUTION}`, 'g');
+/**** ><> ↑ --------- Import and constants initialisation ->  */
 
 export default function certificateUrlParse(url: string) {
   if (url.indexOf(WILDCARD_CHARACTER) === -1) {
@@ -16,6 +17,7 @@ export default function certificateUrlParse(url: string) {
     return parsed;
   }
 }
+/**** ><> ↑ --------- Main Function: certificateUrlParse ->  */
 
 function _reinstateWildcards(string: string): string;
 function _reinstateWildcards(string: string | null): string | null;
@@ -26,3 +28,4 @@ function _reinstateWildcards(string: string | null) {
     return string;
   }
 }
+/**** ><> ↑ --------- Helper Function: _reinstateWildcards ->  */

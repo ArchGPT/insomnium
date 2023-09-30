@@ -1,6 +1,7 @@
 import { build } from 'esbuild';
 import alias from 'esbuild-plugin-alias';
 import path from 'path';
+/**** ><> ↑ --------- Imports */
 
 async function main() {
   await build({
@@ -19,8 +20,10 @@ async function main() {
     ],
     external: ['@getinsomnia/node-libcurl'],
   });
+/**** ><> ↑ --------- Main Function */
 
   process.exit(0);
 }
 
 main();
+/**** ><> ↑ --------- Program Execution */

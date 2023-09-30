@@ -6,6 +6,7 @@ import { useSettingsPatcher } from '../../hooks/use-request';
 import { RootLoaderData } from '../../routes/root';
 import { HelpTooltip } from '../help-tooltip';
 
+/**** ><> ↑ --------- Imports */
 export const TextSetting: FC<{
   disabled?: InputHTMLAttributes<HTMLInputElement>['disabled'];
   help?: string;
@@ -39,6 +40,7 @@ export const TextSetting: FC<{
   }
 
   return (
+/**** ><> ↑ --------- React component */
     <div className="form-control form-control--outlined">
       <label>
         {label}
@@ -53,5 +55,7 @@ export const TextSetting: FC<{
         />
       </label>
     </div>
+/**** ><> ↑ --------- Form control and input field */
   );
 };
+/**** ><> ↑ --------- End of code */

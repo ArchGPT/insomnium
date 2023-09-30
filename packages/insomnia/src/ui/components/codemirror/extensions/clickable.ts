@@ -3,6 +3,7 @@ import 'codemirror/addon/mode/overlay';
 import CodeMirror, { CodeMirrorLinkClickCallback } from 'codemirror';
 import { decode } from 'html-entities';
 
+/**** ><> ↑ --------- Imports */
 import { FLEXIBLE_URL_REGEX } from '../../../../common/constants';
 
 CodeMirror.defineExtension('makeLinksClickable', function(this: CodeMirror.Editor, handleClick: CodeMirrorLinkClickCallback) {
@@ -45,3 +46,4 @@ CodeMirror.defineExtension('makeLinksClickable', function(this: CodeMirror.Edito
     }
   });
 });
+/**** ><> ↑ --------- CodeMirror Extension - makeLinksClickable */

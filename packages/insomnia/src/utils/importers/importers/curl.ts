@@ -3,11 +3,13 @@ import { URL } from 'url';
 
 import { Converter, ImportRequest, Parameter, PostData } from '../entities';
 
+/**** ><> ↑ --------- Imports ->  */
 export const id = 'curl';
 export const name = 'cURL';
 export const description = 'cURL command line tool';
 
 let requestCount = 1;
+/**** ><> ↑ --------- Exports and Constants ->  */
 
 const SUPPORTED_ARGS = [
   'url',
@@ -30,6 +32,7 @@ const SUPPORTED_ARGS = [
   'request',
   'X',
 ];
+/**** ><> ↑ --------- Supported Arguments Definition ->  */
 
 type Pair = string | boolean;
 
@@ -37,6 +40,7 @@ interface PairsByName {
   [name: string]: Pair[];
 }
 
+/**** ><> ↑ --------- Pair Type and Interface Definition ->  */
 const importCommand = (parseEntries: ParseEntry[]): ImportRequest => {
   // ~~~~~~~~~~~~~~~~~~~~~ //
   // Collect all the flags //
@@ -240,6 +244,7 @@ const importCommand = (parseEntries: ParseEntry[]): ImportRequest => {
     body,
   };
 };
+/**** ><> ↑ --------- Function importCommand Definition ->  */
 
 /**
  * cURL supported -d, and --date[suffix] flags.
@@ -271,6 +276,7 @@ const dataFlags = [
    */
   'data-ascii',
 ];
+/**** ><> ↑ --------- Constants for cURL flags ->  */
 
 /**
  * Parses pairs supporting only flags dictated by {@link dataFlags}
@@ -317,6 +323,7 @@ const pairsToDataParameters = (keyedPairs: PairsByName): Parameter[] => {
 
   return dataParameters;
 };
+/**** ><> ↑ --------- Function pairsToDataParameters Definition ->  */
 
 /**
  * Converts pairs (that could include multiple via `&`) into {@link Parameter}s. This
@@ -344,6 +351,7 @@ const pairToParameters = (pair: Pair, allowFiles = false): Parameter[] => {
     return { name, value };
   });
 };
+/**** ><> ↑ --------- Function pairToParameters Definition ->  */
 
 const getPairValue = <T extends string | boolean>(
   parisByName: PairsByName,
@@ -358,6 +366,7 @@ const getPairValue = <T extends string | boolean>(
 
   return defaultValue;
 };
+/**** ><> ↑ --------- Function getPairValue Definition ->  */
 
 export const convert: Converter = rawData => {
   requestCount = 1;
@@ -428,3 +437,4 @@ export const convert: Converter = rawData => {
 
   return requests;
 };
+/**** ><> ↑ --------- Converter Export and Definition ->  */

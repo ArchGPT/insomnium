@@ -5,6 +5,7 @@ import { RequestGroup } from '../../models/request-group';
 import { RequestGroupMeta } from '../../models/request-group-meta';
 import { invariant } from '../../utils/invariant';
 
+/**** ><> ↑ --------- Import statements ->  */
 export const createRequestGroupAction: ActionFunction = async ({ request, params }) => {
   const { workspaceId } = params;
   const formData = await request.formData();
@@ -14,6 +15,7 @@ export const createRequestGroupAction: ActionFunction = async ({ request, params
   await models.requestGroupMeta.create({ parentId: requestGroup._id, collapsed: false });
   return null;
 };
+/**** ><> ↑ --------- createRequestGroupAction functionality ->  */
 export const updateRequestGroupAction: ActionFunction = async ({ request, params }) => {
   const { requestGroupId } = params;
   invariant(typeof requestGroupId === 'string', 'Request Group ID is required');
@@ -23,6 +25,7 @@ export const updateRequestGroupAction: ActionFunction = async ({ request, params
   await models.requestGroup.update(reqGroup, patch);
   return null;
 };
+/**** ><> ↑ --------- updateRequestGroupAction functionality ->  */
 export const deleteRequestGroupAction: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const id = formData.get('id') as string;
@@ -32,6 +35,7 @@ export const deleteRequestGroupAction: ActionFunction = async ({ request }) => {
   await models.requestGroup.remove(requestGroup);
   return null;
 };
+/**** ><> ↑ --------- deleteRequestGroupAction functionality ->  */
 
 export const duplicateRequestGroupAction: ActionFunction = async ({ request }) => {
   const patch = await request.json() as Partial<RequestGroup>;
@@ -51,6 +55,7 @@ export const duplicateRequestGroupAction: ActionFunction = async ({ request }) =
   models.stats.incrementCreatedRequestsForDescendents(newRequestGroup);
   return null;
 };
+/**** ><> ↑ --------- duplicateRequestGroupAction functionality ->  */
 
 export const updateRequestGroupMetaAction: ActionFunction = async ({ request, params }) => {
   const { requestGroupId } = params;
@@ -64,3 +69,4 @@ export const updateRequestGroupMetaAction: ActionFunction = async ({ request, pa
   await models.requestGroupMeta.create({ parentId: requestGroupId, collapsed: false });
   return null;
 };
+/**** ><> ↑ --------- updateRequestGroupMetaAction functionality ->  */

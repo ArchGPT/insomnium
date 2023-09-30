@@ -3,6 +3,7 @@ import React, { FC, ReactElement, useCallback, useRef, useState } from 'react';
 import { createKeybindingsHandler } from '../keydown-binder';
 import { HighlightProps } from './highlight';
 
+/**** ><> ↑ --------- Import statements and declarations ->  */
 export const shouldSave = (oldValue: string, newValue: string | undefined, preventBlank = false) => {
   // Should not save if length = 0 and we want to prevent blank
   if (preventBlank && !newValue?.length) {
@@ -17,6 +18,7 @@ export const shouldSave = (oldValue: string, newValue: string | undefined, preve
   // Should save
   return true;
 };
+/**** ><> ↑ --------- Utility function shouldSave ->  */
 
 interface Props {
   blankValue?: string;
@@ -29,6 +31,7 @@ interface Props {
   singleClick?: boolean;
   value: string;
 }
+/**** ><> ↑ --------- Interface Props definition ->  */
 
 export const Editable: FC<Props> = ({
   blankValue,
@@ -42,9 +45,11 @@ export const Editable: FC<Props> = ({
   value,
   ...childProps
 }) => {
+/**** ><> ↑ --------- Editable component declaration ->  */
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+/**** ><> ↑ --------- Editable component state and refs ->  */
   const handleEditStart = () => {
     setEditing(true);
 
@@ -57,9 +62,11 @@ export const Editable: FC<Props> = ({
       onEditStart();
     }
   };
+/**** ><> ↑ --------- Editable component handleEditStart function ->  */
 
   const onSingleClick = () => singleClick && handleEditStart();
 
+/**** ><> ↑ --------- Editable component onSingleClick function ->  */
   const handleEditEnd = useCallback(() => {
     if (shouldSave(value, inputRef.current?.value.trim(), preventBlank)) {
       // Don't run onSubmit for values that haven't been changed
@@ -70,6 +77,7 @@ export const Editable: FC<Props> = ({
     // It should give the UI enough time to redraw the new value.
     setTimeout(() => setEditing(false), 100);
   }, [onSubmit, preventBlank, value]);
+/**** ><> ↑ --------- Editable component handleEditEnd function ->  */
 
   const handleKeyDown = createKeybindingsHandler({
     'Enter': handleEditEnd,
@@ -82,6 +90,7 @@ export const Editable: FC<Props> = ({
       }
     },
   });
+/**** ><> ↑ --------- Editable component handleKeyDown function ->  */
 
   const initialValue = value || fallbackValue;
   if (editing) {
@@ -109,3 +118,4 @@ export const Editable: FC<Props> = ({
     : <span {...readViewProps}>{initialValue || blankValue}</span>;
 
 };
+/**** ><> ↑ --------- Editable component rendering phase ->  */

@@ -1,6 +1,8 @@
 import { Mock } from 'jest-mock';
+/**** ><> ↑ --------- Importing external module ->  */
 
 import { showAlert, showError, showModal, showPrompt } from './ui/components/modals';
+/**** ><> ↑ --------- Importing local module ->  */
 
 export const getAndClearShowPromptMockArgs = () => {
   const mockFn = showPrompt as Mock<typeof showPrompt>;
@@ -8,6 +10,7 @@ export const getAndClearShowPromptMockArgs = () => {
   mockFn.mockClear();
   return options;
 };
+/**** ><> ↑ --------- Function to get and clear showPrompt mock arguments ->  */
 
 export const getAndClearShowAlertMockArgs = () => {
   const mockFn = showAlert as Mock<typeof showAlert>;
@@ -15,6 +18,7 @@ export const getAndClearShowAlertMockArgs = () => {
   mockFn.mockClear();
   return options;
 };
+/**** ><> ↑ --------- Function to get and clear showAlert mock arguments ->  */
 
 export const getAndClearShowErrorMockArgs = () => {
   const mockFn = showError as Mock<typeof showError>;
@@ -22,6 +26,7 @@ export const getAndClearShowErrorMockArgs = () => {
   mockFn.mockClear();
   return options;
 };
+/**** ><> ↑ --------- Function to get and clear showError mock arguments ->  */
 
 export const getAndClearShowModalMockArgs = () => {
   const mockFn = showModal as Mock<typeof showModal>;
@@ -29,3 +34,4 @@ export const getAndClearShowModalMockArgs = () => {
   mockFn.mockClear();
   return args;
 };
+/**** ><> ↑ --------- Function to get and clear showModal mock arguments ->  */

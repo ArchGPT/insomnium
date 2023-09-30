@@ -16,6 +16,7 @@ import { CodeEditorHandle } from '../codemirror/code-editor';
 import { HelpTooltip } from '../help-tooltip';
 import { MarkdownEditor } from '../markdown-editor';
 
+/**** ><> ↑ --------- Import Statements -> This segment imports all necessary modules and dependencies required for this component. */
 export interface RequestSettingsModalOptions {
   request: Request | GrpcRequest | WebSocketRequest;
 }
@@ -24,6 +25,7 @@ interface State {
   activeWorkspaceIdToCopyTo: string;
 }
 
+/**** ><> ↑ --------- Interface Definitions -> These lines define necessary TypeScript interfaces for this component. */
 export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSettingsModalOptions) => {
   const modalRef = useRef<ModalHandle>(null);
   const editorRef = useRef<CodeEditorHandle>(null);
@@ -45,6 +47,7 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
     modalRef.current?.show();
   }, []);
 
+/**** ><> ↑ --------- Component Definition and States Initialization -> This part defines the `RequestSettingsModal` functional component and initializes its states. */
   const requestFetcher = useFetcher();
   const patchRequest = useRequestPatcher();
   const navigate = useNavigate();
@@ -79,6 +82,7 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
     });
   };
 
+/**** ><> ↑ --------- Defined Functions -> This segment consists of various functions like `handleMoveToWorkspace` and `handleCopyToWorkspace` which are used within this component. */
   return (
     <OverlayContainer>
       <Modal ref={modalRef} onHide={onHide}>
@@ -365,3 +369,4 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Render Method -> This segment contains the render method, which includes JSX elements to be rendered on the screen. */

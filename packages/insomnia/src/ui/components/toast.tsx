@@ -15,6 +15,7 @@ import * as models from '../../models/index';
 import imgSrcCore from '../images/insomnia-logo.svg';
 import { Link } from './base/link';
 
+/**** ><> ↑ --------- Import Statements ->  */
 const INSOMNIA_NOTIFICATIONS_SEEN = 'insomnia::notifications::seen';
 
 export interface ToastNotification {
@@ -24,6 +25,7 @@ export interface ToastNotification {
   message: string;
 }
 
+/**** ><> ↑ --------- Constants and Interfaces ->  */
 const StyledLogo = styled.div`
   margin: var(--padding-xs) var(--padding-sm) var(--padding-xs) var(--padding-xs);
   display: flex;
@@ -49,6 +51,7 @@ const StyledFooter = styled.footer`
   width: 100%;
 `;
 
+/**** ><> ↑ --------- Styled Components ->  */
 type SeenNotifications = Record<string, boolean>;
 
 export const Toast: FC = () => {
@@ -119,6 +122,7 @@ export const Toast: FC = () => {
     handleNotification(updatedNotification);
   };
 
+/**** ><> ↑ --------- Toast Component State and Functions ->  */
   useEffect(() => {
     const unsubscribe = window.main.on('show-notification', (_: IpcRendererEvent, notification: ToastNotification) => handleNotification(notification));
     return () => unsubscribe();
@@ -177,3 +181,4 @@ export const Toast: FC = () => {
     </div>
   ) : null;
 };
+/**** ><> ↑ --------- Toast Component Render ->  */

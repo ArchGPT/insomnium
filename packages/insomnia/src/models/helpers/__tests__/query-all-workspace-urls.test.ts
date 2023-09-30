@@ -3,9 +3,11 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { globalBeforeEach } from '../../../__jest__/before-each';
 import * as models from '../../index';
 import { queryAllWorkspaceUrls } from '../query-all-workspace-urls';
+/**** ><> ↑ --------- Importing dependencies ->  */
 
 describe('queryAllWorkspaceUrls', () => {
   beforeEach(globalBeforeEach);
+/**** ><> ↑ --------- Initializing the test suite ->  */
 
   it('should return empty array when no requests exist', async () => {
     const w = await models.workspace.create({
@@ -14,6 +16,7 @@ describe('queryAllWorkspaceUrls', () => {
     await expect(queryAllWorkspaceUrls(w._id, models.request.type)).resolves.toHaveLength(0);
     await expect(queryAllWorkspaceUrls(w._id, models.grpcRequest.type)).resolves.toHaveLength(0);
   });
+/**** ><> ↑ --------- First test case ->  */
 
   it('should return urls and exclude that of the selected request', async () => {
     const w = await models.workspace.create({
@@ -44,6 +47,7 @@ describe('queryAllWorkspaceUrls', () => {
       url: 'r2.url',
     });
     // Should ignore all of the following
+/**** ><> ↑ --------- Second test case - setup ->  */
     await models.grpcRequest.create({
       name: 'Duplicate grpc url',
       parentId: w._id,
@@ -64,6 +68,7 @@ describe('queryAllWorkspaceUrls', () => {
       parentId: w._id,
       url: undefined,
     });
+/**** ><> ↑ --------- Second test case - testing duplicates ->  */
     const w2 = await models.workspace.create({
       name: 'Workspace 2',
     });
@@ -77,6 +82,7 @@ describe('queryAllWorkspaceUrls', () => {
       parentId: w2._id,
       url: 'diff.url',
     });
+/**** ><> ↑ --------- Second test case - testing different workspace ->  */
     // All items
     await expect(queryAllWorkspaceUrls(w._id, models.request.type)).resolves.toStrictEqual(
       expect.arrayContaining([r1.url, r2.url]),
@@ -92,4 +98,6 @@ describe('queryAllWorkspaceUrls', () => {
       expect.arrayContaining([gr2.url]),
     );
   });
+/**** ><> ↑ --------- Second test case - assertions ->  */
 });
+/**** ><> ↑ --------- Closing the test suite ->  */

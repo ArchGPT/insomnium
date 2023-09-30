@@ -5,6 +5,7 @@ import * as plugins from '../plugins/index';
 import { localTemplateTags } from '../ui/components/templating/local-template-tags';
 import BaseExtension from './base-extension';
 import type { NunjucksParsedTag } from './utils';
+/**** ><> ↑ --------- Import statements ->  */
 
 export class RenderError extends Error {
   // TODO: unsound definite assignment assertions
@@ -19,21 +20,25 @@ export class RenderError extends Error {
   type!: string;
   reason!: string;
 }
+/**** ><> ↑ --------- RenderError class definition ->  */
 
 // Some constants
 export const RENDER_ALL = 'all';
 export const RENDER_VARS = 'variables';
 export const RENDER_TAGS = 'tags';
 export const NUNJUCKS_TEMPLATE_GLOBAL_PROPERTY_NAME = '_';
+/**** ><> ↑ --------- Constants definition ->  */
 
 type NunjucksEnvironment = Environment & {
   extensions: Record<string, BaseExtension>;
 };
+/**** ><> ↑ --------- NunjucksEnvironment type definition ->  */
 
 // Cached globals
 let nunjucksVariablesOnly: NunjucksEnvironment | null = null;
 let nunjucksTagsOnly: NunjucksEnvironment | null = null;
 let nunjucksAll: NunjucksEnvironment | null = null;
+/**** ><> ↑ --------- Global variables declaration ->  */
 
 /**
  * Render text based on stuff
@@ -99,6 +104,7 @@ export function render(
     });
   });
 }
+/**** ><> ↑ --------- Render function definition ->  */
 
 /**
  * Reload Nunjucks environments. Useful for if plugins change.
@@ -108,6 +114,7 @@ export function reload() {
   nunjucksVariablesOnly = null;
   nunjucksTagsOnly = null;
 }
+/**** ><> ↑ --------- Reload function definition ->  */
 
 /**
  * Get definitions of template tags
@@ -129,6 +136,7 @@ export async function getTagDefinitions() {
       actions: ext.getActions(),
     }));
 }
+/**** ><> ↑ --------- getTagDefinitions function definition ->  */
 
 async function getNunjucks(renderMode: string): Promise<NunjucksEnvironment> {
   if (renderMode === RENDER_VARS && nunjucksVariablesOnly) {
@@ -206,3 +214,4 @@ async function getNunjucks(renderMode: string): Promise<NunjucksEnvironment> {
 
   return nunjucksEnvironment;
 }
+/**** ><> ↑ --------- getNunjucks function definition ->  */

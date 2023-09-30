@@ -1,5 +1,6 @@
 import React, { FC, ReactNode, useCallback } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
+/**** ><> ↑ --------- Module imports from external libraries */
 
 import { toKebabCase } from '../../../../../common/misc';
 import { useNunjucks } from '../../../../context/nunjucks/use-nunjucks';
@@ -8,6 +9,7 @@ import { RequestLoaderData } from '../../../../routes/request';
 import { showModal } from '../../../modals';
 import { CodePromptModal } from '../../../modals/code-prompt-modal';
 import { AuthRow } from './auth-row';
+/**** ><> ↑ --------- Module imports from application's internal directories */
 
 const PRIVATE_KEY_PLACEHOLDER = `
 -----BEGIN RSA PRIVATE KEY-----
@@ -21,12 +23,14 @@ Gl/qAewfQiiZlfATQavCDGuDGL1YAIme8a8GgApNYf2jWnidhiqJgRHBRor+yzFr
 cJV+wRTs/Szp6LXAgMmTkKMJ+9XXErUIUgwbl27Y3Rv/9ox1p5VRg+A=
 -----END RSA PRIVATE KEY-----
 `.trim();
+/**** ><> ↑ --------- Declaration of constant PRIVATE_KEY_PLACEHOLDER */
 
 interface Props {
   label: string;
   property: string;
   help?: ReactNode;
 }
+/**** ><> ↑ --------- Declaration of Props interface */
 
 export const AuthPrivateKeyRow: FC<Props> = ({ label, property, help }) => {
   const { activeRequest: { authentication, _id: requestId } } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
@@ -50,6 +54,7 @@ export const AuthPrivateKeyRow: FC<Props> = ({ label, property, help }) => {
   };
 
   const id = toKebabCase(label);
+/**** ><> ↑ --------- Declaration of AuthPrivateKeyRow functional component and its inner functions */
 
   return (
     <AuthRow labelFor={id} label={label} help={help}>
@@ -60,3 +65,4 @@ export const AuthPrivateKeyRow: FC<Props> = ({ label, property, help }) => {
     </AuthRow>
   );
 };
+/**** ><> ↑ --------- Return JSX from AuthPrivateKeyRow component */

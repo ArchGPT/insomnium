@@ -1,8 +1,10 @@
 import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+/**** ><> ↑ --------- Importing libraries */
 
 import { GrpcSendButton } from '../grpc-send-button';
+/**** ><> ↑ --------- Importing components */
 
 describe('<GrpcSendButton />', () => {
   it('should render as disabled if no method is selected', () => {
@@ -18,6 +20,7 @@ describe('<GrpcSendButton />', () => {
     expect(button).toBeDisabled();
     expect(button).toHaveTextContent('Send');
   });
+/**** ><> ↑ --------- Test Case: Render as disabled */
 
   it('should render cancel button if running', () => {
     const handleCancel = jest.fn();
@@ -35,6 +38,7 @@ describe('<GrpcSendButton />', () => {
     fireEvent.click(button);
     expect(handleCancel).toHaveBeenCalled();
   });
+/**** ><> ↑ --------- Test Case: Render cancel button */
 
   it('should render send button if unary RPC', () => {
     const handleSend = jest.fn();
@@ -52,6 +56,7 @@ describe('<GrpcSendButton />', () => {
     fireEvent.click(button);
     expect(handleSend).toHaveBeenCalled();
   });
+/**** ><> ↑ --------- Test Case: Render send button */
 
   it.each(['bidi', 'server', 'client'])(
     'should render start button if streaming RPC: %s',
@@ -73,3 +78,4 @@ describe('<GrpcSendButton />', () => {
     },
   );
 });
+/**** ><> ↑ --------- Test Case: Render start button for different types */

@@ -5,16 +5,19 @@ import { TreeState } from 'react-stately';
 import styled from 'styled-components';
 
 import { MenuItem } from './menu-item';
+/**** ><> ↑ --------- Import section ->  */
 
 interface StyledDividerProps {
   withoutLabel?: boolean;
 }
+/**** ><> ↑ --------- StyledDividerProps interface ->  */
 
 const StyledDividerContainer = styled.div<StyledDividerProps>({
   display: 'flex',
   alignItems: 'center',
   margin: '0 10px',
 });
+/**** ><> ↑ --------- StyledDividerContainer definition ->  */
 
 const StyledDividerSpan = styled.span<StyledDividerProps>({
   whiteSpace: 'nowrap',
@@ -25,21 +28,25 @@ const StyledDividerSpan = styled.span<StyledDividerProps>({
   textTransform: 'uppercase',
   margin: 'var(--padding-sm) 0',
 });
+/**** ><> ↑ --------- StyledDividerSpan definition ->  */
 
 const StyledDivider = styled.hr({
   margin: 'var(--padding-xs) 0',
 });
+/**** ><> ↑ --------- StyledDivider definition ->  */
 
 const StyledList = styled.ul({
   padding: 0,
   listStyle: 'none',
 });
+/**** ><> ↑ --------- StyledList definition ->  */
 
 interface Props<T> {
   section: Node<T>;
   state: TreeState<T>;
   closeOnSelect?: boolean;
 }
+/**** ><> ↑ --------- Props interface ->  */
 
 export const MenuSection = <T extends object>({
   section,
@@ -74,3 +81,4 @@ export const MenuSection = <T extends object>({
     </li>
   );
 };
+/**** ><> ↑ --------- MenuSection component ->  */

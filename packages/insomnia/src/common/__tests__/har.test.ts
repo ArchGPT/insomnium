@@ -10,12 +10,14 @@ import { AUTH_BASIC } from '../constants';
 import { exportHar, exportHarResponse, exportHarWithRequest } from '../har';
 import { getRenderedRequestAndContext } from '../render';
 
+/**** ><> ↑ --------- Module and dependency imports ->  */
 describe('export', () => {
   beforeEach(async () => {
     await globalBeforeEach();
     await models.project.all();
   });
 
+/**** ><> ↑ --------- Main testing block for 'export' ->  */
   describe('exportHar()', () => {
     it('exports single requests', async () => {
       const wrk = await models.workspace.create({
@@ -143,6 +145,7 @@ describe('export', () => {
     });
 
     it('exports multiple requests', async () => {
+/**** ><> ↑ --------- Testing block for 'exportHar()' function with single request ->  */
       const workspace = await models.workspace.create({
         _id: 'wrk_1',
         name: 'Workspace',
@@ -306,6 +309,7 @@ describe('export', () => {
     });
   });
 
+/**** ><> ↑ --------- Testing block for 'exportHar()' function with multiple requests ->  */
   describe('exportHarResponse()', () => {
     it('exports a default har response for an empty response', async () => {
       const notFoundResponse = null;
@@ -389,6 +393,7 @@ describe('export', () => {
     });
   });
 
+/**** ><> ↑ --------- Testing block for 'exportHarResponse()' function ->  */
   describe('exportHarWithRequest()', () => {
     it('renders does it correctly', async () => {
       const workspace = await models.workspace.create();
@@ -565,3 +570,4 @@ describe('export', () => {
     });
   });
 });
+/**** ><> ↑ --------- Testing block for 'exportHarWithRequest()' function ->  */

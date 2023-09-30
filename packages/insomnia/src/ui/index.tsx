@@ -22,6 +22,7 @@ import { DEFAULT_ORGANIZATION_ID } from '../models/organization';
 import { DEFAULT_PROJECT_ID } from '../models/project';
 import { initNewOAuthSession } from '../network/o-auth-2/get-token';
 import { init as initPlugins } from '../plugins';
+/**** ><> ↑ --------- Import statements */
 import { applyColorScheme } from '../plugins/misc';
 import { invariant } from '../utils/invariant';
 import { AppLoadingIndicator } from './components/app-loading-indicator';
@@ -34,6 +35,7 @@ const Workspace = lazy(() => import('./routes/workspace'));
 const UnitTest = lazy(() => import('./routes/unit-test'));
 const Debug = lazy(() => import('./routes/debug'));
 const Design = lazy(() => import('./routes/design'));
+/**** ><> ↑ --------- Component definitions */
 
 
 initializeLogging();
@@ -47,6 +49,7 @@ const prevLocationHistoryEntry = localStorage.getItem('locationHistoryEntry');
 if (prevLocationHistoryEntry && matchPath({ path: '/organization/:organizationId', end: false }, prevLocationHistoryEntry)) {
   locationHistoryEntry = prevLocationHistoryEntry;
 }
+/**** ><> ↑ --------- Initialization and configuration */
 
 const router = createMemoryRouter(
   // @TODO - Investigate file based routing to generate these routes:
@@ -76,6 +79,7 @@ const router = createMemoryRouter(
                   ...args,
                 ),
             },
+/**** ><> ↑ --------- Router creation */
           ],
         },
         {
@@ -88,6 +92,7 @@ const router = createMemoryRouter(
           id: '/organization',
           shouldRevalidate: shouldOrganizationsRevalidate,
           loader: async (...args) => (await import('./routes/organization')).loader(...args),
+/**** ><> ↑ --------- Location history */
           children: [
             {
               path: ':organizationId',
@@ -822,6 +827,7 @@ async function renderApp() {
 }
 
 renderApp();
+/**** ><> ↑ --------- App rendering */
 
 // Export some useful things for dev
 if (isDevelopment()) {
@@ -830,3 +836,4 @@ if (isDevelopment()) {
   // @ts-expect-error -- TSCONVERSION needs window augmentation
   window.db = database;
 }
+/**** ><> ↑ --------- Development-specific exports */

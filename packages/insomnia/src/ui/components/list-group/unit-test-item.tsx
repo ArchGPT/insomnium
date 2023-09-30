@@ -7,6 +7,7 @@ import { SvgIcon } from '../svg-icon';
 import { Button } from '../themed-button';
 import { ListGroupItem } from './list-group-item';
 import { UnitTestRequestSelector } from './unit-test-request-selector';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface TestItem {
   _id: string;
@@ -23,6 +24,7 @@ export interface UnitTestItemProps {
   selectedRequestId?: string | null;
   selectableRequests: Request[];
 }
+/**** ><> ↑ --------- Interface definitions ->  */
 
 const StyledResultListItem = styled(ListGroupItem)`
   && {
@@ -50,6 +52,7 @@ const StyledResultListItem = styled(ListGroupItem)`
     }
   }
 `;
+/**** ><> ↑ --------- Styled components declaration ->  */
 
 const StyledUnitTestContent = styled.div`
   display: block;
@@ -116,3 +119,4 @@ export const UnitTestItem: FunctionComponent<UnitTestItemProps> = ({
     </StyledResultListItem>
   );
 };
+/**** ><> ↑ --------- Functional component declaration ->  */

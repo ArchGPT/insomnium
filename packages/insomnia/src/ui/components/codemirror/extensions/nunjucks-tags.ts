@@ -7,6 +7,7 @@ import { tokenizeTag } from '../../../../templating/utils';
 import { showModal } from '../../modals/index';
 import { NunjucksModal } from '../../modals/nunjucks-modal';
 
+/**** ><> ↑ --------- Imports */
 CodeMirror.defineExtension('enableNunjucksTags', function(
   this: CodeMirror.Editor,
   handleRender: HandleRender,
@@ -43,6 +44,7 @@ CodeMirror.defineExtension('enableNunjucksTags', function(
   // Trigger once right away to snappy perf
   refreshFn();
 },
+/**** ><> ↑ --------- CodeMirror Extension */
 );
 
 async function _highlightNunjucksTags(this: CodeMirror.Editor, render: any, renderContext: any, showVariableSourceAndValue: boolean) {
@@ -52,6 +54,7 @@ async function _highlightNunjucksTags(this: CodeMirror.Editor, render: any, rend
 
   const activeMarks: CodeMirror.TextMarker[] = [];
   const doc: CodeMirror.Doc = this.getDoc();
+/**** ><> ↑ --------- Helper Function */
 
   // Only mark up Nunjucks tokens that are in the viewport
   const vp = this.getViewport();
@@ -261,6 +264,7 @@ async function _highlightNunjucksTags(this: CodeMirror.Editor, render: any, rend
     }
   }
 }
+/**** ><> ↑ --------- Highlight Nunjucks Tags */
 
 async function _updateElementText(render: any, mark: any, text: any, renderContext: any, showVariableSourceAndValue: boolean) {
   const el = mark.replacedWith;
@@ -341,3 +345,4 @@ async function _updateElementText(render: any, mark: any, text: any, renderConte
 
   mark.changed();
 }
+/**** ><> ↑ --------- Update Element Text */

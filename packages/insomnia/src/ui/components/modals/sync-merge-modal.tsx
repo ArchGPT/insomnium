@@ -5,14 +5,17 @@ import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
+/**** ><> ↑ --------- Importing dependencies -> This segment is used to import all necessary dependencies from various modules. */
 export interface SyncMergeModalOptions {
   conflicts?: MergeConflict[];
   handleDone?: (conflicts?: MergeConflict[]) => void;
 }
+/**** ><> ↑ --------- SyncMergeModalOptions interface -> This is the interface for options that can be passed to the SyncMergeModal. It expects an optional array of MergeConflict and an optional handleDone function. */
 export interface SyncMergeModalHandle {
   show: (options: SyncMergeModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- SyncMergeModalHandle interface -> This is the interface for a referential handle used in the SyncMergeModal component, providing explicit methods including show and hide. */
 export const SyncMergeModal = forwardRef<SyncMergeModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<SyncMergeModalOptions>({
@@ -33,6 +36,7 @@ export const SyncMergeModal = forwardRef<SyncMergeModalHandle, ModalProps>((_, r
   const { conflicts, handleDone } = state;
 
   return (
+/**** ><> ↑ --------- SyncMergeModal function component -> This is a functional component wrapped with forwardRef to gain access to the ref of the component. The SyncMergeModal uses state to manage conflicts and a ref to handle the Modal component. */
     <Modal ref={modalRef}>
       <ModalHeader key="header">Resolve Conflicts</ModalHeader>
       <ModalBody key="body" className="pad text-center" noScroll>
@@ -99,5 +103,7 @@ export const SyncMergeModal = forwardRef<SyncMergeModalHandle, ModalProps>((_, r
       </ModalFooter>
     </Modal >
   );
+/**** ><> ↑ --------- Modal JSX return -> This segment returns the Modal JSX. It includes a header, body which contains a table to show conflicts and a footer with a button to submit resolutions and close the modal. */
 });
 SyncMergeModal.displayName = 'SyncMergeModal';
+/**** ><> ↑ --------- Setting displayName property -> This segment sets the displayName property of the SyncMergeModal component to 'SyncMergeModal'. This is useful for debugging purposes. */

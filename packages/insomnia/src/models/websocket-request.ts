@@ -1,6 +1,7 @@
 import { database } from '../common/database';
 import type { BaseModel } from '.';
 import { RequestAuthentication, RequestHeader, RequestParameter } from './request';
+/**** ><> ↑ --------- Import Statements ->  */
 
 export const name = 'WebSocket Request';
 
@@ -12,6 +13,7 @@ export const canDuplicate = true;
 
 export const canSync = true;
 
+/**** ><> ↑ --------- Constants Definition ->  */
 export interface BaseWebSocketRequest {
   name: string;
   description: string;
@@ -25,8 +27,10 @@ export interface BaseWebSocketRequest {
   settingSendCookies: boolean;
   settingFollowRedirects: 'global' | 'on' | 'off';
 }
+/**** ><> ↑ --------- BaseWebSocketRequest Interface Definition ->  */
 
 export type WebSocketRequest = BaseModel & BaseWebSocketRequest & { type: typeof type };
+/**** ><> ↑ --------- WebSocketRequest Type Definition ->  */
 
 export const isWebSocketRequest = (model: Pick<BaseModel, 'type'>): model is WebSocketRequest => (
   model.type === type
@@ -35,6 +39,7 @@ export const isWebSocketRequest = (model: Pick<BaseModel, 'type'>): model is Web
 export const isWebSocketRequestId = (id: string | null) => (
   id?.startsWith(`${prefix}_`)
 );
+/**** ><> ↑ --------- Type Guard Functions ->  */
 
 export const init = (): BaseWebSocketRequest => ({
   name: 'New WebSocket Request',
@@ -49,8 +54,10 @@ export const init = (): BaseWebSocketRequest => ({
   settingFollowRedirects: 'global',
   description: '',
 });
+/**** ><> ↑ --------- Initialization Function ->  */
 
 export const migrate = (doc: WebSocketRequest) => doc;
+/**** ><> ↑ --------- Migrate Function ->  */
 
 export const create = (patch: Partial<WebSocketRequest> = {}) => {
   if (!patch.parentId) {
@@ -59,13 +66,16 @@ export const create = (patch: Partial<WebSocketRequest> = {}) => {
 
   return database.docCreate<WebSocketRequest>(type, patch);
 };
+/**** ><> ↑ --------- Create Function ->  */
 
 export const remove = (obj: WebSocketRequest) => database.remove(obj);
+/**** ><> ↑ --------- Remove Function ->  */
 
 export const update = (
   obj: WebSocketRequest,
   patch: Partial<WebSocketRequest> = {}
 ) => database.docUpdate(obj, patch);
+/**** ><> ↑ --------- Update Function ->  */
 
 // This is duplicated (lol) from models/request.js
 export async function duplicate(request: WebSocketRequest, patch: Partial<WebSocketRequest> = {}) {
@@ -97,9 +107,13 @@ export async function duplicate(request: WebSocketRequest, patch: Partial<WebSoc
     ...patch,
   });
 }
+/**** ><> ↑ --------- Duplicate Function ->  */
 
 export const getById = (_id: string) => database.getWhere<WebSocketRequest>(type, { _id });
+/**** ><> ↑ --------- GetBy Function ->  */
 
 export const findByParentId = (parentId: string) => database.find<WebSocketRequest>(type, { parentId });
+/**** ><> ↑ --------- Find Function ->  */
 
 export const all = () => database.all<WebSocketRequest>(type);
+/**** ><> ↑ --------- Get All Function ->  */

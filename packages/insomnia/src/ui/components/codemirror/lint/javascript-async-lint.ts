@@ -6,6 +6,7 @@
 import CodeMirror from 'codemirror';
 import { JSHINT, type LintError, LintOptions } from 'jshint';
 CodeMirror.registerHelper('lint', 'javascript', validator);
+/**** ><> ↑ --------- Linter Configuration */
 
 interface ValidationError {
   message: string;
@@ -14,6 +15,7 @@ interface ValidationError {
   to: CodeMirror.Position;
 }
 
+/**** ><> ↑ --------- Type Definitions */
 function validator(text: string, options: LintOptions): ValidationError[] {
   if (!options.indent) {
     // JSHint error.character actually is a column index, this fixes underlining on lines using tabs for indentation
@@ -34,6 +36,7 @@ function validator(text: string, options: LintOptions): ValidationError[] {
 
   return result;
 }
+/**** ><> ↑ --------- Validator Function */
 
 function parseErrors(errors: LintError[], output: ValidationError[]) {
   for (let i = 0; i < errors.length; i++) {
@@ -77,3 +80,4 @@ function parseErrors(errors: LintError[], output: ValidationError[]) {
     }
   }
 }
+/**** ><> ↑ --------- Error Parsing Function */

@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import type { ValueOf } from 'type-fest';
+/**** ><> ↑ --------- Importing necessary modules and typings ->  */
 
 export const ButtonSizeEnum = {
   Default: 'default',
@@ -8,6 +9,7 @@ export const ButtonSizeEnum = {
   Medium: 'medium',
   xs: 'xs',
 } as const;
+/**** ><> ↑ --------- Declaration of ButtonSizeEnum ->  */
 
 // These variants determine how the `bg` color variable is handled
 // Outlined sets the `bg` color as an outline
@@ -18,6 +20,7 @@ export const ButtonVariantEnum = {
   Contained: 'contained',
   Text: 'text',
 } as const;
+/**** ><> ↑ --------- Declaration of ButtonVariantEnum along with comments ->  */
 
 // Sets the `bg` color to a themed color
 export const ButtonThemeEnum = {
@@ -29,6 +32,7 @@ export const ButtonThemeEnum = {
   Warning: 'warning',
   Danger: 'danger',
 } as const;
+/**** ><> ↑ --------- Declaration of ButtonThemeEnum ->  */
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   bg?: ValueOf<typeof ButtonThemeEnum>;
@@ -37,6 +41,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   radius?: string;
   margin?: string;
 }
+/**** ><> ↑ --------- Declaration of ButtonProps interface ->  */
 
 const getColorVar = (theme?: ValueOf<typeof ButtonThemeEnum>) => {
   if (!theme || theme === ButtonThemeEnum.Default) {
@@ -45,6 +50,7 @@ const getColorVar = (theme?: ValueOf<typeof ButtonThemeEnum>) => {
 
   return `var(--color-${theme})`;
 };
+/**** ><> ↑ --------- getColorVar function definition ->  */
 
 const getFontColorVar = (theme?: ValueOf<typeof ButtonThemeEnum>) => {
   if (!theme || theme === ButtonThemeEnum.Default) {
@@ -53,6 +59,7 @@ const getFontColorVar = (theme?: ValueOf<typeof ButtonThemeEnum>) => {
 
   return `var(--color-font-${theme})`;
 };
+/**** ><> ↑ --------- getFontColorVar function definition ->  */
 
 export const Button = styled.button<ButtonProps>`
   color: ${({ bg }) => getColorVar(bg)};
@@ -163,6 +170,7 @@ export const Button = styled.button<ButtonProps>`
     opacity: 60%;
   }
 `;
+/**** ><> ↑ --------- Button styled component definition ->  */
 
 Button.defaultProps = {
   variant: 'outlined',
@@ -171,3 +179,4 @@ Button.defaultProps = {
   radius: '3px',
   role: 'button',
 };
+/**** ><> ↑ --------- Setting Button component's default properties ->  */

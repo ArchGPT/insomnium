@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 import { MenuItem } from './menu-item';
 import { MenuSection } from './menu-section';
+/**** ><> ↑ --------- Import statements ->  */
 
 const List = styled.ul({
   border: '1px solid var(--hl-sm)',
@@ -25,10 +26,12 @@ const List = styled.ul({
     outline: '0',
   },
 });
+/**** ><> ↑ --------- Styled component definition ->  */
 
 interface Props<T extends object> extends AriaMenuProps<T> {
   closeOnSelect?: boolean;
 }
+/**** ><> ↑ --------- Props interface declaration ->  */
 
 export const Menu = <T extends object>(props: Props<T>) => {
   // Create menu state based on the incoming props
@@ -37,6 +40,7 @@ export const Menu = <T extends object>(props: Props<T>) => {
   // Get props for the menu element
   const ref = useRef<HTMLUListElement | null>(null);
   const { menuProps } = useMenu(props, state, ref);
+/**** ><> ↑ --------- Menu component declaration and setup ->  */
 
   return (
     <List {...menuProps} ref={ref} className="dropdown__menu">
@@ -71,3 +75,4 @@ export const Menu = <T extends object>(props: Props<T>) => {
     </List>
   );
 };
+/**** ><> ↑ --------- Menu component return ->  */

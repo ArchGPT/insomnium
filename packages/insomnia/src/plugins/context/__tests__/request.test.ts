@@ -15,6 +15,7 @@ const CONTEXT = {
   },
   null_test: null,
 };
+/**** ><> ↑ --------- Imports and setting up constants ->  */
 
 describe('init()', () => {
   beforeEach(async () => {
@@ -95,6 +96,7 @@ describe('init()', () => {
     expect(() => plugin.init()).toThrowError('contexts.request initialized without request');
   });
 });
+/**** ><> ↑ --------- Tests for 'init()' method ->  */
 
 describe('request.*', () => {
   beforeEach(async () => {
@@ -292,3 +294,4 @@ describe('request.*', () => {
     expect(result.request.getBody()).toEqual(newBody);
   });
 });
+/**** ><> ↑ --------- Tests for 'request.*' methods ->  */

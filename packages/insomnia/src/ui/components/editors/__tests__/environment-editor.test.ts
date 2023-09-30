@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import { NUNJUCKS_TEMPLATE_GLOBAL_PROPERTY_NAME } from '../../../../templating';
 import { checkNestedKeys, ensureKeyIsValid } from '../environment-editor';
+/**** ><> ↑ --------- Import statements */
 
 describe('ensureKeyIsValid()', () => {
   it.each([
@@ -59,6 +60,7 @@ describe('ensureKeyIsValid()', () => {
     expect(ensureKeyIsValid(key, true)).toBe(null);
   });
 });
+/**** ><> ↑ --------- Jest tests for 'ensureKeyIsValid()' function */
 
 describe('checkNestedKeys()', () => {
   it('should check root property and error', () => {
@@ -149,3 +151,4 @@ describe('checkNestedKeys()', () => {
     expect(err).toBe(null);
   });
 });
+/**** ><> ↑ --------- Jest tests for 'checkNestedKeys()' function */

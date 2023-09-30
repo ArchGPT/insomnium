@@ -1,5 +1,6 @@
 import { database as db } from '../common/database';
 import type { BaseModel } from './index';
+/**** ><> ↑ --------- Import Statements ->  */
 
 export const name = 'Unit Test Result';
 
@@ -10,6 +11,7 @@ export const prefix = 'utr';
 export const canDuplicate = false;
 
 export const canSync = false;
+/**** ><> ↑ --------- Exports of Constants ->  */
 
 export interface BaseUnitTestResult {
   results: Record<string, any>;
@@ -20,6 +22,7 @@ export type UnitTestResult = BaseModel & BaseUnitTestResult;
 export const isUnitTestResult = (model: Pick<BaseModel, 'type'>): model is UnitTestResult => (
   model.type === type
 );
+/**** ><> ↑ --------- Interface and Type Definitions ->  */
 
 export function init() {
   return {
@@ -60,3 +63,4 @@ export function getById(_id: string) {
 export function all() {
   return db.all<UnitTestResult>(type);
 }
+/**** ><> ↑ --------- Exported Functions ->  */

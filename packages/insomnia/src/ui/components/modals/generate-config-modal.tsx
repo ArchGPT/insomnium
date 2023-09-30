@@ -13,6 +13,7 @@ import { PanelContainer, TabItem, Tabs } from '../base/tabs';
 import { CodeEditor } from '../codemirror/code-editor';
 import { HelpTooltip } from '../help-tooltip';
 import { showModal } from './index';
+/**** ><> ↑ --------- Library and local imports -> These lines are importing necessary libraries and components from local directories for use in the code. */
 
 interface Config {
   label: string;
@@ -48,6 +49,7 @@ export interface GenerateConfigModalHandle {
   show: (options: GenerateConfigModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Interfaces and Config Generators -> These lines are defining several interfaces and establishing user specified configurations for future use. */
 export const GenerateConfigModal = forwardRef<GenerateConfigModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<State>({
@@ -73,6 +75,7 @@ export const GenerateConfigModal = forwardRef<GenerateConfigModalHandle, ModalPr
     },
   }), []);
 
+/**** ><> ↑ --------- GenerateConfigModal Component body and state handling -> This partition involves the creation of a GenerateConfigModal component and the use of state in it. It mainly deals with showing and hiding modals and setting state. */
   const generateConfig = async (generatePlugin: typeof configGenerators[0], apiSpec: ApiSpec): Promise<Config> => {
     try {
       const { rawContents, formatVersion } = parseApiSpec(apiSpec.contents);
@@ -98,6 +101,7 @@ export const GenerateConfigModal = forwardRef<GenerateConfigModalHandle, ModalPr
       };
     }
   };
+/**** ><> ↑ --------- generateConfig Function -> This block is a function that generates a configuration document according to the input API spec, format version and whether the version is supported or not. */
 
   const onSelect = (key: Key) => {
     setState({
@@ -156,6 +160,7 @@ export const GenerateConfigModal = forwardRef<GenerateConfigModalHandle, ModalPr
           </TabItem>)
           )}
         </Tabs>
+/**** ><> ↑ --------- Tabs selection and Config View -> Reflects the selection of tabs in the state and rendering the configuration viewers according to selected tab. */
       </ModalBody>
       {activeConfig && (
         <ModalFooter>
@@ -164,9 +169,11 @@ export const GenerateConfigModal = forwardRef<GenerateConfigModalHandle, ModalPr
           </CopyButton>
         </ModalFooter>
       )}
+/**** ><> ↑ --------- Modal Footer -> Setting up the Modal Footer to enable copy to clipboard functionality. */
     </Modal>
   );
 });
 GenerateConfigModal.displayName = 'GenerateConfigModal';
 
 export const showGenerateConfigModal = (opts: GenerateConfigModalOptions) => showModal(GenerateConfigModal, opts);
+/**** ><> ↑ --------- Component export -> This block assigns a display name and exports the GenerateConfigModal component and the function to show the modal. */

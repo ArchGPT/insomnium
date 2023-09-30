@@ -6,10 +6,12 @@ import { RootLoaderData } from '../../routes/root';
 import { Link } from '../base/link';
 import { showModal } from '../modals/index';
 import { SettingsModal } from '../modals/settings-modal';
+/**** ><> ↑ --------- Importing dependencies ->  */
 interface Props {
   error: string;
   url: string;
 }
+/**** ><> ↑ --------- Interface definition ->  */
 export const ResponseErrorViewer: FC<Props> = memo(({ error }) => {
   let msg: React.ReactNode = null;
   const {
@@ -38,6 +40,7 @@ export const ResponseErrorViewer: FC<Props> = memo(({ error }) => {
   }
 
   return (
+/**** ><> ↑ --------- ResponseErrorViewer functional component definition and main logic ->  */
     <div>
       <pre
         className="selectable pad force-pre-wrap"
@@ -62,6 +65,8 @@ export const ResponseErrorViewer: FC<Props> = memo(({ error }) => {
       </div>
     </div>
   );
+/**** ><> ↑ --------- Return JSX ->  */
 });
 
 ResponseErrorViewer.displayName = 'ResponseError';
+/**** ><> ↑ --------- Setting displayName ->  */

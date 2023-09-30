@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React, { FC, useEffect, useRef } from 'react';
 import { OverlayContainer } from 'react-aria';
 import { useFetcher, useParams } from 'react-router-dom';
+/**** ><> ↑ --------- Imports of external libraries */
 
 import { GitRepository } from '../../../models/git-repository';
 import { CreateNewGitBranchResult, GitBranchesLoaderData } from '../../routes/git-actions';
@@ -11,6 +12,7 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { showAlert } from '.';
+/**** ><> ↑ --------- Imports of internal modules */
 
 type Props = ModalProps & {
   activeBranch: string;
@@ -21,6 +23,7 @@ type Props = ModalProps & {
 export interface GitBranchesModalOptions {
   onCheckout: () => void;
 }
+/**** ><> ↑ --------- Declaration of Props and GitBranchModalOptions */
 
 export const GitBranchesModal: FC<Props> = (({
   branches,
@@ -47,6 +50,7 @@ export const GitBranchesModal: FC<Props> = (({
   const remoteOnlyBranches = remoteBranches.filter(b => !fetchedBranches.includes(b));
   const isFetchingRemoteBranches = branchesFetcher.state !== 'idle';
 
+/**** ><> ↑ --------- GitBranchesModal Functional Component Definition */
   useEffect(() => {
     if (branchesFetcher.state === 'idle' && !branchesFetcher.data) {
       branchesFetcher.load(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/branches`);
@@ -61,6 +65,7 @@ export const GitBranchesModal: FC<Props> = (({
       });
     }
   }, [newBranchFetcher.data?.errors]);
+/**** ><> ↑ --------- GitBranchesModal useEffects */
 
   return (
     <OverlayContainer>
@@ -223,5 +228,7 @@ export const GitBranchesModal: FC<Props> = (({
       </Modal>
     </OverlayContainer>
   );
+/**** ><> ↑ --------- GitBranchesModal Return JSX */
 });
 GitBranchesModal.displayName = 'GitBranchesModal';
+/**** ><> ↑ --------- GitBranchesModal displayName Setting */

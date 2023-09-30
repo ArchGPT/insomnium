@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { globalBeforeEach } from '../../__jest__/before-each';
 import { urlMatchesCertHost } from '../url-matches-cert-host';
+/**** ><> ↑ --------- Imports necessary modules and functions ->  */
 
 describe('urlMatchesCertHost', () => {
   beforeEach(globalBeforeEach);
@@ -56,6 +57,7 @@ describe('urlMatchesCertHost', () => {
       expect(urlMatchesCertHost(certificateHost, requestUrl)).toBe(true);
     });
   });
+/**** ><> ↑ --------- Testing for 'urlMatchesCertHost' when the certificate host has no wildcard ->  */
 
   describe('when using wildcard certificate hosts', () => {
     beforeEach(globalBeforeEach);
@@ -132,6 +134,7 @@ describe('urlMatchesCertHost', () => {
       expect(urlMatchesCertHost(certificateHost, requestUrl)).toBe(true);
     });
   });
+/**** ><> ↑ --------- Testing for 'urlMatchesCertHost' when using wildcard certificate hosts ->  */
 
   describe('when an invalid certificate host is supplied', () => {
     beforeEach(globalBeforeEach);
@@ -155,3 +158,4 @@ describe('urlMatchesCertHost', () => {
     });
   });
 });
+/**** ><> ↑ --------- Testing for 'urlMatchesCertHost' when an invalid certificate host is supplied ->  */

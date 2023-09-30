@@ -6,6 +6,7 @@ import { defineConfig } from 'vite';
 import pkg from './package.json';
 import { electronNodeRequire } from './vite-plugin-electron-node-require';
 
+/**** ><> ↑ --------- Imports */
 export default defineConfig(({ mode }) => {
   const __DEV__ = mode !== 'production';
 
@@ -37,6 +38,7 @@ export default defineConfig(({ mode }) => {
     optimizeDeps: {
       exclude: ['@getinsomnia/node-libcurl'],
     },
+/**** ><> ↑ --------- Configuration */
     plugins: [
       // Allows us to import modules that will be resolved by Node's require() function.
       // e.g. import fs from 'fs'; will get transformed to const fs = require('fs'); so that it works in the renderer process.
@@ -59,5 +61,7 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
+/**** ><> ↑ --------- Plugins */
   };
 });
+/**** ><> ↑ --------- Export */

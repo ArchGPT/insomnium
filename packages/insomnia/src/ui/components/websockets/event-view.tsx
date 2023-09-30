@@ -11,10 +11,12 @@ import { RequestLoaderData } from '../../routes/request';
 import { CodeEditor } from '../codemirror/code-editor';
 import { showError } from '../modals';
 import { WebSocketPreviewModeDropdown } from './websocket-preview-dropdown';
+/**** ><> ↑ --------- Segment 1: Import statements */
 
 interface Props<T extends WebSocketEvent> {
   event: T;
 }
+/**** ><> ↑ --------- Segment 2: Prop Types */
 
 const PreviewPane = styled.div({
   display: 'flex',
@@ -35,6 +37,7 @@ const PreviewPaneContents = styled.div({
   padding: 'var(--padding-sm)',
   flexGrow: 1,
 });
+/**** ><> ↑ --------- Segment 3: Styled Components */
 
 export const MessageEventView: FC<Props<CurlMessageEvent | WebSocketMessageEvent>> = ({ event }) => {
   const { requestId } = useParams() as { requestId: string };
@@ -116,6 +119,7 @@ export const MessageEventView: FC<Props<CurlMessageEvent | WebSocketMessageEvent
     </PreviewPane>
   );
 };
+/**** ><> ↑ --------- Segment 4: MessageEventView Component */
 
 export const EventView: FC<Props<CurlEvent | WebSocketEvent>> = ({ event }) => {
   if (event.type === 'message') {
@@ -123,3 +127,4 @@ export const EventView: FC<Props<CurlEvent | WebSocketEvent>> = ({ event }) => {
   }
   return null;
 };
+/**** ><> ↑ --------- Segment 5: EventView Component */

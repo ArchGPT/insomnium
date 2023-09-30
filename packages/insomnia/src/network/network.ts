@@ -32,6 +32,7 @@ import {
   smartEncodeUrl,
 } from '../utils/url/querystring';
 import { getAuthHeader, getAuthQueryParams } from './authentication';
+/**** ><> ↑ --------- Import statements ->  */
 import { cancellableCurlRequest } from './cancellation';
 import { addSetCookiesToToughCookieJar } from './set-cookie-util';
 import { urlMatchesCertHost } from './url-matches-cert-host';
@@ -63,6 +64,7 @@ export const fetchRequestData = async (requestId: string) => {
 
   return { request, environment, settings, clientCertificates, caCert, activeEnvironmentId };
 };
+/**** ><> ↑ --------- Function fetchRequestData ->  */
 
 export const tryToInterpolateRequest = async (request: Request, environmentId: string, purpose?: RenderPurpose, extraInfo?: ExtraRenderInfo) => {
   try {
@@ -79,6 +81,7 @@ export const tryToInterpolateRequest = async (request: Request, environmentId: s
     throw new Error(`Failed to render request: ${request._id}`);
   }
 };
+/**** ><> ↑ --------- Function tryToInterpolateRequest ->  */
 export const tryToTransformRequestWithPlugins = async (renderResult: RequestAndContext) => {
   const { request, context } = renderResult;
   try {
@@ -87,6 +90,7 @@ export const tryToTransformRequestWithPlugins = async (renderResult: RequestAndC
     throw new Error(`Failed to transform request with plugins: ${request._id}`);
   }
 };
+/**** ><> ↑ --------- Function tryToTransformRequestWithPlugins ->  */
 export async function sendCurlAndWriteTimeline(
   renderedRequest: RenderedRequest,
   clientCertificates: ClientCertificate[],
@@ -160,6 +164,7 @@ export async function sendCurlAndWriteTimeline(
     ...patch,
   };
 }
+/**** ><> ↑ --------- Function sendCurlAndWriteTimeline ->  */
 export const responseTransform = async (patch: ResponsePatch, environmentId: string | null, renderedRequest: RenderedRequest, context: Record<string, any>) => {
   const response: ResponsePatch = {
     ...patch,
@@ -181,6 +186,7 @@ export const responseTransform = async (patch: ResponsePatch, environmentId: str
     context,
   );
 };
+/**** ><> ↑ --------- Function responseTransform ->  */
 export const transformUrl = (url: string, params: RequestParameter[], authentication: RequestAuthentication, shouldEncode: boolean) => {
   const authQueryParam = getAuthQueryParams(authentication);
   const customUrl = joinUrlAndQueryString(url, buildQueryStringFromParams(authQueryParam ? params.concat([authQueryParam]) : params));
@@ -195,6 +201,7 @@ export const transformUrl = (url: string, params: RequestParameter[], authentica
   const socketUrl = (match && match[3]) || '';
   return { finalUrl: `${protocol}//${socketUrl}`, socketPath };
 };
+/**** ><> ↑ --------- Function transformUrl ->  */
 
 const extractCookies = async (headerResults: HeaderResult[], cookieJar: any, finalUrl: string, settingStoreCookies: boolean) => {
   // add set-cookie headers to file(cookiejar) and database
@@ -214,9 +221,11 @@ const extractCookies = async (headerResults: HeaderResult[], cookieJar: any, fin
   }
   return { cookies: [], rejectedCookies: [], totalSetCookies: 0 };
 };
+/**** ><> ↑ --------- Function extractCookies ->  */
 
 export const getSetCookiesFromResponseHeaders = (headers: any[]) => getSetCookieHeaders(headers).map(h => h.value);
 
+/**** ><> ↑ --------- Function getSetCookiesFromResponseHeaders ->  */
 export const getCurrentUrl = ({ headerResults, finalUrl }: { headerResults: any; finalUrl: string }): string => {
   if (!headerResults || !headerResults.length) {
     return finalUrl;
@@ -232,6 +241,7 @@ export const getCurrentUrl = ({ headerResults, finalUrl }: { headerResults: any;
     return finalUrl;
   }
 };
+/**** ><> ↑ --------- Function getCurrentUrl ->  */
 
 async function _applyRequestPluginHooks(
   renderedRequest: RenderedRequest,
@@ -258,6 +268,7 @@ async function _applyRequestPluginHooks(
 
   return newRenderedRequest;
 }
+/**** ><> ↑ --------- Function _applyRequestPluginHooks ->  */
 
 async function _applyResponsePluginHooks(
   response: ResponsePatch,
@@ -298,6 +309,7 @@ async function _applyResponsePluginHooks(
     };
   }
 
+/**** ><> ↑ --------- Function _applyResponsePluginHooks ->  */
 }
 
 export function storeTimeline(timeline: ResponseTimelineEntry[]): Promise<string> {
@@ -320,3 +332,4 @@ export function storeTimeline(timeline: ResponseTimelineEntry[]): Promise<string
     });
   });
 }
+/**** ><> ↑ --------- Function storeTimeline ->  */

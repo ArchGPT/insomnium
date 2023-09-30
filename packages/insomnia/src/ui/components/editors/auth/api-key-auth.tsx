@@ -5,12 +5,14 @@ import { AuthInputRow } from './components/auth-input-row';
 import { AuthSelectRow } from './components/auth-select-row';
 import { AuthTableBody } from './components/auth-table-body';
 import { AuthToggleRow } from './components/auth-toggle-row';
+/**** ><> ↑ --------- Importing Dependencies */
 
 export const options = [
   { name: 'Header', value: HEADER },
   { name: 'Query params', value: QUERY_PARAMS },
   { name: 'Cookie', value: COOKIE },
 ];
+/**** ><> ↑ --------- Options Constants Declaration */
 
 export const ApiKeyAuth: FC<{ disabled?: boolean }> = ({ disabled = false }) => (
   <AuthTableBody>
@@ -20,3 +22,4 @@ export const ApiKeyAuth: FC<{ disabled?: boolean }> = ({ disabled = false }) => 
     <AuthSelectRow label='Add to' property='addTo' options={options} disabled={disabled} />
   </AuthTableBody>
 );
+/**** ><> ↑ --------- Api Key Auth Component Declaration */

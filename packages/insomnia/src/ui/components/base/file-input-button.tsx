@@ -3,6 +3,7 @@ import React, { HTMLAttributes, useCallback } from 'react';
 
 import { selectFileOrFolder } from '../../../common/select-file-or-folder';
 
+/**** ><> ↑ --------- Imports ->  */
 interface Props extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   onChange: (path: string) => void;
   path?: string;
@@ -13,9 +14,11 @@ interface Props extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   name?: string;
   disabled?: boolean;
 }
+/**** ><> ↑ --------- Interface Props definition ->  */
 
 export const FileInputButton = (props: Props) => {
   const { showFileName, showFileIcon, path, name, onChange, itemtypes, extensions, disabled, ...extraProps } = props;
+/**** ><> ↑ --------- Component Definition and Destructuring of Props ->  */
   // NOTE: Basename fails if path is not a string, so let's make sure it is
   const fileName = typeof path === 'string' ? pathBasename(path) : null;
   const _handleChooseFile =  useCallback(async () => {
@@ -31,6 +34,7 @@ export const FileInputButton = (props: Props) => {
 
     onChange(filePath);
   }, [extensions, itemtypes, onChange]);
+/**** ><> ↑ --------- File name handling and File Selection Callback Definition ->  */
   return (
     <button
       type="button"
@@ -44,3 +48,4 @@ export const FileInputButton = (props: Props) => {
     </button>
   );
 };
+/**** ><> ↑ --------- Component render ->  */

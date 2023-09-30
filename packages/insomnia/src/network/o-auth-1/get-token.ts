@@ -2,6 +2,7 @@
  * Get an OAuth1Token object and also handle storing/saving/refreshing
  * @returns {Promise.<void>}
  */
+/**** ><> ↑ --------- Comment describing the OAuth1Token ->  */
 import crypto from 'crypto';
 import OAuth1 from 'oauth-1.0a';
 
@@ -14,6 +15,7 @@ import {
   SIGNATURE_METHOD_PLAINTEXT,
   SIGNATURE_METHOD_RSA_SHA1,
 } from './constants';
+/**** ><> ↑ --------- Import statements ->  */
 
 function hashFunction(signatureMethod: OAuth1SignatureMethod) {
   if (signatureMethod === SIGNATURE_METHOD_HMAC_SHA1) {
@@ -42,6 +44,7 @@ function hashFunction(signatureMethod: OAuth1SignatureMethod) {
 
   throw new Error(`Invalid signature method ${signatureMethod}`);
 }
+/**** ><> ↑ --------- Function definition for hashFunction ->  */
 
 export default async function(
   url: string,
@@ -121,3 +124,4 @@ export default async function(
   const data = oauth.authorize(requestData, token);
   return oauth.toHeader(data);
 }
+/**** ><> ↑ --------- The main function ->  */

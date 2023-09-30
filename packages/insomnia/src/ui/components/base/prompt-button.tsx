@@ -7,8 +7,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
+/**** ><> ↑ --------- Import React libraries and components ->  */
 
 type PromptStateEnum = 'default' | 'ask' | 'done';
+/**** ><> ↑ --------- Define PromptStateEnum ->  */
 
 interface Props<T> {
   className?: string;
@@ -20,6 +22,7 @@ interface Props<T> {
   fullWidth?: boolean;
   onClick?: (event: MouseEvent<HTMLButtonElement>, value?: T) => void;
 }
+/**** ><> ↑ --------- Interface Props definition ->  */
 
 export const PromptButton = <T, >({
   onClick,
@@ -32,6 +35,7 @@ export const PromptButton = <T, >({
   fullWidth = false,
   children,
 }: PropsWithChildren<Props<T>>) => {
+/**** ><> ↑ --------- PromptButton component definition and Props destructuring ->  */
   // Create flag to store the state value.
   const [state, setState] = useState<PromptStateEnum>('default');
 
@@ -39,12 +43,14 @@ export const PromptButton = <T, >({
   const doneTimeout = useRef<NodeJS.Timeout | null>(null);
   const triggerTimeout = useRef<NodeJS.Timeout | null>(null);
 
+/**** ><> ↑ --------- State and Ref creation ->  */
   useEffect(() => {
     return () => {
       triggerTimeout.current && clearTimeout(triggerTimeout.current);
       doneTimeout.current && clearTimeout(doneTimeout.current);
     };
   }, []);
+/**** ><> ↑ --------- UseEffect to clear timeouts ->  */
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (state === 'default') {
@@ -78,6 +84,7 @@ export const PromptButton = <T, >({
       }, 2000);
     }
   };
+/**** ><> ↑ --------- Definition of handleClick function with event handling logic ->  */
 
   return (
     <button
@@ -99,6 +106,7 @@ export const PromptButton = <T, >({
       </PromptMessage>
     </button>
   );
+/**** ><> ↑ --------- Render of PromptButton component ->  */
 };
 
 interface PromptMessageProps {
@@ -107,6 +115,7 @@ interface PromptMessageProps {
   doneMessage?: string;
   children: ReactNode;
 }
+/**** ><> ↑ --------- Interface PromptMessageProps definition ->  */
 const PromptMessage: FunctionComponent<PromptMessageProps> = ({ promptState, confirmMessage, doneMessage, children }) => {
   if (promptState === 'ask') {
     return (
@@ -125,3 +134,4 @@ const PromptMessage: FunctionComponent<PromptMessageProps> = ({ promptState, con
 
   return <>{children}</>;
 };
+/**** ><> ↑ --------- PromptMessage component definition with conditional rendering ->  */

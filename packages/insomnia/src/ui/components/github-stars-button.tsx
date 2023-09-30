@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-aria-components';
 import { useMount, useMountedState } from 'react-use';
+/**** ><> ↑ --------- React and supporting libraries imports ->  */
 
 import { Icon } from './icon';
+/**** ><> ↑ --------- Custom Icon component import ->  */
 
 const LOCALSTORAGE_GITHUB_STARS_KEY = 'insomnia:github-stars';
+/**** ><> ↑ --------- Local storage key definition ->  */
 
 export const GitHubStarsButton = () => {
   const isMounted = useMountedState();
@@ -17,6 +20,7 @@ export const GitHubStarsButton = () => {
   }, [starCount]);
 
   const [error, setError] = useState<Error | null>(null);
+/**** ><> ↑ --------- GitHubStarsButton component definition and state initialization ->  */
 
   useMount(() => {
     if (!isMounted()) {
@@ -45,6 +49,7 @@ export const GitHubStarsButton = () => {
         console.error('error fetching GitHub stars', error);
         setError(error);
       });
+/**** ><> ↑ --------- Fetching data from GitHub API ->  */
   });
 
   const starClick = useCallback(() => {
@@ -55,6 +60,7 @@ export const GitHubStarsButton = () => {
 
   }, []);
 
+/**** ><> ↑ --------- Callback functions definitions ->  */
   const shouldShowCount = !Boolean(error);
 
   return (
@@ -81,3 +87,4 @@ export const GitHubStarsButton = () => {
     </div>
   );
 };
+/**** ><> ↑ --------- Rendering logic ->  */

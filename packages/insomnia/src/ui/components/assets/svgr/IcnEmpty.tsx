@@ -1,4 +1,5 @@
 import React, { SVGProps, memo } from 'react';
+/**** ><> ↑ --------- Importing modules ->  */
 export const SvgIcnEmpty = memo<SVGProps<SVGSVGElement>>(props => (
   <svg
     width="1em"
@@ -9,3 +10,4 @@ export const SvgIcnEmpty = memo<SVGProps<SVGSVGElement>>(props => (
     {...props}
   />
 ));
+/**** ><> ↑ --------- SvgIcnEmpty component definition ->  */

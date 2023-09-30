@@ -5,6 +5,7 @@ import * as requestOperations from './helpers/request-operations';
 import type { BaseModel } from './index';
 import * as models from './index';
 import { ResponseHeader } from './response';
+/**** ><> ↑ --------- Module imports ->  */
 
 export const name = 'WebSocket Response';
 
@@ -16,6 +17,7 @@ export const canDuplicate = false;
 
 export const canSync = false;
 
+/**** ><> ↑ --------- Constants definition ->  */
 export interface BaseWebSocketResponse {
   environmentId: string | null;
   statusCode: number;
@@ -34,12 +36,14 @@ export interface BaseWebSocketResponse {
   settingStoreCookies: boolean | null;
   settingSendCookies: boolean | null;
 }
+/**** ><> ↑ --------- Interface definition for BaseWebSocketResponse ->  */
 
 export type WebSocketResponse = BaseModel & BaseWebSocketResponse;
 
 export const isWebSocketResponse = (model: Pick<BaseModel, 'type'>): model is WebSocketResponse => (
   model.type === type
 );
+/**** ><> ↑ --------- Type definition for WebSocketResponse and type guard ->  */
 
 export function init(): BaseWebSocketResponse {
   return {
@@ -59,10 +63,12 @@ export function init(): BaseWebSocketResponse {
     environmentId: null,
   };
 }
+/**** ><> ↑ --------- Initialization function ->  */
 
 export function migrate(doc: Response) {
   return doc;
 }
+/**** ><> ↑ --------- Migrate function ->  */
 
 export function hookDatabaseInit(consoleLog: typeof console.log = console.log) {
   consoleLog('[db] Init websocket-responses DB');
@@ -77,6 +83,7 @@ export function hookRemove(doc: WebSocketResponse, consoleLog: typeof console.lo
     consoleLog(`[response] Delete timeline ${doc.timelinePath}`);
   });
 }
+/**** ><> ↑ --------- Database hooks ->  */
 
 export function getById(id: string) {
   return db.get<WebSocketResponse>(type, id);
@@ -89,6 +96,7 @@ export function findByParentId(parentId: string) {
 export async function all() {
   return db.all<WebSocketResponse>(type);
 }
+/**** ><> ↑ --------- Database query functions ->  */
 
 export async function removeForRequest(parentId: string, environmentId?: string | null) {
   const settings = await models.settings.getOrCreate();
@@ -107,10 +115,12 @@ export async function removeForRequest(parentId: string, environmentId?: string 
   // why some responses are still showing in the UI.
   await db.removeWhere(type, query);
 }
+/**** ><> ↑ --------- Function to remove response for request ->  */
 
 export function remove(response: WebSocketResponse) {
   return db.remove(response);
 }
+/**** ><> ↑ --------- Function to remove response ->  */
 
 export async function create(patch: Partial<WebSocketResponse> = {}, maxResponses = 20) {
   if (!patch.parentId) {
@@ -147,6 +157,7 @@ export async function create(patch: Partial<WebSocketResponse> = {}, maxResponse
   // Actually create the new response
   return db.docCreate(type, patch);
 }
+/**** ><> ↑ --------- Function to create response ->  */
 
 async function _findRecentForRequest(
   requestId: string,
@@ -164,6 +175,7 @@ async function _findRecentForRequest(
 
   return db.findMostRecentlyModified<WebSocketResponse>(type, query, limit);
 }
+/**** ><> ↑ --------- Auxiliary function to find recent requests ->  */
 
 export async function getLatestForRequest(
   requestId: string,
@@ -173,9 +185,11 @@ export async function getLatestForRequest(
   const response = responses[0] as WebSocketResponse | null | undefined;
   return response || null;
 }
+/**** ><> ↑ --------- Function to get latest response for request ->  */
 
 export function getLatestByParentId(parentId: string) {
   return db.getMostRecentlyModified<WebSocketResponse>(type, {
     parentId,
   });
 }
+/**** ><> ↑ --------- Function to get the latest response by parent id ->  */

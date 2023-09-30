@@ -4,6 +4,7 @@ import { useRouteLoaderData } from 'react-router-dom';
 import { VCS } from '../../sync/vcs/vcs';
 import { WorkspaceLoaderData } from '../routes/workspace';
 import { showError } from './modals';
+/**** ><> ↑ --------- import statements ->  */
 interface Props {
   vcs: VCS;
   branch: string;
@@ -12,6 +13,7 @@ interface Props {
   className?: string;
   children?: ReactNode;
 }
+/**** ><> ↑ --------- Props interface declaration ->  */
 
 export const SyncPullButton: FC<Props> = props => {
   const { className, children, disabled } = props;
@@ -19,6 +21,7 @@ export const SyncPullButton: FC<Props> = props => {
     activeProject,
   } = useRouteLoaderData(':workspaceId') as WorkspaceLoaderData;
   const [loading, setLoading] = useState(false);
+/**** ><> ↑ --------- SyncPullButton component declaration ->  */
   const onClick = async () => {
     const { vcs, onPull, branch } = props;
     setLoading(true);
@@ -47,6 +50,7 @@ export const SyncPullButton: FC<Props> = props => {
       onPull?.();
     }
   };
+/**** ><> ↑ --------- onClick handler function definition ->  */
   return (
     <button className={className} onClick={onClick} disabled={disabled}>
       {loading && <i className="fa fa-spin fa-refresh space-right" />}
@@ -54,3 +58,4 @@ export const SyncPullButton: FC<Props> = props => {
     </button>
   );
 };
+/**** ><> ↑ --------- Return JSX ->  */

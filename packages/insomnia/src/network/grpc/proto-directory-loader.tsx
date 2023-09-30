@@ -4,11 +4,13 @@ import path from 'path';
 import * as models from '../../models';
 import type { ProtoDirectory } from '../../models/proto-directory';
 
+/**** ><> ↑ --------- Import statements ->  */
 interface IngestResult {
   createdDir?: ProtoDirectory | null;
   createdIds: string[];
   error?: Error | null;
 }
+/**** ><> ↑ --------- Interface declaration ->  */
 
 export class ProtoDirectoryLoader {
   createdIds: string[] = [];
@@ -19,11 +21,13 @@ export class ProtoDirectoryLoader {
     this.rootDirPath = rootDirPath;
     this.workspaceId = workspaceId;
   }
+/**** ><> ↑ --------- ProtoDirectoryLoader class declaration ->  */
 
   async _parseDir(entryPath: string, parentId: string) {
     const result = await this._ingest(entryPath, parentId);
     return Boolean(result);
   }
+/**** ><> ↑ --------- _parseDir method declaration ->  */
 
   async _parseFile(entryPath: string, parentId: string) {
     const extension = path.extname(entryPath);
@@ -43,6 +47,7 @@ export class ProtoDirectoryLoader {
     this.createdIds.push(_id);
     return true;
   }
+/**** ><> ↑ --------- _parseFile method declaration ->  */
 
   async _ingest(dirPath: string, parentId: string): Promise<ProtoDirectory | null> {
     // Check exists
@@ -79,6 +84,7 @@ export class ProtoDirectoryLoader {
 
     return null;
   }
+/**** ><> ↑ --------- _ingest method declaration ->  */
 
   async load() {
     try {
@@ -96,4 +102,6 @@ export class ProtoDirectoryLoader {
       } as IngestResult;
     }
   }
+/**** ><> ↑ --------- load method declaration ->  */
 }
+/**** ><> ↑ --------- End of the ProtoDirectoryLoader class ->  */

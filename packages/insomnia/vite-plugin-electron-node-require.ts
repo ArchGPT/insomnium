@@ -1,10 +1,12 @@
 import { createRequire } from 'node:module';
 
 import type { Plugin } from 'vite';
+/**** ><> ↑ --------- Imports */
 
 export interface Options {
   modules: string[];
 }
+/**** ><> ↑ --------- Options Interface */
 
 /**
  * Allows Vite to import modules that will be resolved by Node's require() function.
@@ -43,6 +45,7 @@ export function electronNodeRequire(options: Options): Plugin {
 
       return conf;
     },
+/**** ><> ↑ --------- Electron Node Require Function */
     resolveId(id) {
       const externalId = id.split('virtual:external:')[1];
       if (modules.includes(externalId)) {
@@ -54,6 +57,7 @@ export function electronNodeRequire(options: Options): Plugin {
       // Return null to indicate that this plugin should not resolve the module
       return null;
     },
+/**** ><> ↑ --------- Resolve ID */
     load(id) {
       if (id.includes('virtual:external:')) {
         const externalId = id.split('virtual:external:')[1];
@@ -97,5 +101,7 @@ export function electronNodeRequire(options: Options): Plugin {
       // Return null to indicate that this plugin should not resolve the module
       return null;
     },
+/**** ><> ↑ --------- Load */
   };
 }
+/**** ><> ↑ --------- Plugin Export */

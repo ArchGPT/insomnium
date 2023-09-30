@@ -9,10 +9,12 @@ import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { HelpTooltip } from '../help-tooltip';
+/**** ><> ↑ --------- Import declarations -> This segment of the code imports necessary dependencies from both native and third-party libraries as well as local files. */
 
 export interface ProjectSettingsModalProps extends ModalProps {
   project: Project;
 }
+/**** ><> ↑ --------- Type definitions -> Declaration of types and interfaces used in the project. It's good for type checking and ensuring the code robustness. */
 
 export const ProjectSettingsModal: FC<ProjectSettingsModalProps> = ({ project, onHide }) => {
   const modalRef = useRef<ModalHandle>(null);
@@ -25,6 +27,7 @@ export const ProjectSettingsModal: FC<ProjectSettingsModalProps> = ({ project, o
 
   const isRemote = isRemoteProject(project);
 
+/**** ><> ↑ --------- Component Function -> Initial definition of the functional component and its variables using functional component structures such as `useEffect`, `useRef`, and `useParams`. */
   return (
     <OverlayContainer>
       <Modal onHide={onHide} ref={modalRef}>
@@ -86,8 +89,11 @@ export const ProjectSettingsModal: FC<ProjectSettingsModalProps> = ({ project, o
       </Modal>
     </OverlayContainer>
   );
+/**** ><> ↑ --------- Component Return -> The return statement of the functional component which defines the rendered user interface. It includes multiple nested components from Modal Header to Modal Body. */
 };
 
 ProjectSettingsModal.displayName = 'ProjectSettingsModal';
+/**** ><> ↑ --------- Component Display Name -> Assigning the display name of the functional component. It helps during debugging and testing. */
 
 export default ProjectSettingsModal;
+/**** ><> ↑ --------- Component Export -> The final export statement for the functional component to be used outside of the module. */

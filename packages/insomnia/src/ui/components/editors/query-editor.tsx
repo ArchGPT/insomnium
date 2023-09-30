@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+/**** ><> ↑ --------- Import styled components */
 
 export const QueryEditorContainer = styled.div({
   display: 'grid',
@@ -6,6 +7,7 @@ export const QueryEditorContainer = styled.div({
   gridTemplateRows: 'auto minmax(0,1fr)',
   gridTemplateColumns: '100%',
 });
+/**** ><> ↑ --------- Define QueryEditorContainer styled component */
 
 export const QueryEditorPreview = styled.div({
   maxHeight: '14rem',
@@ -17,6 +19,7 @@ export const QueryEditorPreview = styled.div({
     minHeight: '2em',
   },
 });
+/**** ><> ↑ --------- Define QueryEditorPreview styled component */
 
 export const QueryEditor = styled.div({
   minHeight: '2rem',
@@ -29,3 +32,4 @@ export const QueryEditor = styled.div({
     padding: '0',
   },
 });
+/**** ><> ↑ --------- Define QueryEditor styled component */

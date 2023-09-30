@@ -4,6 +4,7 @@ import { globalBeforeEach } from '../../__jest__/before-each';
 import { CONTENT_TYPE_GRAPHQL } from '../../common/constants';
 import { newBodyGraphQL, updateMimeType } from '../../ui/components/dropdowns/content-type-dropdown';
 import * as models from '../index';
+/**** ><> ↑ --------- Import statements ->  */
 
 describe('init()', () => {
   beforeEach(globalBeforeEach);
@@ -30,6 +31,7 @@ describe('init()', () => {
     });
   });
 });
+/**** ><> ↑ --------- 'init' function declaration ->  */
 
 describe('create()', () => {
   beforeEach(globalBeforeEach);
@@ -77,6 +79,7 @@ describe('create()', () => {
     ).toThrow('New Requests missing `parentId`');
   });
 });
+/**** ><> ↑ --------- 'create' function declaration ->  */
 
 describe('updateMimeType()', () => {
   beforeEach(globalBeforeEach);
@@ -171,6 +174,7 @@ describe('updateMimeType()', () => {
     expect(newRequest.headers).toEqual([]);
   });
 });
+/**** ><> ↑ --------- 'updateMimeType' function declaration ->  */
 
 describe('migrate()', () => {
   beforeEach(globalBeforeEach);
@@ -404,6 +408,7 @@ describe('migrate()', () => {
     expect(migrated).toEqual(expected);
   });
 });
+/**** ><> ↑ --------- 'migrate' function declaration ->  */
 
 describe('newBodyGraphQL()', () => {
   it('strips \\\\n characters', () => {
@@ -437,3 +442,4 @@ describe('newBodyGraphQL()', () => {
     });
   });
 });
+/**** ><> ↑ --------- 'newBodyGraphQL' function declaration ->  */

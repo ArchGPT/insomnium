@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { KeyValueEditor } from '../../key-value-editor/key-value-editor';
+/**** ><> ↑ --------- Import statements */
 
 interface Props {
   onChange: (c: {
@@ -11,6 +12,7 @@ interface Props {
   }[]) => void;
   parameters: any[];
 }
+/**** ><> ↑ --------- Interface declaration */
 
 export const UrlEncodedEditor: FC<Props> = ({ parameters, onChange }) => (
   <div className="scrollable-container tall wide">
@@ -26,3 +28,4 @@ export const UrlEncodedEditor: FC<Props> = ({ parameters, onChange }) => (
     </div>
   </div>
 );
+/**** ><> ↑ --------- Component declaration */

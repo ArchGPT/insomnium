@@ -5,6 +5,7 @@ import { toKebabCase } from '../../../../../common/misc';
 import { useRequestPatcher } from '../../../../hooks/use-request';
 import { RequestLoaderData } from '../../../../routes/request';
 import { AuthRow } from './auth-row';
+/**** ><> ↑ --------- Import statements */
 
 interface Props {
   label: string;
@@ -16,6 +17,7 @@ interface Props {
   help?: ReactNode;
   disabled?: boolean;
 }
+/**** ><> ↑ --------- Interface definition */
 
 export const AuthSelectRow: FC<Props> = ({ label, property, help, options, disabled }) => {
   const { activeRequest: { authentication, _id: requestId } } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
@@ -46,3 +48,4 @@ export const AuthSelectRow: FC<Props> = ({ label, property, help, options, disab
     </AuthRow>
   );
 };
+/**** ><> ↑ --------- Functional Component definition and its logic */

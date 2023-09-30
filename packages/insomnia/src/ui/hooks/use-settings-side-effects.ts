@@ -1,9 +1,11 @@
 import { useEffect, useLayoutEffect } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 import { usePrevious } from 'react-use';
+/**** ><> ↑ --------- Importing necessary dependencies from libraries ->  */
 
 import { Settings } from '../../models/settings';
 import { RootLoaderData } from '../routes/root';
+/**** ><> ↑ --------- Importing local dependencies ->  */
 
 const useRestartSetting = (setting: keyof Settings) => {
   const {
@@ -26,8 +28,10 @@ const useRestartSetting = (setting: keyof Settings) => {
     window.main.restart();
   }, [nextValue, previousValue]);
 };
+/**** ><> ↑ --------- Defining useRestartSetting function ->  */
 
 const updateFontStyle = (key: string, value: string | null) => document?.querySelector('html')?.style.setProperty(key, value);
+/**** ><> ↑ --------- Defining updateFontStyle function ->  */
 
 // as a general rule, if the body effect in this file is more than one line, extract into a separate function.
 export const useSettingsSideEffects = () => {
@@ -58,3 +62,4 @@ export const useSettingsSideEffects = () => {
   useRestartSetting('nunjucksPowerUserMode');
   useRestartSetting('showVariableSourceAndValue');
 };
+/**** ><> ↑ --------- Exporting useSettingsSideEffects function ->  */

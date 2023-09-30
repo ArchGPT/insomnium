@@ -5,9 +5,11 @@ import { TabItem, Tabs } from '../base/tabs';
 import { CodeEditor } from '../codemirror/code-editor';
 import { GrpcStatusTag } from '../tags/grpc-status-tag';
 import { Pane, PaneBody, PaneHeader } from './pane';
+/**** ><> ↑ --------- Importing necessary modules and components ->  */
 interface Props {
   grpcState: GrpcRequestState;
 }
+/**** ><> ↑ --------- Declaration of type Props ->  */
 
 export const GrpcResponsePane: FunctionComponent<Props> = ({ grpcState: { running, responseMessages, status, error } }) => {
   return (
@@ -40,3 +42,5 @@ export const GrpcResponsePane: FunctionComponent<Props> = ({ grpcState: { runnin
     </Pane>
   );
 };
+/**** ><> ↑ --------- Definition of GrpcResponsePane function component ->  */
+/**** ><> ↑ --------- Rendering Tabbed Response Messages within PaneBody if they are available ->  */

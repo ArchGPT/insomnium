@@ -1,10 +1,12 @@
 import React, { createRef, FunctionComponent, useLayoutEffect } from 'react';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Imports required dependencies ->  */
 
 export interface SidebarFilterProps {
   filter: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
+/**** ><> ↑ --------- Declaration of interface 'SidebarFilterProps' ->  */
 
 const StyledFilter = styled.div`
   padding-left: var(--padding-md);
@@ -32,6 +34,7 @@ const StyledFilter = styled.div`
     }
   }
 `;
+/**** ><> ↑ --------- Definition of styled component 'StyledFilter' ->  */
 
 export const SidebarFilter: FunctionComponent<SidebarFilterProps> = ({ filter, onChange }) => {
   const filterField = createRef<HTMLInputElement>();
@@ -54,3 +57,4 @@ export const SidebarFilter: FunctionComponent<SidebarFilterProps> = ({ filter, o
     </StyledFilter>
   );
 };
+/**** ><> ↑ --------- Declaration and definition of main SidebarFilter component ->  */

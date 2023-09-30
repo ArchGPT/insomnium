@@ -1,5 +1,7 @@
 import React, { SVGProps, memo } from 'react';
+/**** ><> ↑ --------- Import statements ->  */
 export const SvgIcnSystemEvent = memo<SVGProps<SVGSVGElement>>(props => (
+/**** ><> ↑ --------- React Component Declaration ->  */
   <svg
     width="1em"
     height="1em"
@@ -9,6 +11,7 @@ export const SvgIcnSystemEvent = memo<SVGProps<SVGSVGElement>>(props => (
     role="img"
     {...props}
   >
+/**** ><> ↑ --------- SVG Element Declaration ->  */
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -16,5 +19,7 @@ export const SvgIcnSystemEvent = memo<SVGProps<SVGSVGElement>>(props => (
       fill="#fff"
       fillOpacity={0.6}
     />
+/**** ><> ↑ --------- Path Element Declaration and attributes ->  */
   </svg>
 ));
+/**** ><> ↑ --------- Closing SVG and React Component Tags ->  */

@@ -10,8 +10,10 @@ import * as postman from './postman';
 import * as postmanenv from './postman-env';
 import * as swagger2 from './swagger-2';
 import * as wsdl from './wsdl';
+/**** ><> ↑ --------- Module imports ->  */
 
 // note that the importers are tried one at a time until one works (for every given input).  That means that we would benefit from keeping the less computationally intense importers near the bottom of the list and the more computationally intense ones near the top.
+/**** ><> ↑ --------- Comment about importers ->  */
 export const importers: Importer[] = [
   insomnia1,
   insomnia2,
@@ -25,8 +27,10 @@ export const importers: Importer[] = [
   openapi3,
   wsdl,
 ];
+/**** ><> ↑ --------- Creating importers array ->  */
 
 export type { Insomnia1Data } from './insomnia-1';
 export type { Insomnia2Data } from './insomnia-2';
 export type { Insomnia3Data } from './insomnia-3';
 export type { Insomnia4Data } from './insomnia-4';
+/**** ><> ↑ --------- Exporting data types ->  */

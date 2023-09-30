@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useRef } from 'react';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface Props {
   body: string;
   url: string;
   webpreferences: string;
 }
+/**** ><> ↑ --------- Props interface definition ->  */
 export const ResponseWebView: FC<Props> = ({ webpreferences, body, url }) => {
   const webviewRef = useRef<Electron.WebviewTag>(null);
 
@@ -20,11 +22,14 @@ export const ResponseWebView: FC<Props> = ({ webpreferences, body, url }) => {
     if (webview) {
       webview.addEventListener('dom-ready', handleDOMReady);
     }
+/**** ><> ↑ --------- Event listener attachment for dom-ready event ->  */
     return () => {
       if (webview) {
         webview.removeEventListener('dom-ready', handleDOMReady);
       }
     };
+/**** ><> ↑ --------- UseEffect hook definition ->  */
+/**** ><> ↑ --------- Event listener clean up in return function ->  */
   }, [body, url]);
   return (
     <webview
@@ -33,6 +38,8 @@ export const ResponseWebView: FC<Props> = ({ webpreferences, body, url }) => {
       src="about:blank"
       // eslint-disable-next-line react/no-unknown-property
       webpreferences={webpreferences}
+/**** ><> ↑ --------- React component definition ->  */
     />
   );
 };
+/**** ><> ↑ --------- Return JSX element webview ->  */

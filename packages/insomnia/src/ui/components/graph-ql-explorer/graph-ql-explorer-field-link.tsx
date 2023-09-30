@@ -1,11 +1,13 @@
 import React, { FC, Fragment, useCallback } from 'react';
 
 import { GraphQLFieldWithParentName } from './graph-ql-types';
+/**** ><> ↑ --------- Import statements */
 
 interface Props {
   onNavigate: (type: GraphQLFieldWithParentName) => void;
   field: GraphQLFieldWithParentName;
 }
+/**** ><> ↑ --------- Interface declaration */
 
 export const GraphQLExplorerFieldLink: FC<Props> = ({
   field,
@@ -29,4 +31,5 @@ export const GraphQLExplorerFieldLink: FC<Props> = ({
       </a>
     </Fragment>
   );
+/**** ><> ↑ --------- Component declaration */
 };

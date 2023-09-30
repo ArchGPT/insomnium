@@ -2,15 +2,18 @@ import React, { FC, useState } from 'react';
 import { Cookie } from 'tough-cookie';
 
 import { CookiesModal } from '../modals/cookies-modal';
+/**** ><> ↑ --------- Import of libraries and components ->  */
 
 interface Props {
   cookiesSent?: boolean | null;
   cookiesStored?: boolean | null;
   headers: any[];
 }
+/**** ><> ↑ --------- Props Interface ->  */
 
 export const ResponseCookiesViewer: FC<Props> = props => {
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
+/**** ><> ↑ --------- Initial definition of component ResponseCookiesViewer with initial useState ->  */
   const renderRow = (h: any, i: number) => {
     let cookie: Cookie | undefined | null = null;
 
@@ -26,6 +29,7 @@ export const ResponseCookiesViewer: FC<Props> = props => {
       <td className="force-wrap">{cookie ? cookie.value : blank}</td>
     </tr>;
   };
+/**** ><> ↑ --------- RenderRow method that contains cookie parsing ->  */
 
   const {
     headers,
@@ -42,6 +46,7 @@ export const ResponseCookiesViewer: FC<Props> = props => {
   } else if (notifyNotStored) {
     noticeMessage = 'storing';
   }
+/**** ><> ↑ --------- Props deconstruction and notification logic ->  */
 
   return <div>
     {noticeMessage && <div className="notice info margin-bottom no-margin-top">
@@ -71,3 +76,4 @@ export const ResponseCookiesViewer: FC<Props> = props => {
     )}
   </div>;
 };
+/**** ><> ↑ --------- Return statement of the function component along with the JSX structure ->  */

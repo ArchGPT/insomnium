@@ -1,4 +1,5 @@
 import YAML from 'yaml';
+/**** ><> ↑ --------- Module Import ->  */
 
 export interface ParsedApiSpec {
   contents: Record<string, any> | null;
@@ -6,6 +7,7 @@ export interface ParsedApiSpec {
   format: 'openapi' | 'swagger' | null;
   formatVersion: string | null;
 }
+/**** ><> ↑ --------- Interface Declaration ->  */
 
 export function parseApiSpec(
   rawDocument: string,
@@ -40,6 +42,7 @@ export function parseApiSpec(
 
   return result;
 }
+/**** ><> ↑ --------- parseApiSpec Function Declaration ->  */
 
 export function resolveComponentSchemaRefs(
   spec: ParsedApiSpec,
@@ -76,3 +79,4 @@ export function resolveComponentSchemaRefs(
 
   return resolved;
 }
+/**** ><> ↑ --------- resolveComponentSchemaRefs Function Declaration ->  */

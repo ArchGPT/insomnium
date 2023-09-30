@@ -30,6 +30,7 @@ import { RenderedQueryString } from '../rendered-query-string';
 import { RequestUrlBar } from '../request-url-bar';
 import { Pane, PaneHeader } from './pane';
 import { PlaceholderRequestPane } from './placeholder-request-pane';
+/**** ><> ↑ --------- Import statements ->  */
 const HeaderContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
@@ -57,12 +58,14 @@ const TabPanelBody = styled.div({
   flex: '1 0',
 });
 
+/**** ><> ↑ --------- Styled divs ->  */
 interface Props {
   environmentId: string;
   settings: Settings;
   setLoading: (l: boolean) => void;
   onPaste: (text: string) => void;
 }
+/**** ><> ↑ --------- Component properties definition ->  */
 
 export const RequestPane: FC<Props> = ({
   environmentId,
@@ -315,3 +318,4 @@ export const RequestPane: FC<Props> = ({
     </Pane>
   );
 };
+/**** ><> ↑ --------- Main React functional component and its body ->  */

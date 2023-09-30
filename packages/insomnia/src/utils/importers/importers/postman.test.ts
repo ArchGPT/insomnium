@@ -3,6 +3,7 @@ import { describe, expect, it } from '@jest/globals';
 import { ImportPostman } from './postman';
 import { HttpsSchemaGetpostmanComJsonCollectionV210, Request1 } from './postman-2.1.types';
 
+/**** ><> ↑ --------- Imports ->  */
 describe('postman', () => {
   const postmanSchema = ({
     requests = [],
@@ -32,6 +33,7 @@ describe('postman', () => {
     ],
   })) as HttpsSchemaGetpostmanComJsonCollectionV210;
 
+/**** ><> ↑ --------- Postman Schema ->  */
   describe('headers', () => {
     describe('properties', () => {
       it('should import headers with all properties', () => {
@@ -226,6 +228,7 @@ describe('postman', () => {
       });
     });
 
+/**** ><> ↑ --------- Headers related test suites ->  */
     describe('oauth1', () => {
       it('returns simple oauth1 authentication', () => {
         const oauth1 = 'OAuth realm="Realm",oauth_consumer_key="Consumer%20Key",oauth_token="Access%20Token",oauth_signature_method="HMAC-SHA1",oauth_timestamp="Timestamp",oauth_nonce="Nonce",oauth_version="Version",oauth_callback="Callback%20URL",oauth_verifier="Verifier",oauth_signature="TwJvZVasVWTL6X%2Bz3lmuiyvaX2Q%3D"';
@@ -263,6 +266,7 @@ describe('postman', () => {
       // we don't have a importOauth2AuthenticationFromHeader with which to write a test for since importBearerAuthenticationFromHeader handles this case
     });
   });
+/**** ><> ↑ --------- OAuth2 related test ->  */
 
   describe('oauth2', () => {
     const request: Request1 = {
@@ -470,3 +474,4 @@ describe('postman', () => {
     });
   });
 });
+/**** ><> ↑ --------- OAuth2 related test suites ->  */

@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import React, { FC } from 'react';
 
+/**** ><> ↑ --------- Imports */
 import { describeByteSize } from '../../../common/misc';
 import { useNunjucksEnabled } from '../../context/nunjucks/nunjucks-enabled-context';
 import { Dropdown, DropdownButton, DropdownItem, ItemContent } from '../base/dropdown';
@@ -23,6 +24,7 @@ export interface Pair {
 
 export type AutocompleteHandler = (pair: Pair) => string[] | PromiseLike<string[]>;
 
+/**** ><> ↑ --------- Variable and Type Declarations */
 interface Props {
   addPair: () => void;
   allowFile?: boolean;
@@ -42,6 +44,7 @@ interface Props {
   onKeydown?: (e: React.KeyboardEvent) => void;
   showDescription: boolean;
 }
+/**** ><> ↑ --------- Props Interface */
 
 export const Row: FC<Props> = ({
   allowFile,
@@ -61,6 +64,7 @@ export const Row: FC<Props> = ({
   valuePlaceholder,
   showDescription,
 }) => {
+/**** ><> ↑ --------- Component Definition */
   const { enabled } = useNunjucksEnabled();
 
   const classes = classnames(className, {
@@ -78,6 +82,7 @@ export const Row: FC<Props> = ({
   const bytes = isMultiline ? Buffer.from(pair.value, 'utf8').length : 0;
 
   return (
+/**** ><> ↑ --------- Component Render */
     <li onKeyDown={onKeydown} onClick={onClick} className={classes}>
       <div className="key-value-editor__row">
         <div
@@ -137,6 +142,7 @@ export const Row: FC<Props> = ({
           }
         </div>
         {showDescription ? (
+/**** ><> ↑ --------- Component Return */
           <div
             className={classnames(
               'form-control form-control--underlined form-control--wide no-min-width',
@@ -187,6 +193,7 @@ export const Row: FC<Props> = ({
           </Dropdown>
         ) : null}
 
+/**** ><> ↑ --------- Dropdown and Buttons */
         {!hideButtons ? (
           <button
             onClick={() => onChange({ ...pair, disabled: !pair.disabled })}
@@ -204,6 +211,7 @@ export const Row: FC<Props> = ({
           </button>
         )}
 
+/**** ><> ↑ --------- Enable/Disable Buttons */
         {!hideButtons ? (
           <PromptButton
             tabIndex={-1}
@@ -219,7 +227,9 @@ export const Row: FC<Props> = ({
           </button>
         )}
       </div>
+/**** ><> ↑ --------- Delete Button */
     </li>
   );
 };
 Row.displayName = 'Row';
+/**** ><> ↑ --------- Component Display Name */

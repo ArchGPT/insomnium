@@ -6,6 +6,7 @@ import { GraphQLExplorerFieldsList } from './graph-ql-explorer-fields-list';
 import { GraphQLExplorerTypeLink } from './graph-ql-explorer-type-link';
 import { GraphQLFieldWithOptionalArgs, GraphQLFieldWithParentName } from './graph-ql-types';
 
+/**** ><> ↑ --------- Import Statements */
 interface Props {
   schema: GraphQLSchema;
   filter: string;
@@ -19,6 +20,7 @@ interface State {
   displayedTypeBatches: number;
   displayedFieldBatches: number;
 }
+/**** ><> ↑ --------- Type Definitions */
 
 const BATCH_SIZE = 100;
 
@@ -52,6 +54,7 @@ export class GraphQLExplorerSearchResults extends PureComponent<Props, State> {
     }
   }
 
+/**** ><> ↑ --------- Component Lifecycle Methods */
   searchForTypes() {
     const { schema, filter } = this.props;
     const typeMap = schema.getTypeMap();
@@ -82,6 +85,7 @@ export class GraphQLExplorerSearchResults extends PureComponent<Props, State> {
 
     return fields;
   }
+/**** ><> ↑ --------- Search Helper Functions */
 
   renderFoundTypes() {
     const { onNavigateType } = this.props;
@@ -115,6 +119,7 @@ export class GraphQLExplorerSearchResults extends PureComponent<Props, State> {
       </>
     );
   }
+/**** ><> ↑ --------- Render Methods */
 
   renderFoundFields() {
     const { onNavigateType, onNavigateField } = this.props;
@@ -160,3 +165,4 @@ export class GraphQLExplorerSearchResults extends PureComponent<Props, State> {
     );
   }
 }
+/**** ><> ↑ --------- Component Rendering */

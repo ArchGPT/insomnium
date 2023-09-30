@@ -5,6 +5,7 @@ import { globalBeforeEach } from '../../../__jest__/before-each';
 import { RENDER_PURPOSE_SEND } from '../../../common/render';
 import * as modals from '../../../ui/components/modals';
 import * as plugin from '../app';
+/**** ><> ↑ --------- Import statements ->  */
 
 describe('init()', () => {
   beforeEach(globalBeforeEach);
@@ -29,6 +30,7 @@ describe('init()', () => {
     ].sort());
   });
 });
+/**** ><> ↑ --------- Initializes the plugin ->  */
 
 describe('app.alert()', () => {
   beforeEach(globalBeforeEach);
@@ -63,6 +65,7 @@ describe('app.alert()', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- Handles alert function ->  */
 
 describe('app.prompt()', () => {
   beforeEach(globalBeforeEach);
@@ -103,6 +106,7 @@ describe('app.prompt()', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- Handles prompt function ->  */
 
 describe('app.getInfo()', () => {
   beforeEach(globalBeforeEach);
@@ -116,3 +120,4 @@ describe('app.getInfo()', () => {
   });
 
 });
+/**** ><> ↑ --------- Provides app info ->  */

@@ -1,11 +1,13 @@
 import classnames from 'classnames';
 import React, { FC, memo, ReactNode } from 'react';
+/**** ><> ↑ --------- Imports dependencies ->  */
 
 interface Props {
   children: ReactNode;
   hideCloseButton?: boolean;
   className?: string;
 }
+/**** ><> ↑ --------- Defines Props interface ->  */
 
 export const ModalHeader: FC<Props> = memo(({ hideCloseButton, className, children }) => {
   let closeButton: null | JSX.Element = null;
@@ -25,5 +27,7 @@ export const ModalHeader: FC<Props> = memo(({ hideCloseButton, className, childr
     </div>
   );
 });
+/**** ><> ↑ --------- Declares the ModalHeader functional component ->  */
 
 ModalHeader.displayName = 'ModalHeader';
+/**** ><> ↑ --------- Sets the displayName of the ModalHeader component ->  */

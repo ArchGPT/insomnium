@@ -8,6 +8,7 @@ import { KeyboardShortcut } from '../../../common/settings';
 import { Modal, ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface AddKeyCombinationModalOptions {
   keyboardShortcut: KeyboardShortcut | null;
@@ -19,6 +20,7 @@ export interface AddKeyCombinationModalHandle {
   show: (options: AddKeyCombinationModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Interfaces declarations ->  */
 export const AddKeyCombinationModal = forwardRef<AddKeyCombinationModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<AddKeyCombinationModalOptions>({
@@ -38,6 +40,7 @@ export const AddKeyCombinationModal = forwardRef<AddKeyCombinationModalHandle, M
     },
   }), []);
 
+/**** ><> ↑ --------- AddKeyCombinationModal component definition and state initialization ->  */
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -87,6 +90,7 @@ export const AddKeyCombinationModal = forwardRef<AddKeyCombinationModalHandle, M
       pressedKeyCombination: pressed,
     });
   };
+/**** ><> ↑ --------- handleKeyDown function ->  */
 
   const { pressedKeyCombination } = state;
   let keyCombDisplay = '';
@@ -101,6 +105,7 @@ export const AddKeyCombinationModal = forwardRef<AddKeyCombinationModalHandle, M
     hidden: !isDuplicate,
   });
   return (
+/**** ><> ↑ --------- Key combination and duplicate check ->  */
     <Modal
       ref={modalRef}
       className="shortcuts add-key-comb-modal"
@@ -119,5 +124,7 @@ export const AddKeyCombinationModal = forwardRef<AddKeyCombinationModalHandle, M
       </ModalBody>
     </Modal>
   );
+/**** ><> ↑ --------- JSX return of AddKeyCombinationModal component ->  */
 });
 AddKeyCombinationModal.displayName = 'AddKeyCombinationModal';
+/**** ><> ↑ --------- Setting displayName of AddKeyCombinationModal component ->  */

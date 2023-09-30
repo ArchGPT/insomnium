@@ -1,6 +1,7 @@
 import React, { PureComponent, ReactNode } from 'react';
 
 import { showError } from './modals/index';
+/**** ><> ↑ --------- import statements */
 
 interface Props {
   children: ReactNode;
@@ -17,6 +18,7 @@ interface State {
     componentStack: string;
   } | null;
 }
+/**** ><> ↑ --------- interface and state declarations */
 
 class SingleErrorBoundary extends PureComponent<Props, State> {
   state: State = {
@@ -74,6 +76,7 @@ class SingleErrorBoundary extends PureComponent<Props, State> {
     }
   }
 
+/**** ><> ↑ --------- SingleErrorBoundary class */
   render() {
     const { error, info } = this.state;
     const { errorClassName, children, renderError } = this.props;
@@ -88,6 +91,7 @@ class SingleErrorBoundary extends PureComponent<Props, State> {
 
     return children;
   }
+/**** ><> ↑ --------- render method */
 }
 
 export class ErrorBoundary extends PureComponent<Props> {
@@ -107,3 +111,4 @@ export class ErrorBoundary extends PureComponent<Props> {
     ));
   }
 }
+/**** ><> ↑ --------- ErrorBoundary class */

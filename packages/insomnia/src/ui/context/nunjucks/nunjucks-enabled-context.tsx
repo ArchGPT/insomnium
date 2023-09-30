@@ -1,10 +1,13 @@
 import React, { createContext, FC, PropsWithChildren, useContext } from 'react';
 
+/**** ><> ↑ --------- Import Statements */
 interface Props {
   disable?: boolean;
 }
+/**** ><> ↑ --------- Interface Definitions */
 
 interface NunjucksEnabledState {
+/**** ><> ↑ --------- Context Definition */
   enabled: boolean;
 }
 
@@ -17,6 +20,7 @@ export const NunjucksEnabledProvider: FC<PropsWithChildren<Props>> = ({ disable,
     </NunjucksEnabledContext.Provider>
   );
 };
+/**** ><> ↑ --------- Provider Component */
 
 export const useNunjucksEnabled = () => {
   const context = useContext(NunjucksEnabledContext);
@@ -27,3 +31,4 @@ export const useNunjucksEnabled = () => {
 
   return context;
 };
+/**** ><> ↑ --------- Custom Hook */

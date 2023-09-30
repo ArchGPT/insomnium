@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 
 import { useNunjucks } from '../../context/nunjucks/use-nunjucks';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface Props {
   defaultValue: string;
   onChange: Function;
 }
+/**** ><> ↑ --------- Interface declaration ->  */
 
 export const VariableEditor: FC<Props> = ({ onChange, defaultValue }) => {
   const { handleRender, handleGetRenderContext } = useNunjucks();
@@ -13,6 +15,7 @@ export const VariableEditor: FC<Props> = ({ onChange, defaultValue }) => {
   const [options, setOptions] = useState<{ name: string; value: any }[]>([]);
   const [preview, setPreview] = useState('');
   const [error, setError] = useState('');
+/**** ><> ↑ --------- React component declaration ->  */
 
   useEffect(() => {
     let isMounted = true;
@@ -33,6 +36,7 @@ export const VariableEditor: FC<Props> = ({ onChange, defaultValue }) => {
       isMounted = false;
     };
   }, [handleGetRenderContext, handleRender, selected]);
+/**** ><> ↑ --------- useEffect hook for data fetching and setup ->  */
 
   const isCustomTemplateSelected = !options.find(v => selected === `{{ ${v.name} }}`);
   return (
@@ -77,3 +81,4 @@ export const VariableEditor: FC<Props> = ({ onChange, defaultValue }) => {
     </div>
   );
 };
+/**** ><> ↑ --------- Display logic and JSX return statement ->  */

@@ -18,6 +18,7 @@ import { ModalHeader } from '../base/modal-header';
 import { ExpandedProtoDirectory, ProtoFileList } from '../proto-file/proto-file-list';
 import { AsyncButton } from '../themed-button';
 import { showAlert, showError } from '.';
+/**** ><> ↑ --------- Import Statements -> This section consists of all necessary imports needed for the rest of the code file. */
 const tryToSelectFilePath = async () => {
   try {
     const { filePath, canceled } = await selectFileOrFolder({ itemTypes: ['file'], extensions: ['proto'] });
@@ -68,6 +69,7 @@ const traverseDirectory = (dir: ProtoDirectory, files: ProtoFile[], directories:
   subDirs: directories.filter(pd => pd.parentId === dir._id).map(subDir => traverseDirectory(subDir, files, directories)),
 });
 
+/**** ><> ↑ --------- Utility Functions Definitions -> This section defines several utility functions to handle selection and validation of file paths. */
 const getProtoDirectories = async (workspaceId: string) => {
   const allFiles = await models.protoFile.all();
   const allDirs = await models.protoDirectory.all();
@@ -91,6 +93,7 @@ const getProtoDirectories = async (workspaceId: string) => {
 
   return expandedDirs;
 };
+/**** ><> ↑ --------- Asynchronous Function for Proto Directories -> This section defines an asynchronous function that gets proto directories inside a workspace. */
 
 export interface Props {
   defaultId?: string;
@@ -100,6 +103,7 @@ export interface Props {
 }
 
 export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRequests }) => {
+/**** ><> ↑ --------- Type and Component Definitions -> Here, the Props type and ProtoFilesModal component are being defined. */
   const modalRef = useRef<ModalHandle>(null);
   const { workspaceId } = useParams() as { workspaceId: string };
 
@@ -125,6 +129,7 @@ export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRe
       }
     });
   }, [workspaceId]);
+/**** ><> ↑ --------- Component State and Effects -> This section sets up component state using useState and useEffect hooks. */
 
   const handleAddDirectory = async () => {
     let rollback = false;
@@ -251,6 +256,7 @@ export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRe
       },
     });
   };
+/**** ><> ↑ --------- Event Handlers -> This section defines several event handlers for updating, deleting, and adding directories and files. */
   const handleAddFile = async () => {
     const filePath = await tryToSelectFilePath();
     if (!filePath) {
@@ -318,3 +324,4 @@ export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRe
     </Modal >
   );
 };
+/**** ><> ↑ --------- Render Function -> The final section is the component’s render function, returning the JSX to be rendered to the DOM. */

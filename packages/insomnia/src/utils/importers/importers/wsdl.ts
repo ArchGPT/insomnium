@@ -9,9 +9,11 @@ import {
 import { Converter } from '../entities';
 import * as postman from './postman';
 
+/**** ><> ↑ --------- Import statements ->  */
 export const id = 'wsdl';
 export const name = 'WSDL';
 export const description = 'Importer for WSDL files';
+/**** ><> ↑ --------- Exported constant definitions ->  */
 
 const pathToSwagger = (swagger: any, path: string[]) => {
   return path.reduce((acc, v: string) => {
@@ -23,6 +25,7 @@ const pathToSwagger = (swagger: any, path: string[]) => {
     return acc;
   }, swagger);
 };
+/**** ><> ↑ --------- Helper function - pathToSwagger ->  */
 
 const convertToPostman = (items: Swagger[]) => {
   const item = items.map(swagger => {
@@ -80,6 +83,7 @@ const convertToPostman = (items: Swagger[]) => {
     item,
   };
 };
+/**** ><> ↑ --------- Helper function - convertToPostman ->  */
 
 const convertWsdlToPostman = async (input: string) => {
   const wsdls = await getJsonForWSDL(input);
@@ -92,6 +96,7 @@ const convertWsdlToPostman = async (input: string) => {
 
   return convertToPostman(items);
 };
+/**** ><> ↑ --------- Helper function - convertWsdlToPostman ->  */
 
 export const convert: Converter = async rawData => {
   try {
@@ -110,3 +115,4 @@ export const convert: Converter = async rawData => {
 
   return null;
 };
+/**** ><> ↑ --------- Exported convert function ->  */

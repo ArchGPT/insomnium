@@ -2,10 +2,12 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 import { SvgIcon } from '../svg-icon';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface UnitTestResultTimestampProps {
   timeMs: String;
 }
+/**** ><> ↑ --------- Interface declaration ->  */
 
 const StyledTimestamp = styled.div`
   display: flex;
@@ -21,6 +23,7 @@ const StyledTimestamp = styled.div`
     margin-right: var(--padding-xxs);
   }
 `;
+/**** ><> ↑ --------- Styled component definition ->  */
 
 export const UnitTestResultTimestamp: FunctionComponent<UnitTestResultTimestampProps> = ({ timeMs }) => {
   return (
@@ -31,3 +34,4 @@ export const UnitTestResultTimestamp: FunctionComponent<UnitTestResultTimestampP
     </StyledTimestamp>
   );
 };
+/**** ><> ↑ --------- Function component declaration ->  */

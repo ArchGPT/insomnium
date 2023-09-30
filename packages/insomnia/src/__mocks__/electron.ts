@@ -3,8 +3,10 @@ import { EventEmitter } from 'events';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+/**** ><> ↑ --------- Import statements ->  */
 
 const RANDOM_STRING = Math.random().toString().replace('.', '');
+/**** ><> ↑ --------- Initialization of RANDOM_STRING ->  */
 
 const remote = {
   app: {
@@ -57,10 +59,12 @@ const remote = {
     },
   },
 };
+/**** ><> ↑ --------- Definition of the remote object ->  */
 
 const dialog = {
   showErrorBox: jest.fn(),
 };
+/**** ><> ↑ --------- Definition of the dialog object ->  */
 
 const electron = {
   ...remote,
@@ -88,6 +92,9 @@ const electron = {
     clear: jest.fn(),
   },
 };
+/**** ><> ↑ --------- Definition of the electron object ->  */
 
 // WARNING: changing this to `export default` will break the mock and be incredibly hard to debug. Ask me how I know.
+/**** ><> ↑ --------- Comment warning ->  */
 module.exports = electron;
+/**** ><> ↑ --------- Export statement ->  */

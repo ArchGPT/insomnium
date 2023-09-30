@@ -1,5 +1,6 @@
 import { database as db } from '../common/database';
 import type { BaseModel } from './index';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const name = 'Folder';
 
@@ -10,6 +11,7 @@ export const prefix = 'fld';
 export const canDuplicate = true;
 
 export const canSync = true;
+/**** ><> ↑ --------- Constant declarations ->  */
 interface BaseRequestGroup {
   name: string;
   description: string;
@@ -19,10 +21,12 @@ interface BaseRequestGroup {
 }
 
 export type RequestGroup = BaseModel & BaseRequestGroup;
+/**** ><> ↑ --------- Type and interface definitions ->  */
 
 export const isRequestGroup = (model: Pick<BaseModel, 'type'>): model is RequestGroup => (
   model.type === type
 );
+/**** ><> ↑ --------- Type assertion function ->  */
 
 export function init(): BaseRequestGroup {
   return {
@@ -33,10 +37,12 @@ export function init(): BaseRequestGroup {
     metaSortKey: -1 * Date.now(),
   };
 }
+/**** ><> ↑ --------- init function ->  */
 
 export function migrate(doc: RequestGroup) {
   return doc;
 }
+/**** ><> ↑ --------- migrate function ->  */
 
 export function create(patch: Partial<RequestGroup> = {}) {
   if (!patch.parentId) {
@@ -45,26 +51,32 @@ export function create(patch: Partial<RequestGroup> = {}) {
 
   return db.docCreate<RequestGroup>(type, patch);
 }
+/**** ><> ↑ --------- create function ->  */
 
 export function update(requestGroup: RequestGroup, patch: Partial<RequestGroup> = {}) {
   return db.docUpdate<RequestGroup>(requestGroup, patch);
 }
+/**** ><> ↑ --------- update function ->  */
 
 export function getById(id: string) {
   return db.get<RequestGroup>(type, id);
 }
+/**** ><> ↑ --------- getById function ->  */
 
 export function findByParentId(parentId: string) {
   return db.find<RequestGroup>(type, { parentId });
 }
+/**** ><> ↑ --------- findByParentId function ->  */
 
 export function remove(requestGroup: RequestGroup) {
   return db.remove(requestGroup);
 }
+/**** ><> ↑ --------- remove function ->  */
 
 export function all() {
   return db.all<RequestGroup>(type);
 }
+/**** ><> ↑ --------- all function ->  */
 
 export async function duplicate(requestGroup: RequestGroup, patch: Partial<RequestGroup> = {}) {
   if (!patch.name) {
@@ -95,5 +107,7 @@ export async function duplicate(requestGroup: RequestGroup, patch: Partial<Reque
     ...patch,
   });
 }
+/**** ><> ↑ --------- duplicate function ->  */
 
 export const isRequestGroupId = (id: string) => id.startsWith(prefix);
+/**** ><> ↑ --------- isRequestGroupId function ->  */

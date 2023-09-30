@@ -10,17 +10,20 @@ import styled from 'styled-components';
 import { DropdownButton } from './dropdown-button';
 import { Menu } from './menu';
 import { Popover } from './popover';
+/**** ><> ↑ --------- Importing dependencies. ->  */
 
 export interface DropdownHandle {
   show: (filterVisible?: boolean) => void;
   hide: () => void;
   toggle: (filterVisible?: boolean) => void;
 }
+/**** ><> ↑ --------- Declaring interfaces for DropdownHandle. ->  */
 
 const Container = styled.div({
   position: 'relative',
   display: 'inline-block',
 });
+/**** ><> ↑ --------- Defining styles with styled-components. ->  */
 
 export interface DropdownProps extends AriaMenuProps<any>, MenuTriggerProps {
   label?: string;
@@ -33,6 +36,7 @@ export interface DropdownProps extends AriaMenuProps<any>, MenuTriggerProps {
   onOpen?: () => void;
   closeOnSelect?: boolean;
 }
+/**** ><> ↑ --------- Declaring interfaces for DropdownProps. ->  */
 
 export const Dropdown = forwardRef<DropdownHandle, DropdownProps>((props: DropdownProps, ref: any) => {
   const {
@@ -85,5 +89,7 @@ export const Dropdown = forwardRef<DropdownHandle, DropdownProps>((props: Dropdo
     </Container>
   );
 });
+/**** ><> ↑ --------- Creating the Dropdown component with all its logic, using React hooks and other imported dependencies. ->  */
 
 Dropdown.displayName = 'Dropdown';
+/**** ><> ↑ --------- Setting the displayName of the Dropdown component. ->  */

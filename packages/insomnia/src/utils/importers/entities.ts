@@ -8,8 +8,10 @@ export interface UNKNOWN_OBJ {
 export interface Comment {
   comment?: UNKNOWN;
 }
+/**** ><> ↑ --------- UNKNOWN type placeholder and related interfaces ->  */
 
 export type Variable = `{{ ${string} }}`;
+/**** ><> ↑ --------- Defines Variable type ->  */
 
 export interface Authentication extends Comment {
   authorizationUrl?: string;
@@ -23,6 +25,7 @@ export interface Authentication extends Comment {
   username?: string;
   password?: string;
 }
+/**** ><> ↑ --------- Authentication interface ->  */
 
 export interface Parameter extends Comment {
   name: string;
@@ -32,6 +35,7 @@ export interface Parameter extends Comment {
   disabled?: boolean;
   type?: 'file' | string;
 }
+/**** ><> ↑ --------- Parameter interface ->  */
 
 export type Body =
   | string
@@ -40,33 +44,39 @@ export type Body =
       text?: string;
       params?: Parameter[];
     };
+/**** ><> ↑ --------- Body type ->  */
 
 export interface Cookie {
   name: string;
   value: string;
 }
+/**** ><> ↑ --------- Cookie interface ->  */
 
 export interface Header extends Comment {
   name: 'Cookie' | 'Content-Type' | string;
   disabled?: boolean;
   value: UNKNOWN;
 }
+/**** ><> ↑ --------- Header interface ->  */
 
 export interface PostData {
   params?: Parameter[];
   mimeType?: string;
   text?: string;
 }
+/**** ><> ↑ --------- PostData interface ->  */
 
 export interface QueryString extends Comment {
   name: string;
 }
+/**** ><> ↑ --------- QueryString interface ->  */
 
 export type ImportRequestType =
   | 'environment'
   | 'request'
   | 'request_group'
   | 'workspace';
+/**** ><> ↑ --------- ImportRequestType type ->  */
 
 export interface ImportRequest<T extends {} = {}> extends Comment {
   _id?: string;
@@ -88,10 +98,12 @@ export interface ImportRequest<T extends {} = {}> extends Comment {
   queryString?: QueryString[];
   url?: string;
 }
+/**** ><> ↑ --------- ImportRequest interface ->  */
 
 export type Converter<T extends {} = {}> = (
   rawData: string
 ) => ImportRequest<T>[] | Promise<ImportRequest<T>[] | null> | null;
+/**** ><> ↑ --------- Converter type ->  */
 
 export interface Importer {
   id: string;
@@ -99,3 +111,4 @@ export interface Importer {
   description: string;
   convert: Converter;
 }
+/**** ><> ↑ --------- Importer interface ->  */

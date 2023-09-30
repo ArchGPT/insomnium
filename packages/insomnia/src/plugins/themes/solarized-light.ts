@@ -1,7 +1,9 @@
 export default {
+/**** ><> ↑ --------- Exporting default module ->  */
   name: 'solarized-light',
   displayName: 'Solarized Light',
   theme: {
+/**** ><> ↑ --------- Module properties ->  */
     background: {
       default: '#fdf6e3',
       success: '#859900',
@@ -11,9 +13,11 @@ export default {
       surprise: '#6c71c4',
       info: '#2aa198',
     },
+/**** ><> ↑ --------- Background theme colors ->  */
     foreground: {
       default: '#657b83',
     },
+/**** ><> ↑ --------- Foreground theme colors ->  */
     highlight: {
       default: 'rgb(142, 149, 146)',
       xxs: 'rgba(159, 167, 164, 0.05)',
@@ -23,5 +27,7 @@ export default {
       lg: 'rgba(142, 149, 146, 0.6)',
       xl: 'rgba(142, 149, 146, 0.8)',
     },
+/**** ><> ↑ --------- Highlight theme colors ->  */
   },
 };
+/**** ><> ↑ --------- Closing of module properties ->  */

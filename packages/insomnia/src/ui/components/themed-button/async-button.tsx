@@ -3,6 +3,7 @@ import React, { MouseEvent, ReactNode, useCallback, useState } from 'react';
 import type { ButtonProps } from './button';
 import { Button } from './button';
 
+/**** ><> ↑ --------- Import statements ->  */
 // Taken from https://github.com/then/is-promise
 function isPromise(obj: unknown) {
   return (
@@ -12,11 +13,13 @@ function isPromise(obj: unknown) {
     typeof obj.then === 'function'
   );
 }
+/**** ><> ↑ --------- Helper function 'isPromise' ->  */
 
 export interface AsyncButtonProps<T> extends ButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => Promise<T> | undefined;
   loadingNode?: ReactNode;
 }
+/**** ><> ↑ --------- AsyncButtonProps interface definition ->  */
 
 export const AsyncButton = <T, >({
   onClick,
@@ -49,3 +52,4 @@ export const AsyncButton = <T, >({
     </Button>
   );
 };
+/**** ><> ↑ --------- AsyncButton component definition ->  */

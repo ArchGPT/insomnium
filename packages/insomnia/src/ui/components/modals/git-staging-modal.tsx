@@ -14,6 +14,7 @@ import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { Tooltip } from '../tooltip';
 import { showAlert } from '.';
+/**** ><> ↑ --------- Importing dependencies -> The code in this segment is responsible for importing necessary dependencies that will be used in the components and functions. It is the first step in most files. */
 
 interface Item {
   path: string;
@@ -23,6 +24,7 @@ interface Item {
   added: boolean;
   editable: boolean;
 }
+/**** ><> ↑ --------- Interface declaration -> This code segment declares an interface for the 'Item' object that will be used to type the data manipulated by the 'GitStagingModal' component. */
 
 export const GitStagingModal: FC<ModalProps> = ({
   onHide,
@@ -39,9 +41,11 @@ export const GitStagingModal: FC<ModalProps> = ({
   const gitChangesFetcher = useFetcher<GitChangesLoaderData>();
   const gitCommitFetcher = useFetcher<CommitToGitRepoResult>();
   const rollbackFetcher = useFetcher<GitRollbackChangesResult>();
+/**** ><> ↑ --------- GitStagingModal component setup -> In this segment, the 'GitStagingModal' component is declared and its initial setup is done, including fetching required data. This part of the code sets up initial state and manages API fetching. */
 
   const isLoadingGitChanges = gitChangesFetcher.state !== 'idle';
 
+/**** ><> ↑ --------- Loading Git changes -> This line checks if git changes are being loaded from the fetcher. */
   useEffect(() => {
     modalRef.current?.show();
   }, []);
@@ -51,6 +55,7 @@ export const GitStagingModal: FC<ModalProps> = ({
       gitChangesFetcher.load(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/changes`);
     }
   }, [organizationId, projectId, workspaceId, gitChangesFetcher]);
+/**** ><> ↑ --------- UseEffect Hook - ModalRef and GitChangesFetcher -> These useEffect hooks are responsible for showing the modal when the component mounts and for loading git changes when needed. */
 
   const {
     changes,
@@ -67,6 +72,7 @@ export const GitStagingModal: FC<ModalProps> = ({
   const modifiedChanges = changes.filter(i => !i.status.includes('added'));
   const unversionedChanges = changes.filter(i => i.status.includes('added'));
 
+/**** ><> ↑ --------- Assigning data from gitChangesFetcher -> In this segment, data from the fetcher is assigned to variables. This includes splitting changes based on their status. */
   const errors = gitCommitFetcher.data?.errors || rollbackFetcher.data?.errors;
 
   useEffect(() => {
@@ -77,6 +83,7 @@ export const GitStagingModal: FC<ModalProps> = ({
       });
     }
   }, [errors]);
+/**** ><> ↑ --------- Error handling -> This segment checks for errors and shows them in an alert if any are present. */
 
   return (
     <OverlayContainer>
@@ -345,9 +352,11 @@ export const GitStagingModal: FC<ModalProps> = ({
       </Modal>
     </OverlayContainer>
   );
+/**** ><> ↑ --------- GitStagingModal render -> This large segment is the main render method of the GitStagingModal component. It contains logic for displaying different elements based on the state and behavior for user interactions. The actual UI of the component is defined in this segment. */
 };
 
 GitStagingModal.displayName = 'GitStagingModal';
+/**** ><> ↑ --------- Setting displayName for GitStagingModal -> This line sets a displayName for the GitStagingModal component for debugging purposes. */
 
 const OperationTooltip = ({ item }: { item: Item }) => {
   const type =
@@ -379,3 +388,4 @@ const OperationTooltip = ({ item }: { item: Item }) => {
     </Tooltip>
   );
 };
+/**** ><> ↑ --------- OperationTooltip component declaration -> This final segment declares the 'OperationTooltip' component, which is used in the render method of 'GitStagingModal'. It determines what label and icon to show based on the status of an item. */

@@ -1,5 +1,6 @@
 import { useNunjucksEnabled } from './nunjucks-enabled-context';
 import { useNunjucks } from './use-nunjucks';
+/**** ><> ↑ --------- Import statements */
 
 /**
  * Gated access to functions useful for Nunjucks rendering. Access is only granted if:
@@ -8,6 +9,7 @@ import { useNunjucks } from './use-nunjucks';
  *
  * For ungated access, use `useNunjucksRenderFunctions` instead
  */
+/**** ><> ↑ --------- Function description */
 export const useGatedNunjucks = (props: { disabled?: boolean } = {}): Partial<ReturnType<typeof useNunjucks>> => {
   const funcs = useNunjucks();
 
@@ -22,8 +24,11 @@ export const useGatedNunjucks = (props: { disabled?: boolean } = {}): Partial<Re
   const isNunjucksTemplatingEnabled = enabledByProp && enabledByProvider;
 
   if (isNunjucksTemplatingEnabled) {
+/**** ><> ↑ --------- Function implementation */
     return funcs;
+/**** ><> ↑ --------- Condition check */
   }
 
   return {};
 };
+/**** ><> ↑ --------- Return statement */

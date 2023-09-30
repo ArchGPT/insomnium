@@ -3,6 +3,7 @@ import fs from 'fs';
 import * as models from '../../models/index';
 import type { ResponseHeader } from '../../models/response';
 
+/**** ><> ↑ --------- Import statements ->  */
 interface MaybeResponse {
   parentId?: string;
   statusCode?: number;
@@ -13,12 +14,14 @@ interface MaybeResponse {
   elapsedTime?: number;
   headers?: ResponseHeader[];
 }
+/**** ><> ↑ --------- Interface definition: MaybeResponse ->  */
 
 export function init(response?: MaybeResponse) {
   if (!response) {
     throw new Error('contexts.response initialized without response');
   }
 
+/**** ><> ↑ --------- Function export & initialization ->  */
   return {
     response: {
       // TODO: Make this work. Right now it doesn't because _id is
@@ -34,26 +37,32 @@ export function init(response?: MaybeResponse) {
       getStatusCode() {
         return response.statusCode || 0;
       },
+/**** ><> ↑ --------- Subset: getStatusCode ->  */
 
       getStatusMessage() {
         return response.statusMessage || '';
       },
+/**** ><> ↑ --------- Subset: getStatusMessage ->  */
 
       getBytesRead() {
         return response.bytesRead || 0;
       },
+/**** ><> ↑ --------- Subset: getBytesRead ->  */
 
       getTime() {
         return response.elapsedTime || 0;
       },
+/**** ><> ↑ --------- Subset: getTime ->  */
 
       getBody() {
         return models.response.getBodyBuffer(response);
       },
+/**** ><> ↑ --------- Subset: getBody ->  */
 
       getBodyStream() {
         return models.response.getBodyStream(response);
       },
+/**** ><> ↑ --------- Subset: getBodyStream ->  */
 
       setBody(body: Buffer) {
         // Should never happen but just in case it does...
@@ -64,6 +73,7 @@ export function init(response?: MaybeResponse) {
         fs.writeFileSync(response.bodyPath, body);
         response.bytesContent = body.length;
       },
+/**** ><> ↑ --------- Subset: setBody ->  */
 
       getHeader(name: string): string | string[] | null {
         const headers = response.headers || [];
@@ -77,6 +87,7 @@ export function init(response?: MaybeResponse) {
           return null;
         }
       },
+/**** ><> ↑ --------- Subset: getHeader ->  */
 
       getHeaders() {
         return response.headers?.map(h => ({
@@ -84,6 +95,7 @@ export function init(response?: MaybeResponse) {
           value: h.value,
         }));
       },
+/**** ><> ↑ --------- Subset: getHeaders ->  */
 
       hasHeader(name: string) {
         return this.getHeader(name) !== null;
@@ -91,3 +103,5 @@ export function init(response?: MaybeResponse) {
     },
   };
 }
+/**** ><> ↑ --------- Response object definition ->  */
+/**** ><> ↑ --------- Subset: hasHeader ->  */

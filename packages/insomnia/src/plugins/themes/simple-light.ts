@@ -1,6 +1,7 @@
 export default {
   name: 'light',
   displayName: 'Simple Light',
+/**** ><> ↑ --------- Module export and theme definition ->  */
   theme: {
     styles: {
       transparentOverlay: {
@@ -12,5 +13,7 @@ export default {
         },
       },
     },
+/**** ><> ↑ --------- Theme styles ->  */
   },
 };
+/**** ><> ↑ --------- End of module export ->  */

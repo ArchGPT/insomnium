@@ -7,6 +7,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react
 import { useRouteLoaderData } from 'react-router-dom';
 import { useMount, useUnmount } from 'react-use';
 
+/**** ><> ↑ --------- Import Statements */
 import { DEBOUNCE_MILLIS } from '../../../common/constants';
 import * as misc from '../../../common/misc';
 import { KeyCombination } from '../../../common/settings';
@@ -27,6 +28,7 @@ export interface OneLineEditorProps {
   onPaste?: (text: string) => void;
 }
 
+/**** ><> ↑ --------- Component Interfaces */
 export interface OneLineEditorHandle {
   selectAll: () => void;
   focusEnd: () => void;
@@ -187,6 +189,7 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
     codeMirror.current?.toTextArea();
     codeMirror.current?.closeHintDropdown();
     codeMirror.current = null;
+/**** ><> ↑ --------- Component Definition */
   });
 
   useEffect(() => {
@@ -198,6 +201,7 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
     codeMirror.current?.on('changes', fn);
     return () => codeMirror.current?.off('changes', fn);
   }, [onChange]);
+/**** ><> ↑ --------- Component Lifecycle and Event Handlers */
 
   useEffect(() => window.main.on('context-menu-command', (_, { key, tag }) =>
     id === key && codeMirror.current?.replaceSelection(tag)), [id]);
@@ -211,6 +215,7 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
       codeMirror.current?.getDoc()?.setCursor(codeMirror.current.getDoc().lineCount(), 0);
     },
   }), []);
+/**** ><> ↑ --------- Utility Functions and Custom Hooks */
 
   return (
     <div
@@ -242,3 +247,4 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
   );
 });
 OneLineEditor.displayName = 'OneLineEditor';
+/**** ><> ↑ --------- Render */

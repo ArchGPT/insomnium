@@ -10,6 +10,7 @@ import { strings } from '../../../common/strings';
 import { ProjectLoaderData } from '../../routes/project';
 import { WorkspaceLoaderData } from '../../routes/workspace';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
+/**** ><> ↑ --------- Imports */
 import { Link } from '../base/link';
 import { ExportRequestsModal } from '../modals/export-requests-modal';
 import { ImportModal } from '../modals/import-modal';
@@ -17,6 +18,7 @@ import { Button } from '../themed-button';
 interface Props {
   hideSettingsModal: () => void;
 }
+/**** ><> ↑ --------- Props Interface */
 
 export const ImportExport: FC<Props> = ({ hideSettingsModal }) => {
   const {
@@ -27,6 +29,7 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal }) => {
 
   const workspaceData = useRouteLoaderData(':workspaceId') as WorkspaceLoaderData | undefined;
   const activeWorkspaceName = workspaceData?.activeWorkspace.name;
+/**** ><> ↑ --------- Component Definition */
   const projectName = workspaceData?.activeProject.name ?? getProductName();
 
   const workspacesFetcher = useFetcher();
@@ -36,15 +39,18 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal }) => {
       workspacesFetcher.load(`/organization/${organizationId}/project/${projectId}`);
     }
   }, [organizationId, projectId, workspacesFetcher]);
+/**** ><> ↑ --------- Fetchers and Effects */
   const projectLoaderData = workspacesFetcher?.data as ProjectLoaderData;
   const workspacesForActiveProject = projectLoaderData?.workspaces.map(w => w.workspace) || [];
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
+/**** ><> ↑ --------- Modal State */
   const handleExportAllToFile = () => {
     exportAllToFile(projectName, workspacesForActiveProject);
     hideSettingsModal();
   };
+/**** ><> ↑ --------- Export Function */
  // here we should list all the folders which contain insomnia.*.db files
  // and have some big red button to overwrite the current data with the backup
  // and once complete trigger an app restart?
@@ -58,6 +64,7 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal }) => {
           Your format isn't supported? <Link href={docsImportExport}>Add Your Own</Link>.
         </p>
         <div className="pad-top">
+/**** ><> ↑ --------- Return Statement */
           {workspaceData?.activeWorkspace ?
             (<Dropdown
               aria-label='Export Data Dropdown'
@@ -87,6 +94,7 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal }) => {
                 </DropdownItem>
               </DropdownSection>
             </Dropdown>) : (<Button onClick={handleExportAllToFile}>{`Export files from the "${projectName}" ${strings.project.singular}`}</Button>)
+/**** ><> ↑ --------- Dropdown Component */
           }
           &nbsp;&nbsp;
           <Button
@@ -104,6 +112,7 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal }) => {
           <Link href="https://insomnia.rest/create-run-button" className="btn btn--compact" button>
             Create Run Button
           </Link>
+/**** ><> ↑ --------- Import and Export Buttons */
         </div>
       </div>
       {isImportModalOpen && (
@@ -126,3 +135,4 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal }) => {
     </Fragment>
   );
 };
+/**** ><> ↑ --------- Import and Export Modals */

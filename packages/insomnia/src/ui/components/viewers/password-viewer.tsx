@@ -1,17 +1,21 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Imports required modules and components. ->  */
 
 import { RootLoaderData } from '../../routes/root';
+/**** ><> ↑ --------- Imports modules related to routing. ->  */
 
 const EyeIcon = styled.i({
   cursor: 'pointer',
   paddingRight: 'var(--padding-xs)',
 });
+/**** ><> ↑ --------- Creates EyeIcon styled component. ->  */
 
 const MASK_CHARACTER = '•';
 /** randomly get anywhere between 4 and 11 mask characters on each invocation */
 const getMask = () => MASK_CHARACTER.repeat(4 + (Math.random() * 7));
+/**** ><> ↑ --------- Sets MASK_CHARACTER and defines the getMask function. ->  */
 
 export const PasswordViewer: FC<{
   onShow?: () => void;
@@ -27,6 +31,7 @@ export const PasswordViewer: FC<{
    */
   maskText?: boolean;
 }> = ({
+/**** ><> ↑ --------- Defines the PasswordViewer component and its properties. ->  */
   onShow,
   initiallyHidden = true,
   text,
@@ -48,6 +53,7 @@ export const PasswordViewer: FC<{
     onShow?.();
     setTextVisible(!textVisible);
   }, [textVisible, onShow]);
+/**** ><> ↑ --------- Defines state and related functionalities inside the component. ->  */
 
   return (
     <span className="monospace">
@@ -59,3 +65,4 @@ export const PasswordViewer: FC<{
     </span>
   );
 };
+/**** ><> ↑ --------- Renders the component. ->  */

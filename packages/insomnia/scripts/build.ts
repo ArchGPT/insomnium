@@ -6,6 +6,7 @@ import licenseChecker from 'license-checker';
 import { ncp } from 'ncp';
 import path from 'path';
 import * as vite from 'vite';
+/**** ><> ↑ --------- Import Statements */
 
 import buildMainAndPreload from '../esbuild.main';
 
@@ -21,6 +22,7 @@ if (require.main === module) {
   });
 }
 
+/**** ><> ↑ --------- Build Main and Preload */
 const copyFiles = (relSource: string, relDest: string) =>
   new Promise<void>((resolve, reject) => {
     const source = path.resolve(__dirname, relSource);
@@ -34,6 +36,7 @@ const copyFiles = (relSource: string, relDest: string) =>
       }
     });
   });
+/**** ><> ↑ --------- Copy Files */
 
 const buildLicenseList = (relSource: string, relDest: string) =>
   new Promise<void>((resolve, reject) => {
@@ -93,6 +96,7 @@ const buildLicenseList = (relSource: string, relDest: string) =>
       }
     );
   });
+/**** ><> ↑ --------- Build License List */
 
 export const start = async () => {
   console.log('[build] Starting build');
@@ -141,3 +145,4 @@ export const start = async () => {
 
   console.log('[build] Complete!');
 };
+/**** ><> ↑ --------- Start Function */

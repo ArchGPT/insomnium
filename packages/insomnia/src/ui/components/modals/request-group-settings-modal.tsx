@@ -13,6 +13,7 @@ import { CodeEditorHandle } from '../codemirror/code-editor';
 import { HelpTooltip } from '../help-tooltip';
 import { MarkdownEditor } from '../markdown-editor';
 
+/**** ><> ↑ --------- Imports ->  */
 export interface RequestGroupSettingsModalOptions {
   requestGroup: RequestGroup;
 }
@@ -20,6 +21,7 @@ interface State {
   defaultPreviewMode: boolean;
   activeWorkspaceIdToCopyTo: string;
 }
+/**** ><> ↑ --------- Interface declarations ->  */
 export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps & {
   requestGroup: RequestGroup;
 }) => {
@@ -42,6 +44,7 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
   const patchRequestGroup = useRequestGroupPatcher();
   const requestFetcher = useFetcher();
 
+/**** ><> ↑ --------- Main functional component and initialization ->  */
   const duplicateRequestGroup = (r: Partial<RequestGroup>) => {
     requestFetcher.submit(r,
       {
@@ -70,10 +73,12 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
     });
   };
 
+/**** ><> ↑ --------- Handlers definitions ->  */
   const {
     defaultPreviewMode,
     activeWorkspaceIdToCopyTo,
   } = state;
+/**** ><> ↑ --------- State variables deconstruction ->  */
   return (
     <OverlayContainer onClick={e => e.stopPropagation()}>
       <Modal ref={modalRef} onHide={onHide}>
@@ -164,3 +169,4 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- JSX Return ->  */

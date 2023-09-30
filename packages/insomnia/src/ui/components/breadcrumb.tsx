@@ -1,16 +1,19 @@
 import React, { FC, Fragment, ReactNode } from 'react';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface CrumbProps {
   id: string;
   node: ReactNode;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
+/**** ><> ↑ --------- CrumbProps Interface definition ->  */
 
 export interface BreadcrumbProps {
   crumbs: CrumbProps[];
   className?: string;
 }
+/**** ><> ↑ --------- BreadcrumbProps Interface definition ->  */
 
 const StyledBreadcrumb = styled.ul`
   font-size: var(--font-size-md);
@@ -53,12 +56,14 @@ const StyledBreadcrumb = styled.ul`
     }
   }
 `;
+/**** ><> ↑ --------- StyledBreadcrumb styled component declaration ->  */
 
 const Crumb: FC<CrumbProps> = ({ id, node, onClick }) => (
   <li key={id} data-testid={id}>
     {onClick ? <a href="#" onClick={onClick}>{node}</a> : node}
   </li>
 );
+/**** ><> ↑ --------- Crumb Functional Component declaration ->  */
 
 export const Breadcrumb: FC<BreadcrumbProps> = ({ crumbs, className }) => (
   <Fragment>
@@ -67,3 +72,4 @@ export const Breadcrumb: FC<BreadcrumbProps> = ({ crumbs, className }) => (
     </StyledBreadcrumb>
   </Fragment>
 );
+/**** ><> ↑ --------- Breadcrumb Functional Component declaration ->  */

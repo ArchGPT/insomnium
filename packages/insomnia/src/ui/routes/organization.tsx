@@ -7,10 +7,12 @@ import { defaultOrganization, Organization } from '../../models/organization';
 import { isRemoteProject } from '../../models/project';
 import { initializeProjectFromTeam } from '../../sync/vcs/initialize-model-from';
 import { getVCS } from '../../sync/vcs/vcs';
+/**** ><> ↑ --------- Importing modules ->  */
 
 export interface LoaderData {
   organizations: Organization[];
 }
+/**** ><> ↑ --------- Defining LoaderData interface ->  */
 
 export const loader: LoaderFunction = async () => {
   try {
@@ -37,10 +39,12 @@ export const loader: LoaderFunction = async () => {
     organizations: [defaultOrganization, ...remoteOrgs],
   };
 };
+/**** ><> ↑ --------- Defining the loader function ->  */
 
 export const useOrganizationLoaderData = () => {
   return useRouteLoaderData('/organization') as LoaderData;
 };
+/**** ><> ↑ --------- Defining useOrganizationLoaderData function ->  */
 
 export const shouldOrganizationsRevalidate: ShouldRevalidateFunction = ({
   currentParams,
@@ -54,3 +58,4 @@ export const shouldOrganizationsRevalidate: ShouldRevalidateFunction = ({
 
   return isSwitchingBetweenOrganizations || shouldForceRevalidate;
 };
+/**** ><> ↑ --------- Defining shouldOrganizationsRevalidate function ->  */

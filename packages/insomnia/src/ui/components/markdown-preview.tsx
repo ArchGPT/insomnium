@@ -5,18 +5,21 @@ import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { markdownToHTML } from '../../common/markdown-to-html';
 import { HandleRender } from '../../common/render';
 
+/**** ><> ↑ --------- Module imports ->  */
 interface Props {
   markdown: string;
   handleRender?: HandleRender;
   className?: string;
   heading?: string;
 }
+/**** ><> ↑ --------- Props interface declaration ->  */
 
 export const MarkdownPreview: FC<Props> = ({ markdown, className, heading }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [compiled, setCompiled] = useState('');
   const [error, setError] = useState('');
 
+/**** ><> ↑ --------- MarkdownPreview component declaration and state initializations ->  */
   useEffect(() => {
     let shouldUpdate = true;
     const fn = async () => {
@@ -34,6 +37,7 @@ export const MarkdownPreview: FC<Props> = ({ markdown, className, heading }) => 
       shouldUpdate = false;
     };
   }, [markdown]);
+/**** ><> ↑ --------- UseEffect hook to update markdown compilation ->  */
   useLayoutEffect(() => {
     if (!divRef.current) {
       return;
@@ -49,10 +53,12 @@ export const MarkdownPreview: FC<Props> = ({ markdown, className, heading }) => 
       a.addEventListener('click', _handleClickLink);
     }
   }, [compiled]);
+/**** ><> ↑ --------- UseLayoutEffect hook to update highlighting and link behavior ->  */
   const _handleClickLink = (event: any) => {
     event.preventDefault();
     window.main.openInBrowser(event.target.getAttribute('href'));
   };
+/**** ><> ↑ --------- _handleClickLink event handler declaration ->  */
 
   return (
     <div ref={divRef} className={classnames('markdown-preview', className)}>
@@ -64,3 +70,4 @@ export const MarkdownPreview: FC<Props> = ({ markdown, className, heading }) => 
     </div>
   );
 };
+/**** ><> ↑ --------- MarkdownPreview component return statement ->  */

@@ -1,11 +1,13 @@
 import { ImportRequest } from './entities';
 import { setDefaults } from './utils';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface InsomniaImporter {
   id: string;
   name: string;
   description: string;
 }
+/**** ><> ↑ --------- InsomniaImporter interface definition ->  */
 
 export interface ConvertResult {
   type: InsomniaImporter;
@@ -17,6 +19,7 @@ export interface ConvertResult {
     resources: ImportRequest[];
   };
 }
+/**** ><> ↑ --------- ConvertResult interface definition ->  */
 
 export const convert = async (rawData: string) => {
   const importers = (await import('./importers')).importers;
@@ -30,6 +33,7 @@ export const convert = async (rawData: string) => {
     if (resources.length > 0 && resources[0].variable) {
       resources[0].environment = resources[0].variable;
     }
+/**** ><> ↑ --------- creating environment from variable if exists ->  */
 
     const convertedResult = {
       type: {
@@ -45,9 +49,14 @@ export const convert = async (rawData: string) => {
         resources: resources.map(setDefaults) as ImportRequest[],
       },
     };
+/**** ><> ↑ --------- preparation of conversion result data ->  */
 
     return convertedResult;
+/**** ><> ↑ --------- returning converted result ->  */
+/**** ><> ↑ --------- iteration over importers ->  */
   }
 
+/**** ><> ↑ --------- convert function definition ->  */
   throw new Error('No importers found for file');
 };
+/**** ><> ↑ --------- throw error if no importers found ->  */

@@ -1,5 +1,7 @@
 export type OAuth1SignatureMethod = 'HMAC-SHA1' | 'RSA-SHA1' | 'HMAC-SHA256' | 'PLAINTEXT';
+/**** ><> ↑ --------- Defining OAuth1 signature methods ->  */
 export const SIGNATURE_METHOD_HMAC_SHA1: OAuth1SignatureMethod = 'HMAC-SHA1';
 export const SIGNATURE_METHOD_HMAC_SHA256: OAuth1SignatureMethod = 'HMAC-SHA256';
 export const SIGNATURE_METHOD_RSA_SHA1: OAuth1SignatureMethod = 'RSA-SHA1';
 export const SIGNATURE_METHOD_PLAINTEXT: OAuth1SignatureMethod = 'PLAINTEXT';
+/**** ><> ↑ --------- Assigning OAuth1 signature methods ->  */

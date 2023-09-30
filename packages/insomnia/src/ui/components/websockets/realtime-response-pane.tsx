@@ -2,6 +2,7 @@ import fs from 'fs';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Import libraries */
 
 import { getSetCookieHeaders } from '../../../common/misc';
 import { CurlEvent } from '../../../main/network/curl';
@@ -26,6 +27,7 @@ import { ResponseHeadersViewer } from '../viewers/response-headers-viewer';
 import { ResponseTimelineViewer } from '../viewers/response-timeline-viewer';
 import { EventLogView } from './event-log-view';
 import { EventView } from './event-view';
+/**** ><> ↑ --------- Import internal dependencies */
 
 const PaneHeader = styled(OriginalPaneHeader)({
   '&&': { justifyContent: 'unset' },
@@ -60,6 +62,7 @@ const EventSearchFormControl = styled.div({
   border: '1px solid var(--hl-md)',
   borderRadius: 'var(--radius-md)',
 });
+/**** ><> ↑ --------- Styled components */
 
 const EventSearchInput = styled.input({
   paddingRight: '2em',
@@ -97,6 +100,7 @@ export const RealtimeResponsePane: FC<{ requestId: string }> = () => {
   }
   return <RealtimeActiveResponsePane response={activeResponse} />;
 };
+/**** ><> ↑ --------- RealtimeResponsePane component */
 
 const RealtimeActiveResponsePane: FC<{ response: WebSocketResponse | Response }> = ({
   response,
@@ -109,6 +113,7 @@ const RealtimeActiveResponsePane: FC<{ response: WebSocketResponse | Response }>
   const [eventType, setEventType] = useState<CurlEvent['type']>();
   const protocol = response.type === 'WebSocketResponse' ? 'webSocket' : 'curl';
   const allEvents = useRealtimeConnectionEvents({ responseId: response._id, protocol });
+/**** ><> ↑ --------- RealtimeActiveResponsePane component - declaration and state hooks */
   const handleSelection = (event: CurlEvent | WebSocketEvent) => {
     setSelectedEvent((selected: CurlEvent | WebSocketEvent | null) => selected?._id === event._id ? null : event);
   };
@@ -142,6 +147,7 @@ const RealtimeActiveResponsePane: FC<{ response: WebSocketResponse | Response }>
 
     return true;
   });
+/**** ><> ↑ --------- RealtimeActiveResponsePane component - filtering events */
 
   useEffect(() => {
     setSelectedEvent(null);
@@ -164,6 +170,7 @@ const RealtimeActiveResponsePane: FC<{ response: WebSocketResponse | Response }>
       isMounted = false;
     };
   }, [response.timelinePath, events.length]);
+/**** ><> ↑ --------- RealtimeActiveResponsePane component - useEffect hooks */
 
   const cookieHeaders = getSetCookieHeaders(response.headers);
   return (
@@ -297,3 +304,4 @@ const RealtimeActiveResponsePane: FC<{ response: WebSocketResponse | Response }>
     </ Pane>
   );
 };
+/**** ><> ↑ --------- RealtimeActiveResponsePane component - render method */

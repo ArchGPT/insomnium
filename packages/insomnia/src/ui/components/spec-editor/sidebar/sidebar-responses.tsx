@@ -5,15 +5,18 @@ import { Tooltip } from '../../tooltip';
 import { SidebarInvalidSection } from './sidebar-invalid-section';
 import { SidebarItem } from './sidebar-item';
 import { SidebarSection } from './sidebar-section';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface SidebarResponsesProps {
   responses: Record<string, any>;
   onClick: (section: string, ...args: any) => void;
 }
+/**** ><> ↑ --------- Interface definition for SidebarResponsesProps ->  */
 
 // Implemented as a class component because of a caveat with render props
 // https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent
 export class SidebarResponses extends Component<SidebarResponsesProps> {
+/**** ><> ↑ --------- Export of SidebarResponses class with an explanation comment ->  */
   renderBody = (filter: string): null | ReactNode => {
     const { responses, onClick } = this.props;
 
@@ -46,8 +49,10 @@ export class SidebarResponses extends Component<SidebarResponsesProps> {
       </div>
     );
   };
+/**** ><> ↑ --------- Definition of renderBody method in the SidebarResponses class ->  */
 
   render() {
     return <SidebarSection title="RESPONSES" renderBody={this.renderBody} />;
   }
 }
+/**** ><> ↑ --------- Definition of render method in the SidebarResponses class ->  */

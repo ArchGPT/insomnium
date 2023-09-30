@@ -4,8 +4,10 @@ import { quote } from 'shell-quote';
 import { Parameter } from '../entities';
 import { convert } from './curl';
 
+/**** ><> ↑ --------- Import statements ->  */
 describe('curl', () => {
   describe('cURL --data flags', () => {
+/**** ><> ↑ --------- Test description ->  */
     it.each([
       // -d
       { flag: '-d', inputs: ['key=value'], expected: [{ name: 'key', value: 'value' }] },
@@ -27,6 +29,7 @@ describe('curl', () => {
       { flag: '-d', inputs: ['%3D'], expected: [{ name: '', value: '=' }] },
       { flag: '--d', inputs: ['%3D=%3D'], expected: [{ name: '=', value: '=' }] },
 
+/**** ><> ↑ --------- Test cases for the '-d' flag ->  */
       // --data
       { flag: '--data', inputs: ['key=value'], expected: [{ name: 'key', value: 'value' }] },
       { flag: '--data', inputs: ['value'], expected: [{ name: '', value: 'value' }] },
@@ -47,6 +50,7 @@ describe('curl', () => {
       { flag: '--data', inputs: ['%3D'], expected: [{ name: '', value: '=' }] },
       { flag: '--data', inputs: ['%3D=%3D'], expected: [{ name: '=', value: '=' }] },
 
+/**** ><> ↑ --------- Test cases for the '--data' flag ->  */
       // --data-ascii
       { flag: '--data-ascii', inputs: ['key=value'], expected: [{ name: 'key', value: 'value' }] },
       { flag: '--data-ascii', inputs: ['value'], expected: [{ name: '', value: 'value' }] },
@@ -65,6 +69,7 @@ describe('curl', () => {
         expected: [{ name: 'first', value: '1' }, { name: 'second', value: '2' }],
       },
 
+/**** ><> ↑ --------- Test cases for the '--data-ascii' flag ->  */
       // --data-binary
       { flag: '--data-binary', inputs: ['key=value'], expected: [{ name: 'key', value: 'value' }] },
       { flag: '--data-binary', inputs: ['value'], expected: [{ name: '', value: 'value' }] },
@@ -83,6 +88,7 @@ describe('curl', () => {
         expected: [{ name: 'first', value: '1' }, { name: 'second', value: '2' }],
       },
 
+/**** ><> ↑ --------- Test cases for the '--data-binary' flag ->  */
       // --data-raw
       { flag: '--data-raw', inputs: ['@filename'], expected: [{ name: '', value: '@filename' }] },
       { flag: '--data-raw', inputs: ['key=value'], expected: [{ name: 'key', value: 'value' }] },
@@ -100,6 +106,7 @@ describe('curl', () => {
         expected: [{ name: 'first', value: '1' }, { name: 'second', value: '2' }],
       },
 
+/**** ><> ↑ --------- Test cases for the '--data-raw' flag ->  */
       // --data-urlencode
       { flag: '--data-urlencode', inputs: ['key=value'], expected: [{ name: 'key', value: 'value' }] },
       {
@@ -122,6 +129,7 @@ describe('curl', () => {
       },
       { flag: '--data-urlencode', inputs: ['=value'], expected: [{ name: '', value: 'value' }] },
 
+/**** ><> ↑ --------- Test cases for the '--data-urlencode' flag ->  */
       // --data-urlencode URI encoding
       { flag: '--data-urlencode', inputs: ['a='], expected: [{ name: '', value: 'a=' }] },
       { flag: '--data-urlencode', inputs: [' '], expected: [{ name: '', value: ' ' }] },
@@ -136,6 +144,7 @@ describe('curl', () => {
       { flag: '--data-urlencode', inputs: ['='], expected: [{ name: '', value: '=' }] },
       { flag: '--data-urlencode', inputs: ['%3D'], expected: [{ name: '', value: '%3D' }] },
     ])('handles %p correctly', async ({
+/**** ><> ↑ --------- Test cases for the '--data-urlencode' flag with URI encoding ->  */
       flag,
       inputs,
       expected,
@@ -152,5 +161,7 @@ describe('curl', () => {
         },
       }]);
     });
+/**** ><> ↑ --------- Test function ->  */
   });
 });
+/**** ><> ↑ --------- Test closure ->  */

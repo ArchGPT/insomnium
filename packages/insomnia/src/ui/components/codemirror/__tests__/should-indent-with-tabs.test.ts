@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import { shouldIndentWithTabs } from '../code-editor';
 
+/**** ><> ↑ --------- Import statements */
 describe('shouldIndentWithTabs()', () => {
   it('should return false if mode contains yaml', () => {
     expect(shouldIndentWithTabs({ mode: 'text/yaml', indentWithTabs: true })).toBe(false);
@@ -18,4 +19,6 @@ describe('shouldIndentWithTabs()', () => {
   it('should return false if mode is openapi', () => {
     expect(shouldIndentWithTabs({ mode: 'openapi', indentWithTabs: true })).toBe(false);
   });
+/**** ><> ↑ --------- Test cases */
 });
+/**** ><> ↑ --------- End of file */

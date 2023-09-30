@@ -7,6 +7,7 @@ import { KeyboardShortcut } from '../../../common/settings';
 import { RootLoaderData } from '../../routes/root';
 import { Hotkey } from '../hotkey';
 import { Pane, PaneBody, PaneHeader } from './pane';
+/**** ><> ↑ --------- Import statements ->  */
 
 const Wrapper = styled.div({
   display: 'flex',
@@ -15,6 +16,7 @@ const Wrapper = styled.div({
   justifyContent: 'center',
   whiteSpace: 'nowrap',
 });
+/**** ><> ↑ --------- Styled-components for Wrapper ->  */
 
 const Item = styled.div({
   display: 'flex',
@@ -23,10 +25,12 @@ const Item = styled.div({
   width: '100%',
   margin: 'var(--padding-sm)',
 });
+/**** ><> ↑ --------- Styled-components for Item ->  */
 
 const Description = styled.div({
   marginRight: '2em',
 });
+/**** ><> ↑ --------- Styled-components for Description ->  */
 
 export const PlaceholderResponsePane: FC<PropsWithChildren<{}>> = ({ children }) => {
   const {
@@ -62,3 +66,4 @@ export const PlaceholderResponsePane: FC<PropsWithChildren<{}>> = ({ children })
     </Pane>
   );
 };
+/**** ><> ↑ --------- React functional component PlaceholderResponsePane ->  */

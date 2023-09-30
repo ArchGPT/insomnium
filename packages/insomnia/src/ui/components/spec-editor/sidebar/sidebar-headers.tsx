@@ -5,15 +5,18 @@ import { Tooltip } from '../../tooltip';
 import { SidebarInvalidSection } from './sidebar-invalid-section';
 import { SidebarItem } from './sidebar-item';
 import { SidebarSection } from './sidebar-section';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface SidebarHeadersProps {
   headers: Record<string, any>;
   onClick: (section: string, ...args: any) => void;
 }
+/**** ><> ↑ --------- SidebarHeadersProps interface ->  */
 
 // Implemented as a class component because of a caveat with render props
 // https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent
 export class SidebarHeaders extends Component<SidebarHeadersProps> {
+/**** ><> ↑ --------- Definition of SidebarHeaders class with some explanation about why it is implemented as a class component ->  */
   renderBody = (filter: string): null | ReactNode => {
     const { headers, onClick } = this.props;
 
@@ -48,8 +51,10 @@ export class SidebarHeaders extends Component<SidebarHeadersProps> {
       </div>
     );
   };
+/**** ><> ↑ --------- renderBody method within SidebarHeaders class ->  */
 
   render() {
     return <SidebarSection title="HEADERS" renderBody={this.renderBody} />;
   }
 }
+/**** ><> ↑ --------- render method within SidebarHeaders class ->  */

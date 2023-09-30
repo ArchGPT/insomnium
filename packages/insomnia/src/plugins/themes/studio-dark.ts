@@ -2,6 +2,7 @@ export default {
   name: 'studio-colorful',
   displayName: 'Designer Dark',
   theme: {
+/**** ><> ↑ --------- Component export and metadata ->  */
     foreground: {
       default: '#e6eff5',
     },
@@ -14,6 +15,7 @@ export default {
       surprise: '#bfa3f9',
       info: '#6ac7e6',
     },
+/**** ><> ↑ --------- Theme color configuration: foreground and background ->  */
     highlight: {
       default: 'rgba(133, 157, 176)',
       xxs: 'rgba(133, 157, 176, 0.05)',
@@ -23,6 +25,7 @@ export default {
       lg: 'rgba(133, 157, 176, 0.5)',
       xl: 'rgba(133, 157, 176, 0.8)',
     },
+/**** ><> ↑ --------- Theme color configuration: highlight ->  */
     styles: {
       appHeader: {
         foreground: {
@@ -34,6 +37,7 @@ export default {
           default: '#68a9a2',
         },
       },
+/**** ><> ↑ --------- Styling configuration for different components: appHeader, link ->  */
       sidebar: {
         foreground: {
           default: '#fff',
@@ -42,6 +46,7 @@ export default {
           default: '#003961',
         },
       },
+/**** ><> ↑ --------- Styling configuration for sidebar ->  */
       dialog: {
         background: {
           default: '#004672',
@@ -52,6 +57,9 @@ export default {
           default: 'rgba(0,37,64,0.8)',
         },
       },
+/**** ><> ↑ --------- Styling configuration for dialog and transparentOverlay ->  */
     },
   },
+/**** ><> ↑ --------- Closing elements of styles and theme ->  */
 };
+/**** ><> ↑ --------- End of object ->  */

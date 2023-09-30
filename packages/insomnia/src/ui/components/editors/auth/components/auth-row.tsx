@@ -1,9 +1,11 @@
 import classnames from 'classnames';
 import React, { FC, PropsWithChildren, ReactNode } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
+/**** ><> ↑ --------- Importing modules */
 
 import { RequestLoaderData } from '../../../../routes/request';
 import { HelpTooltip } from '../../../help-tooltip';
+/**** ><> ↑ --------- Importing local dependencies */
 
 interface Props {
   labelFor: string;
@@ -11,6 +13,7 @@ interface Props {
   help?: ReactNode;
   disabled?: boolean;
 }
+/**** ><> ↑ --------- Defining interface Props */
 
 export const AuthRow: FC<PropsWithChildren<Props>> = ({ labelFor, label, help, disabled, children }) => {
   const { activeRequest: { authentication } } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
@@ -35,3 +38,4 @@ export const AuthRow: FC<PropsWithChildren<Props>> = ({ labelFor, label, help, d
     </tr>
   );
 };
+/**** ><> ↑ --------- Defining AuthRow component */

@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { AuthInputRow } from './components/auth-input-row';
 import { AuthTableBody } from './components/auth-table-body';
 import { AuthToggleRow } from './components/auth-toggle-row';
+/**** ><> ↑ --------- Import statements */
 
 export const BearerAuth: FC<{ disabled?: boolean }> = ({ disabled = false }) => (
   <AuthTableBody>
@@ -11,3 +12,4 @@ export const BearerAuth: FC<{ disabled?: boolean }> = ({ disabled = false }) => 
     <AuthInputRow label='Prefix' property='prefix' disabled={disabled} />
   </AuthTableBody>
 );
+/**** ><> ↑ --------- Component definition */

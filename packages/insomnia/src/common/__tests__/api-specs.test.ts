@@ -4,6 +4,7 @@ import YAML from 'yaml';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import { parseApiSpec } from '../api-specs';
 
+/**** ><> ↑ --------- Import Statements ->  */
 describe('parseApiSpec()', () => {
   beforeEach(globalBeforeEach);
 
@@ -42,6 +43,7 @@ describe('parseApiSpec()', () => {
     expect(parseApiSpec(yamlSpec)).toEqual({ ...expected, rawContents: yamlSpec });
     expect(parseApiSpec(jsonSpec)).toEqual({ ...expected, rawContents: jsonSpec });
   });
+/**** ><> ↑ --------- Test for parsing YAML and JSON Swagger specs ->  */
 
   it('parses YAML and JSON Unknown specs', () => {
     const objSpec = {
@@ -60,6 +62,7 @@ describe('parseApiSpec()', () => {
     expect(parseApiSpec(yamlSpec)).toEqual({ ...expected, rawContents: yamlSpec });
     expect(parseApiSpec(jsonSpec)).toEqual({ ...expected, rawContents: jsonSpec });
   });
+/**** ><> ↑ --------- Test for parsing YAML and JSON Unknown specs ->  */
 
   it('returns the default result if empty document', () => {
     const expected = {
@@ -70,9 +73,12 @@ describe('parseApiSpec()', () => {
     };
     expect(parseApiSpec('')).toEqual(expected);
   });
+/**** ><> ↑ --------- Test for an empty document ->  */
 
   it('Fails on malformed JSON/YAML', () => {
     const rawSpec = ['openapi: 3.0.0', 'info: {{{'].join('\n');
     expect(() => parseApiSpec(rawSpec)).toThrowError('Failed to parse API spec');
   });
 });
+/**** ><> ↑ --------- Main describe block for 'parseApiSpec()' ->  */
+/**** ><> ↑ --------- Test for malformed JSON/YAML ->  */

@@ -8,19 +8,23 @@ import { useRequestPatcher } from '../../hooks/use-request';
 import { RequestLoaderData, WebSocketRequestLoaderData } from '../../routes/request';
 import { CodeEditor } from '../codemirror/code-editor';
 import { KeyValueEditor } from '../key-value-editor/key-value-editor';
+/**** ><> ↑ --------- Importing necessary modules and components */
 
 interface Props {
   bulk: boolean;
   isDisabled?: boolean;
 }
+/**** ><> ↑ --------- Definition of Props interface */
 
 export const RequestHeadersEditor: FC<Props> = ({
   bulk,
   isDisabled,
 }) => {
+/**** ><> ↑ --------- RequestHeadersEditor component definition block start */
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData | WebSocketRequestLoaderData;
   const patchRequest = useRequestPatcher();
   const { requestId } = useParams() as { requestId: string };
+/**** ><> ↑ --------- Retrieving Route and Request data */
 
   const handleBulkUpdate = useCallback((headersString: string) => {
     const headers: {
@@ -45,6 +49,7 @@ export const RequestHeadersEditor: FC<Props> = ({
     }
     patchRequest(requestId, { headers });
   }, [patchRequest, requestId]);
+/**** ><> ↑ --------- handleBulkUpdate useCallback function */
 
   let headersString = '';
   for (const header of activeRequest.headers) {
@@ -59,10 +64,12 @@ export const RequestHeadersEditor: FC<Props> = ({
 
     headersString += `${header.name}: ${header.value}\n`;
   }
+/**** ><> ↑ --------- Preparing headersString variable */
 
   const onChangeHeaders = useCallback((headers: RequestHeader[]) => {
     patchRequest(requestId, { headers });
   }, [patchRequest, requestId]);
+/**** ><> ↑ --------- onChangeHeaders useCallback function */
 
   if (bulk) {
     return (
@@ -75,6 +82,7 @@ export const RequestHeadersEditor: FC<Props> = ({
         />
       </div>
     );
+/**** ><> ↑ --------- Render component for 'bulk' state */
   }
 
   return (
@@ -90,4 +98,6 @@ export const RequestHeadersEditor: FC<Props> = ({
       isWebSocketRequest={isWebSocketRequest(activeRequest)}
     />
   );
+/**** ><> ↑ --------- Render component for non-bulk state */
 };
+/**** ><> ↑ --------- End of RequestHeadersEditor component */

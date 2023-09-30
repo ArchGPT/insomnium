@@ -12,10 +12,12 @@ import {
 import { invariant } from '../utils/invariant';
 import { database } from './database';
 import { RENDER_PURPOSE_SEND } from './render';
+/**** ><> ↑ --------- Import statements ->  */
 
 // The network layer uses settings from the settings model
 // We want to give consumers the ability to override certain settings
 type SettingsOverride = Pick<Settings, 'validateSSL'>;
+/**** ><> ↑ --------- Type definition ->  */
 
 export async function getSendRequestCallbackMemDb(environmentId: string, memDB: any, settingsOverrides?: SettingsOverride) {
   // Initialize the DB in-memory and fill it with data if we're given one
@@ -37,6 +39,7 @@ export async function getSendRequestCallbackMemDb(environmentId: string, memDB: 
       docs.push(doc);
     }
   }
+/**** ><> ↑ --------- Definition of getSendRequestCallbackMemDb function and DB initialization ->  */
 
   await database.batchModifyDocs({
     upsert: docs,
@@ -62,6 +65,7 @@ export async function getSendRequestCallbackMemDb(environmentId: string, memDB: 
 
     return { request, settings, clientCertificates, caCert };
   };
+/**** ><> ↑ --------- Definition of fetchInsoRequestData inner function ->  */
   // Return callback helper to send requests
   return async function sendRequest(requestId: string) {
     const {
@@ -87,4 +91,6 @@ export async function getSendRequestCallbackMemDb(environmentId: string, memDB: 
     return { status, statusMessage, data, headers, responseTime };
 
   };
+/**** ><> ↑ --------- Definition of sendRequest inner function ->  */
 }
+/**** ><> ↑ --------- End of getSendRequestCallbackMemDb function ->  */

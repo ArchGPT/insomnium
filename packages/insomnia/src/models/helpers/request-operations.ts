@@ -2,6 +2,7 @@ import { GrpcRequest, isGrpcRequest, isGrpcRequestId } from '../grpc-request';
 import * as models from '../index';
 import { Request } from '../request';
 import { isWebSocketRequest, isWebSocketRequestId, WebSocketRequest } from '../websocket-request';
+/**** ><> ↑ --------- Import statements ->  */
 
 export function getById(requestId: string): Promise<Request | GrpcRequest | WebSocketRequest | null> {
   if (isGrpcRequestId(requestId)) {
@@ -12,6 +13,7 @@ export function getById(requestId: string): Promise<Request | GrpcRequest | WebS
   }
   return models.request.getById(requestId);
 }
+/**** ><> ↑ --------- Function to get by Id ->  */
 
 export function remove(request: Request | GrpcRequest | WebSocketRequest) {
   if (isGrpcRequest(request)) {
@@ -22,6 +24,7 @@ export function remove(request: Request | GrpcRequest | WebSocketRequest) {
   }
   return models.request.remove(request);
 }
+/**** ><> ↑ --------- Function to remove ->  */
 
 export function update<T extends object>(request: T, patch: Partial<T> = {}): Promise<T> {
   // @ts-expect-error -- TSCONVERSION
@@ -37,6 +40,7 @@ export function update<T extends object>(request: T, patch: Partial<T> = {}): Pr
   // @ts-expect-error -- TSCONVERSION
   return models.request.update(request, patch);
 }
+/**** ><> ↑ --------- Function to update ->  */
 
 export function duplicate<T extends object>(request: T, patch: Partial<T> = {}): Promise<T> {
   // @ts-expect-error -- TSCONVERSION
@@ -52,3 +56,4 @@ export function duplicate<T extends object>(request: T, patch: Partial<T> = {}):
   // @ts-expect-error -- TSCONVERSION
   return models.request.duplicate(request, patch);
 }
+/**** ><> ↑ --------- Function to duplicate ->  */

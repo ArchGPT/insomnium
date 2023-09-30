@@ -3,6 +3,7 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef,
 import { useFetcher, useParams, useRouteLoaderData } from 'react-router-dom';
 import { useInterval } from 'react-use';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Importing external dependencies ->  */
 
 import { RENDER_PURPOSE_SEND } from '../../common/render';
 import * as models from '../../models';
@@ -25,6 +26,7 @@ import { createKeybindingsHandler, useDocBodyKeyboardShortcuts } from './keydown
 import { GenerateCodeModal } from './modals/generate-code-modal';
 import { showAlert, showModal, showPrompt } from './modals/index';
 
+/**** ><> ↑ --------- Importing internal dependencies ->  */
 const StyledDropdownButton = styled(DropdownButton)({
   '&:hover:not(:disabled)': {
     backgroundColor: 'var(--color-surprise)',
@@ -34,6 +36,7 @@ const StyledDropdownButton = styled(DropdownButton)({
     backgroundColor: 'var(--color-surprise)',
   },
 });
+/**** ><> ↑ --------- Styled component definition ->  */
 
 interface Props {
   handleAutocompleteUrls: () => Promise<string[]>;
@@ -42,10 +45,12 @@ interface Props {
   setLoading: (l: boolean) => void;
   onPaste: (text: string) => void;
 }
+/**** ><> ↑ --------- Props interface definition ->  */
 
 export interface RequestUrlBarHandle {
   focusInput: () => void;
 }
+/**** ><> ↑ --------- RequestUrlBarHandle interface definition ->  */
 
 export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
   handleAutocompleteUrls,
@@ -75,6 +80,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
   }, [inputRef]);
 
   useImperativeHandle(ref, () => ({ focusInput }), [focusInput]);
+/**** ><> ↑ --------- RequestUrlBar functional component definition and setup ->  */
 
   const [currentInterval, setCurrentInterval] = useState<number | null>(null);
   const [currentTimeout, setCurrentTimeout] = useState<number | undefined>(undefined);
@@ -89,6 +95,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
   }, [fetcher.state, setLoading]);
   const { organizationId, projectId, workspaceId, requestId } = useParams() as { organizationId: string; projectId: string; workspaceId: string; requestId: string };
   const connect = (connectParams: ConnectActionParams) => {
+/**** ><> ↑ --------- State initialization and fetcher definition ->  */
     fetcher.submit(JSON.stringify(connectParams),
       {
         action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
@@ -104,6 +111,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
         encType: 'application/json',
       });
   };
+/**** ><> ↑ --------- connect and send function definitions ->  */
 
   const sendOrConnect = async (shouldPromptForPathAfterResponse?: boolean) => {
     models.stats.incrementExecutedRequests();
@@ -164,9 +172,11 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
       });
     }
   };
+/**** ><> ↑ --------- sendOrConnect function definition ->  */
 
   useInterval(sendOrConnect, currentInterval ? currentInterval : null);
   useTimeoutWhen(sendOrConnect, currentTimeout, !!currentTimeout);
+/**** ><> ↑ --------- useInterval and useTimeoutWhen hooks usage ->  */
   const patchRequest = useRequestPatcher();
 
   useDocBodyKeyboardShortcuts({
@@ -185,12 +195,14 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
       dropdownRef.current?.toggle(true);
     },
   });
+/**** ><> ↑ --------- patchRequest definition and useDocBodyKeyboardShortcuts usage ->  */
 
   const handleSendDropdownHide = useCallback(() => {
     buttonRef.current?.blur();
   }, []);
   const buttonText = isEventStreamRequest(activeRequest) ? 'Connect' : (downloadPath ? 'Download' : 'Send');
   const { url, method } = activeRequest;
+/**** ><> ↑ --------- Event Handlers definition, and dynamic buttonText computation ->  */
   const isEventStreamOpen = useReadyState({ requestId: activeRequest._id, protocol: 'curl' });
   const isCancellable = currentInterval || currentTimeout || isEventStreamOpen;
   return (
@@ -338,7 +350,9 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
         </>)}
       </div>
     </div>
+/**** ><> ↑ --------- RequestUrlBar component return statement ->  */
   );
 });
 
 RequestUrlBar.displayName = 'RequestUrlBar';
+/**** ><> ↑ --------- Setting displayName for the functional component ->  */

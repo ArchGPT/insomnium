@@ -14,6 +14,7 @@ import { RequestLoaderData } from '../../routes/request';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
 import { showModal } from '../modals';
 import { AlertModal } from '../modals/alert-modal';
+/**** ><> ↑ --------- Import Statements ->  */
 
 const defaultTypes: AuthType[] = [
   'apikey',
@@ -28,6 +29,7 @@ const defaultTypes: AuthType[] = [
   'asap',
   'netrc',
 ];
+/**** ><> ↑ --------- Declaration of Default Authentication Types ->  */
 
 function makeNewAuth(type: string, oldAuth: RequestAuthentication = {}): RequestAuthentication {
   switch (type) {
@@ -124,10 +126,12 @@ function makeNewAuth(type: string, oldAuth: RequestAuthentication = {}): Request
       };
   }
 }
+/**** ><> ↑ --------- Function for Creating New Authentication Object ->  */
 interface Props {
   authTypes?: AuthType[];
   disabled?: boolean;
 }
+/**** ><> ↑ --------- Type Declaration for Props ->  */
 export const AuthDropdown: FC<Props> = ({ authTypes = defaultTypes, disabled = false }) => {
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
   const { requestId } = useParams() as { organizationId: string; projectId: string; workspaceId: string; requestId: string };
@@ -222,3 +226,4 @@ export const AuthDropdown: FC<Props> = ({ authTypes = defaultTypes, disabled = f
     </Dropdown>
   );
 };
+/**** ><> ↑ --------- Component Definition: AuthDropdown ->  */

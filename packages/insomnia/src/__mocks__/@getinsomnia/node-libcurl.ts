@@ -8,6 +8,7 @@ import { CurlInfoDebug } from '@getinsomnia/node-libcurl/dist/enum/CurlInfoDebug
 import { CurlNetrc } from '@getinsomnia/node-libcurl/dist/enum/CurlNetrc';
 import { EventEmitter } from 'events';
 import fs from 'fs';
+/**** ><> ↑ --------- Imports ->  */
 
 class Curl extends EventEmitter {
   _options = {};
@@ -21,6 +22,7 @@ class Curl extends EventEmitter {
     TOTAL_TIME: 'TOTAL_TIME',
   };
 
+/**** ><> ↑ --------- Curl class definition part 1: Properties ->  */
   static option = {
     ACCEPT_ENCODING: 'ACCEPT_ENCODING',
     CAINFO: 'CAINFO',
@@ -64,6 +66,7 @@ class Curl extends EventEmitter {
     WRITEFUNCTION: 'WRITEFUNCTION',
     XFERINFOFUNCTION: 'XFERINFOFUNCTION',
   };
+/**** ><> ↑ --------- Curl class definition part 2: Additional Properties ->  */
 
   static getVersion() {
     return 'libcurl/7.54.0 LibreSSL/2.0.20 zlib/1.2.11 nghttp2/1.24.0';
@@ -167,6 +170,7 @@ class Curl extends EventEmitter {
 
   close() {}
 }
+/**** ><> ↑ --------- Curl class definition part 3: Methods ->  */
 
 /**
  * This is just to make it easier to test
@@ -189,6 +193,7 @@ const getTsEnumOnlyWithNamedMembers = enumObj => {
   }
 
   return obj;
+/**** ><> ↑ --------- Helper function ->  */
 };
 
 // WARNING: changing this to `export default` will break the mock and be incredibly hard to debug. Ask me how I know.
@@ -201,3 +206,4 @@ module.exports = {
   CurlNetrc: getTsEnumOnlyWithNamedMembers(CurlNetrc),
   CurlHttpVersion: getTsEnumOnlyWithNamedMembers(CurlHttpVersion),
 };
+/**** ><> ↑ --------- Module exports ->  */

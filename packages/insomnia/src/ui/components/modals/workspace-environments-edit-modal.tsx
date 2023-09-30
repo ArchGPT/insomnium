@@ -18,9 +18,11 @@ import { PromptButton } from '../base/prompt-button';
 import { EnvironmentEditor, EnvironmentEditorHandle } from '../editors/environment-editor';
 import { HelpTooltip } from '../help-tooltip';
 import { Tooltip } from '../tooltip';
+/**** ><> ↑ --------- Import Statements */
 
 const ROOT_ENVIRONMENT_NAME = 'Base Environment';
 
+/**** ><> ↑ --------- Constant Declaration */
 interface SidebarListItemProps {
   environment: Environment;
 }
@@ -58,6 +60,7 @@ const SidebarListItem: FC<SidebarListItemProps> = ({
     </div>);
 };
 
+/**** ><> ↑ --------- Component Declaration: SidebarListItem */
 // @ts-expect-error props any
 const DropIndicator = props => {
   const ref = React.useRef(null);
@@ -83,6 +86,7 @@ const DropIndicator = props => {
     />
   );
 };
+/**** ><> ↑ --------- Component Declaration: DropIndicator */
 
 // @ts-expect-error Node not generic?
 const ReorderableOption = ({ item, state, dragState, dropState }: { item: Node<Environment>; state: ListState<Node<Environment>>; dragState: DraggableCollectionState; dropState: DroppableCollectionState }): JSX.Element => {
@@ -149,6 +153,7 @@ const ReorderableOption = ({ item, state, dragState, dropState }: { item: Node<E
     </>
   );
 };
+/**** ><> ↑ --------- Component Declaration: ReorderableOption */
 
 // @ts-expect-error props any
 const ReorderableListBox = props => {
@@ -225,6 +230,7 @@ const ReorderableListBox = props => {
     </ul>
   );
 };
+/**** ><> ↑ --------- Component Declaration: ReorderableListBox */
 
 export const WorkspaceEnvironmentsEditModal = (props: ModalProps) => {
   const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
@@ -540,3 +546,4 @@ export const WorkspaceEnvironmentsEditModal = (props: ModalProps) => {
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Component Declaration: WorkspaceEnvironmentsEditModal */

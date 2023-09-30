@@ -6,16 +6,19 @@ import { GraphQLDefaultValue } from './graph-ql-default-value';
 import { GraphQLExplorerTypeLink } from './graph-ql-explorer-type-link';
 import { GraphQLFieldWithParentName } from './graph-ql-types';
 
+/**** ><> ↑ --------- Imports */
 interface Props {
   onNavigateType: (type: GraphQLType) => void;
   field: GraphQLFieldWithParentName;
 }
 
+/**** ><> ↑ --------- Component Definition */
 export class GraphQLExplorerField extends PureComponent<Props> {
   renderDescription() {
     const { field } = this.props;
     return <MarkdownPreview markdown={field.description || '*no description*'} />;
   }
+/**** ><> ↑ --------- renderDescription Function */
 
   renderType() {
     const { field, onNavigateType } = this.props;
@@ -25,6 +28,7 @@ export class GraphQLExplorerField extends PureComponent<Props> {
         <GraphQLExplorerTypeLink type={field.type} onNavigate={onNavigateType} />
       </Fragment>
     );
+/**** ><> ↑ --------- renderType Function */
   }
 
   renderArgumentsMaybe() {
@@ -55,6 +59,7 @@ export class GraphQLExplorerField extends PureComponent<Props> {
       </Fragment>
     );
   }
+/**** ><> ↑ --------- renderArgumentsMaybe Function */
 
   render() {
     return (
@@ -66,3 +71,4 @@ export class GraphQLExplorerField extends PureComponent<Props> {
     );
   }
 }
+/**** ><> ↑ --------- render Function */

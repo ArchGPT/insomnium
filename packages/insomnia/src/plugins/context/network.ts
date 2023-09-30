@@ -2,6 +2,7 @@ import { ExtraRenderInfo, RENDER_PURPOSE_SEND } from '../../common/render';
 import * as models from '../../models';
 import type { Request } from '../../models/request';
 import { fetchRequestData, responseTransform, sendCurlAndWriteTimeline, tryToInterpolateRequest, tryToTransformRequestWithPlugins } from '../../network/network';
+/**** ><> ↑ --------- Importing modules and dependencies ->  */
 
 export function init() {
   return {
@@ -27,4 +28,6 @@ export function init() {
       },
     },
   };
+/**** ><> ↑ --------- Initialization function declaration ->  */
 }
+/**** ><> ↑ --------- Blank line ->  */

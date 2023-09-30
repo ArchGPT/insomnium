@@ -6,10 +6,12 @@ import * as models from '../../models';
 import { UnitTestResult } from '../../models/unit-test-result';
 import { invariant } from '../../utils/invariant';
 import { ListGroup, UnitTestResultItem } from '../components/list-group';
+/**** ><> ↑ --------- Imports and dependencies ->  */
 
 interface TestResultsData {
   testResult: UnitTestResult;
 }
+/**** ><> ↑ --------- Interface definitions ->  */
 
 export const indexLoader: LoaderFunction = async ({ params }) => {
   const { organizationId, projectId, workspaceId, testSuiteId } = params;
@@ -25,6 +27,7 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
 
   return null;
 };
+/**** ><> ↑ --------- indexLoader function definition ->  */
 
 export const loader: LoaderFunction = async ({
   params,
@@ -39,6 +42,7 @@ export const loader: LoaderFunction = async ({
     testResult,
   };
 };
+/**** ><> ↑ --------- loader function definition ->  */
 
 export const TestRunStatus: FC = () => {
   const { testResult } = useRouteLoaderData(':testResultId') as TestResultsData;
@@ -69,3 +73,4 @@ export const TestRunStatus: FC = () => {
     </div>
   );
 };
+/**** ><> ↑ --------- TestRunStatus Function Component definition ->  */

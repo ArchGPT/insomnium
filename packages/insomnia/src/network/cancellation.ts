@@ -1,5 +1,6 @@
 import type { CurlRequestOptions, CurlRequestOutput } from '../main/network/libcurl-promise';
 const cancelRequestFunctionMap = new Map<string, () => void>();
+/**** ><> ↑ --------- Imports and global variable declaration ->  */
 export async function cancelRequestById(requestId: string) {
   const cancel = cancelRequestFunctionMap.get(requestId);
   if (cancel) {
@@ -7,6 +8,7 @@ export async function cancelRequestById(requestId: string) {
   }
   console.log(`[network] Failed to cancel req=${requestId} because cancel function not found`);
 }
+/**** ><> ↑ --------- Function to cancel request by id ->  */
 export const cancellableCurlRequest = async (requestOptions: CurlRequestOptions) => {
   const requestId = requestOptions.requestId;
   const controller = new AbortController();
@@ -27,6 +29,7 @@ export const cancellableCurlRequest = async (requestOptions: CurlRequestOptions)
     return { statusMessage: 'Error', error: err.message || 'Something went wrong' };
   }
 };
+/**** ><> ↑ --------- Function to create a cancellable curl request ->  */
 const cancellablePromise = ({ signal, fn }: { signal: AbortSignal; fn: Promise<any> }) => {
   if (signal?.aborted) {
     return Promise.reject(new DOMException('Aborted', 'AbortError'));
@@ -42,3 +45,4 @@ const cancellablePromise = ({ signal, fn }: { signal: AbortSignal; fn: Promise<a
     signal?.addEventListener('abort', abortHandler);
   });
 };
+/**** ><> ↑ --------- Function to create a cancellable promise ->  */

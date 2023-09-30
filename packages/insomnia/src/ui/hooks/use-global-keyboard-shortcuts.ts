@@ -7,6 +7,7 @@ import { SettingsModal, TAB_INDEX_SHORTCUTS } from '../components/modals/setting
 import { RootLoaderData } from '../routes/root';
 import { WorkspaceLoaderData } from '../routes/workspace';
 import { useSettingsPatcher, useWorkspaceMetaPatcher } from './use-request';
+/**** ><> ↑ --------- Import Statements ->  */
 export const useGlobalKeyboardShortcuts = () => {
   const workspaceData = useRouteLoaderData(':workspaceId') as WorkspaceLoaderData | undefined;
   const {
@@ -16,6 +17,7 @@ export const useGlobalKeyboardShortcuts = () => {
   const patchSettings = useSettingsPatcher();
   const patchWorkspaceMeta = useWorkspaceMetaPatcher();
 
+/**** ><> ↑ --------- Function Definition: useGlobalKeyboardShortcuts ->  */
   useDocBodyKeyboardShortcuts({
     plugin_reload:
       () => plugins.reloadPlugins(),
@@ -29,3 +31,4 @@ export const useGlobalKeyboardShortcuts = () => {
       () => activeWorkspaceMeta && patchWorkspaceMeta(activeWorkspaceMeta.parentId, { sidebarHidden: !activeWorkspaceMeta.sidebarHidden }),
   });
 };
+/**** ><> ↑ --------- Function call: useDocBodyKeyboardShortcuts ->  */

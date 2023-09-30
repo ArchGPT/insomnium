@@ -1,14 +1,17 @@
 import { decodeBase64, encodeBase64 } from '@getinsomnia/api-client/base64';
 import { keyPair, open } from '@getinsomnia/api-client/sealedbox';
 
+/**** ><> ↑ --------- Import statements */
 import * as session from '../account/session';
 import { getAppWebsiteBaseURL } from '../common/constants';
 import { invariant } from '../utils/invariant';
 
+/**** ><> ↑ --------- Session and Constants */
 interface AuthBox {
   token: string;
   key: string;
 }
+/**** ><> ↑ --------- Interface */
 const sessionKeyPair = keyPair();
 encodeBase64(sessionKeyPair.publicKey).then(res => {
   window.localStorage.setItem('insomnia.publicKey', res);
@@ -16,6 +19,7 @@ encodeBase64(sessionKeyPair.publicKey).then(res => {
 encodeBase64(sessionKeyPair.secretKey).then(res => {
   window.localStorage.setItem('insomnia.secretKey', res);
 });
+/**** ><> ↑ --------- Generate and store session key pair */
 /**
  * Keypair used for the login handshake.
  * This keypair can be re-used for the entire session.
@@ -35,6 +39,7 @@ export async function submitAuthCode(code: string) {
 
     throw error;
   }
+/**** ><> ↑ --------- Submit authentication code */
 }
 
 export async function getLoginUrl() {
@@ -45,3 +50,4 @@ export async function getLoginUrl() {
   }
   return `${getAppWebsiteBaseURL()}/app/auth-app/?loginKey=${encodeURIComponent(publicKey)}`;
 }
+/**** ><> ↑ --------- Get login URL */

@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import { containsNunjucks, PluginTheme, validateTheme, validateThemeName } from './misc';
 
+/**** ><> ↑ --------- Importing libraries ->  */
 describe('containsNunjucks', () => {
   it('will return true if the value contains nunjucks without', () => {
     expect(containsNunjucks('{{asdf}}')).toBeTruthy();
@@ -15,6 +16,7 @@ describe('containsNunjucks', () => {
     expect(containsNunjucks('#rgb(1,2,3)')).toBeFalsy();
   });
 });
+/**** ><> ↑ --------- Testing 'containsNunjucks' function ->  */
 
 describe('validateTheme', () => {
   const nunjucksValue = '{{ nunjucks.4.lyfe }}';
@@ -24,6 +26,7 @@ describe('validateTheme', () => {
 
   jest.spyOn(console, 'error').mockImplementation(() => {});
 
+/**** ><> ↑ --------- Setting up test for 'validateTheme' function ->  */
   it('will validate rawCSS in the plugin theme', () => {
     const pluginTheme: PluginTheme = {
       name,
@@ -38,6 +41,7 @@ describe('validateTheme', () => {
     const message = mockMessage(['rawCss']);
     expect(console.error).toHaveBeenLastCalledWith(message);
   });
+/**** ><> ↑ --------- Testing 'validateTheme' with rawCSS ->  */
 
   it('will validate top-level theme blocks in the plugin theme', () => {
     const pluginTheme: PluginTheme = {
@@ -56,6 +60,7 @@ describe('validateTheme', () => {
     const message = mockMessage(['background', 'default']);
     expect(console.error).toHaveBeenLastCalledWith(message);
   });
+/**** ><> ↑ --------- Testing 'validateTheme' with top-level theme blocks ->  */
 
   it('will validate styles sub-theme blocks in the plugin theme', () => {
     const pluginTheme: PluginTheme = {
@@ -78,6 +83,7 @@ describe('validateTheme', () => {
     const message = mockMessage(['styles', 'appHeader', 'foreground', 'default']);
     expect(console.error).toHaveBeenLastCalledWith(message);
   });
+/**** ><> ↑ --------- Testing 'validateTheme' with styles sub-theme blocks ->  */
 });
 
 describe('validateThemeName', () => {
@@ -101,3 +107,4 @@ describe('validateThemeName', () => {
     expect(validName).toEqual('default-dark');
   });
 });
+/**** ><> ↑ --------- Testing 'validateThemeName' function ->  */

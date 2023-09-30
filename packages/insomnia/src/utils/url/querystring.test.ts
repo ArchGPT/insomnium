@@ -8,6 +8,7 @@ import {
   joinUrlAndQueryString,
   smartEncodeUrl,
 } from './querystring';
+/**** ><> ↑ --------- Import statements ->  */
 
 describe('querystring', () => {
   describe('getJoiner()', () => {
@@ -41,6 +42,7 @@ describe('querystring', () => {
       expect(joiner).toBe('&');
     });
   });
+/**** ><> ↑ --------- describe block for getJoiner() function ->  */
 
   describe('joinUrlAndQueryString()', () => {
     it('joins bare URL', () => {
@@ -68,6 +70,7 @@ describe('querystring', () => {
       expect(url).toBe('http://google.com?hi=there&foo=bar%20baz');
     });
   });
+/**** ><> ↑ --------- describe block for joinUrlAndQueryString() function ->  */
 
   describe('build()', () => {
     it('builds simple param', () => {
@@ -93,6 +96,7 @@ describe('querystring', () => {
       expect(str2).toBe('number=0');
     });
   });
+/**** ><> ↑ --------- describe block for buildQueryParameter() function ->  */
 
   describe('buildFromParams()', () => {
     it('builds from params', () => {
@@ -121,6 +125,7 @@ describe('querystring', () => {
       expect(str).toBe('foo=bar%3F%3F&hello=&hi%20there=bar%3F%3F&=bar%3F%3F&=');
     });
   });
+/**** ><> ↑ --------- describe block for buildQueryStringFromParams() function ->  */
 
   describe('deconstructToParams()', () => {
     it('builds from params', () => {
@@ -157,6 +162,7 @@ describe('querystring', () => {
       ]);
     });
   });
+/**** ><> ↑ --------- describe block for deconstructQueryStringToParams() function ->  */
 
   describe('smartEncodeUrl()', () => {
     it('does not touch normal url', () => {
@@ -228,3 +234,4 @@ describe('querystring', () => {
     });
   });
 });
+/**** ><> ↑ --------- describe block for smartEncodeUrl() function ->  */

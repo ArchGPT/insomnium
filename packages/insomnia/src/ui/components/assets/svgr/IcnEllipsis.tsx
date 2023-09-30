@@ -1,4 +1,5 @@
 import React, { SVGProps, memo } from 'react';
+/**** ><> ↑ --------- Import statements ->  */
 export const SvgIcnEllipsis = memo<SVGProps<SVGSVGElement>>(props => (
   <svg
     width="1em"
@@ -9,11 +10,14 @@ export const SvgIcnEllipsis = memo<SVGProps<SVGSVGElement>>(props => (
     role="img"
     {...props}
   >
+/**** ><> ↑ --------- Component definition and properties ->  */
     <path
       fillRule="evenodd"
       clipRule="evenodd"
       d="M1.5 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM7 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM12.5 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
       fill=""
     />
+/**** ><> ↑ --------- Path element with its properties ->  */
   </svg>
 ));
+/**** ><> ↑ --------- Closing tags ->  */

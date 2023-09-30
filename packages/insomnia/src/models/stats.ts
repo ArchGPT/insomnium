@@ -6,6 +6,7 @@ import { isRequest } from './request';
 import type { RequestGroup } from './request-group';
 import { isWebSocketRequest } from './websocket-request';
 import type { Workspace } from './workspace';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const name = 'Stats';
 
@@ -16,6 +17,7 @@ export const prefix = 'sta';
 export const canDuplicate = false;
 
 export const canSync = false;
+/**** ><> ↑ --------- Export constants ->  */
 
 export interface BaseStats {
   currentLaunch: number | null;
@@ -29,10 +31,12 @@ export interface BaseStats {
 }
 
 export type Stats = BaseModel & BaseStats;
+/**** ><> ↑ --------- Define interface and type for BaseStats and Stats ->  */
 
 export const isStats = (model: Pick<BaseModel, 'type'>): model is Stats => (
   model.type === type
 );
+/**** ><> ↑ --------- Export Type guards for Stats ->  */
 
 export function init(): BaseStats {
   return {
@@ -46,6 +50,7 @@ export function init(): BaseStats {
     executedRequests: 0,
   };
 }
+/**** ><> ↑ --------- Init function for BaseStats ->  */
 
 export function migrate(doc: Stats) {
   return doc;
@@ -73,6 +78,7 @@ export async function get() {
 export function all() {
   return db.all<Stats>(type) || [];
 }
+/**** ><> ↑ --------- Export Functions for Stats model manipulation ->  */
 
 export async function incrementRequestStats({
   createdRequests,
@@ -92,6 +98,7 @@ export async function incrementRequestStats({
     }),
   });
 }
+/**** ><> ↑ --------- Export function for incrementing RequestStats ->  */
 
 export async function incrementCreatedRequests() {
   await incrementRequestStats({
@@ -110,6 +117,7 @@ export async function incrementExecutedRequests() {
     executedRequests: 1,
   });
 }
+/**** ><> ↑ --------- Export functions for incrementing individual request stats ->  */
 
 export async function incrementCreatedRequestsForDescendents(doc: Workspace | RequestGroup) {
   const docs = await db.withDescendants(doc);
@@ -126,3 +134,4 @@ export async function incrementDeletedRequestsForDescendents(doc: Workspace | Re
     deletedRequests: requests.length,
   });
 }
+/**** ><> ↑ --------- Export functions for incrementing request stats for descendants ->  */

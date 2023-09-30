@@ -5,6 +5,7 @@ import { globalBeforeEach } from '../../__jest__/before-each';
 import * as models from '../../models';
 import { getAppVersion } from '../constants';
 import { exportRequestsData, exportRequestsHAR, exportWorkspacesData, exportWorkspacesHAR } from '../export';
+/**** ><> ↑ --------- Import statements ->  */
 
 describe('exportWorkspacesHAR() and exportRequestsHAR()', () => {
   beforeEach(async () => {
@@ -108,6 +109,7 @@ describe('exportWorkspacesHAR() and exportRequestsHAR()', () => {
     });
     expect(exportRequestsData.log.entries.length).toBe(1);
   });
+/**** ><> ↑ --------- First Describe function, includes test cases related to exporting Workspaces and Requests as HAR (HTTP Archive) ->  */
 
   it('exports all workspaces as an HTTP Archive', async () => {
     const wrk1 = await models.workspace.create({
@@ -209,6 +211,7 @@ describe('exportWorkspacesHAR() and exportRequestsHAR()', () => {
   });
 });
 
+/**** ><> ↑ --------- Second Describe function, includes test cases related to exporting workspaces and requests only ->  */
 describe('export', () => {
   beforeEach(globalBeforeEach);
 
@@ -470,3 +473,4 @@ describe('export', () => {
     });
   });
 });
+/**** ><> ↑ --------- Third Describe function, includes test cases related to exporting all workspaces, some requests only and correct models ->  */

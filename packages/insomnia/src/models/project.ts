@@ -10,12 +10,14 @@ export const canSync = false;
 
 export const DEFAULT_PROJECT_ID = `${prefix}_default-project`;
 
+/**** ><> ↑ --------- Imports and exports ->  */
 export const isDefaultProject = (project: Pick<Project, '_id'>) => project._id === DEFAULT_PROJECT_ID;
 export const isNotDefaultProject = (project: Pick<Project, '_id'>) => !isDefaultProject(project);
 export const isLocalProject = (project: Pick<Project, 'remoteId'>): project is LocalProject => project.remoteId === null;
 export const isRemoteProject = (project: Pick<Project, 'remoteId'>): project is RemoteProject => !isLocalProject(project);
 export const projectHasSettings = (project: Pick<Project, '_id'>) => !isDefaultProject(project);
 
+/**** ><> ↑ --------- Utility functions ->  */
 interface CommonProject {
   name: string;
 }
@@ -29,6 +31,7 @@ export interface LocalProject extends BaseModel, CommonProject {
 }
 
 export type Project = LocalProject | RemoteProject;
+/**** ><> ↑ --------- Interface definitions ->  */
 
 export const isProject = (model: Pick<BaseModel, 'type'>): model is Project => (
   model.type === type
@@ -37,6 +40,7 @@ export const isProject = (model: Pick<BaseModel, 'type'>): model is Project => (
 export const isProjectId = (id: string | null) => (
   id?.startsWith(`${prefix}_`)
 );
+/**** ><> ↑ --------- Type guards ->  */
 
 export function init(): Partial<Project> {
   return {
@@ -44,10 +48,12 @@ export function init(): Partial<Project> {
     remoteId: null, // `null` is necessary for the model init logic to work properly
   };
 }
+/**** ><> ↑ --------- Init function ->  */
 
 export function migrate(project: Project) {
   return project;
 }
+/**** ><> ↑ --------- Migrate function ->  */
 
 export function createId() {
   return generateId(prefix);
@@ -56,6 +62,7 @@ export function createId() {
 export function create(patch: Partial<Project> = {}) {
   return db.docCreate<Project>(type, patch);
 }
+/**** ><> ↑ --------- CreateId and create functions ->  */
 
 export function getById(_id: string) {
   return db.getWhere<Project>(type, { _id });
@@ -64,16 +71,20 @@ export function getById(_id: string) {
 export function getByRemoteId(remoteId: string) {
   return db.getWhere<Project>(type, { remoteId });
 }
+/**** ><> ↑ --------- Get functions ->  */
 
 export function remove(project: Project) {
   return db.remove(project);
 }
+/**** ><> ↑ --------- Remove function ->  */
 
 export function update(project: Project, patch: Partial<Project>) {
   return db.docUpdate(project, patch);
 }
+/**** ><> ↑ --------- Update function ->  */
 
 export async function all() {
   const projects = await db.all<Project>(type);
   return projects;
 }
+/**** ><> ↑ --------- Retrieval of all database entries ->  */

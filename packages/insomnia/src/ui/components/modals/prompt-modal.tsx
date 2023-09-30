@@ -6,6 +6,7 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
+/**** ><> ↑ --------- Importing necessary packages and components -> These lines import the necessary packages and components that are used throughout this document. This includes both external packages (like 'classnames' and 'React') and internal components (like 'Modal', 'ModalBody', etc.). */
 interface State {
   title: string;
   hints?: string[];
@@ -43,6 +44,7 @@ export interface PromptModalHandle {
   show: (options: PromptModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Defining types and interfaces -> Here, the code defines several TypeScript types and interfaces that are used to manage the component's state and props. This helps ensure type safety and clear communication of what the component expects and can handle. */
 export const PromptModal = forwardRef<PromptModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -188,6 +190,8 @@ export const PromptModal = forwardRef<PromptModalHandle, ModalProps>((_, ref) =>
       </ModalFooter>
     </Modal>
   );
+/**** ><> ↑ --------- The PromptModal functional component definition -> This is the core of the file: the definition of the PromptModal. It is using the React Hook useImperativeHandle to customize the instance value that is exposed to parent components when using ref. This component handles user input, form submission, and rendering of the modal. */
 });
 
 PromptModal.displayName = 'PromptModal';
+/**** ><> ↑ --------- Setting displayName of the component -> This line sets the displayName of the component that is used in debugging messages. It's generally good practice to set this particularly for higher-order components. */

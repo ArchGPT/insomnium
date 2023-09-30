@@ -5,10 +5,12 @@ import { SidebarInvalidSection } from './sidebar-invalid-section';
 import { SidebarItem } from './sidebar-item';
 import { SidebarSection } from './sidebar-section';
 
+/**** ><> ↑ --------- Import statements ->  */
 export interface SidebarSecurityProps {
   security: Record<string, any>;
   onClick: (section: string, ...args: any) => void;
 }
+/**** ><> ↑ --------- SidebarSecurityProps interface ->  */
 
 // Implemented as a class component because of a caveat with render props
 // https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent
@@ -43,8 +45,10 @@ export class SidebarSecurity extends Component<SidebarSecurityProps> {
       </div>
     );
   };
+/**** ><> ↑ --------- SidebarSecurity class declaration and renderBody method ->  */
 
   render() {
     return <SidebarSection title="SECURITY" renderBody={this.renderBody} />;
   }
 }
+/**** ><> ↑ --------- Render method of SidebarSecurity class ->  */

@@ -2,9 +2,11 @@ export default {
   name: 'hyper',
   displayName: 'Hyper',
   theme: {
+/**** ><> ↑ --------- Default export setup ->  */
     foreground: {
       default: '#ddd',
     },
+/**** ><> ↑ --------- Theme foreground settings ->  */
     background: {
       default: '#000',
       success: '#87ee59',
@@ -14,27 +16,33 @@ export default {
       surprise: '#f24aff',
       info: '#23dce8',
     },
+/**** ><> ↑ --------- Theme background settings ->  */
     rawCss: `
       .tooltip, .dropdown__menu {
         opacity: 0.95;
       }
     `,
+/**** ><> ↑ --------- Raw CSS setup ->  */
     styles: {
       dialog: {
+/**** ><> ↑ --------- Styles setup ->  */
         background: {
           default: '#111',
         },
       },
+/**** ><> ↑ --------- Dialog settings ->  */
       transparentOverlay: {
         background: {
           default: 'rgba(0, 0, 0, 0.5)',
         },
       },
+/**** ><> ↑ --------- Transparent overlay settings ->  */
       sidebar: {
         highlight: {
           default: '#aaa',
         },
       },
+/**** ><> ↑ --------- Sidebar settings ->  */
       paneHeader: {
         background: {
           default: '#000',
@@ -47,5 +55,7 @@ export default {
         },
       },
     },
+/**** ><> ↑ --------- Pane header settings ->  */
   },
 };
+/**** ><> ↑ --------- Export closure ->  */

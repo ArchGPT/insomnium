@@ -29,6 +29,7 @@ import { AuthInputRow } from './components/auth-input-row';
 import { AuthSelectRow } from './components/auth-select-row';
 import { AuthTableBody } from './components/auth-table-body';
 import { AuthToggleRow } from './components/auth-toggle-row';
+/**** ><> ↑ --------- Importing required modules, libraries and constants */
 const getAuthorizationUrls = () => authorizationUrls;
 const getAccessTokenUrls = () => accessTokenUrls;
 
@@ -88,6 +89,7 @@ const credentialsInBodyOptions = [
   },
 ];
 
+/**** ><> ↑ --------- Definition of constant arrays used in the application */
 const getFields = (authentication: Request['authentication']) => {
   const clientId = <AuthInputRow label='Client ID' property='clientId' key='clientId' />;
   const clientSecret = <AuthInputRow label='Client Secret' property='clientSecret' key='clientSecret' />;
@@ -145,6 +147,7 @@ const getFields = (authentication: Request['authentication']) => {
     credentialsInBody,
   };
 };
+/**** ><> ↑ --------- Function getFields definition */
 
 const getFieldsForGrantType = (authentication: Request['authentication']) => {
   const {
@@ -242,6 +245,7 @@ const getFieldsForGrantType = (authentication: Request['authentication']) => {
     advanced,
   };
 };
+/**** ><> ↑ --------- Function getFieldsForGrantType definition */
 
 export const OAuth2Auth: FC = () => {
   const { activeRequest: { authentication } } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
@@ -280,6 +284,7 @@ export const OAuth2Auth: FC = () => {
     </>
   );
 };
+/**** ><> ↑ --------- OAuth2Auth component definition */
 /**
   Finds epoch's digit count and converts it to make it exactly 13 digits.
   Which is the epoch millisecond representation. (trims last 2 digits)
@@ -288,6 +293,7 @@ export function convertEpochToMilliseconds(epoch: number) {
   const expDigitCount = epoch.toString().length;
   return parseInt(String(epoch * 10 ** (13 - expDigitCount)), 10);
 }
+/**** ><> ↑ --------- Function convertEpochToMilliseconds definition */
 const renderIdentityTokenExpiry = (token?: Pick<OAuth2Token, 'identityToken'>) => {
   if (!token || !token.identityToken) {
     return;
@@ -336,6 +342,7 @@ const renderAccessTokenExpiry = (token?: Pick<OAuth2Token, 'accessToken' | 'expi
     </span>
   );
 };
+/**** ><> ↑ --------- Functions renderIdentityTokenExpiry and renderAccessTokenExpiry definitions */
 
 const OAuth2TokenInput: FC<{ token: OAuth2Token | null; label: string; property: keyof Pick<OAuth2Token, 'accessToken' | 'refreshToken' | 'identityToken'> }> = ({ token, label, property }) => {
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
@@ -373,6 +380,7 @@ const OAuth2TokenInput: FC<{ token: OAuth2Token | null; label: string; property:
     </div>
   );
 };
+/**** ><> ↑ --------- OAuth2TokenInput component definition */
 
 const OAuth2Error: FC<{ token: OAuth2Token | null }> = ({ token }) => {
   const debug = () => {
@@ -419,6 +427,7 @@ const OAuth2Error: FC<{ token: OAuth2Token | null }> = ({ token }) => {
   }
   return debugButton;
 };
+/**** ><> ↑ --------- OAuth2Error component definition */
 
 const OAuth2Tokens: FC = () => {
   const { activeRequest: { authentication, _id: requestId } } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
@@ -496,3 +505,4 @@ const OAuth2Tokens: FC = () => {
     </div>
   );
 };
+/**** ><> ↑ --------- OAuth2Tokens component definition */

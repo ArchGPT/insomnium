@@ -9,6 +9,7 @@ import { RootLoaderData } from '../routes/root';
 import { WorkspaceLoaderData } from '../routes/workspace';
 import { ErrorBoundary } from './error-boundary';
 import { Sidebar } from './sidebar/sidebar';
+/**** ><> ↑ --------- Import statements and constants ->  */
 const verticalStyles = {
   '.sidebar': {
     gridColumnStart: '2',
@@ -57,6 +58,7 @@ const verticalStyles = {
     },
   },
 };
+/**** ><> ↑ --------- Definition of verticalStyles constant ->  */
 
 const LayoutGrid = styled.div<{orientation: 'vertical' | 'horizontal'}>(props => ({
   gridArea: 'Content',
@@ -175,6 +177,7 @@ const LayoutGrid = styled.div<{orientation: 'vertical' | 'horizontal'}>(props =>
 
   ...props.orientation === 'vertical' && verticalStyles,
 }));
+/**** ><> ↑ --------- LayoutGrid styled component ->  */
 
 const Pane = forwardRef<HTMLElement, { position: string; children: ReactNode }>(
   function Pane({ children, position }, ref) {
@@ -185,10 +188,12 @@ const Pane = forwardRef<HTMLElement, { position: string; children: ReactNode }>(
     );
   }
 );
+/**** ><> ↑ --------- Pane definition ->  */
 
 export const SidebarFooter = styled.div({
   gridRowStart: 6,
 });
+/**** ><> ↑ --------- SidebarFooter styled component ->  */
 
 interface Props {
   renderPageSidebar?: ReactNode;
@@ -196,6 +201,7 @@ interface Props {
   renderPaneTwo?: ReactNode;
   className?: string;
 }
+/**** ><> ↑ --------- Props interface ->  */
 
 export const SidebarLayout: FC<Props> = ({
   renderPaneOne,
@@ -437,3 +443,4 @@ export const SidebarLayout: FC<Props> = ({
     </LayoutGrid>
   );
 };
+/**** ><> ↑ --------- SidebarLayout React component ->  */

@@ -14,6 +14,7 @@ import 'codemirror/mode/ruby/ruby';
 import 'codemirror/mode/shell/shell';
 import 'codemirror/mode/swift/swift';
 import 'codemirror/mode/yaml/yaml';
+/**** ><> ↑ --------- Importing code mirror modes */
 import 'codemirror/addon/display/autorefresh';
 import 'codemirror/addon/dialog/dialog';
 import 'codemirror/addon/fold/foldcode';
@@ -34,14 +35,17 @@ import 'codemirror/addon/selection/selection-pointer';
 import 'codemirror/addon/display/placeholder';
 import 'codemirror/addon/lint/lint';
 
+/**** ><> ↑ --------- Importing code mirror addons */
 // for the code that uses this yaml parser, see https://github.com/codemirror/CodeMirror/blob/master/addon/lint/yaml-lint.js
 import * as jsyaml from 'js-yaml';
 global.jsyaml = jsyaml;
 import 'codemirror/addon/lint/yaml-lint';
 /**/
+/**** ><> ↑ --------- Importing js-yaml and its lint addon */
 import 'codemirror/keymap/vim';
 import 'codemirror/keymap/emacs';
 import 'codemirror/keymap/sublime';
+/**** ><> ↑ --------- Importing code mirror keymaps */
 import 'codemirror-graphql/hint';
 import 'codemirror-graphql/lint';
 import 'codemirror-graphql/info';
@@ -49,6 +53,7 @@ import 'codemirror-graphql/jump';
 import 'codemirror-graphql/mode';
 import 'codemirror-graphql/variables/lint';
 import 'codemirror-graphql/variables/mode';
+/**** ><> ↑ --------- Importing code mirror graphql addons */
 import './modes/nunjucks';
 import './modes/curl';
 import './modes/openapi';
@@ -57,3 +62,4 @@ import './lint/json-lint';
 import './extensions/autocomplete';
 import './extensions/clickable';
 import './extensions/nunjucks-tags';
+/**** ><> ↑ --------- Importing additional custom modes, lints, and extensions */

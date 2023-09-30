@@ -2,6 +2,7 @@ import log from 'electron-log';
 import { dirname } from 'path';
 
 import { isDevelopment } from './constants';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const initializeLogging = () => {
   if (isDevelopment()) {
@@ -21,10 +22,13 @@ export const initializeLogging = () => {
   // Overwrite the console.log/warn/etc methods
   Object.assign(console, log.functions);
 };
+/**** ><> ↑ --------- Initialize logging function ->  */
 
 export function getLogDirectory() {
   const logPath = log.transports.file.getFile().path;
   return dirname(logPath);
 }
+/**** ><> ↑ --------- Get log directory function ->  */
 
 export default log;
+/**** ><> ↑ --------- Default export statement ->  */

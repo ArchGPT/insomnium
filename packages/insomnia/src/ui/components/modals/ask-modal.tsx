@@ -4,6 +4,7 @@ import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
+/**** ><> ↑ --------- Module and dependency imports */
 interface State {
   title: string;
   message: React.ReactNode;
@@ -18,10 +19,12 @@ export interface AskModalOptions {
   yesText?: string;
   noText?: string;
 }
+/**** ><> ↑ --------- State and AskModalOptions interface definitions */
 export interface AskModalHandle {
   show: (options: AskModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- AskModalHandle interface definition */
 export const AskModal = forwardRef<AskModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<State>({
@@ -32,6 +35,7 @@ export const AskModal = forwardRef<AskModalHandle, ModalProps>((_, ref) => {
     onDone: async () => { },
   });
 
+/**** ><> ↑ --------- AskModal functional component definition and state initialization */
   useImperativeHandle(ref, () => ({
     hide: () => {
       modalRef.current?.hide();
@@ -47,6 +51,7 @@ export const AskModal = forwardRef<AskModalHandle, ModalProps>((_, ref) => {
       modalRef.current?.show();
     },
   }), []);
+/**** ><> ↑ --------- useImperativeHandle hook for exposing component methods */
   const { message, title, yesText, noText, onDone } = state;
   return (
     <Modal ref={modalRef}>
@@ -75,6 +80,8 @@ export const AskModal = forwardRef<AskModalHandle, ModalProps>((_, ref) => {
         </div>
       </ModalFooter>
     </Modal>
+/**** ><> ↑ --------- Rendering of Modal structure */
   );
 });
 AskModal.displayName = 'AskModal';
+/**** ><> ↑ --------- Setting displayName */

@@ -18,6 +18,7 @@ import {
   PKCE_CHALLENGE_S256,
 } from './constants';
 
+/**** ><> ↑ --------- Contains all the imports ->  */
 const LOCALSTORAGE_KEY_SESSION_ID = 'insomnia::current-oauth-session-id';
 
 export function initNewOAuthSession() {
@@ -33,6 +34,7 @@ export function getOAuthSession(): string {
   return token || initNewOAuthSession();
 }
 
+/**** ><> ↑ --------- Handling OAuth sessions ->  */
 // NOTE
 // 1. return valid access token from insomnia db
 // 2. send refresh token in order to save and return valid access token
@@ -168,6 +170,7 @@ export const getOAuth2Token = async (
     oauthResponseToAccessToken(authentication.accessTokenUrl, response)
   ));
 };
+/**** ><> ↑ --------- Getting OAuth2 Token ->  */
 // 1. get token from db and return if valid
 // 2. if expired, and no refresh token return null
 // 3. run refresh token query and return new token or null if it fails
@@ -247,6 +250,7 @@ async function getExistingAccessTokenAndRefreshIfExpired(
     refresh_token: data.refresh_token || token.refreshToken,
   }));
 }
+/**** ><> ↑ --------- Getting existing access token and refreshing if expired ->  */
 
 export const oauthResponseToAccessToken = (accessTokenUrl: string, response: Response) => {
   const bodyBuffer = models.response.getBodyBuffer(response);
@@ -269,6 +273,7 @@ export const oauthResponseToAccessToken = (accessTokenUrl: string, response: Res
     xResponseId: response._id,
   };
 };
+/**** ><> ↑ --------- Handling response to access token transformation ->  */
 
 const transformNewAccessTokenToOauthModel = (accessToken: Partial<Record<AuthKeys, string | null>>): Partial<OAuth2Token> => {
   const expiry = accessToken.expires_in ? +accessToken.expires_in : 0;
@@ -287,6 +292,7 @@ const transformNewAccessTokenToOauthModel = (accessToken: Partial<Record<AuthKey
     xError: accessToken.xError || null,
   };
 };
+/**** ><> ↑ --------- Transforming new access token to OAuth model ->  */
 
 const sendAccessTokenRequest = async (requestId: string, authentication: AuthTypeOAuth2, params: RequestParameter[], headers: RequestHeader[]) => {
   invariant(authentication.accessTokenUrl, 'Missing access token URL');
@@ -329,6 +335,7 @@ const sendAccessTokenRequest = async (requestId: string, authentication: AuthTyp
 
   return await models.response.create(responsePatch);
 };
+/**** ><> ↑ --------- Sending access token request ->  */
 export const encodePKCE = (buffer: Buffer) => {
   return buffer.toString('base64')
     // The characters + / = are reserved for PKCE as per the RFC,
@@ -352,3 +359,4 @@ const tryToParse = (body: string): Record<string, any> | null => {
 };
 
 const insertAuthKeyIf = (name: AuthKeys, value?: string) => value ? [{ name, value }] : [];
+/**** ><> ↑ --------- Encoding PKCE, parsing body, and inserting Auth Key if any ->  */

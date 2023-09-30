@@ -11,6 +11,7 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { CodeEditor, CodeEditorHandle } from '../codemirror/code-editor';
+/**** ><> ↑ --------- Import statements */
 
 const MODE_MAP: Record<string, string> = {
   c: 'clike',
@@ -23,6 +24,7 @@ const MODE_MAP: Record<string, string> = {
 const TO_ADD_CONTENT_LENGTH: Record<string, string[]> = {
   node: ['native'],
 };
+/**** ><> ↑ --------- Global constant definitions */
 
 type Props = ModalProps & {
   environmentId: string;
@@ -41,7 +43,9 @@ export interface GenerateCodeModalHandle {
   show: (options: GenerateCodeModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Type declarations and interface exports */
 export const GenerateCodeModal = forwardRef<GenerateCodeModalHandle, Props>((props, ref) => {
+/**** ><> ↑ --------- GenerateCodeModal component definition start */
   const modalRef = useRef<ModalHandle>(null);
   const editorRef = useRef<CodeEditorHandle>(null);
 
@@ -61,6 +65,7 @@ export const GenerateCodeModal = forwardRef<GenerateCodeModalHandle, Props>((pro
     client: storedClient,
     targets: [],
   });
+/**** ><> ↑ --------- Initialization of local state (using React's useRef and useState) */
 
   const generateCode = useCallback(async (request: Request, target?: HTTPSnippetTarget, client?: HTTPSnippetClient) => {
     const HTTPSnippet = (await import('httpsnippet')).default;
@@ -89,6 +94,7 @@ export const GenerateCodeModal = forwardRef<GenerateCodeModalHandle, Props>((pro
     window.localStorage.setItem('insomnia::generateCode::client', JSON.stringify(clientOrFallback));
     window.localStorage.setItem('insomnia::generateCode::target', JSON.stringify(targetOrFallback));
   }, [props.environmentId]);
+/**** ><> ↑ --------- generateCode function definition */
 
   useImperativeHandle(ref, () => ({
     hide: () => {
@@ -102,6 +108,7 @@ export const GenerateCodeModal = forwardRef<GenerateCodeModalHandle, Props>((pro
       modalRef.current?.show();
     },
   }), [generateCode, state]);
+/**** ><> ↑ --------- useImperativeHandle hook usage to manage modal hiding and showing */
 
   const { cmd, target, targets, client, request } = state;
   // NOTE: Just some extra precautions in case the target is messed up
@@ -109,6 +116,7 @@ export const GenerateCodeModal = forwardRef<GenerateCodeModalHandle, Props>((pro
   if (target && Array.isArray(target.clients)) {
     clients = target.clients;
   }
+/**** ><> ↑ --------- State variables extraction */
   return (
     <Modal ref={modalRef} tall {...props}>
       <ModalHeader>Generate Client Code</ModalHeader>
@@ -192,6 +200,8 @@ export const GenerateCodeModal = forwardRef<GenerateCodeModalHandle, Props>((pro
         </button>
       </ModalFooter>
     </Modal>
+/**** ><> ↑ --------- Render method of GenerateCodeModal */
   );
 });
 GenerateCodeModal.displayName = 'GenerateCodeModal';
+/**** ><> ↑ --------- Assigning the displayName property of GenerateCodeModal */

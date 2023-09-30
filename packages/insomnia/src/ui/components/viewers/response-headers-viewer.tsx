@@ -9,6 +9,7 @@ import { Link } from '../base/link';
 interface Props {
   headers: ResponseHeader[];
 }
+/**** ><> ↑ --------- Importing modules and defining type Props ->  */
 
 const validateURL = ({ value }: ResponseHeader) => {
   try {
@@ -18,14 +19,17 @@ const validateURL = ({ value }: ResponseHeader) => {
     return false;
   }
 };
+/**** ><> ↑ --------- Function to validate URLs ->  */
 
 const headerAsString = (header: ResponseHeader) => `${header.name}: ${header.value}`;
 
+/**** ><> ↑ --------- Function to convert headers to string ->  */
 const StyledTableDataCell = styled.td.attrs({
   className: 'force-wrap',
 })({
   width: '50%',
 });
+/**** ><> ↑ --------- Styled Table Data Cell Component ->  */
 
 export const ResponseHeadersViewer: FC<Props> = ({ headers }) => {
   const headersString = useMemo(() => headers.map(headerAsString).join('\n'), [headers]);
@@ -58,3 +62,4 @@ export const ResponseHeadersViewer: FC<Props> = ({ headers }) => {
     </Fragment>
   );
 };
+/**** ><> ↑ --------- ResponseHeadersViewer Component ->  */

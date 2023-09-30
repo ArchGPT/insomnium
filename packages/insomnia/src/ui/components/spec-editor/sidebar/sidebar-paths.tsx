@@ -5,6 +5,7 @@ import { SidebarBadge } from './sidebar-badge';
 import { SidebarInvalidSection } from './sidebar-invalid-section';
 import { SidebarItem } from './sidebar-item';
 import { SidebarSection } from './sidebar-section';
+/**** ><> ↑ --------- Module imports ->  */
 
 export type SidebarPathsType = Record<string, any> | string;
 
@@ -12,8 +13,10 @@ export interface SidebarPathsProps {
   paths: SidebarPathsType;
   onClick: (section: string, ...args: any) => void;
 }
+/**** ><> ↑ --------- Type and interface declarations ->  */
 
 const isNotXDashKey = (key: string) => key.indexOf('x-') !== 0;
+/**** ><> ↑ --------- Utility function declaration ->  */
 
 // Implemented as a class component because of a caveat with render props
 // https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent
@@ -38,6 +41,7 @@ export class SidebarPaths extends Component<SidebarPathsProps> {
     if (!filteredValues.length) {
       return null;
     }
+/**** ><> ↑ --------- filteredValues variable and its usage ->  */
 
     return (
       <div>
@@ -65,9 +69,12 @@ export class SidebarPaths extends Component<SidebarPathsProps> {
           ))}
       </div>
     );
+/**** ><> ↑ --------- Render block for SidebarPaths ->  */
   };
 
   render() {
     return <SidebarSection title="PATHS" renderBody={this.renderBody} />;
   }
+/**** ><> ↑ --------- SidebarPaths Class ->  */
 }
+/**** ><> ↑ --------- render method in SidebarPaths class ->  */

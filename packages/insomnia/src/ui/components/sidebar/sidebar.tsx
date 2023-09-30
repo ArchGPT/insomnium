@@ -6,11 +6,13 @@ import {
   SIDEBAR_SKINNY_REMS,
 } from '../../../common/constants';
 
+/**** ><> ↑ --------- Imports */
 interface Props {
   children: ReactNode;
   hidden: boolean;
   width: number;
 }
+/**** ><> ↑ --------- Interface */
 
 export const Sidebar = memo(
   forwardRef<HTMLElement, Props>(({
@@ -32,5 +34,7 @@ export const Sidebar = memo(
     );
   })
 );
+/**** ><> ↑ --------- Sidebar Component */
 
 Sidebar.displayName = 'Sidebar';
+/**** ><> ↑ --------- Sidebar Display Name */

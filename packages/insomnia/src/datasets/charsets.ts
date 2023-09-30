@@ -1,4 +1,5 @@
 export default [
+/**** ><> ↑ --------- Export statement ->  */
   'utf-8',
   'us-ascii',
   '950',
@@ -119,3 +120,4 @@ export default [
   'x-mac-korean',
   'x-mac-turkish',
 ];
+/**** ><> ↑ --------- Array of encoding types ->  */

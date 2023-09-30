@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { PanelContainer, TabItem, Tabs } from './base/tabs';
 import { CodeEditor, CodeEditorHandle } from './codemirror/code-editor';
 import { MarkdownPreview } from './markdown-preview';
+/**** ><> ↑ --------- Imports */
 
 interface Props {
   onChange: Function;
@@ -14,6 +15,7 @@ interface Props {
   mode?: string;
   tall?: boolean;
 }
+/**** ><> ↑ --------- Props Interfaces */
 
 interface MarkdownEditProps {
   withDynamicHeight: boolean;
@@ -53,6 +55,7 @@ const MarkdownPreiview = styled.div({
   overflow: 'auto',
 });
 
+/**** ><> ↑ --------- Styled Components */
 export const MarkdownEditor = forwardRef<CodeEditorHandle, Props>(({
   mode,
   placeholder,
@@ -92,6 +95,7 @@ export const MarkdownEditor = forwardRef<CodeEditorHandle, Props>(({
                 placeholder={placeholder}
                 defaultValue={markdown}
                 onChange={handleChange}
+/**** ><> ↑ --------- Markdown Editor Component */
               />
             </div>
             <div className='txt-sm italic faint'>
@@ -111,3 +115,4 @@ export const MarkdownEditor = forwardRef<CodeEditorHandle, Props>(({
   );
 });
 MarkdownEditor.displayName = 'MarkdownEditor';
+/**** ><> ↑ --------- Markdown Editor Component (continued) */

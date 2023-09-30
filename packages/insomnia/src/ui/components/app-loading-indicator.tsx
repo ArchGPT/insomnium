@@ -1,6 +1,8 @@
 import React from 'react';
+/**** ><> ↑ --------- React import statement */
 
 export const AppLoadingIndicator = () => (
+/**** ><> ↑ --------- Export of the `AppLoadingIndicator` functional component */
   <div
     id="app-loading-indicator"
     style={{
@@ -11,11 +13,13 @@ export const AppLoadingIndicator = () => (
       width: '100%',
     }}
   >
+/**** ><> ↑ --------- Main div container definition with styling */
     <div
       style={{
         position: 'relative',
       }}
     >
+/**** ><> ↑ --------- Nested div container definition with styling */
       <svg
         viewBox="0 0 378 378"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,6 +27,7 @@ export const AppLoadingIndicator = () => (
         clipRule="evenodd"
         width={100}
       >
+/**** ><> ↑ --------- SVG image and its properties */
         <circle
           cx={36}
           cy={36}
@@ -33,6 +38,7 @@ export const AppLoadingIndicator = () => (
           strokeWidth="4px"
           transform="translate(-323 -111) translate(359.016 147.016) scale(4.24956)"
         />
+/**** ><> ↑ --------- Circle element with transformation and styling */
         <circle
           cx={36}
           cy={36}
@@ -54,6 +60,7 @@ export const AppLoadingIndicator = () => (
             repeatCount="indefinite"
           />
         </circle>
+/**** ><> ↑ --------- Circle element with animation, transformation, and styling */
         <path
           d="M19 37.033c9.96 0 18.033-8.073 18.033-18.033S28.96.967 19 .967.967 9.04.967 19 9.04 37.033 19 37.033z"
           fill="#fff"
@@ -71,6 +78,7 @@ export const AppLoadingIndicator = () => (
           fill="url(#_Linear1)"
           transform="translate(-323 -111) translate(431.258 219.258) scale(4.24956)"
         />
+/**** ><> ↑ --------- Path elements with transformation and styling */
         <defs>
           <linearGradient
             id="_Linear1"
@@ -85,7 +93,10 @@ export const AppLoadingIndicator = () => (
             <stop offset={1} stopColor="#4000bf" />
           </linearGradient>
         </defs>
+/**** ><> ↑ --------- defs element with linear gradient */
       </svg>
     </div>
+/**** ><> ↑ --------- End tags for svg and div elements */
   </div>
 );
+/**** ><> ↑ --------- Ending of the `AppLoadingIndicator` functional component */

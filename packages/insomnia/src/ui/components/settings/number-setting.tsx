@@ -6,6 +6,7 @@ import { useSettingsPatcher } from '../../hooks/use-request';
 import { RootLoaderData } from '../../routes/root';
 import { HelpTooltip } from '../help-tooltip';
 
+/**** ><> ↑ --------- Import statements */
 interface Props {
   help?: string;
   label: string;
@@ -25,6 +26,7 @@ export function snapNumberToLimits(value: number, min?: number, max?: number) {
   }
   return value;
 }
+/**** ><> ↑ --------- Interface and utility function */
 export const NumberSetting: FC<Props> = ({
   help,
   label,
@@ -74,3 +76,4 @@ export const NumberSetting: FC<Props> = ({
     </div>
   );
 };
+/**** ><> ↑ --------- NumberSetting component */

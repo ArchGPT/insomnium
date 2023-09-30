@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 import { useToggle } from 'react-use';
+/**** ><> ↑ --------- Import Statements */
 
 import { SettingsOfType } from '../../../common/settings';
 import { useSettingsPatcher } from '../../hooks/use-request';
 import { RootLoaderData } from '../../routes/root';
 import { HelpTooltip } from '../help-tooltip';
+/**** ><> ↑ --------- Additional Imports */
 
 export const MaskedSetting: FC<{
   disabled?: React.HTMLProps<HTMLInputElement>['disabled'];
@@ -55,3 +57,4 @@ export const MaskedSetting: FC<{
     </div>
   );
 };
+/**** ><> ↑ --------- Component Definition */

@@ -27,6 +27,7 @@ import { FilterHelpModal } from '../modals/filter-help-modal';
 import { showModal } from '../modals/index';
 import { isKeyCombinationInRegistry } from '../settings/shortcuts';
 import { normalizeIrregularWhitespace } from './normalizeIrregularWhitespace';
+/**** ><> ↑ --------- Import statements */
 const TAB_SIZE = 4;
 const MAX_SIZE_FOR_LINTING = 1000000; // Around 1MB
 
@@ -47,6 +48,7 @@ export const shouldIndentWithTabs = ({ mode, indentWithTabs }: { mode?: string; 
   return indentWithTabs && !isYaml && !isOpenAPI;
 };
 
+/**** ><> ↑ --------- EditorState and shouldIndentWithTabs */
 const widget = (cm: CodeMirror.EditorFromTextArea | null, from: CodeMirror.Position, to: CodeMirror.Position) => {
   // Prevent retrieving an invalid content if undefined
   if (!from?.line || !to?.line) {
@@ -130,6 +132,7 @@ export interface CodeEditorHandle {
   setValue: (value: string) => void;
   getValue: () => string;
   scrollToSelection: (chStart: number, chEnd: number, lineStart: number, lineEnd: number) => void;
+/**** ><> ↑ --------- NormalizeMimeType and CodeEditorHandle */
   selectAll: () => void;
   focus: () => void;
   focusEnd: () => void;
@@ -249,6 +252,7 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
     }
     codeMirror.current?.setValue(code || '');
   };
+/**** ><> ↑ --------- CodeEditor and maybePrettifyAndSetValue */
 
   useDocBodyKeyboardShortcuts({
     beautifyRequestBody: () => {
@@ -509,6 +513,7 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
       codeMirror.current?.getDoc()?.setCursor(codeMirror.current.getDoc().lineCount(), 0);
     },
   }), []);
+/**** ><> ↑ --------- useEffect and useImperativeHandle */
 
   const showFilter = readOnly && (mode?.includes('json') || mode?.includes('xml'));
   const showPrettify = showPrettifyButton && mode?.includes('json') || mode?.includes('xml');
@@ -631,3 +636,4 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
   );
 });
 CodeEditor.displayName = 'CodeEditor';
+/**** ><> ↑ --------- showFilter and showPrettify */

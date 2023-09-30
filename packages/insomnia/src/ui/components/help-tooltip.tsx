@@ -2,12 +2,14 @@ import React, { FC, ReactNode } from 'react';
 
 import { Tooltip } from './tooltip';
 
+/**** ><> ↑ --------- Imports and dependencies ->  */
 interface Props {
   children: ReactNode;
   position?: string;
   className?: string;
   info?: boolean;
 }
+/**** ><> ↑ --------- Props interface ->  */
 
 export const HelpTooltip: FC<Props> = props => {
   const { children, className, info } = props;
@@ -17,3 +19,4 @@ export const HelpTooltip: FC<Props> = props => {
     </Tooltip>
   );
 };
+/**** ><> ↑ --------- HelpTooltip Component ->  */

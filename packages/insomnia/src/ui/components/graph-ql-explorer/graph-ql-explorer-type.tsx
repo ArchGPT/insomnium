@@ -7,12 +7,14 @@ import { GraphQLExplorerFieldsList } from './graph-ql-explorer-fields-list';
 import { GraphQLExplorerTypeLink } from './graph-ql-explorer-type-link';
 import { type GraphQLFieldWithParentName } from './graph-ql-types';
 
+/**** ><> ↑ --------- Imports */
 interface Props {
   onNavigateType: (type: GraphQLType) => void;
   onNavigateField: (field: GraphQLFieldWithParentName) => void;
   type: GraphQLType;
   schema: GraphQLSchema | null;
 }
+/**** ><> ↑ --------- Component Props */
 export const GraphQLExplorerType: FC<Props> = ({ schema, type, onNavigateType, onNavigateField }) => {
   const getTitle = () => {
     if (type instanceof GraphQLUnionType) {
@@ -44,6 +46,7 @@ export const GraphQLExplorerType: FC<Props> = ({ schema, type, onNavigateType, o
 
   const title = getTitle();
 
+/**** ><> ↑ --------- Component Definition */
   const sortedFields = 'getFields' in type ? Object.values(type.getFields()).sort(ascendingNameSort) : [];
 
   return (
@@ -51,6 +54,7 @@ export const GraphQLExplorerType: FC<Props> = ({ schema, type, onNavigateType, o
       <MarkdownPreview markdown={markdown} />
       {hasSchemaAndTypes ?
         <Fragment>
+/**** ><> ↑ --------- Helper Functions */
           <h2 className="graphql-explorer__subheading">{title}</h2>
           <ul className="graphql-explorer__defs">
             {types.map(type => (
@@ -74,3 +78,4 @@ export const GraphQLExplorerType: FC<Props> = ({ schema, type, onNavigateType, o
     </div>
   );
 };
+/**** ><> ↑ --------- Component Rendering */

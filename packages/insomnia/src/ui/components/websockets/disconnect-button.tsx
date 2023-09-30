@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Package imports */
 
 import { Dropdown as OriginalDropdown, DropdownButton, DropdownItem, ItemContent } from '../base/dropdown';
+/**** ><> ↑ --------- Component imports */
 
 const SplitButton = styled.div({
   display: 'flex',
@@ -44,6 +46,7 @@ const TextWrapper = styled.div({
   width: '100%',
   paddingLeft: 'var(--padding-xs)',
 });
+/**** ><> ↑ --------- Style declarations for multiple components */
 
 export const DisconnectButton: FC<{ requestId: string }> = ({ requestId }) => {
   const handleCloseThisRequest = () => {
@@ -99,3 +102,4 @@ export const DisconnectButton: FC<{ requestId: string }> = ({ requestId }) => {
     </SplitButton>
   );
 };
+/**** ><> ↑ --------- Function component definition */

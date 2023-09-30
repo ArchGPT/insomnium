@@ -5,16 +5,20 @@ import { Tooltip } from '../../tooltip';
 import { SidebarInvalidSection } from './sidebar-invalid-section';
 import { SidebarItem } from './sidebar-item';
 import { SidebarSection } from './sidebar-section';
+/**** ><> ↑ --------- Imports necessary libraries and components ->  */
 
 export interface SidebarParametersProps {
   parameters: Record<string, any>;
   onClick: (section: string, ...args: any) => void;
 }
+/**** ><> ↑ --------- Declares SidebarParametersProps interface ->  */
 
 // Implemented as a class component because of a caveat with render props
 // https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent
+/**** ><> ↑ --------- Commentary about the nature of the SidebarParameters component ->  */
 export class SidebarParameters extends Component<SidebarParametersProps> {
   renderBody = (filter: string): null | ReactNode => {
+/**** ><> ↑ --------- Declares the SidebarParameters component ->  */
     const { parameters, onClick } = this.props;
 
     if (Object.prototype.toString.call(parameters) !== '[object Object]') {
@@ -48,8 +52,10 @@ export class SidebarParameters extends Component<SidebarParametersProps> {
       </div>
     );
   };
+/**** ><> ↑ --------- Defines `renderBody` method ->  */
 
   render() {
     return <SidebarSection title="PARAMETERS" renderBody={this.renderBody} />;
   }
 }
+/**** ><> ↑ --------- Defines `render` method ->  */

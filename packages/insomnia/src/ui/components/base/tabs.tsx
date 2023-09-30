@@ -3,11 +3,13 @@ import React, { createRef, FC, ReactNode } from 'react';
 import { AriaTabListProps, AriaTabPanelProps, useTab, useTabList, useTabPanel } from 'react-aria';
 import { Item, ItemProps, TabListState, useTabListState } from 'react-stately';
 import styled from 'styled-components';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface StyledTabProps {
   isNested?: boolean;
   isSelected?: boolean;
 }
+/**** ><> ↑ --------- StyledTabProps interface ->  */
 
 const StyledTab = styled.div<StyledTabProps>(({ isNested, isSelected }) => ({
   display: 'flex',
@@ -70,6 +72,7 @@ const StyledTab = styled.div<StyledTabProps>(({ isNested, isSelected }) => ({
     },
   },
 }));
+/**** ><> ↑ --------- StyledTab styled component ->  */
 
 const StyledTabPanel = styled.div({
   width: '100%',
@@ -78,6 +81,7 @@ const StyledTabPanel = styled.div({
   boxSizing: 'border-box',
   overflowY: 'auto',
 });
+/**** ><> ↑ --------- StyledTabPanel styled component ->  */
 
 const StyledTabsContainer = styled.div({
   width: '100%',
@@ -87,10 +91,12 @@ const StyledTabsContainer = styled.div({
   gridTemplateColumns: '100%',
   alignContent: 'stretch',
 });
+/**** ><> ↑ --------- StyledTabsContainer styled component ->  */
 
 interface StyledTabListProps {
   isNested?: boolean;
 }
+/**** ><> ↑ --------- StyledTabListProps interface ->  */
 
 const StyledTabList = styled.div<StyledTabListProps>(({ isNested }) => ({
   display: 'flex',
@@ -125,6 +131,7 @@ const StyledTabList = styled.div<StyledTabListProps>(({ isNested }) => ({
     borderBottom: isNested ? 'none' : '1px solid var(--hl-md)',
   },
 }));
+/**** ><> ↑ --------- StyledTabList styled component ->  */
 
 const StyledPanelContainer = styled.div({
   width: '100%',
@@ -137,8 +144,10 @@ const StyledPanelContainer = styled.div({
     display: 'none',
   },
 });
+/**** ><> ↑ --------- StyledPanelContainer styled component ->  */
 
 type TabItemProps = ItemProps<any>;
+/**** ><> ↑ --------- TabItemProps type ->  */
 
 interface TabProps {
   item: Node<TabItemProps>;
@@ -146,6 +155,7 @@ interface TabProps {
   orientation?: Orientation;
   isNested?: boolean;
 }
+/**** ><> ↑ --------- TabProps interface ->  */
 
 const Tab: FC<TabProps> = ({ item, state, isNested }) => {
   const { key, rendered } = item;
@@ -158,10 +168,12 @@ const Tab: FC<TabProps> = ({ item, state, isNested }) => {
     </StyledTab>
   );
 };
+/**** ><> ↑ --------- Tab component ->  */
 
 interface TabPanelProps extends AriaTabPanelProps {
   state: TabListState<TabItemProps>;
 }
+/**** ><> ↑ --------- TabPanelProps interface ->  */
 
 const TabPanel: FC<TabPanelProps> = ({ state, ...props }) => {
   const ref = createRef<HTMLDivElement>();
@@ -173,10 +185,12 @@ const TabPanel: FC<TabPanelProps> = ({ state, ...props }) => {
     </StyledTabPanel>
   );
 };
+/**** ><> ↑ --------- TabPanel component ->  */
 
 interface TabsProps extends AriaTabListProps<TabItemProps> {
   isNested?: boolean;
 }
+/**** ><> ↑ --------- TabsProps interface ->  */
 
 const Tabs: FC<TabsProps> = props => {
   const state = useTabListState(props);
@@ -203,14 +217,18 @@ const Tabs: FC<TabsProps> = props => {
     </StyledTabsContainer>
   );
 };
+/**** ><> ↑ --------- Tabs component ->  */
 
 interface PanelContainerProps {
   className?: string;
   children: ReactNode;
 }
+/**** ><> ↑ --------- PanelContainerProps interface ->  */
 
 const PanelContainer: FC<PanelContainerProps> = ({ className, children }) => {
   return (<StyledPanelContainer className={className}>{children}</StyledPanelContainer>);
 };
+/**** ><> ↑ --------- PanelContainer component ->  */
 
 export { Tabs, Item as TabItem, PanelContainer };
+/**** ><> ↑ --------- Exports ->  */

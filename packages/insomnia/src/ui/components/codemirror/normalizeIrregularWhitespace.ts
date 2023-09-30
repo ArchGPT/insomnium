@@ -25,9 +25,11 @@ const irregularWhitespaceCharacters = [
   '\u205f',
   '\u3000',
 ];
+/**** ><> ↑ --------- List of irregular whitespace characters adopted from https://eslint.org/docs/rules/no-irregular-whitespace#rule-details */
 
 const irregularWhitespaceCharactersRegex = new RegExp(`[${irregularWhitespaceCharacters.join('')}]`);
 
 export function normalizeIrregularWhitespace(text: string) {
   return text.replace(irregularWhitespaceCharactersRegex, ' ');
 }
+/**** ><> ↑ --------- Normalization function for irregular whitespace */

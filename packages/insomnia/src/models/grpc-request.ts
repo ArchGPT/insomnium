@@ -1,11 +1,13 @@
 import { database as db } from '../common/database';
 import type { BaseModel } from './index';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const name = 'gRPC Request';
 export const type = 'GrpcRequest';
 export const prefix = 'greq';
 export const canDuplicate = true;
 export const canSync = true;
+/**** ><> ↑ --------- Constants definitions ->  */
 
 export interface GrpcRequestBody {
   text?: string;
@@ -29,6 +31,7 @@ interface BaseGrpcRequest {
   metaSortKey: number;
   isPrivate: boolean;
 }
+/**** ><> ↑ --------- Interface definitions ->  */
 
 export type GrpcRequest = BaseModel & BaseGrpcRequest;
 
@@ -39,6 +42,7 @@ export const isGrpcRequest = (model: Pick<BaseModel, 'type'>): model is GrpcRequ
 export const isGrpcRequestId = (id: string | null) => (
   id?.startsWith(`${prefix}_`)
 );
+/**** ><> ↑ --------- Type and Boolean function definitions ->  */
 
 export function init(): BaseGrpcRequest {
   return {
@@ -55,10 +59,12 @@ export function init(): BaseGrpcRequest {
     isPrivate: false,
   };
 }
+/**** ><> ↑ --------- Function to initialize a BaseGrpcRequest ->  */
 
 export function migrate(doc: GrpcRequest) {
   return doc;
 }
+/**** ><> ↑ --------- Placeholder function for migration ->  */
 
 export function create(patch: Partial<GrpcRequest> = {}) {
   if (!patch.parentId) {
@@ -87,6 +93,7 @@ export function findByProtoFileId(protoFileId: string) {
 export function findByParentId(parentId: string) {
   return db.find<GrpcRequest>(type, { parentId });
 }
+/**** ><> ↑ --------- Database operation functions ->  */
 
 // This is duplicated (lol) from models/request.js
 export async function duplicate(request: GrpcRequest, patch: Partial<GrpcRequest> = {}) {
@@ -118,7 +125,9 @@ export async function duplicate(request: GrpcRequest, patch: Partial<GrpcRequest
     ...patch,
   });
 }
+/**** ><> ↑ --------- Function to duplicate a gRPC request ->  */
 
 export function all() {
   return db.all<GrpcRequest>(type);
 }
+/**** ><> ↑ --------- Function to retrieve all gRPC requests ->  */

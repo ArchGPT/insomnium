@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import * as models from '../index';
 import { WorkspaceScopeKeys } from '../workspace';
+/**** ><> ↑ --------- Import statements ->  */
 
 describe('migrate()', () => {
   beforeEach(globalBeforeEach);
@@ -61,11 +62,14 @@ describe('migrate()', () => {
         type: 'ClientCertificate',
       },
     ]);
+/**** ><> ↑ --------- Assertions for certificates ->  */
     expect(migratedWorkspace.certificates).toBeUndefined();
     // Make sure we don't create new certs if we migrate again
     await models.workspace.migrate(migratedWorkspace);
     const certsAgain = await models.clientCertificate.findByParentId(workspace._id);
     expect(certsAgain.length).toBe(2);
+/**** ><> ↑ --------- Test suite 'migrate()' ->  */
+/**** ><> ↑ --------- Confirm there are no new certificates after migration ->  */
   });
 
   it('translates the scope correctly', async () => {
@@ -95,6 +99,7 @@ describe('migrate()', () => {
     await models.workspace.migrate(debugW);
     await models.workspace.migrate(nullW);
     await models.workspace.migrate(somethingElseW);
+/**** ><> ↑ --------- Test condition 'translates the scope correctly' ->  */
     expect(specW.scope).toBe(WorkspaceScopeKeys.design);
     expect(debugW.scope).toBe(WorkspaceScopeKeys.collection);
     expect(nullW.scope).toBe(WorkspaceScopeKeys.collection);
@@ -103,3 +108,4 @@ describe('migrate()', () => {
     expect(collectionW.scope).toBe(WorkspaceScopeKeys.collection);
   });
 });
+/**** ><> ↑ --------- Assertions for scope translation ->  */

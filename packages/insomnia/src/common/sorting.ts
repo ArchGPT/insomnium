@@ -14,9 +14,11 @@ import {
   SORT_TYPE_DESC,
   SORT_TYPE_MANUAL,
 } from './constants';
+/**** ><> ↑ --------- Import statements ->  */
 
 type SortableModel = Request | RequestGroup | GrpcRequest;
 type SortFunction<SortableType> = (a: SortableType, b: SortableType) => number;
+/**** ><> ↑ --------- Type definitions ->  */
 
 export const ascendingNameSort: SortFunction<{name: string}> = (a, b) => {
   return a.name.localeCompare(b.name);
@@ -25,6 +27,7 @@ export const ascendingNameSort: SortFunction<{name: string}> = (a, b) => {
 export const descendingNameSort: SortFunction<{name: string}> = (a, b) => {
   return b.name.localeCompare(a.name);
 };
+/**** ><> ↑ --------- Sorting functions for name ->  */
 
 export const createdFirstSort: SortFunction<{created: number}> = (a, b) => {
   if (a.created === b.created) {
@@ -41,6 +44,7 @@ export const createdLastSort: SortFunction<{created: number}> = (a, b) => {
 
   return a.created > b.created ? -1 : 1;
 };
+/**** ><> ↑ --------- Sorting functions for creation date ->  */
 
 export const ascendingModifiedSort: SortFunction<{lastModifiedTimestamp: number}> = (a, b) => {
   if (a.lastModifiedTimestamp === b.lastModifiedTimestamp) {
@@ -57,6 +61,7 @@ export const descendingModifiedSort: SortFunction<{lastModifiedTimestamp: number
 
   return a.lastModifiedTimestamp > b.lastModifiedTimestamp ? -1 : 1;
 };
+/**** ><> ↑ --------- Sorting functions for modification date ->  */
 
 export const httpMethodSort: SortFunction<Pick<SortableModel, 'type' | 'metaSortKey' | '_id'>> = (a, b) => {
   // Sort Requests and GrpcRequests to top, in that order
@@ -92,6 +97,7 @@ export const httpMethodSort: SortFunction<Pick<SortableModel, 'type' | 'metaSort
   // two GrpcRequests, or two RequestGroups
   return metaSortKeySort(a, b);
 };
+/**** ><> ↑ --------- httpMethodSort function ->  */
 
 export const ascendingTypeSort: SortFunction<Pick<SortableModel, 'type' | 'metaSortKey' | '_id'>> = (a, b) => {
   if (a.type !== b.type && (isRequestGroup(a) || isRequestGroup(b))) {
@@ -108,6 +114,7 @@ export const descendingTypeSort: SortFunction<Pick<SortableModel, 'type' | 'meta
 
   return metaSortKeySort(a, b);
 };
+/**** ><> ↑ --------- Functions for sorting by type ->  */
 
 export const metaSortKeySort: SortFunction<Pick<SortableModel, '_id' | 'metaSortKey'>> = (a, b) => {
   if (a.metaSortKey === b.metaSortKey) {
@@ -116,6 +123,7 @@ export const metaSortKeySort: SortFunction<Pick<SortableModel, '_id' | 'metaSort
 
   return a.metaSortKey < b.metaSortKey ? -1 : 1;
 };
+/**** ><> ↑ --------- metaSortKeySort function ->  */
 
 export const ascendingNumberSort: SortFunction<number> = (a, b) => {
   return a < b ? -1 : 1;
@@ -124,6 +132,7 @@ export const ascendingNumberSort: SortFunction<number> = (a, b) => {
 export const descendingNumberSort: SortFunction<number> = (a, b) => {
   return ascendingNumberSort(b, a);
 };
+/**** ><> ↑ --------- Sorting functions for numbers ->  */
 
 export const sortMethodMap = {
   [SORT_NAME_ASC]: ascendingNameSort,
@@ -137,3 +146,4 @@ export const sortMethodMap = {
   [SORT_TYPE_ASC]: ascendingTypeSort,
   [SORT_TYPE_MANUAL]: metaSortKeySort,
 };
+/**** ><> ↑ --------- Sort method mapping ->  */

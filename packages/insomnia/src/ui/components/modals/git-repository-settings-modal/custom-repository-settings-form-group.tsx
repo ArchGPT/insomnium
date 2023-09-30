@@ -4,11 +4,13 @@ import { docsGitAccessToken } from '../../../../common/documentation';
 import { GitRepository } from '../../../../models/git-repository';
 import { Link } from '../../base/link';
 import { HelpTooltip } from '../../help-tooltip';
+/**** ><> ↑ --------- Import statements ->  */
 
 export interface Props {
   gitRepository?: GitRepository | null;
   onSubmit: (args: Partial<GitRepository>) => void;
 }
+/**** ><> ↑ --------- Type declaration for Props ->  */
 
 export const CustomRepositorySettingsFormGroup: FunctionComponent<Props> = ({
   gitRepository,
@@ -20,6 +22,7 @@ export const CustomRepositorySettingsFormGroup: FunctionComponent<Props> = ({
   const uri = defaultValues.uri;
   const author = defaultValues.author;
   const credentials = defaultValues?.credentials || { username: '', token: '' };
+/**** ><> ↑ --------- Function component declaration and initial variable assignment ->  */
 
   return (
     <form
@@ -40,6 +43,7 @@ export const CustomRepositorySettingsFormGroup: FunctionComponent<Props> = ({
           },
         });
       }}
+/**** ><> ↑ --------- Form element definition ->  */
     >
       <div className="form-control form-control--outlined">
         <label>
@@ -54,6 +58,7 @@ export const CustomRepositorySettingsFormGroup: FunctionComponent<Props> = ({
             placeholder="https://github.com/org/repo.git"
           />
         </label>
+/**** ><> ↑ --------- Git URI input field ->  */
       </div>
       <div className="form-row">
         <div className="form-control form-control--outlined">
@@ -82,6 +87,7 @@ export const CustomRepositorySettingsFormGroup: FunctionComponent<Props> = ({
             />
           </label>
         </div>
+/**** ><> ↑ --------- Author name and email input fields ->  */
       </div>
       <div className="form-row">
         <div className="form-control form-control--outlined">
@@ -128,6 +134,8 @@ export const CustomRepositorySettingsFormGroup: FunctionComponent<Props> = ({
           </label>
         </div>
       </div>
+/**** ><> ↑ --------- Username and Authentication Token input fields ->  */
     </form>
   );
 };
+/**** ><> ↑ --------- End of function component ->  */

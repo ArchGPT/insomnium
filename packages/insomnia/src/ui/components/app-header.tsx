@@ -5,15 +5,18 @@ import styled from 'styled-components';
 import * as session from '../../account/session';
 import { GitHubStarsButton } from './github-stars-button';
 import { InsomniaLogo } from './insomnia-icon';
+/**** ><> ↑ --------- Module imports ->  */
 const LogoWrapper = styled.div({
   display: 'flex',
   justifyContent: 'center',
 });
+/**** ><> ↑ --------- Styled component definition for LogoWrapper ->  */
 
 export interface AppHeaderProps {
   gridCenter?: ReactNode;
   gridRight?: ReactNode;
 }
+/**** ><> ↑ --------- Interface definition for AppHeaderProps ->  */
 
 export interface HeaderProps {
   className?: string;
@@ -21,6 +24,7 @@ export interface HeaderProps {
   gridCenter?: ReactNode;
   gridRight?: ReactNode;
 }
+/**** ><> ↑ --------- Interface definition for HeaderProps ->  */
 
 const StyledHeader = styled.div({
   gridArea: 'Header',
@@ -58,6 +62,7 @@ const StyledHeader = styled.div({
     whiteSpace: 'nowrap',
   },
 });
+/**** ><> ↑ --------- Styled component definition for StyledHeader ->  */
 
 const Header: FC<HeaderProps> = ({ className, gridLeft, gridCenter, gridRight }) => (
   <StyledHeader className={classNames('app-header theme--app-header', className)}>
@@ -66,8 +71,10 @@ const Header: FC<HeaderProps> = ({ className, gridLeft, gridCenter, gridRight })
     <div className="header_right">{gridRight}</div>
   </StyledHeader>
 );
+/**** ><> ↑ --------- Function component definition for Header ->  */
 
 Header.displayName = 'Header';
+/**** ><> ↑ --------- Setting displayName property for Header ->  */
 
 export const AppHeader: FC<AppHeaderProps> = ({
   gridCenter,
@@ -92,3 +99,4 @@ export const AppHeader: FC<AppHeaderProps> = ({
     />
   );
 };
+/**** ><> ↑ --------- Function component definition for AppHeader ->  */

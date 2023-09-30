@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { IconEnum, SvgIcon } from './svg-icon';
 import { Button } from './themed-button';
 
+/**** ><> ↑ --------- Import statements ->  */
 export interface Notice {
   type: 'warning' | 'error' | 'info';
   line: number;
@@ -18,6 +19,7 @@ export interface TableProps {
   headings?: ReactNode[];
 }
 
+/**** ><> ↑ --------- Notice and TableProps interface declarations ->  */
 export const Table = styled.table<TableProps>`
   width: 100%;
   border-spacing: 0;
@@ -69,11 +71,13 @@ export const Table = styled.table<TableProps>`
     }
   }`}
 `;
+/**** ><> ↑ --------- Table styled component ->  */
 
 /********/
 /* <tr> */
 /********/
 export const TableRow = styled.tr``;
+/**** ><> ↑ --------- TableRow styled component ->  */
 
 /********/
 /* <td> */
@@ -88,6 +92,7 @@ export const TableData = styled.td<TableDataProps>`
   padding: 0 var(--padding-md);
   text-align: ${({ align }) => align || 'left'};
 `;
+/**** ><> ↑ --------- TableDataProps interface and TableData styled component ->  */
 
 export interface TableHeaderProps {
   compact?: boolean;
@@ -99,10 +104,12 @@ export const TableHeader = styled.th<TableHeaderProps>`
   padding: 0 var(--padding-md);
   text-align: ${({ align }) => align || 'left'};
 `;
+/**** ><> ↑ --------- TableHeaderProps interface and TableHeader styled component ->  */
 
 export const TableHead = styled.thead``;
 
 export const TableBody = styled.tbody``;
+/**** ><> ↑ --------- TableHead and TableBody styled components ->  */
 
 export interface NoticeTableProps<T extends Notice> {
   notices: T[];
@@ -112,6 +119,7 @@ export interface NoticeTableProps<T extends Notice> {
   compact?: boolean;
   className?: string;
 }
+/**** ><> ↑ --------- NoticeTableProps interface ->  */
 
 const Wrapper = styled.div`
   width: 100%;
@@ -184,6 +192,7 @@ const Header = styled.header`
   border-right: 0;
   padding-left: var(--padding-md);
 `;
+/**** ><> ↑ --------- Wrapper, ScrollWrapperStyled, ErrorCount, JumpButton, Header styled components ->  */
 
 const NoticeRow = <T extends Notice>({
   notice,
@@ -211,6 +220,7 @@ const NoticeRow = <T extends Notice>({
     </TableRow>
   );
 };
+/**** ><> ↑ --------- NoticeRow function component ->  */
 
 export const NoticeTable = <T extends Notice>({
   notices,
@@ -295,3 +305,4 @@ export const NoticeTable = <T extends Notice>({
     </Wrapper>
   );
 };
+/**** ><> ↑ --------- NoticeTable function component ->  */

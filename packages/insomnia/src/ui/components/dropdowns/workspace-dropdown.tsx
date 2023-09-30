@@ -23,6 +23,7 @@ import { configGenerators, showGenerateConfigModal } from '../modals/generate-co
 import { ImportModal } from '../modals/import-modal';
 import { WorkspaceDuplicateModal } from '../modals/workspace-duplicate-modal';
 import { WorkspaceSettingsModal } from '../modals/workspace-settings-modal';
+/**** ><> ↑ --------- Library/module imports ->  */
 
 export const WorkspaceDropdown: FC = () => {
   const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
@@ -45,15 +46,18 @@ export const WorkspaceDropdown: FC = () => {
   const projectName = activeProject.name ?? getProductName();
   const fetcher = useFetcher();
 
+/**** ><> ↑ --------- Component definition and hooks ->  */
   const [, setActionPlugins] = useState<WorkspaceAction[]>([]);
   const [loadingActions, setLoadingActions] = useState<Record<string, boolean>>({});
   const dropdownRef = useRef<DropdownHandle>(null);
+/**** ><> ↑ --------- State hooks for used plugins ->  */
 
 
   const handleDropdownOpen = useCallback(async () => {
     const actionPlugins = await getWorkspaceActions();
     setActionPlugins(actionPlugins);
   }, []);
+/**** ><> ↑ --------- Dropdown open event handler ->  */
 
   const handleGenerateConfig = useCallback((label: string) => {
     if (!activeApiSpec) {
@@ -64,6 +68,7 @@ export const WorkspaceDropdown: FC = () => {
       activeTabLabel: label,
     });
   }, [activeApiSpec]);
+/**** ><> ↑ --------- Config generation handler ->  */
 
   return (
     <>
@@ -169,6 +174,7 @@ export const WorkspaceDropdown: FC = () => {
 
 
       </Dropdown>
+/**** ><> ↑ --------- Defining JSX structure ->  */
       {isDuplicateModalOpen && (
         <WorkspaceDuplicateModal
           onHide={() => setIsDuplicateModalOpen(false)}
@@ -205,3 +211,4 @@ export const WorkspaceDropdown: FC = () => {
     </>
   );
 };
+/**** ><> ↑ --------- Conditionally rendered modals ->  */

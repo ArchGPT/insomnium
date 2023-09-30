@@ -5,6 +5,7 @@ export default {
     foreground: {
       default: '#ddd',
     },
+/**** ><> ↑ --------- Foreground color properties ->  */
     background: {
       default: '#222',
       success: '#8fc860',
@@ -14,6 +15,7 @@ export default {
       surprise: '#aca0f2',
       info: '#6eccec',
     },
+/**** ><> ↑ --------- Background color properties ->  */
     styles: {
       paneHeader: {
         background: {
@@ -31,5 +33,8 @@ export default {
         },
       },
     },
+/**** ><> ↑ --------- Exporting a theme object with its properties ->  */
+/**** ><> ↑ --------- Styles properties ->  */
   },
 };
+/**** ><> ↑ --------- Dialog style properties ->  */

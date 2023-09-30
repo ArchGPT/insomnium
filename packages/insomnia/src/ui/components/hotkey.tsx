@@ -5,6 +5,7 @@ import { isMac } from '../../common/constants';
 import { constructKeyCombinationDisplay, getPlatformKeyCombinations } from '../../common/hotkeys';
 import { KeyCombination, PlatformKeyCombinations } from '../../common/settings';
 
+/**** ><> ↑ --------- Imports */
 interface Props {
   /** One of these two must be given. If both is given, keyCombination will be used. */
   keyCombination?: KeyCombination;
@@ -13,6 +14,7 @@ interface Props {
   /** Show fallback message if keyCombination is not given, but keyBindings has no key combinations. */
   useFallbackMessage?: boolean;
 }
+/**** ><> ↑ --------- Props interface */
 
 export const Hotkey: FC<Props> = memo(({ keyCombination, keyBindings, className, useFallbackMessage }) => {
   if (keyCombination == null && keyBindings == null) {
@@ -58,6 +60,8 @@ export const Hotkey: FC<Props> = memo(({ keyCombination, keyBindings, className,
       {display}
     </kbd>
   );
+/**** ><> ↑ --------- Hotkey component */
 });
 
 Hotkey.displayName = 'Hotkey';
+/**** ><> ↑ --------- Hotkey component display name */

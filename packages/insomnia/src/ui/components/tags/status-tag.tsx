@@ -3,6 +3,7 @@ import React, { FC, memo } from 'react';
 
 import { RESPONSE_CODE_DESCRIPTIONS, RESPONSE_CODE_REASONS } from '../../../common/constants';
 import { Tooltip } from '../tooltip';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface Props {
   statusCode: number;
@@ -10,6 +11,7 @@ interface Props {
   statusMessage?: string;
   tooltipDelay?: number;
 }
+/**** ><> ↑ --------- Props interface ->  */
 
 export const StatusTag: FC<Props> = memo(({ statusMessage, statusCode, small, tooltipDelay }) => {
   let statusCodeToDisplay: string | number = statusCode;
@@ -46,5 +48,7 @@ export const StatusTag: FC<Props> = memo(({ statusMessage, statusCode, small, to
     </div>
   );
 });
+/**** ><> ↑ --------- StatusTag component definition and logic ->  */
 
 StatusTag.displayName = 'StatusTag';
+/**** ><> ↑ --------- Component displayName setup ->  */

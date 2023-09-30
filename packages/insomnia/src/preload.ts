@@ -3,6 +3,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 import { gRPCBridgeAPI } from './main/ipc/grpc';
 import { CurlBridgeAPI } from './main/network/curl';
 import type { WebSocketBridgeAPI } from './main/network/websocket';
+/**** ><> ↑ --------- Imports ->  */
 
 const webSocket: WebSocketBridgeAPI = {
   open: options => ipcRenderer.invoke('webSocket.open', options),
@@ -16,6 +17,7 @@ const webSocket: WebSocketBridgeAPI = {
     send: options => ipcRenderer.invoke('webSocket.event.send', options),
   },
 };
+/**** ><> ↑ --------- WebSocketBridgeAPI Configuration ->  */
 const curl: CurlBridgeAPI = {
   open: options => ipcRenderer.invoke('curl.open', options),
   close: options => ipcRenderer.send('curl.close', options),
@@ -27,6 +29,7 @@ const curl: CurlBridgeAPI = {
     findMany: options => ipcRenderer.invoke('curl.event.findMany', options),
   },
 };
+/**** ><> ↑ --------- CurlBridgeAPI Configuration ->  */
 
 const grpc: gRPCBridgeAPI = {
   start: options => ipcRenderer.send('grpc.start', options),
@@ -37,6 +40,7 @@ const grpc: gRPCBridgeAPI = {
   loadMethods: options => ipcRenderer.invoke('grpc.loadMethods', options),
   loadMethodsFromReflection: options => ipcRenderer.invoke('grpc.loadMethodsFromReflection', options),
 };
+/**** ><> ↑ --------- gRPCBridgeAPI Configuration ->  */
 const main: Window['main'] = {
   loginStateChange: () => ipcRenderer.send('loginStateChange'),
   restart: () => ipcRenderer.send('restart'),
@@ -65,22 +69,27 @@ const main: Window['main'] = {
   insomniaFetch: options => ipcRenderer.invoke('insomniaFetch', options),
   showContextMenu: options => ipcRenderer.send('show-context-menu', options),
 };
+/**** ><> ↑ --------- Main Window Configuration ->  */
 const dialog: Window['dialog'] = {
   showOpenDialog: options => ipcRenderer.invoke('showOpenDialog', options),
   showSaveDialog: options => ipcRenderer.invoke('showSaveDialog', options),
 };
+/**** ><> ↑ --------- Dialog Configuration ->  */
 const app: Window['app'] = {
   getPath: options => ipcRenderer.sendSync('getPath', options),
   getAppPath: () => ipcRenderer.sendSync('getAppPath'),
 };
+/**** ><> ↑ --------- App Configuration ->  */
 const shell: Window['shell'] = {
   showItemInFolder: options => ipcRenderer.send('showItemInFolder', options),
 };
+/**** ><> ↑ --------- Shell Configuration ->  */
 const clipboard: Window['clipboard'] = {
   readText: () => ipcRenderer.sendSync('readText'),
   writeText: options => ipcRenderer.send('writeText', options),
   clear: () => ipcRenderer.send('clear'),
 };
+/**** ><> ↑ --------- Clipboard Configuration ->  */
 
 if (process.contextIsolated) {
   contextBridge.exposeInMainWorld('main', main);
@@ -95,3 +104,4 @@ if (process.contextIsolated) {
   window.shell = shell;
   window.clipboard = clipboard;
 }
+/**** ><> ↑ --------- Security Context Isolation and Main World Exposure ->  */

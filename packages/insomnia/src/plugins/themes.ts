@@ -17,5 +17,7 @@ import p from './themes/solarized-dark';
 import n from './themes/solarized-light';
 import d from './themes/studio-dark';
 import c from './themes/studio-light';
+/**** ><> ↑ --------- Module imports from different theme files ->  */
 
 export default [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r];
+/**** ><> ↑ --------- Export of imported modules ->  */

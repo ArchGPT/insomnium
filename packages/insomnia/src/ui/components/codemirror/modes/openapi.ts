@@ -1,22 +1,27 @@
 import CodeMirror from 'codemirror';
 CodeMirror.defineMode('openapi', function() {
+/**** ><> ↑ --------- library import and function definition */
   const cons = ['true', 'false', 'on', 'off', 'yes', 'no'];
   const keywordRegex = new RegExp('\\b((' + cons.join(')|(') + '))$', 'i');
+/**** ><> ↑ --------- constant and keyword regex definition */
   return {
     token: function(stream, state) {
       const ch = stream.peek();
       const esc = state.escaped;
       state.escaped = false;
+/**** ><> ↑ --------- token function beginning and initial variable definitions */
 
       /* comments */
       if (ch === '#' && (stream.pos === 0 || /\s/.test(stream.string.charAt(stream.pos - 1)))) {
         stream.skipToEnd();
         return 'comment';
       }
+/**** ><> ↑ --------- handling of comments */
 
       if (stream.match(/^('([^']|\\.)*'?|"([^"]|\\.)*"?)/)) {
         return 'string';
       }
+/**** ><> ↑ --------- string matching */
 
       if (state.literal && stream.indentation() > state.keyCol) {
         stream.skipToEnd();
@@ -24,12 +29,14 @@ CodeMirror.defineMode('openapi', function() {
       } else if (state.literal) {
         state.literal = false;
       }
+/**** ><> ↑ --------- literal string handling */
 
       if (stream.sol()) {
         state.keyCol = 0;
         state.pair = false;
         state.pairStart = false;
 
+/**** ><> ↑ --------- state initialization at the start of a line */
         /* document start */
         if (stream.match(/---/)) {
           return 'def';
@@ -39,12 +46,14 @@ CodeMirror.defineMode('openapi', function() {
         if (stream.match(/\.\.\./)) {
           return 'def';
         }
+/**** ><> ↑ --------- document start and end handling */
 
         /* array list item */
         if (stream.match(/\s*-\s+/)) {
           return 'meta';
         }
       }
+/**** ><> ↑ --------- array list item handling */
 
       /* inline pairs/lists */
       if (stream.match(/^(\{|\}|\[|\])/)) {
@@ -60,6 +69,7 @@ CodeMirror.defineMode('openapi', function() {
 
         return 'meta';
       }
+/**** ><> ↑ --------- inline pairs/lists */
 
       /* list separator */
       if (state.inlineList > 0 && !esc && ch === ',') {
@@ -75,6 +85,7 @@ CodeMirror.defineMode('openapi', function() {
         stream.next();
         return 'meta';
       }
+/**** ><> ↑ --------- list and pairs separator */
 
       /* start of value of a pair */
       if (state.pairStart) {
@@ -103,6 +114,7 @@ CodeMirror.defineMode('openapi', function() {
           return 'keyword';
         }
       }
+/**** ><> ↑ --------- start of value of a pair */
 
       /* pairs (associative arrays) -> key */
       if (
@@ -118,12 +130,14 @@ CodeMirror.defineMode('openapi', function() {
         state.pairStart = true;
         return 'meta';
       }
+/**** ><> ↑ --------- handling pairs and keys */
 
       /* nothing found, continue */
       state.pairStart = false;
       state.escaped = ch === '\\';
       stream.next();
       return null;
+/**** ><> ↑ --------- handling when no patterns found */
     },
     startState: function() {
       return {
@@ -136,9 +150,12 @@ CodeMirror.defineMode('openapi', function() {
         escaped: false,
       };
     },
+/**** ><> ↑ --------- startState function and initial state definition */
     lineComment: '#',
     fold: 'indent',
   };
+/**** ><> ↑ --------- remaining function properties definition */
 });
 CodeMirror.defineMIME('text/x-openapi', 'openapi');
 CodeMirror.defineMIME('text/openapi', 'openapi');
+/**** ><> ↑ --------- function definition closure and MIME type definitions */

@@ -15,6 +15,7 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { Tree } from '../export-requests/tree';
+/**** ><> ↑ --------- Import statements -> This section is dedicated to importing necessary libraries and modules. */
 
 export interface Node {
   doc: Request | WebSocketRequest | GrpcRequest | RequestGroup;
@@ -27,12 +28,14 @@ export interface Node {
 export interface State {
   treeRoot: Node | null;
 }
+/**** ><> ↑ --------- Interface definitions -> This section defines the interfaces `Node` and `State` that are used in the rest of the code. */
 
 export const ExportRequestsModal = ({ workspace, onHide }: { workspace: Workspace } & ModalProps) => {
   const modalRef = useRef<ModalHandle>(null);
   const { organizationId, projectId } = useParams() as { organizationId: string; projectId: string };
   const workspaceFetcher = useFetcher();
   const [state, setState] = useState<State>();
+/**** ><> ↑ --------- Export Requests Modal Functional Component -> This section defines the functional component `ExportRequestsModal` and its initial states. */
 
   useEffect(() => {
     const isIdleAndUninitialized = workspaceFetcher.state === 'idle' && !workspaceFetcher.data;
@@ -41,6 +44,7 @@ export const ExportRequestsModal = ({ workspace, onHide }: { workspace: Workspac
     }
   }, [organizationId, projectId, workspaceFetcher, workspace._id]);
   const workspaceLoaderData = workspaceFetcher?.data as WorkspaceLoaderData;
+/**** ><> ↑ --------- First useEffect block -> This section is a useEffect hook which calls workspaceFetcher method when the component first mounts. */
 
   useEffect(() => {
     const createTreeNode = (child: Child): Node => {
@@ -76,10 +80,12 @@ export const ExportRequestsModal = ({ workspace, onHide }: { workspace: Workspac
       },
     });
   }, [workspaceLoaderData?.requestTree]);
+/**** ><> ↑ --------- Second useEffect block -> This section is another useEffect hook which processes the request tree and sets the state. */
 
   useEffect(() => {
     modalRef.current?.show();
   }, []);
+/**** ><> ↑ --------- Third useEffect block -> This section is a useEffect hook which shows the modal when the component first mounts. */
   const getSelectedRequestIds = (node: Node): string[] => {
     const docIsRequest = isRequest(node.doc) || isWebSocketRequest(node.doc) || isGrpcRequest(node.doc);
     if (docIsRequest && node.selectedRequests === node.totalRequests) {
@@ -112,6 +118,7 @@ export const ExportRequestsModal = ({ workspace, onHide }: { workspace: Workspac
     }
     return !!node.children.find(child => setRequestGroupCollapsed(child, isCollapsed, requestGroupId));
   };
+/**** ><> ↑ --------- Helper functions -> This section declares helper functions which are used in the return statement for event handlers. */
 
   const isExportDisabled = state?.treeRoot?.selectedRequests === 0 || false;
   return (
@@ -158,3 +165,4 @@ export const ExportRequestsModal = ({ workspace, onHide }: { workspace: Workspac
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- Render section -> In this section the component is returned. This includes the modal and tree view to select and export requests. */

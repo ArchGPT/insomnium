@@ -7,6 +7,7 @@ const sidebarBackground = {
   surprise: '#a896ff',
   info: '#46c1e6',
 };
+/**** ><> ↑ --------- Declaration of sidebarBackground object with color codes ->  */
 
 export default {
   name: 'default',
@@ -29,11 +30,13 @@ export default {
         background: {
           default: '#2a2a2a',
         },
+/**** ><> ↑ --------- Dialog styles ->  */
       },
       appHeader: {
         background: {
           default: '#2C2C2C',
         },
+/**** ><> ↑ --------- AppHeader styles ->  */
       },
       sidebar: {
         background: sidebarBackground,
@@ -43,6 +46,7 @@ export default {
         highlight: {
           default: '#999',
         },
+/**** ><> ↑ --------- Sidebar styles ->  */
       },
       sidebarHeader: {
         background: {
@@ -51,6 +55,7 @@ export default {
         foreground: {
           default: '#fff',
         },
+/**** ><> ↑ --------- SidebarHeader styles ->  */
       },
       paneHeader: {
         foreground: {
@@ -65,6 +70,7 @@ export default {
           surprise: '#8776d5',
           info: '#20aed9',
         },
+/**** ><> ↑ --------- PaneHeader styles ->  */
       },
       pane: {
         background: {
@@ -74,6 +80,9 @@ export default {
         foreground: {
           default: '#e0e0e0',
         },
+/**** ><> ↑ --------- Theme properties of the default object ->  */
+/**** ><> ↑ --------- Styles properties of the theme ->  */
+/**** ><> ↑ --------- Exporting default object ->  */
         highlight: {
           default: '#999',
         },
@@ -81,3 +90,4 @@ export default {
     },
   },
 };
+/**** ><> ↑ --------- Pane styles ->  */

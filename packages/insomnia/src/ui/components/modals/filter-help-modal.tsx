@@ -4,11 +4,13 @@ import { Link } from '../base/link';
 import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
+/**** ><> ↑ --------- Importing dependencies from React and other components */
 
 interface HelpExample {
   code: string;
   description: string;
 }
+/**** ><> ↑ --------- Interface declaration for HelpExample */
 
 const HelpExamples: FC<{ helpExamples: HelpExample[] }> = ({ helpExamples }) => (
   <table className="table--fancy pad-top-sm">
@@ -22,6 +24,7 @@ const HelpExamples: FC<{ helpExamples: HelpExample[] }> = ({ helpExamples }) => 
     </tbody>
   </table>
 );
+/**** ><> ↑ --------- Declaration and definition of HelpExamples component */
 
 const JSONPathHelp: FC = () => (
   <ModalBody className="pad">
@@ -42,6 +45,7 @@ const JSONPathHelp: FC = () => (
     </p>
   </ModalBody>
 );
+/**** ><> ↑ --------- Declaration and definition of JSONPathHelp component */
 
 const XPathHelp: FC = () => (
   <ModalBody className="pad">
@@ -59,6 +63,7 @@ const XPathHelp: FC = () => (
     />
   </ModalBody>
 );
+/**** ><> ↑ --------- Declaration and definition of XPathHelp component */
 interface FilterHelpModalOptions {
   isJSON: boolean;
 }
@@ -66,6 +71,7 @@ export interface FilterHelpModalHandle {
   show: (options: FilterHelpModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Interface declaration for FilterHelpModalOptions and FilterHelpModalHandle */
 
 export const FilterHelpModal = forwardRef<FilterHelpModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
@@ -93,4 +99,6 @@ export const FilterHelpModal = forwardRef<FilterHelpModalHandle, ModalProps>((_,
     </Modal>
   );
 });
+/**** ><> ↑ --------- Declaration and definition of FilterHelpModal component */
 FilterHelpModal.displayName = 'FilterHelpModal';
+/**** ><> ↑ --------- Setting display name for the FilterHelpModal */

@@ -6,6 +6,7 @@ import { NunjucksEnabledProvider } from '../nunjucks-enabled-context';
 import { useGatedNunjucks } from '../use-gated-nunjucks';
 import { useNunjucks } from '../use-nunjucks';
 
+/**** ><> ↑ --------- Imports */
 jest.mock('../use-nunjucks', () => {
   const funcs: ReturnType<typeof useNunjucks> = {
     handleRender: jest.fn(),
@@ -16,6 +17,7 @@ jest.mock('../use-nunjucks', () => {
     useNunjucks: () => funcs,
   });
 });
+/**** ><> ↑ --------- Mocking */
 
 describe('useGatedNunjucks', () => {
   it('should return defined functions (disableContext false, disableProp false)', () => {
@@ -48,3 +50,4 @@ describe('useGatedNunjucks', () => {
     expect(result.current.handleGetRenderContext).not.toBeDefined();
   });
 });
+/**** ><> ↑ --------- Test cases */

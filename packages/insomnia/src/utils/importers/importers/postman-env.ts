@@ -1,24 +1,29 @@
 import { Converter } from '../entities';
+/**** ><> ↑ --------- Module imports ->  */
 
 export const id = 'postman-environment';
 export const name = 'Postman Environment';
 export const description = 'Importer for Postman environments';
+/**** ><> ↑ --------- Module exports ->  */
 
 interface EnvVar {
   enabled: boolean;
   key: string;
   value: string;
 }
+/**** ><> ↑ --------- Environment variable interface ->  */
 
 interface Environment {
   name: string;
   values: EnvVar[];
   _postman_variable_scope: 'environment' | string;
 }
+/**** ><> ↑ --------- Environment interface ->  */
 
 type Data = {
   [key in EnvVar['key']]: EnvVar['value'];
 };
+/**** ><> ↑ --------- Data type ->  */
 
 export const convert: Converter<Data> = rawData => {
   try {
@@ -52,3 +57,4 @@ export const convert: Converter<Data> = rawData => {
 
   return null;
 };
+/**** ><> ↑ --------- Converter function ->  */

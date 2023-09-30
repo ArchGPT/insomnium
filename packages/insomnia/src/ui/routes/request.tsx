@@ -29,6 +29,7 @@ import { invariant } from '../../utils/invariant';
 import { updateMimeType } from '../components/dropdowns/content-type-dropdown';
 import { CreateRequestType } from '../hooks/use-request';
 
+/**** ><> ↑ --------- Import statements ->  */
 export interface WebSocketRequestLoaderData {
   activeRequest: WebSocketRequest;
   activeRequestMeta: RequestMeta;
@@ -50,6 +51,7 @@ export interface RequestLoaderData {
   responses: Response[];
   requestVersions: RequestVersion[];
 }
+/**** ><> ↑ --------- Export interface definitions ->  */
 
 export const loader: LoaderFunction = async ({ params }): Promise<RequestLoaderData | WebSocketRequestLoaderData | GrpcRequestLoaderData> => {
   const { organizationId, projectId, requestId, workspaceId } = params;
@@ -93,6 +95,7 @@ export const loader: LoaderFunction = async ({ params }): Promise<RequestLoaderD
     requestVersions: await models.requestVersion.findByParentId(requestId),
   } as RequestLoaderData | WebSocketRequestLoaderData;
 };
+/**** ><> ↑ --------- Export loader function ->  */
 
 export const createRequestAction: ActionFunction = async ({ request, params }) => {
   const { organizationId, projectId, workspaceId } = params;
@@ -173,6 +176,7 @@ export const createRequestAction: ActionFunction = async ({ request, params }) =
 
   return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${activeRequestId}`);
 };
+/**** ><> ↑ --------- Create request action ->  */
 export const updateRequestAction: ActionFunction = async ({ request, params }) => {
   const { requestId } = params;
   invariant(typeof requestId === 'string', 'Request ID is required');
@@ -189,6 +193,7 @@ export const updateRequestAction: ActionFunction = async ({ request, params }) =
   await requestOperations.update(req, patch);
   return null;
 };
+/**** ><> ↑ --------- Update request action ->  */
 
 export const deleteRequestAction: ActionFunction = async ({ request, params }) => {
   const { organizationId, projectId, workspaceId } = params;
@@ -207,6 +212,7 @@ export const deleteRequestAction: ActionFunction = async ({ request, params }) =
   }
   return null;
 };
+/**** ><> ↑ --------- Delete request action ->  */
 
 export const duplicateRequestAction: ActionFunction = async ({ request, params }) => {
   const { organizationId, projectId, workspaceId, requestId } = params;
@@ -231,6 +237,7 @@ export const duplicateRequestAction: ActionFunction = async ({ request, params }
   models.stats.incrementCreatedRequests();
   return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${newRequest._id}`);
 };
+/**** ><> ↑ --------- Duplicate request action ->  */
 
 export const updateRequestMetaAction: ActionFunction = async ({ request, params }) => {
   const { requestId } = params;
@@ -243,6 +250,7 @@ export const updateRequestMetaAction: ActionFunction = async ({ request, params 
   await models.requestMeta.updateOrCreateByParentId(requestId, patch);
   return null;
 };
+/**** ><> ↑ --------- Update request meta action ->  */
 export interface ConnectActionParams {
   url: string;
   headers: RequestHeader[];
@@ -290,6 +298,7 @@ export const connectAction: ActionFunction = async ({ request, params }) => {
     });
   });
 };
+/**** ><> ↑ --------- Connect action ->  */
 const writeToDownloadPath = (downloadPathAndName: string, responsePatch: ResponsePatch, requestMeta: RequestMeta, maxHistoryResponses: number) => {
   invariant(downloadPathAndName, 'filename should be set by now');
 
@@ -316,6 +325,7 @@ const writeToDownloadPath = (downloadPathAndName: string, responsePatch: Respons
   });
 
 };
+/**** ><> ↑ --------- Write to download path function ->  */
 export interface SendActionParams {
   renderedRequest: RenderedRequest;
   shouldPromptForPathAfterResponse?: boolean;
@@ -374,6 +384,7 @@ export const sendAction: ActionFunction = async ({ request, params }) => {
     return writeToDownloadPath(filePath, responsePatch, requestMeta, settings.maxHistoryResponses);
   }
 };
+/**** ><> ↑ --------- Send action ->  */
 export const deleteAllResponsesAction: ActionFunction = async ({ params }) => {
   const { workspaceId, requestId } = params;
   invariant(typeof requestId === 'string', 'Request ID is required');
@@ -389,6 +400,7 @@ export const deleteAllResponsesAction: ActionFunction = async ({ params }) => {
   }
   return null;
 };
+/**** ><> ↑ --------- Delete all responses action ->  */
 
 export const deleteResponseAction: ActionFunction = async ({ request, params }) => {
   const { workspaceId, requestId } = params;
@@ -422,3 +434,4 @@ export const deleteResponseAction: ActionFunction = async ({ request, params }) 
 
   return null;
 };
+/**** ><> ↑ --------- Delete response action ->  */

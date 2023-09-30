@@ -22,10 +22,12 @@ import { SidebarFooter, SidebarLayout } from '../components/sidebar-layout';
 import { Button } from '../components/themed-button';
 import { TestRunStatus } from './test-results';
 import TestSuiteRoute from './test-suite';
+/**** ><> ↑ --------- Importing modules and dependencies from other files ->  */
 
 interface LoaderData {
   unitTestSuites: UnitTestSuite[];
 }
+/**** ><> ↑ --------- Interface definition for LoaderData ->  */
 
 export const loader: LoaderFunction = async ({
   params,
@@ -41,6 +43,7 @@ export const loader: LoaderFunction = async ({
     unitTestSuites,
   };
 };
+/**** ><> ↑ --------- Async function for data loading ->  */
 
 const TestRoute: FC = () => {
   const { unitTestSuites } = useLoaderData() as LoaderData;
@@ -63,6 +66,7 @@ const TestRoute: FC = () => {
     )
     .some(({ state }) => state !== 'idle');
 
+/**** ><> ↑ --------- Definition for component TestRoute ->  */
   const navigate = useNavigate();
 
   return (
@@ -223,8 +227,10 @@ const TestRoute: FC = () => {
           />
         </Routes>
       }
+/**** ><> ↑ --------- Detailed rendering logic of the TestRoute component ->  */
     />
   );
 };
 
 export default TestRoute;
+/**** ><> ↑ --------- Exporting the TestRoute module ->  */

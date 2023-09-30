@@ -8,6 +8,7 @@ import { buildQueryStringFromParams, joinUrlAndQueryString, smartEncodeUrl } fro
 import { useNunjucks } from '../context/nunjucks/use-nunjucks';
 import { CopyButton as _CopyButton } from './base/copy-button';
 
+/**** ><> ↑ --------- Module imports ->  */
 const Wrapper = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
@@ -18,6 +19,7 @@ const Wrapper = styled.div({
   gap: 'var(--padding-sm)',
   width: '100%',
 });
+/**** ><> ↑ --------- Styled components definition ->  */
 
 const CopyButton = styled(_CopyButton)({
   '&&': {
@@ -30,9 +32,11 @@ const CopyButton = styled(_CopyButton)({
 interface Props {
   request: Request | WebSocketRequest;
 }
+/**** ><> ↑ --------- Props interface definition ->  */
 
 const defaultPreview = '...';
 
+/**** ><> ↑ --------- Default variable initialization ->  */
 export const RenderedQueryString: FC<Props> = ({ request }) => {
   const [previewString, setPreviewString] = useState(defaultPreview);
   const { handleRender } = useNunjucks();
@@ -78,3 +82,4 @@ export const RenderedQueryString: FC<Props> = ({ request }) => {
     </Wrapper>
   );
 };
+/**** ><> ↑ --------- RenderedQueryString component definition ->  */

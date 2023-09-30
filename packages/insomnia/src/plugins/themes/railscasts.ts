@@ -1,10 +1,13 @@
 export default {
+/**** ><> ↑ --------- Component export ->  */
   name: 'railscasts',
   displayName: 'Railscasts',
+/**** ><> ↑ --------- Component metadata ->  */
   theme: {
     foreground: {
       default: '#ddd',
     },
+/**** ><> ↑ --------- Default theme foreground ->  */
     background: {
       default: '#2b2b2b',
       success: '#a5c261',
@@ -14,6 +17,7 @@ export default {
       surprise: '#b6b3eb',
       info: '#6d9cbe',
     },
+/**** ><> ↑ --------- Default theme background ->  */
     styles: {
       paneHeader: {
         background: {
@@ -26,11 +30,13 @@ export default {
           info: '#6d9cbe',
         },
       },
+/**** ><> ↑ --------- Pane header styles ->  */
       dialog: {
         background: {
           default: '#323232',
         },
       },
+/**** ><> ↑ --------- Dialog styles ->  */
       transparentOverlay: {
         background: {
           default: 'rgba(30, 30, 30, 0.8)',
@@ -39,6 +45,8 @@ export default {
           default: '#e1deda',
         },
       },
+/**** ><> ↑ --------- Transparent overlay styles ->  */
     },
   },
 };
+/**** ><> ↑ --------- End of object ->  */

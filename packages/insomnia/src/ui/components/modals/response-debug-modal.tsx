@@ -7,6 +7,7 @@ import { ResponseTimelineViewer } from '../../components/viewers/response-timeli
 import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
+/**** ><> ↑ --------- Module imports */
 
 interface ResponseDebugModalOptions {
   responseId?: string;
@@ -23,6 +24,7 @@ export interface ResponseDebugModalHandle {
   show: (options: ResponseDebugModalOptions) => void;
   hide: () => void;
 }
+/**** ><> ↑ --------- Type and interface definitions */
 export const ResponseDebugModal = forwardRef<ResponseDebugModalHandle, ModalProps>((_, ref) => {
   const modalRef = useRef<ModalHandle>(null);
   const [state, setState] = useState<State>({
@@ -30,6 +32,7 @@ export const ResponseDebugModal = forwardRef<ResponseDebugModalHandle, ModalProp
     timeline: [],
     title: '',
   });
+/**** ><> ↑ --------- Component function definition - Initialization */
   useImperativeHandle(ref, () => ({
     hide: () => {
       modalRef.current?.hide();
@@ -52,6 +55,7 @@ export const ResponseDebugModal = forwardRef<ResponseDebugModalHandle, ModalProp
       modalRef.current?.show();
     },
   }), []);
+/**** ><> ↑ --------- Component function definition - Function definitions within useImperativeHandle */
   const { responseId, timeline, title } = state;
   return (
     <Modal ref={modalRef} tall>
@@ -75,6 +79,8 @@ export const ResponseDebugModal = forwardRef<ResponseDebugModalHandle, ModalProp
       </ModalBody>
     </Modal>
   );
+/**** ><> ↑ --------- Component function definition - Rendering */
 });
 
 ResponseDebugModal.displayName = 'ResponseDebugModal';
+/**** ><> ↑ --------- Setting displayName for the component */

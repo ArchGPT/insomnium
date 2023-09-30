@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { KeyValueEditor } from '../../key-value-editor/key-value-editor';
 
+/**** ><> ↑ --------- Import statements */
 interface Props {
   onChange: (c: {
     name: string;
@@ -11,6 +12,7 @@ interface Props {
   }[]) => void;
   parameters: any[];
 }
+/**** ><> ↑ --------- Props interface definition */
 
 export const FormEditor: FC<Props> = ({ parameters, onChange }) => (
   <div className="scrollable-container tall wide">
@@ -27,3 +29,4 @@ export const FormEditor: FC<Props> = ({ parameters, onChange }) => (
     </div>
   </div>
 );
+/**** ><> ↑ --------- FormEditor functional component definition */

@@ -12,6 +12,7 @@ import { HtmlElementWrapper } from '../../ui/components/html-element-wrapper';
 import { showAlert, showModal, showPrompt } from '../../ui/components/modals';
 import { PromptModalOptions } from '../../ui/components/modals/prompt-modal';
 import { WrapperModal } from '../../ui/components/modals/wrapper-modal';
+/**** ><> ↑ --------- Import statements and dependency inclusions ->  */
 
 interface DialogOptions {
   onHide?: () => void;
@@ -38,6 +39,7 @@ interface AppClipboard {
 interface ShowGenericModalDialogOptions {
   html?: string;
 }
+/**** ><> ↑ --------- Interface definitions for DialogOptions, AppInfo, ShowDialogOptions, AppClipboard, ShowGenericModalDialogOptions ->  */
 
 export interface AppContext {
   alert: (
@@ -66,6 +68,7 @@ export interface PrivateProperties {
     React: typeof React;
   } | {}>;
 }
+/**** ><> ↑ --------- Interface definitions for AppContext, PrivateProperties ->  */
 
 export function init(renderPurpose: RenderPurpose = RENDER_PURPOSE_GENERAL): {
   app: AppContext;
@@ -229,3 +232,4 @@ export function init(renderPurpose: RenderPurpose = RENDER_PURPOSE_GENERAL): {
     },
   };
 }
+/**** ><> ↑ --------- Function init with AppContext and PrivateProperties instance creation ->  */

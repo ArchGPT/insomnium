@@ -31,6 +31,7 @@ import { RenderedQueryString } from '../rendered-query-string';
 import { WebSocketActionBar } from './action-bar';
 
 const supportedAuthTypes: AuthType[] = ['apikey', 'basic', 'bearer'];
+/**** ><> ↑ --------- Imports and constants definition */
 
 const SendMessageForm = styled.form({
   width: '100%',
@@ -78,6 +79,7 @@ const PaneReadOnlyBanner = () => {
   );
 };
 
+/**** ><> ↑ --------- Styled components definition */
 const QueryEditorWrapper = styled.div({
   flex: '1 0 auto',
   overflowY: 'auto',
@@ -196,6 +198,7 @@ const WebSocketRequestForm: FC<FormProps> = ({
     </SendMessageForm>
   );
 };
+/**** ><> ↑ --------- FormProps interface definition and WebSocketRequestForm component definition */
 
 interface Props {
   environment: Environment | null;
@@ -400,3 +403,4 @@ export const WebSocketRequestPane: FC<Props> = ({ environment }) => {
     </Pane>
   );
 };
+/**** ><> ↑ --------- Props interface definition and WebSocketRequestPane component definition */

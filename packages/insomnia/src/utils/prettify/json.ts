@@ -3,6 +3,7 @@ const STATE_IN_NUN_TAG = 'nuntag';
 const STATE_IN_NUN_COM = 'nuncom';
 const STATE_IN_STRING = 'string';
 const STATE_NONE = 'none';
+/**** ><> ↑ --------- Declaration of state constants ->  */
 
 const NUNJUCKS_OPEN_STATES: {
   '{{': typeof STATE_IN_NUN_VAR;
@@ -14,6 +15,7 @@ const NUNJUCKS_OPEN_STATES: {
   '{%': STATE_IN_NUN_TAG,
   '{#': STATE_IN_NUN_COM,
 };
+/**** ><> ↑ --------- Declaration of NUNJUCKS_OPEN_STATES constant ->  */
 
 const NUNJUCKS_CLOSE_STATES: {
   '}}': typeof STATE_IN_NUN_VAR;
@@ -25,6 +27,7 @@ const NUNJUCKS_CLOSE_STATES: {
   '%}': STATE_IN_NUN_TAG,
   '#}': STATE_IN_NUN_COM,
 };
+/**** ><> ↑ --------- Declaration of NUNJUCKS_CLOSE_STATES constant ->  */
 
 /**
  * Format a JSON string without parsing it as JavaScript.
@@ -57,6 +60,7 @@ export const jsonPrettify = (json?: string, indentChars = '\t', replaceUnicode =
   let nextTwo: string | null = null;
   let state = STATE_NONE;
 
+/**** ><> ↑ --------- jsonPrettify function declaration and start of logic ->  */
   for (; i < il; i += 1) {
     currentChar = json.charAt(i);
     nextChar = json.charAt(i + 1) || '';
@@ -75,6 +79,7 @@ export const jsonPrettify = (json?: string, indentChars = '\t', replaceUnicode =
         newJson += currentChar;
         continue;
       }
+/**** ><> ↑ --------- jsonPrettify function loop start and STATE_IN_STRING condition ->  */
     }
 
     // Close Nunjucks states
@@ -95,6 +100,7 @@ export const jsonPrettify = (json?: string, indentChars = '\t', replaceUnicode =
         continue;
       }
     }
+/**** ><> ↑ --------- jsonPrettify function close Nunjucks states condition ->  */
 
     // ~~~~~~~~~~~~~~~~~~~~~~ //
     // Handle "nothing" State //
@@ -108,6 +114,7 @@ export const jsonPrettify = (json?: string, indentChars = '\t', replaceUnicode =
       i++;
       continue;
     }
+/**** ><> ↑ --------- jsonPrettify function 'nothing' State comment and open Nunjucks states condition ->  */
 
     switch (currentChar) {
       case ',':
@@ -156,15 +163,18 @@ export const jsonPrettify = (json?: string, indentChars = '\t', replaceUnicode =
         newJson += currentChar;
         continue;
     }
+/**** ><> ↑ --------- jsonPrettify function main switch statement ->  */
   }
 
   // Remove lines that only contain whitespace
   return newJson.replace(/^\s*\n/gm, '');
 };
+/**** ><> ↑ --------- jsonPrettify function return statement ->  */
 
 const repeatString = (str: string, count: number) => {
   return new Array(count + 1).join(str);
 };
+/**** ><> ↑ --------- Declaration of repeatString function ->  */
 
 /**
  * Convert escaped unicode characters to real characters. Any JSON parser will do this by
@@ -177,6 +187,7 @@ const convertUnicode = (originalStr: string) => {
   let lastI = 0;
 
   // Matches \u#### but not \\u####
+/**** ><> ↑ --------- Declaration of convertUnicode function and start of logic ->  */
   const unicodeRegex = /\\u[0-9a-fA-F]{4}/g;
 
   let convertedStr = '';
@@ -202,9 +213,11 @@ const convertUnicode = (originalStr: string) => {
       console.warn('Failed to convert unicode char', m[0], err);
     }
   }
+/**** ><> ↑ --------- convertUnicode function unicode conversion logic ->  */
 
   // Finally, add the rest of the string to the end.
   convertedStr += originalStr.slice(lastI, originalStr.length);
 
   return convertedStr;
 };
+/**** ><> ↑ --------- convertUnicode function return statement ->  */

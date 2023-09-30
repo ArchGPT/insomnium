@@ -1,10 +1,12 @@
 import React, { DOMAttributes, FunctionComponent, useEffect, useState } from 'react';
 
 import { REQUEST_SETUP_TEARDOWN_COMPENSATION, REQUEST_TIME_TO_SHOW_COUNTER } from '../../common/constants';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface Props {
   handleCancel: DOMAttributes<HTMLButtonElement>['onClick'];
 }
+/**** ><> ↑ --------- Props interface declaration ->  */
 
 export const ResponseTimer: FunctionComponent<Props> = ({ handleCancel }) => {
   const [milliseconds, setMilliseconds] = useState(0);
@@ -23,8 +25,10 @@ export const ResponseTimer: FunctionComponent<Props> = ({ handleCancel }) => {
       }
     };
   }, []);
+/**** ><> ↑ --------- useEffect hook to start timer ->  */
 
   const seconds = milliseconds / 1000;
+/**** ><> ↑ --------- Declaration of seconds constant ->  */
   return (
     <div className="overlay theme--transparent-overlay">
       <h2 style={{ fontVariantNumeric: 'tabular-nums' }}>
@@ -43,4 +47,6 @@ export const ResponseTimer: FunctionComponent<Props> = ({ handleCancel }) => {
       </div>
     </div>
   );
+/**** ><> ↑ --------- ResponseTimer FunctionComponent declaration ->  */
+/**** ><> ↑ --------- JSX return statement ->  */
 };

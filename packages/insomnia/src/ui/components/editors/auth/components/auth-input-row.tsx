@@ -8,6 +8,7 @@ import { RequestLoaderData } from '../../../../routes/request';
 import { RootLoaderData } from '../../../../routes/root';
 import { OneLineEditor } from '../../../codemirror/one-line-editor';
 import { AuthRow } from './auth-row';
+/**** ><> ↑ --------- Importing dependencies */
 
 interface Props extends Pick<ComponentProps<typeof OneLineEditor>, 'getAutocompleteConstants'> {
   label: string;
@@ -16,6 +17,7 @@ interface Props extends Pick<ComponentProps<typeof OneLineEditor>, 'getAutocompl
   mask?: boolean;
   disabled?: boolean;
 }
+/**** ><> ↑ --------- Interface definition for Props */
 
 export const AuthInputRow: FC<Props> = ({ label, getAutocompleteConstants, property, mask, help, disabled = false }) => {
   const {
@@ -33,6 +35,7 @@ export const AuthInputRow: FC<Props> = ({ label, getAutocompleteConstants, prope
 
   const id = toKebabCase(label);
 
+/**** ><> ↑ --------- Function component AuthInputRow definition */
   return (
     <AuthRow labelFor={id} label={label} help={help} disabled={disabled}>
       <OneLineEditor
@@ -55,3 +58,4 @@ export const AuthInputRow: FC<Props> = ({ label, getAutocompleteConstants, prope
     </AuthRow>
   );
 };
+/**** ><> ↑ --------- Render logic of AuthInputRow component */

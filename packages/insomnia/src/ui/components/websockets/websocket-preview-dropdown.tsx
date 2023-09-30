@@ -3,12 +3,14 @@ import React, { FC } from 'react';
 import { getPreviewModeName, PREVIEW_MODES, PreviewMode } from '../../../common/constants';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
 
+/**** ><> ↑ --------- Import statements */
 interface Props {
   download: () => void;
   copyToClipboard: () => void;
   previewMode: PreviewMode;
   setPreviewMode: (mode: PreviewMode) => void;
 }
+/**** ><> ↑ --------- Props interface definition */
 
 export const WebSocketPreviewModeDropdown: FC<Props> = ({
   download,
@@ -16,6 +18,7 @@ export const WebSocketPreviewModeDropdown: FC<Props> = ({
   previewMode,
   setPreviewMode,
 }) => {
+/**** ><> ↑ --------- WebSocketPreviewModeDropdown functional component definition */
   return (
     <Dropdown
       aria-label="Websocket Preview Mode Dropdown"
@@ -26,6 +29,7 @@ export const WebSocketPreviewModeDropdown: FC<Props> = ({
         </DropdownButton>
       }
     >
+/**** ><> ↑ --------- Dropdown component */
       <DropdownSection
         aria-label="Preview Mode Section"
         title="Preview Mode"
@@ -43,6 +47,7 @@ export const WebSocketPreviewModeDropdown: FC<Props> = ({
           </DropdownItem>
         )}
       </DropdownSection>
+/**** ><> ↑ --------- Preview Mode section */
       <DropdownSection
         aria-label="Actions Section"
         title="Actions"
@@ -62,6 +67,8 @@ export const WebSocketPreviewModeDropdown: FC<Props> = ({
           />
         </DropdownItem>
       </DropdownSection>
+/**** ><> ↑ --------- Actions Section */
     </Dropdown>
   );
 };
+/**** ><> ↑ --------- Export of WebSocketPreviewModeDropdown */
