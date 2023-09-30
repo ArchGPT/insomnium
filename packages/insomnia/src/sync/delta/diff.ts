@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+/**** ><> ↑ --------- import modules ->  */
 
 interface InsertOperation {
   type: 'INSERT';
@@ -12,12 +13,14 @@ interface CopyOperation {
 }
 
 export type Operation = InsertOperation | CopyOperation;
+/**** ><> ↑ --------- define interfaces and types ->  */
 
 interface Block {
   start: number;
   len: number;
   hash: string;
 }
+/**** ><> ↑ --------- define Block interface ->  */
 
 export function diff(source: string, target: string, blockSize: number): Operation[] {
   const operations: Operation[] = [];
@@ -86,6 +89,7 @@ export function diff(source: string, target: string, blockSize: number): Operati
 
   return operations;
 }
+/**** ><> ↑ --------- diff function ->  */
 
 function getBlock(value: string, start: number, blockSize: number): Block {
   if (start >= value.length) {
@@ -99,6 +103,7 @@ function getBlock(value: string, start: number, blockSize: number): Block {
     hash: crypto.createHash('sha1').update(blockSlice).digest('hex'),
   };
 }
+/**** ><> ↑ --------- getBlock helper function ->  */
 
 function getBlockMap(value: string, blockSize: number): Record<string, Block[]> {
   const map: Record<string, Block[]> = {};
@@ -117,7 +122,9 @@ function getBlockMap(value: string, blockSize: number): Record<string, Block[]> 
 
   return map;
 }
+/**** ><> ↑ --------- getBlockMap helper function ->  */
 
 export const __internal = {
   getBlockMap,
 };
+/**** ><> ↑ --------- export internal ->  */

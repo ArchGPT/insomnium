@@ -6,8 +6,10 @@ import { gitRollback } from '../git-rollback';
 import GitVCS, { GIT_CLONE_DIR, GIT_INSOMNIA_DIR } from '../git-vcs';
 import { MemClient } from '../mem-client';
 import { setupDateMocks } from './util';
+/**** ><> ↑ --------- Importing dependencies ->  */
 
 describe('git rollback', () => {
+/**** ><> ↑ --------- Initial describe function for 'git rollback' ->  */
   describe('mocked', () => {
     const removeMock = jest.fn().mockResolvedValue(undefined);
     const unlinkMock = jest.fn().mockResolvedValue(undefined);
@@ -16,6 +18,7 @@ describe('git rollback', () => {
     let vcs: Partial<typeof GitVCS> = {};
 
     beforeEach(() => {
+/**** ><> ↑ --------- Nested describe function for 'mocked' ->  */
       jest.resetAllMocks();
       const fsMock = {
         promises: {
@@ -51,6 +54,7 @@ describe('git rollback', () => {
       expect(removeMock).toHaveBeenNthCalledWith(2, bTxt);
       expect(undoPendingChangesMock).not.toHaveBeenCalled();
     });
+/**** ><> ↑ --------- Test case: 'should remove and delete added and *added files' ->  */
 
     it('should undo pending changes for non-added files', async () => {
       const aTxt = 'a.txt';
@@ -71,6 +75,7 @@ describe('git rollback', () => {
       expect(undoPendingChangesMock).toHaveBeenCalledTimes(1);
       expect(undoPendingChangesMock).toHaveBeenCalledWith(expect.arrayContaining([aTxt, bTxt]));
     });
+/**** ><> ↑ --------- Test case: 'should undo pending changes for non-added files' ->  */
 
     it('should remove, delete, and undo appropriately depending on status', async () => {
       const aTxt = 'a.txt';
@@ -105,7 +110,9 @@ describe('git rollback', () => {
       expect(undoPendingChangesMock).toHaveBeenCalledTimes(1);
       expect(undoPendingChangesMock).toHaveBeenCalledWith(expect.arrayContaining([cTxt, dTxt]));
     });
+/**** ><> ↑ --------- Test case: 'should remove, delete, and undo appropriately depending on status' ->  */
   });
+/**** ><> ↑ --------- End of nested describe function for 'mocked' ->  */
 
   describe('integration', () => {
     let fooTxt = '';
@@ -119,6 +126,7 @@ describe('git rollback', () => {
     afterAll(() => jest.restoreAllMocks());
     beforeEach(setupDateMocks);
 
+/**** ><> ↑ --------- Nested describe function for 'integration' ->  */
     it('should rollback files as expected', async () => {
       const originalContent = 'original';
       const fsClient = MemClient.createClient();
@@ -176,5 +184,8 @@ describe('git rollback', () => {
       );
       expect((await fsClient.promises.readFile(bazTxt)).toString()).toBe(originalContent);
     });
+/**** ><> ↑ --------- Test case: 'should rollback files as expected' ->  */
   });
+/**** ><> ↑ --------- End of nested describe function for 'integration' ->  */
 });
+/**** ><> ↑ --------- End of initial describe function for 'git rollback' ->  */

@@ -3,6 +3,7 @@ import path from 'path';
 
 import Stat from './stat';
 import { SystemError } from './system-error';
+/**** ><> ↑ --------- Import statements ->  */
 
 interface FSFile {
   readonly type: 'file';
@@ -32,16 +33,19 @@ interface FSDir {
 }
 
 type FSEntry = FSDir | FSFile | FSLink;
+/**** ><> ↑ --------- Interface definitions ->  */
 
 export class MemClient {
   __fs: FSEntry;
   __ino: 0;
 
+/**** ><> ↑ --------- Class declaration and initial properties ->  */
   static createClient(): PromiseFsClient {
     return {
       promises: new MemClient(),
     };
   }
+/**** ><> ↑ --------- Static method to create an instance of client ->  */
 
   constructor() {
     this.__ino = 0;
@@ -54,6 +58,7 @@ export class MemClient {
       mtimeMs: Date.now(),
     };
   }
+/**** ><> ↑ --------- Constructor for MemClient ->  */
 
   async tree(baseDir = '/') {
     baseDir = path.normalize(baseDir);
@@ -84,6 +89,7 @@ export class MemClient {
 
     console.log(await next(baseDir, ''));
   }
+/**** ><> ↑ --------- Method to print file tree ->  */
 
   async readFile(
     filePath: string,
@@ -109,6 +115,7 @@ export class MemClient {
       return raw;
     }
   }
+/**** ><> ↑ --------- Method to read files ->  */
 
   async writeFile(
     filePath: string,
@@ -171,12 +178,14 @@ export class MemClient {
     file.contents = newContents.toString('base64');
     return Promise.resolve();
   }
+/**** ><> ↑ --------- Method to write to files ->  */
 
   async unlink(filePath: string) {
     filePath = path.normalize(filePath);
 
     this._remove(this._assertFile(filePath));
   }
+/**** ><> ↑ --------- Method to unlink files ->  */
 
   async readdir(basePath: string) {
     basePath = path.normalize(basePath);
@@ -187,6 +196,7 @@ export class MemClient {
     names.sort();
     return names;
   }
+/**** ><> ↑ --------- Method to read directory entries ->  */
 
   async mkdir(dirPath: string, options?: { recursive?: boolean }) {
     dirPath = path.normalize(dirPath);
@@ -222,6 +232,7 @@ export class MemClient {
       currentPath = nextPath;
     }
   }
+/**** ><> ↑ --------- Method to create directories ->  */
 
   async rmdir(dirPath: string) {
     dirPath = path.normalize(dirPath);
@@ -240,6 +251,7 @@ export class MemClient {
 
     this._remove(dirEntry);
   }
+/**** ><> ↑ --------- Method to remove directories ->  */
 
   async stat(filePath: string) {
     filePath = path.normalize(filePath);
@@ -293,6 +305,7 @@ export class MemClient {
       mtimeMs: entry.mtimeMs,
     });
   }
+/**** ><> ↑ --------- Methods for managing file stats ->  */
 
   _find(filePath: string) {
     filePath = path.normalize(filePath);
@@ -435,3 +448,4 @@ export class MemClient {
     parentEntry.children.splice(index, 1);
   }
 }
+/**** ><> ↑ --------- Internal methods ->  */

@@ -6,10 +6,13 @@ export function invariant(
   // the message takes a fair amount of effort to compute
   message?: string | (() => string),
 ): asserts condition {
+/**** ><> ↑ --------- Function declaration with comments ->  */
   if (condition) {
     return;
   }
+/**** ><> ↑ --------- Function body: checking the condition ->  */
   // Condition not passed
 
   throw new Error(typeof message === 'function' ? message() : message);
 }
+/**** ><> ↑ --------- Function body: throwing an error ->  */

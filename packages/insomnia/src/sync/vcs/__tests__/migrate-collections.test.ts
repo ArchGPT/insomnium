@@ -11,6 +11,7 @@ import MemoryDriver from '../../store/drivers/memory-driver';
 import { initializeProjectFromTeam } from '../initialize-model-from';
 import { migrateCollectionsIntoRemoteProject } from '../migrate-collections';
 import { VCS } from '../vcs';
+/**** ><> ↑ --------- Importing Required Libraries and modules ->  */
 
 jest.mock('../vcs');
 jest.mock('../../../account/session', () => ({
@@ -20,8 +21,10 @@ jest.mock('../../../account/session', () => ({
 const isLoggedIn = mocked(_isLoggedIn);
 const newMockedVcs = () => mocked(new VCS(new MemoryDriver()), true);
 
+/**** ><> ↑ --------- Mocking required modules and creating test scenario setup ->  */
 const projectWithTeamBuilder = createBuilder(backendProjectWithTeamSchema);
 const teamBuilder = createBuilder(teamSchema);
+/**** ><> ↑ --------- Initialising schema builders ->  */
 
 describe('migrateCollectionsIntoRemoteProject', () => {
   beforeEach(async () => {
@@ -31,6 +34,7 @@ describe('migrateCollectionsIntoRemoteProject', () => {
     teamBuilder.reset();
     projectWithTeamBuilder.reset();
   });
+/**** ><> ↑ --------- Describe block for testing 'migrateCollectionsIntoRemoteProject' function ->  */
 
   it('exits if not logged in', async () => {
     // Arrange
@@ -44,6 +48,7 @@ describe('migrateCollectionsIntoRemoteProject', () => {
     expect(vcs.hasBackendProjectForRootDocument).not.toHaveBeenCalled();
     expect(vcs.remoteBackendProjectsInAnyTeam).not.toHaveBeenCalled();
   });
+/**** ><> ↑ --------- Test case for checking exit condition when not logged in ->  */
 
   it('does not migrate if all collections are in a remote project already', async () => {
     // Arrange
@@ -61,6 +66,7 @@ describe('migrateCollectionsIntoRemoteProject', () => {
     expect(vcs.remoteBackendProjectsInAnyTeam).not.toHaveBeenCalled();
     await expect(models.workspace.getById(workspaceInRemote._id)).resolves.toStrictEqual(workspaceInRemote);
   });
+/**** ><> ↑ --------- Test case for checking non-migration condition if all collections are in a remote project already ->  */
 
   it('does not migrate if design documents', async () => {
     // Arrange
@@ -78,6 +84,7 @@ describe('migrateCollectionsIntoRemoteProject', () => {
     expect(vcs.remoteBackendProjectsInAnyTeam).not.toHaveBeenCalled();
     await expect(models.workspace.getById(workspaceInLocal._id)).resolves.toStrictEqual(workspaceInLocal);
   });
+/**** ><> ↑ --------- Test case for checking no migration occurs for design documents ->  */
 
   it('does migrate if collection in non-remote project with local backend project - create remote project', async () => {
     // Arrange
@@ -105,6 +112,7 @@ describe('migrateCollectionsIntoRemoteProject', () => {
       parentId: createdRemoteProject?._id,
     });
   });
+/**** ><> ↑ --------- Test case for migration scenario where collection is in non-remote project with local backend project - create remote project ->  */
 
   it('does migrate if collection in non-remote project with local backend project - use existing remote project', async () => {
     // Arrange
@@ -135,3 +143,4 @@ describe('migrateCollectionsIntoRemoteProject', () => {
     });
   });
 });
+/**** ><> ↑ --------- Test case for migration scenario where collection is in non-remote project with local backend project - use existing remote project ->  */

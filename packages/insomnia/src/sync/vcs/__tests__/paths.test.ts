@@ -1,8 +1,11 @@
 import { describe, expect, it } from '@jest/globals';
+/**** ><> ↑ --------- Importing external libraries ->  */
 
 import * as paths from '../paths';
+/**** ><> ↑ --------- Importing internal modules ->  */
 
 describe('paths', () => {
+/**** ><> ↑ --------- Describe method calling for testing ->  */
   it('successes', async () => {
     expect(paths.projectBase('p1')).toBe('/projects/p1/');
     expect(paths.head('p1')).toBe('/projects/p1/head.json');
@@ -15,3 +18,4 @@ describe('paths', () => {
     expect(paths.branch('p1', 'master')).toBe('/projects/p1/branches/master.json');
   });
 });
+/**** ><> ↑ --------- Individual test case ->  */

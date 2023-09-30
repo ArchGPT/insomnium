@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from 'react-aria-components';
 import {
+/**** ><> ↑ --------- Imports ->  */
   LoaderFunction,
   matchPath,
   redirect,
@@ -35,6 +36,7 @@ import {
 import { fuzzyMatchAll, isNotNullOrUndefined } from '../../common/misc';
 import { descendingNumberSort, sortMethodMap } from '../../common/sorting';
 import { strings } from '../../common/strings';
+/**** ><> ↑ --------- Helper functions and constants ->  */
 import * as models from '../../models';
 import { ApiSpec } from '../../models/api-spec';
 import { CaCertificate } from '../../models/ca-certificate';
@@ -66,6 +68,7 @@ import { SidebarLayout } from '../components/sidebar-layout';
 import { TimeFromNow } from '../components/time-from-now';
 import { useOrganizationLoaderData } from './organization';
 
+/**** ><> ↑ --------- Models and interfaces ->  */
 export interface WorkspaceWithMetadata {
   _id: string;
   hasUnsavedChanges: boolean;
@@ -126,6 +129,7 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
 
   return;
 };
+/**** ><> ↑ --------- Index Loader ->  */
 
 export interface ProjectLoaderData {
   workspaces: WorkspaceWithMetadata[];
@@ -137,6 +141,7 @@ export interface ProjectLoaderData {
   projects: Project[];
   organization: Organization;
 }
+/**** ><> ↑ --------- Project Loader Data ->  */
 
 export const loader: LoaderFunction = async ({
   params,
@@ -304,6 +309,7 @@ export const loader: LoaderFunction = async ({
     ).length,
   };
 };
+/**** ><> ↑ --------- Loader function ->  */
 
 const ProjectRoute: FC = () => {
   const {
@@ -929,5 +935,7 @@ const ProjectRoute: FC = () => {
     </ErrorBoundary>
   );
 };
+/**** ><> ↑ --------- Project Route ->  */
 
 export default ProjectRoute;
+/**** ><> ↑ --------- Default Export ->  */

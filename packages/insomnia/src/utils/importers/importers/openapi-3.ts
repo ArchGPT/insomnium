@@ -5,6 +5,7 @@ import { OpenAPIV2, OpenAPIV3 } from 'openapi-types';
 import { parse as urlParse } from 'url';
 import YAML from 'yaml';
 
+/**** ><> ↑ --------- Import statements ->  */
 import { Authentication, Converter, ImportRequest } from '../entities';
 import { unthrowableParseJson } from '../utils';
 
@@ -57,6 +58,7 @@ const SUPPORTED_HTTP_AUTH_SCHEMES = [
 ];
 const VARIABLE_SEARCH_VALUE = /{([^}]+)}/g;
 let requestCounts: Record<string, number> = {};
+/**** ><> ↑ --------- Variable and constant declarations ->  */
 
 /**
  * Gets a server to use as the default
@@ -103,6 +105,7 @@ const resolveVariables = (server: OpenAPIV3.ServerObject) => {
 
   return resolvedUrl;
 };
+/**** ><> ↑ --------- Function definition ->  */
 
 /**
  * Parse string data into openapi 3 object (https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oasObject)
@@ -147,6 +150,7 @@ const parseEnvs = (baseEnv: ImportRequest, document?: OpenAPIV3.Document | null)
 
   return servers
     .map(server => {
+/**** ><> ↑ --------- Utility functions and constants ->  */
       const currentServerUrl = getServerUrl(server);
       const protocol = currentServerUrl.protocol || '';
 
@@ -209,6 +213,7 @@ const parseEndpoints = (document?: OpenAPIV3.Document | null) => {
         path,
         method,
       }));
+/**** ><> ↑ --------- Parsing functions ->  */
     })
     .flat();
 
@@ -245,6 +250,7 @@ const parseEndpoints = (document?: OpenAPIV3.Document | null) => {
     ...requests,
   ];
 };
+/**** ><> ↑ --------- Environment and request definitions ->  */
 
 /**
  * Return Insomnium folder / request group
@@ -301,6 +307,7 @@ const importRequest = (
     name,
     method: endpointSchema.method?.toUpperCase(),
     url: `{{ _.base_url }}${pathWithParamsAsVariables(endpointSchema.path)}`,
+/**** ><> ↑ --------- Helper functions for request definitions ->  */
     body: body,
     headers: [...paramHeaders, ...securityHeaders],
     authentication: authentication as Authentication,
@@ -344,6 +351,7 @@ const prepareHeaders = (endpointSchema: OpenAPIV3.PathItemObject, body: any) => 
   return paramHeaders;
 };
 
+/**** ><> ↑ --------- Body, header, and parameter preparation functions ->  */
 /**
  * Parse OpenAPI 3 securitySchemes into insomnia definitions of authentication, headers and parameters
  * @returns headers or basic|bearer http authentication details
@@ -529,6 +537,7 @@ const getSecurityEnvVariables = (securitySchemeObject?: OpenAPIV3.SecurityScheme
 const prepareBody = (endpointSchema: OpenAPIV3.OperationObject): ImportRequest['body'] => {
   const { content } = (endpointSchema.requestBody || { content: {} }) as OpenAPIV3.RequestBodyObject;
 
+/**** ><> ↑ --------- Security-related functions ->  */
   const mimeTypes = Object.keys(content);
   const supportedMimeType = mimeTypes.find(reqMimeType => {
     return SUPPORTED_MIME_TYPES.some(supportedMimeType => {
@@ -793,6 +802,7 @@ const parseOAuth2 = (scheme: OpenAPIV3.OAuth2SecurityScheme, selectedScopes: str
     default:
       return {};
   }
+/**** ><> ↑ --------- OAuth2-related functions ->  */
 };
 
 export const convert: Converter = async rawData => {
@@ -845,3 +855,4 @@ export const convert: Converter = async rawData => {
     ...endpoints,
   ];
 };
+/**** ><> ↑ --------- Main conversion function ->  */

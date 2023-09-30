@@ -1,12 +1,14 @@
 import { BaseModel, request, requestGroup, workspace } from '../../models';
 
 export const data: Record<string, Partial<BaseModel>[]> = {
+/**** ><> ↑ --------- Import of required models and initial export declaration. ->  */
   [workspace.type]: [
     {
       _id: 'wrk_1',
       name: 'Wrk 1',
     },
   ],
+/**** ><> ↑ --------- Definition of workspace object in data record. ->  */
   [requestGroup.type]: [
     {
       _id: 'fld_1',
@@ -24,6 +26,7 @@ export const data: Record<string, Partial<BaseModel>[]> = {
       name: 'Fld 3',
     },
   ],
+/**** ><> ↑ --------- Definition of requestGroup object in data record. ->  */
   [request.type]: [
     {
       _id: 'req_1',
@@ -51,4 +54,6 @@ export const data: Record<string, Partial<BaseModel>[]> = {
       name: 'Req 5',
     },
   ],
+/**** ><> ↑ --------- Definition of request object in data record. ->  */
 };
+/**** ><> ↑ --------- Closure of data record. ->  */

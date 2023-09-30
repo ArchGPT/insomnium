@@ -4,6 +4,7 @@ import path from 'path';
 import { ActionFunction, LoaderFunction, redirect } from 'react-router-dom';
 import YAML from 'yaml';
 
+/**** ><> ↑ --------- Imports ->  */
 import { ACTIVITY_SPEC } from '../../common/constants';
 import { database } from '../../common/database';
 import * as models from '../../models';
@@ -37,6 +38,7 @@ import {
 } from '../../sync/git/utils';
 import { invariant } from '../../utils/invariant';
 
+/**** ><> ↑ --------- Constants and Database ->  */
 // Loaders
 export type GitRepoLoaderData =
   | {
@@ -48,6 +50,7 @@ export type GitRepoLoaderData =
       errors: string[];
     };
 
+/**** ><> ↑ --------- Loaders ->  */
 export const gitRepoAction: ActionFunction = async ({
   params,
 }): Promise<GitRepoLoaderData> => {
@@ -319,6 +322,7 @@ export const gitChangesLoader: LoaderFunction = async ({
 
 // Actions
 type CloneGitActionResult =
+/**** ><> ↑ --------- Actions ->  */
   | Response
   | {
       errors?: string[];
@@ -344,6 +348,7 @@ export function parseGitToHttpsURL(s: string) {
 
   return parsed;
 }
+/**** ><> ↑ --------- Helpers ->  */
 
 export const cloneGitRepoAction: ActionFunction = async ({
   request,
@@ -540,6 +545,7 @@ export const cloneGitRepoAction: ActionFunction = async ({
     `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}`
   );
 };
+/**** ><> ↑ --------- Git Repository Actions ->  */
 
 export const updateGitRepoAction: ActionFunction = async ({
   request,
@@ -824,6 +830,7 @@ export const checkoutGitBranchAction: ActionFunction = async ({
 
   return {};
 };
+/**** ><> ↑ --------- Git Branch Actions ->  */
 
 export interface MergeGitBranchResult {
   errors?: string[];
@@ -883,6 +890,7 @@ export interface DeleteGitBranchResult {
 export const deleteGitBranchAction: ActionFunction = async ({
   request,
   params,
+/**** ><> ↑ --------- Git Commit Actions ->  */
 }): Promise<DeleteGitBranchResult> => {
   const { workspaceId } = params;
   invariant(workspaceId, 'Workspace ID is required');
@@ -1050,6 +1058,7 @@ export const pullFromGitRemoteAction: ActionFunction = async ({
 
   return {};
 };
+/**** ><> ↑ --------- Git Push and Pull Actions ->  */
 
 export interface GitChange {
   path: string;
@@ -1235,3 +1244,4 @@ export const gitStatusAction: ActionFunction = async ({
     };
   }
 };
+/**** ><> ↑ --------- Git Changes and Status Actions ->  */

@@ -2,6 +2,7 @@ import { displayModifierKey, isMac } from './constants';
 import { keyboardKeys } from './keyboard-keys';
 import { HotKeyRegistry, KeyboardShortcut, KeyCombination, PlatformKeyCombinations } from './settings';
 import { strings } from './strings';
+/**** ><> ↑ --------- Import external modules ->  */
 
 /**
  * The collection of available hotkeys' and their descriptions.
@@ -38,6 +39,7 @@ export const keyboardShortcutDescriptions: Record<KeyboardShortcut, string> = {
   'beautifyRequestBody': 'Beautify Active Code Editors',
   'graphql_explorer_focus_filter': 'Focus GraphQL Explorer Filter',
 };
+/**** ><> ↑ --------- Hotkeys descriptions ->  */
 
 /**
  * The default key bindings values of all available hotkeys.
@@ -174,6 +176,7 @@ const defaultRegistry: HotKeyRegistry = {
     winLinuxKeys: [{ ctrl: true, shift: true, keyCode: keyboardKeys.i.keyCode }],
   },
 };
+/**** ><> ↑ --------- Default key bindings values ->  */
 
 /**
  * Get a new copy of hotkey registry with default values.
@@ -181,6 +184,7 @@ const defaultRegistry: HotKeyRegistry = {
 export function newDefaultRegistry(): HotKeyRegistry {
   return JSON.parse(JSON.stringify(defaultRegistry));
 }
+/**** ><> ↑ --------- Function to get a new copy of hotkey registry with default values ->  */
 
 /**
  * Get the key combinations based on the current platform.
@@ -192,6 +196,7 @@ export function getPlatformKeyCombinations(bindings: PlatformKeyCombinations): K
 
   return bindings.winLinuxKeys;
 }
+/**** ><> ↑ --------- Function to get the key combinations based on the current platform ->  */
 
 /**
  * Determine whether two key combinations are the same by comparing each of their keys.
@@ -208,6 +213,7 @@ export function areSameKeyCombinations(
     Boolean(keyComb1.meta) === Boolean(keyComb2.meta)
   );
 }
+/**** ><> ↑ --------- Function to compare two key combinations ->  */
 
 /**
  * Gets the displayed text of a key code.
@@ -224,6 +230,7 @@ export function getChar(keyCode: number) {
 
   return char || 'unknown';
 }
+/**** ><> ↑ --------- Function to get the display text of a key code ->  */
 
 function joinHotKeys(mustUsePlus: boolean, keys: string[]) {
   if (!mustUsePlus && isMac()) {
@@ -232,6 +239,7 @@ function joinHotKeys(mustUsePlus: boolean, keys: string[]) {
 
   return keys.join(' + ');
 }
+/**** ><> ↑ --------- Function to join hotkeys ->  */
 
 /**
  * Check whether key code is a modifier key, i.e., alt, shift, ctrl, or meta.
@@ -248,6 +256,7 @@ export function isModifierKeyCode(keyCode: number): boolean {
     keyCode === keyboardKeys.selectkey.keyCode
   );
 }
+/**** ><> ↑ --------- Function to check if key code is a modifier ->  */
 
 /**
  * Construct the display string of a key combination based on platform.
@@ -295,3 +304,4 @@ export function constructKeyCombinationDisplay(
 
   return joint;
 }
+/**** ><> ↑ --------- Function to construct the display of a key combination based on platform ->  */

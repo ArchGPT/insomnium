@@ -12,6 +12,7 @@ import { writeProtoFile } from '../../network/grpc/write-proto-file';
 import { invariant } from '../../utils/invariant';
 import { mockRequestMethods } from './automock';
 
+/**** ><> ↑ --------- Import declarations ->  */
 const grpcCalls = new Map<string, Call>();
 export interface GrpcIpcRequestParams {
   request: RenderedGrpcRequest;
@@ -31,6 +32,7 @@ export interface gRPCBridgeAPI {
   closeAll: typeof closeAll;
 }
 export function registergRPCHandlers() {
+/**** ><> ↑ --------- Interface declarations and grpcCalls map ->  */
   ipcMain.on('grpc.start', start);
   ipcMain.on('grpc.sendMessage', sendMessage);
   ipcMain.on('grpc.commit', (_, requestId) => commit(requestId));
@@ -67,6 +69,7 @@ const loadMethods = async (protoFileId: string): Promise<GrpcMethodInfo[]> => {
     fullPath: method.path,
   }));
 };
+/**** ><> ↑ --------- Grpc options and method loading functions ->  */
 interface MethodDefs {
   path: string;
   requestStream: boolean;
@@ -145,6 +148,7 @@ export const getMethodType = ({ requestStream, responseStream }: any): GrpcMetho
   }
   return 'unary';
 };
+/**** ><> ↑ --------- Interfaces and method type handling ->  */
 
 export const getSelectedMethod = async (request: GrpcRequest): Promise<MethodDefs | undefined> => {
   if (request.protoFileId) {
@@ -180,6 +184,7 @@ const isMessageDefinition = (definition: AnyDefinition): definition is MessageTy
 const isEnumDefinition = (definition: AnyDefinition): definition is EnumTypeDefinition => {
   return (definition as EnumTypeDefinition).format === 'Protocol Buffer 3 EnumDescriptorProto';
 };
+/**** ><> ↑ --------- Method selection and package definition functions ->  */
 
 export const start = (
   event: IpcMainEvent,
@@ -265,6 +270,7 @@ export const start = (
     return;
   });
 };
+/**** ><> ↑ --------- Start function and related gRPC methods ->  */
 
 export const sendMessage = (
   event: IpcMainEvent,
@@ -335,6 +341,7 @@ const onUnaryResponse = (event: IpcMainEvent, requestId: string) => (err: Servic
   }
   grpcCalls.delete(requestId);
 };
+/**** ><> ↑ --------- Send, commit, cancel functions and response handling ->  */
 
 const filterDisabledMetaData = (metadata: GrpcRequestHeader[],): Metadata => {
   const grpcMetadata = new Metadata();
@@ -345,6 +352,7 @@ const filterDisabledMetaData = (metadata: GrpcRequestHeader[],): Metadata => {
   }
   return grpcMetadata;
 };
+/**** ><> ↑ --------- Metadata filtering function ->  */
 
 export type GrpcMethodType = 'unary' | 'server' | 'client' | 'bidi';
 const closeAll = (): void => grpcCalls.forEach(x => x.cancel());
@@ -354,3 +362,4 @@ if (typeof electron.app.on === 'function') {
 } else {
   console.warn('electron.app.on is not a function. Are you running a test?');
 }
+/**** ><> ↑ --------- Exported types and application event handling ->  */

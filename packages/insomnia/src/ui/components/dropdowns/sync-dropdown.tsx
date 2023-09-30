@@ -25,6 +25,7 @@ import { HelpTooltip } from '../help-tooltip';
 import { showError, showModal } from '../modals';
 import { GitRepositorySettingsModal } from '../modals/git-repository-settings-modal';
 
+/**** ><> ↑ --------- Import Statements ->  */
 import { SyncBranchesModal } from '../modals/sync-branches-modal';
 import { SyncDeleteModal } from '../modals/sync-delete-modal';
 import { SyncHistoryModal } from '../modals/sync-history-modal';
@@ -58,6 +59,7 @@ interface State {
   loadingPush: boolean;
   remoteBackendProjects: BackendProjectWithTeam[];
 }
+/**** ><> ↑ --------- Props and State ->  */
 export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
   const [state, setState] = useState<State>({
     localBranches: [],
@@ -128,6 +130,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
     // Do the remote stuff
     refetchRemoteBranch();
   }, [project, refetchRemoteBranch, syncItems, vcs, workspace._id]);
+/**** ><> ↑ --------- SyncDropdown Component ->  */
 
   useInterval(() => {
     refetchRemoteBranch();
@@ -157,6 +160,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
       }));
     }
   });
+/**** ><> ↑ --------- useMount Hook ->  */
 
   // Update if new sync items
   useEffect(() => {
@@ -169,6 +173,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
       });
     }
   }, [syncItems, vcs]);
+/**** ><> ↑ --------- useEffect Hook ->  */
   async function handleSetProject(backendProject: BackendProjectWithTeam) {
     setState(state => ({
       ...state,
@@ -186,6 +191,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
       loadingProjectPull: false,
     }));
   }
+/**** ><> ↑ --------- Handle Set Project ->  */
   async function handlePush() {
     setState(state => ({
       ...state,
@@ -214,6 +220,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
       loadingPush: false,
     }));
   }
+/**** ><> ↑ --------- Handle Push ->  */
 
   async function handlePull() {
     setState(state => ({
@@ -243,6 +250,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
       loadingPull: false,
     }));
   }
+/**** ><> ↑ --------- Handle Pull ->  */
 
   async function handleRevert() {
     try {
@@ -256,6 +264,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
       });
     }
   }
+/**** ><> ↑ --------- Handle Revert ->  */
 
   async function handleSwitchBranch(branch: string) {
     try {
@@ -284,6 +293,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
       currentBranch: branch,
     }));
   }
+/**** ><> ↑ --------- Handle Switch Branch ->  */
 
   if (!session.isLoggedIn()) {
     return null;
@@ -303,6 +313,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
     remoteBackendProjects,
   } = state;
   const canCreateSnapshot =
+/**** ><> ↑ --------- Sync Menu Render ->  */
     Object.keys(status.stage).length > 0 || Object.keys(status.unstaged).length > 0;
   const visibleBranches = localBranches.filter(b => !b.match(/\.hidden$/));
   const syncMenuHeader = (
@@ -447,6 +458,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
         )}
       </div>
     );
+/**** ><> ↑ --------- Git Sync Section ->  */
   }
   const canPush = ahead > 0;
   const canPull = behind > 0;
@@ -618,6 +630,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
         </DropdownSection>
 
         <DropdownSection
+/**** ><> ↑ --------- Sync Branches Section ->  */
           aria-label='Snapshot action section'
           title={currentBranch}
         >
@@ -716,3 +729,4 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
     </div>
   );
 };
+/**** ><> ↑ --------- Snapshot Actions Section ->  */

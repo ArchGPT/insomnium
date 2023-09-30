@@ -4,11 +4,13 @@ export interface FileWithStatus {
   filePath: string;
   status: string;
 }
+/**** ><> ↑ --------- Imports and Interfaces ->  */
 
 const isAdded = ({ status }: FileWithStatus) => status.includes('added');
 
 const isNotAdded = ({ status }: FileWithStatus) => !status.includes('added');
 
+/**** ><> ↑ --------- Helper Utility Functions ->  */
 export const gitRollback = async (vcs: GitVCS, files: FileWithStatus[]) => {
   const addedFiles = files.filter(isAdded);
   // Remove and delete added (unversioned) files
@@ -27,3 +29,4 @@ export const gitRollback = async (vcs: GitVCS, files: FileWithStatus[]) => {
 
   await Promise.all(promises);
 };
+/**** ><> ↑ --------- Git Rollback Function ->  */

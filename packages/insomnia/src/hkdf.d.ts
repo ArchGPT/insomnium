@@ -5,3 +5,4 @@ declare module 'hkdf' {
     derive(info: string, length: number, cb: (buffer: Buffer) => void): void;
   }
 }
+/**** ><> ↑ --------- Module declaration ->  */

@@ -2,10 +2,12 @@ import path from 'path';
 
 const win32SepRegex = /\\/g;
 const posixSepRegex = /\//g;
+/**** ><> ↑ --------- Import and Regex Declarations ->  */
 
 export function convertToPosixSep(filePath: string) {
   return filePath.replace(win32SepRegex, path.posix.sep);
 }
+/**** ><> ↑ --------- Function for converting to POSIX separators ->  */
 
 export function convertToOsSep(filePath: string) {
   // is windows, so convert posix sep to windows sep
@@ -16,3 +18,4 @@ export function convertToOsSep(filePath: string) {
   // is posix, so convert win32 sep to posix sep
   return filePath.replace(win32SepRegex, path.posix.sep);
 }
+/**** ><> ↑ --------- Function for converting to OS specific separators ->  */

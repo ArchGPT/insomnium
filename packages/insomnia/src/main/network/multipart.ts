@@ -1,14 +1,17 @@
 if (process.type === 'renderer') {
   throw new Error('multipart.ts unavailable in renderer');
 }
+/**** ><> ↑ --------- Pre-check for renderer process ->  */
 
 import fs from 'fs';
 import { lookup } from 'mime-types';
 import os from 'os';
 import path from 'path';
 
+/**** ><> ↑ --------- Importing modules ->  */
 import type { RequestBodyParameter } from '../../models/request';
 
+/**** ><> ↑ --------- Importing types ->  */
 export const DEFAULT_BOUNDARY = 'X-INSOMNIA-BOUNDARY';
 
 interface Multipart {
@@ -17,6 +20,7 @@ interface Multipart {
   contentLength: number;
 }
 
+/**** ><> ↑ --------- Constant and interface definition ->  */
 export async function buildMultipart(params: RequestBodyParameter[]) {
   return new Promise<Multipart>(async (resolve, reject) => {
     const filePath = path.join(os.tmpdir(), Math.random() + '.body');
@@ -24,6 +28,7 @@ export async function buildMultipart(params: RequestBodyParameter[]) {
     const lineBreak = '\r\n';
     let totalSize = 0;
 
+/**** ><> ↑ --------- Implementation of buildMultipart function ->  */
     function addFile(path: string) {
       return new Promise<void>((resolve, reject) => {
         let size: number | undefined;
@@ -49,12 +54,14 @@ export async function buildMultipart(params: RequestBodyParameter[]) {
         totalSize += size!;
       });
     }
+/**** ><> ↑ --------- Implementation of addFile function ->  */
 
     const addString = (v: string) => {
       const buffer = Buffer.from(v);
       writeStream.write(buffer);
       totalSize += buffer.length;
     };
+/**** ><> ↑ --------- Implementation of addString function ->  */
 
     for (const param of params) {
       const noName = !param.name;
@@ -121,3 +128,4 @@ export async function buildMultipart(params: RequestBodyParameter[]) {
     writeStream.end();
   });
 }
+/**** ><> ↑ --------- Processing of params ->  */

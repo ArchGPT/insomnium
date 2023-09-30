@@ -8,8 +8,10 @@ import { isCollection, Workspace, WorkspaceScopeKeys } from '../../../models/wor
 import { projectSchema, teamSchema } from '../../__schemas__/type-schemas';
 import { initializeProjectFromTeam, initializeWorkspaceFromBackendProject } from '../initialize-model-from';
 
+/**** ><> ↑ --------- Importing dependencies and setting up the testing environment ->  */
 const teamBuilder = createBuilder(teamSchema);
 const backendProjectBuilder = createBuilder(projectSchema);
+/**** ><> ↑ --------- Creating builders for team and project ->  */
 
 describe('initializeProjectFromTeam', () => {
   beforeEach(globalBeforeEach);
@@ -30,6 +32,7 @@ describe('initializeProjectFromTeam', () => {
     });
   });
 });
+/**** ><> ↑ --------- Test case for the function 'initializeProjectFromTeam' ensuring its accuracy ->  */
 
 describe('initializeWorkspaceFromProject', () => {
   beforeEach(globalBeforeEach);
@@ -52,3 +55,4 @@ describe('initializeWorkspaceFromProject', () => {
     });
   });
 });
+/**** ><> ↑ --------- Test case for the function 'initializeWorkspaceFromBackendProject' ensuring its accuracy ->  */

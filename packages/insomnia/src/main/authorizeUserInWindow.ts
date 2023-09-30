@@ -2,10 +2,12 @@ import { BrowserWindow, dialog } from 'electron';
 
 import * as models from '../models';
 
+/**** ><> ↑ --------- Imports ->  */
 export enum ChromiumVerificationResult {
   BLIND_TRUST = 0,
   USE_CHROMIUM_RESULT = -3
 }
+/**** ><> ↑ --------- ChromiumVerificationResult enum definition ->  */
 
 export enum URLLoadErrorCodes {
   /**
@@ -16,6 +18,7 @@ export enum URLLoadErrorCodes {
    */
   ERR_ABORTED = -3
 }
+/**** ><> ↑ --------- URLLoadErrorCodes enum definition ->  */
 
 export function authorizeUserInWindow({
   url,
@@ -28,6 +31,7 @@ export function authorizeUserInWindow({
   urlFailureRegex: RegExp;
   sessionId: string;
 }): Promise<string> {
+/**** ><> ↑ --------- authorizeUserInWindow function definition ->  */
   return new Promise<string>(async (resolve, reject) => {
     let finalUrl: string | null = null;
 
@@ -35,6 +39,7 @@ export function authorizeUserInWindow({
     const {
       validateAuthSSL,
     } = await models.settings.getOrCreate();
+/**** ><> ↑ --------- authorizeUserInWindow function logic - initial variable setup ->  */
 
     // Create a child window
     const child = new BrowserWindow({
@@ -45,6 +50,7 @@ export function authorizeUserInWindow({
       show: false,
     });
 
+/**** ><> ↑ --------- authorizeUserInWindow function logic - child window setup ->  */
     function _parseUrl(currentUrl: string, source: string) {
       if (currentUrl.match(urlSuccessRegex)) {
         console.log(`[oauth2] ${source}: Matched success redirect to "${currentUrl}" with ${urlSuccessRegex.toString()}`,);
@@ -61,6 +67,7 @@ export function authorizeUserInWindow({
         console.log(`[oauth2] ${source}: Ignoring URL "${currentUrl}". Didn't match ${urlSuccessRegex.toString()}`,);
       }
     }
+/**** ><> ↑ --------- _parseUrl function definition ->  */
 
     // Finish on close
     child.on('close', () => {
@@ -71,6 +78,7 @@ export function authorizeUserInWindow({
         reject(new Error(errorDescription));
       }
     });
+/**** ><> ↑ --------- child window 'close' event handler ->  */
 
     // Select client certificate during login if needed.
     // More Info: https://textslashplain.com/2020/05/04/client-certificate-authentication/
@@ -107,6 +115,7 @@ export function authorizeUserInWindow({
         callback(selectedCertificate);
       });
     });
+/**** ><> ↑ --------- child window 'select-client-certificate' event handler ->  */
 
     // Catch the redirect after login
     child.webContents.on('did-navigate', () => {
@@ -125,6 +134,7 @@ export function authorizeUserInWindow({
       // Listen for did-fail-load to be able to parse the URL even when the callback server is unreachable
       _parseUrl(url, 'did-fail-load');
     });
+/**** ><> ↑ --------- child window 'did-navigate', 'will-redirect' and 'did-fail-load' event handlers ->  */
     child.webContents.session.setCertificateVerifyProc((_request, callback) => {
       if (validateAuthSSL) {
         // Use results of Chromium's cert verification
@@ -137,6 +147,7 @@ export function authorizeUserInWindow({
     // Show the window to the user after it loads
     child.on('ready-to-show', child.show.bind(child));
 
+/**** ><> ↑ --------- child window 'setCertificateVerifyProc' and 'ready-to-show' event handlers ->  */
     try {
       await child.loadURL(url);
     } catch (error) {
@@ -152,3 +163,4 @@ export function authorizeUserInWindow({
     }
   });
 }
+/**** ><> ↑ --------- child window URL loading and error handling ->  */

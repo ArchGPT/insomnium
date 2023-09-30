@@ -6,6 +6,7 @@ import { deleteKeys, resetKeys, shouldIgnoreKey } from '../ignore-keys';
 
 const baseModelBuilder = createBuilder(baseModelSchema);
 const workspaceModelBuilder = createBuilder(workspaceModelSchema);
+/**** ><> ↑ --------- Imports and initial constant setup ->  */
 
 describe('shouldIgnoreKey()', () => {
   it('should always ignore keys', () => {
@@ -29,6 +30,7 @@ describe('shouldIgnoreKey()', () => {
     expect(shouldIgnoreKey('parentId', workspace)).toBe(true);
   });
 });
+/**** ><> ↑ --------- shouldIgnoreKey() function testing: checks which keys should be ignored ->  */
 
 describe('deleteKeys', () => {
   it('should always delete the modified key', () => {
@@ -47,6 +49,7 @@ describe('deleteKeys', () => {
     expect('modified' in workspace).not.toBe(true);
   });
 });
+/**** ><> ↑ --------- deleteKeys function testing: checks if the correct keys are deleted ->  */
 
 describe('resetKeys', () => {
   it('should clear parentId from the workspace', () => {
@@ -65,3 +68,4 @@ describe('resetKeys', () => {
     expect(workspace.parentId).toBeNull();
   });
 });
+/**** ><> ↑ --------- resetKeys function testing: checks if the correct keys are reset ->  */

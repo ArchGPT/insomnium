@@ -5,6 +5,7 @@ import * as models from '../../models';
 import { data as fixtures } from '../__fixtures__/nestedfolders';
 import { _repairDatabase, database as db } from '../database';
 
+/**** ><> ↑ --------- Imports ->  */
 function loadFixture() {
   const promises: Promise<models.BaseModel>[] = [];
   for (const type of Object.keys(fixtures)) {
@@ -15,6 +16,7 @@ function loadFixture() {
   }
   return Promise.all(promises);
 }
+/**** ><> ↑ --------- Load Fixture ->  */
 
 describe('init()', () => {
   beforeEach(globalBeforeEach);
@@ -29,6 +31,7 @@ describe('init()', () => {
     expect((await db.all(models.request.type)).length).toBe(0);
   });
 });
+/**** ><> ↑ --------- Describe init() ->  */
 
 describe('onChange()', () => {
   beforeEach(globalBeforeEach);
@@ -60,6 +63,7 @@ describe('onChange()', () => {
     expect(changesSeen.length).toBe(2);
   });
 });
+/**** ><> ↑ --------- Describe onChange() ->  */
 
 describe('bufferChanges()', () => {
   beforeEach(globalBeforeEach);
@@ -101,6 +105,7 @@ describe('bufferChanges()', () => {
     ]);
   });
 
+/**** ><> ↑ --------- Describe bufferChanges() ->  */
   it('should auto flush after a default wait', async () => {
     const doc = {
       type: models.request.type,
@@ -189,6 +194,7 @@ describe('bufferChangesIndefinitely()', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- Describe bufferChangesIndefinitely() ->  */
 
 describe('requestCreate()', () => {
   beforeEach(globalBeforeEach);
@@ -225,6 +231,7 @@ describe('requestCreate()', () => {
     expect(fn).toThrowError('New Requests missing `parentId`');
   });
 });
+/**** ><> ↑ --------- Describe requestCreate() ->  */
 
 describe('requestGroupDuplicate()', () => {
   beforeEach(async () => {
@@ -260,6 +267,7 @@ describe('requestGroupDuplicate()', () => {
   });
 });
 
+/**** ><> ↑ --------- Describe requestGroupDuplicate() ->  */
 describe('_repairDatabase()', () => {
   beforeEach(globalBeforeEach);
 
@@ -643,6 +651,7 @@ describe('_repairDatabase()', () => {
     );
   });
 });
+/**** ><> ↑ --------- Describe _repairDatabase() ->  */
 
 describe('duplicate()', () => {
   beforeEach(globalBeforeEach);
@@ -684,6 +693,7 @@ describe('duplicate()', () => {
   });
 });
 
+/**** ><> ↑ --------- Describe duplicate() ->  */
 describe('docCreate()', () => {
   beforeEach(globalBeforeEach);
   afterEach(() => jest.restoreAllMocks());
@@ -697,6 +707,7 @@ describe('docCreate()', () => {
     expect(spy).toHaveBeenCalled();
   });
 });
+/**** ><> ↑ --------- Describe docCreate() ->  */
 
 describe('withAncestors()', () => {
   beforeEach(globalBeforeEach);
@@ -744,3 +755,4 @@ describe('withAncestors()', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- Describe withAncestors() ->  */

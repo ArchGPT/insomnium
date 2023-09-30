@@ -1,6 +1,7 @@
 import { Cookie, CookieJar, CookieJSON } from 'tough-cookie';
 
 import type { Cookie as CookieModel } from '../models/cookie-jar';
+/**** ><> ↑ --------- Import statements ->  */
 
 /**
  * Get a list of cookie objects from a request.jar()
@@ -18,6 +19,7 @@ export const cookiesFromJar = (cookieJar: CookieJar): Promise<CookieJSON[]> => {
     });
   });
 };
+/**** ><> ↑ --------- Function to get a list of cookie objects from a request jar ->  */
 
 /**
  * Get a request.jar() from a list of cookie objects
@@ -40,6 +42,7 @@ export const jarFromCookies = (cookies: Cookie[] | CookieModel[]) => {
 
   return jar;
 };
+/**** ><> ↑ --------- Function to get a request jar from a list of cookie objects ->  */
 
 export const cookieToString = (cookie: Parameters<typeof Cookie.fromJSON>[0] | Cookie) => {
   // Cookie can either be a plain JS object or Cookie instance
@@ -60,3 +63,4 @@ export const cookieToString = (cookie: Parameters<typeof Cookie.fromJSON>[0] | C
 
   return str;
 };
+/**** ><> ↑ --------- Function to convert a cookie to string ->  */

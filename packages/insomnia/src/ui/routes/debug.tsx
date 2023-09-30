@@ -17,6 +17,7 @@ import {
   SelectValue,
   useDragAndDrop,
 } from 'react-aria-components';
+/**** ><> ↑ --------- Import statements ->  */
 import {
   LoaderFunction,
   redirect,
@@ -46,6 +47,7 @@ import { isRequestGroup } from '../../models/request-group';
 import { getByParentId as getRequestMetaByParentId } from '../../models/request-meta';
 import {
   isWebSocketRequest,
+/**** ><> ↑ --------- Models and Database related ->  */
   isWebSocketRequestId,
 } from '../../models/websocket-request';
 import { invariant } from '../../utils/invariant';
@@ -69,6 +71,7 @@ import { PlaceholderRequestPane } from '../components/panes/placeholder-request-
 import { RequestPane } from '../components/panes/request-pane';
 import { ResponsePane } from '../components/panes/response-pane';
 import { SidebarLayout } from '../components/sidebar-layout';
+/**** ><> ↑ --------- Modal and Dropdown components ->  */
 import { getMethodShortHand } from '../components/tags/method-tag';
 import { ConnectionCircle } from '../components/websockets/action-bar';
 import { RealtimeResponsePane } from '../components/websockets/realtime-response-pane';
@@ -92,6 +95,7 @@ export interface GrpcMessage {
   text: string;
   created: number;
 }
+/**** ><> ↑ --------- Pane components ->  */
 
 export interface GrpcRequestState {
   requestId: string;
@@ -111,6 +115,7 @@ const INITIAL_GRPC_REQUEST_STATE = {
   error: undefined,
   methods: [],
 };
+/**** ><> ↑ --------- Request-related hooks and functions ->  */
 export const loader: LoaderFunction = async ({ params }) => {
   if (!params.requestId) {
     const { projectId, workspaceId, organizationId } = params;
@@ -139,6 +144,7 @@ const EventStreamSpinner = ({ requestId }: { requestId: string }) => {
   const readyState = useReadyState({ requestId, protocol: 'curl' });
   return readyState ? <ConnectionCircle data-testid="EventStreamSpinner__Connected" /> : null;
 };
+/**** ><> ↑ --------- Spinner components ->  */
 
 export const Debug: FC = () => {
   const {
@@ -1075,3 +1081,4 @@ export const Debug: FC = () => {
 };
 
 export default Debug;
+/**** ><> ↑ --------- Debug component ->  */

@@ -11,8 +11,10 @@ import { DEFAULT_PROJECT_ID } from '../../../models/project';
 import { GIT_CLONE_DIR, GIT_INSOMNIA_DIR, GIT_INSOMNIA_DIR_NAME } from '../git-vcs';
 import { NeDBClient } from '../ne-db-client';
 import { assertAsyncError, setupDateMocks } from './util';
+/**** ><> ↑ --------- Imported Libraries ->  */
 
 const workspaceBuilder = createBuilder(workspaceModelSchema);
+/**** ><> ↑ --------- Initialized workspaceBuilder ->  */
 
 describe('NeDBClient', () => {
   afterAll(() => jest.restoreAllMocks());
@@ -40,6 +42,7 @@ describe('NeDBClient', () => {
       parentId: 'wrk_1',
     });
   });
+/**** ><> ↑ --------- NeDBClient Test ->  */
 
   describe('readdir()', () => {
     it('reads model IDs from model type folders', async () => {
@@ -65,6 +68,7 @@ describe('NeDBClient', () => {
       expect(await neDbClient.readdir(wrkDir)).toEqual(['wrk_1.yml']);
     });
   });
+/**** ><> ↑ --------- Read Directory Test ->  */
 
   describe('readFile()', () => {
     it('reads file from model/id folders', async () => {
@@ -87,6 +91,7 @@ describe('NeDBClient', () => {
       await assertAsyncError(pNeDB.readFile(reqXYml));
     });
   });
+/**** ><> ↑ --------- Read File Test ->  */
 
   describe('stat()', () => {
     it('stats a dir', async () => {
@@ -109,6 +114,7 @@ describe('NeDBClient', () => {
       expect(await neDbClient.stat(path.join(reqDir, 'req_2.yml'))).toEqual(fileType);
     });
   });
+/**** ><> ↑ --------- Stat Test ->  */
 
   describe('writeFile()', () => {
     it('should ignore files not in GIT_INSOMNIA_DIR directory', async () => {
@@ -129,6 +135,7 @@ describe('NeDBClient', () => {
       // Cleanup
       upsertSpy.mockRestore();
     });
+/**** ><> ↑ --------- Write File Test 1 ->  */
 
     it('should write files in GIT_INSOMNIA_DIR directory to db', async () => {
       // Arrange
@@ -149,6 +156,7 @@ describe('NeDBClient', () => {
       // Cleanup
       upsertSpy.mockRestore();
     });
+/**** ><> ↑ --------- Write File Test 2 ->  */
 
     it('should set workspace parentId to the project', async () => {
       // Arrange
@@ -176,6 +184,7 @@ describe('NeDBClient', () => {
       // Cleanup
       upsertSpy.mockRestore();
     });
+/**** ><> ↑ --------- Write File Test 3 ->  */
 
     it('should throw error if id does not match', async () => {
       // Arrange
@@ -194,6 +203,7 @@ describe('NeDBClient', () => {
         'Doc _id does not match file path [env_1 != env_2]',
       );
     });
+/**** ><> ↑ --------- Write File Test 4 ->  */
 
     it('should throw error if type does not match', async () => {
       // Arrange
@@ -212,6 +222,7 @@ describe('NeDBClient', () => {
         'Doc type does not match file path [Environment != Request]',
       );
     });
+/**** ><> ↑ --------- Write File Test 5 ->  */
   });
 
   describe('mkdir()', () => {
@@ -223,3 +234,4 @@ describe('NeDBClient', () => {
     });
   });
 });
+/**** ><> ↑ --------- Make Directory Test ->  */

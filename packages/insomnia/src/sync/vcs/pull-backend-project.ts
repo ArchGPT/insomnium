@@ -9,12 +9,14 @@ import {
 import { BackendProjectWithTeam } from './normalize-backend-project-team';
 import { interceptAccessError } from './util';
 import { VCS } from './vcs';
+/**** ><> ↑ --------- Importing necessary modules and definitions from different files ->  */
 
 interface Options {
   vcs: VCS;
   backendProject: BackendProjectWithTeam;
   remoteProjects: RemoteProject[];
 }
+/**** ><> ↑ --------- Defining the interface Options for the function ->  */
 
 export const pullBackendProject = async ({
   vcs,
@@ -30,6 +32,7 @@ export const pullBackendProject = async ({
     resourceName: backendProject.name,
   });
 
+/**** ><> ↑ --------- Exporting and defining an async function 'pullBackendProject' with logic to set the backend project and perform some operations ->  */
   const defaultBranchMissing = !remoteBranches.includes(DEFAULT_BRANCH_NAME);
 
   // Find or create the remote project locally
@@ -40,8 +43,10 @@ export const pullBackendProject = async ({
     project = await initializeProjectFromTeam(backendProject.team);
     await database.upsert(project);
   }
+/**** ><> ↑ --------- Finding or creating the remote project locally ->  */
 
   let workspaceId;
+/**** ><> ↑ --------- Defining variable workspaceId ->  */
 
   // The default branch does not exist, so we create it and the workspace locally
   if (defaultBranchMissing) {
@@ -53,6 +58,7 @@ export const pullBackendProject = async ({
 
     workspaceId = workspace._id;
   } else {
+/**** ><> ↑ --------- If the default branch does not exist, creating it and the workspace locally ->  */
     await vcs.pull([], project.remoteId); // There won't be any existing docs since it's a new pull
 
     const flushId = await database.bufferChanges();
@@ -68,6 +74,8 @@ export const pullBackendProject = async ({
 
     await database.flushChanges(flushId);
   }
+/**** ><> ↑ --------- If the default branch exists, pulling the project and processing the documents ->  */
 
   return { project, workspaceId };
 };
+/**** ><> ↑ --------- Returning the project and workspaceId from the function ->  */

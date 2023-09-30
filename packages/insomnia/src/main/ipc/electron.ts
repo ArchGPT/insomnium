@@ -6,6 +6,7 @@ import type { NunjucksParsedTagArg } from '../../templating/utils';
 import { localTemplateTags } from '../../ui/components/templating/local-template-tags';
 import { invariant } from '../../utils/invariant';
 
+/**** ><> ↑ --------- Import statements ->  */
 const getTemplateValue = (arg: NunjucksParsedTagArg) => {
   if (arg.defaultValue === undefined) {
     return "''";
@@ -15,6 +16,7 @@ const getTemplateValue = (arg: NunjucksParsedTagArg) => {
   }
   return arg.defaultValue;
 };
+/**** ><> ↑ --------- Function to get template value ->  */
 export function registerElectronHandlers() {
   ipcMain.on('show-context-menu', (event, options) => {
     try {
@@ -111,3 +113,4 @@ export function registerElectronHandlers() {
     event.returnValue = app.getAppPath();
   });
 }
+/**** ><> ↑ --------- Registrations of main process handlers ->  */

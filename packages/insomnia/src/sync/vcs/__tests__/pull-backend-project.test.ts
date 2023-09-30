@@ -12,12 +12,15 @@ import MemoryDriver from '../../store/drivers/memory-driver';
 import { pullBackendProject } from '../pull-backend-project';
 import { VCS } from '../vcs';
 
+/**** ><> ↑ --------- Import statements and variable declarations ->  */
 jest.mock('../vcs');
 
 const backendProject = createBuilder(backendProjectWithTeamSchema).build();
 
+/**** ><> ↑ --------- Mocking the VCS module ->  */
 const newMockedVcs = () => mocked(new VCS(new MemoryDriver()), true);
 
+/**** ><> ↑ --------- Variable declaration for backendProject and newMockedVcs function ->  */
 describe('pullBackendProject()', () => {
   let vcs = newMockedVcs();
 
@@ -31,6 +34,7 @@ describe('pullBackendProject()', () => {
     expect(vcs.setBackendProject).toHaveBeenCalledWith(backendProject);
     expect(vcs.checkout).toHaveBeenCalledWith([], DEFAULT_BRANCH_NAME);
   });
+/**** ><> ↑ --------- beforeEach and afterEach blocks for the main test function ->  */
 
   describe('creating a new project', () => {
     beforeEach(() => {
@@ -41,6 +45,7 @@ describe('pullBackendProject()', () => {
       expect(vcs.pull).not.toHaveBeenCalledWith([], expect.anything());
     });
 
+/**** ><> ↑ --------- describe block for creating a new project ->  */
     it('should use existing project', async () => {
       // Arrange
       const project = await models.project.create({
@@ -64,6 +69,7 @@ describe('pullBackendProject()', () => {
         scope: 'collection',
       }));
     });
+/**** ><> ↑ --------- Test case for using an existing project ->  */
 
     it('should insert a project and workspace with parent', async () => {
       // Act
@@ -83,6 +89,7 @@ describe('pullBackendProject()', () => {
         scope: 'collection',
       }));
     });
+/**** ><> ↑ --------- Test cases for creating a new project and workspace ->  */
 
     it('should update a workspace if the name or parentId is different', async () => {
       // Arrange
@@ -104,6 +111,7 @@ describe('pullBackendProject()', () => {
       }));
     });
   });
+/**** ><> ↑ --------- Test cases for updating a workspace ->  */
 
   describe('pulling an existing project', () => {
     it('should overwrite the parentId only for a workspace with the project id', async () => {
@@ -137,6 +145,7 @@ describe('pullBackendProject()', () => {
       expect(vcs.pull).toHaveBeenCalledWith([], project?.remoteId);
     });
   });
+/**** ><> ↑ --------- describe block for pulling an existing project ->  */
 
   it('should throw the corrected intercepted error', async () => {
     // Arrange
@@ -150,3 +159,4 @@ describe('pullBackendProject()', () => {
     await expect(action).rejects.toThrowError('You no longer have permission to pull the "name" collection.  Contact your team administrator if you think this is an error.');
   });
 });
+/**** ><> ↑ --------- Test case for throwing an intercepted error ->  */

@@ -1,4 +1,5 @@
 /* eslint-disable prefer-rest-params -- don't want to change ...arguments usage for these sensitive functions without more testing */
+/**** ><> ↑ --------- Disable eslint rule for rest parameters ->  */
 import electron from 'electron';
 import NeDB from 'nedb';
 import fsPath from 'path';
@@ -14,6 +15,7 @@ import type { Workspace } from '../models/workspace';
 import { DB_PERSIST_INTERVAL } from './constants';
 import { generateId } from './misc';
 
+/**** ><> ↑ --------- Import statements ->  */
 export interface Query {
   _id?: string | SpecificQuery;
   parentId?: string | SpecificQuery | null;
@@ -37,8 +39,10 @@ export interface SpecificQuery {
   $nin?: string[];
 }
 
+/**** ><> ↑ --------- Interface and types definition ->  */
 export type ModelQuery<T extends BaseModel> = Partial<Record<keyof T, SpecificQuery>>;
 export type ChangeType = 'insert' | 'update' | 'remove';
+/**** ><> ↑ --------- ModelQuery and ChangeType definitions ->  */
 export const database = {
   all: async function<T extends BaseModel>(type: string) {
     if (db._empty) {
@@ -648,11 +652,13 @@ export const database = {
     return next([doc]);
   },
 };
+/**** ><> ↑ --------- Database object with helper functions ->  */
 
 interface DB {
   [index: string]: NeDB;
 }
 
+/**** ><> ↑ --------- DB interface ->  */
 // @ts-expect-error -- TSCONVERSION _empty doesn't match the index signature, use something other than _empty in future
 const db: DB = {
   _empty: true,
@@ -688,6 +694,7 @@ let changeListeners: ChangeListener[] = [];
 
 async function notifyOfChange<T extends BaseModel>(event: ChangeType, doc: T, fromSync: boolean) {
   const updatedDoc = doc;
+  /**** ><> ↑ --------- Helpers ->  */
 
   changeBuffer.push([event, updatedDoc, fromSync]);
 
@@ -720,6 +727,7 @@ async function _send<T>(fnName: string, ...args: any[]) {
   });
 }
 
+/**** ><> ↑ --------- Change Listeners ->  */
 /**
  * Run various database repair scripts
  */
@@ -754,6 +762,7 @@ async function _applyApiSpecName(workspace: Workspace) {
     });
   }
 }
+/**** ><> ↑ --------- Default Model Stuff ->  */
 
 /**
  * This function repairs workspaces that have multiple base environments. Since a workspace
@@ -796,6 +805,7 @@ async function _repairBaseEnvironments(workspace: Workspace) {
   await database.update(chosenBase);
   console.log(`[fix] Merged ${baseEnvironments.length} base environments under ${workspace.name}`);
 }
+/**** ><> ↑ --------- Helpers ->  */
 
 /**
  * This function repairs workspaces that have multiple cookie jars. Since a workspace

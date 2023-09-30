@@ -4,6 +4,7 @@ import path from 'path';
 import { convertToOsSep, convertToPosixSep } from '../path-sep';
 
 jest.mock('path');
+/**** ><> ↑ --------- Import section - Loading necessary modules ->  */
 
 describe('convertToPosixSep()', () => {
   it('should handle empty string', () => {
@@ -16,6 +17,7 @@ describe('convertToPosixSep()', () => {
     expect(convertToPosixSep(input)).toBe(posix);
   });
 });
+/**** ><> ↑ --------- Test block 1 for conversion to POSIX separators ->  */
 
 describe.each(['win32', 'posix'])('convertToOsSep() where os is %s', osType => {
   beforeAll(() => path.__mockPath(osType));
@@ -28,3 +30,4 @@ describe.each(['win32', 'posix'])('convertToOsSep() where os is %s', osType => {
     expect(convertToOsSep(input)).toBe(output);
   });
 });
+/**** ><> ↑ --------- Test block 2 for conversion to OS specific separators ->  */

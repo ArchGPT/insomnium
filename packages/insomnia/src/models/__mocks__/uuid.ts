@@ -2,6 +2,7 @@ let v1Counter = 0;
 
 let v4Counter = 0;
 
+/**** ><> ↑ --------- Variable Declarations ->  */
 const v1UUIDs = [
   'f7272c80-f493-11e6-bc64-92361f002671',
   'f7272f0a-f493-11e6-bc64-92361f002671',
@@ -14,6 +15,7 @@ const v1UUIDs = [
   'f7273f7c-f493-11e6-bc64-92361f002671',
   'f7274300-f493-11e6-bc64-92361f002671',
 ];
+/**** ><> ↑ --------- v1UUIDs Array ->  */
 
 const v4UUIDs = [
   'cc1dd2ca-4275-747a-a881-99e8efd42403',
@@ -192,6 +194,7 @@ const v4UUIDs = [
   'f8be054e-651d-4542-a3e4-681a4a2ec9d0',
   '966e9995-938a-4a5e-813c-de3691dddb3a',
 ];
+/**** ><> ↑ --------- v4UUIDs Array ->  */
 
 function v1() {
   const uuid = v1UUIDs[v1Counter++];
@@ -201,6 +204,7 @@ function v1() {
 
   return uuid;
 }
+/**** ><> ↑ --------- v1 Function ->  */
 
 function v4() {
   const uuid = v4UUIDs[v4Counter++];
@@ -210,8 +214,10 @@ function v4() {
 
   return uuid;
 }
+/**** ><> ↑ --------- v4 Function ->  */
 
 // WARNING: changing this to `export default` will break the mock and be incredibly hard to debug. Ask me how I know.
 module.exports = () => v4();
 module.exports.v4 = () => v4();
 module.exports.v1 = () => v1();
+/**** ><> ↑ --------- Export Module ->  */

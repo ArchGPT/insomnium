@@ -46,6 +46,7 @@ export interface Snapshot {
     email: string;
   };
 }
+/**** ><> ↑ --------- Interface Definitions - Snapshot and related ->  */
 
 export interface Branch {
   name: string;
@@ -53,6 +54,7 @@ export interface Branch {
   modified: Date;
   snapshots: string[];
 }
+/**** ><> ↑ --------- Interface Definition - Branch ->  */
 
 export interface StageEntryDelete {
   deleted: true;
@@ -60,6 +62,7 @@ export interface StageEntryDelete {
   name: string;
   blobId: string;
 }
+/**** ><> ↑ --------- Interface Definitions ->  */
 
 export interface StageEntryAdd {
   added: true;
@@ -76,8 +79,10 @@ export interface StageEntryModify {
   blobId: string;
   blobContent: string;
 }
+/**** ><> ↑ --------- Interface Definitions - Stage Entries ->  */
 
 export type StageEntry = StageEntryDelete | StageEntryAdd | StageEntryModify;
+/**** ><> ↑ --------- Export Type Definition - StageEntry ->  */
 
 export interface MergeConflict {
   name: string;
@@ -87,19 +92,24 @@ export interface MergeConflict {
   theirsBlob: BlobId | null;
   choose: BlobId | null;
 }
+/**** ><> ↑ --------- Interface Definition - MergeConflict ->  */
 
 export type Stage = Record<DocumentKey, StageEntry>;
+/**** ><> ↑ --------- Export Type Definition - Stage ->  */
 
 export interface StatusCandidate {
   key: DocumentKey;
   name: string;
   document: BaseModel;
 }
+/**** ><> ↑ --------- Interface Definition - StatusCandidate ->  */
 
 export type StatusCandidateMap = Record<DocumentKey, StatusCandidate>;
+/**** ><> ↑ --------- Export Type Definition - StatusCandidateMap ->  */
 
 export interface Status {
   key: string;
   stage: Stage;
   unstaged: Record<DocumentKey, StageEntry>;
 }
+/**** ><> ↑ --------- Interface Definition - Status ->  */

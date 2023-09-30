@@ -6,6 +6,7 @@ import { bundleAndLoadRuleset } from '@stoplight/spectral-ruleset-bundler/with-l
 import { oas } from '@stoplight/spectral-rulesets';
 import { app, BrowserWindow, ipcMain, IpcRendererEvent, shell } from 'electron';
 import fs from 'fs';
+/**** ><> ↑ --------- Import external dependencies ->  */
 
 
 import { authorizeUserInWindow } from '../authorizeUserInWindow';
@@ -17,6 +18,7 @@ import { CurlBridgeAPI } from '../network/curl';
 import { cancelCurlRequest, curlRequest } from '../network/libcurl-promise';
 import { WebSocketBridgeAPI } from '../network/websocket';
 import { gRPCBridgeAPI } from './grpc';
+/**** ><> ↑ --------- Import internal dependencies ->  */
 
 export interface MainBridgeAPI {
   loginStateChange: () => void;
@@ -43,6 +45,7 @@ export interface MainBridgeAPI {
   insomniaFetch: typeof insomniaFetch;
   showContextMenu: (options: { key: string }) => void;
 }
+/**** ><> ↑ --------- Interface definition for MainBridgeAPI ->  */
 export function registerMainHandlers() {
   ipcMain.handle('insomniaFetch', async (_, options: Parameters<typeof insomniaFetch>[0]) => {
     return insomniaFetch(options);
@@ -65,6 +68,7 @@ export function registerMainHandlers() {
     const { url, urlSuccessRegex, urlFailureRegex, sessionId } = options;
     return authorizeUserInWindow({ url, urlSuccessRegex, urlFailureRegex, sessionId });
   });
+/**** ><> ↑ --------- Register Main Handlers: insomniaFetch, axiosRequest loginStateChange, backup, restoreBackup, authorizeUserInWindow ->  */
 
   ipcMain.handle('writeFile', async (_, options: { path: string; content: string }) => {
     try {
@@ -74,6 +78,7 @@ export function registerMainHandlers() {
       throw new Error(err);
     }
   });
+/**** ><> ↑ --------- Register Main Handlers: writeFile ->  */
 
   ipcMain.handle('curlRequest', (_, options: Parameters<typeof curlRequest>[0]) => {
     return curlRequest(options);
@@ -82,6 +87,7 @@ export function registerMainHandlers() {
   ipcMain.on('cancelCurlRequest', (_, requestId: string): void => {
     cancelCurlRequest(requestId);
   });
+/**** ><> ↑ --------- Register Main Handlers: curlRequest, cancelCurlRequest ->  */
 
   ipcMain.on('trackSegmentEvent', (_, options: {}): void => {
   //  removed tracking from insomnia
@@ -89,15 +95,18 @@ export function registerMainHandlers() {
   ipcMain.on('trackPageView', (_, options: { name: string }): void => {
     // removed tracking from insomnia
   });
+/**** ><> ↑ --------- Register Main Handlers: trackSegmentEvent, trackPageView ->  */
 
   ipcMain.handle('installPlugin', (_, lookupName: string) => {
     return installPlugin(lookupName);
   });
+/**** ><> ↑ --------- Register Main Handlers: installPlugin ->  */
 
   ipcMain.on('restart', () => {
     app.relaunch();
     app.exit();
   });
+/**** ><> ↑ --------- Register Main Handlers: restart ->  */
 
   ipcMain.on('openInBrowser', (_, href: string) => {
     const { protocol } = new URL(href);
@@ -106,6 +115,7 @@ export function registerMainHandlers() {
       shell.openExternal(href);
     }
   });
+/**** ><> ↑ --------- Register Main Handlers: openInBrowser ->  */
 
   ipcMain.handle('spectralRun', async (_, { contents, rulesetPath }: {
     contents: string;
@@ -136,3 +146,4 @@ export function registerMainHandlers() {
     return diagnostics;
   });
 }
+/**** ><> ↑ --------- Register Main Handlers: spectralRun ->  */

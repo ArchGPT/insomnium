@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import * as models from '../index';
 
+/**** ><> ↑ --------- Importing necessary modules and setting up global variables ->  */
 describe('init()', () => {
   beforeEach(globalBeforeEach);
 
@@ -13,6 +14,7 @@ describe('init()', () => {
     });
   });
 });
+/**** ><> ↑ --------- Testing the 'init' function, confirming that it contains all required fields ->  */
 
 describe('create()', () => {
   beforeEach(globalBeforeEach);
@@ -35,6 +37,7 @@ describe('create()', () => {
     expect(request).toEqual(expected);
     expect(await models.grpcRequestMeta.getOrCreateByParentId(expected.parentId)).toEqual(expected);
   });
+/**** ><> ↑ --------- Testing the 'create' function, ensuring a valid GrpcRequest is created ->  */
 
   it('creates a valid GrpcRequestMeta if it does not exist', async () => {
     Date.now = jest.fn().mockReturnValue(1478795580200);
@@ -50,6 +53,7 @@ describe('create()', () => {
     };
     expect(request).toEqual(expected);
   });
+/**** ><> ↑ --------- Testing the ability to create a valid GrpcRequestMeta if it does not exist ->  */
 
   it('fails when missing parentId', async () => {
     expect(() =>
@@ -58,6 +62,7 @@ describe('create()', () => {
       }),
     ).toThrow('New GrpcRequestMeta missing `parentId`');
   });
+/**** ><> ↑ --------- Testing scenarios where creation fails when parentId is missing ->  */
 
   it('fails when parentId prefix is not that of a GrpcRequest', async () => {
     expect(() =>
@@ -67,3 +72,4 @@ describe('create()', () => {
     ).toThrow('Expected the parent of GrpcRequestMeta to be a GrpcRequest');
   });
 });
+/**** ><> ↑ --------- Testing scenarios where creation fails when parentId prefix is not that of a GrpcRequest ->  */

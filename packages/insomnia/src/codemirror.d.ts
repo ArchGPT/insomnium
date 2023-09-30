@@ -4,10 +4,12 @@ import { GraphQLInfoOptions } from 'codemirror-graphql/info';
 import { ModifiedGraphQLJumpOptions } from 'codemirror-graphql/jump';
 import { GraphQLSchema } from 'graphql';
 
+/**** ><> ↑ --------- Third-party library imports ->  */
 import { HandleGetRenderContext, HandleRender } from './common/render';
 import { Settings } from './models/settings';
 import { NunjucksParsedTag } from './templating/utils';
 
+/**** ><> ↑ --------- Relative imports ->  */
 type LinkClickCallback = (url: string) => void;
 
 interface InsomniaExtensions {
@@ -21,6 +23,7 @@ interface InsomniaExtensions {
   makeLinksClickable: (handleClick: LinkClickCallback) => void;
 }
 
+/**** ><> ↑ --------- Definition of custom types ->  */
 declare module 'codemirror' {
   type CodeMirrorLinkClickCallback = LinkClickCallback;
 
@@ -105,3 +108,4 @@ declare module 'codemirror' {
 
   const keyNames: Record<number, string>;
 }
+/**** ><> ↑ --------- Module declaration extensions ->  */

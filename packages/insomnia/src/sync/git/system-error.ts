@@ -13,6 +13,7 @@ interface SystemErrorConstructor {
   /** The name of the system call that triggered the error */
   syscall: 'write' | 'rmdir' | 'open' | 'scandir';
 }
+/**** ><> ↑ --------- SystemErrorConstructor interface definition ->  */
 
 /**
  * This is basically Node's SystemError, which Node (intentionally) does not expose to prevent people from doing... exactly what we're doing with it (which is throw a SystemError even though we're not System).
@@ -44,3 +45,4 @@ export class SystemError extends Error {
     this.syscall = syscall;
   }
 }
+/**** ><> ↑ --------- SystemError class definition ->  */

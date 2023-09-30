@@ -1,7 +1,9 @@
 import * as git from 'isomorphic-git';
 import path from 'path';
+/**** ><> ↑ --------- Module imports ->  */
 
 type Methods = 'readFile' | 'writeFile' | 'unlink' | 'readdir' | 'mkdir' | 'rmdir' | 'stat' | 'lstat' | 'readlink' | 'symlink';
+/**** ><> ↑ --------- Type declaration ->  */
 
 /**
  * An isometric-git FS client that can route to various client depending on what the filePath is.
@@ -10,6 +12,7 @@ type Methods = 'readFile' | 'writeFile' | 'unlink' | 'readdir' | 'mkdir' | 'rmdi
  * @param otherFS – map of path prefixes to clients
  * @returns {{promises: *}}
  */
+/**** ><> ↑ --------- Documentation for routableFSClient function ->  */
 export function routableFSClient(
   defaultFS: git.PromiseFsClient,
   otherFS: Record<string, git.PromiseFsClient>,
@@ -35,6 +38,7 @@ export function routableFSClient(
     // console.log('[routablefs] Executing', method, filePath, { args }, { result });
     return result;
   };
+/**** ><> ↑ --------- Declaration and definition of routableFSClient function ->  */
 
   // @ts-expect-error -- TSCONVERSION declare and initialize together to avoid an error
   const methods: git.CallbackFsClient = {};
@@ -48,7 +52,9 @@ export function routableFSClient(
   methods.lstat = execMethod.bind(methods, 'lstat');
   methods.readlink = execMethod.bind(methods, 'readlink');
   methods.symlink = execMethod.bind(methods, 'symlink');
+/**** ><> ↑ --------- Initializing and binding methods to execMethod ->  */
   return {
     promises: methods,
   };
 }
+/**** ><> ↑ --------- Returning the methods as promises ->  */

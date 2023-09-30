@@ -5,6 +5,7 @@ import { getApiBaseURL, getAppWebsiteBaseURL, getGitHubGraphQLApiURL } from '../
 export const GITHUB_TOKEN_STORAGE_KEY = 'github-oauth-token';
 export const GITHUB_GRAPHQL_API_URL = getGitHubGraphQLApiURL();
 const getOauthPageURL = () => getAppWebsiteBaseURL() + '/oauth/github';
+/**** ><> ↑ --------- Importing modules and declaring constants ->  */
 
 /**
  * This cache stores the states that are generated for the OAuth flow.
@@ -12,6 +13,7 @@ const getOauthPageURL = () => getAppWebsiteBaseURL() + '/oauth/github';
  * More info https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps#2-users-are-redirected-back-to-your-site-by-github
  */
 const statesCache = new Set<string>();
+/**** ><> ↑ --------- Set instantiation for cache storage ->  */
 
 export function generateAuthorizationUrl() {
   const state = v4();
@@ -29,6 +31,7 @@ export function generateAuthorizationUrl() {
 
   return url.toString();
 }
+/**** ><> ↑ --------- Function to generate an authorization URL ->  */
 
 export async function exchangeCodeForToken({
   code,
@@ -57,6 +60,7 @@ export async function exchangeCodeForToken({
     setAccessToken(result.data.access_token);
   });
 }
+/**** ><> ↑ --------- Function to exchange code for token ->  */
 
 export function getAccessToken() {
   return localStorage.getItem(GITHUB_TOKEN_STORAGE_KEY);
@@ -69,3 +73,4 @@ export function setAccessToken(token: string) {
 export function signOut() {
   localStorage.removeItem(GITHUB_TOKEN_STORAGE_KEY);
 }
+/**** ><> ↑ --------- Functions to get, set, and sign out access token ->  */

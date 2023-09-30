@@ -3,10 +3,12 @@ import { v4 as uuid } from 'uuid';
 
 import { getApiBaseURL } from '../../common/constants';
 
+/**** ><> ↑ --------- Dependencies imports ->  */
 const env = process['env'];
 
 // Warning: As this is a global fetch we need to handle errors, retries and caching
 // GitLab API config
+/**** ><> ↑ --------- Global environment variable and comments ->  */
 const getGitLabConfig = async () => {
   const { INSOMNIA_GITLAB_REDIRECT_URI, INSOMNIA_GITLAB_CLIENT_ID } = env;
 
@@ -36,6 +38,7 @@ const getGitLabConfig = async () => {
     };
   });
 };
+/**** ><> ↑ --------- getGitLabConfig function declaration ->  */
 
 export const getGitLabOauthApiURL = () =>
   env.INSOMNIA_GITLAB_API_URL || 'https://gitlab.com';
@@ -49,13 +52,14 @@ function base64URLEncode(buffer: Buffer) {
     .replace(/\//g, '_')
     .replace(/=/g, '');
 }
-
+/**** ><> ↑ --------- Constants and utility function declarations ->  */
 /**
  * This cache stores the states that are generated for the OAuth flow.
  * This is used to check if a command to exchange a code for a token has been initiated by the app or not.
  */
 const statesCache = new Map<string, string>();
 
+/**** ><> ↑ --------- Cache variable declaration ->  */
 export async function generateAuthorizationUrl() {
   const state = uuid();
 
@@ -91,6 +95,7 @@ export async function generateAuthorizationUrl() {
 
   return gitlabURL.toString();
 }
+/**** ><> ↑ --------- generateAuthorizationUrl function declaration ->  */
 
 export async function exchangeCodeForGitLabToken(input: {
   code: string;
@@ -127,6 +132,7 @@ export async function exchangeCodeForGitLabToken(input: {
     setAccessToken(result.data.access_token, result.data.refresh_token);
   });
 }
+/**** ><> ↑ --------- exchangeCodeForGitLabToken function declaration ->  */
 
 export async function refreshToken() {
   const refreshToken = localStorage.getItem(GITLAB_REFRESH_TOKEN_STORAGE_KEY);
@@ -155,6 +161,7 @@ export async function refreshToken() {
     return result.data.access_token;
   });
 }
+/**** ><> ↑ --------- refreshToken function declaration ->  */
 
 export function getAccessToken() {
   return localStorage.getItem(GITLAB_TOKEN_STORAGE_KEY);
@@ -168,8 +175,10 @@ export function setAccessToken(token: string, refreshToken: string) {
   localStorage.setItem(GITLAB_TOKEN_STORAGE_KEY, token);
   localStorage.setItem(GITLAB_REFRESH_TOKEN_STORAGE_KEY, refreshToken);
 }
+/**** ><> ↑ --------- Various token-related function declarations ->  */
 
 export function signOut() {
   localStorage.removeItem(GITLAB_TOKEN_STORAGE_KEY);
   localStorage.removeItem(GITLAB_REFRESH_TOKEN_STORAGE_KEY);
 }
+/**** ><> ↑ --------- signOut function declaration ->  */

@@ -5,6 +5,7 @@ import { httpClient } from './http-client';
 import { convertToOsSep, convertToPosixSep } from './path-sep';
 import { gitCallbacks } from './utils';
 
+/**** ><> ↑ --------- Module imports ->  */
 export interface GitAuthor {
   name: string;
   email: string;
@@ -32,6 +33,7 @@ interface GitCredentialsOAuth {
 }
 
 export type GitCredentials = GitCredentialsBase | GitCredentialsOAuth;
+/**** ><> ↑ --------- Interface definitions for GitAuthor, GitRemoteConfig, GitCredentialsBase, GitCredentialsOAuth ->  */
 
 export const isGitCredentialsOAuth = (
   credentials: GitCredentials
@@ -48,6 +50,7 @@ export interface GitTimestamp {
   timestamp: number;
 }
 
+/**** ><> ↑ --------- Function and Type definitions ->  */
 export interface GitLogEntry {
   oid: string;
   commit: {
@@ -92,6 +95,7 @@ export const GIT_INTERNAL_DIR = path.join(GIT_CLONE_DIR, gitInternalDirName);
 export const GIT_INSOMNIA_DIR = path.join(GIT_CLONE_DIR, GIT_INSOMNIA_DIR_NAME);
 
 interface BaseOpts {
+/**** ><> ↑ --------- Interface definitions for GitLogEntry, InitOptions, InitFromCloneOptions, and BaseOpts ->  */
   dir: string;
   gitdir?: string;
   fs: git.CallbackFsClient | git.PromiseFsClient;
@@ -128,6 +132,7 @@ export class GitVCS {
       console.log(`[git] Initialized repo in ${gitDirectory}`);
       let defaultBranch = 'main';
 
+/**** ><> ↑ --------- Definition of the GitVCS class along with its properties ->  */
       try {
         const url = await this.getRemoteOriginURI();
         if (!url) {
@@ -564,6 +569,8 @@ export class GitVCS {
     });
     return newBranches;
   }
+/**** ><> ↑ --------- Implementation of the methods for the GitVCS class ->  */
 }
 
 export default new GitVCS();
+/**** ><> ↑ --------- Export the GitVCS class instance ->  */

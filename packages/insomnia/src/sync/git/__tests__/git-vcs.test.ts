@@ -5,6 +5,7 @@ import path from 'path';
 import GitVCS, { GIT_CLONE_DIR, GIT_INSOMNIA_DIR } from '../git-vcs';
 import { MemClient } from '../mem-client';
 import { setupDateMocks } from './util';
+/**** ><> ↑ --------- Importing modules ->  */
 
 describe('Git-VCS', () => {
   let fooTxt = '';
@@ -159,6 +160,7 @@ First commit!
       expect((await GitVCS.log()).length).toBe(1);
     });
   });
+/**** ><> ↑ --------- Common operations in Git-VCS ->  */
 
   describe('push()', () => {
     it('should throw an exception when push response contains errors', async () => {
@@ -172,6 +174,7 @@ First commit!
       );
     });
   });
+/**** ><> ↑ --------- Test case for push() function ->  */
 
   describe('undoPendingChanges()', () => {
     it('should remove pending changes from all tracked files', async () => {
@@ -247,6 +250,7 @@ First commit!
       expect((await fsClient.promises.readFile(foo3Txt)).toString()).toBe(changedContent);
     });
   });
+/**** ><> ↑ --------- Test case for undoPendingChanges() function ->  */
 
   describe('readObjectFromTree()', () => {
     it('reads an object from tree', async () => {
@@ -278,3 +282,4 @@ First commit!
     });
   });
 });
+/**** ><> ↑ --------- Test case for readObjectFromTree() function ->  */

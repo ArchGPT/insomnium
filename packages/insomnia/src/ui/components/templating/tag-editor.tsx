@@ -20,6 +20,7 @@ import type {
 } from '../../../templating/utils';
 import * as templateUtils from '../../../templating/utils';
 import { useNunjucks } from '../../context/nunjucks/use-nunjucks';
+/**** ><> ↑ --------- Import Statements ->  */
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
 import { FileInputButton } from '../base/file-input-button';
 import { HelpTooltip } from '../help-tooltip';
@@ -45,6 +46,7 @@ interface State {
     value: string;
   }[];
 }
+/**** ><> ↑ --------- Props and State Interfaces ->  */
 const sortRequests = (_models: (Request | RequestGroup)[], parentId: string) => {
   let sortedModels: (Request | RequestGroup)[] = [];
   _models
@@ -60,6 +62,7 @@ const sortRequests = (_models: (Request | RequestGroup)[], parentId: string) => 
     });
   return sortedModels;
 };
+/**** ><> ↑ --------- Sort Requests ->  */
 export const TagEditor: FC<Props> = props => {
   const [state, setState] = useState<State>({
     activeTagData: null,
@@ -599,3 +602,4 @@ export const TagEditor: FC<Props> = props => {
   );
 
 };
+/**** ><> ↑ --------- TagEditor Component ->  */

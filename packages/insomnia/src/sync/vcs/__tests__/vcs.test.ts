@@ -6,6 +6,7 @@ import { baseModelSchema, workspaceModelSchema } from '../../../models/__schemas
 import { projectSchema } from '../../__schemas__/type-schemas';
 import MemoryDriver from '../../store/drivers/memory-driver';
 import { BackendProject } from '../../types';
+/**** ><> ↑ --------- Import statements ->  */
 import * as paths from '../paths';
 import { describeChanges } from '../util';
 import { VCS } from '../vcs';
@@ -25,6 +26,7 @@ async function vcs(branch) {
   return v;
 }
 
+/**** ><> ↑ --------- Variable and function declarations ->  */
 describe('VCS', () => {
   beforeEach(async () => {
     let ts = 1000000000000;
@@ -72,6 +74,7 @@ describe('VCS', () => {
       });
     });
 
+/**** ><> ↑ --------- Nested describe block 'VCS' ->  */
     it('returns add/modify/delete operations', async () => {
       const v = await vcs('master');
       const status1 = await v.status(
@@ -127,6 +130,7 @@ describe('VCS', () => {
         },
       ]);
       // Should get every operation type
+/**** ><> ↑ --------- Nested describe block 'returns add/modify/delete operations' ->  */
       const status = await v.status(
         [
           {
@@ -184,6 +188,7 @@ describe('VCS', () => {
             blobContent: '{"_id":"ddd","created":1234,"isPrivate":false,"name":"name","parentId":"","type":"base"}',
           },
         },
+/**** ><> ↑ --------- Nested describe block 'can appear both staged and unstaged' ->  */
       });
       const newStage = await v.stage(status.stage, [
         status.unstaged.a,
@@ -201,6 +206,7 @@ describe('VCS', () => {
           {
             key: 'b',
             name: 'B',
+/**** ><> ↑ --------- Nested describe block 'should not show committed entities' ->  */
             document: newDoc('bbb'),
           },
           {
@@ -412,6 +418,7 @@ describe('VCS', () => {
       });
     });
   });
+/**** ><> ↑ --------- Nested describe block 'stage' ->  */
 
   describe('takeSnapshot()', () => {
     it('commits basic entity', async () => {
@@ -512,6 +519,7 @@ describe('VCS', () => {
       ]);
     });
   });
+/**** ><> ↑ --------- Nested describe block 'takeSnapshot' ->  */
 
   describe('getBranches()', () => {
     it('lists branches', async () => {
@@ -522,6 +530,7 @@ describe('VCS', () => {
       expect(branches).toEqual(['master', 'branch-1', 'branch-2']);
     });
   });
+/**** ><> ↑ --------- Nested describe block 'getBranches' ->  */
 
   describe('removeBranch()', () => {
     it('cannot remove empty branch', async () => {
@@ -551,6 +560,7 @@ describe('VCS', () => {
       expect(didError).toBe(true);
     });
 
+/**** ><> ↑ --------- Nested describe block 'removeBranch' ->  */
     it('remove branch', async () => {
       const v = await vcs('master');
       // Add something to master
@@ -617,6 +627,7 @@ describe('VCS', () => {
     });
   });
 
+/**** ><> ↑ --------- Nested describe block 'fork' ->  */
   describe('merge()', () => {
     it('performs fast-forward merge', async () => {
       const v = await vcs('master');
@@ -834,6 +845,7 @@ describe('VCS', () => {
       ]);
     });
   });
+/**** ><> ↑ --------- Nested describe block 'merge' ->  */
 
   describe('describeChanges()', () => {
     it('works with same object structure', async () => {
@@ -854,6 +866,7 @@ describe('VCS', () => {
       // @ts-expect-error intentionally invalid
       expect(describeChanges(a, b)).toEqual([]);
     });
+/**** ><> ↑ --------- Nested describe block 'describeChanges' ->  */
   });
 
   describe('getHistory()', () => {
@@ -938,6 +951,7 @@ describe('VCS', () => {
       // Get the last 3 items (only 2 exist)
       expect(await v.getHistory(3)).toStrictEqual([s1, s2]);
     });
+/**** ><> ↑ --------- Nested describe block 'getHistory' ->  */
   });
 
   describe('hasBackendProjectForRootDocument', () => {
@@ -968,3 +982,4 @@ describe('VCS', () => {
     });
   });
 });
+/**** ><> ↑ --------- Nested describe block 'hasBackendProjectForRootDocument' ->  */

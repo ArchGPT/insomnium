@@ -4,6 +4,7 @@ import axios from 'axios';
 import { globalBeforeEach } from '../../../__jest__/before-each';
 import * as models from '../../../models';
 import { axiosRequest } from '../axios-request';
+/**** ><> ↑ --------- Imported dependencies and models ->  */
 
 interface AxiosRequestMockUserSettings {
   // mocking only what we need to run axiosRequest
@@ -13,14 +14,17 @@ interface AxiosRequestMockUserSettings {
   noProxy: string;
   validateSSL: boolean;
 }
+/**** ><> ↑ --------- Interface defined for UserSettings ->  */
 
 jest.mock('axios');
 jest.spyOn(models.settings, 'getOrCreate');
 
+/**** ><> ↑ --------- Mocking of axios and settings ->  */
 describe('axiosRequest used for git-sync', () => {
   beforeEach(globalBeforeEach);
 
   describe('proxy behavior should match the same UX from rest client behavior', () => {
+/**** ><> ↑ --------- Overall test description and setup ->  */
     beforeEach(() => {
       globalBeforeEach();
       // we want to test that the values that are passed to axios are returned in the config key
@@ -33,6 +37,7 @@ describe('axiosRequest used for git-sync', () => {
         statusText: 'OK',
       }));
     });
+/**** ><> ↑ --------- First Sub-Test Setup ->  */
 
     afterEach(() => {
       jest.resetAllMocks();
@@ -50,6 +55,7 @@ describe('axiosRequest used for git-sync', () => {
       const response = await axiosRequest({ url: 'https://git.acme.com/username/repo-name.git/git-upload-pack' });
       expect(response.config.proxy).toBe(false);
     });
+/**** ><> ↑ --------- First Sub-Test Execution ->  */
 
     it('should set axios proxy key if the user has the insomnia proxy enabled, proxy http url filled in, and there is not a match in the no proxy settings', async () => {
       const mockInsomniaConfigPanelUserSettings: AxiosRequestMockUserSettings = {
@@ -63,6 +69,7 @@ describe('axiosRequest used for git-sync', () => {
       const response = await axiosRequest({ url: 'http://git.acme.com/username/repo-name.git/git-upload-pack' });
       expect(response.config.proxy).toEqual({ host: 'some.proxy.com', port: 8080 });
     });
+/**** ><> ↑ --------- Second Sub-Test Execution ->  */
 
     it('should set axios proxy key to false if the user has the insomnia proxy enabled, and the proxy http url empty, and there is not a match in the no proxy settings', async () => {
       const mockInsomniaConfigPanelUserSettings: AxiosRequestMockUserSettings = {
@@ -76,6 +83,7 @@ describe('axiosRequest used for git-sync', () => {
       const response = await axiosRequest({ url: 'http://git.acme.com/username/repo-name.git/git-upload-pack' });
       expect(response.config.proxy).toBe(false);
     });
+/**** ><> ↑ --------- Third Sub-Test Execution ->  */
 
     it('should set axios proxy key if the user has the insomnia proxy enabled, only proxy http url filled in, and there is not a match in the no proxy settings', async () => {
       const mockInsomniaConfigPanelUserSettings: AxiosRequestMockUserSettings = {
@@ -89,6 +97,7 @@ describe('axiosRequest used for git-sync', () => {
       const response = await axiosRequest({ url: 'https://git.acme.com/username/repo-name.git/git-upload-pack' });
       expect(response.config.proxy).toEqual({ host: 'some.proxy.com', port: 8080 });
     });
+/**** ><> ↑ --------- Fourth Sub-Test Execution ->  */
 
     it('should set axios proxy key to prefer https if the user has the insomnia proxy enabled, both proxy urls populated, and there is not a match in the no proxy settings', async () => {
       const mockInsomniaConfigPanelUserSettings: AxiosRequestMockUserSettings = {
@@ -102,6 +111,7 @@ describe('axiosRequest used for git-sync', () => {
       const response = await axiosRequest({ url: 'http://git.acme.com/username/repo-name.git/git-upload-pack' });
       expect(response.config.proxy).toEqual({ host: 'some.proxy.com', port: 8081 });
     });
+/**** ><> ↑ --------- Fifth Sub-Test Execution ->  */
 
     it('should set axios proxy key if the user has the insomnia proxy enabled, only proxy https url filled in, and there is not a match in the no proxy settings', async () => {
       const mockInsomniaConfigPanelUserSettings: AxiosRequestMockUserSettings = {
@@ -115,6 +125,8 @@ describe('axiosRequest used for git-sync', () => {
       const response = await axiosRequest({ url: 'https://git.acme.com/username/repo-name.git/git-upload-pack' });
       expect(response.config.proxy).toEqual({ host: 'some.proxy.com', port: 8080 });
     });
+/**** ><> ↑ --------- Sixth Sub-Test Execution ->  */
 
   });
 });
+/**** ><> ↑ --------- Closure of Test descriptions ->  */

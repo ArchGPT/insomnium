@@ -1,6 +1,8 @@
 import zlib from 'zlib';
+/**** ><> ↑ --------- Importing zlib module ->  */
 
 import type { HookFn } from '../index';
+/**** ><> ↑ --------- Importing HookFn type ->  */
 
 const read: HookFn = async function read(extension: string, value: Buffer) {
   if (extension) {
@@ -17,6 +19,7 @@ const read: HookFn = async function read(extension: string, value: Buffer) {
     });
   });
 };
+/**** ><> ↑ --------- Defining 'read' function ->  */
 
 const write: HookFn = async function read(extension: string, value: Buffer) {
   if (extension) {
@@ -33,8 +36,10 @@ const write: HookFn = async function read(extension: string, value: Buffer) {
     });
   });
 };
+/**** ><> ↑ --------- Defining 'write' function ->  */
 
 export default {
   read,
   write,
 };
+/**** ><> ↑ --------- Exporting read and write functions ->  */

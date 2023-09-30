@@ -6,6 +6,7 @@ import YAML from 'yaml';
 import { Converter, Header, ImportRequest } from '../entities';
 import { unthrowableParseJson } from '../utils';
 
+/**** ><> ↑ --------- Import Statements ->  */
 const SUPPORTED_SWAGGER_VERSION = '2.0';
 const MIMETYPE_JSON = 'application/json';
 const MIMETYPE_URLENCODED = 'application/x-www-form-urlencoded';
@@ -21,6 +22,7 @@ export const id = 'swagger2';
 export const name = 'Swagger 2.0';
 export const description = 'Importer for Swagger 2.0 specification (json/yaml)';
 
+/**** ><> ↑ --------- Constants and Export Statements ->  */
 /* eslint-disable camelcase -- this file uses camel case too often */
 
 /**
@@ -43,6 +45,7 @@ const importFolderItem = (parentId: string) => (
   };
 };
 
+/**** ><> ↑ --------- Utility Functions ->  */
 /**
  * Parse string data into swagger 2.0 object (https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#swagger-object)
  */
@@ -53,12 +56,14 @@ const parseDocument = (rawData: string) => {
     return null;
   }
 };
+/**** ><> ↑ --------- Swagger Parsing ->  */
 
 /**
  * Create request definitions based on swagger document.
  */
 const parseEndpoints = (document: OpenAPIV2.Document) => {
   const defaultParent = WORKSPACE_ID;
+/**** ><> ↑ --------- Insomnium Folder / Request Group ->  */
   const globalMimeTypes = document.consumes ?? [];
   const endpointsSchemas: OpenAPIV2.OperationObject[] = Object.keys(
     document.paths,
@@ -130,6 +135,7 @@ const parseEndpoints = (document: OpenAPIV2.Document) => {
   });
 
   return [...folders, ...requests];
+/**** ><> ↑ --------- Parsing and Creating Request Definitions ->  */
 };
 
 const importRequest = (
@@ -179,6 +185,7 @@ const importRequest = (
     request,
   );
 };
+/**** ><> ↑ --------- Request Body and Authentication Setup ->  */
 
 /**
  * Populate Insomnium request with authentication
@@ -310,6 +317,7 @@ const pathWithParamsAsVariables = (path?: string) => {
   return path?.replace(/{([^}]+)}/g, '{{ _.$1 }}');
 };
 
+/**** ><> ↑ --------- Path Manipulation and Parameter Preparation ->  */
 /**
  * Imports insomnia definitions of query parameters.
  */
@@ -421,6 +429,7 @@ const prepareBody = (
   }
 };
 
+/**** ><> ↑ --------- Body Preparation and Conversion Functions ->  */
 type TypeExample =
   | 'string'
   | 'string_email'
@@ -539,6 +548,7 @@ const convertParameters = (parameters?: OpenAPIV2.Parameter[]) => {
   });
 };
 
+/**** ><> ↑ --------- Parameter Example Generation ->  */
 export const convert: Converter = async rawData => {
   requestCount = 1; // Validate
 
@@ -589,3 +599,4 @@ export const convert: Converter = async rawData => {
 
   return [workspace, baseEnv, swaggerEnv, ...endpoints];
 };
+/**** ><> ↑ --------- Swagger Conversion ->  */

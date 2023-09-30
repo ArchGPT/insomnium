@@ -4,6 +4,7 @@ import path from 'path';
 import { GIT_CLONE_DIR } from '../git-vcs';
 import { MemClient } from '../mem-client';
 import { assertAsyncError, setupDateMocks } from './util';
+/**** ><> ↑ --------- Import Statements ->  */
 
 describe('MemClient', () => {
   afterAll(() => jest.restoreAllMocks());
@@ -97,6 +98,7 @@ describe('MemClient', () => {
       expect((await fsClient.readFile(fooTxt)).toString()).toBe('Hello World!xxx');
     });
   });
+/**** ><> ↑ --------- writeFile function tests ->  */
 
   describe('unlink()', () => {
     it('unlinks file', async () => {
@@ -111,6 +113,7 @@ describe('MemClient', () => {
       await assertAsyncError(fsClient.unlink(path.join('not', 'exist.txt')), 'ENOENT');
     });
   });
+/**** ><> ↑ --------- unlink function tests ->  */
 
   describe('readdir()', () => {
     it('lists dir', async () => {
@@ -134,6 +137,7 @@ describe('MemClient', () => {
       await assertAsyncError(fsClient.readdir(path.join('/', 'invalid')), 'ENOENT');
     });
   });
+/**** ><> ↑ --------- readdir function tests ->  */
 
   describe('mkdir()', () => {
     const fooDir = 'foo';
@@ -172,6 +176,7 @@ describe('MemClient', () => {
       await assertAsyncError(fsClient.mkdir(cloneFooBarBazDir), 'ENOENT');
     });
   });
+/**** ><> ↑ --------- mkdir function tests ->  */
 
   describe('rmdir()', () => {
     const abDir = path.join('a', 'b');
@@ -203,6 +208,7 @@ describe('MemClient', () => {
       await assertAsyncError(fsClient.rmdir(fooTxt), 'ENOTDIR');
     });
   });
+/**** ><> ↑ --------- rmdir function tests ->  */
 
   describe('stat()', () => {
     it('stats root dir', async () => {
@@ -250,3 +256,5 @@ describe('MemClient', () => {
     });
   });
 });
+/**** ><> ↑ --------- MemClient describe block ->  */
+/**** ><> ↑ --------- stat function tests ->  */

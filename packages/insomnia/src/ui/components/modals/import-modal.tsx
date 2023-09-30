@@ -12,6 +12,7 @@ import { useFetcher } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
+/**** ><> ↑ --------- Import statements ->  */
   ImportResourcesActionResult,
   ScanForResourcesActionResult,
 } from '../../routes/import';
@@ -60,6 +61,7 @@ const RadioInput = styled.input({
   borderWidth: '0',
 });
 
+/**** ><> ↑ --------- Styled components ->  */
 const Radio: FC<{
   name: string;
   value: string;
@@ -85,6 +87,7 @@ const Radio: FC<{
   );
 };
 
+/**** ><> ↑ --------- React components ->  */
 const Fieldset = styled.fieldset({
   display: 'flex',
   flexDirection: 'column',
@@ -98,6 +101,7 @@ const FileInput = styled.input({
   display: 'none',
 });
 
+/**** ><> ↑ --------- Fieldset and File Input ->  */
 const FileInputLabel = styled.label({
   padding: 'var(--padding-sm)',
   borderRadius: 'var(--radius-md)',
@@ -307,6 +311,7 @@ const SwaggerIcon = (props: React.SVGProps<SVGSVGElement>) => {
     </svg>
   );
 };
+/**** ><> ↑ --------- Icons ->  */
 
 const OpenAPIIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
@@ -468,6 +473,7 @@ export const ImportModal: FC<ImportModalProps> = ({
     </OverlayContainer>
   );
 };
+/**** ><> ↑ --------- ImportModal component ->  */
 
 const ScanResourcesForm = ({
   onSubmit,
@@ -620,6 +626,7 @@ const ScanResourcesForm = ({
   );
 };
 
+/**** ><> ↑ --------- ScanResourcesForm component ->  */
 const ImportTypeTitle = styled.div({
   display: 'flex',
   alignItems: 'center',
@@ -837,3 +844,4 @@ const ImportResourcesForm = ({
     </Fragment>
   );
 };
+/**** ><> ↑ --------- ImportResourcesForm component ->  */

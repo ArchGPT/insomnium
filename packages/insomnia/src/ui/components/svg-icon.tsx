@@ -2,6 +2,7 @@ import React, { Component, CSSProperties, NamedExoticComponent, ReactNode, SVGPr
 import styled from 'styled-components';
 import type { ValueOf } from 'type-fest';
 
+/**** ><> ↑ --------- Importing dependencies ->  */
 import { SvgIcnArrowRight } from './assets/svgr/IcnArrowRight';
 import { SvgIcnBitbucketLogo } from './assets/svgr/IcnBitbucketLogo';
 import { SvgIcnBrackets } from './assets/svgr/IcnBrackets';
@@ -60,6 +61,7 @@ import { SvgIcnWarning } from './assets/svgr/IcnWarning';
 import { SvgIcnWarningCircle } from './assets/svgr/IcnWarningCircle';
 import { SvgIcnX } from './assets/svgr/IcnX';
 
+/**** ><> ↑ --------- Importing SVG Icons ->  */
 export const ThemeEnum = {
   default: 'default',
   highlight: 'highlight',
@@ -72,9 +74,11 @@ export const ThemeEnum = {
   surprise: 'surprise',
   warning: 'warning',
 } as const;
+/**** ><> ↑ --------- Creating ThemeEnum object ->  */
 
 type ThemeKeys = ValueOf<typeof ThemeEnum>;
 
+/**** ><> ↑ --------- Defining ThemeKeys type ->  */
 export const IconEnum = {
   arrowRight: 'arrow-right',
   bitbucket: 'bitbucket',
@@ -135,8 +139,10 @@ export const IconEnum = {
   /** Blank icon */
   empty: 'empty',
 } as const;
+/**** ><> ↑ --------- Creating IconEnum object ->  */
 
 export type IconId = ValueOf<typeof IconEnum>;
+/**** ><> ↑ --------- Defining IconId type ->  */
 
 export interface SvgIconProps {
   icon: IconId;
@@ -144,6 +150,7 @@ export interface SvgIconProps {
   className?: string;
   style?: CSSProperties;
 }
+/**** ><> ↑ --------- Defining SvgIconProps interface ->  */
 
 const SvgIconStyled = styled.div<{
   $theme: ThemeKeys;
@@ -177,6 +184,7 @@ const SvgIconStyled = styled.div<{
   }}
   }
 `;
+/**** ><> ↑ --------- Creating SvgIconStyled Component ->  */
 
 export class SvgIcon extends Component<SvgIconProps> {
   static icons: Record<IconId, [ThemeKeys, NamedExoticComponent<SVGProps<SVGSVGElement>>]> = {
@@ -263,3 +271,4 @@ export class SvgIcon extends Component<SvgIconProps> {
     );
   }
 }
+/**** ><> ↑ --------- Creating SvgIcon Class Component ->  */

@@ -6,3 +6,4 @@ export interface BaseDriver {
   keys(prefix: string, recursive: boolean): Promise<string[]>;
   clear(): Promise<void>;
 }
+/**** ><> ↑ --------- Interface declaration and function signatures ->  */

@@ -1,6 +1,7 @@
 import appConfig from '../../config/config.json';
 import { version } from '../../package.json';
 import { KeyCombination } from './settings';
+/**** ><> ↑ --------- Imports ->  */
 
 const env = process['env'];
 
@@ -18,6 +19,7 @@ export const isLinux = () => getAppPlatform() === 'linux';
 export const isWindows = () => getAppPlatform() === 'win32';
 export const getAppEnvironment = () => process.env.INSOMNIA_ENV || 'production';
 export const isDevelopment = () => getAppEnvironment() === 'development';
+/**** ><> ↑ --------- Environment and App Stuff ->  */
 export const getSegmentWriteKey = () => ''
 export const getSentryDsn = () => ''
 export const getAppBuildDate = () => new Date(process.env.BUILD_DATE ?? '').toLocaleDateString();
@@ -42,6 +44,7 @@ export const getBrowserUserAgent = () => encodeURIComponent(
     .replace(/Electron\/\d+\.\d+\.\d+ /, ''),
 ).replace('%2C', ',');
 
+/**** ><> ↑ --------- Utility Functions ->  */
 export function updatesSupported() {
   // Updates are not supported on Linux
   if (isLinux()) {
@@ -59,6 +62,7 @@ export function updatesSupported() {
 export const getClientString = () => `${getAppEnvironment()}::${getAppPlatform()}::${getAppVersion()}`;
 export const changelogUrl = () => appConfig.changelogUrl + '#' + version;
 
+/**** ><> ↑ --------- Updates and Versions ->  */
 // Global Stuff
 export const DB_PERSIST_INTERVAL = 1000 * 60 * 30; // Compact every once in a while
 export const DEBOUNCE_MILLIS = 100;
@@ -83,6 +87,7 @@ export const CHECK_FOR_UPDATES_INTERVAL = 1000 * 60 * 60 * 3; // 3 hours
 // Available editor key map
 export enum EditorKeyMap {
   default = 'default',
+/**** ><> ↑ --------- Global Constants ->  */
   emacs = 'emacs',
   sublime = 'sublime',
   vim = 'vim',
@@ -95,6 +100,7 @@ export const MNEMONIC_SYM = isMac() ? '' : '&';
 export const displayModifierKey = (key: keyof Omit<KeyCombination, 'keyCode'>) => {
   const mac = isMac();
   switch (key) {
+/**** ><> ↑ --------- Editor and Hotkey Configuration ->  */
     case 'ctrl':
       return mac ? '⌃' : 'Ctrl';
 
@@ -134,6 +140,7 @@ export enum UpdateURL {
 export const getApiBaseURL = () => env.INSOMNIA_API_URL || 'https://api.insomnia.rest';
 
 export const getUpdatesBaseURL = () => env.INSOMNIA_UPDATES_URL || 'https://updates.insomnia.rest';
+/**** ><> ↑ --------- Update URLs and API ->  */
 
 // App website
 export const getAppWebsiteBaseURL = () => env.INSOMNIA_APP_WEBSITE_URL || 'https://app.insomnia.rest';
@@ -144,9 +151,11 @@ export const getGitHubGraphQLApiURL = () => env.INSOMNIA_GITHUB_API_URL || 'http
 // SYNC
 export const DEFAULT_BRANCH_NAME = 'master';
 
+/**** ><> ↑ --------- App Website, GitHub API, and Sync ->  */
 // PLUGIN
 export const PLUGIN_HUB_BASE = 'https://insomnia.rest/plugins';
 export const NPM_PACKAGE_BASE = 'https://www.npmjs.com/package';
+/**** ><> ↑ --------- Plugin and NPM URLs ->  */
 
 // UI Stuf
 export const MAX_SIDEBAR_REMS = 45;
@@ -165,6 +174,7 @@ export const MAX_INTERFACE_FONT_SIZE = 24;
 export const MIN_EDITOR_FONT_SIZE = 8;
 export const MAX_EDITOR_FONT_SIZE = 24;
 
+/**** ><> ↑ --------- UI Settings and Dimensions ->  */
 // Activities
 export type GlobalActivity =
   | 'spec'
@@ -176,6 +186,7 @@ export const ACTIVITY_DEBUG: GlobalActivity = 'debug';
 export const ACTIVITY_UNIT_TEST: GlobalActivity = 'unittest';
 export const ACTIVITY_HOME: GlobalActivity = 'home';
 
+/**** ><> ↑ --------- Activities and Activity Types ->  */
 export const isWorkspaceActivity = (activity?: string): activity is GlobalActivity =>
   isDesignActivity(activity) || isCollectionActivity(activity);
 
@@ -193,6 +204,7 @@ export const isDesignActivity = (activity?: string): activity is GlobalActivity 
 };
 
 export const isCollectionActivity = (activity?: string): activity is GlobalActivity => {
+/**** ><> ↑ --------- Sort Orders and Dashboard Sort Orders ->  */
   switch (activity) {
     case ACTIVITY_DEBUG:
       return true;
@@ -239,6 +251,7 @@ export const HTTP_METHODS = [
 // Additional methods
 export const METHOD_GRPC = 'GRPC';
 
+/**** ><> ↑ --------- HTTP Methods and Additional Methods ->  */
 // Preview Modes
 export const PREVIEW_MODE_FRIENDLY = 'friendly';
 export const PREVIEW_MODE_SOURCE = 'source';
@@ -248,6 +261,7 @@ const previewModeMap = {
   [PREVIEW_MODE_SOURCE]: ['Source', 'Source Code'],
   [PREVIEW_MODE_RAW]: ['Raw', 'Raw Data'],
 };
+/**** ><> ↑ --------- Preview Modes and Content Types ->  */
 export const PREVIEW_MODES = Object.keys(previewModeMap) as (keyof typeof previewModeMap)[];
 
 // Content Types
@@ -274,6 +288,7 @@ const contentTypesMap: Record<string, string[]> = {
   [CONTENT_TYPE_XML]: ['XML', 'XML'],
   [CONTENT_TYPE_YAML]: ['YAML', 'YAML'],
 };
+/**** ><> ↑ --------- Auth Types and JSON Order Constants ->  */
 
 // Auth Types
 export const AUTH_NONE = 'none';
@@ -487,6 +502,7 @@ export const RESPONSE_CODE_DESCRIPTIONS: Record<number, string> = {
   598: 'Used by some HTTP proxies to signal a network read timeout behind the proxy to a client in front of the proxy.',
   599: 'An error used by some HTTP proxies to signal a network connect timeout behind the proxy to a client in front of the proxy.',
 };
+/**** ><> ↑ --------- Activity and Response Code Descriptions ->  */
 
 export const RESPONSE_CODE_REASONS: Record<number, string> = {
   // Special
@@ -577,3 +593,4 @@ export const EXPORT_TYPE_ENVIRONMENT = 'environment';
 export const EXPORT_TYPE_API_SPEC = 'api_spec';
 export const EXPORT_TYPE_PROTO_FILE = 'proto_file';
 export const EXPORT_TYPE_PROTO_DIRECTORY = 'proto_directory';
+/**** ><> ↑ --------- Response Code Reasons and Workspace Export Types ->  */

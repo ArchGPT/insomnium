@@ -17,6 +17,7 @@ import {
   SORT_TYPE_ASC,
   SORT_TYPE_DESC,
 } from '../constants';
+/**** ><> ↑ --------- Import Statements ->  */
 import {
   ascendingNumberSort,
   descendingNumberSort,
@@ -599,6 +600,7 @@ describe('Sorting methods', () => {
       ),
     ).toBe(1);
     expect(
+/**** ><> ↑ --------- Sorting methods ->  */
       descendingTypeSort(
         {
           type: requestGroup.type,
@@ -939,6 +941,7 @@ describe('Sorting methods', () => {
       ),
     ).toBe(1);
   });
+/**** ><> ↑ --------- Sorts by HTTP method ->  */
 
   it('sorts by metaSortKey', () => {
     expect(
@@ -1007,6 +1010,7 @@ describe('Sorting methods', () => {
     ).toBe(1);
   });
 
+/**** ><> ↑ --------- Sorts by metaSortKey ->  */
   it('sorts by number', () => {
     expect(ascendingNumberSort(1, 2)).toBe(-1);
     expect(ascendingNumberSort(-2, 1)).toBe(-1);
@@ -1018,3 +1022,4 @@ describe('Sorting methods', () => {
     expect(descendingNumberSort(1, -2)).toBe(-1);
   });
 });
+/**** ><> ↑ --------- Sorts by number ->  */

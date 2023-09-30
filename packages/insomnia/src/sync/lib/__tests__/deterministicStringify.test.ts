@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { deterministicStringify } from '../deterministicStringify';
+/**** ><> ↑ --------- import statements ->  */
 
 describe('deterministicStringify()', () => {
   it('sorts object keys', () => {
@@ -45,3 +46,4 @@ describe('deterministicStringify()', () => {
     expect(sFunc).toBe('{"a":[0]}');
   });
 });
+/**** ><> ↑ --------- deterministicStringify() function ->  */

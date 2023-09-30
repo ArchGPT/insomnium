@@ -1,7 +1,10 @@
 import type { Operation } from './diff';
+/**** ><> ↑ --------- Importing dependencies ->  */
 
 export function patch(a: string, operations: Operation[]) {
+/**** ><> ↑ --------- Function declaration ->  */
   let result = '';
+/**** ><> ↑ --------- Initializations ->  */
 
   for (const op of operations) {
     if (op.type === 'COPY') {
@@ -10,6 +13,9 @@ export function patch(a: string, operations: Operation[]) {
       result += op.content;
     }
   }
+/**** ><> ↑ --------- Loop through operations ->  */
 
   return result;
+/**** ><> ↑ --------- Return result ->  */
 }
+/**** ><> ↑ --------- End of function ->  */

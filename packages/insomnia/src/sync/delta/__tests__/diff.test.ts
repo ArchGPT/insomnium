@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { __internal, diff } from '../diff';
+/**** ><> ↑ --------- Importing dependencies ->  */
 
 describe('diff()', () => {
   it('creates block map', () => {
@@ -65,6 +66,7 @@ describe('diff()', () => {
       },
     ]);
   });
+/**** ><> ↑ --------- Second test case: Testing 'diff' function with 'Hello World' string ->  */
 
   it('creates operations 2', () => {
     const result2 = diff(
@@ -103,3 +105,5 @@ describe('diff()', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- Describing a test suite for 'diff' ->  */
+/**** ><> ↑ --------- Third test case: Testing 'diff' function with a long sentence ->  */

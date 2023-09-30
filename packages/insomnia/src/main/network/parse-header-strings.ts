@@ -17,6 +17,7 @@ import {
   hasContentTypeHeader,
 } from '../../common/misc';
 import { DEFAULT_BOUNDARY } from './multipart';
+/**** ><> ↑ --------- Module imports ->  */
 
 // Special header value that will prevent the header being sent
 const DISABLE_HEADER_VALUE = '__Di$aB13d__';
@@ -33,6 +34,7 @@ interface Req {
   body: { mimeType?: string | null };
   authentication: Record<string, any>;
 }
+/**** ><> ↑ --------- Constants and Interface definitions ->  */
 export const parseHeaderStrings = ({ req, finalUrl, requestBody, requestBodyPath, authHeader }: Input) => {
   const headers = clone(req.headers);
 
@@ -92,6 +94,7 @@ export const parseHeaderStrings = ({ req, finalUrl, requestBody, requestBodyPath
         : value === DISABLE_HEADER_VALUE ? `${name}:` // Tell Curl NOT to send the header if value is null
           : `${name}: ${value}`);
 };
+/**** ><> ↑ --------- Function parseHeaderStrings implementation ->  */
 
 interface AWSOptions {
   authentication: {
@@ -107,6 +110,7 @@ interface AWSOptions {
   contentTypeHeader?: string;
   body?: string;
 }
+/**** ><> ↑ --------- Interface AWSOptions definition ->  */
 export function _getAwsAuthHeaders({ authentication, url, method, hostHeader, contentTypeHeader, body }: AWSOptions): { name: string; value: any }[] {
   const { path, host } = urlParse(url);
   const onlyContentTypeHeader = contentTypeHeader ? { 'content-type': contentTypeHeader } : {};
@@ -128,3 +132,4 @@ export function _getAwsAuthHeaders({ authentication, url, method, hostHeader, co
     .filter(([name]) => name !== 'content-type') // Don't add this because we already have it
     .map(([name, value]) => ({ name, value }));
 }
+/**** ><> ↑ --------- Function _getAwsAuthHeaders implementation ->  */

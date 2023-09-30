@@ -1,5 +1,6 @@
 import { createBuilder } from '@develohpanda/fluent-builder';
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+/**** ><> ↑ --------- Imports ->  */
 
 import { globalBeforeEach } from '../../__jest__/before-each';
 import * as models from '../../models';
@@ -10,9 +11,11 @@ import * as renderUtils from '../render';
 
 jest.mock('electron');
 
+/**** ><> ↑ --------- Global configurations ->  */
 const envBuilder = createBuilder(environmentModelSchema);
 const reqGroupBuilder = createBuilder(requestGroupModelSchema);
 
+/**** ><> ↑ --------- Builders ->  */
 describe('render tests', () => {
   beforeEach(async () => {
     await globalBeforeEach();
@@ -78,6 +81,7 @@ describe('render tests', () => {
       expect(renderExpression).toBe('cat');
     });
   });
+/**** ><> ↑ --------- Render tests ->  */
 
   describe('buildRenderContext()', () => {
     it('cascades properly', async () => {
@@ -192,6 +196,7 @@ describe('render tests', () => {
       });
     });
 
+/**** ><> ↑ --------- Build render context tests ->  */
     it('rendered parent environment variables', async () => {
       const ancestors = [
         reqGroupBuilder
@@ -496,6 +501,7 @@ describe('render tests', () => {
   describe('render()', () => {
     it('correctly renders simple Object', async () => {
       const newObj = await renderUtils.render(
+/**** ><> ↑ --------- Render tests ->  */
         {
           foo: '{{ foo }}',
           bar: 'bar',
@@ -643,6 +649,7 @@ describe('render tests', () => {
       });
       const request = await renderUtils.getRenderedGrpcRequestMessage({ request: grpcRequest, environmentId: env._id });
       expect(request).toEqual(
+/**** ><> ↑ --------- Get rendered gRPC request message tests ->  */
         expect.objectContaining({
           text: '{ "prop": "bar" }',
         }),
@@ -735,3 +742,4 @@ describe('render tests', () => {
     });
   });
 });
+/**** ><> ↑ --------- Get rendered gRPC request tests ->  */

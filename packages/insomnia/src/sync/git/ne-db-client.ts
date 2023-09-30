@@ -11,11 +11,13 @@ import { GIT_INSOMNIA_DIR_NAME } from './git-vcs';
 import parseGitPath from './parse-git-path';
 import Stat from './stat';
 import { SystemError } from './system-error';
+/**** ><> ↑ --------- Import statements ->  */
 
 export class NeDBClient {
   _workspaceId: string;
   _projectId: string;
 
+/**** ><> ↑ --------- NeDBClient class definition and properties ->  */
   constructor(workspaceId: string, projectId: string) {
     if (!workspaceId) {
       throw new Error('Cannot use NeDBClient without workspace ID');
@@ -24,12 +26,14 @@ export class NeDBClient {
     this._workspaceId = workspaceId;
     this._projectId = projectId;
   }
+/**** ><> ↑ --------- NeDBClient class constructor ->  */
 
   static createClient(workspaceId: string, projectId: string): PromiseFsClient {
     return {
       promises: new NeDBClient(workspaceId, projectId),
     };
   }
+/**** ><> ↑ --------- NeDBClient class static method 'createClient' ->  */
 
   async readFile(
     filePath: string,
@@ -77,6 +81,7 @@ export class NeDBClient {
       return raw;
     }
   }
+/**** ><> ↑ --------- NeDBClient class method 'readFile' ->  */
 
   async writeFile(filePath: string, data: Buffer | string) {
     filePath = path.normalize(filePath);
@@ -107,6 +112,7 @@ export class NeDBClient {
 
     await db.upsert(doc, true);
   }
+/**** ><> ↑ --------- NeDBClient class method 'writeFile' ->  */
 
   async unlink(filePath: string) {
     filePath = path.normalize(filePath);
@@ -124,6 +130,7 @@ export class NeDBClient {
 
     await db.unsafeRemove(doc, true);
   }
+/**** ><> ↑ --------- NeDBClient class method 'unlink' ->  */
 
   async readdir(filePath: string) {
     filePath = path.normalize(filePath);
@@ -159,9 +166,11 @@ export class NeDBClient {
     const ids = docs.map(d => `${d._id}.yml`);
     return [...ids, ...otherFolders].sort();
   }
+/**** ><> ↑ --------- NeDBClient class method 'readdir' ->  */
 
   async mkdir() {
     throw new Error('NeDBClient is not writable');
+/**** ><> ↑ --------- NeDBClient class method 'mkdir' ->  */
   }
 
   async stat(filePath: string) {
@@ -207,23 +216,28 @@ export class NeDBClient {
       });
     }
   }
+/**** ><> ↑ --------- NeDBClient class method 'stat' ->  */
 
   async readlink(filePath: string, ...x: any[]) {
     return this.readFile(filePath, ...x);
   }
+/**** ><> ↑ --------- NeDBClient class method 'readlink' ->  */
 
   async lstat(filePath: string) {
     return this.stat(filePath);
   }
+/**** ><> ↑ --------- NeDBClient class method 'lstat' ->  */
 
   async rmdir() {
     // Dirs in NeDB can't be removed, so we'll just pretend like it succeeded
     return Promise.resolve();
   }
+/**** ><> ↑ --------- NeDBClient class method 'rmdir' ->  */
 
   async symlink() {
     throw new Error('NeDBClient symlink not supported');
   }
+/**** ><> ↑ --------- NeDBClient class method 'symlink' ->  */
 
   _errMissing(filePath: string) {
     return new SystemError({
@@ -235,3 +249,4 @@ export class NeDBClient {
     });
   }
 }
+/**** ><> ↑ --------- NeDBClient class method '_errMissing' ->  */

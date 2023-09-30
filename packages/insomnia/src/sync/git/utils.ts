@@ -4,12 +4,15 @@ import { OauthProviderName } from '../../models/git-repository';
 import type { GitCredentials } from './git-vcs';
 import { getAccessToken as getGitHubAccessToken } from './github-oauth-provider';
 import { getAccessToken as getGitlabAccessToken, refreshToken as refreshGitlabToken } from './gitlab-oauth-provider';
+/**** ><> ↑ --------- Import statements ->  */
 
 export const addDotGit = (url: string): string => (url.endsWith('.git') ? url : `${url}.git`);
+/**** ><> ↑ --------- Adding `.git` to URL function ->  */
 
 const onMessage: MessageCallback = message => {
   console.log(`[git-event] ${message}`);
 };
+/**** ><> ↑ --------- Console log message callback ->  */
 
 const onAuthFailure =
   (credentials?: GitCredentials): AuthFailureCallback =>
@@ -47,10 +50,12 @@ const onAuthFailure =
 
       return;
     };
+/**** ><> ↑ --------- Authentication failure handling, includes refreshing GitLab token ->  */
 
 const onAuthSuccess: AuthSuccessCallback = message => {
   console.log(`[git-event] Auth Success: ${message}`);
 };
+/**** ><> ↑ --------- Authentication success log message callback ->  */
 
 const onAuth = (credentials?: GitCredentials): AuthCallback => (): GitAuth => {
   if (!credentials) {
@@ -86,6 +91,7 @@ const onAuth = (credentials?: GitCredentials): AuthCallback => (): GitAuth => {
     password: credentials.password || credentials.token,
   };
 };
+/**** ><> ↑ --------- Authenticate callback handling credentials ->  */
 
 export const getOauth2FormatName = (credentials?: GitCredentials | null): OauthProviderName | undefined => {
   if (credentials && 'oauth2format' in credentials) {
@@ -94,6 +100,7 @@ export const getOauth2FormatName = (credentials?: GitCredentials | null): OauthP
 
   return;
 };
+/**** ><> ↑ --------- Function to get OAuth2 format name ->  */
 
 export const gitCallbacks = (credentials?: GitCredentials | null) => ({
   onMessage,
@@ -101,3 +108,4 @@ export const gitCallbacks = (credentials?: GitCredentials | null) => ({
   onAuthSuccess,
   onAuth: onAuth(credentials ?? undefined),
 });
+/**** ><> ↑ --------- Exports Git callback functions ->  */

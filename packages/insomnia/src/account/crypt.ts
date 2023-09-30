@@ -1,9 +1,11 @@
 import HKDF from 'hkdf';
 import forge from 'node-forge';
 import srp from 'srp-js';
+/**** ><> ↑ --------- Imports ->  */
 
 const DEFAULT_BYTE_LENGTH = 32;
 const DEFAULT_PBKDF2_ITERATIONS = 1e5; // 100,000
+/**** ><> ↑ --------- Constants definition ->  */
 
 export interface AESMessage {
   iv: string;
@@ -11,6 +13,7 @@ export interface AESMessage {
   d: string;
   ad: string;
 }
+/**** ><> ↑ --------- Interface definition (AESMessage) ->  */
 
 /**
  * Generate hex signing key used for AES encryption
@@ -23,6 +26,7 @@ export async function deriveKey(pass: string, email: string, salt: string) {
   const combinedSalt = await _hkdfSalt(salt, email);
   return _pbkdf2Passphrase(pass, combinedSalt);
 }
+/**** ><> ↑ --------- AES key generation function ->  */
 
 /**
  * Encrypt with RSA256 public key
@@ -55,6 +59,7 @@ export function encryptRSAWithJWK(publicKeyJWK: JsonWebKey, plaintext: string) {
   });
   return forge.util.bytesToHex(encrypted);
 }
+/**** ><> ↑ --------- RSA encryption function with public key ->  */
 
 export function decryptRSAWithJWK(privateJWK: JsonWebKey, encryptedBlob: string) {
   if (!privateJWK.n || !privateJWK.e || !privateJWK.d || !privateJWK.p ||
@@ -79,6 +84,7 @@ export function decryptRSAWithJWK(privateJWK: JsonWebKey, encryptedBlob: string)
   });
   return decodeURIComponent(decrypted);
 }
+/**** ><> ↑ --------- RSA decryption function with private key ->  */
 
 /**
  * Encrypt data using symmetric key
@@ -110,6 +116,7 @@ export function encryptAESBuffer(jwkOrKey: string | JsonWebKey, buff: Buffer, ad
     d: forge.util.bytesToHex(cipher.output),
   };
 }
+/**** ><> ↑ --------- AES buffer encryption function ->  */
 
 /**
  * Encrypt data using symmetric key
@@ -143,6 +150,7 @@ export function encryptAES(jwkOrKey: string | JsonWebKey, plaintext: string, add
     d: forge.util.bytesToHex(cipher.output),
   };
 }
+/**** ><> ↑ --------- AES plaintext encryption function ->  */
 
 /**
  * Decrypt AES using a key
@@ -174,6 +182,7 @@ export function decryptAES(jwkOrKey: string | JsonWebKey, encryptedResult: AESMe
     throw new Error('Failed to decrypt data');
   }
 }
+/**** ><> ↑ --------- AES decryption function ->  */
 
 /**
  * Decrypts AES using a key to buffer
@@ -205,6 +214,7 @@ export function decryptAESToBuffer(jwkOrKey: string | JsonWebKey, encryptedResul
     throw new Error('Failed to decrypt data');
   }
 }
+/**** ><> ↑ --------- AES decryption to buffer function ->  */
 
 /**
  * Generate a random key
@@ -222,6 +232,7 @@ export function srpGenKey() {
     });
   });
 }
+/**** ><> ↑ --------- SRP secret Buffer generation ->  */
 
 /**
  * Generate a random AES256 key for use with symmetric encryption
@@ -254,6 +265,7 @@ export async function generateAES256Key() {
     };
   }
 }
+/**** ><> ↑ --------- Random AES256 key generation ->  */
 
 /**
  * Generate RSA keypair JWK with 2048 bits and exponent 0x10001
@@ -316,6 +328,7 @@ export async function generateKeyPairJWK() {
     };
   }
 }
+/**** ><> ↑ --------- RSA keypair generation ->  */
 
 // ~~~~~~~~~~~~~~~~ //
 // Helper Functions //
@@ -401,3 +414,4 @@ async function _pbkdf2Passphrase(passphrase: string, salt: string) {
     return forge.util.bytesToHex(derivedKeyRaw);
   }
 }
+/**** ><> ↑ --------- Helper functions ->  */

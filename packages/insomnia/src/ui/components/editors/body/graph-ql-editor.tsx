@@ -31,6 +31,7 @@ import { Toolbar } from '../../key-value-editor/key-value-editor';
 import { useDocBodyKeyboardShortcuts } from '../../keydown-binder';
 import { TimeFromNow } from '../../time-from-now';
 
+/**** ><> ↑ --------- Imports ->  */
 function getGraphQLContent(body: GraphQLBody, query?: string, operationName?: string, variables?: string): string {
   // the body object is one dimensional, so we don't need to worry about shallow copying.
   const { query: originalQuery, ...optionalProps } = body;
@@ -59,6 +60,7 @@ function getGraphQLContent(body: GraphQLBody, query?: string, operationName?: st
   return JSON.stringify(content);
 }
 
+/**** ><> ↑ --------- Utility Functions ->  */
 const isOperationDefinition = (def: DefinitionNode): def is OperationDefinitionNode => def.kind === Kind.OPERATION_DEFINITION;
 
 const fetchGraphQLSchemaForRequest = async ({
@@ -148,6 +150,7 @@ const fetchGraphQLSchemaForRequest = async ({
     return { schemaFetchError: { message: err.message } };
   }
 };
+/**** ><> ↑ --------- GraphQL Functions ->  */
 
 interface GraphQLBody {
   query: string;
@@ -218,6 +221,7 @@ export const GraphQLEditor: FC<Props> = ({
     documentAST,
     disabledOperationMarkers: [],
   });
+/**** ><> ↑ --------- GraphQL Editor State ->  */
 
   const [automaticFetch, setAutoFetch] = useLocalStorage<boolean>(
     'graphql.automaticFetch',
@@ -426,6 +430,7 @@ export const GraphQLEditor: FC<Props> = ({
       explorerContainer
     );
   }
+/**** ><> ↑ --------- GraphQL Editor Components ->  */
 
   let graphqlOptions: {
     hintOptions: ShowHintOptions;
@@ -445,6 +450,7 @@ export const GraphQLEditor: FC<Props> = ({
   };
   if (schema) {
     graphqlOptions = {
+/**** ><> ↑ --------- GraphQL Editor Helpers ->  */
       hintOptions: {
         schema,
         completeSingle: false,
@@ -577,6 +583,7 @@ export const GraphQLEditor: FC<Props> = ({
             </DropdownItem>
           </DropdownSection>
         </Dropdown>
+/**** ><> ↑ --------- GraphQL Editor Dropdowns ->  */
       </Toolbar>
 
       <div className="graphql-editor__query">
@@ -597,6 +604,7 @@ export const GraphQLEditor: FC<Props> = ({
           lintOptions={graphqlOptions?.lintOptions}
         />
       </div>
+/**** ><> ↑ --------- GraphQL Editor Query ->  */
       <div className="graphql-editor__schema-error">
         {!hideSchemaFetchErrors && schemaFetchError && (
           <div className="notice error margin no-margin-top margin-bottom-sm">
@@ -613,6 +621,7 @@ export const GraphQLEditor: FC<Props> = ({
           </div>
         )}
       </div>
+/**** ><> ↑ --------- GraphQL Editor Schema Error ->  */
       <div className="graphql-editor__meta">
         {renderSchemaFetchMessage()}
       </div>
@@ -646,12 +655,15 @@ export const GraphQLEditor: FC<Props> = ({
         />
       </div>
       <div className="pane__footer">
+/**** ><> ↑ --------- GraphQL Editor Query Variables ->  */
         <button className="pull-right btn btn--compact" onClick={beautifyRequestBody}>
           Prettify GraphQL
         </button>
       </div>
 
+/**** ><> ↑ --------- GraphQL Editor Footer ->  */
       {graphQLExplorerPortal}
     </div>
   );
 };
+/**** ><> ↑ --------- GraphQL Explorer Portal ->  */

@@ -7,7 +7,9 @@ import path from 'path';
 
 import { isDevelopment, isWindows } from '../common/constants';
 
+/**** ><> ↑ --------- Module imports ->  */
 const YARN_DEPRECATED_WARN = /(?<keyword>warning)(?<dependencies>[^>:].+[>:])(?<issue>.+)/;
+/**** ><> ↑ --------- Constant declaration ->  */
 
 interface InsomniaPlugin {
   // Insomnium attribute from package.json
@@ -40,6 +42,7 @@ interface InsomniaPlugin {
     tarball: string;
   };
 }
+/**** ><> ↑ --------- Interface declaration for InsomniaPlugin ->  */
 
 export default async function(lookupName: string) {
   return new Promise<void>(async (resolve, reject) => {
@@ -88,6 +91,7 @@ export default async function(lookupName: string) {
     resolve();
   });
 }
+/**** ><> ↑ --------- Main function with logic for plugin handling ->  */
 
 async function _isInsomniaPlugin(lookupName: string) {
   return new Promise<InsomniaPlugin>((resolve, reject) => {
@@ -155,6 +159,7 @@ async function _isInsomniaPlugin(lookupName: string) {
     );
   });
 }
+/**** ><> ↑ --------- Helper function checking if insomnia plugin ->  */
 
 async function _installPluginToTmpDir(lookupName: string) {
   return new Promise<{ tmpDir: string }>(async (resolve, reject) => {
@@ -210,6 +215,7 @@ async function _installPluginToTmpDir(lookupName: string) {
     );
   });
 }
+/**** ><> ↑ --------- Helper function handling plugin installation to tmp directory ->  */
 
 export function containsOnlyDeprecationWarnings(stderr: string) {
   // Split on line breaks and remove falsy values (null, undefined, 0, -0, NaN, "", false)
@@ -241,6 +247,7 @@ export function isDeprecatedDependencies(str: string) {
     message.includes('upgrade your dependencies')
   );
 }
+/**** ><> ↑ --------- Functions to handle deprecation warnings ->  */
 
 function _getYarnPath() {
   // TODO: This is brittle. Make finding this more robust.
@@ -250,6 +257,7 @@ function _getYarnPath() {
     return path.resolve(app.getAppPath(), '../bin/yarn-standalone.js');
   }
 }
+/**** ><> ↑ --------- Function to get the path of Yarn ->  */
 
 function escape(p: string) {
   if (isWindows()) {
@@ -260,3 +268,4 @@ function escape(p: string) {
     return p.replace(/([\s()])/g, '\\$1');
   }
 }
+/**** ><> ↑ --------- Function to escape the path of file ->  */

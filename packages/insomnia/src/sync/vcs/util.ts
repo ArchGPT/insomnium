@@ -6,6 +6,7 @@ import { BaseModel } from '../../models';
 import { deleteKeys, resetKeys, shouldIgnoreKey } from '../ignore-keys';
 import { deterministicStringify } from '../lib/deterministicStringify';
 import type {
+/**** ><> ↑ --------- Imports ->  */
   Branch,
   DocumentKey,
   MergeConflict,
@@ -39,6 +40,7 @@ export function generateStateMap(state: SnapshotState | null): SnapshotStateMap 
 
   return map;
 }
+/**** ><> ↑ --------- Helper Functions ->  */
 
 export function generateCandidateMap(candidates: StatusCandidate[]): StatusCandidateMap {
   const map: StatusCandidateMap = {};
@@ -77,6 +79,7 @@ export function threeWayMerge(
   const stateOther = generateStateMap(other);
   const allKeys = combinedMapKeys(stateRoot, stateTrunk, stateOther);
   const newState: SnapshotState = [];
+/**** ><> ↑ --------- Exported Functions ->  */
   const conflicts: MergeConflict[] = [];
 
   for (const key of allKeys) {
@@ -124,6 +127,7 @@ export function threeWayMerge(
     if (root && trunk && other === null && trunk.blob === root.blob) {
       continue;
     }
+/**** ><> ↑ --------- Three-Way Merge ->  */
 
     // ~~~~~~~~~ //
     // Additions //
@@ -143,6 +147,7 @@ export function threeWayMerge(
       }
 
       newState.push(trunk || other);
+/**** ><> ↑ --------- Branch Comparison ->  */
       continue;
     }
 
@@ -200,6 +205,7 @@ export function threeWayMerge(
     // ~~~~~~ //
     // (11/12)
     // Deleted in trunk and modified in other
+/**** ><> ↑ --------- State Delta ->  */
     if (root && trunk === null && other && other.blob !== root.blob) {
       conflicts.push({
         key,
@@ -242,6 +248,7 @@ export function compareBranches(
   a: Branch | null,
   b: Branch | null,
 ): {
+/**** ><> ↑ --------- Staging and Hashing ->  */
   ahead: number;
   behind: number;
 } {
@@ -284,6 +291,7 @@ export function compareBranches(
 export interface StateDelta {
   add: SnapshotStateEntry[];
   update: SnapshotStateEntry[];
+/**** ><> ↑ --------- Conflict Resolution ->  */
   remove: SnapshotStateEntry[];
 }
 
@@ -319,6 +327,7 @@ export function stateDelta(
     }
   }
 
+/**** ><> ↑ --------- Changes Description ->  */
   return result;
 }
 
@@ -577,3 +586,4 @@ export const interceptAccessError = async <T>(
     throw error;
   }
 };
+/**** ><> ↑ --------- Intercept Access Error ->  */

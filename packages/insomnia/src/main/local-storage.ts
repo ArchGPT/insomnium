@@ -1,10 +1,12 @@
 import fs from 'fs';
 import path from 'path';
+/**** ><> ↑ --------- Imports necessary packages ->  */
 
 class LocalStorage {
   _buffer: Record<string, string> = {};
   _timeouts: Record<string, NodeJS.Timeout> = {};
   _basePath: string | null = null;
+/**** ><> ↑ --------- Declaration of the LocalStorage class and its private properties ->  */
 
   constructor(basePath: string) {
     this._basePath = basePath;
@@ -13,12 +15,14 @@ class LocalStorage {
 
     console.log(`[localstorage] Initialized at ${basePath}`);
   }
+/**** ><> ↑ --------- Constructor definition for the LocalStorage class ->  */
 
   setItem<T>(key: string, obj?: T) {
     clearTimeout(this._timeouts[key]);
     this._buffer[key] = JSON.stringify(obj);
     this._timeouts[key] = setTimeout(this._flush.bind(this), 100);
   }
+/**** ><> ↑ --------- setItem method definition for the LocalStorage class ->  */
 
   getItem<T>(key: string, defaultObj?: T) {
     // Make sure things are flushed before we read
@@ -43,6 +47,7 @@ class LocalStorage {
       return defaultObj;
     }
   }
+/**** ><> ↑ --------- getItem method definition for the LocalStorage class ->  */
 
   _flush() {
     const keys = Object.keys(this._buffer);
@@ -65,11 +70,14 @@ class LocalStorage {
       }
     }
   }
+/**** ><> ↑ --------- _flush private method definition for the LocalStorage class ->  */
 
   _getKeyPath(key: string) {
     // @ts-expect-error -- TSCONVERSION this appears to be a genuine error
     return path.join(this._basePath, key);
   }
+/**** ><> ↑ --------- _getKeyPath private method definition for the LocalStorage class ->  */
 }
 
 export default LocalStorage;
+/**** ><> ↑ --------- Export default statement ->  */

@@ -5,10 +5,12 @@ import { GIT_CLONE_DIR, GIT_INTERNAL_DIR } from './git-vcs';
 import { httpClient } from './http-client';
 import { gitCallbacks } from './utils';
 
+/**** ><> ↑ --------- Import statements ->  */
 interface Options {
   fsClient: git.FsClient;
   gitRepository: GitRepository;
 }
+/**** ><> ↑ --------- Interface declaration ->  */
 
 /**
  * Create a shallow clone into the provided FS plugin.
@@ -25,3 +27,4 @@ export const shallowClone = async ({ fsClient, gitRepository }: Options) => {
     depth: 1,
   });
 };
+/**** ><> ↑ --------- Function declaration ->  */

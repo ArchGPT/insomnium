@@ -10,6 +10,7 @@ import {
 import { delay } from '../common/misc';
 import * as models from '../models/index';
 import { invariant } from '../utils/invariant';
+/**** ><> ↑ --------- Import statements ->  */
 const isUpdateSupported = () => {
   if (process.platform === 'linux') {
     console.log('[updater] Not supported on this platform', process.platform);
@@ -29,6 +30,7 @@ const isUpdateSupported = () => {
   }
   return true;
 };
+/**** ><> ↑ --------- Function definition: isUpdateSupported ->  */
 const getUpdateUrl = (updateChannel: string): string | null => {
   invariant(isUpdateSupported(), 'auto update is not supported');
   const fullUrl = new URL(process.platform === 'win32' ? UpdateURL.windows : UpdateURL.mac);
@@ -38,12 +40,14 @@ const getUpdateUrl = (updateChannel: string): string | null => {
   console.log(`[updater] Using url ${fullUrl.toString()}`);
   return fullUrl.toString();
 };
+/**** ><> ↑ --------- Function definition: getUpdateUrl ->  */
 
 const _sendUpdateStatus = (status: string) => {
   for (const window of BrowserWindow.getAllWindows()) {
     window.webContents.send('updaterStatus', status);
   }
 };
+/**** ><> ↑ --------- Function definition: _sendUpdateStatus ->  */
 
 export const init = async () => {
   autoUpdater.on('error', error => {
@@ -108,6 +112,7 @@ export const init = async () => {
     });
   }
 };
+/**** ><> ↑ --------- Function definition: init ->  */
 
 const _checkForUpdates = (updateUrl: string) => {
   try {
@@ -119,3 +124,4 @@ const _checkForUpdates = (updateUrl: string) => {
     _sendUpdateStatus('Update Error');
   }
 };
+/**** ><> ↑ --------- Function definition: _checkForUpdates ->  */

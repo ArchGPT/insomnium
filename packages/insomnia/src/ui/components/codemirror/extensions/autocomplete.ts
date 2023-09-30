@@ -7,6 +7,7 @@ import { escapeRegex, fnOrString, isNotNullOrUndefined } from '../../../../commo
 import { getDefaultFill, NunjucksParsedTag } from '../../../../templating/utils';
 import { isNunjucksMode } from '../modes/nunjucks';
 
+/**** ><> ↑ --------- Imports and dependencies ->  */
 const NAME_MATCH_FLEXIBLE = /[\w.\][\-/]+$/;
 const NAME_MATCH = /[\w.\][]+$/;
 const AFTER_VARIABLE_MATCH = /{{\s*[\w.\][]*$/;
@@ -15,6 +16,7 @@ const COMPLETE_AFTER_WORD = /[\w.\][-]+/;
 const COMPLETE_AFTER_CURLIES = /[^{]*{[{%]\s*/;
 const COMPLETION_CLOSE_KEYS = /[}|-]/;
 const MAX_HINT_LOOK_BACK = 100;
+/**** ><> ↑ --------- Constants and regular expressions ->  */
 const TYPE_VARIABLE = 'variable';
 const TYPE_TAG = 'tag';
 const TYPE_CONSTANT = 'constant';
@@ -23,6 +25,7 @@ const MAX_CONSTANTS = -1;
 const MAX_SNIPPETS = -1;
 const MAX_VARIABLES = -1;
 const MAX_TAGS = -1;
+/**** ><> ↑ --------- Types and maximum limits ->  */
 const ICONS = {
   [TYPE_CONSTANT]: {
     char: '𝒄',
@@ -41,6 +44,7 @@ const ICONS = {
     title: 'Generator Tag',
   },
 };
+/**** ><> ↑ --------- Icons and configuration options ->  */
 
 CodeMirror.defineExtension('isHintDropdownActive', function(this: CodeMirror.Editor) {
   return (
@@ -55,6 +59,7 @@ CodeMirror.defineExtension('closeHintDropdown', function(this: CodeMirror.Editor
   this.state.completionActive?.close();
 });
 
+/**** ><> ↑ --------- CodeMirror extensions ->  */
 CodeMirror.defineOption('environmentAutocomplete', null, (cm: CodeMirror.Editor, options: EnvironmentAutocompleteOptions) => {
   if (!options) {
     return;
@@ -85,6 +90,7 @@ CodeMirror.defineOption('environmentAutocomplete', null, (cm: CodeMirror.Editor,
       hintsContainer = el;
     }
 
+/**** ><> ↑ --------- CodeMirror options and key functions ->  */
     const constants = options.getConstants ? await options.getConstants() : null;
     const variables = options.getVariables ? await options.getVariables() : null;
     const snippets = options.getSnippets ? await options.getSnippets() : null;
@@ -169,6 +175,7 @@ CodeMirror.defineOption('environmentAutocomplete', null, (cm: CodeMirror.Editor,
       name: 'autocomplete-keymap',
       "' '": completeIfAfterTagOrVarOpen,
     };
+/**** ><> ↑ --------- Completion functionality ->  */
 
     // Construct valid codemirror key names from KeyCombination items. The order (Shift-Cmd-Ctrl-Alt) of the modifier is important https://codemirror.net/doc/manual.html#keymaps
     for (const keyComb of keyCombs) {
@@ -440,6 +447,7 @@ function isVariableCompletionItem(item: CompletionItem): item is VariableComplet
 
 function isSnippetCompletionItem(item: CompletionItem): item is SnippetCompletionItem {
   return item.type === TYPE_SNIPPET;
+/**** ><> ↑ --------- Helper functions and types ->  */
 }
 
 function isTagCompletionItem(item: CompletionItem): item is TagCompletionItem {
@@ -537,3 +545,4 @@ function renderHintMatch(li: HTMLElement, _allHints: CodeMirror.Hints, hint: Hin
     ${safeValue}
   `;
 }
+/**** ><> ↑ --------- Replace and render functions ->  */

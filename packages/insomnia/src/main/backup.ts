@@ -8,6 +8,7 @@ import { version } from '../../package.json';
 import { getUpdatesBaseURL } from '../common/constants';
 import * as models from '../models';
 import { insomniaFetch } from './insomniaFetch';
+/**** ><> ↑ --------- Importing modules ->  */
 
 export async function backupIfNewerVersionAvailable() {
   try {
@@ -29,6 +30,7 @@ export async function backupIfNewerVersionAvailable() {
     console.log('[main] Error checking for newer version', err);
   }
 }
+/**** ><> ↑ --------- Function to check for updates and backup if newer version available ->  */
 
 export async function backup() {
   try {
@@ -52,6 +54,7 @@ export async function backup() {
     console.log('Error exporting backup:', err);
   }
 }
+/**** ><> ↑ --------- Function to backup data ->  */
 
 export async function restoreBackup(version: string) {
   try {
@@ -74,3 +77,4 @@ export async function restoreBackup(version: string) {
   electron.app.relaunch();
   electron.app.exit();
 }
+/**** ><> ↑ --------- Function to restore backup ->  */

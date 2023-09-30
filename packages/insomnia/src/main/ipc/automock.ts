@@ -2,6 +2,7 @@
 // TODO simplify this and rename to generate example payload
 import { Enum, Field, MapField, Message, OneOf, Service, Type } from 'protobufjs';
 import { v4 } from 'uuid';
+/**** ><> ↑ --------- Module Imports ->  */
 
 export interface MethodPayload {
   plain: {[key: string]: any};
@@ -11,11 +12,13 @@ export interface MethodPayload {
 export interface ServiceMethodsPayload {
   [name: string]: () => MethodPayload;
 }
+/**** ><> ↑ --------- Interface Definitions ->  */
 
 const enum MethodType {
   request,
   response
 }
+/**** ><> ↑ --------- Enum Definition ->  */
 
 /**
  * Mock method response
@@ -44,6 +47,7 @@ export function mockRequestMethods(
     mocks
   );
 }
+/**** ><> ↑ --------- Function Definitions: mockResponseMethods, mockRequestMethods ->  */
 
 function mockMethodReturnType(
   service: Service,
@@ -73,6 +77,7 @@ function mockMethodReturnType(
     return methods;
   }, {});
 }
+/**** ><> ↑ --------- Function Definition: mockMethodReturnType ->  */
 
 /**
  * Mock a field type
@@ -100,6 +105,7 @@ function mockTypeFields(type: Type, stackDepth: StackDepth): object {
     return data;
   }, fieldsData);
 }
+/**** ><> ↑ --------- Function Definition: mockTypeFields ->  */
 
 /**
  * Mock enum
@@ -109,6 +115,7 @@ function mockEnum(enumType: Enum): number {
 
   return enumType.values[enumKey];
 }
+/**** ><> ↑ --------- Function Definition: mockEnum ->  */
 
 /**
  * Mock a field
@@ -140,6 +147,7 @@ function mockField(field: Field, stackDepth: StackDepth): any {
     return mockPropertyValue;
   }
 }
+/**** ><> ↑ --------- Function Definition: mockField ->  */
 
 function mockMapField(field: MapField, stackDepth: StackDepth): any {
   let mockPropertyValue = null;
@@ -178,6 +186,7 @@ function isProtoType(resolvedType: Enum | Type | null): resolvedType is Type {
     fieldsArray in resolvedType && Array.isArray(resolvedType[fieldsArray])
   );
 }
+/**** ><> ↑ --------- Function Definitions: mockMapField and isProtoType ->  */
 
 function pickOneOf(oneofs: OneOf[], stackDepth: StackDepth) {
   return oneofs.reduce((fields: {[key: string]: any}, oneOf) => {
@@ -224,6 +233,7 @@ function mockScalar(type: string, fieldName: string): any {
       return null;
   }
 }
+/**** ><> ↑ --------- Function Definitions: pickOneOf and mockScalar ->  */
 
 /**
  * Tries to guess a mock value from the field name.
@@ -238,6 +248,7 @@ function interpretMockViaFieldName(fieldName: string): string {
 
   return 'Hello';
 }
+/**** ><> ↑ --------- Function Definition: interpretMockViaFieldName ->  */
 
 class StackDepth {
   private readonly depths: { [type: string]: number };
@@ -259,3 +270,4 @@ class StackDepth {
     return false;
   }
 }
+/**** ><> ↑ --------- Class Definition: StackDepth ->  */

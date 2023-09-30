@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import { addDotGit } from '../utils';
 
+/**** ><> ↑ --------- Importing dependencies ->  */
 const links = {
   scp: {
     bare: 'git@github.com:a/b',
@@ -20,6 +21,7 @@ const links = {
     dotGit: 'https://github.com/a/b.git',
   },
 };
+/**** ><> ↑ --------- Defining the links object ->  */
 
 describe('addDotGit', () => {
   it('adds the .git to bare links', () => {
@@ -28,6 +30,7 @@ describe('addDotGit', () => {
     expect(addDotGit(links.http.bare)).toEqual(links.http.dotGit);
     expect(addDotGit(links.https.bare)).toEqual(links.https.dotGit);
   });
+/**** ><> ↑ --------- First set of tests to see if addDotGit adds .git to bare links ->  */
 
   it('leaves links that already have .git alone', () => {
     expect(addDotGit(links.scp.dotGit)).toEqual(links.scp.dotGit);
@@ -36,3 +39,4 @@ describe('addDotGit', () => {
     expect(addDotGit(links.https.dotGit)).toEqual(links.https.dotGit);
   });
 });
+/**** ><> ↑ --------- Second set of tests to see if addDotGit leaves links that already have .git alone ->  */

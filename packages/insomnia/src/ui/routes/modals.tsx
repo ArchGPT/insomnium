@@ -34,9 +34,8 @@ const Modals: FC = () => {
   const vcs = useVCS({
     workspaceId: activeWorkspace?._id,
   });
-
-  return (
 /**** ><> ↑ --------- Modals component definition and initialization ->  */
+  return (
     <div key="modals" className="modals">
       <ErrorBoundary showAlert>
         <AlertModal ref={instance => registerModal(instance, 'AlertModal')} />
@@ -65,7 +64,7 @@ const Modals: FC = () => {
         <CodePromptModal
           ref={instance => registerModal(instance, 'CodePromptModal')}
         />
-/**** ><> ↑ --------- Different modal component instances registration ->  */
+        {/* /**** ><> ↑ --------- Different modal component instances registration ->  */}
 
         {activeWorkspace ? (
           <>
@@ -75,7 +74,7 @@ const Modals: FC = () => {
             />
           </>
         ) : null}
-/**** ><> ↑ --------- Conditional rendering based on active workspace for NunjucksModal ->  */
+        {/* /**** ><> ↑ --------- Conditional rendering based on active workspace for NunjucksModal ->  */}
 
         <GenerateCodeModal
           ref={instance => registerModal(instance, 'GenerateCodeModal')}
@@ -92,7 +91,7 @@ const Modals: FC = () => {
         <EnvironmentEditModal
           ref={instance => registerModal(instance, 'EnvironmentEditModal')}
         />
-/**** ><> ↑ --------- More modal component instances registration ->  */
+        {/* /**** ><> ↑ --------- More modal component instances registration ->  */}
 
         {activeWorkspace && vcs ? (
           <Fragment>
@@ -101,12 +100,12 @@ const Modals: FC = () => {
             />
           </Fragment>
         ) : null}
-/**** ><> ↑ --------- Conditional rendering based on active workspace and VCS for SyncMergeModal ->  */
+        {/* /**** ><> ↑ --------- Conditional rendering based on active workspace and VCS for SyncMergeModal ->  */}
 
         <AddKeyCombinationModal
           ref={instance => registerModal(instance, 'AddKeyCombinationModal')}
         />
-/**** ><> ↑ --------- Final modal instance registration ->  */
+        {/* /**** ><> ↑ --------- Final modal instance registration ->  */}
 
       </ErrorBoundary>
     </div>

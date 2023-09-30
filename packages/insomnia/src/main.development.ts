@@ -20,6 +20,7 @@ import * as updates from './main/updates';
 import * as windowUtils from './main/window-utils';
 import * as models from './models/index';
 import type { Stats } from './models/stats';
+/**** ><> ↑ --------- Import statements ->  */
 import type { ToastNotification } from './ui/components/toast';
 
 
@@ -27,9 +28,11 @@ import type { ToastNotification } from './ui/components/toast';
 if (checkIfRestartNeeded()) {
   process.exit(0);
 }
+/**** ><> ↑ --------- Handle potential auto-update ->  */
 
 initializeLogging();
 log.info(`Running version ${getAppVersion()}`);
+/**** ><> ↑ --------- Initialize logging and log app running version ->  */
 
 // Override the Electron userData path
 // This makes Chromium use this folder for eg localStorage
@@ -42,9 +45,11 @@ if (envDataPath) {
   const newPath = path.join(defaultPath, '../', isDevelopment() ? 'insomnia-app' : userDataFolder);
   app.setPath('userData', newPath);
 }
+/**** ><> ↑ --------- Override the Electron userData path ->  */
 
 // So if (window) checks don't throw
 global.window = global.window || undefined;
+/**** ><> ↑ --------- Define global window ->  */
 
 // setup right click menu
 app.on('web-contents-created', (_, contents) => {
@@ -54,6 +59,7 @@ app.on('web-contents-created', (_, contents) => {
     contextMenu();
   }
 });
+/**** ><> ↑ --------- Setup right click menu ->  */
 
 // When the app is first launched
 app.on('ready', async () => {
@@ -97,6 +103,7 @@ app.on('ready', async () => {
   // Init the rest
   await updates.init();
 });
+/**** ><> ↑ --------- Execute steps when the app is ready ->  */
 
 // Set as default protocol
 const defaultProtocol = `insomnia${isDevelopment() ? 'dev' : ''}`;
@@ -121,6 +128,7 @@ if (defaultProtocolSuccessful) {
     console.error(`[electron client protocol] the default application set for '${fullDefaultProtocol}' was not found`);
   }
 }
+/**** ><> ↑ --------- Set default protocol ->  */
 
 // Quit when all windows are closed (except on Mac).
 app.on('window-all-closed', () => {
@@ -142,6 +150,7 @@ app.on('activate', (_error, hasVisibleWindows) => {
     }
   }
 });
+/**** ><> ↑ --------- App behavior on window closure and activation ->  */
 
 const _launchApp = async () => {
   let window: BrowserWindow;
@@ -205,6 +214,7 @@ const _launchApp = async () => {
     });
   });
 };
+/**** ><> ↑ --------- Launch app function ->  */
 
 /*
   Only one instance should exist of these models
@@ -215,4 +225,5 @@ async function _createModelInstances() {
   await models.stats.get();
   await models.settings.getOrCreate();
 }
+/**** ><> ↑ --------- Create model instances function ->  */
 

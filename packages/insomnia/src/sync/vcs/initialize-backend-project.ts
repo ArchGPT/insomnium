@@ -5,9 +5,11 @@ import { Project } from '../../models/project';
 import { Workspace } from '../../models/workspace';
 import { WorkspaceMeta } from '../../models/workspace-meta';
 import { StatusCandidate } from '../types';
+/**** ><> ↑ --------- import statements ->  */
 import { VCS } from './vcs';
 
 const blankStage = {};
+/**** ><> ↑ --------- blankStage constant ->  */
 
 export const initializeLocalBackendProjectAndMarkForSync = async ({ vcs, workspace }: { vcs: VCS; workspace: Workspace }) => {
   // Create local project
@@ -30,6 +32,7 @@ export const initializeLocalBackendProjectAndMarkForSync = async ({ vcs, workspa
   // Mark for pushing to the active project
   await models.workspaceMeta.updateByParentId(workspace._id, { pushSnapshotOnInitialize: true });
 };
+/**** ><> ↑ --------- initializeLocalBackendProjectAndMarkForSync function ->  */
 
 export const pushSnapshotOnInitialize = async ({
   vcs,
@@ -56,3 +59,4 @@ export const pushSnapshotOnInitialize = async ({
     await vcs.push(projectRemoteId);
   }
 };
+/**** ><> ↑ --------- pushSnapshotOnInitialize function ->  */

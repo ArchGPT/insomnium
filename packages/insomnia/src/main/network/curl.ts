@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import tls from 'tls';
 import { v4 as uuidV4 } from 'uuid';
+/**** ><> ↑ --------- NodeJS core and Third-party module imports. ->  */
 
 import { describeByteSize, generateId, getSetCookieHeaders } from '../../common/misc';
 import * as models from '../../models';
@@ -19,6 +20,7 @@ import { invariant } from '../../utils/invariant';
 import { setDefaultProtocol } from '../../utils/url/protocol';
 import { createConfiguredCurlInstance } from './libcurl-promise';
 import { parseHeaderStrings } from './parse-header-strings';
+/**** ><> ↑ --------- Importing local project modules. ->  */
 
 export interface CurlConnection extends Curl {
   _id: string;
@@ -66,11 +68,13 @@ export type CurlEvent =
   | CurlMessageEvent
   | CurlErrorEvent
   | CurlCloseEvent;
+/**** ><> ↑ --------- Declaring and exporting interface types for the module. ->  */
 
 const CurlConnections = new Map<string, Curl>();
 const eventLogFileStreams = new Map<string, fs.WriteStream>();
 const timelineFileStreams = new Map<string, fs.WriteStream>();
 
+/**** ><> ↑ --------- Declaring global objects for the module. ->  */
 const parseHeadersAndBuildTimeline = (url: string, headersWithStatus: HeaderInfo) => {
   const { result, ...headers } = headersWithStatus;
   const statusMessage = result?.reason || '';
@@ -82,6 +86,7 @@ const parseHeadersAndBuildTimeline = (url: string, headersWithStatus: HeaderInfo
   ];
   return { timeline, responseHeaders, statusCode, statusMessage, httpVersion };
 };
+/**** ><> ↑ --------- Declaring a function to parse headers and build timeline. ->  */
 interface OpenCurlRequestOptions {
   requestId: string;
   workspaceId: string;
@@ -93,6 +98,7 @@ interface OpenCurlRequestOptions {
   suppressUserAgent: boolean;
 }
 const openCurlConnection = async (
+/**** ><> ↑ --------- Interface and function declaration for opening a CurlConnection. ->  */
   _event: Electron.IpcMainInvokeEvent,
   options: OpenCurlRequestOptions
 ): Promise<void> => {
@@ -269,6 +275,7 @@ const openCurlConnection = async (
     createErrorResponse(responseId, request._id, responseEnvironmentId, timelinePath, e.message || 'Something went wrong');
   }
 };
+/**** ><> ↑ --------- Implementing the logic of the openCurlConnection function. ->  */
 
 const createErrorResponse = async (responseId: string, requestId: string, environmentId: string | null, timelinePath: string, message: string) => {
   const settings = await models.settings.getOrCreate();
@@ -283,6 +290,7 @@ const createErrorResponse = async (responseId: string, requestId: string, enviro
   const res = await models.response.create(responsePatch, settings.maxHistoryResponses);
   models.requestMeta.updateOrCreateByParentId(requestId, { activeResponseId: res._id });
 };
+/**** ><> ↑ --------- Function declaration for creating an error response. ->  */
 
 const deleteRequestMaps = async (requestId: string, message: string, event?: CurlCloseEvent | CurlErrorEvent) => {
   if (event) {
@@ -295,12 +303,14 @@ const deleteRequestMaps = async (requestId: string, message: string, event?: Cur
   timelineFileStreams.delete(requestId);
   CurlConnections.delete(requestId);
 };
+/**** ><> ↑ --------- Function declaration for deleting request maps. ->  */
 
 const getCurlReadyState = async (
   options: { requestId: string }
 ): Promise<CurlConnection['isOpen']> => {
   return CurlConnections.get(options.requestId)?.isOpen ?? false;
 };
+/**** ><> ↑ --------- Function declaration for getting the ready state of a CurlConnection. ->  */
 
 const closeCurlConnection = (
   _event: Electron.IpcMainInvokeEvent,
@@ -327,8 +337,10 @@ const closeCurlConnection = (
     window.webContents.send(readyStateChannel, false);
   }
 };
+/**** ><> ↑ --------- Logic and function declaration for closing a curl connection. ->  */
 
 const closeAllCurlConnections = (): void => CurlConnections.forEach(curl => curl.close());
+/**** ><> ↑ --------- Function declaration for closing all Curl connections. ->  */
 
 const findMany = async (
   options: { responseId: string }
@@ -343,6 +355,7 @@ const findMany = async (
     .map(e => JSON.parse(e))
     // Reverse the list of messages so that we get the latest message first
     .reverse() || [];
+/**** ><> ↑ --------- Function declaration for fetching multiple curl events. ->  */
 };
 
 export interface CurlBridgeAPI {
@@ -356,6 +369,7 @@ export interface CurlBridgeAPI {
     findMany: typeof findMany;
   };
 }
+/**** ><> ↑ --------- Exporting the main API interfaces of the module. ->  */
 export const registerCurlHandlers = () => {
   ipcMain.handle('curl.open', openCurlConnection);
   ipcMain.on('curl.close', closeCurlConnection);
@@ -363,5 +377,7 @@ export const registerCurlHandlers = () => {
   ipcMain.handle('curl.readyState', (_, options: Parameters<typeof getCurlReadyState>[0]) => getCurlReadyState(options));
   ipcMain.handle('curl.event.findMany', (_, options: Parameters<typeof findMany>[0]) => findMany(options));
 };
+/**** ><> ↑ --------- Registering the different curl handlers to the IPC main channel. ->  */
 
 electron.app.on('window-all-closed', closeAllCurlConnections);
+/**** ><> ↑ --------- Registering a callback function when all windows have been closed. ->  */

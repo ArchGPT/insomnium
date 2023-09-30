@@ -4,6 +4,7 @@ import electron from 'electron';
 import fs from 'fs';
 import { join as pathJoin, resolve as pathResolve } from 'path';
 
+/**** ><> ↑ --------- Imports ->  */
 import { version } from '../../../package.json';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import {
@@ -33,6 +34,7 @@ describe('sendCurlAndWriteTimeline()', () => {
     await globalBeforeEach();
     await models.project.all();
   });
+/**** ><> ↑ --------- Test Setup ->  */
 
   it('sends a generic request', async () => {
     const workspace = await models.workspace.create();
@@ -822,6 +824,7 @@ describe('_getAwsAuthHeaders', () => {
     expect(filterHeaders(headers, 'content-type')).toEqual([]);
   });
 });
+/**** ><> ↑ --------- _getAwsAuthHeaders ->  */
 
 describe('_parseHeaders', () => {
   const basicHeaders = [
@@ -990,6 +993,7 @@ describe('_parseHeaders', () => {
     ]);
   });
 });
+/**** ><> ↑ --------- _parseHeaders ->  */
 
 describe('getSetCookiesFromResponseHeaders', () => {
   it('defaults to empty array', () => {
@@ -1005,6 +1009,7 @@ describe('getSetCookiesFromResponseHeaders', () => {
     expect(getSetCookiesFromResponseHeaders(headers)).toEqual(['monster', 'mash']);
   });
 });
+/**** ><> ↑ --------- getSetCookiesFromResponseHeaders ->  */
 describe('getCurrentUrl for tough-cookie', () => {
   it('defaults to finalUrl', () => {
     const headerResults = [];
@@ -1022,3 +1027,4 @@ describe('getCurrentUrl for tough-cookie', () => {
     expect(networkUtils.getCurrentUrl({ headerResults, finalUrl })).toEqual(finalUrl + '/biscuit');
   });
 });
+/**** ><> ↑ --------- getCurrentUrl for tough-cookie ->  */

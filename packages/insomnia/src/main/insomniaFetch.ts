@@ -3,6 +3,7 @@ import { BrowserWindow, net } from 'electron';
 import { getApiBaseURL, getClientString } from '../common/constants';
 import { delay } from '../common/misc';
 
+/**** ><> ↑ --------- Module and dependency imports ->  */
 interface FetchConfig {
   method: 'POST' | 'PUT' | 'GET';
   path: string;
@@ -11,16 +12,19 @@ interface FetchConfig {
   retries?: number;
   origin?: string;
 }
+/**** ><> ↑ --------- FetchConfig Interface declaration ->  */
 // internal request (insomniaFetch)
 // should validate ssl certs on our server
 // should only go to insomnia API
 // should be able to listen for specific messages in headers
 // should be able to retry on 502
 
+/**** ><> ↑ --------- Comments describing the internal request ->  */
 // external request (axiosRequest)
 // should respect settings for proxy and ssl validation
 // should be for all third party APIs, github, gitlab, isometric-git
 
+/**** ><> ↑ --------- Comments describing the external request ->  */
 const exponentialBackOff = async (url: string, init: RequestInit, retries = 0): Promise<Response> => {
   try {
     const response = await net.fetch(url, init);
@@ -37,6 +41,7 @@ const exponentialBackOff = async (url: string, init: RequestInit, retries = 0): 
     throw err;
   }
 };
+/**** ><> ↑ --------- Definition and implementation of exponential backoff function ->  */
 
 export async function insomniaFetch<T = any>({ method, path, data, sessionId, origin }: FetchConfig): Promise<T> {
   const config: RequestInit = {
@@ -61,3 +66,4 @@ export async function insomniaFetch<T = any>({ method, path, data, sessionId, or
   const isJson = response.headers.get('content-type') === 'application/json' || path.match(/\.json$/);
   return isJson ? response.json() : response.text();
 }
+/**** ><> ↑ --------- Insomnia fetch implementation ->  */

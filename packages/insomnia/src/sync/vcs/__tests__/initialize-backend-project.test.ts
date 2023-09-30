@@ -6,6 +6,7 @@ import MemoryDriver from '../../store/drivers/memory-driver';
 import { pushSnapshotOnInitialize } from '../initialize-backend-project';
 import { VCS } from '../vcs';
 
+/**** ><> ↑ --------- Import statements ->  */
 describe('initialize-backend-project', () => {
   beforeEach(globalBeforeEach);
 
@@ -85,3 +86,4 @@ describe('initialize-backend-project', () => {
     });
   });
 });
+/**** ><> ↑ --------- Describing initialize-backend-project ->  */

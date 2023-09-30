@@ -3,6 +3,7 @@ import path from 'path';
 
 import type { BaseDriver } from './base';
 
+/**** ><> ↑ --------- Module and dependency imports ->  */
 export default class FileSystemDriver implements BaseDriver {
   _directory: string;
 
@@ -10,11 +11,13 @@ export default class FileSystemDriver implements BaseDriver {
     this._directory = config.directory;
     console.log(`[FileSystemDriver] Initialized in "${this._directory}"`);
   }
+/**** ><> ↑ --------- Class definition and private constructor ->  */
 
   static create(dataDirectory: string) {
     const directory = path.join(dataDirectory, 'version-control');
     return new FileSystemDriver({ directory });
   }
+/**** ><> ↑ --------- Static create method ->  */
 
   async hasItem(key: string) {
     return new Promise<boolean>((resolve, reject) => {
@@ -29,6 +32,7 @@ export default class FileSystemDriver implements BaseDriver {
       });
     });
   }
+/**** ><> ↑ --------- hasItem method ->  */
 
   setItem(key: string, value: Buffer) {
     return new Promise<void>((resolve, reject) => {
@@ -54,6 +58,7 @@ export default class FileSystemDriver implements BaseDriver {
       });
     });
   }
+/**** ><> ↑ --------- setItem method ->  */
 
   getItem(key: string) {
     return new Promise<Buffer | null>((resolve, reject) => {
@@ -68,6 +73,7 @@ export default class FileSystemDriver implements BaseDriver {
       });
     });
   }
+/**** ><> ↑ --------- getItem method ->  */
 
   removeItem(key: string) {
     return new Promise<void>((resolve, reject) => {
@@ -82,6 +88,7 @@ export default class FileSystemDriver implements BaseDriver {
       });
     });
   }
+/**** ><> ↑ --------- removeItem method ->  */
 
   clear() {
     return new Promise<void>((resolve, reject) => {
@@ -98,6 +105,7 @@ export default class FileSystemDriver implements BaseDriver {
       });
     });
   }
+/**** ><> ↑ --------- clear method ->  */
 
   async keys(prefix: string, recursive: boolean) {
     const next = (dir: string) => {
@@ -145,6 +153,7 @@ export default class FileSystemDriver implements BaseDriver {
 
     return keys;
   }
+/**** ><> ↑ --------- keys method ->  */
 
   _getKeyPath(key: string) {
     const p = path.join(this._directory, key);
@@ -153,4 +162,6 @@ export default class FileSystemDriver implements BaseDriver {
 
     return p;
   }
+/**** ><> ↑ --------- _getKeyPath private method ->  */
 }
+/**** ><> ↑ --------- End of class definition ->  */

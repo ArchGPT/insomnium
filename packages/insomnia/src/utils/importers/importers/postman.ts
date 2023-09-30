@@ -11,6 +11,7 @@ import {
   UrlEncodedParameter as V200UrlEncodedParameter,
   Variable2 as V200Variable2,
 } from './postman-2.0.types';
+/**** ><> ↑ --------- Import statements ->  */
 import {
   Auth as V210Auth,
   Auth1 as V210Auth1,
@@ -50,10 +51,12 @@ type Header = V200Header | V210Header;
 let requestCount = 1;
 let requestGroupCount = 1;
 
+/**** ><> ↑ --------- Variable declarations ->  */
 const POSTMAN_SCHEMA_V2_0 =
   'https://schema.getpostman.com/json/collection/v2.0.0/collection.json';
 const POSTMAN_SCHEMA_V2_1 =
   'https://schema.getpostman.com/json/collection/v2.1.0/collection.json';
+/**** ><> ↑ --------- Constants ->  */
 
 const mapGrantTypeToInsomniaGrantType = (grantType: string) => {
   if (grantType === 'authorization_code_with_pkce') {
@@ -90,6 +93,7 @@ export class ImportPostman {
     return variable;
   };
 
+/**** ><> ↑ --------- Class and Methods ->  */
   importItems = (
     items: PostmanCollection['item'],
     parentId = '__WORKSPACE_ID__',
@@ -146,6 +150,7 @@ export class ImportPostman {
       authentication,
     };
   };
+/**** ><> ↑ --------- Request Import ->  */
 
   importParameters = (parameters: QueryParam[]): Parameter[] => {
     if (!parameters || parameters?.length === 0) {
@@ -783,3 +788,4 @@ export const convert: Converter = rawData => {
 
   return null;
 };
+/**** ><> ↑ --------- Export statement ->  */

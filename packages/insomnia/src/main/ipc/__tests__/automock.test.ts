@@ -1,7 +1,9 @@
 import { it } from '@jest/globals';
 import { parse } from 'protobufjs';
+/**** ><> ↑ --------- Import Statements ->  */
 
 import { mockRequestMethods } from '../automock';
+/**** ><> ↑ --------- Extra Import Statement ->  */
 
 it('mocks simple requests', () => {
   const parsed = parse(`
@@ -27,6 +29,7 @@ it('mocks simple requests', () => {
     foo: 'Hello',
   });
 });
+/**** ><> ↑ --------- First Test Scenario ->  */
 
 it('mocks requests with nested objects', () => {
   const parsed = parse(`
@@ -64,6 +67,7 @@ it('mocks requests with nested objects', () => {
     },
   });
 });
+/**** ><> ↑ --------- Second Test Scenario ->  */
 
 it('mocks requests with enums', () => {
   const parsed = parse(`
@@ -95,6 +99,7 @@ it('mocks requests with enums', () => {
     enum: 0,
   });
 });
+/**** ><> ↑ --------- Third Test Scenario ->  */
 
 it('mocks requests with repeated values', () => {
   const parsed = parse(`
@@ -120,3 +125,4 @@ it('mocks requests with repeated values', () => {
     foo: ['Hello'],
   });
 });
+/**** ><> ↑ --------- Fourth Test Scenario ->  */

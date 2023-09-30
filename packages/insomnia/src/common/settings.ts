@@ -1,4 +1,5 @@
 import { ValueOf } from 'type-fest';
+/**** ><> ↑ --------- Importing module ->  */
 
 /**
  * The readable definition of a hotkey.
@@ -59,6 +60,7 @@ export type KeyboardShortcut =
   | 'beautifyRequestBody'
   | 'graphql_explorer_focus_filter';
 
+/**** ><> ↑ --------- Keyboard shortcut related Interfaces and Types ->  */
 /**
  * The collection of defined hotkeys.
  * The registry maps a hotkey by its reference id to its key bindings.
@@ -76,22 +78,26 @@ export const HttpVersions = {
 } as const;
 
 export type HttpVersion = ValueOf<typeof HttpVersions>;
+/**** ><> ↑ --------- HTTP version constants and related Type ->  */
 
 export enum UpdateChannel {
   stable = 'stable',
   beta = 'beta',
 }
+/**** ><> ↑ --------- Update Channel enum ->  */
 
 /** Gets a subset of Settings where the values match a condition */
 export type SettingsOfType<MatchType> = NonNullable<{
   [Key in keyof Settings]: Settings[Key] extends MatchType ? Key : never;
 }[keyof Settings]>;
+/**** ><> ↑ --------- Type settings definition ->  */
 
 export interface PluginConfig {
   disabled: boolean;
 }
 
 export type PluginConfigMap = Record<string, PluginConfig>;
+/**** ><> ↑ --------- Plugin Config related Interfaces and Types ->  */
 
 export interface Settings {
   autoDetectColorScheme: boolean;
@@ -146,3 +152,4 @@ export interface Settings {
   validateAuthSSL: boolean;
   validateSSL: boolean;
 }
+/**** ><> ↑ --------- Settings interface ->  */

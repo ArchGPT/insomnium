@@ -5,10 +5,13 @@ import protobuf from 'protobufjs';
 import { globalBeforeEach } from '../../../__jest__/before-each';
 import { loadMethodsFromReflection } from '../grpc';
 
+/**** ><> ↑ --------- Import statements ->  */
 jest.mock('grpc-reflection-js');
 
+/**** ><> ↑ --------- Mocking of the grpc-reflection-js package ->  */
 describe('loadMethodsFromReflection', () => {
   beforeEach(globalBeforeEach);
+/**** ><> ↑ --------- Test suite for the 'loadMethodsFromReflection' function ->  */
 
   describe('one service reflection', () => {
     beforeEach(() => {
@@ -47,6 +50,7 @@ describe('loadMethodsFromReflection', () => {
       }]);
     });
   });
+/**** ><> ↑ --------- Sub-suite for testing single service reflection ->  */
 
   describe('format service reflection', () => {
     beforeEach(() => {
@@ -85,6 +89,7 @@ describe('loadMethodsFromReflection', () => {
       }]);
     });
   });
+/**** ><> ↑ --------- Sub-suite for testing the formatting of service reflection ->  */
 
   describe('multiple service reflection', () => {
     beforeEach(() => {
@@ -141,5 +146,7 @@ describe('loadMethodsFromReflection', () => {
       }]);
     });
   });
+/**** ><> ↑ --------- Sub-suite for testing reflection over multiple services ->  */
 
 });
+/**** ><> ↑ --------- End of the main test suite ->  */

@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { baseModelSchema, workspaceModelSchema } from '../../../models/__schemas__/model-schemas';
 import { branchSchema, mergeConflictSchema, statusCandidateSchema } from '../../__schemas__/type-schemas';
 import { StageEntry } from '../../types';
+/**** ><> ↑ --------- Imports ->  */
 import {
   combinedMapKeys,
   compareBranches,
@@ -25,6 +26,7 @@ const baseModelBuilder = createBuilder(baseModelSchema);
 const workspaceModelBuilder = createBuilder(workspaceModelSchema);
 const mergeConflictBuilder = createBuilder(mergeConflictSchema);
 const branchBuilder = createBuilder(branchSchema);
+/**** ><> ↑ --------- Variable Declarations ->  */
 
 describe('util', () => {
   beforeEach(() => {
@@ -116,6 +118,7 @@ describe('util', () => {
   });
 
   describe('generateCandidateMap()', () => {
+/**** ><> ↑ --------- describe('util', () => { ->  */
     it('generates from simple candidates', async () => {
       const candidates = [
         newCandidate('doc_2', 2),
@@ -126,6 +129,7 @@ describe('util', () => {
       expect(Object.keys(map).sort()).toEqual(['doc_1', 'doc_2']);
     });
   });
+/**** ><> ↑ --------- describe('generateCandidateMap()', () => { ->  */
 
   describe('combineMapKeys()', () => {
     it('generates from simple states', async () => {
@@ -140,6 +144,7 @@ describe('util', () => {
       expect(keys.sort()).toEqual(['doc_1', 'doc_2', 'doc_4']);
     });
   });
+/**** ><> ↑ --------- describe('combineMapKeys()', () => { ->  */
 
   describe('threeWayMerge()', () => {
     const A1 = {
@@ -347,6 +352,7 @@ describe('util', () => {
     });
   });
 
+/**** ><> ↑ --------- describe('threeWayMerge()', () => { ->  */
   describe('stateDelta()', () => {
     const A1 = {
       key: 'a',
@@ -424,6 +430,7 @@ describe('util', () => {
       });
     });
   });
+/**** ><> ↑ --------- describe('stateDelta()', () => { ->  */
 
   describe('getStagable()', () => {
     it('works with empty state', () => {
@@ -515,6 +522,7 @@ describe('util', () => {
     });
   });
 
+/**** ><> ↑ --------- describe('getStagable()', () => { ->  */
   describe('getRootSnapshot()', () => {
     it('works with empty states', () => {
       const a = newBranch([]);
@@ -555,6 +563,7 @@ describe('util', () => {
       expect(getRootSnapshot(b, a)).toBe('s3');
     });
   });
+/**** ><> ↑ --------- describe('getRootSnapshot()', () => { ->  */
 
   describe('updateStateWithConflictResolutions()', () => {
     const D1 = {
@@ -609,6 +618,7 @@ describe('util', () => {
     });
   });
 
+/**** ><> ↑ --------- describe('updateStateWithConflictResolutions()', () => { ->  */
   describe('preMergeCheck()', () => {
     it('no changes', () => {
       const trunk = [A1];
@@ -710,6 +720,7 @@ describe('util', () => {
       });
     });
   });
+/**** ><> ↑ --------- describe('preMergeCheck()', () => { ->  */
 
   describe('compareBranches()', () => {
     it('empty states are the same', () => {
@@ -820,6 +831,7 @@ describe('util', () => {
       });
     });
   });
+/**** ><> ↑ --------- describe('compareBranches()', () => { ->  */
 
   describe('hash()', () => {
     it('ignore object key order', () => {
@@ -923,6 +935,7 @@ describe('util', () => {
       expect(() => hash()).toThrowError('Cannot hash undefined value');
     });
   });
+/**** ><> ↑ --------- describe('hash()', () => { ->  */
   describe('hashDocument()', () => {
     it('fails on undefined', () => {
       expect(() => hashDocument(undefined)).toThrowError('Cannot hash undefined value');
@@ -968,6 +981,7 @@ describe('util', () => {
       expect(original.hash).not.toBe(unique.hash);
     });
   });
+/**** ><> ↑ --------- describe('hashDocument()', () => { ->  */
 });
 
 function newSnapshot(n, state) {
@@ -1039,3 +1053,4 @@ describe('interceptAccessError', () => {
     result.toThrowError(message);
   });
 });
+/**** ><> ↑ --------- interceptAccessError ->  */

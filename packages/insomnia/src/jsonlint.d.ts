@@ -1,4 +1,5 @@
 declare module 'jsonlint-mod-fixed' {
+/**** ><> ↑ --------- Module declaration ->  */
 
     interface ParseErrorHash {
         expected?: string[];
@@ -13,10 +14,14 @@ declare module 'jsonlint-mod-fixed' {
         text?: string;
         token?: string | null;
     }
+/**** ><> ↑ --------- Interface definition ->  */
 
     export function parse(input: string): string;
+/**** ><> ↑ --------- Function Export ->  */
     export namespace parser {
         export function parseError(str: string, hash: ParseErrorHash): void;
     }
+/**** ><> ↑ --------- Namespace and Function Export ->  */
 
 }
+/**** ><> ↑ --------- Module closure ->  */

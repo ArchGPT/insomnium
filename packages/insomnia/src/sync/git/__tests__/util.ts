@@ -21,6 +21,7 @@ export function setupDateMocks() {
 
   global.Date = fakeDate;
 }
+/**** ><> ↑ --------- Defines the function setupDateMocks and a fakeDate class for mocking date functionality ->  */
 
 export async function assertAsyncError(promise: Promise<any>, code?: string) {
   try {
@@ -36,3 +37,4 @@ export async function assertAsyncError(promise: Promise<any>, code?: string) {
 
   throw new Error('Promise did not throw');
 }
+/**** ><> ↑ --------- Defines the function assertAsyncError for validating promise error responses ->  */

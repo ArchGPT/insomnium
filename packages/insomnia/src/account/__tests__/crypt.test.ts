@@ -3,6 +3,7 @@ import buffer from 'buffer/';
 
 import * as crypt from '../crypt';
 
+/**** ><> ↑ --------- Importing required modules ->  */
 describe('crypt', () => {
   describe('deriveKey()', () => {
     it('derives a key properly', async () => {
@@ -12,6 +13,7 @@ describe('crypt', () => {
     });
   });
 
+/**** ><> ↑ --------- Crypt DeriveKey test ->  */
   describe('AES', () => {
     it('encrypts and decrypts', () => {
       const key = {
@@ -27,6 +29,7 @@ describe('crypt', () => {
     });
   });
 
+/**** ><> ↑ --------- AES encryption and decryption test ->  */
   describe('AES Buffer', () => {
     it('encrypts and decrypts', () => {
       const key = {
@@ -43,6 +46,7 @@ describe('crypt', () => {
     });
   });
 
+/**** ><> ↑ --------- AES Buffer encryption and decryption test ->  */
   describe('RSA', () => {
     it('encrypts and decrypts', () => {
       const privateKey = {
@@ -95,3 +99,4 @@ describe('crypt', () => {
     });
   });
 });
+/**** ><> ↑ --------- RSA encryption and decryption test with privateKey and publicKey ->  */

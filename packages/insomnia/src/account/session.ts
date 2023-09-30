@@ -2,8 +2,10 @@ import * as srp from 'srp-js';
 
 import * as crypt from './crypt';
 
+/**** ><> ↑ --------- Import statements ->  */
 type LoginCallback = (isLoggedIn: boolean) => void;
 
+/**** ><> ↑ --------- LoginCallback type definition ->  */
 export interface WhoamiResponse {
   sessionAge: number;
   accountId: string;
@@ -25,6 +27,7 @@ export interface WhoamiResponse {
   canManageTeams: boolean;
   maxTeamMembers: number;
 }
+/**** ><> ↑ --------- WhoamiResponse interface definition ->  */
 
 export interface SessionData {
   accountId: string;
@@ -37,11 +40,13 @@ export interface SessionData {
   encPrivateKey: crypt.AESMessage;
 }
 export function onLoginLogout(loginCallback: LoginCallback) {
+/**** ><> ↑ --------- SessionData interface definition ->  */
   window.main.on('loggedIn', () => {
     loginCallback(isLoggedIn());
   });
 }
 
+/**** ><> ↑ --------- onLoginLogout function definition ->  */
 /** Creates a session from a sessionId and derived symmetric key. */
 export async function absorbKey(sessionId: string, key: string) {
   // Get and store some extra info (salts and keys)
@@ -70,6 +75,7 @@ export async function absorbKey(sessionId: string, key: string) {
   window.main.loginStateChange();
 }
 
+/**** ><> ↑ --------- absorbKey function definition ->  */
 export async function changePasswordWithToken(rawNewPassphrase: string, confirmationCode: string) {
   // Sanitize inputs
   const newPassphrase = _sanitizePassphrase(rawNewPassphrase);
@@ -112,6 +118,7 @@ export async function changePasswordWithToken(rawNewPassphrase: string, confirma
   });
 }
 
+/**** ><> ↑ --------- changePasswordWithToken function definition ->  */
 export function sendPasswordChangeCode() {
   return window.main.insomniaFetch({
     method: 'POST',
@@ -120,10 +127,12 @@ export function sendPasswordChangeCode() {
   });
 }
 
+/**** ><> ↑ --------- sendPasswordChangeCode function definition ->  */
 export function getPublicKey() {
   return _getSessionData()?.publicKey;
 }
 
+/**** ><> ↑ --------- getPublicKey function definition ->  */
 export function getPrivateKey() {
   const sessionData = _getSessionData();
 
@@ -141,6 +150,7 @@ export function getPrivateKey() {
   return JSON.parse(privateKeyStr);
 }
 
+/**** ><> ↑ --------- getPrivateKey function definition ->  */
 export function getCurrentSessionId() {
   if (window) {
     return window.localStorage.getItem('currentSessionId');
@@ -148,32 +158,39 @@ export function getCurrentSessionId() {
     return '';
   }
 }
+/**** ><> ↑ --------- getCurrentSessionId function definition ->  */
 
 export function getAccountId() {
   return _getSessionData()?.accountId;
 }
+/**** ><> ↑ --------- getAccountId function definition ->  */
 
 export function getEmail() {
   return _getSessionData()?.email;
 }
+/**** ><> ↑ --------- getEmail function definition ->  */
 
 export function getFirstName() {
   return _getSessionData()?.firstName;
 }
+/**** ><> ↑ --------- getFirstName function definition ->  */
 
 export function getLastName() {
   return _getSessionData()?.lastName;
 }
+/**** ><> ↑ --------- getLastName function definition ->  */
 
 export function getFullName() {
   return `${getFirstName()} ${getLastName()}`.trim();
 }
 
+/**** ><> ↑ --------- getFullName function definition ->  */
 /** Check if we (think) we have a session */
 export function isLoggedIn() {
   return !!getCurrentSessionId();
 }
 
+/**** ><> ↑ --------- isLoggedIn function definition ->  */
 /** Log out and delete session data */
 export async function logout() {
   try {
@@ -192,6 +209,7 @@ export async function logout() {
   window.main.loginStateChange();
 }
 
+/**** ><> ↑ --------- logout function definition ->  */
 /** Set data for the new session and store it encrypted with the sessionId */
 export function setSessionData(
   id: string,
@@ -219,6 +237,7 @@ export function setSessionData(
   window.localStorage.setItem('currentSessionId', id);
   return sessionData;
 }
+/**** ><> ↑ --------- setSessionData function definition ->  */
 export async function listTeams() {
   return window.main.insomniaFetch({
     method: 'GET',
@@ -227,6 +246,7 @@ export async function listTeams() {
   });
 }
 
+/**** ><> ↑ --------- listTeams function definition ->  */
 // ~~~~~~~~~~~~~~~~ //
 // Helper Functions //
 // ~~~~~~~~~~~~~~~~ //
@@ -286,3 +306,4 @@ function _getSrpParams() {
 function _sanitizePassphrase(passphrase: string) {
   return passphrase.trim().normalize('NFKD');
 }
+/**** ><> ↑ --------- Helper Functions ->  */

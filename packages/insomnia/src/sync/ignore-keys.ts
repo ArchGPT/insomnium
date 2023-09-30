@@ -4,9 +4,11 @@ import { isWorkspace, Workspace } from '../models/workspace';
 // Key for VCS to delete before computing changes
 const DELETE_KEY: keyof BaseModel = 'modified';
 
+/**** ><> ↑ --------- Import statements and constants definition ->  */
 type ResetModelKeys<T extends BaseModel> = {
   [K in keyof T]?: T[K] | null;
 };
+/**** ><> ↑ --------- Type definition for resetting model ->  */
 
 // Keys for VCS to reset before computing changes
 //  We can't always delete keys
@@ -15,6 +17,7 @@ type ResetModelKeys<T extends BaseModel> = {
 const RESET_WORKSPACE_KEYS: ResetModelKeys<Workspace> = {
   parentId: null,
 };
+/**** ><> ↑ --------- Constants definition for resetting workspace ->  */
 
 export const shouldIgnoreKey = <T extends BaseModel>(key: keyof T, doc: T) => {
   if (key === DELETE_KEY) {
@@ -27,11 +30,13 @@ export const shouldIgnoreKey = <T extends BaseModel>(key: keyof T, doc: T) => {
 
   return false;
 };
+/**** ><> ↑ --------- Function to check if a key should be ignored ->  */
 
 export const deleteKeys = <T extends BaseModel>(doc: T) => {
   // @ts-expect-error force delete the key even if it is required
   delete doc[DELETE_KEY];
 };
+/**** ><> ↑ --------- Function to delete keys from the document ->  */
 
 export const resetKeys = <T extends BaseModel>(doc: T) => {
   if (isWorkspace(doc)) {
@@ -42,3 +47,4 @@ export const resetKeys = <T extends BaseModel>(doc: T) => {
       });
   }
 };
+/**** ><> ↑ --------- Function to reset keys in the document ->  */
