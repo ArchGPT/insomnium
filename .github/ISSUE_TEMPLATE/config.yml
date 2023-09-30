@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: Feature Request
-    url: https://github.com/Kong/insomnia/discussions/categories/ideas
+    url: https://github.com/ArchGPT/insomnium/discussions
     about: Search and submit ideas for this project
-  - name: Question
-    url: https://chat.insomnia.rest/
-    about: Please ask and answer questions about Insomnium in our Slack Community
+  # - name: Question
+  #   url: https://chat.insomnia.rest/
+  #   about: Please ask and answer questions about Insomnium in our Slack Community

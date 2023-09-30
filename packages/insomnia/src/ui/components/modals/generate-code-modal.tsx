@@ -12,6 +12,10 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { CodeEditor, CodeEditorHandle } from '../codemirror/code-editor';
 
+const defaultTarget = '{"key":"shell","title":"Shell","extname":".sh","default":"curl","clients":[{"key":"curl","title":"cURL","link":"http://curl.haxx.se/","description":"cURL is a command line tool and library for transferring data with URL syntax"},{"key":"httpie","title":"HTTPie","link":"http://httpie.org/","description":"a CLI, cURL-like tool for humans"},{"key":"wget","title":"Wget","link":"https://www.gnu.org/software/wget/","description":"a free software package for retrieving files using HTTP, HTTPS"}]}'
+
+const defaultClient = '{"key":"curl","title":"cURL","link":"http://curl.haxx.se/","description":"cURL is a command line tool and library for transferring data with URL syntax"}'
+
 const MODE_MAP: Record<string, string> = {
   c: 'clike',
   java: 'clike',
@@ -48,11 +52,11 @@ export const GenerateCodeModal = forwardRef<GenerateCodeModalHandle, Props>((pro
   let storedTarget: HTTPSnippetTarget | undefined;
   let storedClient: HTTPSnippetClient | undefined;
   try {
-    storedTarget = JSON.parse(window.localStorage.getItem('insomnia::generateCode::target') || '') as HTTPSnippetTarget;
+    storedTarget = JSON.parse(window.localStorage.getItem('insomnia::generateCode::target') || defaultTarget) as HTTPSnippetTarget;
   } catch (error) {}
 
   try {
-    storedClient = JSON.parse(window.localStorage.getItem('insomnia::generateCode::client') || '') as HTTPSnippetClient;
+    storedClient = JSON.parse(window.localStorage.getItem('insomnia::generateCode::client') || defaultClient) as HTTPSnippetClient;
   } catch (error) {}
   const [state, setState] = useState<State>({
     cmd: '',
