@@ -14,12 +14,17 @@ Insomnium is a fork of [Kong/Insomnia at 2023.5.8](https://github.com/ArchGPT/in
 
 I was among the users who were deeply affected by the recent change. I still think Insomnia is a nice product in general, but I have to disagree with the direction it is going. So I have decided to fork it and make it 100% local and privacy-focus.
 
+> *I choose to walk in shades.* <br>
+> *Hearken now, to the song of dusk* <br>
+> *The forest venerates your name* <br> 
+>--- [Insomnium, song of the dusk](https://youtu.be/nTIDh1miBSc)
+
 ## Roadmap
 
 I have removed user login, tracking, analytics, etc, from Insomnia so it is now a 100% local app. I will be cleaning up the code to make the UI faster, and refactor the local database and config to keep everything lean. If you have any feature request or encountered any bug, feel free to [open an issue](https://github.com/ArchGPT/insomnium/issues). Thanks!
 
 
-I'm also working on a Code Llama plugin for Insomnium to make it more easily customizable and extensible, while keeping the core product fast and 100% local.
+I'm also working on a Code Llama plugin for Insomnium to make it more easily customizable and extensible, while keeping the core product fast and 100% local-only.
 
 ## Download
 
