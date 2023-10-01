@@ -2,13 +2,12 @@
   "private": true,
   "name": "insomnia-send-request",
   "license": "Apache-2.0",
-  "version": "2023.5.8",
+  "version": "2023.5.9-alpha.0",
   "author": "Kong <office@konghq.com>",
   "main": "dist/index.js",
   "types": "dist/send-request/index.d.ts",
   "dependencies": {
     "@getinsomnia/node-libcurl": "2.3.6-18",
- 
     "@stoplight/spectral-core": "^1.18.2",
     "@stoplight/spectral-formats": "^1.5.0",
     "@stoplight/spectral-rulesets": "^1.16.0",
