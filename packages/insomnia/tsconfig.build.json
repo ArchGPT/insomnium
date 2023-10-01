@@ -10,6 +10,8 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "types": ["node", "vite/client"],
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
   "include": [
     "**/*.d.ts",

@@ -57,9 +57,9 @@ jobs:
         env:
           NODE_OPTIONS: '--max_old_space_size=6144'
 
-      - name: Setup Inso CLI version env var
-        run:
-          echo "INSO_VERSION=$(jq .version packages/insomnia-inso/package.json -rj)" >> $GITHUB_ENV
+      # - name: Setup Inso CLI version env var
+      #   run:
+      #     echo "INSO_VERSION=$(jq .version packages/insomnia-inso/package.json -rj)" >> $GITHUB_ENV
 
       # - name: Package inso
       #   run: |

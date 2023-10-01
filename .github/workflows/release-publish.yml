@@ -71,33 +71,33 @@ jobs:
           file_path: ${GITHUB_WORKSPACE}/artifacts/Insomnium.Core-${{ env.RELEASE_VERSION }}-portable.exe
           output_path: ${GITHUB_WORKSPACE}/artifacts/windows-latest-artifacts/insomnia/dist
 
-      - name: Set Inso CLI version on Github Env
-        run:
-          echo "INSO_VERSION=$(jq .version packages/insomnia-inso/package.json -rj)" >> $GITHUB_ENV
+      # - name: Set Inso CLI version on Github Env
+      #   run:
+      #     echo "INSO_VERSION=$(jq .version packages/insomnia-inso/package.json -rj)" >> $GITHUB_ENV
 
-      - name: Create Release for Inso CLI
-        uses: ncipollo/release-action@v1
-        id: release_inso_cli
-        with:
-          tag: lib@${{ env.INSO_VERSION }}
-          name: "Inso CLI ${{ env.INSO_VERSION }} 📦"
-          body: "Full changelog ⇒ https://insomnia.rest/changelog"
-          commit: ${{ env.RELEASE_BRANCH }}
-          prerelease: ${{ env.IS_PRERELEASE }}
-          draft: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create Release for Inso CLI
+      #   uses: ncipollo/release-action@v1
+      #   id: release_inso_cli
+      #   with:
+      #     tag: lib@${{ env.INSO_VERSION }}
+      #     name: "Inso CLI ${{ env.INSO_VERSION }} 📦"
+      #     body: "Full changelog ⇒ https://insomnia.rest/changelog"
+      #     commit: ${{ env.RELEASE_BRANCH }}
+      #     prerelease: ${{ env.IS_PRERELEASE }}
+      #     draft: false
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Inso CLI artifacts to release
-        uses: xresloader/upload-to-github-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.release_inso_cli.outputs.id }}
-          tag_name: lib@${{ env.INSO_VERSION }}
-          file: "./artifacts/*-latest-artifacts/insomnia-inso/artifacts/**"
-          prerelease: ${{ env.IS_PRERELEASE }}
-          draft: false
+      # - name: Upload Inso CLI artifacts to release
+      #   uses: xresloader/upload-to-github-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     release_id: ${{ steps.release_inso_cli.outputs.id }}
+      #     tag_name: lib@${{ env.INSO_VERSION }}
+      #     file: "./artifacts/*-latest-artifacts/insomnia-inso/artifacts/**"
+      #     prerelease: ${{ env.IS_PRERELEASE }}
+      #     draft: false
 
       - name: Create Tag and Release
         uses: ncipollo/release-action@v1
@@ -123,104 +123,104 @@ jobs:
           prerelease: ${{ env.IS_PRERELEASE }}
           draft: false
 
-      - name: Publish beta/stable of Insomnium to Insomnium API
-        if: "!contains(github.event.inputs.version, 'alpha')"
-        run: |
-          curl \
-            --fail \
-            --request POST \
-            --url $INSOMNIA_API_URL/v1/releases \
-            --header "Authorization: Bearer ${INSOMNIA_API_TOKEN}" \
-            --header "Content-Type: application/json" \
-            --data "{ \"app\": \"${RELEASE_APP}\", \"version\": \"${RELEASE_VERSION}\", \"channel\": \"${RELEASE_CHANNEL}\", \"release_date\": \"$(date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*\([+-]\)/\1\2/g')\" }"
-        env:
-          INSOMNIA_API_URL: ${{ secrets.INSOMNIA_API_URL }}
-          INSOMNIA_API_TOKEN: ${{ secrets.INSOMNIA_API_TOKEN }}
-          RELEASE_APP: com.insomnia.app
-          RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
-          RELEASE_CHANNEL: ${{ contains(github.event.inputs.version, 'beta') && 'beta' || 'stable' }}
+      # - name: Publish beta/stable of Insomnium to Insomnium API
+      #   if: "!contains(github.event.inputs.version, 'alpha')"
+      #   run: |
+      #     curl \
+      #       --fail \
+      #       --request POST \
+      #       --url $INSOMNIA_API_URL/v1/releases \
+      #       --header "Authorization: Bearer ${INSOMNIA_API_TOKEN}" \
+      #       --header "Content-Type: application/json" \
+      #       --data "{ \"app\": \"${RELEASE_APP}\", \"version\": \"${RELEASE_VERSION}\", \"channel\": \"${RELEASE_CHANNEL}\", \"release_date\": \"$(date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*\([+-]\)/\1\2/g')\" }"
+      #   env:
+      #     INSOMNIA_API_URL: ${{ secrets.INSOMNIA_API_URL }}
+      #     INSOMNIA_API_TOKEN: ${{ secrets.INSOMNIA_API_TOKEN }}
+      #     RELEASE_APP: com.insomnia.app
+      #     RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
+      #     RELEASE_CHANNEL: ${{ contains(github.event.inputs.version, 'beta') && 'beta' || 'stable' }}
 
-      - name: Publish beta/stable of inso to Insomnium API
-        if: "!contains(github.event.inputs.version, 'alpha')"
-        run: |
-          curl \
-            --fail \
-            --request POST \
-            --url $INSOMNIA_API_URL/v1/releases \
-            --header "Authorization: Bearer ${INSOMNIA_API_TOKEN}" \
-            --header "Content-Type: application/json" \
-            --data "{ \"app\": \"${RELEASE_APP}\", \"version\": \"${RELEASE_VERSION}\", \"channel\": \"${RELEASE_CHANNEL}\", \"release_date\": \"$(date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*\([+-]\)/\1\2/g')\" }"
-        env:
-          INSOMNIA_API_URL: ${{ secrets.INSOMNIA_API_URL }}
-          INSOMNIA_API_TOKEN: ${{ secrets.INSOMNIA_API_TOKEN }}
-          RELEASE_APP: com.insomnia.inso
-          RELEASE_VERSION: ${{ env.INSO_VERSION }}
-          RELEASE_CHANNEL: ${{ contains(github.event.inputs.version, 'beta') && 'beta' || 'stable' }}
+      # - name: Publish beta/stable of inso to Insomnium API
+      #   if: "!contains(github.event.inputs.version, 'alpha')"
+      #   run: |
+      #     curl \
+      #       --fail \
+      #       --request POST \
+      #       --url $INSOMNIA_API_URL/v1/releases \
+      #       --header "Authorization: Bearer ${INSOMNIA_API_TOKEN}" \
+      #       --header "Content-Type: application/json" \
+      #       --data "{ \"app\": \"${RELEASE_APP}\", \"version\": \"${RELEASE_VERSION}\", \"channel\": \"${RELEASE_CHANNEL}\", \"release_date\": \"$(date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*\([+-]\)/\1\2/g')\" }"
+      #   env:
+      #     INSOMNIA_API_URL: ${{ secrets.INSOMNIA_API_URL }}
+      #     INSOMNIA_API_TOKEN: ${{ secrets.INSOMNIA_API_TOKEN }}
+      #     RELEASE_APP: com.insomnia.inso
+      #     RELEASE_VERSION: ${{ env.INSO_VERSION }}
+      #     RELEASE_CHANNEL: ${{ contains(github.event.inputs.version, 'beta') && 'beta' || 'stable' }}
 
-      - name: Upload to snapcraft (beta and stable only)
-        if: "!contains(github.event.inputs.version, 'alpha')"
-        uses: snapcore/action-publish@7fe468c9de12396a9c8964af5d0dfd1d5b493bd7
-        env:
-          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_LOGIN_FILE }}
-        with:
-          snap: artifacts/ubuntu-latest-artifacts/insomnia/dist/Insomnium.Core-${{ env.RELEASE_VERSION }}.snap
-          release: ${{ contains(github.event.inputs.version, 'beta') && 'beta' || 'stable' }}
+      # - name: Upload to snapcraft (beta and stable only)
+      #   if: "!contains(github.event.inputs.version, 'alpha')"
+      #   uses: snapcore/action-publish@7fe468c9de12396a9c8964af5d0dfd1d5b493bd7
+      #   env:
+      #     SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_LOGIN_FILE }}
+      #   with:
+      #     snap: artifacts/ubuntu-latest-artifacts/insomnia/dist/Insomnium.Core-${{ env.RELEASE_VERSION }}.snap
+      #     release: ${{ contains(github.event.inputs.version, 'beta') && 'beta' || 'stable' }}
 
-      - name: Upload .deb to pulp and/or cloudsmith (stable only)
-        uses: docker://kong/release-script:latest
-        env:
-          PULP_USERNAME: ${{ secrets.PULP_USERNAME }}
-          PULP_PASSWORD: ${{ secrets.PULP_PASSWORD }}
-          PULP_HOST: ${{ secrets.PULP_HOST }}
-          VERBOSE: ${{ runner.debug == '1' && '1' || '' }}
-          CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
-          CLOUDSMITH_DRY_RUN: ''
-          IGNORE_CLOUDSMITH_FAILURES: ${{ vars.IGNORE_CLOUDSMITH_FAILURES }}
-          USE_CLOUDSMITH: ${{ vars.USE_CLOUDSMITH }}
-          USE_PULP: ${{ vars.USE_PULP }}
-        with:
-          entrypoint: /entrypoint.sh
-          args: >
-            release
-            --file artifacts/ubuntu-latest-artifacts/insomnia/dist/Insomnium.Core-${{ env.RELEASE_VERSION }}.deb
-            --dist-name ubuntu
-            --dist-version focal
-            --package-type insomnia
-            ${{ env.IS_PRERELEASE == 'true' && '--internal' || '--publish' }}
+      # - name: Upload .deb to pulp and/or cloudsmith (stable only)
+      #   uses: docker://kong/release-script:latest
+      #   env:
+      #     PULP_USERNAME: ${{ secrets.PULP_USERNAME }}
+      #     PULP_PASSWORD: ${{ secrets.PULP_PASSWORD }}
+      #     PULP_HOST: ${{ secrets.PULP_HOST }}
+      #     VERBOSE: ${{ runner.debug == '1' && '1' || '' }}
+      #     CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
+      #     CLOUDSMITH_DRY_RUN: ''
+      #     IGNORE_CLOUDSMITH_FAILURES: ${{ vars.IGNORE_CLOUDSMITH_FAILURES }}
+      #     USE_CLOUDSMITH: ${{ vars.USE_CLOUDSMITH }}
+      #     USE_PULP: ${{ vars.USE_PULP }}
+      #   with:
+      #     entrypoint: /entrypoint.sh
+      #     args: >
+      #       release
+      #       --file artifacts/ubuntu-latest-artifacts/insomnia/dist/Insomnium.Core-${{ env.RELEASE_VERSION }}.deb
+      #       --dist-name ubuntu
+      #       --dist-version focal
+      #       --package-type insomnia
+      #       ${{ env.IS_PRERELEASE == 'true' && '--internal' || '--publish' }}
 
-      - name: Push Inso CLI docker image tags to Docker Hub
-        run: |
-          echo -n $DOCKER_REGISTRY_TOKEN | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin $DOCKER_REGISTRY
-          docker load -i ./artifacts/ubuntu-latest-artifacts/insomnia-inso/artifacts/inso-docker-image.tar
-          docker tag insomnia-inso:temp ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ env.INSO_VERSION }}
-          docker tag insomnia-inso:temp ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_LATEST_TAG}
-          docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ env.INSO_VERSION }}
-          docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_LATEST_TAG}
+      # - name: Push Inso CLI docker image tags to Docker Hub
+      #   run: |
+      #     echo -n $DOCKER_REGISTRY_TOKEN | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin $DOCKER_REGISTRY
+      #     docker load -i ./artifacts/ubuntu-latest-artifacts/insomnia-inso/artifacts/inso-docker-image.tar
+      #     docker tag insomnia-inso:temp ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ env.INSO_VERSION }}
+      #     docker tag insomnia-inso:temp ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_LATEST_TAG}
+      #     docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ env.INSO_VERSION }}
+      #     docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_LATEST_TAG}
 
-        env:
-          DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
-          DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
-          DOCKER_REGISTRY: docker.io
-          DOCKER_IMAGE: kong/inso
-          DOCKER_LATEST_TAG: ${{ env.IS_PRERELEASE == 'false' && 'latest' || contains(github.event.inputs.version, 'alpha') && 'alpha' || 'beta' }}
+      #   env:
+      #     DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+      #     DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
+      #     DOCKER_REGISTRY: docker.io
+      #     DOCKER_IMAGE: kong/inso
+      #     DOCKER_LATEST_TAG: ${{ env.IS_PRERELEASE == 'false' && 'latest' || contains(github.event.inputs.version, 'alpha') && 'alpha' || 'beta' }}
 
-      - name: Upload sourcemaps to Sentry
-        env:
-          SENTRY_AUTH_TOKEN: '${{ secrets.SENTRY_AUTH_TOKEN }}'
-          SENTRY_ORG: '${{ secrets.SENTRY_ORG }}'
-          SENTRY_PROJECT: '${{ secrets.SENTRY_PROJECT }}'
-        run: |
-          curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.2.0" bash
+      # - name: Upload sourcemaps to Sentry
+      #   env:
+      #     SENTRY_AUTH_TOKEN: '${{ secrets.SENTRY_AUTH_TOKEN }}'
+      #     SENTRY_ORG: '${{ secrets.SENTRY_ORG }}'
+      #     SENTRY_PROJECT: '${{ secrets.SENTRY_PROJECT }}'
+      #   run: |
+      #     curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.2.0" bash
 
-          sentry-cli releases new ${{ env.RELEASE_VERSION }}
-          sentry-cli releases set-commits ${{ env.RELEASE_VERSION }} --commit 'Kong/insomnia@${{ env.RELEASE_BRANCH }}'
+      #     sentry-cli releases new ${{ env.RELEASE_VERSION }}
+      #     sentry-cli releases set-commits ${{ env.RELEASE_VERSION }} --commit 'Kong/insomnia@${{ env.RELEASE_BRANCH }}'
 
-          sentry-cli sourcemaps upload -r ${{ env.RELEASE_VERSION }} ./artifacts/*-latest-sentry
+      #     sentry-cli sourcemaps upload -r ${{ env.RELEASE_VERSION }} ./artifacts/*-latest-sentry
 
-      - name: Configure Git user
-        uses: Homebrew/actions/git-user-config@master
-        with:
-          username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'insomnia-infra' }}
+      # - name: Configure Git user
+      #   uses: Homebrew/actions/git-user-config@master
+      #   with:
+      #     username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'insomnia-infra' }}
 
       - name: Merge git branch into main
         run: |
