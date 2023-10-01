@@ -39,16 +39,16 @@ jobs:
       - name: Install packages
         run: npm ci
 
-      - name: Package app (MacOS only)
-        if: matrix.os == 'macos-latest'
-        shell: bash
-        run: npm run app-package
-        env:
-          NODE_OPTIONS: '--max_old_space_size=6144'
-          APPLE_ID: ${{ matrix.os == 'macos-latest' && secrets.DESIGNER_APPLE_ID || '' }}
-          APPLE_APP_SPECIFIC_PASSWORD: ${{ matrix.os == 'macos-latest' && secrets.DESIGNER_APPLE_ID_PASSWORD || '' }}
-          CSC_LINK: ${{ matrix.csc_link_secret != '' && secrets[matrix.csc_link_secret] || '' }}
-          CSC_KEY_PASSWORD: ${{ matrix.csc_key_password_secret != '' && secrets[matrix.csc_key_password_secret] || ''  }}
+      # - name: Package app (MacOS only)
+      #   if: matrix.os == 'macos-latest'
+      #   shell: bash
+      #   run: npm run app-package
+      #   env:
+      #     NODE_OPTIONS: '--max_old_space_size=6144'
+      #     APPLE_ID: ${{ matrix.os == 'macos-latest' && secrets.DESIGNER_APPLE_ID || '' }}
+      #     APPLE_APP_SPECIFIC_PASSWORD: ${{ matrix.os == 'macos-latest' && secrets.DESIGNER_APPLE_ID_PASSWORD || '' }}
+      #     CSC_LINK: ${{ matrix.csc_link_secret != '' && secrets[matrix.csc_link_secret] || '' }}
+      #     CSC_KEY_PASSWORD: ${{ matrix.csc_key_password_secret != '' && secrets[matrix.csc_key_password_secret] || ''  }}
 
       - name: Package app (Windows and Linux)
         if: matrix.os != 'macos-latest'
@@ -61,61 +61,61 @@ jobs:
         run:
           echo "INSO_VERSION=$(jq .version packages/insomnia-inso/package.json -rj)" >> $GITHUB_ENV
 
-      - name: Package inso
-        run: |
-          echo "Replacing electron binary with node binary"
-          node_modules/.bin/node-pre-gyp install --update-binary --directory node_modules/@getinsomnia/node-libcurl
-          npm run inso-package
-        env:
-          VERSION: ${{ env.INSO_VERSION }}
+      # - name: Package inso
+      #   run: |
+      #     echo "Replacing electron binary with node binary"
+      #     node_modules/.bin/node-pre-gyp install --update-binary --directory node_modules/@getinsomnia/node-libcurl
+      #     npm run inso-package
+      #   env:
+      #     VERSION: ${{ env.INSO_VERSION }}
 
-      - name: Code-sign & create Inso CLI installer (macOS only)
-        if: matrix.os == 'macos-latest'
-        run: ./src/scripts/macos-pkg.sh
-        shell: bash
-        working-directory: packages/insomnia-inso
-        continue-on-error: false
-        env:
-          MACOS_CERTIFICATE: ${{ secrets.DESIGNER_MAC_CSC_LINK }}
-          MACOS_CERTIFICATE_PWD: ${{ secrets.DESIGNER_MAC_CSC_KEY_PASSWORD }}
-          PKG_NAME: inso-${{ matrix.os }}-${{ env.INSO_VERSION }}
-          BUNDLE_ID: com.insomnia.inso
-          VERSION: ${{ env.INSO_VERSION }}
+      # - name: Code-sign & create Inso CLI installer (macOS only)
+      #   if: matrix.os == 'macos-latest'
+      #   run: ./src/scripts/macos-pkg.sh
+      #   shell: bash
+      #   working-directory: packages/insomnia-inso
+      #   continue-on-error: false
+      #   env:
+      #     MACOS_CERTIFICATE: ${{ secrets.DESIGNER_MAC_CSC_LINK }}
+      #     MACOS_CERTIFICATE_PWD: ${{ secrets.DESIGNER_MAC_CSC_KEY_PASSWORD }}
+      #     PKG_NAME: inso-${{ matrix.os }}-${{ env.INSO_VERSION }}
+      #     BUNDLE_ID: com.insomnia.inso
+      #     VERSION: ${{ env.INSO_VERSION }}
 
-      - name: Notarize Inso CLI installer (macOS only)
-        if: matrix.os == 'macos-latest'
-        uses: lando/notarize-action@v2
-        with:
-          product-path: packages/insomnia-inso/artifacts/inso-${{ matrix.os }}-${{ env.INSO_VERSION }}.pkg
-          primary-bundle-id: com.insomnia.inso
-          appstore-connect-username: ${{ secrets.DESIGNER_APPLE_ID }}
-          appstore-connect-password: ${{ secrets.DESIGNER_APPLE_ID_PASSWORD }}
-          appstore-connect-team-id: FX44YY62GV
+      # - name: Notarize Inso CLI installer (macOS only)
+      #   if: matrix.os == 'macos-latest'
+      #   uses: lando/notarize-action@v2
+      #   with:
+      #     product-path: packages/insomnia-inso/artifacts/inso-${{ matrix.os }}-${{ env.INSO_VERSION }}.pkg
+      #     primary-bundle-id: com.insomnia.inso
+      #     appstore-connect-username: ${{ secrets.DESIGNER_APPLE_ID }}
+      #     appstore-connect-password: ${{ secrets.DESIGNER_APPLE_ID_PASSWORD }}
+      #     appstore-connect-team-id: FX44YY62GV
 
-      - name: Staple Inso CLI installer (macOS only)
-        if: matrix.os == 'macos-latest'
-        uses: BoundfoxStudios/action-xcode-staple@v1
-        with:
-          product-path: packages/insomnia-inso/artifacts/inso-${{ matrix.os }}-${{ env.INSO_VERSION }}.pkg
+      # - name: Staple Inso CLI installer (macOS only)
+      #   if: matrix.os == 'macos-latest'
+      #   uses: BoundfoxStudios/action-xcode-staple@v1
+      #   with:
+      #     product-path: packages/insomnia-inso/artifacts/inso-${{ matrix.os }}-${{ env.INSO_VERSION }}.pkg
 
-      - name: Notarize Inso CLI binary (macOS only)
-        if: matrix.os == 'macos-latest'
-        uses: lando/notarize-action@v2
-        with:
-          product-path: packages/insomnia-inso/binaries/inso
-          primary-bundle-id: com.insomnia.inso-binary
-          appstore-connect-username: ${{ secrets.DESIGNER_APPLE_ID }}
-          appstore-connect-password: ${{ secrets.DESIGNER_APPLE_ID_PASSWORD }}
-          appstore-connect-team-id: FX44YY62GV
+      # - name: Notarize Inso CLI binary (macOS only)
+      #   if: matrix.os == 'macos-latest'
+      #   uses: lando/notarize-action@v2
+      #   with:
+      #     product-path: packages/insomnia-inso/binaries/inso
+      #     primary-bundle-id: com.insomnia.inso-binary
+      #     appstore-connect-username: ${{ secrets.DESIGNER_APPLE_ID }}
+      #     appstore-connect-password: ${{ secrets.DESIGNER_APPLE_ID_PASSWORD }}
+      #     appstore-connect-team-id: FX44YY62GV
 
-      - name: Create inso artifacts
-        run: npm run inso-package:artifacts
+      # - name: Create inso artifacts
+      #   run: npm run inso-package:artifacts
 
-      - name: Create Docker Image artifacts
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          DOCKER_BUILDKIT=1 docker build --tag insomnia-inso:temp ./packages/insomnia-inso/
-          docker save insomnia-inso:temp -o ./packages/insomnia-inso/artifacts/inso-docker-image.tar
+      # - name: Create Docker Image artifacts
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: |
+      #     DOCKER_BUILDKIT=1 docker build --tag insomnia-inso:temp ./packages/insomnia-inso/
+      #     docker save insomnia-inso:temp -o ./packages/insomnia-inso/artifacts/inso-docker-image.tar
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
@@ -132,16 +132,17 @@ jobs:
             packages/insomnia/dist/*.deb
             packages/insomnia/dist/*.AppImage
             packages/insomnia/dist/*.tar.gz
-            packages/insomnia-inso/artifacts/*
+            
+# packages/insomnia-inso/artifacts/*
 
-      - name: Upload source assets for Sentry
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ matrix.os }}-sentry
-          path: |
-            packages/insomnia/build/*.js
-            packages/insomnia/build/*.map
-            !packages/insomnia/build/yarn-standalone.js
+      # - name: Upload source assets for Sentry
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{ matrix.os }}-sentry
+      #     path: |
+      #       packages/insomnia/build/*.js
+      #       packages/insomnia/build/*.map
+      #       !packages/insomnia/build/yarn-standalone.js
 
   update-pull-request:
     needs: build-and-upload-release-artifacts
@@ -177,9 +178,9 @@ jobs:
             Run locally:
 
             ```bash
-            # Make sure git remote is Kong/insomnia...
+            # Make sure git remote is ArchGPT/insomnium...
 
-            git checkout develop
+            git checkout main
             git merge --no-ff release/<replaced with version>
 
             # Solve merge conflicts ...
@@ -188,5 +189,5 @@ jobs:
             git push
             ```
             </details>
-          destination_branch: develop
+          destination_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}

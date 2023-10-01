@@ -222,10 +222,10 @@ jobs:
         with:
           username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'insomnia-infra' }}
 
-      - name: Merge git branch into develop
+      - name: Merge git branch into main
         run: |
           remote_repo="https://${GITHUB_ACTOR}:${RELEASE_GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git checkout develop
+          git checkout main
           git merge --no-ff ${{ env.RELEASE_BRANCH }}
           git status
           git push "${remote_repo}"
