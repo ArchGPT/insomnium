@@ -135,14 +135,14 @@ jobs:
             
 # packages/insomnia-inso/artifacts/*
 
-      # - name: Upload source assets for Sentry
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{ matrix.os }}-sentry
-      #     path: |
-      #       packages/insomnia/build/*.js
-      #       packages/insomnia/build/*.map
-      #       !packages/insomnia/build/yarn-standalone.js
+      - name: Upload source assets for Sentry
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.os }}-sentry
+          path: |
+            packages/insomnia/build/*.js
+            packages/insomnia/build/*.map
+            !packages/insomnia/build/yarn-standalone.js
 
   update-pull-request:
     needs: build-and-upload-release-artifacts

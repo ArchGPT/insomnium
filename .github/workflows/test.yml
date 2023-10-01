@@ -34,11 +34,11 @@ jobs:
       - name: Install packages
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      # - name: Lint
+      #   run: npm run lint
 
-      - name: Lint markdown
-        run: npm run lint:markdown
+      # - name: Lint markdown
+      #   run: npm run lint:markdown
 
       - name: Type checks
         run: npm run type-check

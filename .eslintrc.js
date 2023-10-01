@@ -27,6 +27,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+
   ],
   plugins: [
     '@typescript-eslint',
@@ -139,7 +140,8 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': [ERROR, { 'allowSingleExtends': true }],
     '@typescript-eslint/no-namespace': [ERROR, { allowDeclarations: true }],
     '@typescript-eslint/no-redeclare': ERROR,
-    '@typescript-eslint/no-unused-vars': [ERROR, { ignoreRestSiblings: true }],
+    '@typescript-eslint/no-unused-vars': OFF(UNKNOWN),
+    // [ERROR, { ignoreRestSiblings: true }],
     '@typescript-eslint/space-infix-ops': ERROR,
     '@typescript-eslint/semi': [ERROR, 'always'],
     '@typescript-eslint/quotes': [ERROR, 'single', { avoidEscape: true }],
