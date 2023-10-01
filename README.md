@@ -1,8 +1,16 @@
 # Insomnium API Client
 
-Insomnium is a 100% local-only and privacy-focus open-source API client for GraphQL, REST, WebSockets, Server-sent events and gRPC.
+Insomnium is a 100% local and privacy-focus open-source API client for testing GraphQL, REST, WebSockets, Server-sent events and gRPC in development/production.
 
-[![license](https://img.shields.io/github/license/Kong/insomnia.svg)](LICENSE)
+- ✅ works 100% offline, the way a local testing tool should behave <br>
+- ✅ no cloud services, no tracking/communication to external servers behind the scene <br>
+- 🦙 (coming up) optional integration to local LLMs like CodeLlama for front-end code generation in React, Vue, htmx, etc, based on the API response JSON
+
+
+
+[![license](https://img.shields.io/github/license/archGPT/insomnium.svg)](LICENSE)
+[![GitHub Discussions](https://img.shields.io/github/discussions/archGPT/insomnium)](https://github.com/ArchGPT/insomnium/discussions)
+[![join our discord](https://dcbadge.vercel.app/api/server/pCcWcncwkw?style=flat&compact=true)](https://discord.gg/pCcWcncwkw)
 
 ![Insomnium API Client](https://raw.githubusercontent.com/ArchGPT/insomnium/main/screenshots/v0.1.png)
 

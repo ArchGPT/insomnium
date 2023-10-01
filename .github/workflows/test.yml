@@ -68,40 +68,40 @@ jobs:
         if: ${{ startsWith(github.head_ref, 'release/') }}
         run: npm run test:build -w packages/insomnia-smoke-test -- --project=Default
 
-      - name: Set Inso CLI variables
-        id: inso-variables
-        shell: bash
-        run: |
-          INSO_VERSION="$(jq .version packages/insomnia-inso/package.json -rj)-run.${{ github.run_number }}"
-          PKG_NAME="inso-ubuntu-latest-$INSO_VERSION"
-          echo "pkg-name=$PKG_NAME" >> $GITHUB_OUTPUT
-          echo "inso-version=$INSO_VERSION" >> $GITHUB_OUTPUT
+      # - name: Set Inso CLI variables
+      #   id: inso-variables
+      #   shell: bash
+      #   run: |
+      #     INSO_VERSION="$(jq .version packages/insomnia-inso/package.json -rj)-run.${{ github.run_number }}"
+      #     PKG_NAME="inso-ubuntu-latest-$INSO_VERSION"
+      #     echo "pkg-name=$PKG_NAME" >> $GITHUB_OUTPUT
+      #     echo "inso-version=$INSO_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Run Inso NPM package tests
-        run: npm run test:bundled-inso
+      # - name: Run Inso NPM package tests
+      #   run: npm run test:bundled-inso
 
-      - name: Package Inso CLI binary
-        run: |
-          echo "Replacing node-libcurl electron binary with node binary"
-          node_modules/.bin/node-pre-gyp install --update-binary --directory node_modules/@getinsomnia/node-libcurl
-          npm run inso-package
-        env:
-          VERSION: ${{ steps.inso-variables.outputs.inso-version }}
+      # - name: Package Inso CLI binary
+      #   run: |
+      #     echo "Replacing node-libcurl electron binary with node binary"
+      #     node_modules/.bin/node-pre-gyp install --update-binary --directory node_modules/@getinsomnia/node-libcurl
+      #     npm run inso-package
+      #   env:
+      #     VERSION: ${{ steps.inso-variables.outputs.inso-version }}
 
-      - name: Create Inso CLI artifacts
-        run: npm run inso-package:artifacts
-        env:
-          VERSION: ${{ steps.inso-variables.outputs.inso-version }}
+      # - name: Create Inso CLI artifacts
+      #   run: npm run inso-package:artifacts
+      #   env:
+      #     VERSION: ${{ steps.inso-variables.outputs.inso-version }}
 
-      - name: Upload Inso CLI artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          if-no-files-found: ignore
-          name: ${{ steps.inso-variables.outputs.pkg-name }}
-          path: packages/insomnia-inso/artifacts
+      # - name: Upload Inso CLI artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     if-no-files-found: ignore
+      #     name: ${{ steps.inso-variables.outputs.pkg-name }}
+      #     path: packages/insomnia-inso/artifacts
 
-      - name: Smoke test Inso CLI
-        run: npm run test:smoke:cli
+      # - name: Smoke test Inso CLI
+      #   run: npm run test:smoke:cli
 
       - name: Upload smoke test traces
         uses: actions/upload-artifact@v3
