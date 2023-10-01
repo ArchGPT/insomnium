@@ -71,11 +71,7 @@ export const SpecEditorSidebar: FC<Props> = ({ apiSpec, handleSetSelection }) =>
             }}
             onClick={generateTestsFromSpec}
           >
-            <InsomniaAI
-              style={{
-                flex: '0 0 20px',
-              }}
-            />
+
             <span>
               Auto-generate Tests For Collection
             </span>

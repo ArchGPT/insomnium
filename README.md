@@ -36,7 +36,7 @@ I'm also working on a Code Llama plugin for Insomnium to make it more easily cus
 
 ## Download
 
-Insomnium is available for Mac, Windows, and Linux. The Mac .dmg can be downloaded [here](https://github.com/ArchGPT/insomnium/releases/tag/v0.1), and for the other OS, you can build it from source using `npm run app-package`. 
+Insomnium is available for Mac, Windows, and Linux, and can be downloaded [here](https://github.com/ArchGPT/insomnium/releases). You can also build it from source on your local machine using `npm run app-package`.
 
 ## Develop Insomnium
 
