@@ -89,8 +89,9 @@ export const EmptyStatePane: FC<{
   documentationLinks,
 }) => (<Panel>
   <Wrapper>
-    <Icon>{icon}</Icon>
+
     <Title>{title}</Title>
+
     {Boolean(secondaryAction) &&
       (<>
         <Divider />

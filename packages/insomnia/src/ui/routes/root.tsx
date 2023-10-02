@@ -59,9 +59,9 @@ import {
   showSettingsModal,
   TAB_INDEX_PLUGINS,
   TAB_INDEX_THEMES } from '../components/modals/settings-modal';
-import { Toast } from '../components/toast';
+// import { Toast } from '../components/toast';
 import { AppHooks } from '../containers/app-hooks';
-import { AIProvider } from '../context/app/ai-context';
+// import { AIProvider } from '../context/app/ai-context';
 import { NunjucksEnabledProvider } from '../context/nunjucks/nunjucks-enabled-context';
 /**** ><> ↑ --------- Settings and Themes */
 import { useSettingsPatcher } from '../hooks/use-request';
@@ -288,7 +288,6 @@ const Root = () => {
     : [];
 
   return (
-    <AIProvider>
       <NunjucksEnabledProvider>
         <AppHooks />
         <div className="app">
@@ -461,9 +460,7 @@ const Root = () => {
 
           {/* <Toast /> */}
         </div>
-      </NunjucksEnabledProvider>
-      {/* /**** ><> ↑ --------- Toast */}
-    </AIProvider>
+    </NunjucksEnabledProvider>
   );
 };
 

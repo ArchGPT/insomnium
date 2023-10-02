@@ -24,6 +24,9 @@ import { ImportModal } from '../modals/import-modal';
 import { WorkspaceDuplicateModal } from '../modals/workspace-duplicate-modal';
 import { WorkspaceSettingsModal } from '../modals/workspace-settings-modal';
 
+console.log("[configGenerators] ", configGenerators);
+
+
 export const WorkspaceDropdown: FC = () => {
   const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
   invariant(organizationId, 'Expected organizationId');
@@ -148,24 +151,6 @@ export const WorkspaceDropdown: FC = () => {
         </DropdownSection>
 
 
-        <DropdownSection
-          aria-label='Config Generators Section'
-          title="Config Generators"
-          items={isDesign(activeWorkspace) ? configGenerators : []}
-        >
-          {p =>
-            <DropdownItem
-              key={`generateConfig-${p.label}`}
-              aria-label={p.label}
-            >
-              <ItemContent
-                icon="code"
-                label={p.label}
-                onClick={() => handleGenerateConfig(p.label)}
-              />
-            </DropdownItem>
-          }
-        </DropdownSection>
 
 
       </Dropdown>

@@ -108,6 +108,8 @@ export const BodyEditor: FC<Props> = ({
   const mimeType = request.body.mimeType;
   const isBodyEmpty = typeof mimeType !== 'string' && !request.body.text;
 
+  const secondaryAction = request.method === "POST" ? " Select a body type from above to send data in the body of a request" : null
+
   const _render = () => {
     if (mimeType === CONTENT_TYPE_FORM_URLENCODED) {
       return <UrlEncodedEditor key={uniqueKey} onChange={handleFormUrlEncodedChange} parameters={request.body.params || []} />;
@@ -124,10 +126,12 @@ export const BodyEditor: FC<Props> = ({
       return <EmptyStatePane
         icon={<i className="fa fa-paper-plane" />}
         documentationLinks={[]}
+        secondaryAction={secondaryAction}
         title="Enter a URL and connect to start receiving event stream data"
       />;
     }
-    return <EmptyStatePane icon={<SvgIcon icon="globe" />} documentationLinks={[]} secondaryAction="" title="Enter a URL and send to get a response" />;
+
+    return <EmptyStatePane icon={<SvgIcon icon="globe" />} documentationLinks={[]} secondaryAction={secondaryAction} title={"Enter a URL and send to get a response"} />;
   };
 
   return <NunjucksEnabledProvider disable={noRender}>{_render()}</NunjucksEnabledProvider>;

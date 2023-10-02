@@ -106,7 +106,7 @@ const router = createMemoryRouter(
                       loader: async (...args) =>
                         (await import('./routes/project')).loader(...args),
                       element: (
-                        <Suspense fallback={<AppLoadingIndicator />}>
+                        <Suspense >
                           <Project />
                         </Suspense>
                       ),
@@ -150,7 +150,7 @@ const router = createMemoryRouter(
                               await import('./routes/workspace')
                             ).workspaceLoader(...args),
                           element: (
-                            <Suspense fallback={<AppLoadingIndicator />}>
+                            <Suspense >
                               <Workspace />
                             </Suspense>
                           ),
@@ -162,7 +162,7 @@ const router = createMemoryRouter(
                                   ...args,
                                 ),
                               element: (
-                                <Suspense fallback={<AppLoadingIndicator />}>
+                                <Suspense >
                                   <Debug />
                                 </Suspense>
                               ),
@@ -286,7 +286,7 @@ const router = createMemoryRouter(
                                   ...args,
                                 ),
                               element: (
-                                <Suspense fallback={<AppLoadingIndicator />}>
+                                <Suspense >
                                   <Design />
                                 </Suspense>
                               ),
@@ -420,7 +420,7 @@ const router = createMemoryRouter(
                                   ...args,
                                 ),
                               element: (
-                                <Suspense fallback={<AppLoadingIndicator />}>
+                                <Suspense >
                                   <UnitTest />
                                 </Suspense>
                               ),
@@ -806,9 +806,9 @@ async function renderApp() {
 
   const settings = await models.settings.getOrCreate();
 
-  if (settings.clearOAuth2SessionOnRestart) {
-    initNewOAuthSession();
-  }
+  // if (settings.clearOAuth2SessionOnRestart) {
+  //   initNewOAuthSession();
+  // }
 
   await applyColorScheme(settings);
 

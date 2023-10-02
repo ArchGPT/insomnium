@@ -3,7 +3,7 @@
   "name": "insomnia-send-request",
   "license": "Apache-2.0",
   "version": "0.1.2",
-  "author": "Kong <office@konghq.com>",
+  "author": "Archy <archy@archgpt.dev>",
   "main": "dist/index.js",
   "types": "dist/send-request/index.d.ts",
   "dependencies": {

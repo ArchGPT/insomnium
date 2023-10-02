@@ -29,10 +29,17 @@ I was among the users who were deeply affected by the recent change. I still thi
 
 ## Roadmap
 
-I have removed user login, tracking, analytics, etc, from Insomnia so it is now a 100% local app. I will be cleaning up the code to make the UI faster, and refactor the local database and config to keep everything lean. If you have any feature request or encountered any bug, feel free to [open an issue](https://github.com/ArchGPT/insomnium/issues). Thanks!
+I have removed user login, tracking, analytics, etc, from Insomnia so it is now a 100% local app. Insomnium 1.0 will be released when the following tasks are completed: 
 
+- [x] finalize the cleaning-up of existing codebase to make the GUI faster
+- [ ] switch to using file-system to store everything. 
 
-I'm also working on a Code Llama plugin for Insomnium to make it more easily customizable and extensible, while keeping the core product fast and 100% local-only.
+  (Currently Insomnia uses [NeDB](https://github.com/louischatriot/nedb) which is not maintained since 2016, and appears to be buggy). 
+  Now that Insomnium is going to exist as a 100% local app (strictly without any cloud services syncing, etc), it makes sense that we store projects/requests/documents as folders/files. This will make import/export less clunky, because in the new Insomnium we will just be directly editing files (via the request GUI) and most recent N results will be saved into a `.api_cache` folder.
+  
+- [ ] In this new version, Insomnium will be able to open any folder as a workspace, and users can share the folder (e.g. `insomnium_testing_api/`) with each other by commiting to a git repo.
+
+If you have any feature request or encountered any bug, feel free to [open an issue](https://github.com/ArchGPT/insomnium/issues). Thanks! I'm also working on a Code Llama plugin for Insomnium to make it more easily customizable and extensible, while keeping the core product fast and 100% local-only.
 
 ## Download
 

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "insomnia-smoke-test",
-  "author": "Kong <office@konghq.com>",
+  "author": "Archy <archy@archgpt.dev>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
