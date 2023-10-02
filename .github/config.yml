@@ -5,14 +5,14 @@ newIssueWelcomeComment: |
   use cases that would benefit. 👪
 
   To help make this a smooth process, please be sure you have first read the
-  [contributing guidelines](https://github.com/kong/insomnia/blob/master/CONTRIBUTING.md).
+  [contributing guidelines](https://github.com/ArchGPT/insomnium/blob/master/CONTRIBUTING.md).
 
 # Comment to be posted to on PRs from first time contributors in your repository
 newPRWelcomeComment: |
   💖 Thanks for opening this pull request! 💖
 
   To help make this a smooth process, please be sure you have first read the
-  [contributing guidelines](https://github.com/kong/insomnia/blob/master/CONTRIBUTING.md).
+  [contributing guidelines](https://github.com/ArchGPT/insomnium/blob/master/CONTRIBUTING.md).
 
 # Comment to be posted to on pull requests merged by a first time user
 firstPRMergeComment: >

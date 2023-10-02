@@ -30,7 +30,7 @@ body:
   attributes:
     label: Is there an existing issue for this?
     options:
-      - label: I have searched the [issue tracker](https://www.github.com/Kong/insomnia/issues) for this problem.
+      - label: I have searched the [issue tracker](https://www.github.com/ArchGPT/insomnium/issues) for this problem.
         required: true
 - type: textarea
   attributes:

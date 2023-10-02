@@ -5,13 +5,13 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kong/insomnia.git",
+    "url": "git+https://github.com/ArchGPT/insomnium.git",
     "directory": "packages/insomnia-smoke-test"
   },
   "bugs": {
-    "url": "https://github.com/kong/insomnia/issues"
+    "url": "https://github.com/ArchGPT/insomnium/issues"
   },
-  "version": "2023.5.8",
+  "version": "0.1.2",
   "scripts": {
     "test:dev": "xvfb-maybe cross-env BUNDLE=dev playwright test",
     "test:build": "xvfb-maybe cross-env BUNDLE=build playwright test",
@@ -48,7 +48,7 @@
     "xvfb-maybe": "^0.2.1"
   },
   "description": "[![Playwright](https://img.shields.io/badge/playwright-blue.svg?style=for-the-badge&logo=playwright)](https://github.com/microsoft/playwright)",
-  "homepage": "https://github.com/Kong/insomnia#readme",
+  "homepage": "https://github.com/ArchGPT/insomnium#readme",
   "main": ".eslintrc.js",
   "directories": {
     "doc": "docs",

@@ -45,7 +45,6 @@ import { exchangeCodeForGitLabToken } from '../../sync/git/gitlab-oauth-provider
 /**** ><> ↑ --------- Account and Models */
 import { submitAuthCode } from '../auth-session-provider';
 import { WorkspaceDropdown } from '../components/dropdowns/workspace-dropdown';
-import { GitHubStarsButton } from '../components/github-stars-button';
 import { Hotkey } from '../components/hotkey';
 import { Icon } from '../components/icon';
 import { InsomniaLogo } from '../components/insomnia-icon';
@@ -115,13 +114,13 @@ const Root = () => {
   const patchSettings = useSettingsPatcher();
 
   useEffect(() => {
-    onLoginLogout(() => {
+    // onLoginLogout(() => {
       // Update the hash of the current route to force revalidation of data
       navigate({
         pathname: location.pathname,
         hash: 'revalidate=true',
       });
-    });
+    // });
   }, [location.pathname, navigate]);
 
   useEffect(() => {
@@ -343,7 +342,7 @@ const Root = () => {
                   </Fragment>
                 )}
               </div>
-              <div className="flex gap-[--padding-sm] items-center justify-end p-2">
+              {/* <div className="flex gap-[--padding-sm] items-center justify-end p-2">
                 {isLoggedIn() ? (
                   <MenuTrigger>
                     <Button className="px-4 py-1 flex items-center justify-center gap-2 aria-pressed:bg-[--hl-sm] rounded-sm text-[--color-font] hover:bg-[--hl-xs] focus:ring-inset ring-1 ring-transparent focus:ring-[--hl-md] transition-all text-sm">
@@ -388,7 +387,7 @@ const Root = () => {
                     <Fragment>
                   </Fragment>
                 )}
-              </div>
+              </div> */}
               {/* /**** ><> ↑ --------- Root Component */}
             </header>
             <div className="[grid-area:Navbar] overflow-hidden">
@@ -460,7 +459,7 @@ const Root = () => {
           </div>
           {/* /**** ><> ↑ --------- Statusbar */}
 
-          <Toast />
+          {/* <Toast /> */}
         </div>
       </NunjucksEnabledProvider>
       {/* /**** ><> ↑ --------- Toast */}

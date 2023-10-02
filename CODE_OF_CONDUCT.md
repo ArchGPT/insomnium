@@ -6,7 +6,7 @@ Diversity is a huge priority, but it can also lead to communication issues and u
 
 This code of conduct applies to all spaces managed by the Insomnium project, including Slack, the issue tracker, and any other forums created for the project which the community uses for communication. In addition, violations of this code outside these spaces may affect a person's ability to participate within them.
 
-If you believe someone is violating the code of conduct, we ask that you report it by emailing [support@insomnia.rest](mailto:support@insomnia.rest). For more details please see our Reporting Guidelines
+If you believe someone is violating the code of conduct, we ask that you report it by emailing [support@archgpt.dev](mailto:support@archgpt.dev). For more details please see our Reporting Guidelines
 
 - **Be friendly and patient.**
 - **Be welcoming.** We strive to be a community that welcomes and supports people of all   backgrounds and identities. This includes, but is not limited to members of any race, ethnicity, culture, national origin, colour, immigration status, social and economic class, educational level, sex, sexual orientation, gender identity and expression, age, size, family status, political belief, religion, and mental and physical ability.
@@ -27,4 +27,4 @@ Original text courtesy of the [Speak Up! project](http://web.archive.org/web/201
 
 ## Questions?
 
-Please send all questions or concerns to [support@insomnia.rest](mailto:support@insomnia.rest).
+Please send all questions or concerns to [support@archgpt.dev](mailto:support@archgpt.dev).

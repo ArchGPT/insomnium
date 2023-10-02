@@ -1,21 +1,20 @@
 {
-  "name": "insomnia",
+  "name": "insomnium",
   "private": true,
   "version": "1.0.0",
-  "author": "Kong <office@konghq.com>",
+  "author": "Archy <archy@archgpt.dev>",
   "description": "Insomnium is a cross-platform REST client, built on top of Electron.",
   "license": "MIT",
-  "repository": "https://github.com/kong/insomnia",
+  "repository": "https://github.com/ArchGPT/insomnium",
   "bugs": {
-    "url": "https://github.com/kong/insomnia/issues"
+    "url": "https://github.com/ArchGPT/insomniumissues"
   },
-  "homepage": "https://github.com/kong/insomnia#readme",
+  "homepage": "https://github.com/ArchGPT/insomnium#readme",
   "engines": {
     "node": ">=18.15 <20",
     "npm": ">=8.19.0"
   },
   "workspaces": [
-    "packages/openapi-2-kong",
     "packages/insomnia-testing",
     "packages/insomnia-send-request",
     "packages/insomnia",

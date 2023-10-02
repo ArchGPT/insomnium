@@ -134,10 +134,10 @@ async function _isInsomniaPlugin(lookupName: string) {
         }
 
         const data = yarnOutput.data;
-        console.log('plugin data', data);
+        console.log('[plugin data]', data);
 
         if (!data.hasOwnProperty('insomnia')) {
-          reject(new Error(`"${lookupName}" not a plugin! Package missing "insomnia" attribute`));
+          reject(new Error(`"${lookupName}" not a plugin! Package missing "insomnia" attribute in object :${JSON.stringify(data)}`));
           return;
         }
 

@@ -2,8 +2,6 @@ import classNames from 'classnames';
 import React, { FC, Fragment, ReactNode } from 'react';
 import styled from 'styled-components';
 
-import * as session from '../../account/session';
-import { GitHubStarsButton } from './github-stars-button';
 import { InsomniaLogo } from './insomnia-icon';
 const LogoWrapper = styled.div({
   display: 'flex',
@@ -80,7 +78,7 @@ export const AppHeader: FC<AppHeaderProps> = ({
           <LogoWrapper>
             <InsomniaLogo />
           </LogoWrapper>
-          {!session.isLoggedIn() ? <GitHubStarsButton /> : null}
+
         </Fragment>
       )}
       gridCenter={gridCenter}

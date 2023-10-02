@@ -708,7 +708,7 @@ export class ImportPostman {
       return {};
     }
     const { schema } = this.collection.info;
-    // Workaround for https://github.com/Kong/insomnia/issues/4437
+    // Workaround for https://github.com/ArchGPT/insomnium/issues/4437
     // Note: We only support importing OAuth2 configuration from Postman v2.1
     if (schema === POSTMAN_SCHEMA_V2_1) {
       const oauth2 = auth.oauth2 as V210Auth['oauth2'];

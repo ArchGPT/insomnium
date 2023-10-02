@@ -204,7 +204,7 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
             {request && isGrpcRequest(request) && (
               <p className="faint italic">
                 Are there any gRPC settings you expect to see? Create a{' '}
-                <a href={'https://github.com/Kong/insomnia/issues/new/choose'}>feature request</a>!
+                <a href={'https://github.com/ArchGPT/insomnium/issues/new/choose'}>feature request</a>!
               </p>
             )}
             {request && isRequest(request) && (

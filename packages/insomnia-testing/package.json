@@ -2,15 +2,15 @@
   "private": true,
   "name": "insomnia-testing",
   "license": "Apache-2.0",
-  "version": "2023.5.8",
+  "version": "0.1.2",
   "author": "Kong <office@konghq.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kong/insomnia.git",
+    "url": "git+https://github.com/ArchGPT/insomnium.git",
     "directory": "packages/insomnia-testing"
   },
   "bugs": {
-    "url": "https://github.com/Kong/insomnia/issues"
+    "url": "https://github.com/ArchGPT/insomnium/issues"
   },
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -20,6 +20,6 @@
     "build": "tsc --build tsconfig.build.json",
     "watch": "npm run build -- --watch"
   },
-  "homepage": "https://github.com/Kong/insomnia#readme",
+  "homepage": "https://github.com/ArchGPT/insomnium#readme",
   "description": ""
 }

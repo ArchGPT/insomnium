@@ -16,7 +16,7 @@ Insomnium is a 100% local and privacy-focus open-source API client for testing G
 
 ## Backstory
 
-Insomnium is a fork of [Kong/Insomnia at 2023.5.8](https://github.com/ArchGPT/insomnia), the last commit before compulsory account login was introduced. In a sense, Insomnium is a community response to [the latest product update that forces account creation w/o warning](https://news.ycombinator.com/item?id=37680522).
+Insomnium is a fork of [Kong/insomnia at 2023.5.8](https://github.com/ArchGPT/insomnia), the last commit before compulsory account login was introduced. In a sense, Insomnium is a community response to [the latest product update that forces account creation w/o warning](https://news.ycombinator.com/item?id=37680522).
 
 ![HN](https://github.com/ArchGPT/insomnium/blob/main/hn.png?raw=true)
 

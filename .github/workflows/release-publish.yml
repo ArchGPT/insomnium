@@ -213,7 +213,7 @@ jobs:
       #     curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.2.0" bash
 
       #     sentry-cli releases new ${{ env.RELEASE_VERSION }}
-      #     sentry-cli releases set-commits ${{ env.RELEASE_VERSION }} --commit 'Kong/insomnia@${{ env.RELEASE_BRANCH }}'
+      #     sentry-cli releases set-commits ${{ env.RELEASE_VERSION }} --commit 'ArchGPT/insomnium@${{ env.RELEASE_BRANCH }}'
 
       #     sentry-cli sourcemaps upload -r ${{ env.RELEASE_VERSION }} ./artifacts/*-latest-sentry
 

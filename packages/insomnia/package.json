@@ -1,23 +1,23 @@
 {
   "name": "insomnia",
-  "version": "2023.5.8",
+  "version": "0.1.2",
   "productName": "Insomnium",
   "private": true,
   "description": "The Collaborative API Design Tool",
-  "homepage": "https://konghq.com",
+  "homepage": "https://archgpt.dev/insomnium",
   "bugs": {
-    "url": "https://github.com/Kong/insomnia/issues"
+    "url": "https://github.com/ArchGPT/insomnium/issues"
   },
   "build": {
     "asar": true
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kong/insomnia.git",
+    "url": "git+https://github.com/ArchGPT/insomnium.git",
     "directory": "packages/insomnia"
   },
   "license": "MIT",
-  "author": "Kong <office@konghq.com>",
+  "author": "Archy <archy@archgpt.dev>",
   "main": "src/main.min.js",
   "scripts": {
     "build": "npm run build:sr && npm run build:app",

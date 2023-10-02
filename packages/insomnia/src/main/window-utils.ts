@@ -104,7 +104,7 @@ export function createWindow() {
 
   // Open generic links (<a .../>) in default browser
   newWindow?.webContents.on('will-navigate', (event, url) => {
-    // Prevents local dev full-reload events from opening browser window, see https://github.com/Kong/insomnia/pull/4925
+    // Prevents local dev full-reload events from opening browser window, see https://github.com/ArchGPT/insomnium/pull/4925
     if (url.startsWith(appUrl)) {
       return;
     }

@@ -1,5 +1,5 @@
 <!--
-Please open an [Issue](https://github.com/kong/insomnia/issues/new) first to discuss new
+Please open an [Issue](https://github.com/ArchGPT/insomnium/issues/new) first to discuss new
 features or non-trivial changes. Please provide as much detail as possible on the change as
 possible including general description, implementation details, potential shortcomings, etc.
 

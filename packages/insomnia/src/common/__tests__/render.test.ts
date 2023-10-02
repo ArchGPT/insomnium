@@ -73,7 +73,7 @@ describe('render tests', () => {
         consume: 'f67565de946a899a534fd908e7eef872',
       });
       // In runtime, this context is used to render, which re-evaluates the expression for replaced in the rootEnvironment by using the built context
-      // Regression test from issue 1917 - https://github.com/Kong/insomnia/issues/1917
+      // Regression test from issue 1917 - https://github.com/ArchGPT/insomnium/issues/1917
       const renderExpression = await renderUtils.render(rootEnvironment.data.replaced, context);
       expect(renderExpression).toBe('cat');
     });

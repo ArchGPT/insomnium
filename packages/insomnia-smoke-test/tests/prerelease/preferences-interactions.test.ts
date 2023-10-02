@@ -15,7 +15,7 @@ test('Preferences through keyboard shortcut', async ({ page }) => {
   await page.locator('text=Insomnium Preferences').first().click();
 });
 
-// Quick reproduction for Kong/insomnia#5664 and INS-2267
+// Quick reproduction for ArchGPT/insomnium#5664 and INS-2267
 test('Check filter responses by environment preference', async ({ app, page }) => {
   await page.getByRole('button', { name: 'Create in project' }).click();
   const text = await loadFixture('simple.yaml');
