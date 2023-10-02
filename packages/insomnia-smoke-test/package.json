@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/ArchGPT/insomnium/issues"
   },
-  "version": "0.1.2",
+  "version": "0.1.3-alpha.0",
   "scripts": {
     "test:dev": "xvfb-maybe cross-env BUNDLE=dev playwright test",
     "test:build": "xvfb-maybe cross-env BUNDLE=build playwright test",

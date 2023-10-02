@@ -2,13 +2,12 @@
   "private": true,
   "name": "insomnia-send-request",
   "license": "Apache-2.0",
-  "version": "0.1.2",
+  "version": "0.1.3-alpha.0",
   "author": "Archy <archy@archgpt.dev>",
   "main": "dist/index.js",
   "types": "dist/send-request/index.d.ts",
   "dependencies": {
     "@getinsomnia/node-libcurl": "2.3.6-18",
- 
     "@stoplight/spectral-core": "^1.18.2",
     "@stoplight/spectral-formats": "^1.5.0",
     "@stoplight/spectral-rulesets": "^1.16.0",
