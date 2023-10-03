@@ -45,6 +45,20 @@ If you have any feature request or encountered any bug, feel free to [open an is
 
 Insomnium is available for Mac, Windows, and Linux, and can be downloaded [here](https://github.com/ArchGPT/insomnium/releases). You can also build it from source on your local machine using `npm run app-package`.
 
+## Migration from Insomnia
+
+To migrate your data from Insomnia, you can do one of the following:
+
+- use the GUI to import/export manually (in Preferences/Data)
+ 
+- or just copy the config file directly: 
+
+```
+cp -r ~/.config/Insomnia ~/.config/Insomnium
+cp -r "~/Library/Application Support/Insomnia" "~/Library/Application Support/Insomnium"
+```
+
+
 ## Develop Insomnium
 
 Development on Insomnium can be done on Mac, Windows, or Linux as long as you have [Node.js](https://nodejs.org) and [Git](https://git-scm.com/). See the `.nvmrc` file located in the project for the correct Node version.
