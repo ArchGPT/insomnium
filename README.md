@@ -41,6 +41,9 @@ I have removed user login, tracking, analytics, etc, from Insomnia so it is now 
 
 If you have any feature request or encountered any bug, feel free to [open an issue](https://github.com/ArchGPT/insomnium/issues). Thanks! I'm also working on a Code Llama plugin for Insomnium to make it more easily customizable and extensible, while keeping the core product fast and 100% local-only.
 
+> _**Vote for Insomnium's new icon now! [github.com/ArchGPT/insomnium/discussions/11](https://github.com/ArchGPT/insomnium/discussions/11)**_
+
+
 ## Download
 
 Insomnium is available for Mac, Windows, and Linux, and can be downloaded [here](https://github.com/ArchGPT/insomnium/releases). You can also build it from source on your local machine using `npm run app-package`.

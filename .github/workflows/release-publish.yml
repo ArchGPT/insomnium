@@ -98,7 +98,7 @@ jobs:
         with:
           release_id: ${{ steps.core_tag_and_release.outputs.id }}
           tag_name: ${{ env.RELEASE_CORE_TAG }}
-          file: "./artifacts/*-latest-artifacts/insomnia/**"
+          file: "./artifacts/*-latest-artifacts/**"
           prerelease: ${{ env.IS_PRERELEASE }}
           draft: false
 
