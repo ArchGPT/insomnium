@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/ArchGPT/insomnium#readme",
   "engines": {
-    "node": ">=18.15 <20",
+    "node": ">=18.17.0",
     "npm": ">=8.19.0"
   },
   "workspaces": [
@@ -71,5 +71,8 @@
     "tslib": "2.0.1",
     "type-fest": "^2.12.0",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.10"
   }
 }

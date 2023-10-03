@@ -707,7 +707,7 @@ const localTemplatePlugins: { templateTag: PluginTemplateTag }[] = [
               return results[0];
             }
           } else {
-            const DOMParser = (await import('xmldom')).DOMParser;
+            const DOMParser = (await import('@xmldom/xmldom')).DOMParser;
             const dom = new DOMParser().parseFromString(body);
             let selectedValues: SelectedValue[] = [];
             if (sanitizedFilter === undefined) {
