@@ -24,7 +24,7 @@ import {
   CodeEditorHandle,
 } from '../components/codemirror/code-editor';
 import { DesignEmptyState } from '../components/design-empty-state';
-import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
+
 import { ErrorBoundary } from '../components/error-boundary';
 import { Notice, NoticeTable } from '../components/notice-table';
 import { SidebarLayout } from '../components/sidebar-layout';
@@ -260,7 +260,7 @@ const Design: FC = () => {
                 gridRowStart: 6,
               }}
             >
-              <WorkspaceSyncDropdown />
+              no sync desu
             </div>
           </ErrorBoundary>
         ) : (
@@ -271,7 +271,7 @@ const Design: FC = () => {
                 gridRowStart: 6,
               }}
             >
-              <WorkspaceSyncDropdown />
+                no sync desu
             </div>
           </Fragment>
         )

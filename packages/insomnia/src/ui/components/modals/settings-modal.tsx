@@ -1,6 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
-import * as session from '../../../account/session';
 import { getAppVersion, getProductName } from '../../../common/constants';
 import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
@@ -29,7 +28,6 @@ export const TAB_INDEX_AI = 'ai';
 export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props, ref) => {
   const [defaultTabKey, setDefaultTabKey] = useState('general');
   const modalRef = useRef<ModalHandle>(null);
-  const email = session.isLoggedIn() ? session.getFullName() : null;
 
   useImperativeHandle(ref, () => ({
     hide: () => {
@@ -47,7 +45,7 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
         {getProductName()} Preferences
         <span className="faint txt-sm">
           &nbsp;&nbsp;–&nbsp; v{getAppVersion()}
-          {email ? ` – ${email}` : null}
+
         </span>
       </ModalHeader>
       <ModalBody noScroll>

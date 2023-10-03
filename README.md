@@ -28,7 +28,7 @@ I was among the users who were deeply affected by the recent change. I still thi
 
 ## Roadmap
 
-I have removed user login, tracking, analytics, etc, from Insomnia so it is now a 100% local app. 
+I have removed user login, tracking, analytics, etc, from Insomnia so it is now a 100% local app. (And runs much faster!)
 
 If you have any feature request or encountered any bug, feel free to [open an issue](https://github.com/ArchGPT/insomnium/issues). Thanks! I'm also working on a Code Llama plugin for Insomnium to make it more easily customizable and extensible, while keeping the core product fast and 100% local-only. [You can read more about Insomnium's roadmap here](https://github.com/ArchGPT/insomnium/discussions/13).
 

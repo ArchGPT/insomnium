@@ -2,8 +2,8 @@ import clone from 'clone';
 import crypto from 'crypto';
 import path from 'path';
 
-import * as crypt from '../../account/crypt';
-import * as session from '../../account/session';
+// import * as crypt from '../../account/crypt';
+
 import { generateId } from '../../common/misc';
 import { strings } from '../../common/strings';
 import { BaseModel } from '../../models';
@@ -921,7 +921,7 @@ export class VCS {
 
       for (const blob of blobs) {
         const encryptedResult = JSON.parse(blob.content);
-        result[blob.id] = crypt.decryptAESToBuffer(symmetricKey, encryptedResult);
+        // result[blob.id] = crypt.decryptAESToBuffer(symmetricKey, encryptedResult);
       }
     }
 
@@ -974,21 +974,21 @@ export class VCS {
         throw new Error(`Failed to get blob id=${id}`);
       }
 
-      const encryptedResult = crypt.encryptAESBuffer(symmetricKey, content);
-      batch.push({
-        id,
-        content: JSON.stringify(encryptedResult, null, 2),
-      });
-      batchSizeBytes += content.length;
-      const isLastId = i === allIds.length - 1;
+      // const encryptedResult = crypt.encryptAESBuffer(symmetricKey, content);
+      // batch.push({
+      //   id,
+      //   content: JSON.stringify(encryptedResult, null, 2),
+      // });
+      // batchSizeBytes += content.length;
+      // const isLastId = i === allIds.length - 1;
 
-      if (batchSizeBytes > maxBatchSize || isLastId || batch.length >= maxBatchCount) {
-        count += await next(batch);
-        const batchSizeMB = Math.round((batchSizeBytes / 1024) * 100) / 100;
-        console.log(`[sync] Uploaded ${count}/${allIds.length} blobs in batch ${batchSizeMB} KB`);
-        batch = [];
-        batchSizeBytes = 0;
-      }
+      // if (batchSizeBytes > maxBatchSize || isLastId || batch.length >= maxBatchCount) {
+      //   count += await next(batch);
+      //   const batchSizeMB = Math.round((batchSizeBytes / 1024) * 100) / 100;
+      //   console.log(`[sync] Uploaded ${count}/${allIds.length} blobs in batch ${batchSizeMB} KB`);
+      //   batch = [];
+      //   batchSizeBytes = 0;
+      // }
     }
 
     console.log(`[sync] Finished uploading ${count}/${allIds.length} blobs`);
@@ -1132,57 +1132,57 @@ export class VCS {
     }[],
   ) {
     // Generate symmetric key for ResourceGroup
-    const symmetricKey = await crypt.generateAES256Key();
-    const symmetricKeyStr = JSON.stringify(symmetricKey);
+    // const symmetricKey = await crypt.generateAES256Key();
+    // const symmetricKeyStr = JSON.stringify(symmetricKey);
 
-    const teamKeys: {accountId: string; encSymmetricKey: string}[] = [];
+    // const teamKeys: {accountId: string; encSymmetricKey: string}[] = [];
 
-    if (!teamId || !teamPublicKeys?.length) {
-      throw new Error('teamId and teamPublicKeys must not be null or empty!');
-    }
+    // if (!teamId || !teamPublicKeys?.length) {
+    //   throw new Error('teamId and teamPublicKeys must not be null or empty!');
+    // }
 
-    // Encrypt the symmetric key with the public keys of all the team members, ourselves included
-    for (const { accountId, publicKey } of teamPublicKeys) {
-      teamKeys.push({
-        accountId,
-        encSymmetricKey: crypt.encryptRSAWithJWK(JSON.parse(publicKey), symmetricKeyStr),
-      });
-    }
+    // // Encrypt the symmetric key with the public keys of all the team members, ourselves included
+    // for (const { accountId, publicKey } of teamPublicKeys) {
+    //   teamKeys.push({
+    //     accountId,
+    //     encSymmetricKey: crypt.encryptRSAWithJWK(JSON.parse(publicKey), symmetricKeyStr),
+    //   });
+    // }
 
-    const { projectCreate } = await this._runGraphQL(
-      `
-        mutation (
-          $name: String!,
-          $id: ID!,
-          $rootDocumentId: ID!,
-          $teamId: ID,
-          $teamKeys: [ProjectCreateKeyInput!],
-        ) {
-          projectCreate(
-            name: $name,
-            id: $id,
-            rootDocumentId: $rootDocumentId,
-            teamId: $teamId,
-            teamKeys: $teamKeys,
-          ) {
-            id
-            name
-            rootDocumentId
-          }
-        }
-      `,
-      {
-        name: workspaceName,
-        id: this._backendProjectId(),
-        rootDocumentId: workspaceId,
-        teamId: teamId,
-        teamKeys: teamKeys,
-      },
-      'createProject',
-    );
+    // const { projectCreate } = await this._runGraphQL(
+    //   `
+    //     mutation (
+    //       $name: String!,
+    //       $id: ID!,
+    //       $rootDocumentId: ID!,
+    //       $teamId: ID,
+    //       $teamKeys: [ProjectCreateKeyInput!],
+    //     ) {
+    //       projectCreate(
+    //         name: $name,
+    //         id: $id,
+    //         rootDocumentId: $rootDocumentId,
+    //         teamId: $teamId,
+    //         teamKeys: $teamKeys,
+    //       ) {
+    //         id
+    //         name
+    //         rootDocumentId
+    //       }
+    //     }
+    //   `,
+    //   {
+    //     name: workspaceName,
+    //     id: this._backendProjectId(),
+    //     rootDocumentId: workspaceId,
+    //     teamId: teamId,
+    //     teamKeys: teamKeys,
+    //   },
+    //   'createProject',
+    // );
 
-    console.log(`[sync] Created remote project ${projectCreate.id} (${projectCreate.name})`);
-    return projectCreate as BackendProject;
+    // console.log(`[sync] Created remote project ${projectCreate.id} (${projectCreate.name})`);
+    // return projectCreate as BackendProject;
   }
 
   async _getBackendProject(): Promise<BackendProject | null> {
@@ -1195,11 +1195,11 @@ export class VCS {
   }
 
   async _getBackendProjectSymmetricKey() {
-    const { privateKey } = this._assertSession();
+    // const { privateKey } = this._assertSession();
 
-    const encSymmetricKey = await this._queryBackendProjectKey();
-    const symmetricKeyStr = crypt.decryptRSAWithJWK(privateKey, encSymmetricKey);
-    return JSON.parse(symmetricKeyStr);
+    // const encSymmetricKey = await this._queryBackendProjectKey();
+    // const symmetricKeyStr = crypt.decryptRSAWithJWK(privateKey, encSymmetricKey);
+    // return JSON.parse(symmetricKeyStr);
   }
 
   async _assertBackendProject() {
@@ -1233,16 +1233,7 @@ export class VCS {
   }
 
   _assertSession() {
-    if (!session.isLoggedIn()) {
-      throw new Error('Not logged in');
-    }
-
-    return {
-      accountId: session.getAccountId(),
-      sessionId: session.getCurrentSessionId(),
-      privateKey: session.getPrivateKey(),
-      publicKey: session.getPublicKey(),
-    };
+    throw "nah"
   }
 
   async _assertBranch(branchName: string) {

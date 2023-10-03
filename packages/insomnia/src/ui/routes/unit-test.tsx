@@ -15,7 +15,7 @@ import * as models from '../../models';
 import type { UnitTestSuite } from '../../models/unit-test-suite';
 import { invariant } from '../../utils/invariant';
 import { Dropdown, DropdownButton, DropdownItem, ItemContent } from '../components/base/dropdown';
-import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
+
 import { ErrorBoundary } from '../components/error-boundary';
 import { showPrompt } from '../components/modals';
 import { SidebarFooter, SidebarLayout } from '../components/sidebar-layout';
@@ -163,7 +163,7 @@ const TestRoute: FC = () => {
             </ul>
           </div>
           <SidebarFooter>
-            <WorkspaceSyncDropdown />
+            {/* <WorkspaceSyncDropdown /> */}
           </SidebarFooter>
         </ErrorBoundary>
       }

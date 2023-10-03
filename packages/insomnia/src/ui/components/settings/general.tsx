@@ -1,7 +1,6 @@
 import React, { FC, Fragment } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 
-import * as session from '../../../account/session';
 import {
   EditorKeyMap,
   isMac,
@@ -42,7 +41,6 @@ export const General: FC = () => {
   const {
     settings,
   } = useRouteLoaderData('root') as RootLoaderData;
-  const isLoggedIn = session.isLoggedIn();
 
   return (
     <div className="pad-bottom">

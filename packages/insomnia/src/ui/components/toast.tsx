@@ -3,7 +3,7 @@ import type { IpcRendererEvent } from 'electron';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import * as session from '../../account/session';
+
 import {
   getAppId,
   getAppPlatform,
@@ -104,15 +104,15 @@ export const Toast: FC = () => {
         updatesNotSupported: !updatesSupported(),
         version: getAppVersion(),
       };
-      const notificationOrEmpty = await window.main.insomniaFetch<ToastNotification>({
-        method: 'POST',
-        path: '/notification',
-        data,
-        sessionId: session.getCurrentSessionId(),
-      });
-      if (notificationOrEmpty && typeof notificationOrEmpty !== 'string') {
-        updatedNotification = notificationOrEmpty;
-      }
+      // const notificationOrEmpty = await window.main.insomniaFetch<ToastNotification>({
+      //   method: 'POST',
+      //   path: '/notification',
+      //   data,
+      //   sessionId: session.getCurrentSessionId(),
+      // });
+      // if (notificationOrEmpty && typeof notificationOrEmpty !== 'string') {
+      //   updatedNotification = notificationOrEmpty;
+      // }
     } catch (err) {
       console.warn('[toast] Failed to fetch user notifications', err);
     }

@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { OverlayContainer } from 'react-aria';
 import { useRouteLoaderData } from 'react-router-dom';
 
-import * as session from '../../../account/session';
 import { database as db } from '../../../common/database';
 import type { Snapshot } from '../../../sync/types';
 import { VCS } from '../../../sync/vcs/vcs';
@@ -35,9 +34,9 @@ export const SyncHistoryModal = ({ vcs, branch, history, onHide }: Props) => {
       const { firstName, lastName } = snapshot.authorAccount;
       fullName += `${firstName} ${lastName}`;
     }
-    if (snapshot.author === session.getAccountId()) {
-      fullName += ' (you)';
-    }
+    // if (snapshot.author === session.getAccountId()) {
+    //   fullName += ' (you)';
+    // }
 
     return fullName;
   };

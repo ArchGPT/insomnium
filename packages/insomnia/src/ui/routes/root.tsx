@@ -25,16 +25,10 @@ import {
 } from 'react-router-dom';
 /**** ><> ↑ --------- Imports */
 
-import {
-  getFirstName,
-  getLastName,
-  isLoggedIn,
-  logout,
-  onLoginLogout,
-} from '../../account/session';
+
 import { isDevelopment } from '../../common/constants';
 import * as models from '../../models';
-import { isDefaultOrganization } from '../../models/organization';
+
 import { Settings } from '../../models/settings';
 import { isDesign } from '../../models/workspace';
 import { reloadPlugins } from '../../plugins';
@@ -43,11 +37,11 @@ import { setTheme } from '../../plugins/misc';
 import { exchangeCodeForToken } from '../../sync/git/github-oauth-provider';
 import { exchangeCodeForGitLabToken } from '../../sync/git/gitlab-oauth-provider';
 /**** ><> ↑ --------- Account and Models */
-import { submitAuthCode } from '../auth-session-provider';
+
 import { WorkspaceDropdown } from '../components/dropdowns/workspace-dropdown';
 import { Hotkey } from '../components/hotkey';
 import { Icon } from '../components/icon';
-import { InsomniaLogo } from '../components/insomnia-icon';
+
 import { showError, showModal } from '../components/modals';
 import { AlertModal } from '../components/modals/alert-modal';
 import { AskModal } from '../components/modals/ask-modal';
@@ -59,15 +53,16 @@ import {
   showSettingsModal,
   TAB_INDEX_PLUGINS,
   TAB_INDEX_THEMES } from '../components/modals/settings-modal';
-// import { Toast } from '../components/toast';
+
 import { AppHooks } from '../containers/app-hooks';
-// import { AIProvider } from '../context/app/ai-context';
+
 import { NunjucksEnabledProvider } from '../context/nunjucks/nunjucks-enabled-context';
 /**** ><> ↑ --------- Settings and Themes */
 import { useSettingsPatcher } from '../hooks/use-request';
 import Modals from './modals';
-import { useOrganizationLoaderData } from './organization';
+
 import { WorkspaceLoaderData } from './workspace';
+import { defaultOrganization } from '../../models/organization';
 
 /**** ><> ↑ --------- Hooks and Containers */
 export interface RootLoaderData {
@@ -81,32 +76,15 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
 };
 /**** ><> ↑ --------- Root Loader Data */
 
-const getNameInitials = (name: string) => {
-  // Split on whitespace and take first letter of each word
-  const words = name.toUpperCase().split(' ');
-  const firstWord = words[0];
-  const lastWord = words[words.length - 1];
 
-  // If there is only one word, just take the first letter
-  if (words.length === 1) {
-    return firstWord.charAt(0);
-  }
-
-  // If the first word is an emoji or an icon then just use that
-  const iconMatch = firstWord.match(/\p{Extended_Pictographic}/u);
-  if (iconMatch) {
-    return iconMatch[0];
-  }
-
-  return `${firstWord.charAt(0)}${lastWord ? lastWord.charAt(0) : ''}`;
-};
 /**** ><> ↑ --------- Helper Function */
 
 const Root = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { settings } = useLoaderData() as RootLoaderData;
-  const { organizations } = useOrganizationLoaderData();
+  const organizations = [defaultOrganization]
+
   const workspaceData = useRouteLoaderData(
     ':workspaceId'
   ) as WorkspaceLoaderData | null;
@@ -114,13 +92,10 @@ const Root = () => {
   const patchSettings = useSettingsPatcher();
 
   useEffect(() => {
-    // onLoginLogout(() => {
-      // Update the hash of the current route to force revalidation of data
       navigate({
         pathname: location.pathname,
         hash: 'revalidate=true',
       });
-    // });
   }, [location.pathname, navigate]);
 
   useEffect(() => {
@@ -246,7 +221,7 @@ const Root = () => {
           }
 
           case 'insomnia://app/auth/finish': {
-            submitAuthCode(params.box);
+
             break;
           }
 
@@ -305,7 +280,7 @@ const Root = () => {
             <header className="[grid-area:Header] grid grid-cols-3 items-center">
               <div className="flex items-center">
                 <div className="flex w-[50px] py-2">
-                  <InsomniaLogo />
+
                 </div>
 
               </div>
@@ -340,53 +315,8 @@ const Root = () => {
                     )}
                   </Fragment>
                 )}
-              </div>
-              {/* <div className="flex gap-[--padding-sm] items-center justify-end p-2">
-                {isLoggedIn() ? (
-                  <MenuTrigger>
-                    <Button className="px-4 py-1 flex items-center justify-center gap-2 aria-pressed:bg-[--hl-sm] rounded-sm text-[--color-font] hover:bg-[--hl-xs] focus:ring-inset ring-1 ring-transparent focus:ring-[--hl-md] transition-all text-sm">
-                      <Icon icon="user" />{' '}
-                      {`${getFirstName()} ${getLastName()}`}
-                    </Button>
-                    <Popover className="min-w-max">
-                      <Menu
-                        onAction={action => {
-                          if (action === 'logout') {
-                            logout();
-                          }
+            </div>
 
-                          if (action === 'account-settings') {
-                            window.main.openInBrowser(
-                              'https://app.insomnia.rest/app/account/'
-                            );
-                          }
-                        }}
-                        className="border select-none text-sm min-w-max border-solid border-[--hl-sm] shadow-lg bg-[--color-bg] py-2 rounded-md overflow-y-auto max-h-[85vh] focus:outline-none"
-                      >
-                        <Item
-                          id="account-settings"
-                          className="flex gap-2 px-[--padding-md] aria-selected:font-bold items-center text-[--color-font] h-[--line-height-xs] w-full text-md whitespace-nowrap bg-transparent hover:bg-[--hl-sm] disabled:cursor-not-allowed focus:bg-[--hl-xs] focus:outline-none transition-colors"
-                          aria-label="Account settings"
-                        >
-                          <Icon icon="gear" />
-                          <span>Account Settings</span>
-                        </Item>
-                        <Item
-                          id="logout"
-                          className="flex gap-2 px-[--padding-md] aria-selected:font-bold items-center text-[--color-font] h-[--line-height-xs] w-full text-md whitespace-nowrap bg-transparent hover:bg-[--hl-sm] disabled:cursor-not-allowed focus:bg-[--hl-xs] focus:outline-none transition-colors"
-                          aria-label="logout"
-                        >
-                          <Icon icon="sign-out" />
-                          <span>Logout</span>
-                        </Item>
-                      </Menu>
-                    </Popover>
-                  </MenuTrigger>
-                ) : (
-                    <Fragment>
-                  </Fragment>
-                )}
-              </div> */}
               {/* /**** ><> ↑ --------- Root Component */}
             </header>
             <div className="[grid-area:Navbar] overflow-hidden">
@@ -404,11 +334,8 @@ const Root = () => {
                         }
                         to={`/organization/${organization._id}`}
                       >
-                        {isDefaultOrganization(organization) ? (
-                          <Icon icon="home" />
-                        ) : (
-                          getNameInitials(organization.name)
-                        )}
+
+                        <Icon icon="home" />
                       </NavLink>
                     </Link>
                     <Tooltip

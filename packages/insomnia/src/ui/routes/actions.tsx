@@ -3,7 +3,7 @@ import { generate, runTests, type Test } from 'insomnia-testing';
 import path from 'path';
 import { ActionFunction, redirect } from 'react-router-dom';
 
-import * as session from '../../account/session';
+
 import { parseApiSpec, resolveComponentSchemaRefs } from '../../common/api-specs';
 import { ACTIVITY_DEBUG, ACTIVITY_SPEC } from '../../common/constants';
 import { database } from '../../common/database';
@@ -117,15 +117,15 @@ export const createNewWorkspaceAction: ActionFunction = async ({
   const workspaceMeta = await models.workspaceMeta.getOrCreateByParentId(workspace._id);
 
   await database.flushChanges(flushId);
-  if (session.isLoggedIn() && isRemoteProject(project) && !workspaceMeta.gitRepositoryId) {
-    const vcs = getVCS();
-    if (vcs) {
-      await initializeLocalBackendProjectAndMarkForSync({
-        vcs,
-        workspace,
-      });
-    }
-  }
+  // if (session.isLoggedIn() && isRemoteProject(project) && !workspaceMeta.gitRepositoryId) {
+  //   const vcs = getVCS();
+  //   if (vcs) {
+  //     await initializeLocalBackendProjectAndMarkForSync({
+  //       vcs,
+  //       workspace,
+  //     });
+  //   }
+  // }
 
 
 
@@ -216,12 +216,12 @@ export const duplicateWorkspaceAction: ActionFunction = async ({ request, params
   try {
     // Mark for sync if logged in and in the expected project
     const vcs = getVCS();
-    if (session.isLoggedIn() && vcs && isRemoteProject(duplicateToProject)) {
-      await initializeLocalBackendProjectAndMarkForSync({
-        vcs: vcs.newInstance(),
-        workspace: newWorkspace,
-      });
-    }
+    // if (session.isLoggedIn() && vcs && isRemoteProject(duplicateToProject)) {
+    //   await initializeLocalBackendProjectAndMarkForSync({
+    //     vcs: vcs.newInstance(),
+    //     workspace: newWorkspace,
+    //   });
+    // }
   } catch (e) {
     console.warn('Failed to initialize local backend project', e);
   }
@@ -616,25 +616,25 @@ export const generateCollectionAndTestsAction: ActionFunction = async ({ params 
 
         const methodInfo = resolveComponentSchemaRefs(spec, getMethodInfo(request));
 
-        const response = await window.main.insomniaFetch<{ test: { requestId: string } }>({
-          method: 'POST',
-          origin: 'https://ai.insomnia.rest',
-          path: '/v1/generate-test',
-          sessionId: session.getCurrentSessionId(),
-          data: {
-            teamId: organizationId,
-            request: requests.find(r => r._id === test.requestId),
-            methodInfo,
-          },
-        });
+        // const response = await window.main.insomniaFetch<{ test: { requestId: string } }>({
+        //   method: 'POST',
+        //   origin: 'https://ai.insomnia.rest',
+        //   path: '/v1/generate-test',
+        //   sessionId: session.getCurrentSessionId(),
+        //   data: {
+        //     teamId: organizationId,
+        //     request: requests.find(r => r._id === test.requestId),
+        //     methodInfo,
+        //   },
+        // });
 
-        const aiTest = response.test;
+        // const aiTest = response.test;
 
-        await models.unitTest.create({ ...aiTest, parentId: aiTestSuite._id, requestId: test.requestId });
-        writer.write({
-          progress: ++progress,
-          total,
-        });
+        // await models.unitTest.create({ ...aiTest, parentId: aiTestSuite._id, requestId: test.requestId });
+        // writer.write({
+        //   progress: ++progress,
+        //   total,
+        // });
 
       } catch (err) {
         console.log(err);
@@ -697,25 +697,25 @@ export const generateTestsAction: ActionFunction = async ({ params }) => {
   for (const test of tests) {
     async function generateTest() {
       try {
-        const response = await window.main.insomniaFetch<{ test: { requestId: string } }>({
-          method: 'POST',
-          origin: 'https://ai.insomnia.rest',
-          path: '/v1/generate-test',
-          sessionId: session.getCurrentSessionId(),
-          data: {
-            teamId: organizationId,
-            request: requests.find(r => r._id === test.requestId),
-          },
-        });
+        // const response = await window.main.insomniaFetch<{ test: { requestId: string } }>({
+        //   method: 'POST',
+        //   origin: 'https://ai.insomnia.rest',
+        //   path: '/v1/generate-test',
+        //   sessionId: session.getCurrentSessionId(),
+        //   data: {
+        //     teamId: organizationId,
+        //     request: requests.find(r => r._id === test.requestId),
+        //   },
+        // });
 
-        const aiTest = response.test;
+        // const aiTest = response.test;
 
-        await models.unitTest.create({ ...aiTest, parentId: aiTestSuite._id, requestId: test.requestId });
+        // await models.unitTest.create({ ...aiTest, parentId: aiTestSuite._id, requestId: test.requestId });
 
-        writer.write({
-          progress: ++progress,
-          total,
-        });
+        // writer.write({
+        //   progress: ++progress,
+        //   total,
+        // });
       } catch (err) {
         console.log(err);
         writer.write({

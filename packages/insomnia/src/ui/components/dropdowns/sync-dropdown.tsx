@@ -3,7 +3,7 @@ import React, { FC, Fragment, useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams, useRouteLoaderData } from 'react-router-dom';
 import { useInterval, useMount } from 'react-use';
 
-import * as session from '../../../account/session';
+
 import { DEFAULT_BRANCH_NAME } from '../../../common/constants';
 import { database as db, Operation } from '../../../common/database';
 import { docsVersionControl } from '../../../common/documentation';
@@ -13,7 +13,7 @@ import { isRemoteProject, Project } from '../../../models/project';
 import type { Workspace } from '../../../models/workspace';
 import { Snapshot, Status } from '../../../sync/types';
 import { pushSnapshotOnInitialize } from '../../../sync/vcs/initialize-backend-project';
-import { logCollectionMovedToProject } from '../../../sync/vcs/migrate-collections';
+
 import { BackendProjectWithTeam } from '../../../sync/vcs/normalize-backend-project-team';
 import { pullBackendProject } from '../../../sync/vcs/pull-backend-project';
 import { interceptAccessError } from '../../../sync/vcs/util';
@@ -89,17 +89,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
   const remoteProjects = projects.filter(isRemoteProject);
 
   const refetchRemoteBranch = useCallback(async () => {
-    if (session.isLoggedIn()) {
-      try {
-        const compare = await vcs.compareRemoteBranch();
-        setState(state => ({
-          ...state,
-          compare,
-        }));
-      } catch (err) {
-        console.log('Failed to compare remote branches', err.message);
-      }
-    }
+
   }, [vcs]);
 
   const refreshVCSAndRefetchRemote = useCallback(async () => {
@@ -178,7 +168,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
     if (pulledIntoProject.project._id !== project._id) {
       // If pulled into a different project, reactivate the workspace
       navigate(`/organization/${organizationId}/project/${projectId}/workspace/${workspace._id}`);
-      logCollectionMovedToProject(workspace, pulledIntoProject.project);
+      // logCollectionMovedToProject(workspace, pulledIntoProject.project);
     }
     await refreshVCSAndRefetchRemote();
     setState(state => ({
@@ -285,9 +275,9 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
     }));
   }
 
-  if (!session.isLoggedIn()) {
+  // if (!session.isLoggedIn()) {
     return null;
-  }
+  // }
 
   const {
     localBranches,
