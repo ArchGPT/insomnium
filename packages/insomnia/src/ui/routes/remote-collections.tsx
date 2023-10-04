@@ -7,24 +7,24 @@ import { RemoteProject } from '../../models/project';
 import { BackendProject } from '../../sync/types';
 import { pullBackendProject } from '../../sync/vcs/pull-backend-project';
 import { getVCS } from '../../sync/vcs/vcs';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 
 export const pullRemoteCollectionAction: ActionFunction = async ({ request, params }) => {
   const { organizationId, projectId } = params;
   const formData = await request.formData();
 
   const backendProjectId = formData.get('backendProjectId');
-  invariant(typeof backendProjectId === 'string', 'Collection Id is required');
+  guard(typeof backendProjectId === 'string', 'Collection Id is required');
   const remoteId = formData.get('remoteId');
-  invariant(typeof remoteId === 'string', 'Remote Id is required');
+  guard(typeof remoteId === 'string', 'Remote Id is required');
 
   const vcs = getVCS();
-  invariant(vcs, 'VCS is not defined');
+  guard(vcs, 'VCS is not defined');
 
   const remoteBackendProjects = await vcs.remoteBackendProjects(remoteId);
   const backendProject = remoteBackendProjects.find(p => p.id === backendProjectId);
 
-  invariant(backendProject, 'Backend project not found');
+  guard(backendProject, 'Backend project not found');
 
   const remoteProjects = await database.find<RemoteProject>(models.project.type, {
     // @ts-expect-error -- Improve database query typing
@@ -53,16 +53,16 @@ export interface RemoteCollectionsLoaderData {
 
 export const remoteCollectionsLoader: LoaderFunction = async ({ params }): Promise<RemoteCollectionsLoaderData> => {
   const { projectId } = params;
-  invariant(typeof projectId === 'string', 'Project Id is required');
+  guard(typeof projectId === 'string', 'Project Id is required');
 
   try {
     const project = await models.project.getById(projectId);
-    invariant(project, 'Project not found');
+    guard(project, 'Project not found');
     const vcs = getVCS();
-    invariant(vcs, 'VCS is not defined');
+    guard(vcs, 'VCS is not defined');
 
     const remoteId = project.remoteId;
-    invariant(remoteId, 'Project is not a remote project');
+    guard(remoteId, 'Project is not a remote project');
 
     const allVCSBackendProjects = await vcs.localBackendProjects();
     // Filter out backend projects that are not connected to a workspace because the workspace was deleted

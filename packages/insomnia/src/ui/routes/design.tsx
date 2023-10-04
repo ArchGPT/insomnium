@@ -18,7 +18,7 @@ import { ACTIVITY_SPEC } from '../../common/constants';
 import { debounce } from '../../common/misc';
 import { ApiSpec } from '../../models/api-spec';
 import * as models from '../../models/index';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import {
   CodeEditor,
   CodeEditorHandle,
@@ -82,11 +82,11 @@ export const loader: LoaderFunction = async ({
   params,
 }): Promise<LoaderData> => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
   const apiSpec = await models.apiSpec.getByParentId(workspaceId);
-  invariant(apiSpec, 'API spec not found');
+  guard(apiSpec, 'API spec not found');
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 

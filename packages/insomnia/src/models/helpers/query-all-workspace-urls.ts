@@ -1,6 +1,6 @@
 import { database as db } from '../../common/database';
 import * as models from '../../models';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { GrpcRequest, type as GrpcRequestType } from '../grpc-request';
 import { Request, type as RequestType } from '../request';
 
@@ -10,7 +10,7 @@ export const queryAllWorkspaceUrls = async (
   reqId = 'n/a',
 ): Promise<string[]> => {
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, `Workspace ${workspaceId} not found`);
+  guard(workspace, `Workspace ${workspaceId} not found`);
   const docs = await db.withDescendants(workspace, reqType) as (Request | GrpcRequest)[];
   const urls = docs
     .filter(

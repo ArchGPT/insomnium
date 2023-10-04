@@ -1,7 +1,7 @@
 // NOTE: this file should not be imported by electron renderer because node-libcurl is not-context-aware
 // Related issue https://github.com/JCMais/node-libcurl/issues/155
-import { invariant } from '../../utils/invariant';
-invariant(process.type !== 'renderer', 'Native abstractions for Nodejs module unavailable in renderer');
+import { guard } from '../../utils/guard';
+guard(process.type !== 'renderer', 'Native abstractions for Nodejs module unavailable in renderer');
 
 import { Curl, CurlAuth, CurlCode, CurlFeature, CurlHttpVersion, CurlInfoDebug, CurlNetrc } from '@getinsomnia/node-libcurl';
 import electron from 'electron';
@@ -131,7 +131,7 @@ export const curlRequest = (options: CurlRequestOptions) => new Promise<CurlRequ
     const { authentication } = req;
     if (requestBodyPath) {
       // AWS IAM file upload not supported
-      invariant(authentication.type !== AUTH_AWS_IAM, 'AWS authentication not supported for provided body type');
+      guard(authentication.type !== AUTH_AWS_IAM, 'AWS authentication not supported for provided body type');
       const { size: contentLength } = fs.statSync(requestBodyPath);
       curl.setOpt(Curl.option.INFILESIZE_LARGE, contentLength);
       curl.setOpt(Curl.option.UPLOAD, 1);

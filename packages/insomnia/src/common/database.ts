@@ -13,6 +13,7 @@ import * as models from '../models/index';
 import type { Workspace } from '../models/workspace';
 import { DB_PERSIST_INTERVAL } from './constants';
 import { generateId } from './misc';
+import { dummyStartingWorkspace, importToWorkspaceFromJSON } from './import';
 
 export interface Query {
   _id?: string | SpecificQuery;
@@ -354,8 +355,9 @@ export const database = {
     // NOTE: Only repair the DB if we're not running in memory. Repairing here causes tests to hang indefinitely for some reason.
     // TODO: Figure out why this makes tests hang
     if (!config.inMemoryOnly) {
-      await _repairDatabase();
+      await _fixDBShape();
       consoleLog(`[db] Initialized DB at ${getDBFilePath('$TYPE')}`);
+
     }
 
     // This isn't the best place for this but w/e
@@ -723,14 +725,16 @@ async function _send<T>(fnName: string, ...args: any[]) {
 /**
  * Run various database repair scripts
  */
-export async function _repairDatabase() {
+export async function _fixDBShape() {
   console.log('[fix] Running database repairs');
-
-  for (const workspace of await database.find<Workspace>(models.workspace.type)) {
+  const workspaces = await database.find<Workspace>(models.workspace.type)
+  for (const workspace of workspaces) {
     await _repairBaseEnvironments(workspace);
     await _fixMultipleCookieJars(workspace);
     await _applyApiSpecName(workspace);
   }
+
+  console.log(['workspaces'], workspaces)
 
   for (const gitRepository of await database.find<GitRepository>(models.gitRepository.type)) {
     await _fixOldGitURIs(gitRepository);

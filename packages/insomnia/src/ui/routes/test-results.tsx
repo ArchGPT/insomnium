@@ -4,7 +4,7 @@ import { LoaderFunction, redirect, useRouteLoaderData } from 'react-router-dom';
 import { database } from '../../common/database';
 import * as models from '../../models';
 import { UnitTestResult } from '../../models/unit-test-result';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { ListGroup, UnitTestResultItem } from '../components/list-group';
 
 interface TestResultsData {
@@ -13,10 +13,10 @@ interface TestResultsData {
 
 export const indexLoader: LoaderFunction = async ({ params }) => {
   const { organizationId, projectId, workspaceId, testSuiteId } = params;
-  invariant(projectId, 'Project ID is required');
-  invariant(organizationId, 'Organization ID is required');
-  invariant(workspaceId, 'Workspace ID is required');
-  invariant(testSuiteId, 'Test suite ID is required');
+  guard(projectId, 'Project ID is required');
+  guard(organizationId, 'Organization ID is required');
+  guard(workspaceId, 'Workspace ID is required');
+  guard(testSuiteId, 'Test suite ID is required');
 
   const testResult = await models.unitTestResult.getLatestByParentId(workspaceId);
   if (testResult) {
@@ -30,11 +30,11 @@ export const loader: LoaderFunction = async ({
   params,
 }): Promise<TestResultsData> => {
   const { testResultId } = params;
-  invariant(testResultId, 'Test Result ID is required');
+  guard(testResultId, 'Test Result ID is required');
   const testResult = await database.getWhere<UnitTestResult>(models.unitTestResult.type, {
     _id: testResultId,
   });
-  invariant(testResult, 'Test Result not found');
+  guard(testResult, 'Test Result not found');
   return {
     testResult,
   };

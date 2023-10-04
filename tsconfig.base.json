@@ -23,5 +23,9 @@
     "target": "ES2019",
     "types": ["node"],
     "useUnknownInCatchVariables": false
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["./*"]
+    // },
   },
 }

@@ -176,6 +176,7 @@ const TabPanel: FC<TabPanelProps> = ({ state, ...props }) => {
 
 interface TabsProps extends AriaTabListProps<TabItemProps> {
   isNested?: boolean;
+  rightButton?: any
 }
 
 const Tabs: FC<TabsProps> = props => {
@@ -185,6 +186,8 @@ const Tabs: FC<TabsProps> = props => {
 
   return (
     <StyledTabsContainer>
+      <div className='relative'>
+
       <StyledTabList {...tabListProps} ref={ref} isNested={props.isNested}>
         {[...state.collection].map((item: Node<TabItemProps>) => (
           <Tab
@@ -195,7 +198,11 @@ const Tabs: FC<TabsProps> = props => {
             isNested={props.isNested}
           />
         ))}
-      </StyledTabList>
+
+        </StyledTabList>
+
+        {props.rightButton}
+      </div>
       <TabPanel
         key={state.selectedItem?.key}
         state={state}

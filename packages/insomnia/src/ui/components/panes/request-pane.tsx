@@ -123,7 +123,8 @@ export const RequestPane: FC<Props> = ({
     activeRequest.body.mimeType;
   return (
     <Pane type="request">
-      <PaneHeader>
+
+      <PaneHeader >
         <ErrorBoundary errorClassName="font-error pad text-center">
           <RequestUrlBar
             key={requestId}
@@ -306,6 +307,8 @@ export const RequestPane: FC<Props> = ({
           </PanelContainer>
         </TabItem>
       </Tabs>
+
+
       {isRequestSettingsModalOpen && (
         <RequestSettingsModal
           request={activeRequest}

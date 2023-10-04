@@ -4,7 +4,7 @@ import { app, BrowserWindow, clipboard, dialog, ipcMain, Menu, shell } from 'ele
 import { fnOrString } from '../../common/misc';
 import type { NunjucksParsedTagArg } from '../../templating/utils';
 import { localTemplateTags } from '../../ui/components/templating/local-template-tags';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 
 const getTemplateValue = (arg: NunjucksParsedTagArg) => {
   if (arg.defaultValue === undefined) {
@@ -61,7 +61,7 @@ export function registerElectronHandlers() {
       ];
       const menu = Menu.buildFromTemplate(template);
       const win = BrowserWindow.fromWebContents(event.sender);
-      invariant(win, 'expected window');
+      guard(win, 'expected window');
       menu.popup({ window: win });
     } catch (e) {
       console.error(e);

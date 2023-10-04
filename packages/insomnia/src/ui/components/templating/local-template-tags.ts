@@ -12,7 +12,7 @@ import { Request, RequestParameter } from '../../../models/request';
 import { Response } from '../../../models/response';
 import { TemplateTag } from '../../../plugins';
 import { PluginTemplateTag } from '../../../templating/extensions';
-import { invariant } from '../../../utils/invariant';
+import { guard } from '../../../utils/guard';
 import { buildQueryStringFromParams, joinUrlAndQueryString, smartEncodeUrl } from '../../../utils/url/querystring';
 
 const localTemplatePlugins: { templateTag: PluginTemplateTag }[] = [
@@ -46,7 +46,7 @@ const localTemplatePlugins: { templateTag: PluginTemplateTag }[] = [
       ],
       run(_context, action, kind, text) {
         text = text || '';
-        invariant(action === 'encode' || action === 'decode', 'invalid action');
+        guard(action === 'encode' || action === 'decode', 'invalid action');
         if (action === 'encode') {
           if (kind === 'normal') {
             return Buffer.from(text, 'utf8').toString('base64');

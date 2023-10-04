@@ -21,6 +21,8 @@ import * as windowUtils from './main/window-utils';
 import * as models from './models/index';
 import type { Stats } from './models/stats';
 import type { ToastNotification } from './ui/components/toast';
+import { dummyStartingWorkspace, importToWorkspaceFromJSON } from './common/import';
+import { Workspace } from './models/workspace';
 
 
 // Handle potential auto-update
@@ -39,7 +41,7 @@ if (envDataPath) {
 } else {
   // Explicitly set userData folder from config because it's sketchy to rely on electron-builder to use productName, which could be changed by accident.
   const defaultPath = app.getPath('userData');
-  const newPath = path.join(defaultPath, '../', isDevelopment() ? 'insomnia-app' : userDataFolder);
+  const newPath = path.join(defaultPath, '../', isDevelopment() ? 'insomnium-dev-desu' : userDataFolder);
   app.setPath('userData', newPath);
 }
 
@@ -90,12 +92,18 @@ app.on('ready', async () => {
   // Init some important things first
   await database.init(models.types());
   await _createModelInstances();
+  const workspaces = await database.find<Workspace>(models.workspace.type)
+  console.log("workspaces desu", workspaces);
+
 
   windowUtils.init();
   await _launchApp();
 
   // Init the rest
   await updates.init();
+
+  // NOTE: could also try to initialize workspace here (?)
+
 });
 
 // Set as default protocol

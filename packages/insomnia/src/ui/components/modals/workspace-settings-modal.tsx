@@ -12,7 +12,7 @@ import * as models from '../../../models/index';
 import { isRequest } from '../../../models/request';
 import { Workspace } from '../../../models/workspace';
 import { WorkspaceMeta } from '../../../models/workspace-meta';
-import { invariant } from '../../../utils/invariant';
+import { guard } from '../../../utils/guard';
 import { FileInputButton } from '../base/file-input-button';
 import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
@@ -521,7 +521,7 @@ export const WorkspaceSettingsModal = ({ workspace, workspaceMeta, clientCertifi
                               gitRepositoryId: null,
                             });
                           } else {
-                            invariant(workspaceMeta, 'Workspace meta not found');
+                            guard(workspaceMeta, 'Workspace meta not found');
 
                             const repo = await models.gitRepository.create({
                               uri: '',

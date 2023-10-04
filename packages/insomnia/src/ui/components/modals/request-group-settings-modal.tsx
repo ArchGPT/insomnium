@@ -3,7 +3,7 @@ import { OverlayContainer } from 'react-aria';
 import { useFetcher, useNavigate, useParams } from 'react-router-dom';
 
 import type { RequestGroup } from '../../../models/request-group';
-import { invariant } from '../../../utils/invariant';
+import { guard } from '../../../utils/guard';
 import { useRequestGroupPatcher } from '../../hooks/use-request';
 import { ProjectLoaderData } from '../../routes/project';
 import { Modal, type ModalHandle, ModalProps } from '../base/modal';
@@ -55,14 +55,14 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
   }, []);
   const navigate = useNavigate();
   const handleMoveToWorkspace = async () => {
-    invariant(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
+    guard(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
     patchRequestGroup(requestGroup._id, { parentId: state.activeWorkspaceIdToCopyTo });
     modalRef.current?.hide();
     navigate(`/organization/${organizationId}/project/${projectId}/workspace/${state.activeWorkspaceIdToCopyTo}/debug`);
   };
 
   const handleCopyToWorkspace = async () => {
-    invariant(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
+    guard(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
     duplicateRequestGroup({
       _id: requestGroup._id,
       name: requestGroup.name, // Because duplicate will add (Copy) suffix if name is not provided in patch
@@ -92,7 +92,7 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
                 placeholder={requestGroup?.name || 'My Folder'}
                 defaultValue={requestGroup?.name}
                 onChange={async event => {
-                  invariant(requestGroup, 'No request group');
+                  guard(requestGroup, 'No request group');
                   patchRequestGroup(requestGroup._id, { name: event.target.value });
                 }}
               />
@@ -105,7 +105,7 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
             placeholder="Write a description"
             defaultValue={requestGroup?.description || ''}
             onChange={async (description: string) => {
-              invariant(requestGroup, 'No request group');
+              guard(requestGroup, 'No request group');
               patchRequestGroup(requestGroup._id, { description });
             }}
           />

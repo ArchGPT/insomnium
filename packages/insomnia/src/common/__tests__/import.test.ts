@@ -6,6 +6,7 @@ import { globalBeforeEach } from '../../__jest__/before-each';
 import { request, requestGroup, workspace } from '../../models';
 import { DEFAULT_PROJECT_ID } from '../../models/project';
 import * as importUtil from '../import';
+import * as importResourcesToProject from '../importResourcesToProject';
 
 describe('isApiSpecImport()', () => {
   it.each(['swagger2', 'openapi3'])(
@@ -46,7 +47,7 @@ describe('importRaw()', () => {
     expect(scanResult.type.id).toBe('curl');
     expect(scanResult.errors.length).toBe(0);
 
-    await importUtil.importResourcesToProject({
+    await importResourcesToProject.importResourcesToProject({
       projectId: DEFAULT_PROJECT_ID,
     });
 
@@ -105,7 +106,7 @@ describe('importRaw()', () => {
     expect(scanResult.type.id).toBe('postman');
     expect(scanResult.errors.length).toBe(0);
 
-    await importUtil.importResourcesToProject({
+    await importResourcesToProject.importResourcesToProject({
       projectId: DEFAULT_PROJECT_ID,
     });
 

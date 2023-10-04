@@ -52,7 +52,7 @@ import {
 } from '../../models/project';
 import { isDesign, Workspace } from '../../models/workspace';
 import { WorkspaceMeta } from '../../models/workspace-meta';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { ProjectDropdown } from '../components/dropdowns/project-dropdown';
 
 import { WorkspaceCardDropdown } from '../components/dropdowns/workspace-card-dropdown';
@@ -87,7 +87,7 @@ export interface WorkspaceWithMetadata {
 
 export const indexLoader: LoaderFunction = async ({ params }) => {
   const { organizationId } = params;
-  invariant(organizationId, 'Organization ID is required');
+  guard(organizationId, 'Organization ID is required');
 
   const prevOrganizationLocation = localStorage.getItem(
     `locationHistoryEntry:${organizationId}`
@@ -143,8 +143,8 @@ export const loader: LoaderFunction = async ({
 }): Promise<ProjectLoaderData> => {
   const search = new URL(request.url).searchParams;
   const { projectId, organizationId } = params;
-  invariant(organizationId, 'Organization ID is required');
-  invariant(projectId, 'projectId parameter is required');
+  guard(organizationId, 'Organization ID is required');
+  guard(projectId, 'projectId parameter is required');
   const sortOrder = search.get('sortOrder') || 'modified-desc';
   const filter = search.get('filter') || '';
   const scope = search.get('scope') || 'all';
@@ -161,7 +161,7 @@ export const loader: LoaderFunction = async ({
         remoteId: null,
       }));
   }
-  invariant(project, 'Project was not found');
+  guard(project, 'Project was not found');
 
   const projectWorkspaces = await models.workspace.findByParentId(project._id);
 
@@ -187,7 +187,7 @@ export const loader: LoaderFunction = async ({
     const workspaceMeta = await models.workspaceMeta.getOrCreateByParentId(
       workspace._id
     );
-    invariant(workspaceMeta, 'WorkspaceMeta was not found');
+    guard(workspaceMeta, 'WorkspaceMeta was not found');
     const lastActiveBranch = workspaceMeta?.cachedGitRepositoryBranch;
 
     const lastCommitAuthor = workspaceMeta?.cachedGitLastAuthor;

@@ -6,7 +6,7 @@ import * as models from '../../../models';
 import { GrpcRequest, isGrpcRequest } from '../../../models/grpc-request';
 import { isRequest, Request } from '../../../models/request';
 import { isWebSocketRequest, WebSocketRequest } from '../../../models/websocket-request';
-import { invariant } from '../../../utils/invariant';
+import { guard } from '../../../utils/guard';
 import { useRequestPatcher } from '../../hooks/use-request';
 import { ProjectLoaderData } from '../../routes/project';
 import { Modal, type ModalHandle, ModalProps } from '../base/modal';
@@ -57,14 +57,14 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
       });
   };
   async function handleMoveToWorkspace() {
-    invariant(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
+    guard(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
     patchRequest(request._id, { parentId: state.activeWorkspaceIdToCopyTo });
     modalRef.current?.hide();
     navigate(`/organization/${organizationId}/project/${projectId}/workspace/${state.activeWorkspaceIdToCopyTo}/debug`);
   }
 
   async function handleCopyToWorkspace() {
-    invariant(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
+    guard(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
     duplicateRequest({ parentId: state.activeWorkspaceIdToCopyTo });
   }
   const { defaultPreviewMode, activeWorkspaceIdToCopyTo } = state;

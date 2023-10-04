@@ -1,4 +1,4 @@
-import { invariant } from '../../../utils/invariant';
+import { guard } from '../../../utils/guard';
 import { ModalProps } from '../base/modal';
 import { AlertModal, AlertModalOptions } from './alert-modal';
 import { ErrorModal, ErrorModalOptions } from './error-modal';
@@ -34,7 +34,7 @@ export function showModal<TModalProps extends ModalProps & React.RefAttributes<{
   modalComponent: ModalComponent<TModalProps>, config?: ModalHandleShowOptions<GetRefHandleFromProps<TModalProps>>,
 ) {
   const name = modalComponent.name || modalComponent.displayName;
-  invariant(name, 'Modal must have a name or displayName');
+  guard(name, 'Modal must have a name or displayName');
   window.main.trackPageView({ name });
 
   const modalHandle = getModalComponentHandle(name) as unknown as GetRefHandleFromProps<TModalProps>;
@@ -67,7 +67,7 @@ export function hideAllModals() {
 
 function getModalComponentHandle(name: string) {
   const modalComponentRef = modals[name];
-  invariant(modalComponentRef, `Modal ${name} not found`);
+  guard(modalComponentRef, `Modal ${name} not found`);
 
   return modalComponentRef;
 }

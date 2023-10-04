@@ -8,7 +8,7 @@ import type { OAuth2Token } from '../../models/o-auth-2-token';
 import type { AuthTypeOAuth2, OAuth2ResponseType, RequestHeader, RequestParameter } from '../../models/request';
 import type { Request } from '../../models/request';
 import type { Response } from '../../models/response';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { setDefaultProtocol } from '../../utils/url/protocol';
 import { getBasicAuthHeader } from '../basic-auth/get-header';
 import { fetchRequestData, responseTransform, sendCurlAndWriteTimeline, tryToInterpolateRequest, tryToTransformRequestWithPlugins } from '../network';
@@ -47,9 +47,9 @@ export const getOAuth2Token = async (
     return oAuth2Token;
   }
   const validGrantType = ['implicit', 'authorization_code', 'password', 'client_credentials'].includes(authentication.grantType);
-  invariant(validGrantType, `Invalid grant type ${authentication.grantType}`);
+  guard(validGrantType, `Invalid grant type ${authentication.grantType}`);
   if (authentication.grantType === 'implicit') {
-    invariant(authentication.authorizationUrl, 'Missing authorization URL');
+    guard(authentication.authorizationUrl, 'Missing authorization URL');
     const responseTypeOrFallback = authentication.responseType || 'token';
     const hasNonce = responseTypeOrFallback === 'id_token token' || responseTypeOrFallback === 'id_token';
     const implicitUrl = new URL(authentication.authorizationUrl);
@@ -79,7 +79,7 @@ export const getOAuth2Token = async (
       return models.oAuth2Token.update(old, transformNewAccessTokenToOauthModel(params));
     }
     const hash = responseUrl.hash.slice(1);
-    invariant(hash, 'No hash found in response URL from OAuth2 provider');
+    guard(hash, 'No hash found in response URL from OAuth2 provider');
     const data = Object.fromEntries(new URLSearchParams(hash));
     const old = await models.oAuth2Token.getOrCreateByParentId(requestId);
     return models.oAuth2Token.update(old, transformNewAccessTokenToOauthModel({
@@ -87,10 +87,10 @@ export const getOAuth2Token = async (
       access_token: data.access_token || data.id_token,
     }));
   }
-  invariant(authentication.accessTokenUrl, 'Missing access token URL');
+  guard(authentication.accessTokenUrl, 'Missing access token URL');
   let params: RequestHeader[] = [];
   if (authentication.grantType === 'authorization_code') {
-    invariant(authentication.authorizationUrl, 'Invalid authorization URL');
+    guard(authentication.authorizationUrl, 'Invalid authorization URL');
 
     const codeVerifier = authentication.usePkce ? encodePKCE(crypto.randomBytes(32)) : '';
     const usePkceAnd256 = authentication.usePkce && authentication.pkceMethod === PKCE_CHALLENGE_S256;
@@ -236,7 +236,7 @@ async function getExistingAccessTokenAndRefreshIfExpired(
 
     throw new Error(`[oauth2] Failed to refresh token url=${authentication.accessTokenUrl} status=${statusCode}`);
   }
-  invariant(bodyBuffer, `[oauth2] No body returned from ${authentication.accessTokenUrl}`);
+  guard(bodyBuffer, `[oauth2] No body returned from ${authentication.accessTokenUrl}`);
   const data = tryToParse(bodyBuffer.toString());
   if (!data) {
     return null;
@@ -289,7 +289,7 @@ const transformNewAccessTokenToOauthModel = (accessToken: Partial<Record<AuthKey
 };
 
 const sendAccessTokenRequest = async (requestId: string, authentication: AuthTypeOAuth2, params: RequestParameter[], headers: RequestHeader[]) => {
-  invariant(authentication.accessTokenUrl, 'Missing access token URL');
+  guard(authentication.accessTokenUrl, 'Missing access token URL');
   console.log(`[network] Sending with settings req=${requestId}`);
   // @TODO unpack oauth into regular timeline and remove oauth timeine dialog
   const { request,

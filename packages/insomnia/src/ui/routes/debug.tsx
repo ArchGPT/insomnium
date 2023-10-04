@@ -34,7 +34,7 @@ import { PlatformKeyCombinations } from '../../common/settings';
 import type { GrpcMethodInfo } from '../../main/ipc/grpc';
 import * as models from '../../models';
 import { Environment } from '../../models/environment';
-import { isGrpcRequest, isGrpcRequestId } from '../../models/grpc-request';
+import { GrpcRequest, isGrpcRequest, isGrpcRequestId } from '../../models/grpc-request';
 import { getByParentId as getGrpcRequestMetaByParentId } from '../../models/grpc-request-meta';
 import {
   isEventStreamRequest,
@@ -42,13 +42,14 @@ import {
   isRequestId,
   Request,
 } from '../../models/request';
-import { isRequestGroup } from '../../models/request-group';
+import { isRequestGroup, RequestGroup } from '../../models/request-group';
 import { getByParentId as getRequestMetaByParentId } from '../../models/request-meta';
 import {
   isWebSocketRequest,
   isWebSocketRequestId,
+  WebSocketRequest
 } from '../../models/websocket-request';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { RequestActionsDropdown } from '../components/dropdowns/request-actions-dropdown';
 import { RequestGroupActionsDropdown } from '../components/dropdowns/request-group-actions-dropdown';
 
@@ -93,6 +94,10 @@ export interface GrpcMessage {
   created: number;
 }
 
+const getRequestNameOrFallback = (doc: Request | RequestGroup | GrpcRequest | WebSocketRequest): string => {
+  return !isRequestGroup(doc) ? doc.name || doc.url || 'Untitled request' : doc.name || 'Untitled folder';
+};
+
 export interface GrpcRequestState {
   requestId: string;
   running: boolean;
@@ -114,13 +119,13 @@ const INITIAL_GRPC_REQUEST_STATE = {
 export const loader: LoaderFunction = async ({ params }) => {
   if (!params.requestId) {
     const { projectId, workspaceId, organizationId } = params;
-    invariant(workspaceId, 'Workspace ID is required');
-    invariant(projectId, 'Project ID is required');
+    guard(workspaceId, 'Workspace ID is required');
+    guard(projectId, 'Project ID is required');
     const activeWorkspace = await models.workspace.getById(workspaceId);
-    invariant(activeWorkspace, 'Workspace not found');
+    guard(activeWorkspace, 'Workspace not found');
     const activeWorkspaceMeta =
       await models.workspaceMeta.getOrCreateByParentId(workspaceId);
-    invariant(activeWorkspaceMeta, 'Workspace meta not found');
+    guard(activeWorkspaceMeta, 'Workspace meta not found');
     const activeRequestId = activeWorkspaceMeta.activeRequestId;
     const activeRequest = activeRequestId ? await models.request.getById(activeRequestId) : null;
     if (activeRequest) {
@@ -199,7 +204,7 @@ export const Debug: FC = () => {
     Record<string, boolean>
   >({});
   const setLoading = (isLoading: boolean) => {
-    invariant(requestId, 'No active request');
+    guard(requestId, 'No active request');
     if (Boolean(runningRequests?.[requestId]) !== isLoading) {
       setRunningRequests({
         ...runningRequests,
@@ -884,7 +889,7 @@ export const Debug: FC = () => {
                           gRPC
                         </span>
                       )}
-                      <span className="truncate">{item.doc.name}</span>
+                      <span className="truncate">{getRequestNameOrFallback(item.doc)}</span>
                       <span className="flex-1" />
                       {item.pinned && (
                         <Icon className='text-[--font-size-sm]' icon="thumb-tack" />
@@ -971,7 +976,7 @@ export const Debug: FC = () => {
                             icon={item.collapsed ? 'folder' : 'folder-open'}
                           />
                         )}
-                        <span className="truncate">{item.doc.name}</span>
+                        <span className="truncate">{getRequestNameOrFallback(item.doc)}</span>
                         <span className="flex-1" />
                         {isWebSocketRequest(item.doc) && <WebSocketSpinner requestId={item.doc._id} />}
                         {isEventStreamRequest(item.doc) && <EventStreamSpinner requestId={item.doc._id} />}

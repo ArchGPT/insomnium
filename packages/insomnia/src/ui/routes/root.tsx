@@ -23,6 +23,8 @@ import {
   useParams,
   useRouteLoaderData,
 } from 'react-router-dom';
+import llama from "../../../src/ui/components/assets/llama.jpg"
+
 /**** ><> ↑ --------- Imports */
 
 
@@ -280,19 +282,19 @@ const Root = () => {
             <header className="[grid-area:Header] grid grid-cols-3 items-center">
               <div className="flex items-center">
                 <div className="flex w-[50px] py-2">
-
+                &nbsp;
                 </div>
 
               </div>
               <div className="flex gap-2 flex-nowrap items-center justify-center">
                 {workspaceData && (
                   <Fragment>
-                    <Breadcrumbs items={crumbs}>
+                  <Breadcrumbs items={crumbs}>
                       {item => (
                         <Item key={item.id} id={item.id}>
                           {item.node}
                         </Item>
-                      )}
+                    )} 
                     </Breadcrumbs>
                     {isDesign(workspaceData?.activeWorkspace) && (
                       <nav className="flex rounded-full justify-between content-evenly font-semibold bg-[--hl-xs] p-[--padding-xxs]">
@@ -332,7 +334,17 @@ const Root = () => {
                               : 'outline-transparent focus:outline-[--hl-md] hover:outline-[--hl-md]'
                           }`
                         }
-                        to={`/organization/${organization._id}`}
+
+
+                        to={(() => {
+
+                          const prevLocationHistoryEntry = localStorage.getItem('org_locationHistoryEntry');
+
+                          if (prevLocationHistoryEntry) return prevLocationHistoryEntry;
+
+                          return `/organization/${organization._id}`
+
+                        })()}
                       >
 
                         <Icon icon="home" />
@@ -347,6 +359,29 @@ const Root = () => {
                     </Tooltip>
                   </TooltipTrigger>
                 ))}
+              {/* <TooltipTrigger>
+                <Link>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `select-none text-[--color-font-surprise] flex-shrink-0 hover:no-underline transition-all duration-150 bg-gradient-to-br box-border from-[#4000BF] to-[#154B62]  font-bold  rounded-md w-[28px] h-[28px] flex items-center justify-center active:outline overflow-hidden outline-offset-[3px] outline ${isActive
+                        ? 'outline-[--color-font]'
+                        : 'outline-transparent focus:outline-[--hl-md] hover:outline-[--hl-md]'
+                      }`
+                    }
+                    to={`/llm`}
+                  >
+
+                    <img src={llama} />
+                  </NavLink>
+                </Link>
+                <Tooltip
+                  placement="right"
+                  offset={8}
+                  className="border select-none text-sm min-w-max border-solid border-[--hl-sm] shadow-lg bg-[--color-bg] text-[--color-font] px-4 py-2 rounded-md overflow-y-auto max-h-[85vh] focus:outline-none"
+                >
+                  <span>Large Language Models</span>
+                </Tooltip>
+              </TooltipTrigger> */}
               </nav>
             </div>
             {/* /**** ><> ↑ --------- Navbar */}

@@ -14,7 +14,7 @@ import * as models from '../../models';
 import { isRequest, Request } from '../../models/request';
 import { isUnitTest, UnitTest } from '../../models/unit-test';
 import { UnitTestSuite } from '../../models/unit-test-suite';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { Editable } from '../components/base/editable';
 import { CodeEditor, CodeEditorHandle } from '../components/codemirror/code-editor';
 import { ListGroup, UnitTestItem } from '../components/list-group';
@@ -201,9 +201,9 @@ const UnitTestItemView = ({
 
 export const indexLoader: LoaderFunction = async ({ params }) => {
   const { organizationId, projectId, workspaceId } = params;
-  invariant(organizationId, 'organizationId is required');
-  invariant(projectId, 'projectId is required');
-  invariant(workspaceId, 'workspaceId is required');
+  guard(organizationId, 'organizationId is required');
+  guard(projectId, 'projectId is required');
+  guard(workspaceId, 'workspaceId is required');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
   if (workspaceMeta?.activeUnitTestSuiteId) {
@@ -233,11 +233,11 @@ interface LoaderData {
 export const loader: LoaderFunction = async ({ params }): Promise<LoaderData> => {
   const { workspaceId, testSuiteId } = params;
 
-  invariant(workspaceId, 'Workspace ID is required');
-  invariant(testSuiteId, 'Test Suite ID is required');
+  guard(workspaceId, 'Workspace ID is required');
+  guard(testSuiteId, 'Test Suite ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
   const workspaceEntities = await database.withDescendants(workspace);
   const requests: Request[] = workspaceEntities.filter(isRequest);
 
@@ -253,7 +253,7 @@ export const loader: LoaderFunction = async ({ params }): Promise<LoaderData> =>
     });
   }
 
-  invariant(unitTestSuite, 'Test Suite not found');
+  guard(unitTestSuite, 'Test Suite not found');
 
   const unitTests = (await database.withDescendants(unitTestSuite)).filter(
     isUnitTest

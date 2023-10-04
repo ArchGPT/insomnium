@@ -13,7 +13,7 @@ import {
 
 import * as models from '../../models';
 import type { UnitTestSuite } from '../../models/unit-test-suite';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { Dropdown, DropdownButton, DropdownItem, ItemContent } from '../components/base/dropdown';
 
 import { ErrorBoundary } from '../components/error-boundary';
@@ -32,10 +32,10 @@ export const loader: LoaderFunction = async ({
 }): Promise<LoaderData> => {
   const { workspaceId } = params;
 
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
 
   const unitTestSuites = await models.unitTestSuite.findByParentId(workspaceId);
-  invariant(unitTestSuites, 'Unit test suites not found');
+  guard(unitTestSuites, 'Unit test suites not found');
 
   return {
     unitTestSuites,

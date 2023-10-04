@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals
 import { globalBeforeEach } from '../../__jest__/before-each';
 import * as models from '../../models';
 import { data as fixtures } from '../__fixtures__/nestedfolders';
-import { _repairDatabase, database as db } from '../database';
+import { _fixDBShape, database as db } from '../database';
 
 function loadFixture() {
   const promises: Promise<models.BaseModel>[] = [];
@@ -260,7 +260,7 @@ describe('requestGroupDuplicate()', () => {
   });
 });
 
-describe('_repairDatabase()', () => {
+describe('_fixDBShape()', () => {
   beforeEach(globalBeforeEach);
 
   it('fixes duplicate environments', async () => {
@@ -377,7 +377,7 @@ describe('_repairDatabase()', () => {
     ]);
 
     // Run the fix algorithm
-    await _repairDatabase();
+    await _fixDBShape();
 
     // Make sure things get adjusted
     const descendants2 = (await db.withDescendants(workspace)).map(d => ({
@@ -528,7 +528,7 @@ describe('_repairDatabase()', () => {
       },
     ]);
     // Run the fix algorithm
-    await _repairDatabase();
+    await _fixDBShape();
     // Make sure things get adjusted
     const descendants2 = (await db.withDescendants(workspace)).map(d => ({
       _id: d._id,
@@ -594,7 +594,7 @@ describe('_repairDatabase()', () => {
     expect((await models.apiSpec.getByParentId(w2._id))?.fileName).toBe('New Document');
     expect((await models.apiSpec.getByParentId(w3._id))?.fileName).toBe('Unique name');
     // Run the fix algorithm
-    await _repairDatabase();
+    await _fixDBShape();
     // Make sure things get adjusted
     expect((await models.apiSpec.getByParentId(w1._id))?.fileName).toBe('Workspace 1'); // Should fix
     expect((await models.apiSpec.getByParentId(w2._id))?.fileName).toBe('Workspace 2'); // Should fix
@@ -616,7 +616,7 @@ describe('_repairDatabase()', () => {
     const newRepoWithoutSuffix = await models.gitRepository.create({
       uri: 'https://github.com/foo/bar',
     });
-    await _repairDatabase();
+    await _fixDBShape();
     expect(await db.get(models.gitRepository.type, oldRepoWithSuffix._id)).toEqual(
       expect.objectContaining({
         uri: 'https://github.com/foo/bar.git',

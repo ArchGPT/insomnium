@@ -9,6 +9,7 @@ import * as models from '../../../models/index';
 import { DEFAULT_PROJECT_ID, Project } from '../../../models/project';
 import { WorkspaceScopeKeys } from '../../../models/workspace';
 import * as plugin from '../data';
+import * as init from '../init';
 
 jest.mock('../../../ui/components/modals');
 
@@ -16,7 +17,7 @@ describe('init()', () => {
   beforeEach(globalBeforeEach);
 
   it('initializes correctly', async () => {
-    const { data } = plugin.init(DEFAULT_PROJECT_ID);
+    const { data } = init.init(DEFAULT_PROJECT_ID);
     expect(Object.keys(data)).toEqual(['import', 'export']);
     expect(Object.keys(data.export).sort()).toEqual(['har', 'insomnia']);
     expect(Object.keys(data.import).sort()).toEqual(['raw', 'uri']);
@@ -41,7 +42,7 @@ describe('app.import.*', () => {
     const workspace = await models.workspace.getById('wrk_1');
     expect(await db.all(models.workspace.type)).toEqual([workspace]);
     expect(await db.count(models.request.type)).toBe(0);
-    const { data } = plugin.init(project._id);
+    const { data } = init.init(project._id);
     const filename = path.resolve(__dirname, '../__fixtures__/basic-import.json');
     await data.import.uri(`file://${filename}`);
     const allWorkspaces = await db.all(models.workspace.type);
@@ -88,7 +89,7 @@ describe('app.import.*', () => {
     const workspace = await models.workspace.getById('wrk_1');
     expect(await db.all(models.workspace.type)).toEqual([workspace]);
     expect(await db.count(models.request.type)).toBe(0);
-    const { data } = plugin.init(project._id);
+    const { data } = init.init(project._id);
     const filename = path.resolve(__dirname, '../__fixtures__/basic-import.json');
     await data.import.raw(fs.readFileSync(filename, 'utf8'));
     const allWorkspaces = await db.all(models.workspace.type);
@@ -157,7 +158,7 @@ describe('app.export.*', () => {
   });
 
   it('insomnia', async () => {
-    const { data } = plugin.init(project._id);
+    const { data } = init.init(project._id);
     const exported = await data.export.insomnia();
     const exportedData = JSON.parse(exported);
     expect(typeof exportedData.__export_date).toBe('string');
@@ -206,7 +207,7 @@ describe('app.export.*', () => {
   });
 
   it('har', async () => {
-    const { data } = plugin.init(project._id);
+    const { data } = init.init(project._id);
     const exported = await data.export.har();
     const exportedData = JSON.parse(exported);
     exportedData.log.entries[0].startedDateTime = '2017-11-24T18:12:12.849Z';

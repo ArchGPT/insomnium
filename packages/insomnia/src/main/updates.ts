@@ -9,7 +9,7 @@ import {
 } from '../common/constants';
 import { delay } from '../common/misc';
 import * as models from '../models/index';
-import { invariant } from '../utils/invariant';
+import { guard } from '../utils/guard';
 const isUpdateSupported = () => {
   if (process.platform === 'linux') {
     console.log('[updater] Not supported on this platform', process.platform);
@@ -30,7 +30,7 @@ const isUpdateSupported = () => {
   return true;
 };
 const getUpdateUrl = (updateChannel: string): string | null => {
-  invariant(isUpdateSupported(), 'auto update is not supported');
+  guard(isUpdateSupported(), 'auto update is not supported');
   const fullUrl = new URL(process.platform === 'win32' ? UpdateURL.windows : UpdateURL.mac);
   fullUrl.searchParams.append('v', getAppVersion());
   fullUrl.searchParams.append('app', getAppId());

@@ -15,7 +15,7 @@ import { RequestAuthentication, RequestHeader } from '../../models/request';
 import { Response } from '../../models/response';
 import { addSetCookiesToToughCookieJar } from '../../network/set-cookie-util';
 import { urlMatchesCertHost } from '../../network/url-matches-cert-host';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { setDefaultProtocol } from '../../utils/url/protocol';
 import { createConfiguredCurlInstance } from './libcurl-promise';
 import { parseHeaderStrings } from './parse-header-strings';
@@ -243,7 +243,7 @@ const openCurlConnection = async (
       }
       timeline.map(t => timelineFileStreams.get(options.requestId)?.write(JSON.stringify(t) + '\n'));
 
-      invariant(eventLogFileStreams.get(request._id), 'writableStream should be defined');
+      guard(eventLogFileStreams.get(request._id), 'writableStream should be defined');
       for await (const chunk of stream) {
         const messageEvent: CurlMessageEvent = {
           _id: uuidV4(),

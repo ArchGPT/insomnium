@@ -3,7 +3,7 @@ import { ActionFunction } from 'react-router-dom';
 import * as models from '../../models';
 import { RequestGroup } from '../../models/request-group';
 import { RequestGroupMeta } from '../../models/request-group-meta';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 
 export const createRequestGroupAction: ActionFunction = async ({ request, params }) => {
   const { workspaceId } = params;
@@ -16,9 +16,9 @@ export const createRequestGroupAction: ActionFunction = async ({ request, params
 };
 export const updateRequestGroupAction: ActionFunction = async ({ request, params }) => {
   const { requestGroupId } = params;
-  invariant(typeof requestGroupId === 'string', 'Request Group ID is required');
+  guard(typeof requestGroupId === 'string', 'Request Group ID is required');
   const reqGroup = await models.requestGroup.getById(requestGroupId);
-  invariant(reqGroup, 'Request Group not found');
+  guard(reqGroup, 'Request Group not found');
   const patch = await request.json() as RequestGroup;
   await models.requestGroup.update(reqGroup, patch);
   return null;
@@ -27,7 +27,7 @@ export const deleteRequestGroupAction: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const id = formData.get('id') as string;
   const requestGroup = await models.requestGroup.getById(id);
-  invariant(requestGroup, 'Request Group not found');
+  guard(requestGroup, 'Request Group not found');
   models.stats.incrementDeletedRequestsForDescendents(requestGroup);
   await models.requestGroup.remove(requestGroup);
   return null;
@@ -35,12 +35,12 @@ export const deleteRequestGroupAction: ActionFunction = async ({ request }) => {
 
 export const duplicateRequestGroupAction: ActionFunction = async ({ request }) => {
   const patch = await request.json() as Partial<RequestGroup>;
-  invariant(patch._id, 'Request group id not found');
+  guard(patch._id, 'Request group id not found');
   const requestGroup = await models.requestGroup.getById(patch._id);
-  invariant(requestGroup, 'Request group not found');
+  guard(requestGroup, 'Request group not found');
   if (patch.parentId) {
     const workspace = await models.workspace.getById(patch.parentId);
-    invariant(workspace, 'Workspace is required');
+    guard(workspace, 'Workspace is required');
     // TODO: if gRPC, we should also copy the protofile to the destination workspace - INS-267
     // Move to top of sort order
     const newRequestGroup = await models.requestGroup.duplicate(requestGroup, { name: patch.name, parentId: patch.parentId, metaSortKey: -1e9 });
@@ -54,7 +54,7 @@ export const duplicateRequestGroupAction: ActionFunction = async ({ request }) =
 
 export const updateRequestGroupMetaAction: ActionFunction = async ({ request, params }) => {
   const { requestGroupId } = params;
-  invariant(typeof requestGroupId === 'string', 'Request Group ID is required');
+  guard(typeof requestGroupId === 'string', 'Request Group ID is required');
   const patch = await request.json() as Partial<RequestGroupMeta>;
   const requestGroupMeta = await models.requestGroupMeta.getByParentId(requestGroupId);
   if (requestGroupMeta) {

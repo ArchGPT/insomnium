@@ -9,7 +9,7 @@ import {
   tryToInterpolateRequest,
   tryToTransformRequestWithPlugins,
 } from '../network/network';
-import { invariant } from '../utils/invariant';
+import { guard } from '../utils/guard';
 import { database } from './database';
 import { RENDER_PURPOSE_SEND } from './render';
 
@@ -44,7 +44,7 @@ export async function getSendRequestCallbackMemDb(environmentId: string, memDB: 
   });
   const fetchInsoRequestData = async (requestId: string) => {
     const request = await models.request.getById(requestId);
-    invariant(request, 'failed to find request');
+    guard(request, 'failed to find request');
     const ancestors = await database.withAncestors(request, [
       models.request.type,
       models.requestGroup.type,
@@ -53,10 +53,10 @@ export async function getSendRequestCallbackMemDb(environmentId: string, memDB: 
     const workspaceDoc = ancestors.find(isWorkspace);
     const workspaceId = workspaceDoc ? workspaceDoc._id : 'n/a';
     const workspace = await models.workspace.getById(workspaceId);
-    invariant(workspace, 'failed to find workspace');
+    guard(workspace, 'failed to find workspace');
 
     const settings = await models.settings.getOrCreate();
-    invariant(settings, 'failed to create settings');
+    guard(settings, 'failed to create settings');
     const clientCertificates = await models.clientCertificate.findByParentId(workspaceId);
     const caCert = await models.caCertificate.findByParentId(workspaceId);
 

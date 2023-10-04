@@ -43,17 +43,7 @@ Alternatively, you can build Insomnium from source on your local machine using `
 
 ## Migration from Insomnia
 
-To migrate your data from Insomnia, you can do one of the following:
-
-- use the GUI to import/export manually (in Preferences/Data)
- 
-- or just copy the config file directly: 
-
-```
-cp -r ~/.config/Insomnia ~/.config/Insomnium
-cp -r "~/Library/Application Support/Insomnia" "~/Library/Application Support/Insomnium"
-```
-
+You can use the GUI (under `Preferences/Data`) or direclty e.g. for linux `cp -r ~/.config/Insomnia ~/.config/Insomnium`. [For MacOS and Windows, you can read more here](https://archgpt.dev/insomnium/migration-guide). Feel free to open an issue/discussion if anything weird happens.
 
 ## Develop Insomnium
 

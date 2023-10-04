@@ -9,16 +9,17 @@ import { isRemoteProject } from '../../models/project';
 export interface LoaderData {
   organizations: Organization[];
 }
-
+// these are dummies; to-do: clean this whole thing up
 export const loader: LoaderFunction = async () => {
-
   return {
     organizations: [defaultOrganization],
   };
 };
 
 export const useOrganizationLoaderData = () => {
-  return useRouteLoaderData('/organization') as LoaderData;
+  return {
+    organizations: [defaultOrganization],
+  }
 };
 
 export const shouldOrganizationsRevalidate: ShouldRevalidateFunction = ({

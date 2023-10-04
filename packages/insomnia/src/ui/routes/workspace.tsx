@@ -28,7 +28,7 @@ import {
 import { Workspace } from '../../models/workspace';
 import { WorkspaceMeta } from '../../models/workspace-meta';
 import { StatusCandidate } from '../../sync/types';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 
 type Collection = Child[];
 
@@ -65,29 +65,29 @@ export const workspaceLoader: LoaderFunction = async ({
   params,
 }): Promise<WorkspaceLoaderData> => {
   const { projectId, workspaceId, organizationId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
-  invariant(projectId, 'Project ID is required');
+  guard(workspaceId, 'Workspace ID is required');
+  guard(projectId, 'Project ID is required');
 
   const activeWorkspace = await models.workspace.getById(workspaceId);
-  invariant(activeWorkspace, 'Workspace not found');
+  guard(activeWorkspace, 'Workspace not found');
 
   // I don't know what to say man, this is just how it is
   await models.environment.getOrCreateForParentId(workspaceId);
   await models.cookieJar.getOrCreateForParentId(workspaceId);
 
   const activeProject = await models.project.getById(projectId);
-  invariant(activeProject, 'Project not found');
+  guard(activeProject, 'Project not found');
 
   const activeWorkspaceMeta = await models.workspaceMeta.getOrCreateByParentId(
     workspaceId,
   );
-  invariant(activeWorkspaceMeta, 'Workspace meta not found');
+  guard(activeWorkspaceMeta, 'Workspace meta not found');
   const gitRepository = await models.gitRepository.getById(
     activeWorkspaceMeta.gitRepositoryId || '',
   );
 
   const baseEnvironment = await models.environment.getByParentId(workspaceId);
-  invariant(baseEnvironment, 'Base environment not found');
+  guard(baseEnvironment, 'Base environment not found');
 
   const subEnvironments = (
     await models.environment.findByParentId(baseEnvironment._id)
@@ -101,7 +101,7 @@ export const workspaceLoader: LoaderFunction = async ({
   const activeCookieJar = await models.cookieJar.getOrCreateForParentId(
     workspaceId,
   );
-  invariant(activeCookieJar, 'Cookie jar not found');
+  guard(activeCookieJar, 'Cookie jar not found');
 
   const activeApiSpec = await models.apiSpec.getByParentId(workspaceId);
   const clientCertificates = await models.clientCertificate.findByParentId(

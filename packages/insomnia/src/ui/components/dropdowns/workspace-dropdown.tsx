@@ -12,7 +12,7 @@ import { isDesign, Workspace } from '../../../models/workspace';
 import type { WorkspaceAction } from '../../../plugins';
 import { getWorkspaceActions } from '../../../plugins';
 import * as pluginContexts from '../../../plugins/context';
-import { invariant } from '../../../utils/invariant';
+import { guard } from '../../../utils/guard';
 import { useAIContext } from '../../context/app/ai-context';
 import { WorkspaceLoaderData } from '../../routes/workspace';
 import { Dropdown, DropdownButton, type DropdownHandle, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
@@ -29,7 +29,7 @@ console.log("[configGenerators] ", configGenerators);
 
 export const WorkspaceDropdown: FC = () => {
   const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
-  invariant(organizationId, 'Expected organizationId');
+  guard(organizationId, 'Expected organizationId');
   const {
     activeWorkspace,
     activeWorkspaceMeta,

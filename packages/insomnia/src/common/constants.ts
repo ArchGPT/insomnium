@@ -243,10 +243,13 @@ export const METHOD_GRPC = 'GRPC';
 export const PREVIEW_MODE_FRIENDLY = 'friendly';
 export const PREVIEW_MODE_SOURCE = 'source';
 export const PREVIEW_MODE_RAW = 'raw';
+export const FRONT_END = 'frontend';
 const previewModeMap = {
   [PREVIEW_MODE_FRIENDLY]: ['Preview', 'Visual Preview'],
   [PREVIEW_MODE_SOURCE]: ['Source', 'Source Code'],
   [PREVIEW_MODE_RAW]: ['Raw', 'Raw Data'],
+  // v0.3
+  // [FRONT_END]: ['FrontEnd', 'Front End Code'],
 };
 export const PREVIEW_MODES = Object.keys(previewModeMap) as (keyof typeof previewModeMap)[];
 
@@ -373,7 +376,7 @@ export const dashboardSortOrderName: Record<DashboardSortOrder, string> = {
   [SORT_MODIFIED_DESC]: 'Last Modified',
 };
 
-export type PreviewMode = 'friendly' | 'source' | 'raw';
+export type PreviewMode = 'friendly' | 'source' | 'raw' | 'frontend';
 
 export function getPreviewModeName(previewMode: PreviewMode, useLong = false) {
   if (previewModeMap.hasOwnProperty(previewMode)) {

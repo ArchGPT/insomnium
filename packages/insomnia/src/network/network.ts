@@ -24,7 +24,7 @@ import type { Settings } from '../models/settings';
 import { isWorkspace } from '../models/workspace';
 import * as pluginContexts from '../plugins/context/index';
 import * as plugins from '../plugins/index';
-import { invariant } from '../utils/invariant';
+import { guard } from '../utils/guard';
 import { setDefaultProtocol } from '../utils/url/protocol';
 import {
   buildQueryStringFromParams,
@@ -38,7 +38,7 @@ import { urlMatchesCertHost } from './url-matches-cert-host';
 
 export const fetchRequestData = async (requestId: string) => {
   const request = await models.request.getById(requestId);
-  invariant(request, 'failed to find request');
+  guard(request, 'failed to find request');
   const ancestors = await db.withAncestors(request, [
     models.request.type,
     models.requestGroup.type,
@@ -47,17 +47,17 @@ export const fetchRequestData = async (requestId: string) => {
   const workspaceDoc = ancestors.find(isWorkspace);
   const workspaceId = workspaceDoc ? workspaceDoc._id : 'n/a';
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'failed to find workspace');
+  guard(workspace, 'failed to find workspace');
   const workspaceMeta = await models.workspaceMeta.getOrCreateByParentId(workspace._id);
 
   // fallback to base environment
   const activeEnvironmentId = workspaceMeta.activeEnvironmentId;
   const activeEnvironment = activeEnvironmentId && await models.environment.getById(activeEnvironmentId);
   const environment = activeEnvironment || await models.environment.getOrCreateForParentId(workspace._id);
-  invariant(environment, 'failed to find environment ' + activeEnvironmentId);
+  guard(environment, 'failed to find environment ' + activeEnvironmentId);
 
   const settings = await models.settings.getOrCreate();
-  invariant(settings, 'failed to create settings');
+  guard(settings, 'failed to create settings');
   const clientCertificates = await models.clientCertificate.findByParentId(workspaceId);
   const caCert = await models.caCertificate.findByParentId(workspaceId);
 

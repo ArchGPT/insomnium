@@ -19,7 +19,7 @@ import type { ResponsePatch } from '../../../../main/network/libcurl-promise';
 import * as models from '../../../../models';
 import type { Request } from '../../../../models/request';
 import { fetchRequestData, responseTransform, sendCurlAndWriteTimeline, tryToInterpolateRequest, tryToTransformRequestWithPlugins } from '../../../../network/network';
-import { invariant } from '../../../../utils/invariant';
+import { guard } from '../../../../utils/guard';
 import { jsonPrettify } from '../../../../utils/prettify/json';
 import { RootLoaderData } from '../../../routes/root';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../../base/dropdown';
@@ -413,7 +413,7 @@ export const GraphQLEditor: FC<Props> = ({
   // Create portal for GraphQL Explorer
   let graphQLExplorerPortal: React.ReactPortal | null = null;
   const explorerContainer = document.querySelector('#graphql-explorer-container');
-  invariant(explorerContainer, 'Failed to find #graphql-explorer-container');
+  guard(explorerContainer, 'Failed to find #graphql-explorer-container');
   if (explorerContainer) {
     graphQLExplorerPortal = ReactDOM.createPortal(
       <GraphQLExplorer

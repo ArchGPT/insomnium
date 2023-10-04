@@ -9,7 +9,7 @@ import * as models from '../../models';
 import type { GrpcRequest, GrpcRequestHeader } from '../../models/grpc-request';
 import { parseGrpcUrl } from '../../network/grpc/parse-grpc-url';
 import { writeProtoFile } from '../../network/grpc/write-proto-file';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 import { mockRequestMethods } from './automock';
 
 const grpcCalls = new Map<string, Call>();
@@ -59,7 +59,7 @@ const loadMethodsFromFilePath = async (filePath: string, includeDirs: string[]):
 };
 const loadMethods = async (protoFileId: string): Promise<GrpcMethodInfo[]> => {
   const protoFile = await models.protoFile.getById(protoFileId);
-  invariant(protoFile, `Proto file ${protoFileId} not found`);
+  guard(protoFile, `Proto file ${protoFileId} not found`);
   const { filePath, dirs } = await writeProtoFile(protoFile);
   const methods = await loadMethodsFromFilePath(filePath, dirs);
   return methods.map(method => ({
@@ -94,7 +94,7 @@ const getMethodsFromReflection = async (host: string, metadata: GrpcRequestHeade
         try {
           console.log('[grpc] loading service from reflection:', service);
           const serviceDefinition = asServiceDefinition(packageDefinition[service]);
-          invariant(serviceDefinition, `'${service}' was not a valid ServiceDefinition`);
+          guard(serviceDefinition, `'${service}' was not a valid ServiceDefinition`);
           const serviceMethods = Object.values(serviceDefinition);
           return serviceMethods.map(m => {
             const methodName = Object.keys(mockedRequestMethods).find(name => m.path.endsWith(`/${name}`));
@@ -120,7 +120,7 @@ const getMethodsFromReflection = async (host: string, metadata: GrpcRequestHeade
   }
 };
 export const loadMethodsFromReflection = async (options: { url: string; metadata: GrpcRequestHeader[] }): Promise<GrpcMethodInfo[]> => {
-  invariant(options.url, 'gRPC request url not provided');
+  guard(options.url, 'gRPC request url not provided');
   const methods = await getMethodsFromReflection(options.url, options.metadata);
   return methods.map(method => ({
     type: getMethodType(method),
@@ -149,14 +149,14 @@ export const getMethodType = ({ requestStream, responseStream }: any): GrpcMetho
 export const getSelectedMethod = async (request: GrpcRequest): Promise<MethodDefs | undefined> => {
   if (request.protoFileId) {
     const protoFile = await models.protoFile.getById(request.protoFileId);
-    invariant(protoFile?.protoText, `No proto file found for gRPC request ${request._id}`);
+    guard(protoFile?.protoText, `No proto file found for gRPC request ${request._id}`);
     const { filePath, dirs } = await writeProtoFile(protoFile);
     const methods = await loadMethodsFromFilePath(filePath, dirs);
-    invariant(methods, 'No methods found');
+    guard(methods, 'No methods found');
     return methods.find(c => c.path === request.protoMethodName);
   }
   const methods = await getMethodsFromReflection(request.url, request.metadata);
-  invariant(methods, 'No reflection methods found');
+  guard(methods, 'No reflection methods found');
   return methods.find(c => c.path === request.protoMethodName);
 };
 export const getMethodsFromPackageDefinition = (packageDefinition: PackageDefinition): MethodDefs[] => {

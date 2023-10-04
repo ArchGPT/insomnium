@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 
 import {
+  FRONT_END,
   HUGE_RESPONSE_MB,
   LARGE_RESPONSE_MB,
   PREVIEW_MODE_FRIENDLY,
@@ -232,6 +233,12 @@ export const ResponseViewer = ({
 
   if (bodyBuffer.length === 0) {
     return <div className="pad faint">No body returned for response</div>;
+  }
+
+  if (previewMode === FRONT_END) {
+    return (<div>
+      {/* to-do */}
+    </div>)
   }
 
   const contentType = _getContentType();

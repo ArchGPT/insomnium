@@ -44,7 +44,7 @@ export function createWindow() {
   const { bounds, fullscreen, maximize } = getBounds();
   const { x, y, width, height } = bounds;
 
-  const appLogo = 'static/insomnia-core-logo_16x.png';
+  // const appLogo = 'static/insomnia-core-logo_16x.png';
   let isVisibleOnAnyDisplay = true;
 
   for (const d of electron.screen.getAllDisplays()) {
@@ -77,7 +77,8 @@ export function createWindow() {
     minHeight: MINIMUM_HEIGHT,
     minWidth: MINIMUM_WIDTH,
     acceptFirstMouse: true,
-    icon: path.resolve(__dirname, appLogo),
+    icon: '',
+    // path.resolve(__dirname, appLogo),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       zoomFactor: getZoomFactor(),
