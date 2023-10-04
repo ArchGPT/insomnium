@@ -35,7 +35,7 @@ import {
   addDotGit,
   getOauth2FormatName,
 } from '../../sync/git/utils';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 
 // Loaders
 export type GitRepoLoaderData =
@@ -53,13 +53,13 @@ export const gitRepoAction: ActionFunction = async ({
 }): Promise<GitRepoLoaderData> => {
   try {
     const { workspaceId, projectId } = params;
-    invariant(typeof workspaceId === 'string', 'Workspace Id is required');
-    invariant(typeof projectId === 'string', 'Project Id is required');
+    guard(typeof workspaceId === 'string', 'Workspace Id is required');
+    guard(typeof projectId === 'string', 'Project Id is required');
 
     const workspace = await models.workspace.getById(workspaceId);
-    invariant(workspace, 'Workspace not found');
+    guard(workspace, 'Workspace not found');
     const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
-    invariant(workspaceMeta, 'Workspace meta not found');
+    guard(workspaceMeta, 'Workspace meta not found');
     if (!workspaceMeta.gitRepositoryId) {
       return {
         errors: ['Workspace is not linked to a git repository'],
@@ -69,7 +69,7 @@ export const gitRepoAction: ActionFunction = async ({
     const gitRepository = await models.gitRepository.getById(
       workspaceMeta.gitRepositoryId
     );
-    invariant(gitRepository, 'Git Repository not found');
+    guard(gitRepository, 'Git Repository not found');
 
     if (GitVCS.isInitializedForRepo(gitRepository._id)) {
       return {
@@ -158,13 +158,13 @@ export const gitBranchesLoader: LoaderFunction = async ({
   params,
 }): Promise<GitBranchesLoaderData> => {
   const { workspaceId, projectId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace Id is required');
-  invariant(typeof projectId === 'string', 'Project Id is required');
+  guard(typeof workspaceId === 'string', 'Workspace Id is required');
+  guard(typeof projectId === 'string', 'Project Id is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
-  invariant(workspaceMeta, 'Workspace meta not found');
+  guard(workspaceMeta, 'Workspace meta not found');
   if (!workspaceMeta.gitRepositoryId) {
     return {
       errors: ['Workspace is not linked to a git repository'],
@@ -174,7 +174,7 @@ export const gitBranchesLoader: LoaderFunction = async ({
   const gitRepository = await models.gitRepository.getById(
     workspaceMeta.gitRepositoryId
   );
-  invariant(gitRepository, 'Git Repository not found');
+  guard(gitRepository, 'Git Repository not found');
 
   const branches = await GitVCS.listBranches();
 
@@ -194,13 +194,13 @@ export const gitFetchAction: ActionFunction = async ({
   params,
 }): Promise<GitFetchLoaderData> => {
   const { workspaceId, projectId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace Id is required');
-  invariant(typeof projectId === 'string', 'Project Id is required');
+  guard(typeof workspaceId === 'string', 'Workspace Id is required');
+  guard(typeof projectId === 'string', 'Project Id is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
-  invariant(workspaceMeta, 'Workspace meta not found');
+  guard(workspaceMeta, 'Workspace meta not found');
   if (!workspaceMeta.gitRepositoryId) {
     return {
       errors: ['Workspace is not linked to a git repository'],
@@ -210,7 +210,7 @@ export const gitFetchAction: ActionFunction = async ({
   const gitRepository = await models.gitRepository.getById(
     workspaceMeta.gitRepositoryId
   );
-  invariant(gitRepository, 'Git Repository not found');
+  guard(gitRepository, 'Git Repository not found');
 
   try {
     await GitVCS.fetch({
@@ -242,13 +242,13 @@ export const gitLogLoader: LoaderFunction = async ({
   params,
 }): Promise<GitLogLoaderData> => {
   const { workspaceId, projectId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace Id is required');
-  invariant(typeof projectId === 'string', 'Project Id is required');
+  guard(typeof workspaceId === 'string', 'Workspace Id is required');
+  guard(typeof projectId === 'string', 'Project Id is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
-  invariant(workspaceMeta, 'Workspace meta not found');
+  guard(workspaceMeta, 'Workspace meta not found');
   if (!workspaceMeta.gitRepositoryId) {
     return {
       errors: ['Workspace is not linked to a git repository'],
@@ -258,7 +258,7 @@ export const gitLogLoader: LoaderFunction = async ({
   const gitRepository = await models.gitRepository.getById(
     workspaceMeta.gitRepositoryId
   );
-  invariant(gitRepository, 'Git Repository not found');
+  guard(gitRepository, 'Git Repository not found');
   try {
     const log = await GitVCS.log({ depth: 35 });
 
@@ -283,20 +283,20 @@ export const gitChangesLoader: LoaderFunction = async ({
   params,
 }): Promise<GitChangesLoaderData> => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace Id is required');
+  guard(typeof workspaceId === 'string', 'Workspace Id is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
 
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const gitRepository = await models.gitRepository.getById(repoId);
 
-  invariant(gitRepository, 'Git Repository not found');
+  guard(gitRepository, 'Git Repository not found');
 
   const branch = await GitVCS.getBranch();
   try {
@@ -351,22 +351,22 @@ export const cloneGitRepoAction: ActionFunction = async ({
 }): Promise<CloneGitActionResult> => {
   const { organizationId, projectId } = params;
 
-  invariant(typeof projectId === 'string', 'ProjectId is required.');
+  guard(typeof projectId === 'string', 'ProjectId is required.');
   const project = await models.project.getById(projectId);
-  invariant(project, 'Project not found');
+  guard(project, 'Project not found');
 
   const repoSettingsPatch: Partial<GitRepository> = {};
   const formData = await request.formData();
 
   // URI
   const uri = formData.get('uri');
-  invariant(typeof uri === 'string', 'URI is required');
+  guard(typeof uri === 'string', 'URI is required');
   repoSettingsPatch.uri = parseGitToHttpsURL(uri);
   // Author
   const authorName = formData.get('authorName');
-  invariant(typeof authorName === 'string', 'Author name is required');
+  guard(typeof authorName === 'string', 'Author name is required');
   const authorEmail = formData.get('authorEmail');
-  invariant(typeof authorEmail === 'string', 'Author email is required');
+  guard(typeof authorEmail === 'string', 'Author email is required');
 
   repoSettingsPatch.author = {
     name: authorName,
@@ -376,14 +376,14 @@ export const cloneGitRepoAction: ActionFunction = async ({
   // Git Credentials
   const oauth2format = formData.get('oauth2format');
   if (oauth2format) {
-    invariant(
+    guard(
       oauth2format === 'gitlab' || oauth2format === 'github',
       'OAuth2 format is required'
     );
     const token = formData.get('token');
-    invariant(typeof token === 'string', 'Token is required');
+    guard(typeof token === 'string', 'Token is required');
     const username = formData.get('username');
-    invariant(typeof username === 'string', 'Username is required');
+    guard(typeof username === 'string', 'Username is required');
 
     repoSettingsPatch.credentials = {
       username,
@@ -392,9 +392,9 @@ export const cloneGitRepoAction: ActionFunction = async ({
     };
   } else {
     const token = formData.get('token');
-    invariant(typeof token === 'string', 'Token is required');
+    guard(typeof token === 'string', 'Token is required');
     const username = formData.get('username');
-    invariant(typeof username === 'string', 'Username is required');
+    guard(typeof username === 'string', 'Username is required');
 
     repoSettingsPatch.credentials = {
       password: token,
@@ -528,7 +528,7 @@ export const cloneGitRepoAction: ActionFunction = async ({
   await database.flushChanges(bufferId);
 
 
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
 
   // Redirect to debug for collection scope initial clone
   if (scope === WorkspaceScopeKeys.collection) {
@@ -546,9 +546,9 @@ export const updateGitRepoAction: ActionFunction = async ({
   params,
 }) => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
   let gitRepositoryId = workspaceMeta?.gitRepositoryId;
@@ -558,14 +558,14 @@ export const updateGitRepoAction: ActionFunction = async ({
 
   // URI
   const uri = formData.get('uri');
-  invariant(typeof uri === 'string', 'URI is required');
+  guard(typeof uri === 'string', 'URI is required');
   repoSettingsPatch.uri = parseGitToHttpsURL(uri);
 
   // Author
   const authorName = formData.get('authorName');
-  invariant(typeof authorName === 'string', 'Author name is required');
+  guard(typeof authorName === 'string', 'Author name is required');
   const authorEmail = formData.get('authorEmail');
-  invariant(typeof authorEmail === 'string', 'Author email is required');
+  guard(typeof authorEmail === 'string', 'Author email is required');
 
   repoSettingsPatch.author = {
     name: authorName,
@@ -575,14 +575,14 @@ export const updateGitRepoAction: ActionFunction = async ({
   // Git Credentials
   const oauth2format = formData.get('oauth2format');
   if (oauth2format) {
-    invariant(
+    guard(
       oauth2format === 'gitlab' || oauth2format === 'github',
       'OAuth2 format is required'
     );
     const token = formData.get('token');
-    invariant(typeof token === 'string', 'Token is required');
+    guard(typeof token === 'string', 'Token is required');
     const username = formData.get('username');
-    invariant(typeof username === 'string', 'Username is required');
+    guard(typeof username === 'string', 'Username is required');
 
     repoSettingsPatch.credentials = {
       username,
@@ -591,9 +591,9 @@ export const updateGitRepoAction: ActionFunction = async ({
     };
   } else {
     const token = formData.get('token');
-    invariant(typeof token === 'string', 'Token is required');
+    guard(typeof token === 'string', 'Token is required');
     const username = formData.get('username');
-    invariant(typeof username === 'string', 'Username is required');
+    guard(typeof username === 'string', 'Username is required');
 
     repoSettingsPatch.credentials = {
       password: token,
@@ -603,7 +603,7 @@ export const updateGitRepoAction: ActionFunction = async ({
 
   if (gitRepositoryId) {
     const repo = await models.gitRepository.getById(gitRepositoryId);
-    invariant(repo, 'GitRepository not found');
+    guard(repo, 'GitRepository not found');
     await models.gitRepository.update(repo, repoSettingsPatch);
     gitRepositoryId = repo._id;
   } else {
@@ -621,21 +621,21 @@ export const updateGitRepoAction: ActionFunction = async ({
 
 export const resetGitRepoAction: ActionFunction = async ({ params }) => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
 
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
 
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const repo = await models.gitRepository.getById(repoId);
 
-  invariant(repo, 'Git Repository not found');
+  guard(repo, 'Git Repository not found');
 
   const flushId = await database.bufferChanges();
   if (workspaceMeta) {
@@ -662,23 +662,23 @@ export const commitToGitRepoAction: ActionFunction = async ({
   params,
 }): Promise<CommitToGitRepoResult> => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const repo = await models.gitRepository.getById(repoId);
-  invariant(repo, 'Git Repository not found');
+  guard(repo, 'Git Repository not found');
 
   const formData = await request.formData();
 
   const message = formData.get('message');
-  invariant(typeof message === 'string', 'Commit message is required');
+  guard(typeof message === 'string', 'Commit message is required');
 
   const stagedChangesPaths = [...formData.getAll('paths')] as string[];
   const allModified = Boolean(formData.get('allModified'));
@@ -724,23 +724,23 @@ export const createNewGitBranchAction: ActionFunction = async ({
   params,
 }): Promise<CreateNewGitBranchResult> => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const repo = await models.gitRepository.getById(repoId);
-  invariant(repo, 'Git Repository not found');
+  guard(repo, 'Git Repository not found');
 
   const formData = await request.formData();
 
   const branch = formData.get('branch');
-  invariant(typeof branch === 'string', 'Branch name is required');
+  guard(typeof branch === 'string', 'Branch name is required');
 
   try {
     const providerName = getOauth2FormatName(repo?.credentials);
@@ -772,25 +772,25 @@ export const checkoutGitBranchAction: ActionFunction = async ({
   params,
 }): Promise<CheckoutGitBranchResult> => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
 
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
 
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const repo = await models.gitRepository.getById(repoId);
-  invariant(repo, 'Git Repository not found');
+  guard(repo, 'Git Repository not found');
 
   const formData = await request.formData();
 
   const branch = formData.get('branch');
-  invariant(typeof branch === 'string', 'Branch name is required');
+  guard(typeof branch === 'string', 'Branch name is required');
 
   const bufferId = await database.bufferChanges();
   try {
@@ -834,24 +834,24 @@ export const mergeGitBranchAction: ActionFunction = async ({
   params,
 }): Promise<MergeGitBranchResult> => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
 
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
 
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const repo = await models.gitRepository.getById(repoId);
-  invariant(repo, 'Git Repository not found');
+  guard(repo, 'Git Repository not found');
 
   const formData = await request.formData();
   const branch = formData.get('branch');
-  invariant(typeof branch === 'string', 'Branch name is required');
+  guard(typeof branch === 'string', 'Branch name is required');
 
   try {
     const providerName = getOauth2FormatName(repo?.credentials);
@@ -885,25 +885,25 @@ export const deleteGitBranchAction: ActionFunction = async ({
   params,
 }): Promise<DeleteGitBranchResult> => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
 
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
 
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const repo = await models.gitRepository.getById(repoId);
-  invariant(repo, 'Git Repository not found');
+  guard(repo, 'Git Repository not found');
 
   const formData = await request.formData();
 
   const branch = formData.get('branch');
-  invariant(typeof branch === 'string', 'Branch name is required');
+  guard(typeof branch === 'string', 'Branch name is required');
 
   try {
     const providerName = getOauth2FormatName(repo?.credentials);
@@ -926,9 +926,9 @@ export const pushToGitRemoteAction: ActionFunction = async ({
   params,
 }): Promise<PushToGitRemoteResult> => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const formData = await request.formData();
 
@@ -938,11 +938,11 @@ export const pushToGitRemoteAction: ActionFunction = async ({
 
   const repoId = workspaceMeta?.gitRepositoryId;
 
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const gitRepository = await models.gitRepository.getById(repoId);
 
-  invariant(gitRepository, 'Git Repository not found');
+  guard(gitRepository, 'Git Repository not found');
 
   // Check if there is anything to push
   let canPush = false;
@@ -1003,19 +1003,19 @@ export const pullFromGitRemoteAction: ActionFunction = async ({
   params,
 }): Promise<PullFromGitRemoteResult> => {
   const { workspaceId } = params;
-  invariant(workspaceId, 'Workspace ID is required');
+  guard(workspaceId, 'Workspace ID is required');
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
 
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const gitRepository = await models.gitRepository.getById(repoId);
 
-  invariant(gitRepository, 'Git Repository not found');
+  guard(gitRepository, 'Git Repository not found');
 
   const bufferId = await database.bufferChanges();
 
@@ -1154,20 +1154,20 @@ export const gitRollbackChangesAction: ActionFunction = async ({
   request,
 }): Promise<GitRollbackChangesResult> => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace Id is required');
+  guard(typeof workspaceId === 'string', 'Workspace Id is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
   const repoId = workspaceMeta?.gitRepositoryId;
 
-  invariant(repoId, 'Workspace is not linked to a git repository');
+  guard(repoId, 'Workspace is not linked to a git repository');
 
   const gitRepository = await models.gitRepository.getById(repoId);
 
-  invariant(gitRepository, 'Git Repository not found');
+  guard(gitRepository, 'Git Repository not found');
 
   const formData = await request.formData();
 
@@ -1213,10 +1213,10 @@ export const gitStatusAction: ActionFunction = async ({
   params,
 }): Promise<GitStatusResult> => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace Id is required');
+  guard(typeof workspaceId === 'string', 'Workspace Id is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
   try {
     const { changes } = await getGitChanges(GitVCS, workspace);
     const localChanges = changes.filter(i => i.editable).length;

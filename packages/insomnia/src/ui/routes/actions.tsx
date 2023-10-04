@@ -22,15 +22,15 @@ import { WorkspaceMeta } from '../../models/workspace-meta';
 import { getSendRequestCallback } from '../../network/unit-test-feature';
 import { initializeLocalBackendProjectAndMarkForSync } from '../../sync/vcs/initialize-backend-project';
 import { getVCS } from '../../sync/vcs/vcs';
-import { invariant } from '../../utils/invariant';
+import { guard } from '../../utils/guard';
 
 // Project
 export const createNewProjectAction: ActionFunction = async ({ request, params }) => {
   const { organizationId } = params;
-  invariant(organizationId, 'Organization ID is required');
+  guard(organizationId, 'Organization ID is required');
   const formData = await request.formData();
   const name = formData.get('name');
-  invariant(typeof name === 'string', 'Name is required');
+  guard(typeof name === 'string', 'Name is required');
   const project = await models.project.create({ name });
 
   return redirect(`/organization/${organizationId}/project/${project._id}`);
@@ -43,16 +43,16 @@ export const renameProjectAction: ActionFunction = async ({
   const formData = await request.formData();
 
   const name = formData.get('name');
-  invariant(typeof name === 'string', 'Name is required');
+  guard(typeof name === 'string', 'Name is required');
 
   const { projectId } = params;
-  invariant(projectId, 'Project ID is required');
+  guard(projectId, 'Project ID is required');
 
   const project = await models.project.getById(projectId);
 
-  invariant(project, 'Project not found');
+  guard(project, 'Project not found');
 
-  invariant(
+  guard(
     !isRemoteProject(project),
     'Cannot rename remote project',
   );
@@ -64,10 +64,10 @@ export const renameProjectAction: ActionFunction = async ({
 
 export const deleteProjectAction: ActionFunction = async ({ params }) => {
   const { organizationId, projectId } = params;
-  invariant(organizationId, 'Organization ID is required');
-  invariant(projectId, 'Project ID is required');
+  guard(organizationId, 'Organization ID is required');
+  guard(projectId, 'Project ID is required');
   const project = await models.project.getById(projectId);
-  invariant(project, 'Project not found');
+  guard(project, 'Project not found');
 
   await models.stats.incrementDeletedRequestsForDescendents(project);
   await models.project.remove(project);
@@ -82,20 +82,20 @@ export const createNewWorkspaceAction: ActionFunction = async ({
   request,
 }) => {
   const { organizationId, projectId } = params;
-  invariant(organizationId, 'Organization ID is required');
-  invariant(projectId, 'Project ID is required');
+  guard(organizationId, 'Organization ID is required');
+  guard(projectId, 'Project ID is required');
 
   const project = await models.project.getById(projectId);
 
-  invariant(project, 'Project not found');
+  guard(project, 'Project not found');
 
   const formData = await request.formData();
 
   const name = formData.get('name');
-  invariant(typeof name === 'string', 'Name is required');
+  guard(typeof name === 'string', 'Name is required');
 
   const scope = formData.get('scope');
-  invariant(scope === 'design' || scope === 'collection', 'Scope is required');
+  guard(scope === 'design' || scope === 'collection', 'Scope is required');
 
   const flushId = await database.bufferChanges();
 
@@ -140,18 +140,18 @@ export const deleteWorkspaceAction: ActionFunction = async ({
   request,
 }) => {
   const { organizationId, projectId } = params;
-  invariant(projectId, 'projectId is required');
+  guard(projectId, 'projectId is required');
 
   const project = await models.project.getById(projectId);
-  invariant(project, 'Project not found');
+  guard(project, 'Project not found');
 
   const formData = await request.formData();
 
   const workspaceId = formData.get('workspaceId');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   await models.stats.incrementDeletedRequestsForDescendents(workspace);
   await models.workspace.remove(workspace);
@@ -173,22 +173,22 @@ export const deleteWorkspaceAction: ActionFunction = async ({
 
 export const duplicateWorkspaceAction: ActionFunction = async ({ request, params }) => {
   const { organizationId } = params;
-  invariant(organizationId, 'Organization Id is required');
+  guard(organizationId, 'Organization Id is required');
   const formData = await request.formData();
   const projectId = formData.get('projectId');
-  invariant(typeof projectId === 'string', 'Project ID is required');
+  guard(typeof projectId === 'string', 'Project ID is required');
 
   const workspaceId = formData.get('workspaceId');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const name = formData.get('name') || '';
-  invariant(typeof name === 'string', 'Name is required');
+  guard(typeof name === 'string', 'Name is required');
 
   const duplicateToProject = await models.project.getById(projectId);
-  invariant(duplicateToProject, 'Project not found');
+  guard(duplicateToProject, 'Project not found');
   async function duplicate(
     workspace: Workspace,
     { name, parentId }: Pick<Workspace, 'name' | 'parentId'>,
@@ -235,13 +235,13 @@ export const duplicateWorkspaceAction: ActionFunction = async ({ request, params
 export const updateWorkspaceAction: ActionFunction = async ({ request }) => {
   const patch = await request.json();
   const workspaceId = patch.workspaceId;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
   const workspace = await models.workspace.getById(workspaceId);
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   if (workspace.scope === 'design') {
     const apiSpec = await models.apiSpec.getByParentId(workspaceId);
-    invariant(apiSpec, 'No Api Spec found for this workspace');
+    guard(apiSpec, 'No Api Spec found for this workspace');
 
     await models.apiSpec.update(apiSpec, {
       fileName: patch.name || workspace.name,
@@ -255,7 +255,7 @@ export const updateWorkspaceAction: ActionFunction = async ({ request }) => {
 
 export const updateWorkspaceMetaAction: ActionFunction = async ({ request, params }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
   const patch = await request.json() as Partial<WorkspaceMeta>;
   await models.workspaceMeta.updateByParentId(workspaceId, patch);
   return null;
@@ -267,10 +267,10 @@ export const createNewTestSuiteAction: ActionFunction = async ({
   params,
 }) => {
   const { organizationId, workspaceId, projectId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
   const formData = await request.formData();
   const name = formData.get('name');
-  invariant(typeof name === 'string', 'Name is required');
+  guard(typeof name === 'string', 'Name is required');
 
   const unitTestSuite = await models.unitTestSuite.create({
     parentId: workspaceId,
@@ -283,13 +283,13 @@ export const createNewTestSuiteAction: ActionFunction = async ({
 
 export const deleteTestSuiteAction: ActionFunction = async ({ params }) => {
   const { organizationId, workspaceId, projectId, testSuiteId } = params;
-  invariant(typeof testSuiteId === 'string', 'Test Suite ID is required');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
-  invariant(typeof projectId === 'string', 'Project ID is required');
+  guard(typeof testSuiteId === 'string', 'Test Suite ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof projectId === 'string', 'Project ID is required');
 
   const unitTestSuite = await models.unitTestSuite.getById(testSuiteId);
 
-  invariant(unitTestSuite, 'Test Suite not found');
+  guard(unitTestSuite, 'Test Suite not found');
 
   await models.unitTestSuite.remove(unitTestSuite);
 
@@ -301,14 +301,14 @@ export const runAllTestsAction: ActionFunction = async ({
   params,
 }) => {
   const { organizationId, projectId, workspaceId, testSuiteId } = params;
-  invariant(typeof projectId === 'string', 'Project ID is required');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
-  invariant(typeof testSuiteId === 'string', 'Test Suite ID is required');
+  guard(typeof projectId === 'string', 'Project ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof testSuiteId === 'string', 'Test Suite ID is required');
 
   const unitTests = await database.find<UnitTest>(models.unitTest.type, {
     parentId: testSuiteId,
   });
-  invariant(unitTests, 'No unit tests found');
+  guard(unitTests, 'No unit tests found');
 
   const tests: Test[] = unitTests
     .filter(t => t !== null)
@@ -335,19 +335,19 @@ export const runAllTestsAction: ActionFunction = async ({
 
 export const renameTestSuiteAction: ActionFunction = async ({ request, params }) => {
   const { workspaceId, projectId, testSuiteId } = params;
-  invariant(typeof testSuiteId === 'string', 'Test Suite ID is required');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
-  invariant(typeof projectId === 'string', 'Project ID is required');
+  guard(typeof testSuiteId === 'string', 'Test Suite ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof projectId === 'string', 'Project ID is required');
 
   const formData = await request.formData();
   const name = formData.get('name');
-  invariant(typeof name === 'string', 'Name is required');
+  guard(typeof name === 'string', 'Name is required');
 
   const unitTestSuite = await database.getWhere(models.unitTestSuite.type, {
     _id: testSuiteId,
   });
 
-  invariant(unitTestSuite, 'Test Suite not found');
+  guard(unitTestSuite, 'Test Suite not found');
 
   await models.unitTestSuite.update(unitTestSuite, { name });
 
@@ -357,11 +357,11 @@ export const renameTestSuiteAction: ActionFunction = async ({ request, params })
 // Unit Test
 export const createNewTestAction: ActionFunction = async ({ request, params }) => {
   const { testSuiteId } = params;
-  invariant(typeof testSuiteId === 'string', 'Test Suite ID is required');
+  guard(typeof testSuiteId === 'string', 'Test Suite ID is required');
   const formData = await request.formData();
 
   const name = formData.get('name');
-  invariant(typeof name === 'string', 'Name is required');
+  guard(typeof name === 'string', 'Name is required');
 
   await models.unitTest.create({
     parentId: testSuiteId,
@@ -376,13 +376,13 @@ expect(response1.status).to.equal(200);`,
 
 export const deleteTestAction: ActionFunction = async ({ params }) => {
   const { testId } = params;
-  invariant(typeof testId === 'string', 'Test ID is required');
+  guard(typeof testId === 'string', 'Test ID is required');
 
   const unitTest = await database.getWhere<UnitTest>(models.unitTest.type, {
     _id: testId,
   });
 
-  invariant(unitTest, 'Test not found');
+  guard(unitTest, 'Test not found');
 
   await models.unitTest.remove(unitTest);
 
@@ -392,21 +392,21 @@ export const deleteTestAction: ActionFunction = async ({ params }) => {
 export const updateTestAction: ActionFunction = async ({ request, params }) => {
   const { testId } = params;
   const formData = await request.formData();
-  invariant(typeof testId === 'string', 'Test ID is required');
+  guard(typeof testId === 'string', 'Test ID is required');
   const code = formData.get('code');
-  invariant(typeof code === 'string', 'Code is required');
+  guard(typeof code === 'string', 'Code is required');
   const name = formData.get('name');
-  invariant(typeof name === 'string', 'Name is required');
+  guard(typeof name === 'string', 'Name is required');
   const requestId = formData.get('requestId');
 
   if (requestId) {
-    invariant(typeof requestId === 'string', 'Request ID is required');
+    guard(typeof requestId === 'string', 'Request ID is required');
   }
 
   const unitTest = await database.getWhere<UnitTest>(models.unitTest.type, {
     _id: testId,
   });
-  invariant(unitTest, 'Test not found');
+  guard(unitTest, 'Test not found');
 
   await models.unitTest.update(unitTest, { name, code, requestId: requestId || null });
 
@@ -415,12 +415,12 @@ export const updateTestAction: ActionFunction = async ({ request, params }) => {
 
 export const runTestAction: ActionFunction = async ({ params }) => {
   const { organizationId, projectId, workspaceId, testSuiteId, testId } = params;
-  invariant(typeof testId === 'string', 'Test ID is required');
+  guard(typeof testId === 'string', 'Test ID is required');
 
   const unitTest = await database.getWhere<UnitTest>(models.unitTest.type, {
     _id: testId,
   });
-  invariant(unitTest, 'Test not found');
+  guard(unitTest, 'Test not found');
 
   const tests: Test[] = [
     {
@@ -450,16 +450,16 @@ export const updateApiSpecAction: ActionFunction = async ({
   params,
 }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
   const formData = await request.formData();
   const contents = formData.get('contents');
   const fromSync = Boolean(formData.get('fromSync'));
 
-  invariant(typeof contents === 'string', 'Contents is required');
+  guard(typeof contents === 'string', 'Contents is required');
 
   const apiSpec = await models.apiSpec.getByParentId(workspaceId);
 
-  invariant(apiSpec, 'API Spec not found');
+  guard(apiSpec, 'API Spec not found');
   await database.update({
     ...apiSpec,
     modified: Date.now(),
@@ -475,8 +475,8 @@ export const generateCollectionFromApiSpecAction: ActionFunction = async ({
 }) => {
   const { organizationId, projectId, workspaceId } = params;
 
-  invariant(typeof projectId === 'string', 'Project ID is required');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof projectId === 'string', 'Project ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const apiSpec = await models.apiSpec.getByParentId(workspaceId);
 
@@ -486,7 +486,7 @@ export const generateCollectionFromApiSpecAction: ActionFunction = async ({
 
   const workspace = await models.workspace.getById(workspaceId);
 
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getOrCreateByParentId(workspaceId);
 
@@ -515,17 +515,17 @@ export const generateCollectionFromApiSpecAction: ActionFunction = async ({
 export const generateCollectionAndTestsAction: ActionFunction = async ({ params }) => {
   const { organizationId, projectId, workspaceId } = params;
 
-  invariant(typeof organizationId === 'string', 'Organization ID is required');
-  invariant(typeof projectId === 'string', 'Project ID is required');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof organizationId === 'string', 'Organization ID is required');
+  guard(typeof projectId === 'string', 'Project ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const apiSpec = await models.apiSpec.getByParentId(workspaceId);
 
-  invariant(apiSpec, 'API Spec not found');
+  guard(apiSpec, 'API Spec not found');
 
   const workspace = await models.workspace.getById(workspaceId);
 
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceMeta = await models.workspaceMeta.getOrCreateByParentId(workspaceId);
 
@@ -653,17 +653,17 @@ export const generateCollectionAndTestsAction: ActionFunction = async ({ params 
 export const generateTestsAction: ActionFunction = async ({ params }) => {
   const { organizationId, projectId, workspaceId } = params;
 
-  invariant(typeof organizationId === 'string', 'Organization ID is required');
-  invariant(typeof projectId === 'string', 'Project ID is required');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof organizationId === 'string', 'Organization ID is required');
+  guard(typeof projectId === 'string', 'Project ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const apiSpec = await models.apiSpec.getByParentId(workspaceId);
 
-  invariant(apiSpec, 'API Spec not found');
+  guard(apiSpec, 'API Spec not found');
 
   const workspace = await models.workspace.getById(workspaceId);
 
-  invariant(workspace, 'Workspace not found');
+  guard(workspace, 'Workspace not found');
 
   const workspaceDescendants = await database.withDescendants(workspace);
 
@@ -734,9 +734,9 @@ export const generateTestsAction: ActionFunction = async ({ params }) => {
 export const accessAIApiAction: ActionFunction = async ({ params }) => {
   const { organizationId, projectId, workspaceId } = params;
 
-  invariant(typeof organizationId === 'string', 'Organization ID is required');
-  invariant(typeof projectId === 'string', 'Project ID is required');
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof organizationId === 'string', 'Organization ID is required');
+  guard(typeof projectId === 'string', 'Project ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   try {
     const response = await window.main.insomniaFetch<{ enabled: boolean }>({
@@ -762,13 +762,13 @@ export const createEnvironmentAction: ActionFunction = async ({
   request,
 }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const { isPrivate } = await request.json();
 
   const baseEnvironment = await models.environment.getByParentId(workspaceId);
 
-  invariant(baseEnvironment, 'Base environment not found');
+  guard(baseEnvironment, 'Base environment not found');
 
   const environment = await models.environment.create({
     parentId: baseEnvironment._id,
@@ -779,20 +779,20 @@ export const createEnvironmentAction: ActionFunction = async ({
 };
 export const updateEnvironment: ActionFunction = async ({ request, params }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const { environmentId, patch } = await request.json();
 
-  invariant(typeof environmentId === 'string', 'Environment ID is required');
+  guard(typeof environmentId === 'string', 'Environment ID is required');
 
   const environment = await models.environment.getById(environmentId);
 
-  invariant(environment, 'Environment not found');
-  invariant(typeof name === 'string', 'Name is required');
+  guard(environment, 'Environment not found');
+  guard(typeof name === 'string', 'Name is required');
 
   const baseEnvironment = await models.environment.getByParentId(workspaceId);
 
-  invariant(baseEnvironment, 'Base environment not found');
+  guard(baseEnvironment, 'Base environment not found');
 
   const updatedEnvironment = await models.environment.update(environment, patch);
 
@@ -803,20 +803,20 @@ export const deleteEnvironmentAction: ActionFunction = async ({
   request, params,
 }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const formData = await request.formData();
 
   const environmentId = formData.get('environmentId');
-  invariant(typeof environmentId === 'string', 'Environment ID is required');
+  guard(typeof environmentId === 'string', 'Environment ID is required');
 
   const environment = await models.environment.getById(environmentId);
 
   const baseEnvironment = await models.environment.getByParentId(workspaceId);
 
-  invariant(environment?._id !== baseEnvironment?._id, 'Cannot delete base environment');
+  guard(environment?._id !== baseEnvironment?._id, 'Cannot delete base environment');
 
-  invariant(environment, 'Environment not found');
+  guard(environment, 'Environment not found');
 
   await models.environment.remove(environment);
 
@@ -827,16 +827,16 @@ export const duplicateEnvironmentAction: ActionFunction = async ({
   request, params,
 }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const formData = await request.formData();
 
   const environmentId = formData.get('environmentId');
 
-  invariant(typeof environmentId === 'string', 'Environment ID is required');
+  guard(typeof environmentId === 'string', 'Environment ID is required');
 
   const environment = await models.environment.getById(environmentId);
-  invariant(environment, 'Environment not found');
+  guard(environment, 'Environment not found');
 
   const newEnvironment = await models.environment.duplicate(environment);
 
@@ -847,17 +847,17 @@ export const setActiveEnvironmentAction: ActionFunction = async ({
   request, params,
 }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const formData = await request.formData();
 
   const environmentId = formData.get('environmentId');
 
-  invariant(typeof environmentId === 'string', 'Environment ID is required');
+  guard(typeof environmentId === 'string', 'Environment ID is required');
 
   const workspaceMeta = await models.workspaceMeta.getOrCreateByParentId(workspaceId);
 
-  invariant(workspaceMeta, 'Workspace meta not found');
+  guard(workspaceMeta, 'Workspace meta not found');
 
   await models.workspaceMeta.update(workspaceMeta, { activeEnvironmentId: environmentId || null });
 
@@ -868,15 +868,15 @@ export const updateCookieJarAction: ActionFunction = async ({
   request, params,
 }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
   const { cookieJarId, patch } = await request.json();
 
-  invariant(typeof cookieJarId === 'string', 'Cookie Jar ID is required');
+  guard(typeof cookieJarId === 'string', 'Cookie Jar ID is required');
 
   const cookieJar = await models.cookieJar.getById(cookieJarId);
 
-  invariant(cookieJar, 'Cookie Jar not found');
+  guard(cookieJar, 'Cookie Jar not found');
 
   const updatedCookieJar = await models.cookieJar.update(cookieJar, patch);
 
@@ -892,16 +892,16 @@ export const createNewCaCertificateAction: ActionFunction = async ({ request }) 
 export const updateCaCertificateAction: ActionFunction = async ({ request }) => {
   const patch = await request.json();
   const caCertificate = await models.caCertificate.getById(patch._id);
-  invariant(caCertificate, 'CA Certificate not found');
+  guard(caCertificate, 'CA Certificate not found');
   await models.caCertificate.update(caCertificate, patch);
   return null;
 };
 
 export const deleteCaCertificateAction: ActionFunction = async ({ params }) => {
   const { workspaceId } = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
   const caCertificate = await models.caCertificate.findByParentId(workspaceId);
-  invariant(caCertificate, 'CA Certificate not found');
+  guard(caCertificate, 'CA Certificate not found');
   await models.caCertificate.removeWhere(workspaceId);
   return null;
 };
@@ -915,7 +915,7 @@ export const createNewClientCertificateAction: ActionFunction = async ({ request
 export const updateClientCertificateAction: ActionFunction = async ({ request }) => {
   const patch = await request.json();
   const clientCertificate = await models.clientCertificate.getById(patch._id);
-  invariant(clientCertificate, 'CA Certificate not found');
+  guard(clientCertificate, 'CA Certificate not found');
   await models.clientCertificate.update(clientCertificate, patch);
   return null;
 };
@@ -923,7 +923,7 @@ export const updateClientCertificateAction: ActionFunction = async ({ request })
 export const deleteClientCertificateAction: ActionFunction = async ({ request }) => {
   const { _id } = await request.json();
   const clientCertificate = await models.clientCertificate.getById(_id);
-  invariant(clientCertificate, 'CA Certificate not found');
+  guard(clientCertificate, 'CA Certificate not found');
   await models.clientCertificate.remove(clientCertificate);
   return null;
 };
@@ -942,19 +942,19 @@ const getCollectionItem = async (id: string) => {
     item = await getById(id);
   }
 
-  invariant(item, 'Item not found');
+  guard(item, 'Item not found');
 
   return item;
 };
 
 export const reorderCollectionAction: ActionFunction = async ({ request, params }) => {
   const { workspaceId }  = params;
-  invariant(typeof workspaceId === 'string', 'Workspace ID is required');
+  guard(typeof workspaceId === 'string', 'Workspace ID is required');
   const { id, targetId, dropPosition, metaSortKey } = await request.json();
-  invariant(typeof id === 'string', 'ID is required');
-  invariant(typeof targetId === 'string', 'Target ID is required');
-  invariant(typeof dropPosition === 'string', 'Drop position is required');
-  invariant(typeof metaSortKey === 'number', 'MetaSortKey position is required');
+  guard(typeof id === 'string', 'ID is required');
+  guard(typeof targetId === 'string', 'Target ID is required');
+  guard(typeof dropPosition === 'string', 'Drop position is required');
+  guard(typeof metaSortKey === 'number', 'MetaSortKey position is required');
 
   if (id === targetId) {
     return null;
