@@ -43,7 +43,7 @@ Alternatively, you can build Insomnium from source on your local machine using `
 
 ## Migration from Insomnia
 
-You can use the GUI (under `Preferences/Data`) or direclty e.g. for linux `cp -r ~/.config/Insomnia ~/.config/Insomnium`. [For MacOS and Windows, you can read more here](https://archgpt.dev/insomnium/migration-guide). Feel free to open an issue/discussion if anything weird happens.
+You can use the GUI (under `Preferences/Data`) or directly e.g. for linux `cp -r ~/.config/Insomnia ~/.config/Insomnium`. [For MacOS and Windows, you can read more here](https://archgpt.dev/insomnium/migration-guide). Feel free to open an issue/discussion if anything weird happens.
 
 ## Develop Insomnium
 
