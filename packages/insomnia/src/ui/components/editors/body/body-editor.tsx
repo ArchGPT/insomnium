@@ -18,7 +18,7 @@ import {
   type RequestBodyParameter,
 } from '../../../../models/request';
 import { NunjucksEnabledProvider } from '../../../context/nunjucks/nunjucks-enabled-context';
-import { useRequestPatcher } from '../../../hooks/use-request';
+import { useRequestSetter } from '../../../hooks/use-request';
 import { AskModal } from '../../modals/ask-modal';
 import { showModal } from '../../modals/index';
 import { EmptyStatePane } from '../../panes/empty-state-pane';
@@ -39,7 +39,7 @@ export const BodyEditor: FC<Props> = ({
   environmentId,
 }) => {
   const { workspaceId, requestId } = useParams() as { workspaceId: string; requestId: string };
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const handleRawChange = useCallback((rawValue: string) => {
     const body = typeof request.body.mimeType !== 'string'
       ? { text: rawValue }

@@ -148,7 +148,6 @@ export async function scanResources({
 export const importPure = async (json: { resources: BaseModel[] } & any) => {
   const _resources = json.resources;
   // console.log("importPure", json);
-
   return await importResourcesToProject({ _resources });
 }
 

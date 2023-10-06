@@ -7,7 +7,7 @@ import { GrpcRequest, isGrpcRequest } from '../../../models/grpc-request';
 import { isRequest, Request } from '../../../models/request';
 import { isWebSocketRequest, WebSocketRequest } from '../../../models/websocket-request';
 import { guard } from '../../../utils/guard';
-import { useRequestPatcher } from '../../hooks/use-request';
+import { useRequestSetter } from '../../hooks/use-request';
 import { ProjectLoaderData } from '../../routes/project';
 import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
@@ -46,7 +46,7 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
   }, []);
 
   const requestFetcher = useFetcher();
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const navigate = useNavigate();
   const duplicateRequest = (r: Partial<Request>) => {
     requestFetcher.submit(JSON.stringify(r),

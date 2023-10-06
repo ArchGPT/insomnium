@@ -1,6 +1,7 @@
 import { format as urlFormat, parse as urlParse } from 'url';
 
 import { setDefaultProtocol } from './protocol';
+import { RequestSegment } from '../../models/request';
 
 const ESCAPE_REGEX_MATCH = /[-[\]/{}()*+?.\\^$|]/g;
 
@@ -105,6 +106,14 @@ export const buildQueryStringFromParams = (
   }
   return items.join('&');
 };
+
+export const addSegValuesToUrl = (fullUrl: string, segmentParams?: RequestSegment[]) => {
+  if (!segmentParams) return fullUrl
+  return fullUrl.replace((/\:([\w_-]*?)(?=($|[^[\w_-]))/g), (match, p1) => {
+    const seg = segmentParams.find((a) => a.name === p1)
+    return seg?.value || match
+  })
+}
 
 /**
  * Deconstruct a querystring to name/value pairs

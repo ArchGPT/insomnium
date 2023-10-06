@@ -1,6 +1,6 @@
 import { database } from '../common/database';
 import type { BaseModel } from '.';
-import { RequestAuthentication, RequestHeader, RequestParameter } from './request';
+import { RequestAuthentication, RequestHeader, RequestParameter, RequestSegment } from './request';
 
 export const name = 'WebSocket Request';
 
@@ -24,6 +24,7 @@ export interface BaseWebSocketRequest {
   settingStoreCookies: boolean;
   settingSendCookies: boolean;
   settingFollowRedirects: 'global' | 'on' | 'off';
+  segmentParams: RequestSegment[]
 }
 
 export type WebSocketRequest = BaseModel & BaseWebSocketRequest & { type: typeof type };
@@ -48,6 +49,7 @@ export const init = (): BaseWebSocketRequest => ({
   settingSendCookies: true,
   settingFollowRedirects: 'global',
   description: '',
+  segmentParams: []
 });
 
 export const migrate = (doc: WebSocketRequest) => doc;

@@ -18,7 +18,7 @@ import { WebSocketRequest } from '../../../models/websocket-request';
 import type { RequestAction } from '../../../plugins';
 import { getRequestActions } from '../../../plugins';
 import * as pluginContexts from '../../../plugins/context/index';
-import { useRequestMetaPatcher, useRequestPatcher } from '../../hooks/use-request';
+import { useRequestMetaPatcher, useRequestSetter } from '../../hooks/use-request';
 import { RootLoaderData } from '../../routes/root';
 import { type DropdownProps } from '../base/dropdown';
 import { Icon } from '../icon';
@@ -45,7 +45,7 @@ export const RequestActionsDropdown = ({
     settings,
   } = useRouteLoaderData('root') as RootLoaderData;
   const patchRequestMeta = useRequestMetaPatcher();
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const { hotKeyRegistry } = settings;
   const [actionPlugins, setActionPlugins] = useState<RequestAction[]>([]);
   const [loadingActions, setLoadingActions] = useState<Record<string, boolean>>({});

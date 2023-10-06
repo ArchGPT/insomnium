@@ -9,7 +9,7 @@ import { WebSocketRequest } from '../../../models/websocket-request';
 import { tryToInterpolateRequestOrShowRenderErrorModal } from '../../../utils/try-interpolate';
 import { buildQueryStringFromParams, joinUrlAndQueryString } from '../../../utils/url/querystring';
 import { useReadyState } from '../../hooks/use-ready-state';
-import { useRequestPatcher } from '../../hooks/use-request';
+import { useRequestSetter } from '../../hooks/use-request';
 import { useActiveRequestSyncVCSVersion, useGitVCSVersion } from '../../hooks/use-vcs-version';
 import { WebSocketRequestLoaderData } from '../../routes/request';
 import { RootLoaderData } from '../../routes/root';
@@ -21,6 +21,7 @@ import { AuthWrapper } from '../editors/auth/auth-wrapper';
 import { QueryEditorContainer, QueryEditorPreview } from '../editors/query-editor';
 import { RequestHeadersEditor } from '../editors/request-headers-editor';
 import { RequestParametersEditor } from '../editors/request-parameters-editor';
+import { RequestSegmentEditor } from '../editors/request-segment-editor'
 import { ErrorBoundary } from '../error-boundary';
 import { MarkdownPreview } from '../markdown-preview';
 import { showAlert, showModal } from '../modals';
@@ -255,7 +256,7 @@ export const WebSocketRequestPane: FC<Props> = ({ environment }) => {
 
   const gitVersion = useGitVCSVersion();
   const activeRequestSyncVersion = useActiveRequestSyncVCSVersion();
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   // Reset the response pane state when we switch requests, the environment gets modified, or the (Git|Sync)VCS version changes
   const uniqueKey = `${environment?.modified}::${requestId}::${gitVersion}::${activeRequestSyncVersion}::${activeRequestMeta.activeResponseId}`;
 
@@ -328,6 +329,11 @@ export const WebSocketRequestPane: FC<Props> = ({ environment }) => {
                   bulk={useBulkParametersEditor}
                   disabled={disabled}
                 />
+                {/* 
+                <RequestSegmentEditor
+                  bulk={useBulkParametersEditor}
+                  disabled={disabled}
+                /> */}
               </ErrorBoundary>
             </QueryEditorWrapper>
           </QueryEditorContainer>

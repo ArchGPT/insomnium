@@ -323,8 +323,7 @@ const Root = () => {
             </header>
             <div className="[grid-area:Navbar] overflow-hidden">
               <nav className="flex flex-col items-center place-content-stretch gap-[--padding-md] w-full h-full overflow-y-auto py-[--padding-md]">
-                {organizations.map(organization => (
-                  <TooltipTrigger key={organization._id}>
+              <TooltipTrigger key={organizations[0]._id}>
                     <Link>
                       <NavLink
                         className={({ isActive }) =>
@@ -336,13 +335,19 @@ const Root = () => {
                         }
 
 
-                        to={(() => {
+                    to={(() => {
 
-                          const prevLocationHistoryEntry = localStorage.getItem('org_locationHistoryEntry');
+                      const currentLocation = location.pathname;
 
-                          if (prevLocationHistoryEntry) return prevLocationHistoryEntry;
+                      if (!currentLocation.includes('organization')) {
+                        // jump to the previous requester location
+                        // if coming from none requester tab
+                        const prevLocationHistoryEntry = localStorage.getItem('requester_locationHistoryEntry');
 
-                          return `/organization/${organization._id}`
+                        if (prevLocationHistoryEntry) return prevLocationHistoryEntry;
+                      }
+
+                      return `/organization/${organizations[0]._id}`
 
                         })()}
                       >
@@ -355,10 +360,10 @@ const Root = () => {
                       offset={8}
                       className="border select-none text-sm min-w-max border-solid border-[--hl-sm] shadow-lg bg-[--color-bg] text-[--color-font] px-4 py-2 rounded-md overflow-y-auto max-h-[85vh] focus:outline-none"
                     >
-                      <span>{organization.name}</span>
+                  <span>{organizations[0].name}</span>
                     </Tooltip>
                   </TooltipTrigger>
-                ))}
+
               {/* <TooltipTrigger>
                 <Link>
                   <NavLink

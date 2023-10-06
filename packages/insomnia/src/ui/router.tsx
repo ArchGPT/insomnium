@@ -807,7 +807,7 @@ export const setupRouterStuff = () => {
     );
 
     if (match?.params.organizationId) {
-      localStorage.setItem('org_locationHistoryEntry', location.pathname);
+      localStorage.setItem('requester_locationHistoryEntry', location.pathname);
     }
     localStorage.setItem('locationHistoryEntry', location.pathname);
     match?.params.organizationId && localStorage.setItem(`locationHistoryEntry:${match?.params.organizationId}`, location.pathname);

@@ -37,6 +37,7 @@ interface Props {
   onDelete?: (pair: Pair) => void;
   pair: Pair;
   readOnly?: boolean;
+  readOnlyField?: boolean;
   valuePlaceholder?: string;
   onClick?: () => void;
   onKeydown?: (e: React.KeyboardEvent) => void;
@@ -56,6 +57,7 @@ export const Row: FC<Props> = ({
   onDelete,
   pair,
   readOnly,
+  readOnlyField,
   onClick,
   onKeydown,
   valuePlaceholder,
@@ -89,8 +91,9 @@ export const Row: FC<Props> = ({
             id={'key-value-editor__name' + pair.id}
             placeholder={namePlaceholder || 'Name'}
             defaultValue={pair.name}
+            isInfered={readOnlyField}
             getAutocompleteConstants={() => handleGetAutocompleteNameConstants?.(pair) || []}
-            readOnly={readOnly}
+            readOnly={readOnly || readOnlyField}
             onChange={name => onChange({ ...pair, name })}
           />
         </div>
@@ -204,7 +207,7 @@ export const Row: FC<Props> = ({
           </button>
         )}
 
-        {!hideButtons ? (
+        {(!hideButtons && onDelete) ? (
           <PromptButton
             tabIndex={-1}
             confirmMessage=""

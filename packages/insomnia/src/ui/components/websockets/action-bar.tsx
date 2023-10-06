@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import * as models from '../../../models';
 import { WebSocketRequest } from '../../../models/websocket-request';
 import { tryToInterpolateRequestOrShowRenderErrorModal } from '../../../utils/try-interpolate';
-import { buildQueryStringFromParams, joinUrlAndQueryString } from '../../../utils/url/querystring';
+import { addSegValuesToUrl, buildQueryStringFromParams, joinUrlAndQueryString } from '../../../utils/url/querystring';
 import { ConnectActionParams } from '../../routes/request';
 import { OneLineEditor, OneLineEditorHandle } from '../codemirror/one-line-editor';
 import { createKeybindingsHandler, useDocBodyKeyboardShortcuts } from '../keydown-binder';
@@ -102,7 +102,7 @@ export const WebSocketActionBar: FC<ActionBarProps> = ({ request, environmentId,
       },
     });
     rendered && connect({
-      url: joinUrlAndQueryString(rendered.url, buildQueryStringFromParams(rendered.parameters)),
+      url: addSegValuesToUrl(joinUrlAndQueryString(rendered.url, buildQueryStringFromParams(rendered.parameters)), rendered.segmentParams),
       headers: rendered.headers,
       authentication: rendered.authentication,
       cookieJar: rendered.workspaceCookieJar,

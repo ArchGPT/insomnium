@@ -323,6 +323,8 @@ export async function getRequestHooks(): Promise<RequestHook[]> {
       module: {},
     },
     hook: context => {
+      console.log('[header] HOOK Setting default headers');
+
       const headers = context.request.getEnvironmentVariable('DEFAULT_HEADERS');
       if (!headers) {
         return;

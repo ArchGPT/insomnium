@@ -9,7 +9,7 @@ import {
 import { RequestAuthentication } from '../../../models/request';
 import { SIGNATURE_METHOD_HMAC_SHA1 } from '../../../network/o-auth-1/constants';
 import { GRANT_TYPE_AUTHORIZATION_CODE } from '../../../network/o-auth-2/constants';
-import { useRequestPatcher } from '../../hooks/use-request';
+import { useRequestSetter } from '../../hooks/use-request';
 import { RequestLoaderData } from '../../routes/request';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
 import { showModal } from '../modals';
@@ -131,7 +131,7 @@ interface Props {
 export const AuthDropdown: FC<Props> = ({ authTypes = defaultTypes, disabled = false }) => {
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
   const { requestId } = useParams() as { organizationId: string; projectId: string; workspaceId: string; requestId: string };
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const onClick = useCallback(async (type: AuthType) => {
     if (!activeRequest || !('authentication' in activeRequest)) {
       return;

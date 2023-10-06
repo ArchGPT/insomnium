@@ -19,7 +19,7 @@ import { Request, RequestBody, RequestHeader, RequestParameter } from '../../../
 import { deconstructQueryStringToParams } from '../../../utils/url/querystring';
 
 
-import { useRequestPatcher } from '../../hooks/use-request';
+import { useRequestSetter } from '../../hooks/use-request';
 import { RequestLoaderData } from '../../routes/request';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
 import { AlertModal } from '../modals/alert-modal';
@@ -29,7 +29,7 @@ const EMPTY_MIME_TYPE = null;
 
 export const ContentTypeDropdown: FC = () => {
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const { requestId } = useParams() as { requestId: string };
   const handleChangeMimeType = async (mimeType: string | null) => {
     const { body } = activeRequest;

@@ -395,7 +395,10 @@ export async function getRenderContext(
     },
     getEnvironmentId: () => environmentId,
     // It is possible for a project to not exist because this code path can be reached via Inso/insomnia-send-request which has no concept of a project.
-    getProjectId: () => project?._id,
+    getProjectId: () => {
+      console.log("getProjectId ??", project, ancestors, _ancestors)
+      return project?._id
+    }
   };
 
   // Generate the context we need to render
@@ -514,6 +517,10 @@ export async function getRenderedRequestAndContext(
 
   // Default the proto if it doesn't exist
   renderedRequest.url = setDefaultProtocol(renderedRequest.url);
+
+  // ARCHY NOTE: Recomposing the values here ?
+  console.log("renderedRequest", renderedRequest);
+
   return {
     context: renderContext,
     request: {
@@ -539,6 +546,7 @@ export async function getRenderedRequestAndContext(
       settingStoreCookies: renderedRequest.settingStoreCookies,
       settingRebuildPath: renderedRequest.settingRebuildPath,
       settingFollowRedirects: renderedRequest.settingFollowRedirects,
+      segmentParams: renderedRequest.segmentParams,
       type: renderedRequest.type,
       url: renderedRequest.url,
     },

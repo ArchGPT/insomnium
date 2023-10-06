@@ -12,7 +12,7 @@ import * as models from '../../../models';
 import type { GrpcRequestHeader } from '../../../models/grpc-request';
 import { queryAllWorkspaceUrls } from '../../../models/helpers/query-all-workspace-urls';
 import { tryToInterpolateRequestOrShowRenderErrorModal } from '../../../utils/try-interpolate';
-import { useRequestPatcher } from '../../hooks/use-request';
+import { useRequestSetter } from '../../hooks/use-request';
 import { useActiveRequestSyncVCSVersion, useGitVCSVersion } from '../../hooks/use-vcs-version';
 import { GrpcRequestState } from '../../routes/debug';
 import { GrpcRequestLoaderData } from '../../routes/request';
@@ -90,7 +90,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
   const gitVersion = useGitVCSVersion();
   const activeRequestSyncVersion = useActiveRequestSyncVCSVersion();
   const { workspaceId, requestId } = useParams() as { workspaceId: string; requestId: string };
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const {
     activeEnvironment,
   } = useRouteLoaderData(':workspaceId') as WorkspaceLoaderData;

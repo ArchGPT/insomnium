@@ -9,10 +9,10 @@ import * as models from '../../models';
 import { isEventStreamRequest } from '../../models/request';
 import { fetchRequestData, tryToInterpolateRequest, tryToTransformRequestWithPlugins } from '../../network/network';
 import { tryToInterpolateRequestOrShowRenderErrorModal } from '../../utils/try-interpolate';
-import { buildQueryStringFromParams, joinUrlAndQueryString } from '../../utils/url/querystring';
+import { addSegValuesToUrl, buildQueryStringFromParams, joinUrlAndQueryString } from '../../utils/url/querystring';
 
 import { useReadyState } from '../hooks/use-ready-state';
-import { useRequestPatcher } from '../hooks/use-request';
+import { useRequestSetter } from '../hooks/use-request';
 import { useRequestMetaPatcher } from '../hooks/use-request';
 import { useTimeoutWhen } from '../hooks/useTimeoutWhen';
 import { ConnectActionParams, RequestLoaderData, SendActionParams } from '../routes/request';
@@ -129,7 +129,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
           },
         });
         rendered && connect({
-          url: joinUrlAndQueryString(rendered.url, buildQueryStringFromParams(rendered.parameters)),
+          url: addSegValuesToUrl(joinUrlAndQueryString(rendered.url, buildQueryStringFromParams(rendered.parameters)), rendered.segmentParams),
           headers: rendered.headers,
           authentication: rendered.authentication,
           cookieJar: rendered.workspaceCookieJar,
@@ -145,6 +145,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
         environment } = await fetchRequestData(requestId);
 
       const renderResult = await tryToInterpolateRequest(request, environment._id, RENDER_PURPOSE_SEND);
+      // ARCHY NOTE: HERE IS SEND
       const renderedRequest = await tryToTransformRequestWithPlugins(renderResult);
       renderedRequest && send({
         renderedRequest,
@@ -167,7 +168,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
 
   useInterval(sendOrConnect, currentInterval ? currentInterval : null);
   useTimeoutWhen(sendOrConnect, currentTimeout, !!currentTimeout);
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
 
   useDocBodyKeyboardShortcuts({
     request_focusUrl: () => {
@@ -207,7 +208,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
           ref={inputRef}
           type="text"
           getAutocompleteConstants={handleAutocompleteUrls}
-          placeholder="https://api.myproduct.com/v1/users"
+          placeholder="https://api.archgpt.dev/v1/posts"
           defaultValue={url}
           onChange={url => patchRequest(requestId, { url })}
           onKeyDown={createKeybindingsHandler({

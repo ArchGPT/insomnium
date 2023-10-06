@@ -25,6 +25,7 @@ export interface OneLineEditorProps {
   readOnly?: boolean;
   type?: string;
   onPaste?: (text: string) => void;
+  isInfered?: boolean
 }
 
 export interface OneLineEditorHandle {
@@ -38,6 +39,7 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
   onChange,
   onKeyDown,
   placeholder,
+  isInfered,
   readOnly,
   type,
   onPaste,
@@ -198,6 +200,13 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
     codeMirror.current?.on('changes', fn);
     return () => codeMirror.current?.off('changes', fn);
   }, [onChange]);
+
+  useEffect(() => {
+
+    if (isInfered && codeMirror.current) {
+      codeMirror.current?.setValue(defaultValue)
+    }
+  }, [defaultValue, isInfered])
 
   useEffect(() => window.main.on('context-menu-command', (_, { key, tag }) =>
     id === key && codeMirror.current?.replaceSelection(tag)), [id]);
