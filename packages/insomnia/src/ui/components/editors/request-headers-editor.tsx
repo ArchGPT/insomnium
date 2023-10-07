@@ -4,7 +4,7 @@ import { useParams, useRouteLoaderData } from 'react-router-dom';
 import { getCommonHeaderNames, getCommonHeaderValues } from '../../../common/common-headers';
 import type { RequestHeader } from '../../../models/request';
 import { isWebSocketRequest } from '../../../models/websocket-request';
-import { useRequestPatcher } from '../../hooks/use-request';
+import { useRequestSetter } from '../../hooks/use-request';
 import { RequestLoaderData, WebSocketRequestLoaderData } from '../../routes/request';
 import { CodeEditor } from '../codemirror/code-editor';
 import { KeyValueEditor } from '../key-value-editor/key-value-editor';
@@ -19,7 +19,7 @@ export const RequestHeadersEditor: FC<Props> = ({
   isDisabled,
 }) => {
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData | WebSocketRequestLoaderData;
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const { requestId } = useParams() as { requestId: string };
 
   const handleBulkUpdate = useCallback((headersString: string) => {

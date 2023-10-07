@@ -24,6 +24,8 @@ export function remove(request: Request | GrpcRequest | WebSocketRequest) {
 }
 
 export function update<T extends object>(request: T, patch: Partial<T> = {}): Promise<T> {
+  console.log('request-operations.ts update()', patch);
+
   // @ts-expect-error -- TSCONVERSION
   if (isGrpcRequest(request)) {
     // @ts-expect-error -- TSCONVERSION

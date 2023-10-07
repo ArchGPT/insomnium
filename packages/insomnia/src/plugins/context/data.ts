@@ -1,5 +1,6 @@
 import * as models from '../../models';
 import type { Workspace } from '../../models/workspace';
+import { init as dataInit } from './dataInit';
 
 export interface InsomniaExport {
   workspace?: Workspace;
@@ -19,4 +20,8 @@ export const getWorkspaces = (activeProjectId?: string) => {
     return models.workspace.all();
   }
 };
+
+export const init = dataInit
+
+
 

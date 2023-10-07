@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { Request } from '../../models/request';
 import { WebSocketRequest } from '../../models/websocket-request';
-import { buildQueryStringFromParams, joinUrlAndQueryString, smartEncodeUrl } from '../../utils/url/querystring';
+import { addSegValuesToUrl, buildQueryStringFromParams, joinUrlAndQueryString, smartEncodeUrl } from '../../utils/url/querystring';
 import { useNunjucks } from '../context/nunjucks/use-nunjucks';
 import { CopyButton as _CopyButton } from './base/copy-button';
 
@@ -39,19 +39,25 @@ export const RenderedQueryString: FC<Props> = ({ request }) => {
 
   useAsync(async () => {
     const enabledParameters = request.parameters.filter(({ disabled }) => !disabled);
+    const enabledSeg = request.segmentParams.filter(({ disabled }) => !disabled);
     try {
       const result = await handleRender({
         url: request.url,
         parameters: enabledParameters,
+        segmentParams: enabledSeg
       });
 
       if (!result) {
         return;
       }
 
-      const { url, parameters } = result;
+      const { url, parameters, segmentParams } = result;
       const qs = buildQueryStringFromParams(parameters);
-      const fullUrl = joinUrlAndQueryString(url, qs);
+      let fullUrl = joinUrlAndQueryString(url, qs);
+      // look for :name for segmentParams and replace with value
+
+      fullUrl = addSegValuesToUrl(fullUrl, segmentParams)
+
       const encoded = smartEncodeUrl(fullUrl, request.settingEncodeUrl);
       setPreviewString(encoded === '' ? defaultPreview : encoded);
     } catch (error: unknown) {

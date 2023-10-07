@@ -7,7 +7,7 @@ import * as models from '../../../models';
 import { queryAllWorkspaceUrls } from '../../../models/helpers/query-all-workspace-urls';
 import type { Settings } from '../../../models/settings';
 import { deconstructQueryStringToParams, extractQueryStringFromUrl } from '../../../utils/url/querystring';
-import { useRequestPatcher, useSettingsPatcher } from '../../hooks/use-request';
+import { useRequestSetter, useSettingsPatcher } from '../../hooks/use-request';
 import { useActiveRequestSyncVCSVersion, useGitVCSVersion } from '../../hooks/use-vcs-version';
 import { RequestLoaderData } from '../../routes/request';
 import { WorkspaceLoaderData } from '../../routes/workspace';
@@ -30,6 +30,7 @@ import { RenderedQueryString } from '../rendered-query-string';
 import { RequestUrlBar } from '../request-url-bar';
 import { Pane, PaneHeader } from './pane';
 import { PlaceholderRequestPane } from './placeholder-request-pane';
+import { RequestSegmentEditor } from '../editors/request-segment-editor';
 const HeaderContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
@@ -75,7 +76,7 @@ export const RequestPane: FC<Props> = ({
   const patchSettings = useSettingsPatcher();
   const [isRequestSettingsModalOpen, setIsRequestSettingsModalOpen] =
     useState(false);
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
 
   useState(false);
   const handleImportQueryFromUrl = () => {
@@ -182,6 +183,12 @@ export const RequestPane: FC<Props> = ({
               >
                 <RequestParametersEditor
                   key={contentType}
+                  bulk={settings.useBulkParametersEditor}
+                />
+
+                <br />
+                <RequestSegmentEditor
+                  key={contentType + "segment"}
                   bulk={settings.useBulkParametersEditor}
                 />
               </ErrorBoundary>

@@ -41,12 +41,17 @@ interface Props {
   }[]) => void;
   pairs: Pair[];
   valuePlaceholder?: string;
+  hideToolbar?: boolean
+  title?: string
+  isFieldInferred?: boolean
+  cantDelete?: boolean
 }
 
 export const KeyValueEditor: FC<Props> = ({
   allowFile,
   allowMultiline,
   className,
+  cantDelete,
   descriptionPlaceholder,
   handleGetAutocompleteNameConstants,
   handleGetAutocompleteValueConstants,
@@ -56,6 +61,9 @@ export const KeyValueEditor: FC<Props> = ({
   onChange,
   pairs,
   valuePlaceholder,
+  hideToolbar,
+  title,
+  isFieldInferred
 }) => {
   // We should make the pair.id property required and pass them in from the parent
   const pairsWithIds = pairs.map(pair => ({ ...pair, id: pair.id || generateId('pair') }));
@@ -72,7 +80,8 @@ export const KeyValueEditor: FC<Props> = ({
 
   return (
     <Fragment>
-      <Toolbar>
+
+      {!hideToolbar && <Toolbar>
         <button
           className="btn btn--compact"
           onClick={() =>
@@ -98,8 +107,11 @@ export const KeyValueEditor: FC<Props> = ({
         >
           Toggle Description
         </button>
-      </Toolbar>
+      </Toolbar>}
+      {title && <Toolbar> <button
+        className="btn btn--compact">{title} </button> </Toolbar>}
       <ul className={classnames('key-value-editor', 'wide', className)}>
+
         {pairs.length === 0 && (
           <Row
             key='empty-row'
@@ -138,7 +150,7 @@ export const KeyValueEditor: FC<Props> = ({
             </div>
           </li>
         )) : null}
-        {pairsWithIds.map(pair => (
+        {pairsWithIds.map((pair, i) => (
           <Row
             key={pair.id}
             showDescription={showDescription}
@@ -146,12 +158,13 @@ export const KeyValueEditor: FC<Props> = ({
             valuePlaceholder={valuePlaceholder}
             descriptionPlaceholder={descriptionPlaceholder}
             onChange={pair => onChange(pairsWithIds.map(p => (p.id === pair.id ? pair : p)))}
-            onDelete={pair => onChange(pairsWithIds.filter(p => p.id !== pair.id))}
+            onDelete={cantDelete ? undefined : pair => onChange(pairsWithIds.filter(p => p.id !== pair.id))}
             handleGetAutocompleteNameConstants={handleGetAutocompleteNameConstants}
             handleGetAutocompleteValueConstants={handleGetAutocompleteValueConstants}
             allowMultiline={allowMultiline}
             allowFile={allowFile}
             readOnly={isDisabled}
+            readOnlyField={isFieldInferred}
             hideButtons={isDisabled}
             pair={pair}
             addPair={() => onChange([...pairsWithIds, {

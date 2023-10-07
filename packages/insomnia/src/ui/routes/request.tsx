@@ -173,12 +173,15 @@ export const createRequestAction: ActionFunction = async ({ request, params }) =
 
   return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${activeRequestId}`);
 };
+
+// ARCHY NOTE: ACTUAL REQUEST UPDATE IS HERE after
 export const updateRequestAction: ActionFunction = async ({ request, params }) => {
   const { requestId } = params;
   guard(typeof requestId === 'string', 'Request ID is required');
   const req = await requestOperations.getById(requestId);
   guard(req, 'Request not found');
   const patch = await request.json();
+
   // TODO: if gRPC, we should also copy the protofile to the destination workspace - INS-267
   const isMimeTypeChanged = isRequest(req) && patch.body && patch.body.mimeType !== req.body.mimeType;
   if (isMimeTypeChanged) {

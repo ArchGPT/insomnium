@@ -11,10 +11,13 @@ import { Settings } from '../../models/settings';
 import { WebSocketRequest } from '../../models/websocket-request';
 import { WorkspaceMeta } from '../../models/workspace-meta';
 
-export const useRequestPatcher = () => {
+export const useRequestSetter = () => {
   const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
   const fetcher = useFetcher();
   return (requestId: string, patch: Partial<GrpcRequest> | Partial<Request> | Partial<WebSocketRequest>) => {
+    // const s = JSON.stringify(patch)
+    // console.log("XX", s);
+
     fetcher.submit(JSON.stringify(patch), {
       action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/update`,
       method: 'post',

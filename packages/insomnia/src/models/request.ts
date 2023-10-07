@@ -71,6 +71,14 @@ export interface RequestParameter {
   fileName?: string;
 }
 
+export interface RequestSegment {
+  name: string;
+  value: string;
+  disabled?: boolean;
+  id?: string;
+  fileName?: string;
+}
+
 export interface RequestBodyParameter {
   name: string;
   value: string;
@@ -107,6 +115,7 @@ export interface BaseRequest {
   settingEncodeUrl: boolean;
   settingRebuildPath: boolean;
   settingFollowRedirects: 'global' | 'on' | 'off';
+  segmentParams: RequestSegment[]
 }
 
 export type Request = BaseModel & BaseRequest;
@@ -142,6 +151,7 @@ export function init(): BaseRequest {
     settingEncodeUrl: true,
     settingRebuildPath: true,
     settingFollowRedirects: 'global',
+    segmentParams: [],
   };
 }
 

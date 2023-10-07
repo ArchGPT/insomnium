@@ -19,7 +19,7 @@ import type { HeaderResult, ResponsePatch, ResponseTimelineEntry } from '../main
 import * as models from '../models';
 import { CaCertificate } from '../models/ca-certificate';
 import { ClientCertificate } from '../models/client-certificate';
-import type { Request, RequestAuthentication, RequestParameter } from '../models/request';
+import type { Request, RequestAuthentication, RequestParameter, RequestSegment } from '../models/request';
 import type { Settings } from '../models/settings';
 import { isWorkspace } from '../models/workspace';
 import * as pluginContexts from '../plugins/context/index';
@@ -27,6 +27,7 @@ import * as plugins from '../plugins/index';
 import { guard } from '../utils/guard';
 import { setDefaultProtocol } from '../utils/url/protocol';
 import {
+  addSegValuesToUrl,
   buildQueryStringFromParams,
   joinUrlAndQueryString,
   smartEncodeUrl,
@@ -96,7 +97,7 @@ export async function sendCurlAndWriteTimeline(
   const requestId = renderedRequest._id;
   const timeline: ResponseTimelineEntry[] = [];
 
-  const { finalUrl, socketPath } = transformUrl(renderedRequest.url, renderedRequest.parameters, renderedRequest.authentication, renderedRequest.settingEncodeUrl);
+  const { finalUrl, socketPath } = transformUrl(renderedRequest.url, renderedRequest.parameters, renderedRequest.segmentParams, renderedRequest.authentication, renderedRequest.settingEncodeUrl);
 
   timeline.push({ value: `Preparing request to ${finalUrl}`, name: 'Text', timestamp: Date.now() });
   timeline.push({ value: `Current time is ${new Date().toISOString()}`, name: 'Text', timestamp: Date.now() });
@@ -181,9 +182,10 @@ export const responseTransform = async (patch: ResponsePatch, environmentId: str
     context,
   );
 };
-export const transformUrl = (url: string, params: RequestParameter[], authentication: RequestAuthentication, shouldEncode: boolean) => {
+// ARCHY NOTE: HERE IS THE ACTUAL CALL
+export const transformUrl = (url: string, params: RequestParameter[], segs: RequestSegment[], authentication: RequestAuthentication, shouldEncode: boolean) => {
   const authQueryParam = getAuthQueryParams(authentication);
-  const customUrl = joinUrlAndQueryString(url, buildQueryStringFromParams(authQueryParam ? params.concat([authQueryParam]) : params));
+  const customUrl = addSegValuesToUrl(joinUrlAndQueryString(url, buildQueryStringFromParams(authQueryParam ? params.concat([authQueryParam]) : params)), segs);
   const isUnixSocket = customUrl.match(/https?:\/\/unix:\//);
   if (!isUnixSocket) {
     return { finalUrl: smartEncodeUrl(customUrl, shouldEncode) };
@@ -239,7 +241,12 @@ async function _applyRequestPluginHooks(
 ) {
   const newRenderedRequest = clone(renderedRequest);
 
+
+  console.log("[URL]", newRenderedRequest.url);
+  newRenderedRequest.url = newRenderedRequest.url.replace(":desu", "a")
+
   for (const { plugin, hook } of await plugins.getRequestHooks()) {
+
     const context = {
       ...(pluginContexts.app.init(RENDER_PURPOSE_NO_RENDER) as Record<string, any>),
       ...pluginContexts.data.init(renderedContext.getProjectId()),
@@ -249,6 +256,7 @@ async function _applyRequestPluginHooks(
     };
 
     try {
+      console.log("[plugin] applying ", plugin)
       await hook(context);
     } catch (err) {
       err.plugin = plugin;

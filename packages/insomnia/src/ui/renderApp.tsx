@@ -6,11 +6,17 @@ import * as models from '../models';
 import { init as initPlugins } from '../plugins';
 import { applyColorScheme } from '../plugins/misc';
 import { guard } from '../utils/guard';
-import { setupRouterStuff } from './setupRouterStuff';
+import { setupRouterStuff } from './router';
 import { dummyStartingWorkspace, importPure } from '../common/import';
 import { Workspace } from '../models/workspace';
 
 export async function renderApp() {
+
+  const workspaces = await database.find<Workspace>(models.workspace.type)
+  console.log("workspaces.length detected _", workspaces.length);
+  if (workspaces.length === 0) await importPure(dummyStartingWorkspace())
+
+
   const router = setupRouterStuff();
 
   await database.initClient();
@@ -21,10 +27,6 @@ export async function renderApp() {
 
   await applyColorScheme(settings);
 
-  const workspaces = await database.find<Workspace>(models.workspace.type)
-  console.log("workspaces.length detected _", workspaces.length);
-
-  if (workspaces.length === 0) await importPure(dummyStartingWorkspace())
 
   const root = document.getElementById('root');
 

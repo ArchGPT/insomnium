@@ -3,7 +3,7 @@ import { useRouteLoaderData } from 'react-router-dom';
 
 import { toKebabCase } from '../../../../../common/misc';
 import { useNunjucks } from '../../../../context/nunjucks/use-nunjucks';
-import { useRequestPatcher } from '../../../../hooks/use-request';
+import { useRequestSetter } from '../../../../hooks/use-request';
 import { RequestLoaderData } from '../../../../routes/request';
 import { showModal } from '../../../modals';
 import { CodePromptModal } from '../../../modals/code-prompt-modal';
@@ -30,7 +30,7 @@ interface Props {
 
 export const AuthPrivateKeyRow: FC<Props> = ({ label, property, help }) => {
   const { activeRequest: { authentication, _id: requestId } } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const { handleGetRenderContext, handleRender } = useNunjucks();
 
   const privateKey = authentication[property];

@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react';
 import { useParams, useRouteLoaderData } from 'react-router-dom';
 
 import { RequestParameter } from '../../../models/request';
-import { useRequestPatcher } from '../../hooks/use-request';
+import { useRequestSetter } from '../../hooks/use-request';
 import { RequestLoaderData, WebSocketRequestLoaderData } from '../../routes/request';
 import { CodeEditor } from '../codemirror/code-editor';
 import { KeyValueEditor } from '../key-value-editor/key-value-editor';
@@ -18,7 +18,7 @@ export const RequestParametersEditor: FC<Props> = ({
 }) => {
   const { requestId } = useParams() as { requestId: string };
   const { activeRequest } = useRouteLoaderData('request/:requestId') as RequestLoaderData | WebSocketRequestLoaderData;
-  const patchRequest = useRequestPatcher();
+  const patchRequest = useRequestSetter();
   const handleBulkUpdate = useCallback((paramsString: string) => {
     const parameters: {
       name: string;
