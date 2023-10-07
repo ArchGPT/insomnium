@@ -6,7 +6,7 @@ Please take a moment to review this document in order to make the contribution p
 
 [GitHub Issues](https://github.com/ArchGPT/insomnium/issues) is the preferred channel for [bug reports](#bug-reports), [features requests](#feature-requests) and [submitting pull requests](#pull-requests).
 
-Please respect the following restrictions:
+Please respect the following guidelines:
 
 - Please **do not** derail or troll issues. Keep the discussion on topic and respect the opinions of others.
 
