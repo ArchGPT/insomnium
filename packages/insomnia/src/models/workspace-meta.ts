@@ -89,9 +89,9 @@ export async function getByGitRepositoryId(gitRepositoryId: string) {
   return db.getWhere<WorkspaceMeta>(type, { gitRepositoryId });
 }
 
-export async function getOrCreateByParentId(parentId: string) {
+export async function getOrCreateByParentId(parentId: string, patch: any = {}) {
   const doc = await getByParentId(parentId);
-  return doc || create({ parentId });
+  return doc || create({ ...patch, parentId },);
 }
 
 export function all() {
