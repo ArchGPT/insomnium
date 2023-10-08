@@ -37,7 +37,17 @@ If you have any feature request or encountered any bug, feel free to [open an is
 
 ## Download
 
-Insomnium is available for Mac, Windows, Ubuntu, Debian, CentOS, Fedora and [can be downloaded here](https://github.com/ArchGPT/insomnium/releases). Insomnium is also [available on AUR for ArchLinux](https://aur.archlinux.org/packages/insomnium-bin). 
+Insomnium is available for MacOS, Windows, Ubuntu, Debian, CentOS, Fedora and [can be downloaded here](https://github.com/ArchGPT/insomnium/releases). You can also install Insomnium via homebrew for MacOS 
+
+```
+brew tap ArchGPT/tap
+brew install --cask insomnium
+```
+
+or [AUR](https://aur.archlinux.org/packages/insomnium-bin) for ArchLinux
+```
+yay -S insomnium
+```
 
 Alternatively, you can build Insomnium from source on your local machine using `npm run app-package`.
 
