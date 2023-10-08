@@ -14,29 +14,36 @@ import { BaseModel } from '../models';
 export async function renderApp() {
 
   const prevLocationHistoryEntry = localStorage.getItem('locationHistoryEntry');
-  let beginningPath: string | null = null
+  let beginningPathForFirstTimeUser: string | null = null
+  let wId: string | null = null
+  let eId: string | null = null
 
-  // if (!prevLocationHistoryEntry) {
+  if (!prevLocationHistoryEntry) {
   const workspaceNumber = await database.count<Workspace>(models.workspace.type)
   console.log("workspaces detected ~>", workspaceNumber);
 
   if (workspaceNumber === 0) {
-    const [d, wId, rId] = dummyStartingWorkspace()
+    const [d] = dummyStartingWorkspace()
     const newObj = await importPure(d) as {
       resources: { resources: models.BaseModel[] }[];
     }
 
     const r = (newObj.resources?.[0]?.resources as BaseModel[]).find((a) => a.type === "Request")
     const w = (newObj.resources?.[0]?.resources as BaseModel[]).find((a) => a.type === "Workspace")
-    if (w && r)
-      beginningPath = `/organization/org_default-project/project/proj_default-project/workspace/${w._id}/debug/request/${r._id}`
-
+    const e = (newObj.resources?.[0]?.resources as BaseModel[]).find((a) => a.type === "Environment")
+    if (w && r) {
+      wId = w._id
+      beginningPathForFirstTimeUser = `/organization/org_default-project/project/proj_default-project/workspace/${w._id}/debug/request/${r._id}`
+    }
+    if (e) {
+      eId = e._id
+    }
     // console.log("newPath", beginningPath)
   }
 
-  // }
+  }
 
-  const router = setupRouterStuff(beginningPath);
+  const router = setupRouterStuff(beginningPathForFirstTimeUser);
 
   await database.initClient();
 
@@ -51,7 +58,22 @@ export async function renderApp() {
 
   guard(root, 'Could not find root element');
 
+  // this only affect users who are openning insomnium for the first time:
+  if (beginningPathForFirstTimeUser && wId) {
+    const id = await models.workspaceMeta.getByParentId(wId);
+    if (!id) {
+      const activeWorkspaceMeta = await models.workspaceMeta.getOrCreateByParentId(wId);
+
+      await models.workspaceMeta.update(activeWorkspaceMeta, {
+        activeEnvironmentId: eId,
+      });
+    }
+  }
+
   ReactDOM.createRoot(root).render(
     <RouterProvider router={router} />
   );
+
 }
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

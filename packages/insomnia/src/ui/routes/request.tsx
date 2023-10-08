@@ -60,6 +60,7 @@ export const loader: LoaderFunction = async ({ params }): Promise<RequestLoaderD
     throw redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug`);
   }
   const activeWorkspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
+
   guard(activeWorkspaceMeta, 'Active workspace meta not found');
   // NOTE: loaders shouldnt mutate data, this should be moved somewhere else
   await models.workspaceMeta.update(activeWorkspaceMeta, { activeRequestId: requestId });
