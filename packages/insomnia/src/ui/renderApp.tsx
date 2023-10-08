@@ -12,9 +12,9 @@ import { Workspace } from '../models/workspace';
 
 export async function renderApp() {
 
-  const workspaces = await database.find<Workspace>(models.workspace.type)
-  console.log("workspaces.length detected _", workspaces.length);
-  if (workspaces.length === 0) await importPure(dummyStartingWorkspace())
+  const workspaceNumber = await database.count<Workspace>(models.workspace.type)
+  console.log("workspaces detected ~>", workspaceNumber);
+  if (workspaceNumber === 0) await importPure(dummyStartingWorkspace())
 
 
   const router = setupRouterStuff();
