@@ -259,15 +259,19 @@ export const isApiSpecImport = ({ id }: Pick<InsomniaImporter, 'id'>) =>
 export const dummyStartingWorkspace = () => {
   const currentUnixTime = Date.now();
   const oneSec = 1000;
-  return ({
+  const wId = generateId(models.workspace.prefix)
+  const rId = generateId(models.request.prefix)
+  const eId = generateId(models.environment.prefix)
+  const jId = generateId(models.cookieJar.prefix)
+  return [({
     "_type": "export",
     "__export_format": 4,
     "__export_date": "2023-10-04T20:25:03.318Z",
     "__export_source": "insomnia.desktop.app:v0.1.3",
     "resources": [
       {
-        "_id": "req_27805db4efde4432b27c5961a44e41b7",
-        "parentId": "wrk_7f7845eb4c2043c2b9f327cbe81714b7",
+        "_id": rId,
+        "parentId": wId,
         "modified": currentUnixTime - oneSec * 3,
         "created": currentUnixTime - oneSec * 3,
         "url": "",
@@ -289,7 +293,7 @@ export const dummyStartingWorkspace = () => {
         "type": "Request"
       },
       {
-        "_id": "wrk_7f7845eb4c2043c2b9f327cbe81714b7",
+        "_id": wId,
         "parentId": null,
         "modified": currentUnixTime - oneSec * 2,
         "created": currentUnixTime - oneSec * 2,
@@ -298,11 +302,11 @@ export const dummyStartingWorkspace = () => {
         "scope": "collection",
         // "_type": "workspace",
         "type": "Workspace",
-        // fixed wrong import field bug from Insomnia?
+        // hmm where is the fn for import field transfromation from Insomnia
       },
       {
-        "_id": "env_7b68f82b6819ad3e7ff7db3f463fbeaaf47b816c",
-        "parentId": "wrk_7f7845eb4c2043c2b9f327cbe81714b7",
+        "_id": eId,
+        "parentId": wId,
         "modified": currentUnixTime - oneSec * 1,
         "created": currentUnixTime - oneSec * 1,
         "name": "Base Environment",
@@ -314,8 +318,8 @@ export const dummyStartingWorkspace = () => {
         "type": "Environment"
       },
       {
-        "_id": "jar_7b68f82b6819ad3e7ff7db3f463fbeaaf47b816c",
-        "parentId": "wrk_7f7845eb4c2043c2b9f327cbe81714b7",
+        "_id": jId,
+        "parentId": wId,
         "modified": currentUnixTime,
         "created": currentUnixTime,
         "name": "Default Jar",
@@ -323,5 +327,5 @@ export const dummyStartingWorkspace = () => {
         "type": "CookieJar"
       }
     ]
-  })
+  }), wId, rId]
 }

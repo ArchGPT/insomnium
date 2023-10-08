@@ -24,7 +24,7 @@ export const importResourcesToNewWorkspace = async (projectId: string, _resource
       scope: 'design',
       parentId: projectId,
     });
-    models.apiSpec.updateOrCreateForParentId(newWorkspace._id, {
+    await models.apiSpec.updateOrCreateForParentId(newWorkspace._id, {
       contents: ResourceCache.content,
       contentType: 'yaml',
       fileName: workspaceToImport?.name,

@@ -50,7 +50,7 @@ if (prevLocationHistoryEntry && matchPath({ path: '/organization/:organizationId
   locationHistoryEntry = prevLocationHistoryEntry;
 }
 
-export const setupRouterStuff = () => {
+export const setupRouterStuff = (beginningPath: string | null = null) => {
 
   const router = createMemoryRouter(
     // @TODO - Investigate file based routing to generate these routes:
@@ -792,7 +792,7 @@ export const setupRouterStuff = () => {
       },
     ],
     {
-      initialEntries: [locationHistoryEntry],
+      initialEntries: [beginningPath || locationHistoryEntry],
     },
   );
 
@@ -811,6 +811,7 @@ export const setupRouterStuff = () => {
     }
     localStorage.setItem('locationHistoryEntry', location.pathname);
     match?.params.organizationId && localStorage.setItem(`locationHistoryEntry:${match?.params.organizationId}`, location.pathname);
+    console.log("location.pathname", location.pathname)
   })
 
   return router

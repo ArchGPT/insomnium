@@ -9,15 +9,34 @@ import { guard } from '../utils/guard';
 import { setupRouterStuff } from './router';
 import { dummyStartingWorkspace, importPure } from '../common/import';
 import { Workspace } from '../models/workspace';
+import { BaseModel } from '../models';
 
 export async function renderApp() {
 
+  const prevLocationHistoryEntry = localStorage.getItem('locationHistoryEntry');
+  let beginningPath: string | null = null
+
+  // if (!prevLocationHistoryEntry) {
   const workspaceNumber = await database.count<Workspace>(models.workspace.type)
   console.log("workspaces detected ~>", workspaceNumber);
-  if (workspaceNumber === 0) await importPure(dummyStartingWorkspace())
 
+  if (workspaceNumber === 0) {
+    const [d, wId, rId] = dummyStartingWorkspace()
+    const newObj = await importPure(d) as {
+      resources: { resources: models.BaseModel[] }[];
+    }
 
-  const router = setupRouterStuff();
+    const r = (newObj.resources?.[0]?.resources as BaseModel[]).find((a) => a.type === "Request")
+    const w = (newObj.resources?.[0]?.resources as BaseModel[]).find((a) => a.type === "Workspace")
+    if (w && r)
+      beginningPath = `/organization/org_default-project/project/proj_default-project/workspace/${w._id}/debug/request/${r._id}`
+
+    // console.log("newPath", beginningPath)
+  }
+
+  // }
+
+  const router = setupRouterStuff(beginningPath);
 
   await database.initClient();
 
