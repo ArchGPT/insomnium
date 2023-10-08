@@ -137,6 +137,13 @@ export const RequestGroupActionsDropdown = ({
     action: () => void;
   })[] = [
       {
+        id: 'From Curl',
+        name: 'From Curl',
+        icon: 'terminal',
+        action: () => setPasteCurlModalOpen(true),
+
+      },
+      {
         id: 'HTTP',
         name: 'HTTP Request',
         icon: 'plus-circle',
@@ -181,13 +188,6 @@ export const RequestGroupActionsDropdown = ({
           requestType: 'WebSocket',
           parentId: requestGroup._id,
         }),
-      },
-      {
-        id: 'From Curl',
-        name: 'From Curl',
-        icon: 'terminal',
-        action: () => setPasteCurlModalOpen(true),
-
       },
       {
         id: 'New Folder',

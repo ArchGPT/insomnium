@@ -196,10 +196,10 @@ jobs:
 
       #     sentry-cli sourcemaps upload -r ${{ env.RELEASE_VERSION }} ./artifacts/*-latest-sentry
 
-      # - name: Configure Git user
-      #   uses: Homebrew/actions/git-user-config@master
-      #   with:
-      #     username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'insomnia-infra' }}
+      - name: Configure Git user
+        uses: Homebrew/actions/git-user-config@master
+        with:
+          username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'insomnia-infra' }}
 
       - name: Merge git branch into main
         run: |
