@@ -139,4 +139,4 @@ Check out our open-source [Insomnium Documentation](https://archgpt.dev/insomniu
 
 ## License
 
-[MIT](LICENSE)
+The source code license is MIT, as described in the [LICENSE](LICENSE) file.
