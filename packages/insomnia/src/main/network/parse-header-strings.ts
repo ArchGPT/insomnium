@@ -1,5 +1,6 @@
 import aws4 from 'aws4';
 import clone from 'clone';
+import { createHash } from 'crypto';
 import { parse as urlParse } from 'url';
 
 import {
@@ -61,6 +62,7 @@ export const parseHeaderStrings = ({ req, finalUrl, requestBody, requestBodyPath
       body: requestBody,
       method,
     }).forEach(header => headers.push(header));
+    headers.push({ name: 'x-amz-content-sha256', value: createHash('sha256').update(requestBody || '').digest('hex') });
   }
   const isMultipartForm = req.body.mimeType === CONTENT_TYPE_FORM_DATA;
   if (isMultipartForm && requestBodyPath) {
