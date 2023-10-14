@@ -18,6 +18,7 @@ const recursiveWriteProtoDirectory = async (
   dir: ProtoDirectory,
   descendants: BaseModel[],
   currentDirPath: string,
+  forceWrite: boolean,
 ): Promise<string[]> => {
   // Increment folder path
   const dirPath = path.join(currentDirPath, dir.name);
@@ -26,19 +27,19 @@ const recursiveWriteProtoDirectory = async (
   const files = descendants.filter(isProtoFile).filter(f => f.parentId === dir._id);
   await Promise.all(files.map(protoFile => {
     const fullPath = path.join(dirPath, protoFile.name);
-    if (fs.existsSync(fullPath)) {
+    if (!forceWrite && fs.existsSync(fullPath)) {
       return;
     }
     fs.promises.writeFile(fullPath, protoFile.protoText);
   }));
   // Get and write subdirectories
   const createdDirs = await Promise.all(
-    descendants.filter(f => isProtoDirectory(f) && f.parentId === dir._id).map(f => recursiveWriteProtoDirectory(f, descendants, dirPath)),
+    descendants.filter(f => isProtoDirectory(f) && f.parentId === dir._id).map(f => recursiveWriteProtoDirectory(f, descendants, dirPath, forceWrite)),
   );
   return [dirPath, ...createdDirs.flat()];
 };
 
-export const writeProtoFile = async (protoFile: ProtoFile): Promise<WriteResult> => {
+export const writeProtoFile = async (protoFile: ProtoFile, forceWrite = false): Promise<WriteResult> => {
   // Find all ancestors
   const ancestors = await db.withAncestors(protoFile, [
     models.protoDirectory.type,
@@ -74,6 +75,7 @@ export const writeProtoFile = async (protoFile: ProtoFile): Promise<WriteResult>
         'insomnia-grpc',
         `${rootAncestorProtoDirectory._id}.${rootAncestorProtoDirectory.modified}`,
       ),
+      forceWrite
     );
     return {
       filePath: path.join(...ancestorDirectories
@@ -95,7 +97,7 @@ export const writeProtoFile = async (protoFile: ProtoFile): Promise<WriteResult>
     };
     // Check if file already exists
     const fullPath = path.join(rootDir, filePath);
-    if (fs.existsSync(fullPath)) {
+    if (!forceWrite && fs.existsSync(fullPath)) {
       return result;
     }
     // Write file

@@ -90,6 +90,29 @@ describe('writeProtoFile', () => {
       expect(existsSyncSpy).toHaveBeenCalledWith(expectedFullPath);
       expect(writeFileSpy).not.toHaveBeenCalled();
     });
+
+    it('writes individual file when forced, even if it already exists', async () => {
+      // Arrange
+      const w = await models.workspace.create();
+      const pf = await models.protoFile.create({
+        parentId: w._id,
+        protoText: 'text',
+      });
+      const tmpDirPath = path.join('.', 'foo', 'bar', 'baz');
+
+      _configureSpies(tmpDirPath, true); // file already exists
+
+      // Act
+      const result = await writeProtoFile(pf, true);
+      // Assert
+      const expectedDir = path.join(tmpDirPath, 'insomnia-grpc');
+      const expectedFileName = `${pf._id}.${pf.modified}.proto`;
+      const expectedFullPath = path.join(expectedDir, expectedFileName);
+      expect(result.filePath).toEqual(expectedFileName);
+      expect(result.dirs).toEqual([expectedDir]);
+      expect(existsSyncSpy).not.toHaveBeenCalledWith(expectedFullPath); // Not called because of the force flag
+      expect(writeFileSpy).toHaveBeenCalledWith(expectedFullPath, pf.protoText);
+    });
   });
 
   describe('nested files', () => {
@@ -227,6 +250,56 @@ describe('writeProtoFile', () => {
       expect(existsSyncSpy).toHaveBeenCalledWith(expectedFullPath.root);
       expect(existsSyncSpy).toHaveBeenCalledWith(expectedFullPath.nested);
       expect(writeFileSpy).not.toHaveBeenCalled();
+    });
+
+    it('should write file when forced, even if it already exists', async () => {
+      // Arrange
+      const w = await models.workspace.create();
+      const pdRoot = await models.protoDirectory.create({
+        parentId: w._id,
+        name: 'rootDir',
+      });
+      const pdNested = await models.protoDirectory.create({
+        parentId: pdRoot._id,
+        name: 'nestedDir',
+      });
+      const pfRoot = await models.protoFile.create({
+        parentId: pdRoot._id,
+        name: 'root.proto',
+        protoText: 'root',
+      });
+      const pfNested = await models.protoFile.create({
+        parentId: pdNested._id,
+        name: 'nested.proto',
+        protoText: 'nested',
+      });
+      const tmpDirPath = path.join('.', 'foo', 'bar', 'baz');
+
+      _configureSpies(tmpDirPath, true); // files already exists
+
+      // Act
+      const result = await writeProtoFile(pfNested, true);
+      // Assert
+      const expectedRootDir = path.join(
+        tmpDirPath,
+        'insomnia-grpc',
+        `${pdRoot._id}.${pdRoot.modified}`,
+        pdRoot.name,
+      );
+      const expectedNestedDir = path.join(expectedRootDir, pdNested.name);
+      const expectedFilePath = {
+        root: pfRoot.name,
+        nested: path.join(pdNested.name, pfNested.name),
+      };
+      const expectedFullPath = {
+        root: path.join(expectedRootDir, expectedFilePath.root),
+        nested: path.join(expectedRootDir, expectedFilePath.nested),
+      };
+      expect(result.filePath).toEqual(expectedFilePath.nested);
+      expect(result.dirs).toEqual([expectedRootDir, expectedNestedDir]);
+      expect(existsSyncSpy).not.toHaveBeenCalledWith(expectedFullPath.root); // Not called due to force flag
+      expect(existsSyncSpy).not.toHaveBeenCalledWith(expectedFullPath.nested); // Not called due to force flag
+      expect(writeFileSpy).toHaveBeenCalledWith(expectedFullPath.nested, pfNested.protoText);
     });
   });
 });
