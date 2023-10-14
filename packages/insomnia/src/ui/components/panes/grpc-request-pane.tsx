@@ -1,6 +1,5 @@
-import React, { FunctionComponent, useRef, useState } from 'react';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { useParams, useRouteLoaderData } from 'react-router-dom';
-import { useMount } from 'react-use';
 import styled from 'styled-components';
 
 import { getCommonHeaderNames, getCommonHeaderValues } from '../../../common/common-headers';
@@ -78,14 +77,17 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
 
   const [isProtoModalOpen, setIsProtoModalOpen] = useState(false);
   const { requestMessages, running, methods } = grpcState;
-  useMount(async () => {
-    if (!activeRequest.protoFileId) {
-      return;
+  useEffect(() => {
+    async function loadMethods() {
+      if (!activeRequest.protoFileId || grpcState.methods.length > 0) {
+        return;
+      }
+      console.log(`[gRPC] loading proto file methods pf=${activeRequest.protoFileId}`);
+      const methods = await window.main.grpc.loadMethods(activeRequest.protoFileId);
+      setGrpcState({ ...grpcState, methods });
     }
-    console.log(`[gRPC] loading proto file methods pf=${activeRequest.protoFileId}`);
-    const methods = await window.main.grpc.loadMethods(activeRequest.protoFileId);
-    setGrpcState({ ...grpcState, methods });
-  });
+    loadMethods();
+  }, [activeRequest]);
   const editorRef = useRef<CodeEditorHandle>(null);
   const gitVersion = useGitVCSVersion();
   const activeRequestSyncVersion = useActiveRequestSyncVCSVersion();
