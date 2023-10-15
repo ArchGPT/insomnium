@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { ChangeBufferEvent, database as db } from '../../../common/database';
 import { selectFileOrFolder } from '../../../common/select-file-or-folder';
 import * as models from '../../../models';
-import { isProtoDirectory, ProtoDirectory } from '../../../models/proto-directory';
+import { getById as getProtoDirectoryById, isProtoDirectory, ProtoDirectory } from '../../../models/proto-directory';
 import { isProtoFile, type ProtoFile } from '../../../models/proto-file';
 import { ProtoDirectoryLoader } from '../../../network/grpc/proto-directory-loader';
 import { writeProtoFile } from '../../../network/grpc/write-proto-file';
@@ -42,7 +42,7 @@ const tryToSelectFolderPath = async () => {
   }
   return;
 };
-const isProtofileValid = async (filePath: string) => {
+const isProtofileValid = async (filePath: string, includeDirs: string[] = []) => {
   try {
     await protoLoader.load(filePath, {
       keepCase: true,
@@ -50,6 +50,7 @@ const isProtofileValid = async (filePath: string) => {
       enums: String,
       defaults: true,
       oneofs: true,
+      includeDirs: includeDirs,
     });
     return true;
   } catch (error) {
@@ -205,20 +206,38 @@ export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRe
     if (!filePath) {
       return;
     }
-    if (!await isProtofileValid(filePath)) {
+    const includeDirs = await findAncestorDirectories(protoFile, filePath);
+    if (!await isProtofileValid(filePath, includeDirs)) {
       return;
     }
     const contents = await fs.promises.readFile(filePath, 'utf-8');
+    const contentsChanged = contents !== protoFile.protoText;
     const updatedFile = await models.protoFile.update(protoFile, {
       name: path.basename(filePath),
       protoText: contents,
     });
+    // force update the proto file if the content changed
+    writeProtoFile(updatedFile, contentsChanged);
+
     const impacted = await models.grpcRequest.findByProtoFileId(updatedFile._id);
     const requestIds = impacted.map(g => g._id);
     if (requestIds?.length) {
       requestIds.forEach(requestId => window.main.grpc.cancel(requestId));
       reloadRequests(requestIds);
     }
+  };
+
+  const findAncestorDirectories = async (protoFile: ProtoFile, filePath: string): Promise<string[]> => {
+    /* Traverse up the file tree to gather all _real_ ancestor directories */
+    let parent = await getProtoDirectoryById(protoFile.parentId);
+    let basePath = path.dirname(filePath);
+    const result = [];
+    while (parent !== null) {
+      basePath = path.dirname(basePath);
+      result.push(path.join(basePath, parent.name));
+      parent = await getProtoDirectoryById(parent.parentId);
+    }
+    return result;
   };
 
   const handleDeleteDirectory = (protoDirectory: ProtoDirectory) => {
