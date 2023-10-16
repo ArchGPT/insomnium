@@ -11,10 +11,6 @@ on:
       - opened
       - synchronize
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   Lint:
     name: Lint
