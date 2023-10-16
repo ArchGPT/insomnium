@@ -156,8 +156,7 @@ export function createWindow() {
           if (!window || !window.webContents) {
             return;
           }
-
-          const href = changelogUrl();
+          const href = changelogUrl() 
           const { protocol } = new URL(href);
           if (protocol === 'http:' || protocol === 'https:') {
             // eslint-disable-next-line no-restricted-properties

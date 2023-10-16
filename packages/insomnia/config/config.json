@@ -5,11 +5,10 @@
   "productName": "Insomnium",
   "synopsis": "The 100% local and privacy-focus API Client and Design Tool",
   "icon": "https://github.com/archGPT/insomnium/blob/main/packages/insomnia/src/icons/icon.png?raw=true",
-  "changelogUrl": "",
+  "changelogUrl": "https://github.com/ArchGPT/insomnium/releases/tag/core",
   "theme": "default",
   "lightTheme": "studio-light",
   "darkTheme": "default",
   "githubOrg": "ArchGPT",
   "githubRepo": "insomnium"
-
 }
