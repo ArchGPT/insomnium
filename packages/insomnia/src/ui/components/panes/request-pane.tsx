@@ -108,7 +108,8 @@ export const RequestPane: FC<Props> = ({
     ':workspaceId',
   ) as WorkspaceLoaderData;
   // Force re-render when we switch requests, the environment gets modified, or the (Git|Sync)VCS version changes
-  const uniqueKey = `${activeEnvironment?.modified}::${requestId}::${gitVersion}::${activeRequestSyncVersion}::${activeRequestMeta?.activeResponseId}`;
+  const uniqueKeyReq = `${activeEnvironment?.modified}::${requestId}::${gitVersion}::${activeRequestSyncVersion}`
+  const uniqueKey = `${uniqueKeyReq}::${activeRequestMeta?.activeResponseId}`;
 
   if (!activeRequest) {
     return <PlaceholderRequestPane />;
@@ -129,7 +130,7 @@ export const RequestPane: FC<Props> = ({
         <ErrorBoundary errorClassName="font-error pad text-center">
           <RequestUrlBar
             key={requestId}
-            uniquenessKey={uniqueKey}
+            uniquenessKey={uniqueKeyReq}
             handleAutocompleteUrls={() => queryAllWorkspaceUrls(workspaceId, models.request.type, requestId)}
             nunjucksPowerUserMode={settings.nunjucksPowerUserMode}
             setLoading={setLoading}
