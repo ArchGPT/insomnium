@@ -9,11 +9,9 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 
-import llama from "../../../src/ui/components/assets/llama-icon.png"
+import llama from "../../../src/ui/components/assets/llama-icon.png";
 
-
-
-import { Button } from "../../../components/ui/button"
+import { Button } from "../../../components/ui/button";
 
 const Container = styled.div({
   display: 'flex',
@@ -26,12 +24,11 @@ const Container = styled.div({
 
 const Spinner = () => <i className="fa fa-spin fa-refresh" />;
 
-
-type OllmaModel = {
-  name: string,
-  modified_at: string,
-  size: number
-}
+interface OllmaModel {
+  name: string;
+  modified_at: string;
+  size: number;
+};
 
 export const LLMRoute: FC = () => {
   const error = useRouteError();
@@ -56,28 +53,28 @@ export const LLMRoute: FC = () => {
   const navigation = useNavigation();
   const errorMessage = getErrorMessage(error);
 
-  const URL = "http://localhost:11434/api/tags"
+  const URL = "http://localhost:11434/api/tags";
 
   const [models, setModels] = useState<OllmaModel[]>([
     {
       "name": "llama2:7b",
       "modified_at": "2023-08-02T17:02:23.713454393-07:00",
-      "size": 3791730596
+      "size": 3791730596,
     },
     {
       "name": "llama2:13b",
       "modified_at": "2023-08-08T12:08:38.093596297-07:00",
-      "size": 7323310500
-    }
+      "size": 7323310500,
+    },
   ]
-  )
+  );
 
   useEffect(() => {
     fetch(URL)
       .then(res => res.json())
       .then(res => setModels(res.models))
-      .catch(err => console.log(err))
-  }, [])
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <Container style={{ background: "#f3a17c" }}>
@@ -97,4 +94,4 @@ export const LLMRoute: FC = () => {
   );
 };
 
-export default LLMRoute
+export default LLMRoute;

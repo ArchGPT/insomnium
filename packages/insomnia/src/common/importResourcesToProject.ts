@@ -6,13 +6,10 @@ import { DEFAULT_PROJECT_ID } from '../models/project';
 import { importResourcesToNewWorkspace } from './importResourcesToNewWorkspace';
 import { ResourceCache } from './import';
 
-
-
-export async function importResourcesToProject({ projectId = DEFAULT_PROJECT_ID, _resources }: { projectId?: string; _resources?: BaseModel[]; }) {
+export async function importResourcesToProject({ projectId = DEFAULT_PROJECT_ID, _resources }: { projectId?: string; _resources?: BaseModel[] }) {
 
   const resources = _resources || ResourceCache!.resources;
   guard(resources, 'No resources to import');
-
 
   const bufferId = await db.bufferChanges();
   if (!resources.find(isWorkspace)) {

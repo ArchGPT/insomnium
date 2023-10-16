@@ -108,7 +108,7 @@ export const BodyEditor: FC<Props> = ({
   const mimeType = request.body.mimeType;
   const isBodyEmpty = typeof mimeType !== 'string' && !request.body.text;
 
-  const secondaryAction = request.method === "POST" ? " Select a body type from above to send data in the body of a request" : null
+  const secondaryAction = request.method === "POST" ? " Select a body type from above to send data in the body of a request" : null;
 
   const _render = () => {
     if (mimeType === CONTENT_TYPE_FORM_URLENCODED) {

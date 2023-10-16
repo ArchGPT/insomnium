@@ -10,8 +10,6 @@ import { database as db } from './database';
 import { generateId } from './misc';
 import { ResourceCache, isApiSpecImport, isSubEnvironmentResource } from './import';
 
-
-
 export const importResourcesToNewWorkspace = async (projectId: string, _resources?: BaseModel[], workspaceToImport?: Workspace) => {
 
   const resources = _resources || ResourceCache?.resources;

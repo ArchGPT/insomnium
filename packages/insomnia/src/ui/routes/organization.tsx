@@ -1,6 +1,5 @@
 import { LoaderFunction, ShouldRevalidateFunction, useRouteLoaderData } from 'react-router-dom';
 
-
 import { database } from '../../common/database';
 import { project } from '../../models';
 import { defaultOrganization, Organization } from '../../models/organization';
@@ -19,7 +18,7 @@ export const loader: LoaderFunction = async () => {
 export const useOrganizationLoaderData = () => {
   return {
     organizations: [defaultOrganization],
-  }
+  };
 };
 
 export const shouldOrganizationsRevalidate: ShouldRevalidateFunction = ({

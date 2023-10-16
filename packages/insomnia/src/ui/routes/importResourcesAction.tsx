@@ -6,7 +6,6 @@ import { DEFAULT_PROJECT_ID } from '../../models/project';
 import { guard } from '../../utils/guard';
 import { ImportResourcesActionResult } from './import';
 
-
 export const importResourcesAction: ActionFunction = async ({ request }): Promise<ImportResourcesActionResult> => {
   const formData = await request.formData();
 

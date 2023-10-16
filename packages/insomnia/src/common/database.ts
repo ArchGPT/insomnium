@@ -729,14 +729,14 @@ async function _send<T>(fnName: string, ...args: any[]) {
  */
 export async function _fixDBShape() {
   console.log('[fix] Running database repairs');
-  const workspaces = await database.find<Workspace>(models.workspace.type)
+  const workspaces = await database.find<Workspace>(models.workspace.type);
   for (const workspace of workspaces) {
     await _repairBaseEnvironments(workspace);
     await _fixMultipleCookieJars(workspace);
     await _applyApiSpecName(workspace);
   }
 
-  console.log(['workspaces'], workspaces)
+  console.log(['workspaces'], workspaces);
 
   for (const gitRepository of await database.find<GitRepository>(models.gitRepository.type)) {
     await _fixOldGitURIs(gitRepository);

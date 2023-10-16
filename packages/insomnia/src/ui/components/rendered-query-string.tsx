@@ -44,7 +44,7 @@ export const RenderedQueryString: FC<Props> = ({ request }) => {
       const result = await handleRender({
         url: request.url,
         parameters: enabledParameters,
-        segmentParams: enabledSeg
+        segmentParams: enabledSeg,
       });
 
       if (!result) {
@@ -56,7 +56,7 @@ export const RenderedQueryString: FC<Props> = ({ request }) => {
       let fullUrl = joinUrlAndQueryString(url, qs);
       // look for :name for segmentParams and replace with value
 
-      fullUrl = addSegValuesToUrl(fullUrl, segmentParams)
+      fullUrl = addSegValuesToUrl(fullUrl, segmentParams);
 
       const encoded = smartEncodeUrl(fullUrl, request.settingEncodeUrl);
       setPreviewString(encoded === '' ? defaultPreview : encoded);

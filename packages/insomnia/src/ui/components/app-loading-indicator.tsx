@@ -15,8 +15,6 @@ export const AppLoadingIndicator = () => (
       style={{
         position: 'relative',
       }}
-    >
-
-    </div>
+    />
   </div>
 );

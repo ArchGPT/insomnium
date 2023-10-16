@@ -927,7 +927,6 @@ const localTemplatePlugins: { templateTag: PluginTemplateTag }[] = [
           }
           console.log("{TEMPLATE}", request.parameters);
 
-
           for (const queryParameter of request.parameters) {
             const queryParameterName = await context.util.render(queryParameter.name);
             parameterNames.push(queryParameterName);

@@ -462,7 +462,6 @@ export const cloneGitRepoAction: ActionFunction = async ({
     });
     await models.apiSpec.getOrCreateForParentId(workspace._id);
 
-
     workspaceId = workspace._id;
 
     // Store GitRepository settings and set it as active
@@ -474,14 +473,12 @@ export const cloneGitRepoAction: ActionFunction = async ({
 
     if (workspaces.length === 0) {
 
-
       return {
         errors: ['No workspaces found in repository'],
       };
     }
 
     if (workspaces.length > 1) {
-
 
       return {
         errors: ['Multiple workspaces found in repository. Expected one.'],
@@ -526,7 +523,6 @@ export const cloneGitRepoAction: ActionFunction = async ({
 
   // Flush DB changes
   await database.flushChanges(bufferId);
-
 
   guard(workspaceId, 'Workspace ID is required');
 
@@ -978,7 +974,6 @@ export const pushToGitRemoteAction: ActionFunction = async ({
     }
     const errorMessage = err instanceof Error ? err.message : 'Unknown Error';
 
-
     if (err instanceof Errors.PushRejectedError) {
       return {
         errors: [`Push Rejected, ${errorMessage}`],
@@ -1039,7 +1034,6 @@ export const pullFromGitRemoteAction: ActionFunction = async ({
       return { errors: [`${err.message}, ${err.data.response}`] };
     }
     const errorMessage = err instanceof Error ? err.message : 'Unknown Error';
-
 
     return {
       errors: [`${errorMessage}`],
