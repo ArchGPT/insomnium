@@ -14,7 +14,7 @@
           "NODE_ENV": "development"
         }
       },
-      "command": "${workspaceRoot}/packages/insomnia/node_modules/.bin/esr esbuild.main.ts"
+      "command": "npm run build:main.min.js"
     },
     {
       "label": "Insomnium: Compile Renderer (Watch)",
