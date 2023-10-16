@@ -9,7 +9,7 @@ const BINARY_PREFIX = 'Insomnium.Core';
  */
 const config = {
   npmRebuild: false,
-  appId: 'com.insomnia.app',
+  appId: 'com.insomnium.app',
   protocols: [
     {
       name: 'Insomnium',

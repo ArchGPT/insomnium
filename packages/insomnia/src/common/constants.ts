@@ -127,14 +127,14 @@ export const displayModifierKey = (key: keyof Omit<KeyCombination, 'keyCode'>) =
 
 // Update
 export enum UpdateURL {
-  mac = 'https://updates.insomnia.rest/builds/check/mac',
-  windows = 'https://updates.insomnia.rest/updates/win',
+  mac = 'https://archgpt.dev/insomnium/builds/check/mac',
+  windows = 'https://archgpt.dev/insomnium/updates/win',
 }
 
 // API
 export const getApiBaseURL = () => env.INSOMNIA_API_URL || 'https://api.insomnia.rest';
 
-export const getUpdatesBaseURL = () => env.INSOMNIA_UPDATES_URL || 'https://updates.insomnia.rest';
+export const getUpdatesBaseURL = () => env.INSOMNIA_UPDATES_URL || 'https://archgpt.dev/insomnium';
 
 // App website
 export const getAppWebsiteBaseURL = () => env.INSOMNIA_APP_WEBSITE_URL || 'https://app.insomnia.rest';

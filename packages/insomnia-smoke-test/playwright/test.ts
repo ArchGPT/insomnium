@@ -31,7 +31,7 @@ export const test = baseTest.extend<{
       INSOMNIA_APP_WEBSITE_URL: webServerUrl + '/website',
       INSOMNIA_GITHUB_API_URL: webServerUrl + '/github-api/graphql',
       INSOMNIA_GITLAB_API_URL: webServerUrl + '/gitlab-api',
-      INSOMNIA_UPDATES_URL: webServerUrl || 'https://updates.insomnia.rest',
+      INSOMNIA_UPDATES_URL: webServerUrl || 'https://archgpt.dev/insomnium',
     };
 
     const electronApp = await playwright._electron.launch({
