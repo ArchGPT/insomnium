@@ -54,15 +54,18 @@ jobs:
       - name: Install packages
         run: npm ci
 
+      - name: Test Insomnium
+        working-directory: packages/insomnia
+        run: npm test
+
+      - name: Test Insomnium Testing
+        working-directory: packages/insomnia-testing
+        run: npm test
+
       # need to roll back type checks gradually
       # - name: Type checks
       #   run: npm run type-check
 
-      # - name: Test Insomnium
-      #   run: npm test -w packages/insomnia
-
-      # - name: Test Insomnium Testing
-      #   run: npm test -w packages/insomnia-testing
       # - name: Build app for smoke tests
       #   run: NODE_OPTIONS='--max_old_space_size=6144' npm run app-build
 
