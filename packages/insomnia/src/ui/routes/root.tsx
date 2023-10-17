@@ -23,10 +23,9 @@ import {
   useParams,
   useRouteLoaderData,
 } from 'react-router-dom';
-import llama from "../../../src/ui/components/assets/llama.jpg"
+import llama from "../../../src/ui/components/assets/llama.jpg";
 
 /**** ><> ↑ --------- Imports */
-
 
 import { isDevelopment } from '../../common/constants';
 import * as models from '../../models';
@@ -78,14 +77,13 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
 };
 /**** ><> ↑ --------- Root Loader Data */
 
-
 /**** ><> ↑ --------- Helper Function */
 
 const Root = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { settings } = useLoaderData() as RootLoaderData;
-  const organizations = [defaultOrganization]
+  const organizations = [defaultOrganization];
 
   const workspaceData = useRouteLoaderData(
     ':workspaceId'
@@ -128,8 +126,6 @@ const Root = () => {
               message: params.message,
             });
             break;
-
-
 
           case 'insomnia://app/import':
             setImportUri(params.uri);
@@ -294,7 +290,7 @@ const Root = () => {
                         <Item key={item.id} id={item.id}>
                           {item.node}
                         </Item>
-                    )} 
+                    )}
                     </Breadcrumbs>
                     {isDesign(workspaceData?.activeWorkspace) && (
                       <nav className="flex rounded-full justify-between content-evenly font-semibold bg-[--hl-xs] p-[--padding-xxs]">
@@ -334,8 +330,7 @@ const Root = () => {
                           }`
                         }
 
-
-                    to={(() => {
+                        to={(() => {
 
                       const currentLocation = location.pathname;
 
@@ -344,10 +339,12 @@ const Root = () => {
                         // if coming from none requester tab
                         const prevLocationHistoryEntry = localStorage.getItem('requester_locationHistoryEntry');
 
-                        if (prevLocationHistoryEntry) return prevLocationHistoryEntry;
+                        if (prevLocationHistoryEntry) {
+ return prevLocationHistoryEntry;
+}
                       }
 
-                      return `/organization/${organizations[0]._id}`
+                      return `/organization/${organizations[0]._id}`;
 
                         })()}
                       >

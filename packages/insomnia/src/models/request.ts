@@ -115,7 +115,7 @@ export interface BaseRequest {
   settingEncodeUrl: boolean;
   settingRebuildPath: boolean;
   settingFollowRedirects: 'global' | 'on' | 'off';
-  segmentParams: RequestSegment[]
+  segmentParams: RequestSegment[];
 }
 
 export type Request = BaseModel & BaseRequest;

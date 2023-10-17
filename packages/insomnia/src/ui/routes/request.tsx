@@ -171,7 +171,6 @@ export const createRequestAction: ActionFunction = async ({ request, params }) =
   guard(typeof activeRequestId === 'string', 'Request ID is required');
   models.stats.incrementCreatedRequests();
 
-
   return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${activeRequestId}`);
 };
 

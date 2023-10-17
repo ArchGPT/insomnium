@@ -37,7 +37,6 @@ const Design = lazy(() => import('./routes/design'));
 
 const LLMRoute = lazy(() => import('./routes/llm'));
 
-
 initializeLogging();
 // Handy little helper
 document.body.setAttribute('data-platform', process.platform);
@@ -811,9 +810,9 @@ export const setupRouterStuff = (beginningPath: string | null = null) => {
     }
     localStorage.setItem('locationHistoryEntry', location.pathname);
     match?.params.organizationId && localStorage.setItem(`locationHistoryEntry:${match?.params.organizationId}`, location.pathname);
-    console.log("location.pathname", location.pathname)
-  })
+    console.log("location.pathname", location.pathname);
+  });
 
-  return router
+  return router;
 
-}
+};

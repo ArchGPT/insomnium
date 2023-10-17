@@ -241,9 +241,8 @@ async function _applyRequestPluginHooks(
 ) {
   const newRenderedRequest = clone(renderedRequest);
 
-
   console.log("[URL]", newRenderedRequest.url);
-  newRenderedRequest.url = newRenderedRequest.url.replace(":desu", "a")
+  newRenderedRequest.url = newRenderedRequest.url.replace(":desu", "a");
 
   for (const { plugin, hook } of await plugins.getRequestHooks()) {
 
@@ -256,7 +255,7 @@ async function _applyRequestPluginHooks(
     };
 
     try {
-      console.log("[plugin] applying ", plugin)
+      console.log("[plugin] applying ", plugin);
       await hook(context);
     } catch (err) {
       err.plugin = plugin;

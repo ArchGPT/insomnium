@@ -27,7 +27,6 @@ const Modals: FC = () => {
   const workspaceData = useRouteLoaderData(':workspaceId') as WorkspaceLoaderData | undefined;
   const { activeWorkspace, activeEnvironment } = workspaceData || {};
 
-
   return (
     <div key="modals" className="modals">
       <ErrorBoundary showAlert>
@@ -82,8 +81,6 @@ const Modals: FC = () => {
         <EnvironmentEditModal
           ref={instance => registerModal(instance, 'EnvironmentEditModal')}
         />
-
-
 
         <AddKeyCombinationModal
           ref={instance => registerModal(instance, 'AddKeyCombinationModal')}

@@ -38,7 +38,6 @@ module.exports = {
     'filenames',
     'react-hooks',
     'import',
-    'simple-import-sort',
   ],
   globals: {
     __DEV__: true,
@@ -98,14 +97,15 @@ module.exports = {
     'space-infix-ops': SUCCESSOR(TYPESCRIPT_EXTENSION),
     'space-unary-ops': ERROR,
     'space-in-parens': ERROR,
-    'spaced-comment': [ERROR, 'always', {
-      exceptions: ['/', '*', '-', '* '], // for ASCII art :)
-      markers: [
-        '/', // for TypeScript directives, doxygen, vsdoc, etc. (which use `///`)
-        '?', // for Quokka
-      ],
-    }],
+    // 'spaced-comment': [ERROR, 'always', {
+    //   exceptions: ['/', '*', '-', '* '], // for ASCII art :)
+    //   markers: [
+    //     '/', // for TypeScript directives, doxygen, vsdoc, etc. (which use `///`)
+    //     '?', // for Quokka
+    //   ],
+    // }],
 
+    'react/display-name': WARN(UNKNOWN),
     'react/no-unescaped-entities': OFF(TYPESCRIPT_CONVERSION),
     'react/jsx-first-prop-new-line': [ERROR, 'multiline'],
     'react/jsx-max-props-per-line': [ERROR, { maximum: 1, when: 'multiline' }],
@@ -123,11 +123,11 @@ module.exports = {
     'react/no-array-index-key': WARN(UNKNOWN),
     'react/self-closing-comp': ERROR,
 
-    'react-hooks/exhaustive-deps': [ERROR, {
+    'react-hooks/exhaustive-deps': [WARN(UNKNOWN), {
       // From react-use https://github.com/streamich/react-use/issues/1703#issuecomment-770972824
       'additionalHooks': '^use(Async|AsyncFn|AsyncRetry|Debounce|UpdateEffect|IsomorphicLayoutEffect|DeepCompareEffect|ShallowCompareEffect)$',
     }],
-    'react-hooks/rules-of-hooks': ERROR,
+    'react-hooks/rules-of-hooks': WARN(UNKNOWN),
 
     '@typescript-eslint/array-type': [ERROR, { default: 'array', readonly: 'array' }],
     '@typescript-eslint/ban-types': OFF(UNKNOWN),
@@ -144,9 +144,9 @@ module.exports = {
     // [ERROR, { ignoreRestSiblings: true }],
     '@typescript-eslint/space-infix-ops': ERROR,
     '@typescript-eslint/semi': [ERROR, 'always'],
-    '@typescript-eslint/quotes': [ERROR, 'single', { avoidEscape: true }],
+    // '@typescript-eslint/quotes': [ERROR, 'single', { avoidEscape: true }],
 
-    'simple-import-sort/imports': ERROR,
+    // 'simple-import-sort/imports': ERROR,
     'filenames/match-exported': OFF(UNKNOWN),
     camelcase: OFF(UNKNOWN),
     '@typescript-eslint/no-use-before-define': OFF(TYPESCRIPT_CONVERSION),

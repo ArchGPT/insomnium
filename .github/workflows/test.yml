@@ -11,11 +11,31 @@ on:
       - opened
       - synchronize
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
+  Lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # - name: Lint markdown
+      #   run: npm run lint:markdown
+      
   Test:
     runs-on: ubuntu-latest
     strategy:
@@ -33,13 +53,6 @@ jobs:
 
       - name: Install packages
         run: npm ci
-
-      # need to fix this 
-      # - name: Lint
-      #   run: npm run lint
-
-      # - name: Lint markdown
-      #   run: npm run lint:markdown
 
       # need to roll back type checks gradually
       # - name: Type checks

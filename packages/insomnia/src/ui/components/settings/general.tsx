@@ -355,8 +355,6 @@ export const General: FC = () => {
 
       <hr className="pad-top" />
 
-
-
     </div>
   );
 };

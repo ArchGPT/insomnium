@@ -18,7 +18,6 @@ import {
 import { Request, RequestBody, RequestHeader, RequestParameter } from '../../../models/request';
 import { deconstructQueryStringToParams } from '../../../utils/url/querystring';
 
-
 import { useRequestSetter } from '../../hooks/use-request';
 import { RequestLoaderData } from '../../routes/request';
 import { Dropdown, DropdownButton, DropdownItem, DropdownSection, ItemContent } from '../base/dropdown';
@@ -62,7 +61,6 @@ export const ContentTypeDropdown: FC = () => {
       });
     }
     patchRequest(requestId, { body: { mimeType } });
-
 
   };
 

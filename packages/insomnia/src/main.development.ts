@@ -24,7 +24,6 @@ import type { ToastNotification } from './ui/components/toast';
 import { dummyStartingWorkspace, importToWorkspaceFromJSON } from './common/import';
 import { Workspace } from './models/workspace';
 
-
 // Handle potential auto-update
 if (checkIfRestartNeeded()) {
   process.exit(0);
@@ -92,9 +91,8 @@ app.on('ready', async () => {
   // Init some important things first
   await database.init(models.types());
   await _createModelInstances();
-  const workspaces = await database.find<Workspace>(models.workspace.type)
+  const workspaces = await database.find<Workspace>(models.workspace.type);
   console.log("workspaces desu", workspaces);
-
 
   windowUtils.init();
   await _launchApp();
@@ -223,4 +221,3 @@ async function _createModelInstances() {
   await models.stats.get();
   await models.settings.getOrCreate();
 }
-

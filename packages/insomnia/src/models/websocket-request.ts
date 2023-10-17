@@ -24,7 +24,7 @@ export interface BaseWebSocketRequest {
   settingStoreCookies: boolean;
   settingSendCookies: boolean;
   settingFollowRedirects: 'global' | 'on' | 'off';
-  segmentParams: RequestSegment[]
+  segmentParams: RequestSegment[];
 }
 
 export type WebSocketRequest = BaseModel & BaseWebSocketRequest & { type: typeof type };
@@ -49,7 +49,7 @@ export const init = (): BaseWebSocketRequest => ({
   settingSendCookies: true,
   settingFollowRedirects: 'global',
   description: '',
-  segmentParams: []
+  segmentParams: [],
 });
 
 export const migrate = (doc: WebSocketRequest) => doc;

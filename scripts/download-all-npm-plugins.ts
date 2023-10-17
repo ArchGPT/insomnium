@@ -24,7 +24,7 @@ const pageSize = 250;
 const npmSearchUrl = `https://registry.npmjs.org/-/v1/search?text=${npmSearchText}&size=${pageSize}`;
 
 const request = https.get(npmSearchUrl, response => {
-  let data: Uint8Array[] = [];
+  const data: Uint8Array[] = [];
   response.on('data', (chunk: Uint8Array) => {
     data.push(chunk);
   });
