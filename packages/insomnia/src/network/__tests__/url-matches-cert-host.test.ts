@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import { urlMatchesCertHost } from '../url-matches-cert-host';
 
+
 describe('urlMatchesCertHost', () => {
   beforeEach(globalBeforeEach);
   describe('when the certificate host has no wildcard', () => {
@@ -123,6 +124,7 @@ describe('urlMatchesCertHost', () => {
     it('should return true if certificate host has wildcard port', () => {
       const requestUrl = 'http://localhost:3000/some/resources?query=1';
       const certificateHost = 'localhost:*';
+
       expect(urlMatchesCertHost(certificateHost, requestUrl)).toBe(true);
     });
 

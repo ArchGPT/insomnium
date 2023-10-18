@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/ArchGPT/insomnium#readme",
   "engines": {
-    "node": ">=18.17.0",
+    "node": ">=18.18.2",
     "npm": ">=8.19.0"
   },
   "workspaces": [
