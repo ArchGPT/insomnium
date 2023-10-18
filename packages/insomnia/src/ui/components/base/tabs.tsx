@@ -176,7 +176,7 @@ const TabPanel: FC<TabPanelProps> = ({ state, ...props }) => {
 
 interface TabsProps extends AriaTabListProps<TabItemProps> {
   isNested?: boolean;
-  rightButton?: any
+  rightButton?: any;
 }
 
 const Tabs: FC<TabsProps> = props => {

@@ -86,7 +86,7 @@ export const GenerateConfigModal = forwardRef<GenerateConfigModalHandle, ModalPr
           error: `Unsupported OpenAPI spec format ${formatVersion}`,
         };
       }
-      throw "openapi-2-kong removed"
+      throw "openapi-2-kong removed";
 
     } catch (err) {
       return {

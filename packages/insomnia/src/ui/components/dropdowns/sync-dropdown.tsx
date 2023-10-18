@@ -3,7 +3,6 @@ import React, { FC, Fragment, useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams, useRouteLoaderData } from 'react-router-dom';
 import { useInterval, useMount } from 'react-use';
 
-
 import { DEFAULT_BRANCH_NAME } from '../../../common/constants';
 import { database as db, Operation } from '../../../common/database';
 import { docsVersionControl } from '../../../common/documentation';
@@ -561,9 +560,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
           title={syncMenuHeader}
         >
 
-          <DropdownItem aria-label='Login'>
-
-          </DropdownItem>
+          <DropdownItem aria-label='Login' />
 
           <DropdownItem aria-label='Branches'>
             <ItemContent

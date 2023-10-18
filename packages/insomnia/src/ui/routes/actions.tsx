@@ -3,7 +3,6 @@ import { generate, runTests, type Test } from 'insomnia-testing';
 import path from 'path';
 import { ActionFunction, redirect } from 'react-router-dom';
 
-
 import { parseApiSpec, resolveComponentSchemaRefs } from '../../common/api-specs';
 import { ACTIVITY_DEBUG, ACTIVITY_SPEC } from '../../common/constants';
 import { database } from '../../common/database';
@@ -72,7 +71,6 @@ export const deleteProjectAction: ActionFunction = async ({ params }) => {
   await models.stats.incrementDeletedRequestsForDescendents(project);
   await models.project.remove(project);
 
-
   return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${DEFAULT_PROJECT_ID}`);
 };
 
@@ -126,8 +124,6 @@ export const createNewWorkspaceAction: ActionFunction = async ({
   //     });
   //   }
   // }
-
-
 
   return redirect(
     `/organization/${organizationId}/project/${projectId}/workspace/${workspace._id}/${workspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
@@ -277,7 +273,6 @@ export const createNewTestSuiteAction: ActionFunction = async ({
     name,
   });
 
-
   return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}`);
 };
 
@@ -292,7 +287,6 @@ export const deleteTestSuiteAction: ActionFunction = async ({ params }) => {
   guard(unitTestSuite, 'Test Suite not found');
 
   await models.unitTestSuite.remove(unitTestSuite);
-
 
   return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/test`);
 };
@@ -328,7 +322,6 @@ export const runAllTestsAction: ActionFunction = async ({
     results,
     parentId: workspaceId,
   });
-
 
   return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
 };
@@ -369,7 +362,6 @@ export const createNewTestAction: ActionFunction = async ({ request, params }) =
 expect(response1.status).to.equal(200);`,
     name,
   });
-
 
   return null;
 };
@@ -439,7 +431,6 @@ export const runTestAction: ActionFunction = async ({ params }) => {
     results,
     parentId: unitTest.parentId,
   });
-
 
   return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
 };

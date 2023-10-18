@@ -108,12 +108,14 @@ export const buildQueryStringFromParams = (
 };
 
 export const addSegValuesToUrl = (fullUrl: string, segmentParams?: RequestSegment[]) => {
-  if (!segmentParams) return fullUrl
-  return fullUrl.replace((/\:([\w_-]*?)(?=($|[^[\w_-]))/g), (match, p1) => {
-    const seg = segmentParams.find((a) => a.name === p1)
-    return seg?.value || match
-  })
+  if (!segmentParams) {
+ return fullUrl;
 }
+  return fullUrl.replace((/\:([\w_-]*?)(?=($|[^[\w_-]))/g), (match, p1) => {
+    const seg = segmentParams.find(a => a.name === p1);
+    return seg?.value || match;
+  });
+};
 
 /**
  * Deconstruct a querystring to name/value pairs

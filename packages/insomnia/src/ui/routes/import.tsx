@@ -56,4 +56,3 @@ export interface ImportResourcesActionResult {
   errors?: string[];
   done: boolean;
 }
-

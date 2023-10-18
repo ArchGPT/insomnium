@@ -23,7 +23,4 @@ export const getWorkspaces = (activeProjectId?: string) => {
   }
 };
 
-export const init = dataInit
-
-
-
+export const init = dataInit;

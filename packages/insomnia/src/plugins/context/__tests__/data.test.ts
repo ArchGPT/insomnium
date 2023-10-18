@@ -170,16 +170,6 @@ describe('app.export.*', () => {
       _type: 'export',
       resources: expect.arrayContaining([
         {
-          _id: 'wrk_1',
-          _type: 'workspace',
-          created: 111,
-          description: '',
-          modified: 222,
-          name: 'New Collection',
-          parentId: null,
-          scope: WorkspaceScopeKeys.collection,
-        },
-        {
           _id: 'req_1',
           _type: 'request',
           isPrivate: false,
@@ -194,6 +184,7 @@ describe('app.export.*', () => {
           name: 'New Request',
           parameters: [],
           parentId: 'wrk_1',
+          segmentParams: [],
           settingDisableRenderRequestBody: false,
           settingEncodeUrl: true,
           settingSendCookies: true,
@@ -201,6 +192,16 @@ describe('app.export.*', () => {
           settingRebuildPath: true,
           settingFollowRedirects: 'global',
           url: 'https://insomnia.rest',
+        },
+        {
+          _id: 'wrk_1',
+          _type: 'workspace',
+          created: 111,
+          description: '',
+          modified: 222,
+          name: 'New Collection',
+          parentId: null,
+          scope: WorkspaceScopeKeys.collection,
         },
       ]),
     });

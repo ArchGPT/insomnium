@@ -149,13 +149,8 @@ export const ResponsePane: FC<Props> = ({
           />
         </PaneHeader>
       )}
-      <Tabs aria-label="Response pane tabs"
-
-      // to-do for v0.3: show conditionally by setting
-      // rightButton={<div className="go-llm"><button className='highlight' onClick={() => {
-      // patchRequestMeta(activeRequest._id, { previewMode: 'frontend' })
-      // }}>generate front end</button></div>}
-
+      <Tabs
+        aria-label="Response pane tabs"
       >
         <TabItem
           key="preview"

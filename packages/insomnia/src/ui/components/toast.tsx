@@ -3,7 +3,6 @@ import type { IpcRendererEvent } from 'electron';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-
 import {
   getAppId,
   getAppPlatform,
@@ -90,7 +89,7 @@ export const Toast: FC = () => {
       updateAutomatically,
       updateChannel,
     } = await models.settings.getOrCreate();
-    let updatedNotification: ToastNotification | null = null;
+    const updatedNotification: ToastNotification | null = null;
     // Try fetching user notification
     try {
       const data = {

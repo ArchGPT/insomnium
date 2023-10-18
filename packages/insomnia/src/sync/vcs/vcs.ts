@@ -959,9 +959,9 @@ export class VCS {
     };
 
     // Push each missing blob in batches of 2MB max
-    let count = 0;
-    let batch: { id: string; content: string }[] = [];
-    let batchSizeBytes = 0;
+    const count = 0;
+    const batch: { id: string; content: string }[] = [];
+    const batchSizeBytes = 0;
     const maxBatchSize = 1024 * 1024 * 2; // 2 MB
 
     const maxBatchCount = 200;
@@ -1233,7 +1233,7 @@ export class VCS {
   }
 
   _assertSession() {
-    throw "nah"
+    throw "nah";
   }
 
   async _assertBranch(branchName: string) {

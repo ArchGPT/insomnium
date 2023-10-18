@@ -1,7 +1,6 @@
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { useFetcher, useParams, useRouteLoaderData } from 'react-router-dom';
 
-
 import { getProductName } from '../../../common/constants';
 import { database as db } from '../../../common/database';
 import { getWorkspaceLabel } from '../../../common/get-workspace-label';
@@ -25,7 +24,6 @@ import { WorkspaceDuplicateModal } from '../modals/workspace-duplicate-modal';
 import { WorkspaceSettingsModal } from '../modals/workspace-settings-modal';
 
 console.log("[configGenerators] ", configGenerators);
-
 
 export const WorkspaceDropdown: FC = () => {
   const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
@@ -51,7 +49,6 @@ export const WorkspaceDropdown: FC = () => {
   const [, setActionPlugins] = useState<WorkspaceAction[]>([]);
   const [loadingActions, setLoadingActions] = useState<Record<string, boolean>>({});
   const dropdownRef = useRef<DropdownHandle>(null);
-
 
   const handleDropdownOpen = useCallback(async () => {
     const actionPlugins = await getWorkspaceActions();
@@ -149,9 +146,6 @@ export const WorkspaceDropdown: FC = () => {
             />
           </DropdownItem>
         </DropdownSection>
-
-
-
 
       </Dropdown>
       {isDuplicateModalOpen && (

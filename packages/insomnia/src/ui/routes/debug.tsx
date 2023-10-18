@@ -47,7 +47,7 @@ import { getByParentId as getRequestMetaByParentId } from '../../models/request-
 import {
   isWebSocketRequest,
   isWebSocketRequestId,
-  WebSocketRequest
+  WebSocketRequest,
 } from '../../models/websocket-request';
 import { guard } from '../../utils/guard';
 import { RequestActionsDropdown } from '../components/dropdowns/request-actions-dropdown';
@@ -1002,7 +1002,6 @@ export const Debug: FC = () => {
               </GridList>
             </div>
           </div>
-
 
           {isEnvironmentModalOpen && (
             <WorkspaceEnvironmentsEditModal

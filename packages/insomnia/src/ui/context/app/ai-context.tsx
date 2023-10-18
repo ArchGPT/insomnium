@@ -2,8 +2,6 @@ import React, { createContext, FC, PropsWithChildren, useContext, useEffect } fr
 import { useFetcher, useFetchers, useParams } from 'react-router-dom';
 import { usePrevious } from 'react-use';
 
-
-
 const AIContext = createContext({
   generating: false,
   generateTests: () => { },
@@ -38,7 +36,7 @@ export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
   const aiGenerateTestsFromSpecFetcher = useFetcher();
   const loading = useFetchers().filter(loader => loader.formAction?.includes('/ai/generate/')).some(loader => loader.state !== 'idle');
 
-  const loggedIn = false
+  const loggedIn = false;
 
   const prevProjectId = usePrevious(projectId);
 

@@ -238,7 +238,7 @@ export const ResponseViewer = ({
   if (previewMode === FRONT_END) {
     return (<div>
       {/* to-do */}
-    </div>)
+    </div>);
   }
 
   const contentType = _getContentType();

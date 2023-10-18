@@ -316,7 +316,6 @@ export const RequestPane: FC<Props> = ({
         </TabItem>
       </Tabs>
 
-
       {isRequestSettingsModalOpen && (
         <RequestSettingsModal
           request={activeRequest}

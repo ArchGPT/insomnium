@@ -76,7 +76,6 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
             </PanelContainer>
           </TabItem>
 
-
         </Tabs>
       </ModalBody>
     </Modal>

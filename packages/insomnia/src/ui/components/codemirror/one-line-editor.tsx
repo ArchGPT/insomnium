@@ -25,7 +25,7 @@ export interface OneLineEditorProps {
   readOnly?: boolean;
   type?: string;
   onPaste?: (text: string) => void;
-  isInfered?: boolean
+  isInfered?: boolean;
 }
 
 export interface OneLineEditorHandle {
@@ -209,9 +209,9 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
   useEffect(() => {
 
     if (isInfered && codeMirror.current) {
-      codeMirror.current?.setValue(defaultValue)
+      codeMirror.current?.setValue(defaultValue);
     }
-  }, [defaultValue, isInfered])
+  }, [defaultValue, isInfered]);
 
   useEffect(() => window.main.on('context-menu-command', (_, { key, tag }) =>
     id === key && codeMirror.current?.replaceSelection(tag)), [id]);

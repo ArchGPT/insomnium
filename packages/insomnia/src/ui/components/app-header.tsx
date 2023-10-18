@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React, { FC, Fragment, ReactNode } from 'react';
 import styled from 'styled-components';
 
-
 const LogoWrapper = styled.div({
   display: 'flex',
   justifyContent: 'center',
@@ -75,9 +74,7 @@ export const AppHeader: FC<AppHeaderProps> = ({
     <Header
       gridLeft={(
         <Fragment>
-          <LogoWrapper>
-
-          </LogoWrapper>
+          <LogoWrapper />
 
         </Fragment>
       )}

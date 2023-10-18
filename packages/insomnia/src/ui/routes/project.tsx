@@ -321,7 +321,7 @@ const ProjectRoute: FC = () => {
     projectId: string;
   };
 
-  const organizations = [defaultOrganization]
+  const organizations = [defaultOrganization];
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [isGitRepositoryCloneModalOpen, setIsGitRepositoryCloneModalOpen] =

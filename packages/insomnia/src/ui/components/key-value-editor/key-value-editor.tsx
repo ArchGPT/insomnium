@@ -41,10 +41,10 @@ interface Props {
   }[]) => void;
   pairs: Pair[];
   valuePlaceholder?: string;
-  hideToolbar?: boolean
-  title?: string
-  isFieldInferred?: boolean
-  cantDelete?: boolean
+  hideToolbar?: boolean;
+  title?: string;
+  isFieldInferred?: boolean;
+  cantDelete?: boolean;
 }
 
 export const KeyValueEditor: FC<Props> = ({
@@ -63,7 +63,7 @@ export const KeyValueEditor: FC<Props> = ({
   valuePlaceholder,
   hideToolbar,
   title,
-  isFieldInferred
+  isFieldInferred,
 }) => {
   // We should make the pair.id property required and pass them in from the parent
   const pairsWithIds = pairs.map(pair => ({ ...pair, id: pair.id || generateId('pair') }));
@@ -109,7 +109,8 @@ export const KeyValueEditor: FC<Props> = ({
         </button>
       </Toolbar>}
       {title && <Toolbar> <button
-        className="btn btn--compact">{title} </button> </Toolbar>}
+        className="btn btn--compact"
+      >{title} </button> </Toolbar>}
       <ul className={classnames('key-value-editor', 'wide', className)}>
 
         {pairs.length === 0 && (

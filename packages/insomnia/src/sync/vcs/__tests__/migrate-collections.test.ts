@@ -12,16 +12,14 @@ import { initializeProjectFromTeam } from '../initialize-model-from';
 // import { migrateCollectionsIntoRemoteProject } from '../migrate-collections';
 import { VCS } from '../vcs';
 
-jest.mock('../vcs');
-jest.mock('../../../account/session', () => ({
-  isLoggedIn: jest.fn(),
-}));
-
-// const isLoggedIn = mocked(_isLoggedIn);
-const newMockedVcs = () => mocked(new VCS(new MemoryDriver()), true);
-
 const projectWithTeamBuilder = createBuilder(backendProjectWithTeamSchema);
 const teamBuilder = createBuilder(teamSchema);
+
+it('is commented out', () => {
+  // Empty test to keep the test runner happy
+
+  // Currently this functionality is not used maybe should be removed
+});
 
 // describe('migrateCollectionsIntoRemoteProject', () => {
 //   beforeEach(async () => {

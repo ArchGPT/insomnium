@@ -144,27 +144,24 @@ export async function scanResources({
   };
 }
 
-
 export const importPure = async (json: { resources: BaseModel[] } & any) => {
   const _resources = json.resources;
   // console.log("importPure", json);
   return await importResourcesToProject({ _resources });
-}
-
+};
 
 export const importResourcesToWorkspace = async ({ workspaceId }: { workspaceId: string }) => {
   guard(ResourceCache, 'No resources to import');
   const resources = ResourceCache.resources;
   return await importToWorkspace({ workspaceId, resources });
-}
+};
 
-export const importToWorkspaceFromJSON = async ({ workspaceId, json }: { workspaceId: string, json: { resources: BaseModel[] } } & any) => {
+export const importToWorkspaceFromJSON = async ({ workspaceId, json }: { workspaceId: string; json: { resources: BaseModel[] } } & any) => {
   const resources = json.resources;
   return await importToWorkspace({ workspaceId, resources });
-}
+};
 
-export const importToWorkspace = async ({ workspaceId, resources }: { workspaceId: string, resources: BaseModel[] }) => {
-
+export const importToWorkspace = async ({ workspaceId, resources }: { workspaceId: string; resources: BaseModel[] }) => {
 
   const bufferId = await db.bufferChanges();
   const ResourceIdMap = new Map();
@@ -255,14 +252,13 @@ export const importToWorkspace = async ({ workspaceId, resources }: { workspaceI
 export const isApiSpecImport = ({ id }: Pick<InsomniaImporter, 'id'>) =>
   id === 'openapi3' || id === 'swagger2';
 
-
 export const dummyStartingWorkspace = () => {
   const currentUnixTime = Date.now();
   const oneSec = 1000;
-  const wId = generateId(models.workspace.prefix)
-  const rId = generateId(models.request.prefix)
-  const eId = generateId(models.environment.prefix)
-  const jId = generateId(models.cookieJar.prefix)
+  const wId = generateId(models.workspace.prefix);
+  const rId = generateId(models.request.prefix);
+  const eId = generateId(models.environment.prefix);
+  const jId = generateId(models.cookieJar.prefix);
   return [({
     "_type": "export",
     "__export_format": 4,
@@ -290,7 +286,7 @@ export const dummyStartingWorkspace = () => {
         "settingEncodeUrl": true,
         "settingRebuildPath": true,
         "settingFollowRedirects": "global",
-        "type": "Request"
+        "type": "Request",
       },
       {
         "_id": wId,
@@ -315,7 +311,7 @@ export const dummyStartingWorkspace = () => {
         "color": null,
         "isPrivate": false,
         "metaSortKey": currentUnixTime - oneSec * 1,
-        "type": "Environment"
+        "type": "Environment",
       },
       {
         "_id": jId,
@@ -324,8 +320,8 @@ export const dummyStartingWorkspace = () => {
         "created": currentUnixTime,
         "name": "Default Jar",
         "cookies": [],
-        "type": "CookieJar"
-      }
-    ]
-  }), wId, rId]
-}
+        "type": "CookieJar",
+      },
+    ],
+  }), wId, rId];
+};

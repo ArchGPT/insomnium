@@ -21,7 +21,7 @@ import { AuthWrapper } from '../editors/auth/auth-wrapper';
 import { QueryEditorContainer, QueryEditorPreview } from '../editors/query-editor';
 import { RequestHeadersEditor } from '../editors/request-headers-editor';
 import { RequestParametersEditor } from '../editors/request-parameters-editor';
-import { RequestSegmentEditor } from '../editors/request-segment-editor'
+import { RequestSegmentEditor } from '../editors/request-segment-editor';
 import { ErrorBoundary } from '../error-boundary';
 import { MarkdownPreview } from '../markdown-preview';
 import { showAlert, showModal } from '../modals';
@@ -329,7 +329,7 @@ export const WebSocketRequestPane: FC<Props> = ({ environment }) => {
                   bulk={useBulkParametersEditor}
                   disabled={disabled}
                 />
-                {/* 
+                {/*
                 <RequestSegmentEditor
                   bulk={useBulkParametersEditor}
                   disabled={disabled}
