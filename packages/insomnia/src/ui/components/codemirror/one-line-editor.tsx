@@ -172,14 +172,13 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
     codeMirror.current.on('dragstart', preventDefault);
     codeMirror.current.setCursor({ line: -1, ch: -1 });
 
-
     // console.log("did mount - " + defaultValue, "_:" + codeMirror.current.getValue())
 
     if (defaultValue === codeMirror.current.getValue()) {
       // Actually set the value
       codeMirror.current?.setValue(defaultValue || '');
       // Clear history so we can't undo the initial set
-      codeMirror.current?.clearHistory()
+      codeMirror.current?.clearHistory();
     }
     // Setup nunjucks listeners
     if (!readOnly && handleRender && !settings.nunjucksPowerUserMode) {

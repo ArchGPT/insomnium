@@ -1,5 +1,5 @@
 import { parse as urlParse } from 'url';
-import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid';
 
 const WILDCARD_CHARACTER = '*';
 const WILDCARD_SUBSTITUTION = Math.random().toString().split('.')[1];
@@ -11,7 +11,9 @@ export default function certificateUrlParse(url: string, debug: boolean = false)
     return urlParse(url);
   } else {
     const parsed = urlParse(url.replace(/\*/g, WILDCARD_SUBSTITUTION));
-    if (debug) console.log("parsed", parsed);
+    if (debug) {
+      console.log("parsed", parsed);
+    };
 
     parsed.hostname = _reinstateWildcards(parsed.hostname);
     parsed.host = _reinstateWildcards(parsed.host);

@@ -17,18 +17,16 @@ export function urlMatchesCertHost(certificateHost: string, requestUrl: string, 
   const cHostnameRegex = escapeRegex(cHostname || '').replace(/\\\*/g, '.*');
   const cPortRegex = escapeRegex(cPort || '').replace(/\\\*/g, '.*');
 
-
-
   // Check ports
   if ((cPort + '').includes('*')) {
     if (!(port || '').match(`^${cPortRegex}$`)) {
-      if (debug) console.log(`port does not match ${cPortRegex}, ${cPort}, ${port}`)
+      if (debug) console.log(`port does not match ${cPortRegex}, ${cPort}, ${port}`);
 
       return false;
     }
   } else {
     if (assumedCPort !== assumedPort) {
-      if (debug) console.log(`port does not match ${assumedCPort}, ${assumedPort}`)
+      if (debug) console.log(`port does not match ${assumedCPort}, ${assumedPort}`);
 
       return false;
     }
@@ -36,7 +34,7 @@ export function urlMatchesCertHost(certificateHost: string, requestUrl: string, 
 
   // Check hostnames
   if (!(hostname || '').match(`^${cHostnameRegex}$`)) {
-    if (debug) console.log(`port does not match ${hostname}, ${cHostnameRegex}`)
+    if (debug) console.log(`port does not match ${hostname}, ${cHostnameRegex}`);
     return false;
   }
 

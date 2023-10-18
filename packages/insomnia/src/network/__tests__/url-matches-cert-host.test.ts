@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { globalBeforeEach } from '../../__jest__/before-each';
 import { urlMatchesCertHost } from '../url-matches-cert-host';
 
-
 describe('urlMatchesCertHost', () => {
   beforeEach(globalBeforeEach);
   describe('when the certificate host has no wildcard', () => {

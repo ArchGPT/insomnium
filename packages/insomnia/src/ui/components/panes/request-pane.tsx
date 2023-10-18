@@ -108,7 +108,8 @@ export const RequestPane: FC<Props> = ({
     ':workspaceId',
   ) as WorkspaceLoaderData;
   // Force re-render when we switch requests, the environment gets modified, or the (Git|Sync)VCS version changes
-  const uniqueKeyReq = `${activeEnvironment?.modified}::${requestId}::${gitVersion}::${activeRequestSyncVersion}`
+  const uniqueKeyReq = `${activeEnvironment?.modified}::${requestId}::${gitVersion}::${activeRequestSyncVersion}`;
+
   const uniqueKey = `${uniqueKeyReq}::${activeRequestMeta?.activeResponseId}`;
 
   if (!activeRequest) {

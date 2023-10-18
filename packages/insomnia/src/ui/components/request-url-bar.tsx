@@ -195,7 +195,6 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
   const isEventStreamOpen = useReadyState({ requestId: activeRequest._id, protocol: 'curl' });
   const isCancellable = currentInterval || currentTimeout || isEventStreamOpen;
 
-
   console.log("did mount uniquenessKey", uniquenessKey);
 
   return (
