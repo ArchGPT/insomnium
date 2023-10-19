@@ -19,7 +19,7 @@ export async function renderApp() {
   let wId: string | null = null;
   let eId: string | null = null;
 
-  // initalize a new req manually on user's first run
+  // initialize a new req manually on user's first run
   if (!prevLocationHistoryEntry) {
   const workspaceNumber = await database.count<Workspace>(models.workspace.type);
   console.log("workspaces detected ~>", workspaceNumber);
