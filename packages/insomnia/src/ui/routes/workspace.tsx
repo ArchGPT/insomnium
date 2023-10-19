@@ -153,8 +153,8 @@ export const workspaceLoader: LoaderFunction = async ({
   const grpcAndRequestMetas = [...requestMetas, ...grpcRequestMetas] as (RequestMeta | GrpcRequestMeta)[];
   const requestGroupMetas = await database.find(models.requestGroupMeta.type, { parentId: { $in: listOfParentIds } }) as RequestGroupMeta[];
 
-  // team sync needs an up to date list of eveything in the workspace to detect changes
-  // TODO: move this to somewhere more approriate
+  // team sync needs an up to date list of everything in the workspace to detect changes
+  // TODO: move this to somewhere more appropriate
   allRequests.map(r => syncItemsList.push(r));
   syncItemsList.push(activeWorkspace);
   syncItemsList.push(baseEnvironment);
