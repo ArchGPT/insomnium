@@ -251,7 +251,7 @@ const previewModeMap = {
   [PREVIEW_MODE_RAW]: ['Raw', 'Raw Data'],
   // v0.3
   // [FRONT_END]: ['FrontEnd', 'Front End Code'],
-};
+} satisfies Record<PreviewMode, string[]>;
 export const PREVIEW_MODES = Object.keys(previewModeMap) as (keyof typeof previewModeMap)[];
 
 // Content Types
@@ -377,7 +377,7 @@ export const dashboardSortOrderName: Record<DashboardSortOrder, string> = {
   [SORT_MODIFIED_DESC]: 'Last Modified',
 };
 
-export type PreviewMode = 'friendly' | 'source' | 'raw' | 'frontend';
+export type PreviewMode = 'friendly' | 'source' | 'raw' /*| 'frontend' */;
 
 export function getPreviewModeName(previewMode: PreviewMode, useLong = false) {
   if (previewModeMap.hasOwnProperty(previewMode)) {

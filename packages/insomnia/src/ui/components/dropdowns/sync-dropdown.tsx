@@ -497,7 +497,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
                     />
                   </Tooltip>
 
-                  {/* Only show cloud icons if logged in */}
+                  {/* Only show cloud icons if logged in
                   {session.isLoggedIn() && (
                     <Fragment>
                       {loadingPull ? (
@@ -524,7 +524,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
                         </Tooltip>
                       )}
                     </Fragment>
-                  )}
+                  )} */}
                 </div>
               </div>
 
@@ -560,7 +560,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
           title={syncMenuHeader}
         >
 
-          <DropdownItem aria-label='Login' />
+          {/* <DropdownItem aria-label='Login'> */}
 
           <DropdownItem aria-label='Branches'>
             <ItemContent

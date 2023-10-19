@@ -723,29 +723,32 @@ export const generateTestsAction: ActionFunction = async ({ params }) => {
 };
 
 export const accessAIApiAction: ActionFunction = async ({ params }) => {
-  const { organizationId, projectId, workspaceId } = params;
 
-  guard(typeof organizationId === 'string', 'Organization ID is required');
-  guard(typeof projectId === 'string', 'Project ID is required');
-  guard(typeof workspaceId === 'string', 'Workspace ID is required');
+  throw new Error("accesAI is disabled");
 
-  try {
-    const response = await window.main.insomniaFetch<{ enabled: boolean }>({
-      method: 'POST',
-      origin: 'https://ai.insomnia.rest',
-      path: '/v1/access',
-      sessionId: session.getCurrentSessionId(),
-      data: {
-        teamId: organizationId,
-      },
-    });
+  // const { organizationId, projectId, workspaceId } = params;
 
-    return {
-      enabled: response.enabled,
-    };
-  } catch (err) {
-    return { enabled: false };
-  }
+  // guard(typeof organizationId === 'string', 'Organization ID is required');
+  // guard(typeof projectId === 'string', 'Project ID is required');
+  // guard(typeof workspaceId === 'string', 'Workspace ID is required');
+
+  // try {
+  //   const response = await window.main.insomniaFetch<{ enabled: boolean }>({
+  //     method: 'POST',
+  //     origin: 'https://ai.insomnia.rest',
+  //     path: '/v1/access',
+  //     sessionId: session.getCurrentSessionId(),
+  //     data: {
+  //       teamId: organizationId,
+  //     },
+  //   });
+
+  //   return {
+  //     enabled: response.enabled,
+  //   };
+  // } catch (err) {
+  //   return { enabled: false };
+  // }
 };
 
 export const createEnvironmentAction: ActionFunction = async ({
