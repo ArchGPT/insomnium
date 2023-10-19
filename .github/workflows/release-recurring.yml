@@ -1,15 +1,9 @@
 name: Release Recurring
 # This workflow bakes executables of the major platforms for Testing purposes
 on:
-  merge_group:
-  workflow_dispatch:
   push:
     branches:
       - main
-  pull_request:
-    types:
-      - opened
-      - synchronize
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
