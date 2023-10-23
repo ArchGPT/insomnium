@@ -97,8 +97,6 @@ app.on('ready', async () => {
   windowUtils.init();
   await _launchApp();
 
-  // Init the rest
-  await updates.init();
 
   // NOTE: could also try to initialize workspace here (?)
 
