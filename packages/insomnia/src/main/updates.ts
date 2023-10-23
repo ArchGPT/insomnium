@@ -78,7 +78,6 @@ export const init = async () => {
 
   if (isUpdateSupported()) {
 
-
     // on check now button pushed
     ipcMain.on('manualUpdateCheck', async () => {
       console.log('[updater] Manual update check');
