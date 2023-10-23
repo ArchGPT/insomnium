@@ -248,7 +248,7 @@ export const OneLineEditor = forwardRef<OneLineEditorHandle, OneLineEditorProps>
           style={{ display: 'none' }}
           readOnly={readOnly}
           autoComplete="off"
-          defaultValue=""
+          defaultValue={defaultValue}
         />
       </div>
     </div >
