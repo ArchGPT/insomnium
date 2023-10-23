@@ -79,6 +79,7 @@ export interface CodeEditorProps {
   getAutocompleteConstants?: () => string[] | PromiseLike<string[]>;
   getAutocompleteSnippets?: () => CodeMirror.Snippet[];
   hideGutters?: boolean;
+  hideFilter?: boolean;
   hideLineNumbers?: boolean;
   hintOptions?: ShowHintOptions;
   id: string;
@@ -144,6 +145,7 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
   filterHistory,
   getAutocompleteConstants,
   getAutocompleteSnippets,
+  hideFilter,
   hideGutters,
   hideLineNumbers,
   hintOptions,
@@ -293,7 +295,7 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
       indentUnit: indentSize || TAB_SIZE,
       hintOptions,
       info: infoOptions,
-      viewportMargin: dynamicHeight ? Infinity : 30,
+      viewportMargin: 30,
       readOnly: !!readOnly,
       selectionPointer: 'default',
       jump: jumpOptions,
@@ -510,7 +512,7 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
     },
   }), []);
 
-  const showFilter = readOnly && (mode?.includes('json') || mode?.includes('xml'));
+  const showFilter = !hideFilter && readOnly && (mode?.includes('json') || mode?.includes('xml'));
   const showPrettify = showPrettifyButton && mode?.includes('json') || mode?.includes('xml');
 
   return (

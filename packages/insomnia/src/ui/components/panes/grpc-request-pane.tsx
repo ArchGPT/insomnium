@@ -6,7 +6,7 @@ import { getCommonHeaderNames, getCommonHeaderValues } from '../../../common/com
 import { documentationLinks } from '../../../common/documentation';
 import { generateId } from '../../../common/misc';
 import { getRenderedGrpcRequest, getRenderedGrpcRequestMessage, RENDER_PURPOSE_SEND } from '../../../common/render';
-import { GrpcMethodType } from '../../../main/ipc/grpc';
+import { GrpcMethodInfo, GrpcMethodType } from '../../../main/ipc/grpc';
 import * as models from '../../../models';
 import type { GrpcRequestHeader } from '../../../models/grpc-request';
 import { queryAllWorkspaceUrls } from '../../../models/helpers/query-all-workspace-urls';
@@ -76,18 +76,32 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
   const { activeRequest } = useRouteLoaderData('request/:requestId') as GrpcRequestLoaderData;
 
   const [isProtoModalOpen, setIsProtoModalOpen] = useState(false);
-  const { requestMessages, running, methods } = grpcState;
+  const { requestMessages, running, method } = grpcState;
+  const [methods, setMethods] = useState<GrpcMethodInfo[] | undefined>(undefined);
+
   useEffect(() => {
     async function loadMethods() {
-      if (!activeRequest.protoFileId || grpcState.methods.length > 0) {
+      if (!activeRequest.protoFileId) {
         return;
       }
-      console.log(`[gRPC] loading proto file methods pf=${activeRequest.protoFileId}`);
-      const methods = await window.main.grpc.loadMethods(activeRequest.protoFileId);
-      setGrpcState({ ...grpcState, methods });
+
+      let loadedMethods = methods;
+      if (methods === undefined) {
+        console.log(`[gRPC] loading proto file methods pf=${activeRequest.protoFileId}`);
+        loadedMethods = await window.main.grpc.loadMethods(activeRequest.protoFileId);
+        setMethods(loadedMethods);
+      }
+
+      if (!grpcState.method) {
+        const method = loadedMethods?.find(c => c.fullPath === activeRequest.protoMethodName);
+        if (method) {
+          setGrpcState({ ...grpcState, method });
+        }
+      }
     }
     loadMethods();
   }, [activeRequest]);
+
   const editorRef = useRef<CodeEditorHandle>(null);
   const gitVersion = useGitVCSVersion();
   const activeRequestSyncVersion = useActiveRequestSyncVCSVersion();
@@ -99,7 +113,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
   const environmentId = activeEnvironment._id;
   // Reset the response pane state when we switch requests, the environment gets modified, or the (Git|Sync)VCS version changes
   const uniquenessKey = `${activeEnvironment.modified}::${requestId}::${gitVersion}::${activeRequestSyncVersion}`;
-  const method = methods.find(c => c.fullPath === activeRequest.protoMethodName);
+
   const methodType = method?.type;
   const handleRequestSend = async () => {
     if (method && !running) {
@@ -166,7 +180,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
             <StyledDropdownWrapper>
               <GrpcMethodDropdown
                 disabled={running}
-                methods={methods}
+                methods={methods ?? []}
                 selectedMethod={method}
                 handleChange={protoMethodName => {
                   patchRequest(requestId, { protoMethodName });
@@ -176,6 +190,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
                     responseMessages: [],
                     status: undefined,
                     error: undefined,
+                    method: methods?.find(m => m.fullPath === protoMethodName),
                   });
                 }}
               />
@@ -201,7 +216,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
                   try {
                     const rendered = await tryToInterpolateRequestOrShowRenderErrorModal({ request: activeRequest, environmentId, payload: { url: activeRequest.url, metadata: activeRequest.metadata } });
                     const methods = await window.main.grpc.loadMethodsFromReflection(rendered);
-                    setGrpcState({ ...grpcState, methods });
+                    setMethods(methods);
                     patchRequest(requestId, { protoFileId: '', protoMethodName: '' });
                   } catch (error) {
                     showModal(ErrorModal, { error });
@@ -334,7 +349,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
           if (activeRequest.protoFileId !== protoFileId) {
             patchRequest(requestId, { protoFileId, protoMethodName: '' });
             const methods = await window.main.grpc.loadMethods(protoFileId);
-            setGrpcState({ ...grpcState, methods });
+            setMethods(methods);
             setIsProtoModalOpen(false);
           }
           setIsProtoModalOpen(false);
