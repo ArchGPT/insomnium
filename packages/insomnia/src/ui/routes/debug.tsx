@@ -105,16 +105,16 @@ export interface GrpcRequestState {
   responseMessages: GrpcMessage[];
   status?: StatusObject;
   error?: ServiceError;
-  methods: GrpcMethodInfo[];
+  method?: GrpcMethodInfo;
 }
 
-const INITIAL_GRPC_REQUEST_STATE = {
+const INITIAL_GRPC_REQUEST_STATE: Omit<GrpcRequestState, "requestId"> = {
   running: false,
   requestMessages: [],
   responseMessages: [],
   status: undefined,
   error: undefined,
-  methods: [],
+  method: undefined,
 };
 export const loader: LoaderFunction = async ({ params }) => {
   if (!params.requestId) {
