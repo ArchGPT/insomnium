@@ -715,21 +715,23 @@ export class VCS {
     variables: Record<string, any>,
     name: string,
   ): Promise<Record<string, any>> {
-    const { sessionId } = this._assertSession();
+    throw new Error("Remote sessions are disabled");
 
-    const { data, errors } = await window.main.insomniaFetch<{ data: {}; errors: [{ message: string }] }>({
-      method: 'POST',
-      path: '/graphql?' + name,
-      data: { query, variables },
-      sessionId,
-    });
+    // const { sessionId } = this._assertSession();
 
-    if (errors && errors.length) {
-      console.log(`[sync] Failed to query ${name}`, errors);
-      throw new Error(`Failed to query ${name}: ${errors[0].message}`);
-    }
+    // const { data, errors } = await window.main.insomniaFetch<{ data: {}; errors: [{ message: string }] }>({
+    //   method: 'POST',
+    //   path: '/graphql?' + name,
+    //   data: { query, variables },
+    //   sessionId,
+    // });
 
-    return data;
+    // if (errors && errors.length) {
+    //   console.log(`[sync] Failed to query ${name}`, errors);
+    //   throw new Error(`Failed to query ${name}: ${errors[0].message}`);
+    // }
+
+    // return data;
   }
 
   async _queryBlobsMissing(ids: string[]): Promise<string[]> {
@@ -843,16 +845,16 @@ export class VCS {
   }
 
   async _queryPushSnapshots(allSnapshots: Snapshot[]) {
-    const { accountId } = this._assertSession();
+    //const { accountId } = this._assertSession();
 
     for (const snapshots of chunkArray(allSnapshots, 20)) {
       // This bit of logic fills in any missing author IDs from times where
       // the user created snapshots while not logged in
-      for (const snapshot of snapshots) {
-        if (snapshot.author === '') {
-          snapshot.author = accountId || '';
-        }
-      }
+      // for (const snapshot of snapshots) {
+      //   if (snapshot.author === '') {
+      //     snapshot.author = accountId || '';
+      //   }
+      // }
 
       const branch = await this._getCurrentBranch();
       const { snapshotsCreate } = await this._runGraphQL(
@@ -1183,6 +1185,7 @@ export class VCS {
 
     // console.log(`[sync] Created remote project ${projectCreate.id} (${projectCreate.name})`);
     // return projectCreate as BackendProject;
+    return {} as BackendProject;
   }
 
   async _getBackendProject(): Promise<BackendProject | null> {
@@ -1230,10 +1233,6 @@ export class VCS {
   async _getCurrentBranch() {
     const head = await this._getHead();
     return this._getOrCreateBranch(head.branch);
-  }
-
-  _assertSession() {
-    throw "nah";
   }
 
   async _assertBranch(branchName: string) {
