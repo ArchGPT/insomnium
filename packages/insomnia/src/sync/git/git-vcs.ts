@@ -87,7 +87,7 @@ interface InitFromCloneOptions {
  */
 export const GIT_CLONE_DIR = '.';
 const gitInternalDirName = 'git';
-export const GIT_INSOMNIA_DIR_NAME = '.insomnia';
+export const GIT_INSOMNIA_DIR_NAME = '.insomnium';
 export const GIT_INTERNAL_DIR = path.join(GIT_CLONE_DIR, gitInternalDirName);
 export const GIT_INSOMNIA_DIR = path.join(GIT_CLONE_DIR, GIT_INSOMNIA_DIR_NAME);
 

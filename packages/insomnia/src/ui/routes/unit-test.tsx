@@ -22,6 +22,7 @@ import { SidebarFooter, SidebarLayout } from '../components/sidebar-layout';
 import { Button } from '../components/themed-button';
 import { TestRunStatus } from './test-results';
 import TestSuiteRoute from './test-suite';
+import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
 
 interface LoaderData {
   unitTestSuites: UnitTestSuite[];

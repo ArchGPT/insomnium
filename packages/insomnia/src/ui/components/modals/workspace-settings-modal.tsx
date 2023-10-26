@@ -502,7 +502,7 @@ export const WorkspaceSettingsModal = ({ workspace, workspaceMeta, clientCertifi
                   )}
                 </PanelContainer>
               </TabItem>
-              <TabItem key="git-sybc" title="Git Sync">
+              {/* <TabItem key="git-sybc" title="Git Sync">
                 <PanelContainer className="pad">
                   <div className="form-control form-control--outlined">
                     <label
@@ -542,7 +542,7 @@ export const WorkspaceSettingsModal = ({ workspace, workspaceMeta, clientCertifi
                     </p>
                   </div>
                 </PanelContainer>
-              </TabItem>
+              </TabItem> */}
             </Tabs>
           </ModalBody> : null}
       </Modal>

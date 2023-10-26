@@ -1,5 +1,5 @@
 import { fromUrl } from 'hosted-git-info';
-import { Errors } from 'isomorphic-git';
+import { Errors, clone } from 'isomorphic-git';
 import path from 'path';
 import { ActionFunction, LoaderFunction, redirect } from 'react-router-dom';
 import YAML from 'yaml';
@@ -36,6 +36,7 @@ import {
   getOauth2FormatName,
 } from '../../sync/git/utils';
 import { guard } from '../../utils/guard';
+import electron from 'electron';
 
 // Loaders
 export type GitRepoLoaderData =
@@ -976,12 +977,12 @@ export const pushToGitRemoteAction: ActionFunction = async ({
 
     if (err instanceof Errors.PushRejectedError) {
       return {
-        errors: [`Push Rejected, ${errorMessage}`],
+        errors: [`Push Rejected, ${errorMessage}` + `\n recommendation: use git inside terminal to resolve this.`],
       };
     }
 
     return {
-      errors: [`Error Pushing Repository, ${errorMessage}`],
+      errors: [`Error Pushing Repository, ${errorMessage}` + `\n recommendation: use git inside terminal to resolve this.`],
     };
   }
 
@@ -1022,9 +1023,13 @@ export const pullFromGitRemoteAction: ActionFunction = async ({
       depth: 1,
       credentials: gitRepository?.credentials,
     });
+
   } catch (e) {
     console.warn('Error fetching from remote', e);
   }
+
+
+
 
   try {
     await GitVCS.pull(gitRepository.credentials);
@@ -1038,6 +1043,19 @@ export const pullFromGitRemoteAction: ActionFunction = async ({
     return {
       errors: [`${errorMessage}`],
     };
+  }
+
+  if (workspaceMeta) {
+    const log = (await GitVCS.log({ depth: 1 })) || [];
+
+    const author = log[0] ? log[0].commit.author : null;
+    const cachedGitLastCommitTime = author ? author.timestamp * 1000 : null;
+    console.log("gitV cachedGitLastCommitTime", cachedGitLastCommitTime);
+
+    await models.workspaceMeta.update(workspaceMeta, {
+      cachedGitLastCommitTime,
+      cachedGitLastAuthor: author?.name || null,
+    });
   }
 
   await database.flushChanges(bufferId);

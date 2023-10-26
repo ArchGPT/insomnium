@@ -34,6 +34,7 @@ import {
   useActiveApiSpecSyncVCSVersion,
   useGitVCSVersion,
 } from '../hooks/use-vcs-version';
+import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
 const EmptySpaceHelper = styled.div({
   display: 'flex',
   alignItems: 'flex-start',
@@ -260,7 +261,7 @@ const Design: FC = () => {
                 gridRowStart: 6,
               }}
             >
-              no sync desu
+              <WorkspaceSyncDropdown />
             </div>
           </ErrorBoundary>
         ) : (
@@ -271,7 +272,7 @@ const Design: FC = () => {
                 gridRowStart: 6,
               }}
             >
-                no sync desu
+                <WorkspaceSyncDropdown />
             </div>
           </Fragment>
         )

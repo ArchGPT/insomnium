@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { OverlayContainer } from 'react-aria';
 import { useFetcher, useParams } from 'react-router-dom';
 
@@ -78,6 +78,8 @@ export const GitStagingModal: FC<ModalProps> = ({
     }
   }, [errors]);
 
+  const [hasDone, setHasDone] = useState(false)
+
   return (
     <OverlayContainer>
       <Modal onHide={onHide} ref={modalRef}>
@@ -85,9 +87,22 @@ export const GitStagingModal: FC<ModalProps> = ({
         <ModalBody className="wide pad">
           <gitCommitFetcher.Form
             id="git-staging-form"
-            method="post"
+            // method="post"
             ref={formRef}
-            action={`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/commit`}
+            // action={`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/commit`}
+            onSubmit={async (e) => {
+              e.preventDefault();
+              if (formRef.current) {
+                const data = new FormData(formRef.current);
+                data.append('changeType', 'modified');
+                const res = await gitCommitFetcher.submit(data, {
+                  action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/commit`,
+                  method: 'post',
+                });
+                setHasDone(true)
+
+              }
+            }}
           >
             {hasChanges ? (
               <>
@@ -318,7 +333,7 @@ export const GitStagingModal: FC<ModalProps> = ({
               <div className="txt-sm faint italic">
                 {isLoadingGitChanges ? <>
                   <i className="fa fa-spinner fa-spin space-right" />
-                  Loading changes...</> : 'No changes to commit.'}
+                    Loading changes...</> : errors && errors?.length > 0 ? "network error.." : hasDone ? "Commited. Ready to push" : 'No new changes to commit.'}
               </div>
             )}
           </gitCommitFetcher.Form>

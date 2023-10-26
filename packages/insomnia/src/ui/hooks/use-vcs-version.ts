@@ -13,6 +13,7 @@ export function useActiveRequestSyncVCSVersion() {
 
   useEffect(() => {
     const isRequestUpdatedFromSync = (changes: ChangeBufferEvent<BaseModel>[]) => changes.find(([, doc, fromSync]) => requestId === doc._id && fromSync);
+
     database.onChange(changes => isRequestUpdatedFromSync(changes) && setVersion(v => v + 1));
   }, [requestId]);
 
@@ -40,5 +41,6 @@ export function useGitVCSVersion() {
   const {
     activeWorkspaceMeta,
   } = useRouteLoaderData(':workspaceId') as WorkspaceLoaderData;
-  return ((activeWorkspaceMeta?.cachedGitLastCommitTime + '') + activeWorkspaceMeta?.cachedGitRepositoryBranch) + '';
+  return activeWorkspaceMeta?.cachedGitLastCommitTime
+
 }

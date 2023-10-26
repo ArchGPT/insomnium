@@ -87,6 +87,7 @@ import {
 } from './request';
 import { RootLoaderData } from './root';
 import { Child, WorkspaceLoaderData } from './workspace';
+import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
 
 export interface GrpcMessage {
   id: string;
@@ -1002,6 +1003,9 @@ export const Debug: FC = () => {
               </GridList>
             </div>
           </div>
+
+          <WorkspaceSyncDropdown />
+
 
           {isEnvironmentModalOpen && (
             <WorkspaceEnvironmentsEditModal

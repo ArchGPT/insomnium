@@ -90,20 +90,7 @@ export const GitRepositoryCloneModal = (props: ModalProps) => {
             selectedKey={selectedTab}
             onSelectionChange={(key: Key) => setTab(key as OauthProviderName)}
           >
-            <TabItem key='github' title={<TabPill><i className="fa fa-github" /> GitHub</TabPill>}>
-              <PanelContainer className="pad pad-top-sm">
-                <GitHubRepositorySetupFormGroup
-                  onSubmit={onSubmit}
-                />
-              </PanelContainer>
-            </TabItem>
-            <TabItem key='gitlab' title={<TabPill><i className="fa fa-gitlab" /> GitLab</TabPill>}>
-              <PanelContainer className="pad pad-top-sm">
-                <GitLabRepositorySetupFormGroup
-                  onSubmit={onSubmit}
-                />
-              </PanelContainer>
-            </TabItem>
+
             <TabItem key='custom' title={<TabPill><i className="fa fa-code-fork" /> Git</TabPill>}>
               <PanelContainer className="pad pad-top-sm">
                 <CustomRepositorySettingsFormGroup

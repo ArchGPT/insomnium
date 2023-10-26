@@ -138,7 +138,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         PROXY: '',
         TIMEOUT_MS: 30000,
         URL: 'http://localhost/?foo%20bar=hello%26world',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });
@@ -309,7 +309,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         PROXY: '',
         TIMEOUT_MS: 30000,
         URL: 'http://localhost/?foo%20bar=hello%26world',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });
@@ -741,7 +741,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         SSL_VERIFYPEER: 0, // should disable SSL
         TIMEOUT_MS: 30000,
         URL: 'http://localhost/?foo%20bar=hello%26world',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });

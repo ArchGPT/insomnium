@@ -33,7 +33,7 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
   const updateGitRepositoryFetcher = useFetcher();
   const deleteGitRepositoryFetcher = useFetcher();
 
-  const [selectedTab, setTab] = useState<OauthProviderName>('github');
+  const [selectedTab, setTab] = useState<OauthProviderName>('custom');
 
   useEffect(() => {
     modalRef.current?.show();
@@ -84,12 +84,8 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
     <OverlayContainer>
       <Modal ref={modalRef} {...props}>
         <ModalHeader>
-          Repository Settings{' '}
-          <HelpTooltip>
-            Sync and collaborate with Git
-            <br />
-            <Link href={docsGitSync}>Documentation {<i className="fa fa-external-link-square" />}</Link>
-          </HelpTooltip>
+          Git Settings
+
         </ModalHeader>
         <ModalBody>
           <ErrorBoundary>
@@ -99,22 +95,6 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
               selectedKey={selectedTab}
               onSelectionChange={(key: Key) => setTab(key as OauthProviderName)}
             >
-              <TabItem key='github' title={<TabPill><i className="fa fa-github" /> GitHub</TabPill>}>
-                <PanelContainer className="pad pad-top-sm">
-                  <GitHubRepositorySetupFormGroup
-                    uri={gitRepository?.uri}
-                    onSubmit={onSubmit}
-                  />
-                </PanelContainer>
-              </TabItem>
-              <TabItem key='gitlab' title={<TabPill><i className="fa fa-gitlab" /> GitLab</TabPill>}>
-                <PanelContainer className="pad pad-top-sm">
-                  <GitLabRepositorySetupFormGroup
-                    uri={gitRepository?.uri}
-                    onSubmit={onSubmit}
-                  />
-                </PanelContainer>
-              </TabItem>
               <TabItem key='custom' title={<TabPill><i className="fa fa-code-fork" /> Git</TabPill>}>
                 <PanelContainer className="pad pad-top-sm">
                   <CustomRepositorySettingsFormGroup
