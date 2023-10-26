@@ -19,6 +19,7 @@ import { guard } from '../utils/guard';
 import { database as db } from './database';
 import { generateId } from './misc';
 import { importResourcesToProject } from './importResourcesToProject';
+import { getAppVersion } from './constants';
 
 export interface ExportedModel extends BaseModel {
   _type: string;
@@ -276,7 +277,7 @@ export const dummyStartingWorkspace = () => {
         "method": "GET",
         "body": {},
         "parameters": [],
-        "headers": [{ "name": "User-Agent", "value": "insomnia/0.1.3" }],
+        "headers": [{ "name": "User-Agent", "value": "insomnium/" + getAppVersion() }],
         "authentication": {},
         "metaSortKey": -(currentUnixTime - oneSec * 3 - 1),
         "isPrivate": false,

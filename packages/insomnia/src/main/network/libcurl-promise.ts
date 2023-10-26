@@ -375,7 +375,7 @@ export const createConfiguredCurlInstance = ({
   const { headers, authentication } = req;
 
   const userAgent: RequestHeader | null = headers.find((h: any) => h.name.toLowerCase() === 'user-agent') || null;
-  const userAgentOrFallback = typeof userAgent?.value === 'string' ? userAgent?.value : 'insomnia/' + version;
+  const userAgentOrFallback = typeof userAgent?.value === 'string' ? userAgent?.value : 'insomnium/' + version;
   curl.setOpt(Curl.option.USERAGENT, userAgentOrFallback);
   if (req.suppressUserAgent) {
     curl.setOpt(Curl.option.USERAGENT, '');
