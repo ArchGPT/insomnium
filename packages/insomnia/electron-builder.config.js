@@ -105,7 +105,7 @@ const config = {
   },
   linux: {
     artifactName: `${BINARY_PREFIX}-\${version}.\${ext}`,
-    executableName: 'insomnia',
+    executableName: 'insomnium',
     synopsis: 'The Collaborative API Client and Design Tool',
     category: 'Development',
     desktop: {
