@@ -1,12 +1,11 @@
 {
-  "json.schemas": [],
-  "files.associations": {
-    "*.db": "ndjson",
-    "*.jsonl": "ndjson",
-    "*.njson": "ndjson"
-  },
-  "files.insertFinalNewline": true,
-  "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "modifications",
-  "editor.defaultFormatter": "vscode.typescript-language-features",
+    "json.schemas": [],
+    "files.associations": {
+        "*.db": "ndjson",
+        "*.jsonl": "ndjson",
+        "*.njson": "ndjson"
+    },
+    "files.insertFinalNewline": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
 }

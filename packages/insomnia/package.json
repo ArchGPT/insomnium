@@ -95,6 +95,7 @@
     "yaml": "^1.6.0",
     "yaml-source-map": "^2.1.1"
   },
+  "prettier": {},
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@develohpanda/fluent-builder": "^2.1.2",

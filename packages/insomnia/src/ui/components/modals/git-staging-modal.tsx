@@ -90,7 +90,7 @@ export const GitStagingModal: FC<ModalProps> = ({
             // method="post"
             ref={formRef}
             // action={`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/commit`}
-            onSubmit={async (e) => {
+            onSubmit={async e => {
               e.preventDefault();
               if (formRef.current) {
                 const data = new FormData(formRef.current);
@@ -333,7 +333,7 @@ export const GitStagingModal: FC<ModalProps> = ({
               <div className="txt-sm faint italic">
                 {isLoadingGitChanges ? <>
                   <i className="fa fa-spinner fa-spin space-right" />
-                    Loading changes...</> : errors && errors?.length > 0 ? "network error.." : hasDone ? "Commited. Ready to push" : 'No new changes to commit.'}
+                  Loading changes...</> : errors && errors?.length > 0 ? "network error.." : hasDone ? "Commited. Ready to push" : 'No new changes to commit.'}
               </div>
             )}
           </gitCommitFetcher.Form>

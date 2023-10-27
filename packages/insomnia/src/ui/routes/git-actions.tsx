@@ -41,13 +41,13 @@ import electron from 'electron';
 // Loaders
 export type GitRepoLoaderData =
   | {
-      branch: string;
-      branches: string[];
-      gitRepository: GitRepository | null;
-    }
+    branch: string;
+    branches: string[];
+    gitRepository: GitRepository | null;
+  }
   | {
-      errors: string[];
-    };
+    errors: string[];
+  };
 
 export const gitRepoAction: ActionFunction = async ({
   params,
@@ -148,12 +148,12 @@ export const gitRepoAction: ActionFunction = async ({
 
 export type GitBranchesLoaderData =
   | {
-      branches: string[];
-      remoteBranches: string[];
-    }
+    branches: string[];
+    remoteBranches: string[];
+  }
   | {
-      errors: string[];
-    };
+    errors: string[];
+  };
 
 export const gitBranchesLoader: LoaderFunction = async ({
   params,
@@ -188,8 +188,8 @@ export const gitBranchesLoader: LoaderFunction = async ({
 };
 
 export interface GitFetchLoaderData {
-      errors: string[];
-    }
+  errors: string[];
+}
 
 export const gitFetchAction: ActionFunction = async ({
   params,
@@ -233,11 +233,11 @@ export const gitFetchAction: ActionFunction = async ({
 
 export type GitLogLoaderData =
   | {
-      log: GitLogEntry[];
-    }
+    log: GitLogEntry[];
+  }
   | {
-      errors: string[];
-    };
+    errors: string[];
+  };
 
 export const gitLogLoader: LoaderFunction = async ({
   params,
@@ -322,8 +322,8 @@ export const gitChangesLoader: LoaderFunction = async ({
 type CloneGitActionResult =
   | Response
   | {
-      errors?: string[];
-    };
+    errors?: string[];
+  };
 
 export function parseGitToHttpsURL(s: string) {
   // try to convert any git URL to https URL
@@ -422,9 +422,9 @@ export const cloneGitRepoAction: ActionFunction = async ({
       };
     }
 
-      return {
-        errors: [err.message],
-      };
+    return {
+      errors: [err.message],
+    };
   }
 
   const containsInsomniaDir = async (
@@ -1029,8 +1029,6 @@ export const pullFromGitRemoteAction: ActionFunction = async ({
   }
 
 
-
-
   try {
     await GitVCS.pull(gitRepository.credentials);
 
@@ -1121,7 +1119,7 @@ async function getGitChanges(vcs: typeof GitVCS, workspace: Workspace) {
       if (docYML) {
         try {
           statusNames[gitPath] = YAML.parse(docYML.toString()).name || '';
-        } catch (err) {}
+        } catch (err) { }
       }
     }
     // We know that type is in the path; extract it. If the model is not found, set to Unknown.
