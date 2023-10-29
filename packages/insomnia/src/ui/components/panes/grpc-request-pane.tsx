@@ -256,10 +256,10 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
                         className='btn btn--compact btn--clicky-small margin-left-sm bg-default'
                         onClick={async () => {
                           const requestBody = await getRenderedGrpcRequestMessage({
-                            request: activeRequest,
-                            environmentId,
-                            purpose: RENDER_PURPOSE_SEND,
-                          });
+                              request: activeRequest,
+                              environmentId,
+                              purpose: RENDER_PURPOSE_SEND,
+                            });
                           const preparedMessage = {
                             body: requestBody,
                             requestId,
@@ -267,9 +267,9 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
                           window.main.grpc.sendMessage(preparedMessage);
                           setGrpcState({
                             ...grpcState, requestMessages: [...requestMessages, {
-                              id: generateId(),
+                                id: generateId(),
                               text: preparedMessage.body.text || '',
-                              created: Date.now(),
+                                created: Date.now(),
                             }],
                           });
                         }}
@@ -298,17 +298,17 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
                         />
                       </TabItem>,
                       ...requestMessages.sort((a, b) => a.created - b.created).map((m, index) => (
-                        <TabItem key={m.id} title={`Stream ${index + 1}`}>
-                          <CodeEditor
-                            id={'grpc-request-editor-tab' + m.id}
-                            defaultValue={m.text}
-                            mode="application/json"
-                            enableNunjucks
-                            readOnly
-                            autoPrettify
-                          />
-                        </TabItem>
-                      )),
+                          <TabItem key={m.id} title={`Stream ${index + 1}`}>
+                            <CodeEditor
+                              id={'grpc-request-editor-tab' + m.id}
+                              defaultValue={m.text}
+                              mode="application/json"
+                              enableNunjucks
+                              readOnly
+                              autoPrettify
+                            />
+                          </TabItem>
+                        )),
                     ]}
                   </Tabs>
                 </>
@@ -341,20 +341,26 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
           )}
         </PaneBody>
       </Pane>
-      {isProtoModalOpen && <ProtoFilesModal
-        reloadRequests={reloadRequests}
-        defaultId={activeRequest.protoFileId}
-        onHide={() => setIsProtoModalOpen(false)}
-        onSave={async (protoFileId: string) => {
-          if (activeRequest.protoFileId !== protoFileId) {
-            patchRequest(requestId, { protoFileId, protoMethodName: '' });
-            const methods = await window.main.grpc.loadMethods(protoFileId);
-            setMethods(methods);
+      {isProtoModalOpen && (
+        <ProtoFilesModal
+          reloadRequests={reloadRequests}
+          defaultId={activeRequest.protoFileId}
+          onHide={() => setIsProtoModalOpen(false)}
+          onSave={async (protoFileId: string) => {
+            if (activeRequest.protoFileId !== protoFileId) {
+              patchRequest(requestId, {
+                protoFileId,
+                protoMethodName: undefined,
+              });
+              setGrpcState({ ...grpcState, method: undefined });
+              const methods = await window.main.grpc.loadMethods(protoFileId);
+              setMethods(methods);
+              setIsProtoModalOpen(false);
+            }
             setIsProtoModalOpen(false);
-          }
-          setIsProtoModalOpen(false);
-        }}
-      />}
+          }}
+        />
+      )}
     </>
   );
 };
