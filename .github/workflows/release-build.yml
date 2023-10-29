@@ -3,7 +3,7 @@ name: Release Build
 on:
   push:
     branches:
-      - 'release/**'
+      - "release/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,8 +23,8 @@ jobs:
             csc_link_secret: DESIGNER_WINDOWS_CSC_LINK
             csc_key_password_secret: DESIGNER_WINDOWS_CSC_KEY_PASSWORD
           - os: ubuntu-latest
-            csc_link_secret: ''
-            csc_key_password_secret: ''
+            csc_link_secret: ""
+            csc_key_password_secret: ""
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
@@ -32,30 +32,31 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
+          node-version-file: ".nvmrc"
+          cache: "npm"
           cache-dependency-path: package-lock.json
 
       - name: Install packages
         run: npm ci
 
-      # - name: Package app (MacOS only)
-      #   if: matrix.os == 'macos-latest'
-      #   shell: bash
-      #   run: npm run app-package
-      #   env:
-      #     NODE_OPTIONS: '--max_old_space_size=6144'
-      #     APPLE_ID: ${{ matrix.os == 'macos-latest' && secrets.DESIGNER_APPLE_ID || '' }}
-      #     APPLE_APP_SPECIFIC_PASSWORD: ${{ matrix.os == 'macos-latest' && secrets.DESIGNER_APPLE_ID_PASSWORD || '' }}
-      #     CSC_LINK: ${{ matrix.csc_link_secret != '' && secrets[matrix.csc_link_secret] || '' }}
-      #     CSC_KEY_PASSWORD: ${{ matrix.csc_key_password_secret != '' && secrets[matrix.csc_key_password_secret] || ''  }}
+      - name: Package app (MacOS only)
+        if: matrix.os == 'macos-latest'
+        shell: bash
+        run: npm run app-package
+        env:
+          NODE_OPTIONS: "--max_old_space_size=6144"
+          APPLE_ID: ${{ matrix.os == 'macos-latest' && secrets.DESIGNER_APPLE_ID || '' }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ matrix.os == 'macos-latest' && secrets.DESIGNER_APPLE_ID_PASSWORD || '' }}
+          CSC_LINK: ${{ matrix.csc_link_secret != '' && secrets[matrix.csc_link_secret] || '' }}
+          CSC_KEY_PASSWORD:
+            ${{ matrix.csc_key_password_secret != '' && secrets[matrix.csc_key_password_secret] || ''  }}
 
       - name: Package app (Windows and Linux)
         if: matrix.os != 'macos-latest'
         shell: bash
         run: npm run app-package
         env:
-          NODE_OPTIONS: '--max_old_space_size=6144'
+          NODE_OPTIONS: "--max_old_space_size=6144"
 
       # - name: Setup Inso CLI version env var
       #   run:
@@ -132,17 +133,17 @@ jobs:
             packages/insomnia/dist/*.deb
             packages/insomnia/dist/*.AppImage
             packages/insomnia/dist/*.tar.gz
-            
-# packages/insomnia-inso/artifacts/*
 
-      # - name: Upload source assets for Sentry
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{ matrix.os }}-sentry
-      #     path: |
-      #       packages/insomnia/build/*.js
-      #       packages/insomnia/build/*.map
-      #       !packages/insomnia/build/yarn-standalone.js
+  # packages/insomnia-inso/artifacts/*
+
+  # - name: Upload source assets for Sentry
+  #   uses: actions/upload-artifact@v3
+  #   with:
+  #     name: ${{ matrix.os }}-sentry
+  #     path: |
+  #       packages/insomnia/build/*.js
+  #       packages/insomnia/build/*.map
+  #       !packages/insomnia/build/yarn-standalone.js
 
   update-pull-request:
     needs: build-and-upload-release-artifacts
@@ -152,7 +153,7 @@ jobs:
         id: release_version
         shell: bash
         run: |
-           echo "version=${BRANCH/release\//}" >> $GITHUB_OUTPUT
+          echo "version=${BRANCH/release\//}" >> $GITHUB_OUTPUT
         env:
           BRANCH: ${{ github.ref_name }}
 
