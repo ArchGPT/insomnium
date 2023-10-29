@@ -83,7 +83,7 @@ export const GrpcMethodDropdown: FunctionComponent<Props> = ({
             style={{ maxWidth: '240px', display: 'flex', alignItems: 'center' }}
           >
             <span style={{ maxWidth: '240px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {!selectedPath ? 'Select Method' : getShortGrpcPath(selectedPath)}
+              {selectedPath ? getShortGrpcPath(selectedPath) : methods.length > 0 ? 'Select Method' : 'No methods in proto'}
             </span>
             <i className="fa fa-caret-down pad-left-sm" />
           </Tooltip>
