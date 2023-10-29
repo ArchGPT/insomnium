@@ -300,7 +300,7 @@ export const GrpcRequestPane: FunctionComponent<Props> = ({
                       ...requestMessages.sort((a, b) => a.created - b.created).map((m, index) => (
                           <TabItem key={m.id} title={`Stream ${index + 1}`}>
                             <CodeEditor
-                            id={'grpc-request-editor-tab' + m.id}
+                              id={'grpc-request-editor-tab' + m.id}
                               defaultValue={m.text}
                               mode="application/json"
                               enableNunjucks
