@@ -9,7 +9,7 @@ import { Button } from '../themed-button';
 export type SelectProtoFileHandler = (id: string) => void;
 export type DeleteProtoFileHandler = (protofile: ProtoFile) => void;
 export type DeleteProtoDirectoryHandler = (protoDirectory: ProtoDirectory) => void;
-export type UpdateProtoFileHandler = (protofile: ProtoFile) => Promise<void>;
+export type UpdateProtoFileHandler = (protofile: ProtoFile | ProtoDirectory) => Promise<void>;
 export type RenameProtoFileHandler = (protoFile: ProtoFile, name?: string) => Promise<void>;
 export const ProtoListItem = styled(ListGroupItem).attrs(() => ({
   className: 'row-spaced',
@@ -54,17 +54,27 @@ const recursiveRender = (
         <div className="row">
           <Button
             variant="text"
-            title="Delete Directory"
+            title="Re-discover proto files"
             onClick={event => {
               event.stopPropagation();
-              handleDeleteDirectory(dir);
+              handleUpdate(dir);
             }}
-            bg="danger"
           >
-            <i className="fa fa-trash-o" />
+            <i className="fa fa-refresh" />
           </Button>
         </div>
       )}
+      <Button
+        variant="text"
+        title="Delete Directory"
+        onClick={event => {
+          event.stopPropagation();
+          handleDeleteDirectory(dir);
+        }}
+        bg="danger"
+      >
+        <i className="fa fa-trash-o" />
+      </Button>
     </ProtoListItem>),
   ...files.map(f => (
     <ProtoListItem

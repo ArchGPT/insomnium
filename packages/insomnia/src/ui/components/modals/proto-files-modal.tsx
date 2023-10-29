@@ -1,29 +1,29 @@
-import * as protoLoader from '@grpc/proto-loader';
-import fs from 'fs';
-import path from 'path';
-import React, { FC, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { FC, useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import { ChangeBufferEvent, database as db } from '../../../common/database';
-import { selectFileOrFolder } from '../../../common/select-file-or-folder';
-import * as models from '../../../models';
-import { getById as getProtoDirectoryById, isProtoDirectory, ProtoDirectory } from '../../../models/proto-directory';
-import { isProtoFile, type ProtoFile } from '../../../models/proto-file';
-import { ProtoDirectoryLoader } from '../../../network/grpc/proto-directory-loader';
-import { writeProtoFile } from '../../../network/grpc/write-proto-file';
-import { Modal, type ModalHandle } from '../base/modal';
-import { ModalBody } from '../base/modal-body';
-import { ModalFooter } from '../base/modal-footer';
-import { ModalHeader } from '../base/modal-header';
-import { ExpandedProtoDirectory, ProtoFileList } from '../proto-file/proto-file-list';
-import { AsyncButton } from '../themed-button';
-import { showAlert, showError } from '.';
+import { ChangeBufferEvent, database as db } from "../../../common/database";
+import { selectFileOrFolder } from "../../../common/select-file-or-folder";
+import * as models from "../../../models";
+import { isProtoDirectory, ProtoDirectory } from "../../../models/proto-directory";
+import { isProtoFile, ProtoFile } from "../../../models/proto-file";
+
+import { Modal, ModalHandle } from "../base/modal";
+import { ModalBody } from "../base/modal-body";
+import { ModalFooter } from "../base/modal-footer";
+import { ModalHeader } from "../base/modal-header";
+import { ExpandedProtoDirectory, ProtoFileList } from "../proto-file/proto-file-list";
+import { AsyncButton } from "../themed-button";
+import { showAlert, showError } from ".";
+import * as protoLoader from "../../../network/grpc/proto-loader";
+
 const tryToSelectFilePath = async () => {
   try {
-    const { filePath, canceled } = await selectFileOrFolder({ itemTypes: ['file'], extensions: ['proto'] });
+    const { filePath, canceled } = await selectFileOrFolder({
+      itemTypes: ["file"],
+      extensions: ["proto"],
+    });
     if (!canceled && filePath) {
       return filePath;
-
     }
   } catch (error) {
     showError({ error });
@@ -32,35 +32,17 @@ const tryToSelectFilePath = async () => {
 };
 const tryToSelectFolderPath = async () => {
   try {
-    const { filePath, canceled } = await selectFileOrFolder({ itemTypes: ['directory'], extensions: ['proto'] });
+    const { filePath, canceled } = await selectFileOrFolder({
+      itemTypes: ["directory"],
+      extensions: ["proto"],
+    });
     if (!canceled && filePath) {
       return filePath;
-
     }
   } catch (error) {
     showError({ error });
   }
   return;
-};
-const isProtofileValid = async (filePath: string, includeDirs: string[] = []) => {
-  try {
-    await protoLoader.load(filePath, {
-      keepCase: true,
-      longs: String,
-      enums: String,
-      defaults: true,
-      oneofs: true,
-      includeDirs: includeDirs,
-    });
-    return true;
-  } catch (error) {
-    showError({
-      title: 'Invalid Proto File',
-      message: `The file ${filePath} could not be parsed`,
-      error,
-    });
-    return false;
-  }
 };
 
 const traverseDirectory = (dir: ProtoDirectory, files: ProtoFile[], directories: ProtoDirectory[]): ExpandedProtoDirectory => ({
@@ -127,164 +109,122 @@ export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRe
     });
   }, [workspaceId]);
 
-  const handleAddDirectory = async () => {
-    let rollback = false;
-    let createdIds: string[];
-    const bufferId = await db.bufferChangesIndefinitely();
-    const filePath = await tryToSelectFolderPath();
-    if (!filePath) {
-      return;
-    }
-    try {
-      const result = await new ProtoDirectoryLoader(filePath, workspaceId).load();
-      createdIds = result.createdIds;
-      const { error, createdDir } = result;
-
-      if (error) {
-        showError({
-          title: 'Failed to import',
-          message: `An unexpected error occurred when reading ${filePath}`,
-          error,
-        });
-        rollback = true;
-        return;
-      }
-
-      // Show warning if no files found
-      if (!createdDir) {
-        showAlert({
-          title: 'No files found',
-          message: `No .proto files were found under ${filePath}.`,
-        });
-        return;
-      }
-
-      // Try parse all loaded proto files to make sure they are valid
-      const loadedEntities = await db.withDescendants(createdDir);
-      const loadedFiles = loadedEntities.filter(isProtoFile);
-
-      for (const protoFile of loadedFiles) {
-        try {
-          const { filePath, dirs } = await writeProtoFile(protoFile);
-          protoLoader.load(filePath, {
-            keepCase: true,
-            longs: String,
-            enums: String,
-            defaults: true,
-            oneofs: true,
-            includeDirs: dirs,
-          });
-        } catch (error) {
-          showError({
-            title: 'Invalid Proto File',
-            message: `The file ${protoFile.name} could not be parsed`,
-            error,
-          });
-          rollback = true;
-          return;
-        }
-      }
-    } catch (error) {
-      rollback = true;
-      showError({ error });
-    } finally {
-      // Fake flushing changes (or, rollback) only prevents change notifications being sent to the UI
-      // It does NOT revert changes written to the database, as is typical of a db transaction rollback
-      // As such, if rolling back, the created directory needs to be deleted manually
-      await db.flushChanges(bufferId, rollback);
-
-      if (rollback) {
-        // @ts-expect-error -- TSCONVERSION
-        await models.protoDirectory.batchRemoveIds(createdIds);
-        // @ts-expect-error -- TSCONVERSION
-        await models.protoFile.batchRemoveIds(createdIds);
-      }
-    }
-  };
-  const handleUpdate = async (protoFile: ProtoFile) => {
+  const handleAddFile = async () => {
     const filePath = await tryToSelectFilePath();
     if (!filePath) {
       return;
     }
-    const includeDirs = await findAncestorDirectories(protoFile, filePath);
-    if (!await isProtofileValid(filePath, includeDirs)) {
-      return;
-    }
-    const contents = await fs.promises.readFile(filePath, 'utf-8');
-    const contentsChanged = contents !== protoFile.protoText;
-    const updatedFile = await models.protoFile.update(protoFile, {
-      name: path.basename(filePath),
-      protoText: contents,
-    });
-    // force update the proto file if the content changed
-    writeProtoFile(updatedFile, contentsChanged);
 
-    const impacted = await models.grpcRequest.findByProtoFileId(updatedFile._id);
-    const requestIds = impacted.map(g => g._id);
-    if (requestIds?.length) {
-      requestIds.forEach(requestId => window.main.grpc.cancel(requestId));
-      reloadRequests(requestIds);
+    const workspace = await models.workspace.getById(workspaceId);
+    const addResult = await protoLoader.addFileFromPath(filePath, workspace!);
+    if (addResult.success) {
+      setSelectedId(addResult.loaded[0]._id);
+    }
+
+    if (addResult.errors.length > 0) {
+      showError({
+        title: "Failed to add file",
+        message: `Could not add ${filePath}:\n${addResult.errors.join("\n")}`,
+      });
     }
   };
 
-  const findAncestorDirectories = async (protoFile: ProtoFile, filePath: string): Promise<string[]> => {
-    /* Traverse up the file tree to gather all _real_ ancestor directories */
-    let parent = await getProtoDirectoryById(protoFile.parentId);
-    let basePath = path.dirname(filePath);
-    const result = [];
-    while (parent !== null) {
-      basePath = path.dirname(basePath);
-      result.push(path.join(basePath, parent.name));
-      parent = await getProtoDirectoryById(parent.parentId);
+  const handleAddDirectory = async () => {
+    const filePath = await tryToSelectFolderPath();
+    if (!filePath) {
+      return;
     }
-    return result;
+    const workspace = await models.workspace.getById(workspaceId);
+    const addResult = await protoLoader.addDirectoryFromPath(filePath, workspace!);
+
+    if (addResult.errors.length > 0) {
+      showError({
+        title: "Encountered some issues while adding directory",
+        message: `Some proto files could not be added:\n${addResult.errors.join("\n")}`,
+      });
+    }
+  };
+
+  const handleUpdate = async (protoFileOrDir: ProtoFile | ProtoDirectory) => {
+    if (isProtoFile(protoFileOrDir)) {
+      await handleUpdateProtoFile(protoFileOrDir);
+    } else {
+      await handleUpdateProtoDirectory(protoFileOrDir);
+    }
+  };
+
+  const handleUpdateProtoFile = async (protoFile: ProtoFile) => {
+    const filePath = await tryToSelectFilePath();
+    if (!filePath) {
+      return;
+    }
+    const updateResult = await protoLoader.updateFileFromPath(protoFile, filePath);
+
+    if (updateResult.success) {
+      const updatedFile = updateResult.loaded[0];
+
+      const impacted = await models.grpcRequest.findByProtoFileId(updatedFile._id);
+      const requestIds = impacted.map(g => g._id);
+      if (requestIds?.length) {
+        requestIds.forEach(requestId => window.main.grpc.cancel(requestId));
+        reloadRequests(requestIds);
+      }
+    }
+
+    if (updateResult.errors.length > 0) {
+      showError({
+        title: "Failed to update file",
+        message: `Could not update ${filePath}:\n${updateResult.errors.join("\n")}`,
+      });
+    }
+  };
+
+  const handleUpdateProtoDirectory = async (rootProtoDir: ProtoDirectory) => {
+    const dirPath = await tryToSelectFolderPath();
+    if (!dirPath) return;
+
+    const updateResult = await protoLoader.updateDirectoryFromPath(dirPath, rootProtoDir);
+
+    if (updateResult.errors.length > 0) {
+      showError({
+        title: "Encountered some issues while updating directory",
+        message: `Some proto files failed to update:\n${updateResult.errors.join("\n")}`,
+      });
+    }
   };
 
   const handleDeleteDirectory = (protoDirectory: ProtoDirectory) => {
     showAlert({
       title: `Delete ${protoDirectory.name}`,
-      message: (<span>
-        Really delete <strong>{protoDirectory.name}</strong> and all proto files contained within?
-        All requests that use these proto files will stop working.
-      </span>),
+      message: (
+        <span>
+          Really delete <strong>{protoDirectory.name}</strong> and all proto files contained within? All requests that use these proto files
+          will stop working.
+        </span>
+      ),
       addCancel: true,
       onConfirm: async () => {
         models.protoDirectory.remove(protoDirectory);
-        setSelectedId('');
+        setSelectedId("");
       },
     });
   };
   const handleDeleteFile = (protoFile: ProtoFile) => {
     showAlert({
       title: `Delete ${protoFile.name}`,
-      message: (<span>
-        Really delete <strong>{protoFile.name}</strong>? All requests that use this proto file will
-        stop working.
-      </span>),
+      message: (
+        <span>
+          Really delete <strong>{protoFile.name}</strong>? All requests that use this proto file will stop working.
+        </span>
+      ),
       addCancel: true,
       onConfirm: () => {
         models.protoFile.remove(protoFile);
         if (selectedId === protoFile._id) {
-          setSelectedId('');
+          setSelectedId("");
         }
       },
     });
-  };
-  const handleAddFile = async () => {
-    const filePath = await tryToSelectFilePath();
-    if (!filePath) {
-      return;
-    }
-    if (!await isProtofileValid(filePath)) {
-      return;
-    }
-    const contents = await fs.promises.readFile(filePath, 'utf-8');
-    const newFile = await models.protoFile.create({
-      name: path.basename(filePath),
-      parentId: workspaceId,
-      protoText: contents,
-    });
-    setSelectedId(newFile._id);
   };
 
   return (
@@ -294,17 +234,10 @@ export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRe
         <div className="row-spaced margin-bottom bold">
           Files
           <span>
-            <AsyncButton
-              className="margin-right-sm"
-              onClick={handleAddDirectory}
-              loadingNode={<i className="fa fa-spin fa-refresh" />}
-            >
+            <AsyncButton className="margin-right-sm" onClick={handleAddDirectory} loadingNode={<i className="fa fa-spin fa-refresh" />}>
               Add Directory
             </AsyncButton>
-            <AsyncButton
-              onClick={handleAddFile}
-              loadingNode={<i className="fa fa-spin fa-refresh" />}
-            >
+            <AsyncButton onClick={handleAddFile} loadingNode={<i className="fa fa-spin fa-refresh" />}>
               Add Proto File
             </AsyncButton>
           </span>
@@ -324,7 +257,7 @@ export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRe
             className="btn"
             onClick={event => {
               event.preventDefault();
-              if (typeof onSave === 'function' && selectedId) {
+              if (typeof onSave === "function" && selectedId) {
                 onSave(selectedId);
               }
             }}
@@ -334,6 +267,6 @@ export const ProtoFilesModal: FC<Props> = ({ defaultId, onHide, onSave, reloadRe
           </button>
         </div>
       </ModalFooter>
-    </Modal >
+    </Modal>
   );
 };
