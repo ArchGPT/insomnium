@@ -208,7 +208,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         PROXY: '',
         TIMEOUT_MS: 30000,
         URL: 'http://localhost/',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });
@@ -373,7 +373,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         TIMEOUT_MS: 30000,
         UPLOAD: 1,
         URL: 'http://localhost/',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });
@@ -466,7 +466,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         TIMEOUT_MS: 30000,
         URL: 'http://localhost/',
         UPLOAD: 1,
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });
@@ -507,7 +507,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         TIMEOUT_MS: 30000,
         URL: 'http://my/path',
         UNIX_SOCKET_PATH: '/my/socket',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });
@@ -547,7 +547,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         PROXY: '',
         TIMEOUT_MS: 30000,
         URL: 'http://localhost:3000/foo/bar',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });
@@ -587,7 +587,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         PROXY: '',
         TIMEOUT_MS: 30000,
         URL: 'http://unix:3000/my/path',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });
@@ -629,7 +629,7 @@ describe('sendCurlAndWriteTimeline()', () => {
         TIMEOUT_MS: 30000,
         NETRC: CurlNetrc.Required,
         URL: '',
-        USERAGENT: `insomnia/${version}`,
+        USERAGENT: `insomnium/${version}`,
         VERBOSE: true,
       },
     });

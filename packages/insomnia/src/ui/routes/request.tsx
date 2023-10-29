@@ -106,7 +106,7 @@ export const createRequestAction: ActionFunction = async ({ request, params }) =
       parentId: parentId || workspaceId,
       method: METHOD_GET,
       name: 'New Request',
-      headers: [{ name: 'User-Agent', value: `insomnia/${version}` }],
+      headers: [{ name: 'User-Agent', value: `insomnium/${version}` }],
     }))._id;
   }
   if (requestType === 'gRPC') {
@@ -120,7 +120,7 @@ export const createRequestAction: ActionFunction = async ({ request, params }) =
       parentId: parentId || workspaceId,
       method: METHOD_POST,
       headers: [
-        { name: 'User-Agent', value: `insomnia/${version}` },
+        { name: 'User-Agent', value: `insomnium/${version}` },
         { name: 'Content-Type', value: CONTENT_TYPE_JSON },
       ],
       body: {
@@ -136,7 +136,7 @@ export const createRequestAction: ActionFunction = async ({ request, params }) =
       method: METHOD_GET,
       url: '',
       headers: [
-        { name: 'User-Agent', value: `insomnia/${version}` },
+        { name: 'User-Agent', value: `insomnium/${version}` },
         { name: 'Accept', value: CONTENT_TYPE_EVENT_STREAM },
       ],
       name: 'New Event Stream',
@@ -146,7 +146,7 @@ export const createRequestAction: ActionFunction = async ({ request, params }) =
     activeRequestId = (await models.webSocketRequest.create({
       parentId: parentId || workspaceId,
       name: 'New WebSocket Request',
-      headers: [{ name: 'User-Agent', value: `insomnia/${version}` }],
+      headers: [{ name: 'User-Agent', value: `insomnium/${version}` }],
     }))._id;
   }
   if (requestType === 'From Curl') {

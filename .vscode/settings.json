@@ -1,11 +1,12 @@
 {
-    "json.schemas": [],
-    "files.associations": {
-        "*.db": "ndjson",
-        "*.jsonl": "ndjson",
-        "*.njson": "ndjson"
-    },
-    "files.insertFinalNewline": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file"
+  "json.schemas": [],
+  "files.associations": {
+    "*.db": "ndjson",
+    "*.jsonl": "ndjson",
+    "*.njson": "ndjson"
+  },
+  "files.insertFinalNewline": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file"
+  // use prettier
 }
