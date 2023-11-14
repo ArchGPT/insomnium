@@ -4,7 +4,7 @@ import { useFetcher, useParams, useRouteLoaderData } from 'react-router-dom';
 import { useInterval } from 'react-use';
 import styled from 'styled-components';
 
-import { RENDER_PURPOSE_SEND } from '../../common/render';
+import { RENDER_PURPOSE_NO_RENDER } from '../../common/render';
 import * as models from '../../models';
 import { isEventStreamRequest } from '../../models/request';
 import { fetchRequestData, tryToInterpolateRequest, tryToTransformRequestWithPlugins } from '../../network/network';
@@ -144,7 +144,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
       const { request,
         environment } = await fetchRequestData(requestId);
 
-      const renderResult = await tryToInterpolateRequest(request, environment._id, RENDER_PURPOSE_SEND);
+      const renderResult = await tryToInterpolateRequest(request, environment._id, RENDER_PURPOSE_NO_RENDER);
       // ARCHY NOTE: HERE IS SEND
       const renderedRequest = await tryToTransformRequestWithPlugins(renderResult);
       renderedRequest && send({
