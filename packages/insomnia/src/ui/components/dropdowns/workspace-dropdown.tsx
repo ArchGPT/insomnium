@@ -46,9 +46,41 @@ export const WorkspaceDropdown: FC = () => {
   const projectName = activeProject.name ?? getProductName();
   const fetcher = useFetcher();
 
-  const [, setActionPlugins] = useState<WorkspaceAction[]>([]);
+  const [actionPlugins, setActionPlugins] = useState<WorkspaceAction[]>([]);
   const [loadingActions, setLoadingActions] = useState<Record<string, boolean>>({});
   const dropdownRef = useRef<DropdownHandle>(null);
+
+  const handlePluginClick = useCallback(async ({ action, plugin, label }: WorkspaceAction, workspace: Workspace) => {
+    setLoadingActions({ ...loadingActions, [label]: true });
+    try {
+      const context = {
+        ...(pluginContexts.app.init(RENDER_PURPOSE_NO_RENDER) as Record<string, any>),
+        ...pluginContexts.data.init(activeProject._id),
+        ...(pluginContexts.store.init(plugin) as Record<string, any>),
+        ...(pluginContexts.network.init() as Record<string, any>),
+      };
+
+      const docs = await db.withDescendants(workspace);
+      const requests = docs
+        .filter(isRequest)
+        .filter(doc => (
+          !doc.isPrivate
+        ));
+      const requestGroups = docs.filter(isRequestGroup);
+      await action(context, {
+        requestGroups,
+        requests,
+        workspace,
+      });
+    } catch (err) {
+      showError({
+        title: 'Plugin Action Failed',
+        error: err,
+      });
+    }
+    setLoadingActions({ ...loadingActions, [label]: false });
+    dropdownRef.current?.hide();
+  }, [activeProject._id, loadingActions]);
 
   const handleDropdownOpen = useCallback(async () => {
     const actionPlugins = await getWorkspaceActions();
@@ -145,6 +177,24 @@ export const WorkspaceDropdown: FC = () => {
               onClick={() => setIsSettingsModalOpen(true)}
             />
           </DropdownItem>
+        </DropdownSection>
+        <DropdownSection
+          aria-label='Plugins Section'
+          title="Plugins"
+        >
+          {actionPlugins.map((p: WorkspaceAction) => (
+            <DropdownItem
+              key={p.label}
+              aria-label={p.label}
+            >
+              <ItemContent
+                icon={loadingActions[p.label] ? 'refresh fa-spin' : p.icon || 'code'}
+                label={p.label}
+                stayOpenAfterClick
+                onClick={() => handlePluginClick(p, activeWorkspace)}
+              />
+            </DropdownItem>
+          ))}
         </DropdownSection>
 
       </Dropdown>
