@@ -58,6 +58,10 @@ jobs:
         env:
           NODE_OPTIONS: "--max_old_space_size=6144"
 
+      #  For electron builder codesigning for macOS, CSC_LINK env variable advised to typically point to Developer ID Application.
+      #  If distributing .pkg, would use Developer ID Installer certificate instead.
+      #  Next step should be uncommenting the chunk below as we __may__ have the secrets now.
+
       # - name: Setup Inso CLI version env var
       #   run:
       #     echo "INSO_VERSION=$(jq .version packages/insomnia-inso/package.json -rj)" >> $GITHUB_ENV
@@ -91,7 +95,7 @@ jobs:
       #     primary-bundle-id: com.insomnia.inso
       #     appstore-connect-username: ${{ secrets.DESIGNER_APPLE_ID }}
       #     appstore-connect-password: ${{ secrets.DESIGNER_APPLE_ID_PASSWORD }}
-      #     appstore-connect-team-id: FX44YY62GV
+      #     appstore-connect-team-id: 679M9248WK
 
       # - name: Staple Inso CLI installer (macOS only)
       #   if: matrix.os == 'macos-latest'
@@ -107,7 +111,7 @@ jobs:
       #     primary-bundle-id: com.insomnia.inso-binary
       #     appstore-connect-username: ${{ secrets.DESIGNER_APPLE_ID }}
       #     appstore-connect-password: ${{ secrets.DESIGNER_APPLE_ID_PASSWORD }}
-      #     appstore-connect-team-id: FX44YY62GV
+      #     appstore-connect-team-id: 679M9248WK
 
       # - name: Create inso artifacts
       #   run: npm run inso-package:artifacts
