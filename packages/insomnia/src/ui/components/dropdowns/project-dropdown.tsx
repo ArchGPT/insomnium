@@ -14,23 +14,46 @@ import {
 } from '../../../models/project';
 import { Icon } from '../icon';
 import ProjectSettingsModal from '../modals/project-settings-modal';
+import electron, { ipcRenderer, shell } from 'electron';
+
 
 interface Props {
   project: Project;
   organizationId: string;
+  isBasedProject?: boolean
 }
 
-export const ProjectDropdown: FC<Props> = ({ project, organizationId }) => {
+export const ProjectDropdown: FC<Props> = ({ project, organizationId, isBasedProject }) => {
   const [isProjectSettingsModalOpen, setIsProjectSettingsModalOpen] =
     useState(false);
   const deleteProjectFetcher = useFetcher();
+
+  const openFolderAction: {
+    id: string;
+    name: string;
+    icon: IconName;
+    action: (project: Project) => void;
+  } = {
+    id: 'show-in-file-system',
+    name: "Show in File System",
+    icon: 'folder-open',
+    action: (project: Project) => {
+
+
+      const base = window.app.getPath("userData")
+      window.shell.showItemInFolder(base + "/defaultCodebase/.insomnium/" + (isBasedProject ? "" : project.name))
+
+
+    }
+  }
 
   const projectActionList: {
     id: string;
     name: string;
     icon: IconName;
-    action: (projectId: string) => void;
-  }[] = [
+    action: (project: Project) => void;
+  }[] = isBasedProject ? [openFolderAction] : [
+    openFolderAction,
     {
       id: 'settings',
       name: 'Settings',
@@ -46,7 +69,7 @@ export const ProjectDropdown: FC<Props> = ({ project, organizationId }) => {
           {},
           {
             method: 'post',
-            action: `/organization/${organizationId}/project/${projectId}/delete`,
+            action: `/organization/${organizationId}/project/${project._id}/delete`,
           }
         ),
     },
@@ -65,7 +88,7 @@ export const ProjectDropdown: FC<Props> = ({ project, organizationId }) => {
             aria-label="Project Actions Menu"
             selectionMode="single"
             onAction={key => {
-              projectActionList.find(({ id }) => key === id)?.action(project._id);
+              projectActionList.find(({ id }) => key === id)?.action(project);
             }}
             items={projectActionList}
             className="border select-none text-sm min-w-max border-solid border-[--hl-sm] shadow-lg bg-[--color-bg] py-2 rounded-md overflow-y-auto max-h-[85vh] focus:outline-none"

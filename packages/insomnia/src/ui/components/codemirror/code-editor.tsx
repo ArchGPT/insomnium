@@ -167,6 +167,7 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
   style,
   uniquenessKey,
   updateFilter,
+  setGenDescription
 }, ref) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -556,7 +557,9 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
                 type="text"
                 title="Filter response body"
                 defaultValue={filter || ''}
-                placeholder={mode?.includes('json') ? '$.store.books[*].author' : '/store/books/author'}
+                placeholder={
+                  mode?.includes('json') ? '$.store.books[*].author' : '/store/books/author'
+                }
                 onKeyDown={createKeybindingsHandler({
                   'Enter': () => {
                     const filter = inputRef.current?.value;
@@ -567,6 +570,8 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
                   },
                 })}
                 onChange={e => {
+                  // setGenDescription(e.target.value)
+
                   if (e.target.value === '') {
                     if (updateFilter) {
                       updateFilter('');
@@ -609,6 +614,11 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(({
                   ))}
                 </Dropdown>
               )) : null}
+            <div className='theme--pane__header'>
+              <button className='llm-button' onClick={async () => {
+
+              }}>🐕 generate filter</button>
+            </div>
             {showFilter ?
               (<button key="help" className="btn btn--compact" onClick={() => showModal(FilterHelpModal, { isJSON: Boolean(mode?.includes('json')) })}>
                 <i className="fa fa-question-circle" />

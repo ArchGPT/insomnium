@@ -389,7 +389,7 @@ export const WebSocketRequestPane: FC<Props> = ({ environment }) => {
                 </span>
                 <br />
                 <br />
-                  <button className="btn btn--clicky faint" onClick={() => setIsRequestSettingsModalOpen(true)}>
+                <button className="btn btn--clicky faint" onClick={() => setIsRequestSettingsModalOpen(true)}>
                   Add Description
                 </button>
               </p>

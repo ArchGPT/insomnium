@@ -39,16 +39,16 @@ const CertificateField: FC<{
   privateText,
   optional,
 }) => {
-  if (optional && value === null) {
-    return null;
-  }
+    if (optional && value === null) {
+      return null;
+    }
 
-  let display: ReactNode = value;
-  if (privateText) {
-    display = <PasswordViewer text={value} />;
-  } else {
-    display = <span className="monospace selectable">{value}</span>;
-  }
+    let display: ReactNode = value;
+    if (privateText) {
+      display = <PasswordViewer text={value} />;
+    } else {
+      display = <span className="monospace selectable">{value}</span>;
+    }
 
     return (
       <span className="pad-right no-wrap">

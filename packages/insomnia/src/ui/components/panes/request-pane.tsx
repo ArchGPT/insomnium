@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useFetcher, useParams, useRouteLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
+import { Switch } from '@headlessui/react'
 
 import { getContentTypeFromHeaders } from '../../../common/constants';
 import * as models from '../../../models';
@@ -32,6 +33,9 @@ import { Pane, PaneHeader } from './pane';
 import { PlaceholderRequestPane } from './placeholder-request-pane';
 import { RequestSegmentEditor } from '../editors/request-segment-editor';
 import { GitRepoLoaderData } from '../../routes/git-actions';
+import { CodeEditor, CodeEditorHandle } from '../codemirror/code-editor';
+import { ipcRenderer } from 'electron';
+import classNames from 'classnames';
 const HeaderContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
@@ -64,6 +68,9 @@ interface Props {
   settings: Settings;
   setLoading: (l: boolean) => void;
   onPaste: (text: string) => void;
+  selectionKey: string | null,
+  setSelectionKey: (key: string) => void,
+
 }
 
 export const RequestPane: FC<Props> = ({
@@ -71,6 +78,9 @@ export const RequestPane: FC<Props> = ({
   settings,
   setLoading,
   onPaste,
+  frontEndCode,
+  selectionKey,
+  setSelectionKey
 }) => {
   const { activeRequest, activeRequestMeta } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
   const { workspaceId, requestId } = useParams() as { organizationId: string; projectId: string; workspaceId: string; requestId: string };
@@ -78,6 +88,36 @@ export const RequestPane: FC<Props> = ({
   const [isRequestSettingsModalOpen, setIsRequestSettingsModalOpen] =
     useState(false);
   const patchRequest = useRequestSetter();
+
+
+  const frontEndCodeRef = React.useRef<CodeEditorHandle>(null);
+
+  // useEffect(() => {
+  //   if (frontEndCodeRef.current)
+  //     frontEndCodeRef.current.setValue(frontEndCode);
+  // }, [frontEndCode, selectionKey])
+
+
+  useEffect(() => {
+    if (selectionKey === 'llm') {
+      ipcRenderer.send('watchFile', 'ohayo');
+    }
+  }, [selectionKey])
+
+  const fileContentChangeHandler = (event: any, data: string) => {
+    if (frontEndCodeRef.current)
+      frontEndCodeRef.current.setValue(data);
+  };
+
+  useEffect(() => {
+    ipcRenderer.on('file-updated', fileContentChangeHandler)
+
+    return () => {
+      ipcRenderer.removeListener('file-updated', fileContentChangeHandler)
+    }
+
+  }, [])
+
 
   useState(false);
   const handleImportQueryFromUrl = () => {
@@ -157,10 +197,16 @@ export const RequestPane: FC<Props> = ({
             nunjucksPowerUserMode={settings.nunjucksPowerUserMode}
             setLoading={setLoading}
             onPaste={onPaste}
+            setIsRequestSettingsModalOpen={setIsRequestSettingsModalOpen}
           />
         </ErrorBoundary>
       </PaneHeader>
-      <Tabs aria-label="Request pane tabs">
+      <Tabs aria-label="Request pane tabs"
+        onSelectionChange={(key: any) => {
+          setSelectionKey(key)
+        }}
+        selectedKey={selectionKey}
+      >
         <TabItem key="content-type" title={<ContentTypeDropdown />}>
           <BodyEditor
             key={uniqueKey}
@@ -278,65 +324,135 @@ export const RequestPane: FC<Props> = ({
             </TabPanelFooter>
           </HeaderContainer>
         </TabItem>
+
         <TabItem
-          key="docs"
+
+          key="llm"
           title={
             <>
-              Docs
-              {activeRequest.description && (
-                <span className="bubble space-left">
-                  <i className="fa fa--skinny fa-check txt-xxs" />
-                </span>
-              )}
+              ArchGPT
             </>
           }
         >
           <PanelContainer className="tall">
-            {activeRequest.description ? (
-              <div>
-                <div className="pull-right pad bg-default">
-                  <button
-                    className="btn btn--clicky"
-                    onClick={() => setIsRequestSettingsModalOpen(true)}
+            <div className='bg-black text-white mb-2'>
+              <div className='pt-4 pl-4 flex items-center justify-between pr-4'>
+                <div className=''>Intention:</div>
+
+                <Switch.Group as="div" className="flex items-center">
+                  <Switch
+                    checked={true}
+                    onChange={() => { }}
+                    className="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
                   >
-                    Edit
-                  </button>
-                </div>
-                <div className="pad">
-                  <ErrorBoundary errorClassName="font-error pad text-center">
-                    <MarkdownPreview
-                      heading={activeRequest.name}
-                      markdown={activeRequest.description}
+                    <span className="sr-only">Infer from names and other files</span>
+                    <span aria-hidden="true" className="pointer-events-none absolute h-full w-full rounded-md" />
+                    <span
+                      aria-hidden="true"
+                      className={classNames(
+                        true ? 'bg-indigo-600' : 'bg-gray-200',
+                        'pointer-events-none absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out'
+                      )}
                     />
-                  </ErrorBoundary>
-                </div>
-              </div>
-            ) : (
-              <div className="overflow-hidden editor vertically-center text-center">
-                <p className="pad text-sm text-center">
-                  <span className="super-faint">
-                    <i
-                      className="fa fa-file-text-o"
-                      style={{
-                        fontSize: '8rem',
-                        opacity: 0.3,
-                      }}
+                    <span
+                      aria-hidden="true"
+                      className={classNames(
+                        true ? 'translate-x-5' : 'translate-x-0',
+                        'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border border-gray-200 bg-white shadow ring-0 transition-transform duration-200 ease-in-out'
+                      )}
                     />
-                  </span>
-                  <br />
-                  <br />
-                  <button
-                    className="btn btn--clicky faint"
-                    onClick={() => setIsRequestSettingsModalOpen(true)}
-                  >
-                    Add Description
-                  </button>
-                </p>
+                  </Switch>
+                  <Switch.Label as="span" className="ml-3 text-sm">
+                    <span className="font-medium">Infer intention from files and names</span>{' '}
+
+                  </Switch.Label>
+                </Switch.Group>
+
+
               </div>
-            )}
-          </PanelContainer>
-        </TabItem>
-      </Tabs>
+              <textarea
+                autoComplete="off"
+                defaultValue="hello"
+                className='bg-black text-base-content w-full h-24 p-4'
+              />
+            </div>
+            <div className='theme--pane__header'>
+              <Tabs aria-label="ArchGPT pane tabs"
+              // onSelectionChange={(key: any) => {
+              //   setSelectionKey(key)
+              // }}
+              // selectedKey={selectionKey}
+
+              >
+                <TabItem key="front-end" title={"Front-End UI"}>
+                  <div className='px-4 mt-2 flex flex-wrap items-center gap-2'>
+                    <div>write LLM result into: <u>./request5/ui.htmx</u>
+                    </div>
+
+                    <div className="flex items-center space-x-1">
+
+                      <div >
+                        <button className='llm-button' onClick={async () => {
+
+                        }}>🐕 gen UI for input</button>
+                      </div>
+                      <div >
+                        <button className='llm-button' onClick={async () => {
+
+                        }}>🐕 gen UI for result JSON</button>
+                      </div>
+                      <div className='llm-button'> <i className="fa fa-gear" /></div>
+                    </div>
+                  </div>
+                </TabItem>
+                <TabItem key="filter" title={"JSON Filter"}>
+                  <div className="flex items-center space-x-1 mt-2">
+                    <div className='px-4'>write LLM result into: <u>./request5/filter.ts</u>
+                    </div>
+                    <div className='theme--pane__header'>
+                      <button className='llm-button' onClick={async () => {
+
+                      }}>🐕 gen filter</button>
+                    </div>
+                    <div className='llm-button'>   <i className="fa fa-gear" /></div>
+                  </div>
+                </TabItem>
+                {/* <TabItem key="test-case" title={"test cases"}>
+                  <div className="flex items-center space-x-1 mt-2">
+                    <div className='px-4'>stream LLM result into: "./request5/tests.tsx"
+                    </div>
+                    <div className='theme--pane__header'>
+                      <button className='llm-button' onClick={async () => {
+
+                      }}>🐕 send and run LLM</button>
+                    </div>
+                  </div>
+                </TabItem> */}
+              </Tabs>
+            </div>
+
+            <CodeEditor
+              className='mt-2 px-4'
+              id="markdown-editor"
+              ref={frontEndCodeRef}
+              hideGutters
+              hideLineNumbers
+              dynamicHeight={''}
+              showPrettifyButton
+              noStyleActiveLine
+              enableNunjucks
+              mode={''}
+              defaultValue='_'
+            // placeholder={placeholder}
+            // defaultValue={markdown}
+            // onChange={handleChange}
+            />
+            <div>
+
+            </div>
+          </PanelContainer >
+        </TabItem >
+      </Tabs >
 
       {isRequestSettingsModalOpen && (
         <RequestSettingsModal
@@ -344,6 +460,54 @@ export const RequestPane: FC<Props> = ({
           onHide={() => setIsRequestSettingsModalOpen(false)}
         />
       )}
-    </Pane>
+    </Pane >
   );
 };
+
+
+
+
+// <PanelContainer className="tall">
+//             {activeRequest.description ? (
+//               <div>
+//                 <div className="pull-right pad bg-default">
+//                   <button
+//                     className="btn btn--clicky"
+//                     onClick={() => setIsRequestSettingsModalOpen(true)}
+//                   >
+//                     Edit
+//                   </button>
+//                 </div>
+//                 <div className="pad">
+//                   <ErrorBoundary errorClassName="font-error pad text-center">
+//                     <MarkdownPreview
+//                       heading={activeRequest.name}
+//                       markdown={activeRequest.description}
+//                     />
+//                   </ErrorBoundary>
+//                 </div>
+//               </div>
+//             ) : (
+//               <div className="overflow-hidden editor vertically-center text-center">
+//                 <p className="pad text-sm text-center">
+//                   <span className="super-faint">
+//                     <i
+//                       className="fa fa-file-text-o"
+//                       style={{
+//                         fontSize: '8rem',
+//                         opacity: 0.3,
+//                       }}
+//                     />
+//                   </span>
+//                   <br />
+//                   <br />
+//                   <button
+//                     className="btn btn--clicky faint"
+//                     onClick={() => setIsRequestSettingsModalOpen(true)}
+//                   >
+//                     Add Description
+//                   </button>
+//                 </p>
+//               </div>
+//             )}
+//           </PanelContainer>

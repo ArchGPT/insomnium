@@ -213,8 +213,8 @@ export const loader: LoaderFunction = async ({
 
     const hasUnsavedChanges = Boolean(
       isDesign(workspace) &&
-        workspaceMeta?.cachedGitLastCommitTime &&
-        modifiedLocally > workspaceMeta?.cachedGitLastCommitTime
+      workspaceMeta?.cachedGitLastCommitTime &&
+      modifiedLocally > workspaceMeta?.cachedGitLastCommitTime
     );
 
     const clientCertificates = await models.clientCertificate.findByParentId(
@@ -253,20 +253,20 @@ export const loader: LoaderFunction = async ({
     .filter(workspace =>
       filter
         ? Boolean(
-            fuzzyMatchAll(
-              filter,
-              // Use the filter string to match against these properties
-              [
-                workspace.name,
-                workspace.workspace.scope === 'design'
-                  ? 'document'
-                  : 'collection',
-                workspace.lastActiveBranch || '',
-                workspace.specFormatVersion || '',
-              ],
-              { splitSpace: true, loose: true }
-            )?.indexes
-          )
+          fuzzyMatchAll(
+            filter,
+            // Use the filter string to match against these properties
+            [
+              workspace.name,
+              workspace.workspace.scope === 'design'
+                ? 'document'
+                : 'collection',
+              workspace.lastActiveBranch || '',
+              workspace.specFormatVersion || '',
+            ],
+            { splitSpace: true, loose: true }
+          )?.indexes
+        )
         : true
     )
     .sort((a, b) => sortMethodMap[sortOrder as DashboardSortOrder](a, b));
@@ -287,9 +287,9 @@ export const loader: LoaderFunction = async ({
       organizationId === DEFAULT_ORGANIZATION_ID
         ? defaultOrganization
         : {
-            _id: organizationId,
-            name: projects[0].name,
-          },
+          _id: organizationId,
+          name: projects[0].name,
+        },
     workspaces,
     projects,
     projectsCount: organizationProjects.length,
@@ -391,33 +391,33 @@ const ProjectRoute: FC = () => {
     icon: IconName;
     action: () => void;
   }[] = [
-    {
-      id: 'new-collection',
-      name: 'Request collection',
-      icon: 'bars',
-      action: createNewCollection,
-    },
-    {
-      id: 'new-document',
-      name: 'Design document',
-      icon: 'file',
-      action: createNewDocument,
-    },
-    {
-      id: 'import',
-      name: 'Import',
-      icon: 'file-import',
-      action: () => {
-        setImportModalType('file');
+      {
+        id: 'new-collection',
+        name: 'Request collection',
+        icon: 'bars',
+        action: createNewCollection,
       },
-    },
-    {
-      id: 'git-clone',
-      name: 'Git Clone',
-      icon: 'code-fork',
-      action: importFromGit,
-    },
-  ];
+      {
+        id: 'new-document',
+        name: 'Design document',
+        icon: 'file',
+        action: createNewDocument,
+      },
+      {
+        id: 'import',
+        name: 'Import',
+        icon: 'file-import',
+        action: () => {
+          setImportModalType('file');
+        },
+      },
+      {
+        id: 'git-clone',
+        name: 'Git Clone',
+        icon: 'code-fork',
+        action: importFromGit,
+      },
+    ];
 
   const scopeActionList: {
     id: string;
@@ -430,35 +430,35 @@ const ProjectRoute: FC = () => {
       run: () => void;
     };
   }[] = [
-    {
-      id: 'all',
-      label: `All files (${allFilesCount})`,
-      icon: 'folder',
-      level: 0,
-    },
-    {
-      id: 'design',
-      label: `Documents (${documentsCount})`,
-      level: 1,
-      icon: 'file',
-      action: {
-        icon: 'plus',
-        label: 'New design document',
-        run: createNewDocument,
+      {
+        id: 'all',
+        label: `All files (${allFilesCount})`,
+        icon: 'folder',
+        level: 0,
       },
-    },
-    {
-      id: 'collection',
-      label: `Collections (${collectionsCount})`,
-      level: 1,
-      icon: 'bars',
-      action: {
-        icon: 'plus',
-        label: 'New request collection',
-        run: createNewCollection,
+      {
+        id: 'design',
+        label: `Documents (${documentsCount})`,
+        level: 1,
+        icon: 'file',
+        action: {
+          icon: 'plus',
+          label: 'New design document',
+          run: createNewDocument,
+        },
       },
-    },
-  ];
+      {
+        id: 'collection',
+        label: `Collections (${collectionsCount})`,
+        level: 1,
+        icon: 'bars',
+        action: {
+          icon: 'plus',
+          label: 'New request collection',
+          run: createNewCollection,
+        },
+      },
+    ];
 
   return (
     <ErrorBoundary>
@@ -467,55 +467,18 @@ const ProjectRoute: FC = () => {
           className="new-sidebar"
           renderPageSidebar={
             <div className="flex flex-1 flex-col overflow-hidden divide-solid divide-y divide-[--hl-md]">
-              <div className="p-[--padding-sm]">
-                <Select
-                  aria-label="Organizations"
-                  onSelectionChange={id => {
-                    navigate(`/organization/${id}`);
-                  }}
-                  selectedKey={organizationId}
-                  items={organizations}
-                >
-                  <Button className="px-4 py-1 flex flex-1 items-center justify-center gap-2 aria-pressed:bg-[--hl-sm] rounded-sm text-[--color-font] hover:bg-[--hl-xs] focus:ring-inset ring-1 ring-transparent focus:ring-[--hl-md] transition-all text-sm">
-                    <SelectValue<Organization> className="flex truncate items-center justify-center gap-2">
-                      {({ selectedItem }) => {
-                        return selectedItem?.name;
-                      }}
-                    </SelectValue>
-                    <Icon icon="caret-down" />
+              <div>
+                <div className="border select-none text-sm min-w-max border-solid border-[--hl-sm] shadow-lg bg-[--color-bg] py-2 rounded-md overflow-y-auto max-h-[85vh] focus:outline-none">
+                  <Button className="ml-1 px-4 py-1 flex flex-1 items-center justify-center gap-2 aria-pressed:bg-[--hl-sm] rounded-sm text-[--color-font] hover:bg-[--hl-xs] focus:ring-inset ring-1 ring-transparent focus:ring-[--hl-md] transition-all text-sm">
+                    move .insomnium into your codebase
+                    <Icon icon="caret-right" />
                   </Button>
-                  <Popover className="min-w-max">
-                    <ListBox<Organization> className="border select-none text-sm min-w-max border-solid border-[--hl-sm] shadow-lg bg-[--color-bg] py-2 rounded-md overflow-y-auto max-h-[85vh] focus:outline-none">
-                      {item => (
-                        <Item
-                          id={item._id}
-                          key={item._id}
-                          className="flex gap-2 px-[--padding-md] aria-selected:font-bold items-center text-[--color-font] h-[--line-height-xs] w-full text-md whitespace-nowrap bg-transparent hover:bg-[--hl-sm] disabled:cursor-not-allowed focus:bg-[--hl-xs] focus:outline-none transition-colors"
-                          aria-label={item.name}
-                          textValue={item.name}
-                          value={item}
-                        >
-                          {({ isSelected }) => (
-                            <Fragment>
-                              <span>{item.name}</span>
-                              {isSelected && (
-                                <Icon
-                                  icon="check"
-                                  className="text-[--color-success] justify-self-end"
-                                />
-                              )}
-                            </Fragment>
-                          )}
-                        </Item>
-                      )}
-                    </ListBox>
-                  </Popover>
-                </Select>
+                </div>
               </div>
               <div className="flex flex-col flex-1">
-                <Heading className="p-[--padding-sm] uppercase text-xs">
-                  Projects ({projectsCount})
-                </Heading>
+                {/* <Heading className="p-[--padding-sm] uppercase text-xs">
+                  Directories ({projectsCount})
+                </Heading> */}
                 {organizationId === DEFAULT_ORGANIZATION_ID && (
                   <div className="flex justify-between gap-1 p-[--padding-sm]">
                     <SearchField
@@ -603,23 +566,22 @@ const ProjectRoute: FC = () => {
                   }}
                 >
                   {item => {
+                    const isBasedProject = item._id === DEFAULT_PROJECT_ID
                     return (
                       <Item
                         key={item._id}
                         id={item._id}
                         textValue={item.name}
-                        className="group outline-none select-none"
+                        className={"group outline-none select-none"}
                       >
                         <div className="flex select-none outline-none group-aria-selected:text-[--color-font] relative group-hover:bg-[--hl-xs] group-focus:bg-[--hl-sm] transition-colors gap-2 px-4 items-center h-[--line-height-xs] w-full overflow-hidden text-[--hl]">
                           <span className="group-aria-selected:bg-[--color-surprise] transition-colors top-0 left-0 absolute h-full w-[2px] bg-transparent" />
-                          <Icon
-                            icon={
-                              isRemoteProject(item) ? 'globe-americas' : 'laptop'
-                            }
-                          />
-                          <span className="truncate">{item.name}</span>
+
+                          <Icon icon={'folder'} className={(isBasedProject ? "" : " ml-4")} />
+
+                          <span className="truncate">{isBasedProject ? ".insomnium" : item.name}</span>
                           <span className="flex-1" />
-                          {item._id !== DEFAULT_PROJECT_ID && <ProjectDropdown organizationId={organizationId} project={item} />}
+                          <ProjectDropdown organizationId={organizationId} project={item} isBasedProject={isBasedProject} />
                         </div>
                       </Item>
                     );
