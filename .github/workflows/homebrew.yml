@@ -65,8 +65,7 @@ jobs:
         uses: macauley/action-homebrew-bump-cask@v1.0.0
         with:
           token: ${{ secrets.HOMEBREW_PR_GH_TOKEN }}
-
+          cask: insomnium
           # run brew livecheck to check if any provided casks are outdated.
           # Better as a schedule. If none are oudated, action exit
           livecheck: true
-      
