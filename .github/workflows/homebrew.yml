@@ -19,6 +19,9 @@ jobs:
         with:
           test-bot: false
 
+      - name: Tap into ArchGPT/homebrew-tap
+        run: brew tap ArchGPT/homebrew-tap
+
       - name: Cache Homebrew Bundler RubyGems
         id: cache
         uses: actions/cache@v3
@@ -65,7 +68,7 @@ jobs:
         uses: macauley/action-homebrew-bump-cask@v1.0.0
         with:
           token: ${{ secrets.HOMEBREW_PR_GH_TOKEN }}
-          cask: insomnium
+          cask: ArchGPT/homebrew-tap/insomnium
           # run brew livecheck to check if any provided casks are outdated.
           # Better as a schedule. If none are oudated, action exit
           livecheck: true
