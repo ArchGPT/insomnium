@@ -52,9 +52,12 @@ jobs:
           # Custom GitHub access token with only the 'public_repo' scope enabled
           token: ${{secrets.HOMEBREW_PR_GH_TOKEN}}
           # Bump only these formulae if outdated
-          formulae:
+          casks:
+            inso-beta
+            inso
             insomnia
-
+          
+          
       - name: Homebrew bump cask
         uses: macauley/action-homebrew-bump-cask@v1.0.0
         with:
