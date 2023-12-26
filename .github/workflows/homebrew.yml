@@ -45,24 +45,16 @@ jobs:
       - name: Update brew
         run: brew update
 
-      # Update Homebrew's Inso(mnia) formulae
-      # https://github.com/Homebrew/actions/tree/master/bump-formulae
-      - name: Bump Inso (Beta) Formula
-        uses: Homebrew/actions/bump-formulae@master
+
+      - name: Bump Inso-beta, Insomnia, Insomnium Packages
+        uses: Homebrew/actions/bump-packages@master
         with:
           token: ${{ secrets.HOMEBREW_PR_GH_TOKEN }}
-          formulae: inso-beta
-      - name: Bump Inso Formula
-        uses: Homebrew/actions/bump-formulae@master
-        with:
-          token: ${{ secrets.HOMEBREW_PR_GH_TOKEN }}
-          formulae: inso
-      - name: Bump Insomnium Formula
-        uses: Homebrew/actions/bump-formulae@master
-        with:
-          token: ${{ secrets.HOMEBREW_PR_GH_TOKEN }}
-          # Bump only these formulae if outdated
-          formulae: insomnia
+
+          formulae: |
+            inso-beta
+            inso
+            insomnia
 
       - name: Homebrew bump cask
         uses: macauley/action-homebrew-bump-cask@v1.0.0
