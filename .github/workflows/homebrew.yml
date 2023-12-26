@@ -46,14 +46,13 @@ jobs:
         run: brew update
 
 
-      - name: Bump Inso-beta, Insomnia, Insomnium Packages
+      - name: Bump insomnia package
         uses: Homebrew/actions/bump-packages@master
         with:
-          token: ${{ secrets.HOMEBREW_PR_GH_TOKEN }}
-
-          formulae: |
-            
-            inso
+          # Custom GitHub access token with only the 'public_repo' scope enabled
+          token: ${{secrets.HOMEBREW_PR_GH_TOKEN}}
+          # Bump only these formulae if outdated
+          formulae:
             insomnia
 
       - name: Homebrew bump cask
