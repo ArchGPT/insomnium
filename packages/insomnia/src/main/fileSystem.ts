@@ -11,7 +11,7 @@ export const init = async () => {
 
   const dataPath = electron.app.getPath('userData');
 
-  let workSpacePath = path.join(dataPath, 'defaultCodebase', '.insomnium');
+  const workSpacePath = path.join(dataPath, 'defaultCodebase', '.insomnium');
 
   console.log("process.env['INSOMNIA_DATA_PATH']", process.env['INSOMNIA_DATA_PATH'])
   console.log("workSpacePath_", workSpacePath);
@@ -50,6 +50,11 @@ export const init = async () => {
 }
 
 
-export const saveRequestToFile = async ()=>{
-  
+// e.g. view dummyStartingWorkspace packages/insomnia/src/common/import.ts
+
+export const saveRequestToFile = async (exportedJsonObj:any, repoPath:string) => {
+  // here we want to divide exportJsonObj into N parts where every part is an element in ".resources"
+  // and then we want to save each part as a file in the repo 
+
+
 }
