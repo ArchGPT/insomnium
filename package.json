@@ -75,8 +75,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@xmldom/xmldom": "^0.8.10",
-    "archgpt": "file:../archgpt.dev/main",
     "openai": "^4.14.2",
-    "tree-sitter": "^0.20.6"
+    "tree-sitter": "^0.20.6",
+    "archgpt": "0.0.1-c"
   }
 }

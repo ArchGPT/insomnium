@@ -27,7 +27,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 
-import OpenAI from "openai"
+
 import { archGPT } from "../../common/archgpt"
 
 import { SORT_ORDERS, SortOrder, sortOrderName } from '../../common/constants';
@@ -205,8 +205,6 @@ export const Debug: FC = () => {
     });
   }, []);
 
-
-  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, dangerouslyAllowBrowser: true });
 
 
   const [frontEndCode, setFrontEndCode] = useState("_")
