@@ -30,11 +30,7 @@ export const ResponseErrorViewer: FC<Props> = memo(({ error }) => {
       </button>
     );
   } else {
-    msg = (
-      <Link button className="btn btn--clicky" href={docsBase}>
-        Documentation
-      </Link>
-    );
+    msg = <div></div>
   }
 
   return (
@@ -49,16 +45,16 @@ export const ResponseErrorViewer: FC<Props> = memo(({ error }) => {
       </pre>
       <hr />
       <div className="text-center pad">
-        <p className="faint pad-left pad-right">Here are some additional things that may help.</p>
+        {/* <p className="faint pad-left pad-right">Here are some additional things that may help.</p> */}
         {msg}
-          &nbsp;&nbsp;
-        <Link
+        &nbsp;&nbsp;
+        {/* <Link
           button
           className="btn btn--clicky margin-top-sm"
           href="https://insomnia.rest/support"
         >
           Contact Support
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

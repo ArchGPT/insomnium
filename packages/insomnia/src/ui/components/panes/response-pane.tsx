@@ -1,7 +1,8 @@
 import fs from 'fs';
 import { extension as mimeExtension } from 'mime-types';
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
+import OpenAI from "openai"
 
 import { PREVIEW_MODE_SOURCE } from '../../../common/constants';
 import { getSetCookieHeaders } from '../../../common/misc';
@@ -27,13 +28,16 @@ import { ResponseViewer } from '../viewers/response-viewer';
 import { BlankPane } from './blank-pane';
 import { Pane, PaneHeader } from './pane';
 import { PlaceholderResponsePane } from './placeholder-response-pane';
+import { ipcRenderer } from 'electron';
 
 interface Props {
   runningRequests: Record<string, boolean>;
 }
 export const ResponsePane: FC<Props> = ({
   runningRequests,
+  makeFrontEndCode
 }) => {
+  const [genDescription, setGenDescription] = React.useState('')
   const { activeRequest, activeRequestMeta, activeResponse } = useRouteLoaderData('request/:requestId') as RequestLoaderData;
   const filterHistory = activeRequestMeta.responseFilterHistory || [];
   const filter = activeRequestMeta.responseFilter || '';
@@ -133,6 +137,10 @@ export const ResponsePane: FC<Props> = ({
       </PlaceholderResponsePane>
     );
   }
+
+
+
+
   const timeline = models.response.getTimeline(activeResponse);
   const cookieHeaders = getSetCookieHeaders(activeResponse.headers);
   return (
@@ -147,10 +155,25 @@ export const ResponsePane: FC<Props> = ({
           <ResponseHistoryDropdown
             activeResponse={activeResponse}
           />
+
         </PaneHeader>
       )}
       <Tabs
         aria-label="Response pane tabs"
+        // to-do for v0.3: show conditionally by setting
+        rightButton={<div className="go-llm theme--pane__header"><button className='llm-button' onClick={async () => {
+          let buffer = ''
+          const json = handleGetResponseBody()!.toString('utf8')
+          console.log("json", json);
+          // patchRequestMeta(activeRequest._id, { previewMode: 'frontend' })
+          // hello
+
+          await makeFrontEndCode(json,
+            // genDescription
+          )
+
+        }}>🐕 generate htmx UI</button></div>}
+
       >
         <TabItem
           key="preview"
@@ -234,3 +257,7 @@ export const ResponsePane: FC<Props> = ({
     </Pane>
   );
 };
+
+
+
+

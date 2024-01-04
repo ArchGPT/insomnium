@@ -1099,6 +1099,8 @@ async function getGitChanges(vcs: typeof GitVCS, workspace: Workspace) {
   const allPaths = await getGitVCSPaths(vcs);
   const statusNames: Record<string, string> = {};
   for (const doc of docs) {
+    console.log("[get git change] .. doc .. ", path.join(GIT_INSOMNIA_DIR_NAME, doc.type, `${doc._id}.json`))
+
     const name = (isApiSpec(doc) && doc.fileName) || doc.name || '';
     statusNames[path.join(GIT_INSOMNIA_DIR_NAME, doc.type, `${doc._id}.json`)] =
       name;
@@ -1148,6 +1150,8 @@ async function getGitChanges(vcs: typeof GitVCS, workspace: Workspace) {
       path: gitPath,
     };
   }
+  // console.log("changes", items);
+
 
   return {
     changes: Object.values(items),

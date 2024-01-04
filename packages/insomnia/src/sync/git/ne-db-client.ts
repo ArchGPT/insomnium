@@ -31,6 +31,10 @@ export class NeDBClient {
     };
   }
 
+  async mirrorFS() {
+    // when fileSystem is turned on, mirrorFS is called with a 3 second debounce for every changes made to the db, to update the file system
+  }
+
   async readFile(
     filePath: string,
     options?: BufferEncoding | { encoding?: BufferEncoding },
@@ -43,6 +47,8 @@ export class NeDBClient {
         encoding: options,
       };
     }
+    console.log('[git - readFile] called ', filePath, options);
+
 
     const { root, type, id } = parseGitPath(filePath);
 
@@ -86,6 +92,8 @@ export class NeDBClient {
       console.log(`[git] Ignoring external file ${filePath}`);
       return;
     }
+    // console.log('[writeFile] called ', filePath, root, 'ooh');
+
 
     const doc: BaseModel = YAML.parse(data.toString());
 

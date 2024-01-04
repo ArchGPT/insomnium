@@ -266,7 +266,7 @@ export class GitVCS {
 
   async add(relPath: string) {
     relPath = convertToPosixSep(relPath);
-    console.log(`[git] Add ${relPath}`);
+    console.log(`[git] Add local: ${relPath} with ${JSON.stringify(this._baseOpts)}`);
     return git.add({ ...this._baseOpts, filepath: relPath });
   }
 
@@ -429,7 +429,7 @@ export class GitVCS {
     });
   }
 
-  async log(input: {depth?: number} = {}) {
+  async log(input: { depth?: number } = {}) {
     const { depth = 35 } = input;
     try {
       const remoteOriginURI = await this.getRemoteOriginURI();

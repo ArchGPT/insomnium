@@ -27,6 +27,9 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 
+import OpenAI from "openai"
+import { archGPT } from "../../common/archgpt"
+
 import { SORT_ORDERS, SortOrder, sortOrderName } from '../../common/constants';
 import { ChangeBufferEvent, database as db } from '../../common/database';
 import { generateId } from '../../common/misc';
@@ -146,6 +149,8 @@ const EventStreamSpinner = ({ requestId }: { requestId: string }) => {
   return readyState ? <ConnectionCircle data-testid="EventStreamSpinner__Connected" /> : null;
 };
 
+
+
 export const Debug: FC = () => {
   const {
     activeWorkspace,
@@ -199,6 +204,48 @@ export const Debug: FC = () => {
       }
     });
   }, []);
+
+
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, dangerouslyAllowBrowser: true });
+
+
+  const [frontEndCode, setFrontEndCode] = useState("_")
+  const [selectionKey, setSelectionKey] = useState<string | null>(null)
+
+
+
+  const makeFrontEndCode = async (json: any, description = "We'll display JSON nicelt in gothic style.") => {
+    let buffer = ''
+    console.log("description __ => ", description);
+
+    const requestId = "test"
+    setSelectionKey("llm")
+
+    await archGPT.runPrompt("CREATE_FILE", {
+      id: requestId,
+      filePath: "",
+      savedToHistory: true,
+      loadPromptTemplate: "gpt4-react-tailwind",
+      promptTemplateData: {
+        json
+      },
+      intrepretStream: () => {
+        return {
+          shouldContinue: () => true,
+          take: (str) => {
+            if (str) {
+              buffer += str
+              console.log("[ ->]", buffer)
+              setFrontEndCode(buffer)
+            }
+          }
+        }
+      }
+    })
+
+  }
+
+
 
   const { settings } = useRouteLoaderData('root') as RootLoaderData;
   const [runningRequests, setRunningRequests] = useState<
@@ -1052,6 +1099,8 @@ export const Debug: FC = () => {
                   setPastedCurl(text);
                   setPasteCurlModalOpen(true);
                 }}
+                selectionKey={selectionKey}
+                setSelectionKey={setSelectionKey}
               />
             )}
             {!requestId && <PlaceholderRequestPane />}
@@ -1073,7 +1122,8 @@ export const Debug: FC = () => {
             <RealtimeResponsePane requestId={activeRequest._id} />
           )}
           {activeRequest && isRequest(activeRequest) && !isRealtimeRequest && (
-            <ResponsePane runningRequests={runningRequests} />
+            // Normal RESTful Response:
+            <ResponsePane runningRequests={runningRequests} makeFrontEndCode={makeFrontEndCode} />
           )}
         </ErrorBoundary>
       }

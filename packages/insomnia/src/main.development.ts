@@ -1,5 +1,5 @@
 
-import electron, { app, ipcMain, session } from 'electron';
+import electron, { app, ipcMain, ipcRenderer, session } from 'electron';
 import { BrowserWindow } from 'electron';
 import contextMenu from 'electron-context-menu';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
@@ -18,11 +18,13 @@ import { registerWebSocketHandlers } from './main/network/websocket';
 import { checkIfRestartNeeded } from './main/squirrel-startup';
 import * as updates from './main/updates';
 import * as windowUtils from './main/window-utils';
+import * as fsUtils from './main/fileSystem'
 import * as models from './models/index';
 import type { Stats } from './models/stats';
 import type { ToastNotification } from './ui/components/toast';
 import { dummyStartingWorkspace, importToWorkspaceFromJSON } from './common/import';
 import { Workspace } from './models/workspace';
+import { archGPT } from './common/archgpt';
 
 // Handle potential auto-update
 if (checkIfRestartNeeded()) {
@@ -38,6 +40,8 @@ const envDataPath = process.env.INSOMNIA_DATA_PATH;
 if (envDataPath) {
   app.setPath('userData', envDataPath);
 } else {
+  console.log("creating data_path; isDevelopment->", isDevelopment());
+
   // Explicitly set userData folder from config because it's sketchy to rely on electron-builder to use productName, which could be changed by accident.
   const defaultPath = app.getPath('userData');
   const newPath = path.join(defaultPath, '../', isDevelopment() ? 'insomnium-dev-dez4' : userDataFolder);
@@ -94,8 +98,19 @@ app.on('ready', async () => {
   const workspaces = await database.find<Workspace>(models.workspace.type);
   console.log("workspaces desu", workspaces);
 
+
+
   windowUtils.init();
+
+
+  // prepare archGPT with the repo 
+  // archGPT.initEdges()
+
+
   await _launchApp();
+
+
+  await fsUtils.init()
 
   // NOTE: could also try to initialize workspace here (?)
 
