@@ -51,13 +51,13 @@ export const ResponseErrorViewer: FC<Props> = memo(({ error }) => {
       <div className="text-center pad">
         <p className="faint pad-left pad-right">Here are some additional things that may help.</p>
         {msg}
-          &nbsp;&nbsp;
+        &nbsp;&nbsp;
         <Link
           button
           className="btn btn--clicky margin-top-sm"
-          href="https://insomnia.rest/support"
+          href="https://github.com/ArchGPT/insomnium#bugs-and-feature-requests"
         >
-          Contact Support
+          Submit an Issue
         </Link>
       </div>
     </div>
