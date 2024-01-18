@@ -145,7 +145,7 @@ const UnitTestItemView = ({
           const variableName = 'response' + (highestNumberedConstant + 1);
           return [
             {
-              name: 'Send Current request',
+              name: 'Send Current Request',
               displayValue: '',
               value:
                 `const ${variableName} = await insomnia.send();\n` +
