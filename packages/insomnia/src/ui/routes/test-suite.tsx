@@ -147,35 +147,17 @@ const UnitTestItemView = ({
             {
               name: 'Send Current Request',
               displayValue: '',
-              value: `const ${variableName} = await insomnia.send();\n` +
-              `expect(${variableName}.status).to.equal(200);`,
+              value:
+                `const ${variableName} = await insomnia.send();\n` +
+                `expect(${variableName}.status).to.equal(200);`,
             },
-            {
-              name: 'Send Request By ID',
+            ...requests.map(({ name, _id }) => ({
+              name: `Send: ${name}`,
               displayValue: '',
-              value: async () => {
-                return new Promise(resolve => {
-                  showModal(SelectModal, {
-                    title: 'Select Request',
-                    message: 'Select a request to fill',
-                    value: '__NULL__',
-                    options: [
-                      {
-                        name: '-- Select Request --',
-                        value: '__NULL__',
-                      },
-                      ...requests.map(({ name, _id }) => ({
-                        name,
-                        displayValue: '',
-                        value: `const ${variableName} = await insomnia.send('${_id}');\n` +
-                        `expect(${variableName}.status).to.equal(200);`,
-                      })),
-                    ],
-                    onDone: (value: string | null) => resolve(value),
-                  });
-                });
-              },
-            },
+              value:
+                `const ${variableName} = await insomnia.send('${_id}');\n` +
+                `expect(${variableName}.status).to.equal(200);`,
+            })),
           ];
         }}
         lintOptions={lintOptions}
