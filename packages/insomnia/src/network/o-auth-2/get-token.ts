@@ -159,7 +159,7 @@ export const getOAuth2Token = async (
       ...insertAuthKeyIf('client_secret', authentication.clientSecret),
     ];
   } else {
-    headers.push(getBasicAuthHeader(authentication.clientId, authentication.clientSecret));
+    headers.push(getBasicAuthHeader(encodeURIComponent(authentication.clientId ?? ''), encodeURIComponent(authentication.clientSecret ?? '')));
   }
 
   const response = await sendAccessTokenRequest(requestId, authentication, params, headers);
