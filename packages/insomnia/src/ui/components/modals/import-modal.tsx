@@ -325,6 +325,50 @@ const OpenAPIIcon = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
+const HoppscotchIcon = (props: React.SVGProps<SVGSVGElement>) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" transform="matrix(0.8,0,0,0.8,0,0)">
+      <path
+        fill="currentColor"
+        d="M12.945 14.086c-.24.54-.98.734-1.651.436-.671-.3-1.02-.98-.78-1.519.24-.54.979-.734 1.65-.435.671.299 1.021.978.78 1.518Z"
+      />
+      <path
+        fill="currentColor"
+        d="M12.945 14.086c-.24.54-.98.734-1.651.436-.671-.3-1.02-.98-.78-1.519.24-.54.979-.734 1.65-.435.671.299 1.021.978.78 1.518Z"
+      />
+      <path
+        fill="currentColor"
+        d="M16.965 16.413c.703.201 1.404-.093 1.566-.658.162-.565-.276-1.186-.98-1.388-.702-.201-1.403.093-1.565.658-.162.565.276 1.186.98 1.388Z"
+      />
+      <path
+        fill="currentColor"
+        d="M16.965 16.413c.703.201 1.404-.093 1.566-.658.162-.565-.276-1.186-.98-1.388-.702-.201-1.403.093-1.565.658-.162.565.276 1.186.98 1.388Z"
+      />
+      <path
+        fill="currentColor"
+        d="M7.218 9.767c.62.387.87 1.105.559 1.604-.311.498-1.066.588-1.686.2-.62-.387-.87-1.106-.56-1.604.312-.498 1.067-.588 1.687-.2Z"
+      />
+      <path
+        fill="currentColor"
+        d="M7.218 9.767c.62.387.87 1.105.559 1.604-.311.498-1.066.588-1.686.2-.62-.387-.87-1.106-.56-1.604.312-.498 1.067-.588 1.687-.2Z"
+      />
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M15.632 4.776a8.894 8.894 0 0 1 5.29 7.937c1.867 1.47 3.723 3.528 2.86 5.466-.968 2.174-4.415 2.085-8.334.985A7.113 7.113 0 0 1 5.063 14.54C1.623 12.364-.75 9.862.218 7.688c.863-1.94 3.634-1.937 5.975-1.532a8.894 8.894 0 0 1 9.439-1.38ZM1.862 8.42c-.47 1.056 2.056 4.053 8.972 7.133 6.916 3.079 10.834 2.95 11.304 1.894.39-.874-1.212-2.554-3.046-3.856-1.426-1.02-3.38-2.144-5.929-3.278-.694-.31-.964-1.134-.673-1.789.292-.655.933-1.093 2.282-1.155.635-.002.718-.178.747-.33.036-.232-.287-.47-.62-.618-2.647-1.178-5.888-.684-8.134 1.681-2.195-.491-4.514-.557-4.903.318Z"
+        clip-rule="evenodd"
+      />
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M15.632 4.776a8.894 8.894 0 0 1 5.29 7.937c1.867 1.47 3.723 3.528 2.86 5.466-.968 2.174-4.415 2.085-8.334.985A7.113 7.113 0 0 1 5.063 14.54C1.623 12.364-.75 9.862.218 7.688c.863-1.94 3.634-1.937 5.975-1.532a8.894 8.894 0 0 1 9.439-1.38ZM1.862 8.42c-.47 1.056 2.056 4.053 8.972 7.133 6.916 3.079 10.834 2.95 11.304 1.894.39-.874-1.212-2.554-3.046-3.856-1.426-1.02-3.38-2.144-5.929-3.278-.694-.31-.964-1.134-.673-1.789.292-.655.933-1.093 2.282-1.155.635-.002.718-.178.747-.33.036-.232-.287-.47-.62-.618-2.647-1.178-5.888-.684-8.134 1.681-2.195-.491-4.514-.557-4.903.318Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  );
+};
+
+
 const CurlIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
@@ -433,7 +477,7 @@ export const ImportModal: FC<ImportModalProps> = ({
   const header = shouldImportToWorkspace ? `Import to "${workspaceName}" Workspace` : `Import to "${projectName}" Project`;
   return (
     <OverlayContainer onClick={e => e.stopPropagation()}>
-      <Modal ref={modalRef} onHide={onHide}>
+      <Modal ref={modalRef} onHide={onHide} wide>
         <ModalHeader>{header}</ModalHeader>
         {scanResourcesFetcher.data && scanResourcesFetcher.data.errors.length === 0 ? (
           <ImportResourcesForm
@@ -585,6 +629,10 @@ const ScanResourcesForm = ({
               Swagger
             </Pill>
             <Pill>
+              <HoppscotchIcon />
+              Hoppscotch
+            </Pill>
+            <Pill>
               <OpenAPIIcon />
               OpenAPI
             </Pill>
@@ -680,6 +728,12 @@ const ImportResourcesForm = ({
                     <Fragment>
                       <PostmanIcon width={24} height={24} />
                       Postman
+                    </Fragment>
+                  )}
+                  {scanResult.type?.id.includes('hoppscotch') && (
+                    <Fragment>
+                      <HoppscotchIcon width={24} height={24} />
+                      Hoppscotch
                     </Fragment>
                   )}
                   {scanResult.type?.id.includes('swagger') && (
