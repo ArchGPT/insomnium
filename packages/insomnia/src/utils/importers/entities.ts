@@ -17,11 +17,16 @@ export interface Authentication extends Comment {
   clientId?: string;
   clientSecret?: Variable;
   scope?: string;
-  type?: 'basic' | 'oauth2';
-  grantType?: 'authorization_code' | 'password' | 'client_credentials';
+  type?: 'none' | 'apikey' | 'basic' | 'oauth1' | 'oauth2' | 'bearer' | 'digest' | 'ntlm' | 'iam' | 'netrc' | 'asap' | 'hawk' | 'sha1' | 'sha256';
+  grantType?: 'authorization_code' | 'client_credentials' | 'password' | 'implicit' | 'refresh_token';
   disabled?: boolean;
   username?: string;
   password?: string;
+  prefix?: string;
+  token?: string;
+  addTo?: 'header' | 'queryParams' | 'cookie';
+  key?: string;
+  value?: string;
 }
 
 export interface Parameter extends Comment {

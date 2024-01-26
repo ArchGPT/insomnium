@@ -1,0 +1,207 @@
+{
+  "v": 2,
+  "name": "Codecon",
+  "folders": [
+    {
+      "v": 2,
+      "name": "Local",
+      "folders": [],
+      "requests": [
+        {
+          "v": "1",
+          "name": "Local - Claim",
+          "method": "POST",
+          "endpoint": "http://localhost:8080/token/claim",
+          "auth": {
+            "authType": "none",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n\t\"code\": \"CODE\",\n\t\"email\": \"mark@email.com\",\n\t\"name\": \"Mark Kop\"\n}"
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "active": true
+            },
+            {
+              "key": "x-apikey",
+              "value": "<<apikey>>",
+              "active": true
+            }
+          ],
+          "params": [],
+          "preRequestScript": "",
+          "testScript": ""
+        },
+        {
+          "v": "1",
+          "name": "Local - Rank",
+          "method": "PUT",
+          "endpoint": "http://localhost:8080/user/rank",
+          "auth": {
+            "authType": "none",
+            "authActive": true
+          },
+          "body": {
+            "body": "xxx: xeee\nxfwf: \"w3f:3f\"",
+            "contentType": "application/x-www-form-urlencoded"
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "active": true
+            },
+            {
+              "key": "x-apikey",
+              "value": "<<apikey>>",
+              "active": true
+            }
+          ],
+          "params": [],
+          "preRequestScript": "",
+          "testScript": ""
+        },
+        {
+          "v": "1",
+          "name": "Local - Docs",
+          "method": "GET",
+          "endpoint": "http://localhost:8080/docs",
+          "auth": {
+            "authType": "none",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": ""
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "active": true
+            },
+            {
+              "key": "x-apikey",
+              "value": "<<apikey>>",
+              "active": true
+            }
+          ],
+          "params": [],
+          "preRequestScript": "",
+          "testScript": ""
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": []
+    },
+    {
+      "v": 2,
+      "name": "Production",
+      "folders": [],
+      "requests": [
+        {
+          "v": "1",
+          "name": "Prod - Claim",
+          "method": "POST",
+          "endpoint": "<<base_url>>/token/claim",
+          "auth": {
+            "authType": "none",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n\t\"code\": \"CODE\",\n\t\"email\": \"mark@email.com\",\n\t\"name\": \"Mark Kop\"\n}"
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "active": true
+            },
+            {
+              "key": "x-apikey",
+              "value": "<<apikey>>",
+              "active": true
+            },
+            {
+              "key": "Workspace-Inherited-Header",
+              "value": "OverriddenByRequest/json",
+              "active": true
+            }
+          ],
+          "params": [],
+          "preRequestScript": "",
+          "testScript": ""
+        },
+        {
+          "v": "1",
+          "name": "Prod - Rank",
+          "method": "GET",
+          "endpoint": "<<base_url>>/user/rank",
+          "auth": {
+            "authType": "none",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": ""
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "active": true
+            },
+            {
+              "key": "x-apikey",
+              "value": "<<apikey>>",
+              "active": true
+            }
+          ],
+          "params": [],
+          "preRequestScript": "",
+          "testScript": ""
+        }
+      ],
+      "auth": {
+        "username": "OverriddenByFolderWorkspaceInheritedUsername",
+        "password": "OverriddenByFolderWorkspaceInheritedPassword",
+        "authType": "basic",
+        "authActive": false
+      },
+      "headers": [
+        {
+          "key": "Workspace-Inherited-Header",
+          "value": "OverriddenByFolder/json",
+          "active": true
+        }
+      ]
+    }
+  ],
+  "requests": [],
+  "auth": {
+    "username": "WorkspaceInheritedUsername",
+    "password": "WorkspaceInheritedPassword",
+    "authType": "basic",
+    "authActive": true
+  },
+  "headers": [
+    {
+      "key": "Workspace-Inherited-Header",
+      "value": "application/json",
+      "active": true
+    },
+    {
+      "key": "x-apikey",
+      "value": "<<apikey>>",
+      "active": true
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2021-09-05T13:32:00.783Z",
+  "__export_source": "insomnia.importers:v0.1.0",
+  "resources": [
+    {
+      "_id": "__WRK_255t__",
+      "_type": "workspace",
+      "name": "Codecon",
+      "parentId": null
+    },
+    {
+      "_id": "__GRP_255u__",
+      "_type": "request_group",
+      "name": "Local",
+      "environment": {},
+      "parentId": "__WRK_255t__"
+    },
+    {
+      "_id": "__REQ_255v__",
+      "_type": "request",
+      "name": "Local - Claim",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"code\": \"CODE\",\n\t\"email\": \"mark@email.com\",\n\t\"name\": \"Mark Kop\"\n}"
+      },
+      "url": "http://localhost:8080/token/claim",
+      "parentId": "__GRP_255u__",
+      "authentication": {
+        "disabled": true
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "x-apikey",
+          "value": "{{ _.apikey }}",
+          "disabled": false
+        },
+        {
+          "name": "Workspace-Inherited-Header",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "__REQ_255w__",
+      "_type": "request",
+      "name": "Local - Rank",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          { "name": "xxx", "value": "xeee" },
+          { "name": "xfwf", "value": "w3f:3f" }
+        ]
+      },
+      "url": "http://localhost:8080/user/rank",
+      "parentId": "__GRP_255u__",
+      "authentication": {
+        "disabled": true
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "x-apikey",
+          "value": "{{ _.apikey }}",
+          "disabled": false
+        },
+        {
+          "name": "Workspace-Inherited-Header",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "__REQ_255x__",
+      "_type": "request",
+      "name": "Local - Docs",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "url": "http://localhost:8080/docs",
+      "parentId": "__GRP_255u__",
+      "authentication": {
+        "disabled": true
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "x-apikey",
+          "value": "{{ _.apikey }}",
+          "disabled": false
+        },
+        {
+          "name": "Workspace-Inherited-Header",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "__GRP_255y__",
+      "_type": "request_group",
+      "name": "Production",
+      "environment": {},
+      "parentId": "__WRK_255t__"
+    },
+    {
+      "_id": "__REQ_255z__",
+      "_type": "request",
+      "name": "Prod - Claim",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"code\": \"CODE\",\n\t\"email\": \"mark@email.com\",\n\t\"name\": \"Mark Kop\"\n}"
+      },
+      "url": "{{ _.base_url }}/token/claim",
+      "parentId": "__GRP_255y__",
+      "authentication": {
+        "disabled": true
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "x-apikey",
+          "value": "{{ _.apikey }}",
+          "disabled": false
+        },
+        {
+          "name": "Workspace-Inherited-Header",
+          "value": "OverriddenByRequest/json",
+          "disabled": false
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "__REQ_2560__",
+      "_type": "request",
+      "name": "Prod - Rank",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "url": "{{ _.base_url }}/user/rank",
+      "parentId": "__GRP_255y__",
+      "authentication": {
+        "disabled": true
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "x-apikey",
+          "value": "{{ _.apikey }}",
+          "disabled": false
+        },
+        {
+          "name": "Workspace-Inherited-Header",
+          "value": "OverriddenByFolder/json",
+          "disabled": false
+        }
+      ],
+      "parameters": []
+    }
+  ]
+}
