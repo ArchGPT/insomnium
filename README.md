@@ -23,7 +23,7 @@ I was among the users who were deeply affected by the recent change. I still thi
 
 > *I choose to walk in shades.* <br>
 > *Hearken now, to the song of dusk* <br>
-> *The forest venerates your name* <br> 
+> *The forest venerates your name* <br>
 >--- [Insomnium, song of the dusk](https://youtu.be/nTIDh1miBSc)
 
 ## Roadmap
@@ -37,7 +37,7 @@ If you have any feature request or encountered any bug, feel free to [open an is
 
 ## Download
 
-Insomnium is available for Mac, Windows, Ubuntu, Debian, CentOS, Fedora and [can be downloaded here](https://github.com/ArchGPT/insomnium/releases). Insomnium is also [available on AUR for ArchLinux](https://aur.archlinux.org/packages/insomnium-bin). 
+Insomnium is available for Mac, Windows, Ubuntu, Debian, CentOS, Fedora and [can be downloaded here](https://github.com/ArchGPT/insomnium/releases). Insomnium is also [available on AUR for ArchLinux](https://aur.archlinux.org/packages/insomnium-bin).
 
 Alternatively, you can build Insomnium from source on your local machine using `npm run app-package`.
 
