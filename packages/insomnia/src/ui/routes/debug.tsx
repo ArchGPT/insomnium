@@ -78,6 +78,7 @@ import { useReadyState } from '../hooks/use-ready-state';
 import {
   CreateRequestType,
   useRequestGroupMetaPatcher,
+  useRequestGroupPatcher,
   useRequestMetaPatcher,
   useRequestSetter,
 } from '../hooks/use-request';
@@ -188,6 +189,20 @@ export const Debug: FC = () => {
 
   const patchRequestMeta = useRequestMetaPatcher();
   const patchRequest = useRequestSetter();
+  const patchGroup = useRequestGroupPatcher();
+
+  const handleItemDoublClick = (itemDoc: Request | GrpcRequest | WebSocketRequest | RequestGroup) => {
+    const isGroup = isRequestGroup(itemDoc);
+
+    showPrompt({
+      title: isGroup ? 'Rename Folder' : 'Rename Request',
+      defaultValue: itemDoc.name,
+      submitName: 'Rename',
+      selectText: true,
+      label: 'Name',
+      onComplete: name => (isGroup ? patchGroup : patchRequest)(itemDoc._id, { name }),
+    });
+  }
 
   useEffect(() => {
     db.onChange(async (changes: ChangeBufferEvent[]) => {
@@ -895,16 +910,7 @@ export const Debug: FC = () => {
                       )}
                       <span
                         className="truncate"
-                        onDoubleClick={() => {
-                          showPrompt({
-                            title: 'Rename Request',
-                            defaultValue: item.doc.name,
-                            submitName: 'Rename',
-                            selectText: true,
-                            label: 'Name',
-                            onComplete: name => patchRequest(item.doc._id, { name }),
-                          });
-                        }}
+                        onDoubleClick={() => handleItemDoublClick(item.doc)}
                       >
                         {getRequestNameOrFallback(item.doc)}
                       </span>
@@ -996,16 +1002,7 @@ export const Debug: FC = () => {
                         )}
                         <span
                           className="truncate"
-                          onDoubleClick={() => {
-                            showPrompt({
-                              title: 'Rename Request',
-                              defaultValue: item.doc.name,
-                              submitName: 'Rename',
-                              selectText: true,
-                              label: 'Name',
-                              onComplete: name => patchRequest(item.doc._id, { name }),
-                            });
-                          }}
+                          onDoubleClick={() => handleItemDoublClick(item.doc)}
                         >
                           {getRequestNameOrFallback(item.doc)}
                         </span>
