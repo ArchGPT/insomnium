@@ -191,7 +191,7 @@ export const Debug: FC = () => {
   const patchRequest = useRequestSetter();
   const patchGroup = useRequestGroupPatcher();
 
-  const handleItemDoublClick = (itemDoc: Request | GrpcRequest | WebSocketRequest | RequestGroup) => {
+  const handleItemDoublClick = useCallback((itemDoc: Request | GrpcRequest | WebSocketRequest | RequestGroup) => {
     const isGroup = isRequestGroup(itemDoc);
 
     showPrompt({
@@ -202,7 +202,7 @@ export const Debug: FC = () => {
       label: 'Name',
       onComplete: name => (isGroup ? patchGroup : patchRequest)(itemDoc._id, { name }),
     });
-  }
+  }, [patchRequest, patchGroup]);
 
   useEffect(() => {
     db.onChange(async (changes: ChangeBufferEvent[]) => {
