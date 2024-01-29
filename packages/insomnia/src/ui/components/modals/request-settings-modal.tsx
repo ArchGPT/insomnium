@@ -18,17 +18,20 @@ import { MarkdownEditor } from '../markdown-editor';
 
 export interface RequestSettingsModalOptions {
   request: Request | GrpcRequest | WebSocketRequest;
+  autoFocusOn?: 'name' | 'description';
 }
 interface State {
   defaultPreviewMode: boolean;
   activeWorkspaceIdToCopyTo: string;
 }
 
-export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSettingsModalOptions) => {
+export const RequestSettingsModal = ({ request, onHide, autoFocusOn }: ModalProps & RequestSettingsModalOptions) => {
   const modalRef = useRef<ModalHandle>(null);
   const editorRef = useRef<CodeEditorHandle>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const { organizationId, projectId, workspaceId } = useParams() as { organizationId: string; projectId: string; workspaceId: string };
   const workspacesFetcher = useFetcher();
+
   useEffect(() => {
     const isIdleAndUninitialized = workspacesFetcher.state === 'idle' && !workspacesFetcher.data;
     if (isIdleAndUninitialized) {
@@ -37,12 +40,24 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
   }, [organizationId, projectId, workspacesFetcher]);
   const projectLoaderData = workspacesFetcher?.data as ProjectLoaderData;
   const workspacesForActiveProject = projectLoaderData?.workspaces.map(w => w.workspace) || [];
+
   const [state, setState] = useState<State>({
     defaultPreviewMode: !!request?.description,
     activeWorkspaceIdToCopyTo: '',
   });
+
   useEffect(() => {
     modalRef.current?.show();
+
+    if (autoFocusOn) {
+      setTimeout(() => {
+        if (autoFocusOn === 'description') {
+          editorRef.current?.focus();
+        } else if (autoFocusOn === 'name') {
+          nameRef.current?.focus();
+        }
+      });
+    }
   }, []);
 
   const requestFetcher = useFetcher();
@@ -56,6 +71,7 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
         encType: 'application/json',
       });
   };
+
   async function handleMoveToWorkspace() {
     guard(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
     patchRequest(request._id, { parentId: state.activeWorkspaceIdToCopyTo });
@@ -93,6 +109,7 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
                 Name{' '}
                 <span className="txt-sm faint italic">(also rename by double-clicking in sidebar)</span>
                 <input
+                  ref={nameRef}
                   type="text"
                   placeholder={request?.url || 'My Request'}
                   defaultValue={request?.name}

@@ -258,6 +258,7 @@ export const RequestActionsDropdown = ({
       <RequestSettingsModal
         request={request}
         onHide={() => setIsSettingsModalOpen(false)}
+        autoFocusOn="name"
       />
     )}
     </Fragment>
