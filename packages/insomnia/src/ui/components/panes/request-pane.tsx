@@ -342,6 +342,7 @@ export const RequestPane: FC<Props> = ({
         <RequestSettingsModal
           request={activeRequest}
           onHide={() => setIsRequestSettingsModalOpen(false)}
+          autoFocusOn="description"
         />
       )}
     </Pane>

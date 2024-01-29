@@ -1059,6 +1059,7 @@ export const Debug: FC = () => {
               <RequestSettingsModal
                 request={activeRequest}
                 onHide={() => setIsRequestSettingsModalOpen(false)}
+                autoFocusOn="name"
               />
             )}
           </ErrorBoundary>
