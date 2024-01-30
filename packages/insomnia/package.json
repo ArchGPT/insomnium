@@ -67,7 +67,7 @@
     "hkdf": "^0.0.2",
     "hosted-git-info": "5.2.1",
     "html-entities": "^2.4.0",
-    "httpsnippet": "^2.0.0",
+    "httpsnippet": "^3.0.1",
     "iconv-lite": "^0.6.3",
     "isomorphic-git": "^1.10.4",
     "js-yaml": "^3.14.1",
