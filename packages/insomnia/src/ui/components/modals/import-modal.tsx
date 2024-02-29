@@ -354,15 +354,15 @@ const HoppscotchIcon = (props: React.SVGProps<SVGSVGElement>) => {
       />
       <path
         fill="currentColor"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M15.632 4.776a8.894 8.894 0 0 1 5.29 7.937c1.867 1.47 3.723 3.528 2.86 5.466-.968 2.174-4.415 2.085-8.334.985A7.113 7.113 0 0 1 5.063 14.54C1.623 12.364-.75 9.862.218 7.688c.863-1.94 3.634-1.937 5.975-1.532a8.894 8.894 0 0 1 9.439-1.38ZM1.862 8.42c-.47 1.056 2.056 4.053 8.972 7.133 6.916 3.079 10.834 2.95 11.304 1.894.39-.874-1.212-2.554-3.046-3.856-1.426-1.02-3.38-2.144-5.929-3.278-.694-.31-.964-1.134-.673-1.789.292-.655.933-1.093 2.282-1.155.635-.002.718-.178.747-.33.036-.232-.287-.47-.62-.618-2.647-1.178-5.888-.684-8.134 1.681-2.195-.491-4.514-.557-4.903.318Z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       />
       <path
         fill="currentColor"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M15.632 4.776a8.894 8.894 0 0 1 5.29 7.937c1.867 1.47 3.723 3.528 2.86 5.466-.968 2.174-4.415 2.085-8.334.985A7.113 7.113 0 0 1 5.063 14.54C1.623 12.364-.75 9.862.218 7.688c.863-1.94 3.634-1.937 5.975-1.532a8.894 8.894 0 0 1 9.439-1.38ZM1.862 8.42c-.47 1.056 2.056 4.053 8.972 7.133 6.916 3.079 10.834 2.95 11.304 1.894.39-.874-1.212-2.554-3.046-3.856-1.426-1.02-3.38-2.144-5.929-3.278-.694-.31-.964-1.134-.673-1.789.292-.655.933-1.093 2.282-1.155.635-.002.718-.178.747-.33.036-.232-.287-.47-.62-.618-2.647-1.178-5.888-.684-8.134 1.681-2.195-.491-4.514-.557-4.903.318Z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       />
     </svg>
   );
@@ -815,32 +815,32 @@ const ImportResourcesForm = ({
             )}
             {scanResult.environments &&
               scanResult.environments.length > 0 && (
-              <tr className="table--no-outline-row">
-                <td>
-                  {scanResult.environments.length}{' '}
-                  {scanResult.environments.length === 1
-                    ? 'Environment'
-                    : 'Environments'}
-                  {' with '}
-                  {scanResult.cookieJars?.length}{' '}
-                  {scanResult.cookieJars?.length === 1 ? 'Cookie Jar' : 'Cookie Jars'}
-                </td>
-              </tr>
-            )}
+                <tr className="table--no-outline-row">
+                  <td>
+                    {scanResult.environments.length}{' '}
+                    {scanResult.environments.length === 1
+                      ? 'Environment'
+                      : 'Environments'}
+                    {' with '}
+                    {scanResult.cookieJars?.length}{' '}
+                    {scanResult.cookieJars?.length === 1 ? 'Cookie Jar' : 'Cookie Jars'}
+                  </td>
+                </tr>
+              )}
             {scanResult.unitTestSuites &&
               scanResult.unitTestSuites?.length > 0 && (
-              <tr className="table--no-outline-row">
-                <td>
-                  {scanResult.unitTestSuites.length}{' '}
-                  {scanResult.unitTestSuites.length === 1
-                    ? 'Test Suite'
-                    : 'Test Suites'}
-                  {' with '}
-                  {scanResult.unitTests?.length}
-                  {scanResult.unitTests?.length === 1 ? ' Test' : ' Tests'}
-                </td>
-              </tr>
-            )}
+                <tr className="table--no-outline-row">
+                  <td>
+                    {scanResult.unitTestSuites.length}{' '}
+                    {scanResult.unitTestSuites.length === 1
+                      ? 'Test Suite'
+                      : 'Test Suites'}
+                    {' with '}
+                    {scanResult.unitTests?.length}
+                    {scanResult.unitTests?.length === 1 ? ' Test' : ' Tests'}
+                  </td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>

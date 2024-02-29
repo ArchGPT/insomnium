@@ -102,7 +102,7 @@ const importCommand = (parseEntries: ParseEntry[]): ImportRequest => {
     }));
 
     url = href.replace(search, '').replace(/\/$/, '');
-  } catch (error) {}
+  } catch (error) { }
 
   /// /////// Authentication //////////
   const [username, password] = getPairValue(pairsByName, '', [
@@ -208,6 +208,9 @@ const importCommand = (parseEntries: ParseEntry[]): ImportRequest => {
         value: decodeURIComponent(parameter.value || ''),
       };
     });
+  } else if (dataParameters && mimeType === 'application/xml') {
+    body.text = dataParameters.map(parameter => `${parameter.name}=${parameter.value}`).join('&');
+    body.mimeType = mimeType || '';
   } else if (dataParameters.length !== 0) {
     body.text = dataParameters.map(parameter => `${parameter.name}${parameter.value}`).join('&');
     body.mimeType = mimeType || '';
