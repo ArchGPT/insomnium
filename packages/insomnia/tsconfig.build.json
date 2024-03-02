@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["DOM.Iterable", "DOM"],
+    "lib": ["DOM.Iterable", "DOM", "ES2021.Promise"],
     "isolatedModules": true,
     "jsx": "react",
     "outDir": "./build",
