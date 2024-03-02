@@ -58,7 +58,7 @@ export interface Database {
 
   find<T extends BaseModel>(
     type: string,
-    query?: Query | string,
+    query?: Query,
     sort?: Sort<T>
   ): Promise<T[]>;
 
@@ -110,7 +110,6 @@ export interface Database {
 
   update<T extends BaseModel>(doc: T, fromSync?: boolean): Promise<T>;
 
-  // TODO(TSCONVERSION) the update method above can now take an upsert property
   upsert<T extends BaseModel>(doc: T, fromSync?: boolean): Promise<T>;
 
   withAncestors<T extends BaseModel>(
@@ -259,11 +258,13 @@ export abstract class BaseImplementation implements Database {
     sort?: Sort<T>
   ): Promise<T[]>;
 
-  abstract findMostRecentlyModified<T extends BaseModel>(
-    type: string,
-    query?: Query,
-    limit?: number | null
-  ): Promise<T[]>;
+  async findMostRecentlyModified<T extends BaseModel>(type: string, query?: Query | undefined, limit?: number | null | undefined): Promise<T[]> {
+    const result = await this.find<T>(type, query, { modified: -1 } as Sort<T>);
+    if (limit) {
+      return result.slice(0, limit);
+    }
+    return result;
+  }
 
   async flushChanges(id = 0, fake = false) {
     // Only flush if ID is 0 or the current flush ID is the same as passed
@@ -299,10 +300,14 @@ export abstract class BaseImplementation implements Database {
     }
   }
 
-  abstract get<T extends BaseModel>(
-    type: string,
-    id?: string
-  ): Promise<T | null>;
+  async get<T extends BaseModel>(type: string, id?: string) {
+    // Short circuit IDs used to represent nothing
+    if (!id || id === "n/a") {
+      return null;
+    } else {
+      return this.getWhere<T>(type, { _id: id });
+    }
+  }
 
   async getMostRecentlyModified<T extends BaseModel>(
     type: string,
@@ -425,7 +430,7 @@ export abstract class BaseImplementation implements Database {
         for (const type of models.types()) {
           // If the doc is null, we want to search for parentId === null
           const parentId = doc ? doc._id : null;
-          const promise = self.find(type, { parentId });
+          const promise = self.find<BaseModel>(type, { parentId });
           promises.push(promise);
         }
 
@@ -458,5 +463,59 @@ export abstract class BaseImplementation implements Database {
     if (!this.bufferingChanges) {
       await this.flushChanges();
     }
+  }
+
+  static sortList<T extends BaseModel>(list: T[], sort?: Sort<T>): T[] {
+    list.sort((itemA, itemB) => {
+      return Object.entries(sort ?? {}).reduce((result, [key, direction]) => {
+        if (direction !== 1 && direction !== -1) {
+          throw new Error("Method not implemented.");
+        }
+        if (result !== 0) {
+          return result;
+        }
+        if (typeof itemA[key as keyof T] === "string")
+          return (
+            (itemA[key as keyof T] as string).localeCompare(
+              itemB[key as keyof T] as string
+            ) * direction
+          );
+        return (
+          (itemA[key as keyof T] as number) -
+          (itemB[key as keyof T] as number) * direction
+        );
+      }, 0);
+    });
+    return list;
+  }
+
+  static filterList<T extends BaseModel>(list: T[], query: Query): T[] {
+    return list.filter(item => {
+      return Object.entries(query ?? {}).every(([key, value]) => {
+        if (typeof value === "object") {
+          let valid = true;
+          const operators = Object.keys(value);
+          operators.forEach((operator) => {
+            switch (operator) {
+              case "$gt":
+                valid &&= item[key as keyof T] > value[operator];
+                break;
+              case "$in":
+                valid &&= value[operator].includes(item[key as keyof T]);
+                break;
+              case "$nin": {
+                valid &&= !value[operator].includes(item[key as keyof T]);
+                break;
+              }
+              default:
+                throw new Error("Method not implemented.");
+            }
+          });
+
+          return valid;
+        }
+        return item[key as keyof T] === value;
+      });
+    })
   }
 }

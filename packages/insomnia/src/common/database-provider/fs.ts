@@ -46,12 +46,11 @@ class FSDatabase extends BaseImplementation implements Database {
 
   async find<T extends BaseModel>(
     type: string,
-    query?: string | Query,
+    query?: Query,
     sort?: Sort<T>
   ): Promise<T[]> {
     if (
       query === undefined ||
-      (typeof query === "string" && query.length === 0) ||
       (typeof query === "object" && Object.keys(query).length === 0)
     ) {
       let filesPath: string[] = [];
@@ -73,68 +72,10 @@ class FSDatabase extends BaseImplementation implements Database {
       const files = await Promise.all(
         rawFiles.map((file) => models.initModel<T>(type, file))
       );
-      files.sort((itemA, itemB) => {
-        return Object.entries(sort ?? {}).reduce((result, [key, direction]) => {
-          if (direction !== 1 && direction !== -1) {
-            throw new Error("Method not implemented.");
-          }
-          if (result !== 0) {
-            return result;
-          }
-          if (typeof itemA[key as keyof T] === "string")
-            return (
-              (itemA[key as keyof T] as string).localeCompare(
-                itemB[key as keyof T] as string
-              ) * direction
-            );
-          return (
-            (itemA[key as keyof T] as number) -
-            (itemB[key as keyof T] as number) * direction
-          );
-        }, 0);
-      });
-      return files;
+      return BaseImplementation.sortList(files, sort);
     }
 
-    return (await this.find<T>(type)).filter((item) => {
-      return Object.entries(query ?? {}).every(([key, value]) => {
-        if (typeof value === "object") {
-          let valid = true;
-          const operators = Object.keys(value);
-          operators.forEach((operator) => {
-            switch (operator) {
-              case "$gt":
-                valid &&= item[key as keyof T] > value[operator];
-                break;
-              case "$in":
-                valid &&= value[operator].includes(item[key as keyof T]);
-                break;
-              case "$nin": {
-                valid &&= !value[operator].includes(item[key as keyof T]);
-                break;
-              }
-              default:
-                throw new Error("Method not implemented.");
-            }
-          });
-
-          return valid;
-        }
-        return item[key as keyof T] === value;
-      });
-    });
-  }
-
-  async findMostRecentlyModified<T extends BaseModel>(
-    type: string,
-    query?: Query | undefined,
-    limit?: number | null | undefined
-  ): Promise<T[]> {
-    const result = await this.find<T>(type, query, { modified: -1 } as Sort<T>);
-    if (limit) {
-      return result.slice(0, limit);
-    }
-    return result;
+    return BaseImplementation.filterList(await this.find<T>(type), query);
   }
 
   get<T extends BaseModel>(

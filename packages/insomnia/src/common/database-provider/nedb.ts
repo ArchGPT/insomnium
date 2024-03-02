@@ -152,12 +152,7 @@ class NeDBImplementation extends BaseImplementation implements Database {
       return _send<T>("get", ...arguments);
     }
 
-    // Short circuit IDs used to represent nothing
-    if (!id || id === "n/a") {
-      return null;
-    } else {
-      return this.getWhere<T>(type, { _id: id });
-    }
+    return super.get<T>(type, id)
   }
 
   getMostRecentlyModified<T extends BaseModel>(
@@ -462,9 +457,9 @@ class NeDBImplementation extends BaseImplementation implements Database {
     stopType: string | null = null
   ): Promise<BaseModel[]> {
     if (db._empty) {
-      return _send<BaseModel[]>("withDescendants", ...arguments);
+      return _send<T[]>("withDescendants", ...arguments);
     }
-    return super.withDescendants(doc, stopType);
+    return super.withDescendants<T>(doc, stopType);
   }
 }
 
