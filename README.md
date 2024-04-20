@@ -1,5 +1,7 @@
 # Insomnium API Client
 
+*\<currently not being actively maintained>*
+ 
 Insomnium is a 100% local and privacy-focused open-source API client for testing GraphQL, REST, WebSockets, Server-sent events and gRPC in development/production.
 
 - ✅ works 100% offline, the way a local testing tool should behave <br>
@@ -11,9 +13,9 @@ Insomnium is a 100% local and privacy-focused open-source API client for testing
 
 ![Insomnium API Client](https://raw.githubusercontent.com/ArchGPT/insomnium/main/screenshots/v0.1.png)
 
-# Current Status
+## Current Status
 
-Due to another related project, this repo is no longer being actively maintained. (You are welcomed to fork this and continue from here on!)
+Due to another related project, this repo is no longer being actively maintained. (You are welcomed to fork this and continue from here on)
 
 ## General
 
