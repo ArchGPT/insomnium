@@ -4,14 +4,28 @@ Insomnium is a 100% local and privacy-focused open-source API client for testing
 
 - ✅ works 100% offline, the way a local testing tool should behave <br>
 - ✅ no cloud services, no tracking/communication to external servers behind the scene <br>
-- 🦙 (coming up) optional integration to local LLMs like CodeLlama for front-end code generation in React, Vue, htmx, etc, based on the API response JSON
-
 
 [![license](https://img.shields.io/github/license/archGPT/insomnium.svg)](LICENSE)
 [![GitHub Discussions](https://img.shields.io/github/discussions/archGPT/insomnium)](https://github.com/ArchGPT/insomnium/discussions)
 [![join our discord](https://dcbadge.vercel.app/api/server/pCcWcncwkw?style=flat&compact=true)](https://discord.gg/pCcWcncwkw)
 
 ![Insomnium API Client](https://raw.githubusercontent.com/ArchGPT/insomnium/main/screenshots/v0.1.png)
+
+## General
+
+I have removed user login, tracking, analytics, etc, from Insomnia so it is now a 100% local app. (And runs faster!)
+
+
+# Current Status
+
+Due to another related project, this repo is no longer being actively maintained.
+
+## Download
+
+Insomnium is available for Mac, Windows, Ubuntu, Debian, CentOS, Fedora and [can be downloaded here](https://github.com/ArchGPT/insomnium/releases). Insomnium is also [available on AUR for ArchLinux](https://aur.archlinux.org/packages/insomnium-bin). 
+
+Alternatively, you can build Insomnium from source on your local machine using `npm run app-package`.
+
 
 ## Backstory
 
@@ -26,20 +40,6 @@ I was among the users who were deeply affected by the recent change. I still thi
 > *The forest venerates your name* <br> 
 >--- [Insomnium, song of the dusk](https://youtu.be/nTIDh1miBSc)
 
-## Roadmap
-
-I have removed user login, tracking, analytics, etc, from Insomnia so it is now a 100% local app. (And runs faster!)
-
-If you have any feature request or encountered any bug, feel free to [open an issue](https://github.com/ArchGPT/insomnium/issues). Thanks! I'm also working on a Code Llama plugin for Insomnium to make it more easily customizable and extensible, while keeping the core product fast and 100% local-only. [You can read more about Insomnium's roadmap here](https://github.com/ArchGPT/insomnium/discussions/13).
-
-> _**Vote for Insomnium's new icon now! [github.com/ArchGPT/insomnium/discussions/11](https://github.com/ArchGPT/insomnium/discussions/11)**_
-
-
-## Download
-
-Insomnium is available for Mac, Windows, Ubuntu, Debian, CentOS, Fedora and [can be downloaded here](https://github.com/ArchGPT/insomnium/releases). Insomnium is also [available on AUR for ArchLinux](https://aur.archlinux.org/packages/insomnium-bin). 
-
-Alternatively, you can build Insomnium from source on your local machine using `npm run app-package`.
 
 ## Migration from Insomnia
 
