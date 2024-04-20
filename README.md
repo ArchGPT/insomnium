@@ -11,14 +11,14 @@ Insomnium is a 100% local and privacy-focused open-source API client for testing
 
 ![Insomnium API Client](https://raw.githubusercontent.com/ArchGPT/insomnium/main/screenshots/v0.1.png)
 
+# Current Status
+
+Due to another related project, this repo is no longer being actively maintained. (You are welcomed to fork this and continue from here on!)
+
 ## General
 
 I have removed user login, tracking, analytics, etc, from Insomnia so it is now a 100% local app. (And runs faster!)
 
-
-# Current Status
-
-Due to another related project, this repo is no longer being actively maintained.
 
 ## Download
 
