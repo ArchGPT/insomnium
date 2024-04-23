@@ -95,6 +95,35 @@ describe('importRaw()', () => {
     });
   });
 
+  it('should import a curl request to an existing workspace with an XML body', async () => {
+    const fixturePath = path.join(__dirname, '..', '__fixtures__', 'curl', 'complex-input-xml.sh');
+    const content = fs.readFileSync(fixturePath, 'utf8').toString();
+
+    const existingWorkspace = await workspace.create();
+
+    const scanResult = await importUtil.scanResources({
+      content,
+    });
+
+    expect(scanResult.type?.id).toBe('curl');
+    expect(scanResult.errors.length).toBe(0);
+
+    await importUtil.importResourcesToWorkspace({
+      workspaceId: existingWorkspace._id,
+    });
+
+    const workspacesCount = await workspace.count();
+    expect(workspacesCount).toBe(1);
+
+    const curlRequests = await request.findByParentId(existingWorkspace._id);
+
+    expect(curlRequests[0]).toMatchObject({
+      body: {
+        "text": "<?xml version=\"1.0\"?<test>HELLO</test>",
+      },
+    });
+  });
+
   it('should import a postman collection to a new workspace', async () => {
     const fixturePath = path.join(__dirname, '..', '__fixtures__', 'postman', 'aws-signature-auth-v2_0-input.json');
     const content = fs.readFileSync(fixturePath, 'utf8').toString();
