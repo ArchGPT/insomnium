@@ -1,6 +1,6 @@
 {
   "name": "insomnium",
-  "version": "0.2.3-a",
+  "version": "0.2.3-beta.1",
   "productName": "Insomnium",
   "private": true,
   "description": "The Collaborative API Design Tool",
